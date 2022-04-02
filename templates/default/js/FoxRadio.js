@@ -12,16 +12,28 @@
 		}
 
 		function refreshMain(){
+		 $.ajax('/').done(function (data) {
+			 let s;
+			 $(data).find('#content').each(function(){
+				 s+=this.innerHTML;
+			 })
+			  $('#content').html(s);
+		 });
+		}
+		
+		function mainRefresh(button){
+		  button.addClass('animated jackInTheBox');
 		  $.ajax('/').done(function (data) {
 			$("#content").fadeOut(500);
 			let s = '';
-			//console.log($(data).find('#content'));
+			console.log($(data).find('#content'));
 			$(data).find('#content').each(function(){
 			  s+=this.innerHTML;
-			  //setTimeout(function(){
+			  setTimeout(function(){
 				  $("#content").fadeIn(500);
 				  $('#content').html(s);
-			  //}, 600);
+				  button.removeClass('jackInTheBox');
+			  }, 600);
 			})
 		  });
 		};

@@ -12,10 +12,18 @@
 			<li>
 				<a href="/"><i class="fa fa-comments" aria-hidden="true"></i>ФОРУМ</a>
 			</li>
-								
-			</li>
-				<a href="#login"><i class="fa fa-comments" aria-hidden="true"></i>Войти</a>
-			</li>
+				
+
+
 		</ul>
 	</nav>
+	{if !profile == ""}
+	<nav class="rightNavBlock">
+		<li>
+			<div class="sub-main">
+				<a href="#login"><button class="logInBtn"><span>Войти</span></button></a>
+			</div>
+		</li>
+	</nav>
+	{/if}
 </div>

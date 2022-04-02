@@ -23,6 +23,7 @@ if(!defined('FOXXEY')) {
 				functions::jsonAnswer("Успешная авторизация!", false);
 			} else {
 				$logger->WriteLine($this->authData['login']." failed authorisation with password ".$this->authData['password']);
+				$antiBrute = new antiBrute(REMOTE_IP, $db, false);
 				functions::jsonAnswer("Неверный логин или пароль!");
 			}
 		}

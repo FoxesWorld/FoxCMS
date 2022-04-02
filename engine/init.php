@@ -8,19 +8,20 @@ session_start();
 		
 		protected $debug;
 		protected $logger;
+		protected static $profileBlock = '';
 		protected $db;
 		
 		private $toIncludeArray = array(
-				"JS" =>
-					array(
-					'.js',
-					ENGINE_DIR.'/classes/js/',
-					true), 
-				"CSS" =>
-					array(
-					'.css',
-					ENGINE_DIR.'/skins/css/',
-					true));
+			"JS" =>
+				array(
+				'.js',
+				ENGINE_DIR.'/classes/js/',
+				true), 
+			"CSS" =>
+				array(
+				'.css',
+				ENGINE_DIR.'/skins/css/',
+				true));
 		
 		function __construct($debug = false) {
 			global $config;
@@ -32,37 +33,13 @@ session_start();
 			
 			require (ENGINE_DIR.'engine.php');
 			require (ENGINE_DIR.'/lib/smarty/Smarty.class.php');
+			require (ENGINE_DIR.'/classes/user/userInit.class.php');
 
-			if(isset($_REQUEST['userAction'])){
-				if($_REQUEST['key'] === $config['secureKey']) {
-					$engine = new engine($_REQUEST['userAction'], $this->db, $this->logger);
-				}
-			}
-
-			$smarty = new Smarty;
-			$smarty->debugging = false;
-			$smarty->cache_lifetime = 120;
-			$smarty->assign("systemJS", $this->getFilesInc('JS'));
-			$smarty->assign("systemCSS", $this->getFilesInc('CSS'));
-			$smarty->assign("tplDir", "/templates/".$config['siteTpl']);
-			$smarty->assign("builtInJS", '<script>request = new request("/", {key:"'.$config['secureKey'].'"}, false);formInit(500);</script>');
-			$smarty->template_dir 	= ROOT_DIR.'/templates/'.$config['siteTpl'];
-			$smarty->compile_dir 	= ENGINE_DIR.'/cache/compile/';
-			$smarty->cache_dir 		= ENGINE_DIR.'/cache/cache/';
-			$smarty->display('main.tpl');
-
-				if(!isset($_SESSION['isLogged'])) {
-					$loginField = new modalConstructor("login", "Авторизация", "Что бы на сайт войти логин и пароль нам нужно ввести", "%file:=auth");
-					echo $loginField->mdlOut();
-					
-					$regField = new modalConstructor("reg", "Регистрация", "Регистрируйтесь пожалуйста", "%file:=reg");
-					echo $regField->mdlOut();
-				} else {
-					self::libFilesInclude(ENGINE_DIR.'/classes/user/profile', false);
-				}
+				$userInit = new userInit();
+				$smartyInit = new smartyInit();
 		}
-		
-		private function getFilesInc($filetype){
+
+		protected function getFilesInc($filetype){
 			$allFilesArray = $this->systemLibsInc();
 			$outString = "";
 			foreach ($allFilesArray as $key){
@@ -88,7 +65,7 @@ session_start();
 			return $outString;
 		}
 
-		function systemLibsInc(){
+		private function systemLibsInc(){
 			$filesArray = array();
 			foreach ($this->toIncludeArray as $key => $value){
 				if($value[2] === true) {
@@ -98,7 +75,6 @@ session_start();
 				
 			return $filesArray;
 		}
-		
 
 		public static function libFilesInclude($libDir, $debug) {
 			global $config;
@@ -118,5 +94,27 @@ session_start();
 			if($debug){
 				echo "<br />";
 			}
+		}
+	}
+
+	class smartyInit extends init {
+		
+		protected $smarty;
+		
+		function __construct() {
+			global $config;
+			$this->smarty = new Smarty;
+			$this->smarty->debugging = false;
+			$this->smarty->cache_lifetime = 120;
+			$this->smarty->assign("systemJS", $this->getFilesInc('JS'));
+			$this->smarty->assign("systemCSS", $this->getFilesInc('CSS'));
+			$this->smarty->assign("tplDir", "/templates/".$config['siteTpl']);
+			$this->smarty->assign("profile", init::$profileBlock);
+			$this->smarty->assign("builtInJS", '<script>request = new request("/", {key:"'.$config['secureKey'].'"}, false);formInit(500);</script>');
+			$this->smarty->template_dir 	= ROOT_DIR.'/templates/'.$config['siteTpl'];
+			$this->smarty->compile_dir 	= ENGINE_DIR.'/cache/compile/';
+			$this->smarty->cache_dir 		= ENGINE_DIR.'/cache/cache/';
+			$this->smarty->display('main.tpl');
+		
 		}
 	}

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-04-02 17:09:19
+/* Smarty version 4.0.4, created on 2022-04-02 23:13:47
   from '/Avalon/sites/FoxRadio/www/templates/default/nav.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6248590f56b0a9_79323668',
+  'unifunc' => 'content_6248ae7b8d33b8_00573176',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '41cb0854ea5615e8e4c498cd471f3486c90bf78d' => 
     array (
       0 => '/Avalon/sites/FoxRadio/www/templates/default/nav.tpl',
-      1 => 1648908542,
+      1 => 1648930423,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6248590f56b0a9_79323668 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6248ae7b8d33b8_00573176 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="navigation">
 	<nav>
 	   <ul>				
@@ -35,11 +35,19 @@ function content_6248590f56b0a9_79323668 (Smarty_Internal_Template $_smarty_tpl)
 			<li>
 				<a href="/"><i class="fa fa-comments" aria-hidden="true"></i>ФОРУМ</a>
 			</li>
-								
-			</li>
-				<a href="#login"><i class="fa fa-comments" aria-hidden="true"></i>Войти</a>
-			</li>
+				
+
+
 		</ul>
 	</nav>
+	<?php if (!'profile' == '') {?>
+	<nav class="rightNavBlock">
+		<li>
+			<div class="sub-main">
+				<a href="#login"><button class="logInBtn"><span>Войти</span></button></a>
+			</div>
+		</li>
+	</nav>
+	<?php }?>
 </div><?php }
 }

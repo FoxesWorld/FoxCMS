@@ -1,5 +1,6 @@
 html {
 	background-image: url('/templates/default/img/bg.jpg');
+	font-family: 'FSElliotPro';
 	background-size: cover;
     background-repeat: no-repeat;
     overflow-x: hidden;
@@ -17,12 +18,22 @@ main {
     margin: 15%;
 }
 
+li {
+	list-style: none;
+}
+
 .logo {
 	font-family: 'FSElliotPro-Heavy';
 	color: #f69d4bb0;
 	display: block;
 	float: left;
     width: fit-content;
+	cursor: pointer;
+}
+
+.logo:hover {
+	transition: 0.5s;
+	opacity: 0.3;
 }
 
 .logo > img {
@@ -44,8 +55,18 @@ main {
 
 .navigation {
 	margin: 0 auto;
+}
+
+.rightNavBlock {
+	float: right;
+	margin: 0;
+}
+
+.userProfile {
+	border: 1px solid black;
     width: fit-content;
-	float: left;
+    padding: 10px;
+    border-radius: 5px 0px;
 }
 
 
@@ -68,6 +89,16 @@ nav, nav ul li, nav ul li a {
 ol, ul {
     list-style: none;
 	position: relative;
+	padding: 0px;
+}
+
+footer {
+    background-color: #4e5357d6;
+    position: absolute;
+	height: 45px;
+	width: 100%;
+    left: 0;
+    bottom: 0;
 }
 
 .input_block {

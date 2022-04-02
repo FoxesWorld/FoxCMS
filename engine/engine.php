@@ -1,7 +1,16 @@
 <?php
 if(!defined('FOXXEY')) {
 	die ('{"message": "Not in FOXXEY thread"}');
+} else {
+	if(isset($_REQUEST['userAction'])){
+		if($_REQUEST['key'] === $config['secureKey']) {
+			$engine = new engine($_REQUEST['userAction'], $this->db, $this->logger);
+		} else {
+			functions::jsonAnswer('Wrong secure key!', true);
+		}
+	}
 }
+
 	class engine {
 		
 		function __construct($request = null, $db, $logger){
