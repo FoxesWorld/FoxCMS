@@ -1,0 +1,109 @@
+<?php 
+/*
+=====================================================
+ Well, you are Tespi today!
+-----------------------------------------------------
+ https://Foxesworld.ru/
+-----------------------------------------------------
+ Copyright (c) 2016-2021  FoxesWorld
+-----------------------------------------------------
+ This code is reserved
+-----------------------------------------------------
+ File: randTexts.class.php
+-----------------------------------------------------
+ Verssion: 0.1.4.1 Alpha
+-----------------------------------------------------
+ Usage: Generate random text to entertain user
+=====================================================
+*/
+if (!defined('FOXXEY')) {
+	die ('{"message": "Not in FOXXEY thread"}');
+}
+	class randTexts {
+	
+		/* INPUT */
+		private $textToSend;
+		private $debug;
+		
+		/* INTERNAL */
+		
+		private $textsDir;
+		private $textArr;
+		
+		/* CONFIG */
+		private $mdlName;
+		private $config = array();
+		private $defaultConfig = array('randTexts' => 
+		array(
+			'textsDir' 			=> ETC.'messages/randTexts/',
+			'debug'				=> false
+		));
+		
+		/**
+		 * randTexts constructor.
+		 * @param $textType
+		 * @param bool $debug
+		 */
+		function __construct($textType, $debug = false){
+			/*ConfInit*/
+				$this->mdlName = basename(__FILE__);
+				$conf = conff::confGen($this->mdlName, $this->defaultConfig);
+				$this->config = $conf->readInIarray();
+			
+			$this->textsDir 	= $this->config['textsDir'];
+			$this->debug 		= $this->config['debug'];
+			$this->textToSend 	= $textType;
+
+			if($this->debug){
+				echo 'TextType - '.$this->textToSend;
+			}
+		}
+		
+		public function textOut(){
+			return $this->getTexts();
+			
+		}
+
+		private function getTexts(){
+			$filePath = $this->textsDir.$this->textToSend.'.txt';
+			if(file_exists($filePath)) {
+				$this->textArr = file($filePath);
+				$randWord = rand(0, count($this->textArr)-1);
+				$answer = str_replace("\n", "", $this->textArr[$randWord]);
+			} else {
+			$answer = '{"message": "File '.$filePath.' not found!"}}';
+			}
+			$answer = substr($answer,0,-1);
+			return $answer;
+		}
+		
+		private function prepareWorkDir(){
+			//WIP
+		}
+
+		public static function getUserName(){
+			global $config;
+				if(class_exists('randTexts')) {
+					$randTexts = new randTexts('noName', $config['randTextsDebug']);
+						$name = $randTexts->textOut();
+					} else {
+						echo '{"message": "Module randTexts not found!", "desc": "Can`t say an unknown user who is he today!"},';
+						$name = 'Unnamed user';
+					}
+				return $name;
+			}
+		
+
+		public static function wrongHWIDmessage(){
+			global $config;
+					if(class_exists('randTexts')) {
+						$randTexts = new randTexts('wrongHWID', $config['randTextsDebug']);
+						$name = $randTexts->textOut();
+					} else {
+						echo '{"message": "Module randTexts not found!", "desc": "Can`t say user how wrong he is!"},';
+						$name = 'Incorrect HWID';
+					}
+			return $name;
+		}
+	
+	}

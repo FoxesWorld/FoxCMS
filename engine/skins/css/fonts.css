@@ -1,0 +1,33 @@
+@font-face {
+  font-family: 'FSElliotPro';
+  src: url('../fonts/FSElliotPro.eot');
+  src: url('../fonts/FSElliotPro.ttf') format('truetype'),
+       url('../fonts/FSElliotPro.svg#FSElliotPro') format('svg'),
+       url('../fonts/FSElliotPro.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+    font-family: 'Intro-Black';
+    src: url('/templates/fonts/Intro-Black.ttf') format('truetype'),
+    url('/templates/fonts/Intro-Black.svg#Intro-Black') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'FSElliotPro-Heavy';
+  src: url('../fonts/FSElliotPro-Heavy.eot');
+  src: url('../fonts/FSElliotPro-Heavy.ttf') format('truetype'),
+       url('../fonts/FSElliotPro-Heavy.svg#FSElliotPro-Heavy') format('svg'),
+       url('../fonts/FSElliotPro-Heavy.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+	font-family: 'Minecraft';
+	src: url('../fonts/minecraft.ttf') format('truetype');
+	font-style: normal;
+}

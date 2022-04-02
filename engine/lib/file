@@ -1,0 +1,191 @@
+<?php
+/**
+ * Script to get list of files with !ignoreFiles option
+ *
+ * @version	2021.11.11
+ * @author  Aiden Fox
+ * @link    https://github.com/AidenF0X
+ * @license	GNU/GPL http://www.gnu.org/licenses/gpl.html
+ 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
+	class file {
+		
+		/* INPUT DATA */
+		private static $filePath  			= 'undefined';
+		private static $inputText			=  'undefined';
+		
+		/* WRITING FILE */
+		private static $writeNode 			= 'undefined';
+		private static $fileResourceLink;
+		private static $rights				= 'undefined'; //unused
+		
+		/* FILE INFO */
+		private static $fileSize			= 'undefined';
+		private static $message				= 'undefined';
+		private static $fileContents		= 'undefined';
+		private static $recordedContents	= 'undefined';
+		private static $outArray			= array();
+		
+		/*INTERNAL */
+		private static $serialize			= false;
+		private static $workDone			= false;
+		
+		public static function efile($filePath, $serialize = false, $str = null){
+			self::$serialize = $serialize;
+			if($filePath) {
+				self::$filePath = $filePath;
+				switch(file_exists($filePath)){
+					
+					case true:
+						self::$fileSize = filesize(self::$filePath);
+						self::$rights = getPerms::permissions($filePath);
+						self::$fileContents = self::flread(self::$filePath);
+						self::fileMode($filePath, $str);		
+						self::fileop($filePath, $str);
+
+						self::$workDone = true; 
+					break;
+					
+					case false:
+						self::fcreate(self::$filePath, $str);
+						self::$message = 'Creating `'.self::$filePath.'` file';
+						self::efile(self::$filePath, $str);
+
+						self::$workDone = false;
+					break;					
+				}
+
+				self::$outArray = array('path' => self::$filePath, 'size' => self::$fileSize, 'rights' => self::$rights, 'content' => self::$fileContents, 'message' => self::$message);
+				if(self::$workDone === true) {
+					fclose (self::$fileResourceLink);
+				}
+				return self::$outArray;
+			} else {
+				return $filePath.' is an unexisting Path!';
+			}
+		}
+		
+		private static function fcreate($file, $str){
+				self::$fileResourceLink = fopen($file, "a+");
+				self::fileMode($file, $str);		
+				self::fileop($file, $str);
+		}
+		
+		private static function flread($file){
+			ob_start();
+			readfile($file);//ob_get_level()
+			$fileContents = ob_get_clean();
+			
+			switch(self::$serialize){
+				case true:
+					$fcont = unserialize($fileContents);
+				break;
+				
+				case false:
+					$fcont = $fileContents;
+				break;
+			}
+			return $fcont;
+		}
+		
+		private static function fileMode($file, $str){
+			$message = 'Reading file';
+			$writeNode = 'r';
+			$fcont = self::flread($file);
+
+			if($str) {
+				switch(is_array($str)){
+					case true:
+						switch(is_writable($file)){
+							case true:
+								switch($fcont){
+									
+									case null:
+										$writeNode = 'w';
+										$message = 'Writing '.$file;
+									break;
+									
+									case (self::getSizeArray($fcont) === self::getSizeArray($str)):
+									break;
+								}
+							break;
+							
+							case false:
+								$message = 'Not enough rights for that file';
+							break;
+						}
+					break;
+
+					case false:
+						if($str !== $fcont){
+							switch(is_writable($file)){
+								case true:
+									$message = 'Writing '.$file;
+									$writeNode = 'w';
+								break;
+								
+								case false:
+									$message = 'Not enough rights for that file';
+								break;
+							}
+						}
+					break;
+				}
+			}
+			if(file_exists($file)) {
+				self::$message = $message;
+				self::$writeNode = $writeNode;
+				self::$fileResourceLink = fopen($file,self::$writeNode);
+			} else {
+				return 'Not found a file- '.$file;
+			}
+		}
+		
+		private static function fileop($file, $str){
+			switch(self::$writeNode){
+
+				case 'r':
+					self::$fileContents = self::flread($file);
+				break;
+				
+				case 'w':
+					switch(self::$serialize){
+						case true:
+							$writeString = serialize($str);
+						break;
+						
+						case false:
+							$writeString = $str;
+						break;
+					}
+					self::$recordedContents = fputs(self::$fileResourceLink, $writeString);
+					$recorded = filesize(self::$filePath) - self::$fileSize;
+					self::$fileContents = self::flread($file);
+				break;
+			}
+		}
+		
+		private static function getSizeArray($arr) {
+			$tot = 0;
+			foreach($arr as $a) {
+				if (is_array($a)) {
+					$tot += self::getSizeArray($a);
+				}
+				if (is_string($a)) {
+					$tot += strlen($a);
+				}
+				if (is_int($a)) {
+					$tot += PHP_INT_SIZE;
+				}
+			}
+			return $tot;
+		}
+
+	}

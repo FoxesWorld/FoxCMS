@@ -1,0 +1,57 @@
+<?php
+/**
+ * Script to generate modal windows
+ *
+ * @version	2022.04.01
+ * @author  Aiden Fox
+ * @link    https://github.com/AidenF0X
+ * @license	GNU/GPL http://www.gnu.org/licenses/gpl.html
+ 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
+if (!defined('FOXXEY')) {
+	die ('{"message": "Not in FOXXEY thread"}');
+}
+ 
+	class modalConstructor {
+
+		private $modalFilesDir;
+		private $modalElements = array('mdlAdress', 'mdlTitle', 'mdlDesc', 'mdlContent');
+		private $modalShape = '<div class="foxModal" data-foxModal-id="{mdlAdress}" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
+									<button data-foxModal-action="close" class="foxModal-close" aria-label="Close"></button>
+									  <div>
+										<h2 id="modalTitle" class="animated jackInTheBox">{mdlTitle}</h2>
+											<span id="modalDesc" class="animated fadeInUp">
+												{mdlDesc}
+											</span>
+											<div id="mdlContent">
+												{mdlContent}
+											</div>
+									  </div>
+								</div>';
+
+		
+		
+		function __construct($mdlAdress = "mdl", $mdlTitle = "modal title", $mdlDesc = "modalDescription", $mdlContent = "tes"){
+			global $config;
+			$this->modalFilesDir = ROOT_DIR."/templates/".$config['siteTpl'].'/modal/';
+			foreach($this->modalElements as $key){
+
+				if(strpos(${$key}, '%file:=') !== false){
+					${$key} = file::efile($this->modalFilesDir.explode("=", $mdlContent)[1].'.tpl')["content"];
+				}
+				$this->modalShape = str_replace("{".$key."}", ${$key}, $this->modalShape);
+			}
+		}
+		
+		public function mdlOut(){
+			echo $this->modalShape;
+		}
+		
+	}
