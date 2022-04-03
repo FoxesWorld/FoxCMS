@@ -2,7 +2,7 @@
 if(!defined('FOXXEY')) {
 	die ('{"message": "Not in FOXXEY thread"}');
 }
-	class auth {
+	class auth extends engine {
 		
 		private $authData = array();
 		

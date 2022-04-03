@@ -9,6 +9,7 @@
 				document.body.scrollTop = scrollV;
 				document.body.scrollLeft = scrollH;
 			}
+			location.reload();
 		}
 
 		function refreshMain(){

@@ -41,6 +41,7 @@
 		
 		function submitForm(data, url, method, button){
 			let answer = 'notSent';
+			console.log(data);
 			switch(method){
 				case 'post':
 					answer = request.send_post(data);

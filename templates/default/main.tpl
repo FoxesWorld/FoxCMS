@@ -21,7 +21,7 @@
 					vid.volume = 0.05;
 			</script>
 		</main>
-
+		{include file='notify.tpl'}
 	</body>
 	{include file='footer.tpl'}
 </html>

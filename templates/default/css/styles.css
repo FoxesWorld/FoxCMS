@@ -56,6 +56,7 @@ li {
 
 .navigation {
 	margin: 0 auto;
+	z-index: -1;
 }
 
 .rightNavBlock {
@@ -69,6 +70,12 @@ li {
 	box-shadow:0px 2px 10px 5px #615954d1;
     width: fit-content;
     padding: 0px 10px;
+	width: 25%;
+}
+
+.userProfile > ul {
+	margin: 5% auto;
+    display: table;
 }
 
 
@@ -76,7 +83,7 @@ li {
 	 background-color: #4e5357d6;
 	 height: 45px;
 	 width: 100%;
-	 position:absolute;
+	 position:fixed;
 	 top:0;
 	 right:0;
 }
@@ -96,11 +103,12 @@ ol, ul {
 
 footer {
     background-color: #4e5357d6;
-    position: absolute;
+    position: fixed;
 	height: 45px;
 	width: 100%;
     left: 0;
     bottom: 0;
+	z-index: -1;
 }
 
 footer > span {
@@ -176,7 +184,7 @@ footer > span > b {
     margin: 0 auto;
 }
 
-input[type="submit"] {
+input[type="submit"].login {
 	display: block;
 	border: 0;
     width: 276px;
@@ -194,10 +202,25 @@ input[type="submit"] {
 }
 
 
-input[type="submit"]:hover {
+input[type="submit"]:hover.login  {
     background: #bbd641;
 }
 
-   
+input[type="submit"].logout {
+	-webkit-box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
+    -moz-box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
+    box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
+	background-color: #d77c2e;
+    padding: 10px;
+    margin: 5px 0px;
+	cursor: pointer;
+    border: 0;
+}
+
+input[type="submit"]:hover.logout  {
+	transition: 0.5s;
+    background: #f15b21c7;
+	box-shadow: 0 5px 20px 0 rgb(219 113 23 / 98%);
+}
 
    

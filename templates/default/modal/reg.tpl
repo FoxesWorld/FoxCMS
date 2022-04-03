@@ -27,5 +27,5 @@
 		</div>
 
 		<input id="userAction" class="input" type="hidden" value="reg">
-		<input type="submit" />
+		<input type="submit" class="login" />
 	</form>

@@ -1,5 +1,7 @@
 <?php
-
+if (!defined('FOXXEY')) {
+	die ('{"message": "Not in FOXXEY thread"}');
+}
 	class profile {
 		
 		private $profileBlock;
@@ -9,6 +11,7 @@
 		function __construct(){
 			global $config;
 			if($_SESSION['isLogged'] === true){
+				$userActions = new userActions();
 				$this->profileShape = file::efile(ROOT_DIR."/templates/".$config['siteTpl'].'/profileComponent.tpl')["content"];
 				foreach($_SESSION as $key => $value) {
 					if(in_array($key, $config['userDataToShow'], true)){
@@ -22,10 +25,4 @@
 		public function profileOut(){
 			return $this->profileBlock;
 		}
-		
-		private function logout(){
-			session_destroy();
-			header('Location: /');
-		}
-		
 	}

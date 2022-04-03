@@ -1,9 +1,9 @@
 <?php
-
+if (!defined('FOXXEY')) {
+	die ('{"message": "Not in FOXXEY thread"}');
+}
 	class userInit extends init {
-		
-		
-		
+
 		function __construct() {
 				switch(@$_SESSION['isLogged']){
 					case true:

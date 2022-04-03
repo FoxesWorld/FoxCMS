@@ -1,24 +1,30 @@
 <?php
-
+if (!defined('FOXXEY')) {
+	die ('{"message": "Not in FOXXEY thread"}');
+}
 	class smartyInit extends init {
 		
 		protected $smarty;
 		
 		function __construct() {
 			global $config;
-			$this->smarty = new Smarty;
-			$this->smarty->debugging = false;
-			$this->smarty->cache_lifetime = 120;
+			$this->smarty 					= new Smarty;
+			$this->smarty->debugging 		= false;
+			$this->smarty->cache_lifetime 	= 120;
+			$this->smarty->template_dir 	= ROOT_DIR.'/templates/'.$config['siteTpl'];
+			$this->smarty->compile_dir 		= ENGINE_DIR.'/cache/compile/';
+			$this->smarty->cache_dir 		= ENGINE_DIR.'/cache/cache/';
+			$this->smartyAssign();
+			$this->smarty->display('main.tpl');
+		}
+		
+		protected function smartyAssign(){
+			global $config;
 			$this->smarty->assign("systemJS", $this->getFilesInc('JS'));
 			$this->smarty->assign("systemCSS", $this->getFilesInc('CSS'));
 			$this->smarty->assign("tplDir", "/templates/".$config['siteTpl']);
 			$this->smarty->assign("profile", init::$profileBlock);
 			$this->smarty->assign("builtInJS", '<script>request = new request("/", {key:"'.$config['secureKey'].'"}, false);formInit(500);</script>');
-			$this->smarty->template_dir 	= ROOT_DIR.'/templates/'.$config['siteTpl'];
-			$this->smarty->compile_dir 	= ENGINE_DIR.'/cache/compile/';
-			$this->smarty->cache_dir 		= ENGINE_DIR.'/cache/cache/';
-			$this->smarty->display('main.tpl');
-		
 		}
 		
 		protected function getFilesInc($filetype){

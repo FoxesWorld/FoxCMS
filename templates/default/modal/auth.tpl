@@ -11,7 +11,7 @@
 		
 		<tr>
 			<td>
-				<input type="submit" />
+				<input type="submit" class="login" />
 			</td>
 			<td>
 				<div class="input_block animated fadeInLeft">

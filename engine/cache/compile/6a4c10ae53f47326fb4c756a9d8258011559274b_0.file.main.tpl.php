@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-04-03 10:39:59
+/* Smarty version 4.0.4, created on 2022-04-03 13:52:29
   from '/Avalon/sites/FoxRadio/www/templates/default/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_62494f4f048da9_87003659',
+  'unifunc' => 'content_62497c6d6c92e8_57531047',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6a4c10ae53f47326fb4c756a9d8258011559274b' => 
     array (
       0 => '/Avalon/sites/FoxRadio/www/templates/default/main.tpl',
-      1 => 1648971592,
+      1 => 1648983146,
       2 => 'file',
     ),
   ),
@@ -21,10 +21,11 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:header.tpl' => 1,
     'file:logo.tpl' => 1,
     'file:nav.tpl' => 1,
+    'file:notify.tpl' => 1,
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_62494f4f048da9_87003659 (Smarty_Internal_Template $_smarty_tpl) {
+function content_62497c6d6c92e8_57531047 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html>
 
 	<?php $_smarty_tpl->_subTemplateRender('file:header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
@@ -55,7 +56,8 @@ function content_62494f4f048da9_87003659 (Smarty_Internal_Template $_smarty_tpl)
 			<?php echo '</script'; ?>
 >
 		</main>
-
+		<?php $_smarty_tpl->_subTemplateRender('file:notify.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
 	</body>
 	<?php $_smarty_tpl->_subTemplateRender('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>

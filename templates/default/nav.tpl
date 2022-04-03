@@ -2,15 +2,15 @@
 	<nav>
 	   <ul>				
 			<li>
-				<a href="/personal"><i class="fa fa-user" aria-hidden="true"></i>ЛИЧНЫЙ КАБИНЕТ</a>
+				<a href="#" onclick="$(this).notify('Work In Progress!', 'info');"><i class="fa fa-user" aria-hidden="true"></i>ЛИЧНЫЙ КАБИНЕТ</a>
 			</li>
 												
 			<li>
-				<a href="/"><i class="fa fa-money" aria-hidden="true"></i>ДОНАТ УСЛУГИ</a>
+				<a href="#" onclick="$(this).notify('Work In Progress!', 'info');"><i class="fa fa-money" aria-hidden="true"></i>ДОНАТ УСЛУГИ</a>
 			</li>
 											
 			<li>
-				<a href="/"><i class="fa fa-comments" aria-hidden="true"></i>ФОРУМ</a>
+				<a href="#" onclick="$(this).notify('Work In Progress!', 'info');"><i class="fa fa-comments" aria-hidden="true"></i>ФОРУМ</a>
 			</li>
 				
 

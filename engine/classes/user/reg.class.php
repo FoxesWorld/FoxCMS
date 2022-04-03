@@ -2,7 +2,7 @@
 if(!defined('FOXXEY')) {
 	die ('{"message": "Not in FOXXEY thread"}');
 }
-	class reg {
+	class reg extends engine{
 		
 		private $regData;
 		private $passminCount = 5;
@@ -38,13 +38,19 @@ if(!defined('FOXXEY')) {
 		}
 		
 		private function regiter(){
+			global $config;
 			functions::checkSA($this->regData);
+			require(ENGINE_DIR.'classes/user/sessionManager.class.php');
 			$this->logger->WriteLine("Trying to register user '".$this->regData['login']."'");
 			$password = password_hash($this->regData['password'], PASSWORD_DEFAULT);
 			$query = "INSERT INTO `users`(`login`, `password`, `email`, `user_group`, `realname`, `hash`, `reg_date`, `last_date`) 
-			VALUES ('".$this->regData['login']."', '".$password."', '".$this->regData['email']."', '".$this->baseUserGroup."', '', '".authorize::generateLoginHash()."', '".CURRENT_TIME."', '".CURRENT_TIME."')";
+			VALUES ('".$this->regData['login']."', '".$password."', '".$this->regData['email']."', '".$this->baseUserGroup."', '".randTexts::getUserName()."', '".authorize::generateLoginHash()."', '".CURRENT_TIME."', '".CURRENT_TIME."')";
 			$userReg = $this->db->run($query);
 			if($userReg) {
+				foreach($config['userDatainDb'] as $key){
+					$userData[] = functions::getUserData($this->regData['login'], $key, $this->db);
+				}
+				$sessionManager = new sessionManager($userData);
 				functions::jsonAnswer("Registration complete!", false); 
 			} else {
 				
