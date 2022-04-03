@@ -1,4 +1,4 @@
-		function removeHash () { 
+		function removeHash () {
 			var scrollV, scrollH, loc = window.location;
 			if ("pushState" in history)
 				history.pushState("", document.title, loc.pathname + loc.search);
@@ -14,10 +14,10 @@
 		function refreshMain(){
 		 $.ajax('/').done(function (data) {
 			 let s;
-			 $(data).find('#content').each(function(){
+			 $(data).find('vody').each(function(){
 				 s+=this.innerHTML;
 			 })
-			  $('#content').html(s);
+			  $('body').html(s);
 		 });
 		}
 		

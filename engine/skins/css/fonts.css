@@ -10,8 +10,8 @@
 
 @font-face {
     font-family: 'Intro-Black';
-    src: url('/templates/fonts/Intro-Black.ttf') format('truetype'),
-    url('/templates/fonts/Intro-Black.svg#Intro-Black') format('svg');
+    src: url('../fonts/Intro-Black.ttf') format('truetype'),
+    url('../fonts/Intro-Black.svg#Intro-Black') format('svg');
     font-weight: normal;
     font-style: normal;
 }

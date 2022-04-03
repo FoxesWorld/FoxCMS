@@ -17,7 +17,7 @@
 
 		</ul>
 	</nav>
-	{if !profile == ""}
+	{if !$profile}
 	<nav class="rightNavBlock">
 		<li>
 			<div class="sub-main">

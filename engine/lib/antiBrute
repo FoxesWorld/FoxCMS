@@ -61,7 +61,7 @@ if (!defined('FOXXEY')) {
 			}
 
 			if(date::checkTime($this->DBtime) === false){
-				functions::jsonAnswer("Подождите перед следующей попыткой!", true);
+				functions::jsonAnswer(randTexts::tempban(), true);
 			}
 		}
 

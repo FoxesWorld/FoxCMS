@@ -2,7 +2,7 @@
 /**
  * Script to generate modal windows
  *
- * @version	2022.04.01
+ * @version	2022.04.03
  * @author  Aiden Fox
  * @link    https://github.com/AidenF0X
  * @license	GNU/GPL http://www.gnu.org/licenses/gpl.html
@@ -23,24 +23,14 @@ if (!defined('FOXXEY')) {
 
 		private $modalFilesDir;
 		private $modalElements = array('mdlAdress', 'mdlTitle', 'mdlDesc', 'mdlContent');
-		private $modalShape = '<div class="foxModal" data-foxModal-id="{mdlAdress}" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
-									<button data-foxModal-action="close" class="foxModal-close" aria-label="Close"></button>
-									  <div>
-										<h2 id="modalTitle" class="animated jackInTheBox">{mdlTitle}</h2>
-											<span id="modalDesc" class="animated fadeInUp">
-												{mdlDesc}
-											</span>
-											<div id="mdlContent">
-												{mdlContent}
-											</div>
-									  </div>
-								</div>';
+		private $modalShape = '';
 
 		
 		
 		function __construct($mdlAdress = "mdl", $mdlTitle = "modal title", $mdlDesc = "modalDescription", $mdlContent = "tes"){
 			global $config;
 			$this->modalFilesDir = ROOT_DIR."/templates/".$config['siteTpl'].'/modal/';
+			$this->modalShape = file::efile(ROOT_DIR."/templates/".$config['siteTpl'].'/modalComponent.tpl')["content"];
 			foreach($this->modalElements as $key){
 
 				if(strpos(${$key}, '%file:=') !== false){
