@@ -4,22 +4,18 @@
 
 	<body id="content">
 		{$builtInJS}
-		<div class="animated BounceInRight delay-1s menu-top">
-			{include file='logo.tpl'}
-			{include file='nav.tpl'}
+		<div class="animate__animated animate__BounceInRight animate__delay-1s menu-top">
+			{include file='components/logo.tpl'}
+			{include file='components/nav.tpl'}
 		</div>
 
-		<main ID="mainCont" class="animated BounceInUp delay-3s">
+		<main ID="mainCont" class="animate__animated animate__BounceInUp animate__delay-3s">
 			{$profile}
-			
-			<audio id="player" controls="controls" preload="none" style="margin-top: 24px; width: 100%;">
-                <source src="https://radio.macros-core.com:8443/live" type="audio/mpeg">
-            </audio>
+			<div class="contInner">
 
-			<script>
-					var vid = document.getElementById("player");
-					vid.volume = 0.05;
-			</script>
+				{include file='components/radioPlayer.tpl'}
+
+			</div>
 		</main>
 		{include file='notify.tpl'}
 	</body>

@@ -31,12 +31,15 @@ session_start();
 			
 			require (ENGINE_DIR.'engine.php');
 			require (ENGINE_DIR.'lib/smarty/Smarty.class.php');
+			require (ENGINE_DIR.'classes/linkBuilder.class.php');
 			require (ENGINE_DIR.'classes/smartyInit.class.php');
 			require (ENGINE_DIR.'classes/notify/notify-parser.php');
 			require (ENGINE_DIR.'classes/user/userInit.class.php');
 
-				$userInit = new userInit();
-				$smartyInit = new smartyInit();
+				$userInit 	= new userInit;
+				$builtLinks = new linkBuilder;
+				$smartyInit = new smartyInit($builtLinks->buildLinks());
+
 		}
 
 	}

@@ -5,8 +5,10 @@ if (!defined('FOXXEY')) {
 	class smartyInit extends init {
 		
 		protected $smarty;
+		private $links;
 		
-		function __construct() {
+		function __construct($builtLinks) {
+			$this->links = $builtLinks;
 			global $config;
 			$this->smarty 					= new Smarty;
 			$this->smarty->debugging 		= false;
@@ -22,6 +24,7 @@ if (!defined('FOXXEY')) {
 			global $config;
 			$this->smarty->assign("systemJS", $this->getFilesInc('JS'));
 			$this->smarty->assign("systemCSS", $this->getFilesInc('CSS'));
+			$this->smarty->assign("links", $this->links);
 			$this->smarty->assign("tplDir", "/templates/".$config['siteTpl']);
 			$this->smarty->assign("profile", init::$profileBlock);
 			$this->smarty->assign("builtInJS", '<script>request = new request("/", {key:"'.$config['secureKey'].'"}, false);formInit(500);</script>');
