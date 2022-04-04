@@ -9,15 +9,13 @@
 			{include file='components/nav.tpl'}
 		</div>
 
-		<main ID="mainCont" class="animate__animated animate__BounceInUp animate__delay-3s">
+		<main ID="mainCont" class="animate__animated animate__jackInTheBox animate__delay-2s">
 			{$profile}
-			<div class="contInner">
-
+			<div class="animate__animated animate__backInUp animate__delay-3s contInner">
 				{include file='components/radioPlayer.tpl'}
-
 			</div>
 		</main>
-		{include file='notify.tpl'}
+		{include file='components/advert.tpl'}
 	</body>
 	{include file='footer.tpl'}
 </html>

@@ -22,11 +22,18 @@
 		'bantime'			=> CURRENT_TIME + (120),
 		'maxLoginAttempts'	=> 1,
 		
+	/*WebSite Appeareance*/
+	
+		/*Title*/
+		'title' => 'FoxRadio',
+		'status' => 'Alpha',
+		
 		/* LINKS */
 		'links' => array(
 		array('Tes', 'tes.ru', '<i class="fa fa-user" aria-hidden="true"></i>'),
 		array('Wesp', 'wesp.ru', '<i class="fa fa-money" aria-hidden="true"></i>')
 		),
+		'additionalString' => 'onclick="$(this).notify(\'Work In Progress!\', \'info\'); return false"',
 		
 		/* UserSettings */
 		'userDatainDb'   => array("user_id", "email", "login", "password", "user_group", "realname", "hash", "reg_date", "last_date"),

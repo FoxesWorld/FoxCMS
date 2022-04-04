@@ -2,7 +2,7 @@
 if(!defined('FOXXEY')) {
 	die ('{"message": "Not in FOXXEY thread"}');
 }
-	class auth extends engine {
+	class auth extends authWrapper {
 		
 		private $authData = array();
 		
@@ -12,11 +12,21 @@ if(!defined('FOXXEY')) {
 			$inputPassword = $this->authData['password'];
 			$userPassword = functions::getUserData($this->authData['login'], 'password', $db);
 			if(authorize::passVerify($inputPassword, $userPassword)) {
-				require(ENGINE_DIR.'classes/user/sessionManager.class.php');
 				$userData = array();
 				$this->authUpdates($this->authData['login'], $db);
+
 				foreach($config['userDatainDb'] as $key){
-					$userData[] = functions::getUserData($this->authData['login'], $key, $db);
+					switch($key){
+						case 'user_group':
+							$groupAssociacion = new groupAssociacion(functions::getUserData($this->authData['login'], $key, $db), $db);
+							$userData[] = $groupAssociacion->userGroupName()["groupType"];
+						break;
+						
+						default:
+							$userData[] = functions::getUserData($this->authData['login'], $key, $db);
+						break;
+					}
+					
 				}
 				$sessionManager = new sessionManager($userData);
 				$logger->WriteLine($this->authData['login']." successfuly authorised");

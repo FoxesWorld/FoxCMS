@@ -64,12 +64,17 @@ li {
 	margin: 0;
 }
 
+#mainCont {
+	box-shadow: 0px 2px 10px 5px #615954d1;
+}
+
 #mainCont > .userProfile {
 	border-radius: 5px 0px 0px 5px;
 	background-color: #eb9869d1;
 	box-shadow:0px 2px 10px 5px #615954d1;
     width: fit-content;
     padding: 0px 10px;
+	z-index: 1;
 	width: 25%;
 }
 

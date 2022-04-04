@@ -25,6 +25,8 @@ if (!defined('FOXXEY')) {
 			$this->smarty->assign("systemJS", $this->getFilesInc('JS'));
 			$this->smarty->assign("systemCSS", $this->getFilesInc('CSS'));
 			$this->smarty->assign("links", $this->links);
+			$this->smarty->assign("title", $config['title']);
+			$this->smarty->assign("status", $config['status']);
 			$this->smarty->assign("tplDir", "/templates/".$config['siteTpl']);
 			$this->smarty->assign("profile", init::$profileBlock);
 			$this->smarty->assign("builtInJS", '<script>request = new request("/", {key:"'.$config['secureKey'].'"}, false);formInit(500);</script>');

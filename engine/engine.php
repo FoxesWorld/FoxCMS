@@ -4,31 +4,25 @@ if(!defined('FOXXEY')) {
 } else {
 	if(isset($_REQUEST['userAction'])){
 		if(@$_REQUEST['key'] === $config['secureKey']) {
-			$engine = new engine($_REQUEST['userAction'], $this->db, $this->logger);
+			$engine = new engine($_REQUEST, $this->db, $this->logger);
 		} else {
 			functions::jsonAnswer('Wrong secure key!', true);
 		}
 	}
 }
 
-	class engine {
+	class engine extends init {
 		
 		function __construct($request = null, $db, $logger){
-			$logger->WriteLine('Engine init!');
-			$request=functions::filterString($request);
+			$action = $request['userAction'];
 			if(@!$_SESSION['isLogged']) {
-				if(functions::FoxesStrlen($request) > 0) {
-					
-					switch($request){
-						
+				if(functions::FoxesStrlen($action) > 0) {
+					switch(functions::filterString($action)){
+
 						case 'auth':
-							require (ENGINE_DIR.'classes/user/auth.class.php');
-							$auth = new auth($_POST, $db, $logger);
-						break;
-						
 						case 'reg':
-							require (ENGINE_DIR.'classes/user/reg.class.php');
-							$req = new reg($_REQUEST, $db, $logger);
+							require (ENGINE_DIR.'classes/user/authWrapper.class.php');
+							$authWrapper = new authWrapper($request, $db, $logger);
 						break;
 						
 						default:

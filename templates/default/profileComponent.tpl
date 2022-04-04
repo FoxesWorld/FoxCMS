@@ -1,4 +1,4 @@
-<div class="userProfile animated jackInTheBox delay-4s">
+<div class="userProfile animate__animated animate__backInLeft animate__delay-3s">
 	<ul>
 		{profileData}
 		

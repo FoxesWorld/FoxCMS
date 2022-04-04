@@ -1,7 +1,7 @@
 <head>	
 	<meta charset="utf-8">
 	<meta name="HandheldFriendly" content="true">
-	<title>FoxRadio</title>
+	<title>{$title} {$status}</title>
     <link rel="shortcut icon" type="image/png" href="/favicon.ico">
 	<meta name="format-detection" content="telephone=no">
 	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height"> 

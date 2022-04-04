@@ -36,7 +36,7 @@ session_start();
 			require (ENGINE_DIR.'classes/notify/notify-parser.php');
 			require (ENGINE_DIR.'classes/user/userInit.class.php');
 
-				$userInit 	= new userInit;
+				$userInit 	= new userInit($this->db, $this->logger);
 				$builtLinks = new linkBuilder;
 				$smartyInit = new smartyInit($builtLinks->buildLinks());
 

@@ -40,7 +40,6 @@ if(!defined('FOXXEY')) {
 		private function regiter(){
 			global $config;
 			functions::checkSA($this->regData);
-			require(ENGINE_DIR.'classes/user/sessionManager.class.php');
 			$this->logger->WriteLine("Trying to register user '".$this->regData['login']."'");
 			$password = password_hash($this->regData['password'], PASSWORD_DEFAULT);
 			$query = "INSERT INTO `users`(`login`, `password`, `email`, `user_group`, `realname`, `hash`, `reg_date`, `last_date`) 
@@ -48,8 +47,18 @@ if(!defined('FOXXEY')) {
 			$userReg = $this->db->run($query);
 			if($userReg) {
 				foreach($config['userDatainDb'] as $key){
-					$userData[] = functions::getUserData($this->regData['login'], $key, $this->db);
+					switch($key){
+						case 'user_group':
+							$groupAssociacion = new groupAssociacion(functions::getUserData($this->authData['login'], $key, $db), $db);
+							$userData[] = $groupAssociacion->userGroupName()["groupType"];
+						break;
+						
+						default:
+							$userData[] = functions::getUserData($this->authData['login'], $key, $db);
+						break;
+					}
 				}
+				$this->logger->WriteLine("User has completed registration '".$this->regData['login']."'");
 				$sessionManager = new sessionManager($userData);
 				functions::jsonAnswer("Registration complete!", false); 
 			} else {

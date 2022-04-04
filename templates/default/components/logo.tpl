@@ -1,5 +1,5 @@
 <div class="logo" onclick="location.reload();">
 	<img src="{$tplDir}/img/logo.png">
-	<small>Alpha</small>
-	<span>FoxRadio</span>
+	<small>{$status}</small>
+	<span>{$title}</span>
 </div>
