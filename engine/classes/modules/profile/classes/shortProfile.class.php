@@ -2,15 +2,15 @@
 if (!defined('FOXXEY')) {
 	die ('{"message": "Not in FOXXEY thread"}');
 }
-	class profile {
+	class shortProfile extends profile {
 		
-		private $profileBlock;
+		private $shortProfileBlock;
 		private $selectedData;
 		private $profileShape = '';
 		
 		function __construct(){
 			global $config;
-			if($_SESSION['isLogged'] === true){
+			if(@$_SESSION['isLogged'] === true){
 				$userActions = new userActions();
 				$this->profileShape = file::efile(ROOT_DIR."/templates/".$config['siteTpl'].'/profileComponent.tpl')["content"];
 				foreach($_SESSION as $key => $value) {
@@ -18,11 +18,11 @@ if (!defined('FOXXEY')) {
 						$this->selectedData .= '<li><b>'.$key.'</b>: '.$value.'<li>';
 					}
 				}
-				$this->profileBlock = str_replace('{profileData}', $this->selectedData, $this->profileShape);
+				$this->shortProfileBlock = str_replace('{profileData}', $this->selectedData, $this->profileShape);
 			}
 		}
 		
 		public function profileOut(){
-			return $this->profileBlock;
+			return $this->shortProfileBlock;
 		}
 	}

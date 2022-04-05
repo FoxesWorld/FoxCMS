@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-04-03 17:41:11
+/* Smarty version 4.0.4, created on 2022-04-05 17:34:02
   from '/Avalon/sites/FoxRadio/www/templates/default/components/nav.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6249b207951161_50455202',
+  'unifunc' => 'content_624c535aa19359_09846467',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ad9b6fd3bbcd8e9c37c627e225ac89b86d6b5095' => 
     array (
       0 => '/Avalon/sites/FoxRadio/www/templates/default/components/nav.tpl',
-      1 => 1648996766,
+      1 => 1649169238,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6249b207951161_50455202 (Smarty_Internal_Template $_smarty_tpl) {
+function content_624c535aa19359_09846467 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="navigation">
 	<nav>
 	   <ul>				
@@ -28,7 +28,7 @@ function content_6249b207951161_50455202 (Smarty_Internal_Template $_smarty_tpl)
 
 		</ul>
 	</nav>
-	<?php if (!$_smarty_tpl->tpl_vars['profile']->value) {?>
+	<?php if (!$_smarty_tpl->tpl_vars['isLogged']->value) {?>
 	<nav class="rightNavBlock">
 		<li>
 			<div class="sub-main">

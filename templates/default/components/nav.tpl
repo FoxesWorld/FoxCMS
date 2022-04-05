@@ -4,7 +4,7 @@
 			{$links}
 		</ul>
 	</nav>
-	{if !$profile}
+	{if !$isLogged}
 	<nav class="rightNavBlock">
 		<li>
 			<div class="sub-main">

@@ -35,12 +35,12 @@ session_start();
 			$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
 
 			require (ENGINE_DIR.'lib/smarty/Smarty.class.php');
-			require (ENGINE_DIR.'classes/modules/user/userInit.class.php');
+			require (ENGINE_DIR.'classes/modules/notify/notify.class.php');
+			require (ENGINE_DIR.'classes/modules/auth/auth.class.php');
+			require (ENGINE_DIR.'classes/modules/profile/profile.class.php');
 			require (ENGINE_DIR.'classes/linkBuilder.class.php');
 			require (ENGINE_DIR.'classes/smartyInit.class.php');
-			require (ENGINE_DIR.'classes/modules/notify/notify-parser.php');
-				
-				$userInit 	= new userInit($this->db, $this->logger);
+
 				$builtLinks = new linkBuilder;
 				$smartyInit = new smartyInit($builtLinks->buildLinks());
 

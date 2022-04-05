@@ -29,6 +29,7 @@ if (!defined('FOXXEY')) {
 			$this->smarty->assign("status", $config['status']);
 			$this->smarty->assign("tplDir", "/templates/".$config['siteTpl']);
 			$this->smarty->assign("profile", init::$profileBlock);
+			$this->smarty->assign("isLogged", @$_SESSION['isLogged']);
 			$this->smarty->assign("builtInJS", '<script>request = new request("/", {key:"'.$config['secureKey'].'"}, false);formInit(500);</script>');
 		}
 		

@@ -1,6 +1,6 @@
 <?php
 
-	class userActions extends userInit {
+	class userActions extends profile {
 		
 		private $userActionReq = "userProfileAction";
 		
