@@ -35,14 +35,14 @@ session_start();
 			$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
 
 			require (ENGINE_DIR.'lib/smarty/Smarty.class.php');
-			require (ENGINE_DIR.'classes/modules/notify/notify.class.php');
-			require (ENGINE_DIR.'classes/modules/auth/auth.class.php');
-			require (ENGINE_DIR.'classes/modules/profile/profile.class.php');
-			require (ENGINE_DIR.'classes/linkBuilder.class.php');
+			
+			foreach(filesInDir::filesInDirArray(ENGINE_DIR.'classes/modules') as $key){
+				require(ENGINE_DIR.'classes/modules/'.$key.'/'.$key.'.class.php');
+			}
+			
 			require (ENGINE_DIR.'classes/smartyInit.class.php');
 
-				$builtLinks = new linkBuilder;
-				$smartyInit = new smartyInit($builtLinks->buildLinks());
+				$smartyInit = new smartyInit(linkBuilder::buildLinks());
 
 		}
 

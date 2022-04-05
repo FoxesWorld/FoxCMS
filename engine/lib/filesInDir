@@ -36,7 +36,7 @@ if(!defined('FOXXEY')) {
 			'explodeSymbol'  => ','
 		));
 
-		public static function filesInDirArray($path, $mask, $useIgnoreFile = true, $debug = false){
+		public static function filesInDirArray($path, $mask = "*", $useIgnoreFile = true, $debug = false){
 			//self::confInit(self::$mdlName, self::$defaultConfig);
 			if(is_dir($path)) {
 				$openDir = opendir($path);

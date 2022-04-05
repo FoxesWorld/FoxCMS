@@ -6,7 +6,7 @@
 (function () {
 	console.log('Advert 0.1.5 Init');
 	let advert = 'YES';
-	let debug = true;
+	let debug = false;
 	
 	$.post('', {
           advert: advert
