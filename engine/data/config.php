@@ -30,7 +30,7 @@
 		
 		/* LINKS */
 		'links' => array(
-		array('Tes', 'tes.ru', '<i class="fa fa-user" aria-hidden="true"></i>'),
+		array('TressModal', '#tess', '<i class="fa fa-user" aria-hidden="true"></i>'),
 		array('Wesp', 'wesp.ru', '<i class="fa fa-money" aria-hidden="true"></i>')
 		),
 		'additionalString' => 'onclick="$(this).notify(\'Work In Progress!\', \'info\'); return false"',

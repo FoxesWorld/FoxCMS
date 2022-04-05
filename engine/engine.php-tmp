@@ -8,6 +8,9 @@ if(!defined('FOXXEY')) {
 		} else {
 			functions::jsonAnswer('Wrong secure key!', true);
 		}
+	} else {
+		require (ENGINE_DIR.'classes/user/userInit.class.php');
+		$userInit 	= new userInit($this->db, $this->logger);
 	}
 }
 

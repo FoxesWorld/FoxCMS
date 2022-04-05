@@ -200,6 +200,11 @@ footer > span > b {
     margin: 0 auto;
 }
 
+input[type="submit"]{
+	font-family: 'FSElliotPro-Bold';
+	color: white;
+}
+
 input[type="submit"].login {
 	display: block;
 	border: 0;
@@ -237,6 +242,60 @@ input[type="submit"]:hover.logout  {
 	transition: 0.5s;
     background: #f15b21c7;
 	box-shadow: 0 5px 20px 0 rgb(219 113 23 / 98%);
+}
+
+/* RIBBON */
+.wrap {
+  z-index: 99;
+}
+
+.ribbon {
+    position: relative;
+    width: 150px;
+	background-image: -moz-linear-gradient(#BFDC7A, #a7bc61);
+	background-image: -webkit-linear-gradient(#BFDC7A, #a7bc61);
+	background-image: -o-linear-gradient(rgba(#BFDC7A, #a7bc61));
+	background-image: -ms-linear-gradient(#BFDC7A, #a7bc61);
+    color: #333;
+	font-family: 'Intro-Black';
+    text-align: center;
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
+    padding: 7px 0;
+    top: 25px;
+    left: -10px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform:    rotate(45deg);
+    -ms-transform:     rotate(45deg);
+    -o-transform:      rotate(45deg);
+}
+
+/*
+.ribbon:before, .ribbon:after {
+content: '';
+position: absolute;
+border-style: solid;
+border-color: transparent;
+bottom: -20px;
+}
+.ribbon:before {
+border-width: 0 30px 20px 0;
+border-right-color: #892b2b;
+left: 0;
+}
+ 
+.ribbon:after {
+border-width: 0 0 20px 30px;
+border-left-color: #892b2b;
+right: 0;
+} */
+
+.wrap-ribbon {
+	width: 106px;
+    height: 106px;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
    

@@ -18,8 +18,13 @@ session_start();
 		
 		//Modals to unlogged
 		protected $modalsUnlogged = array(
-		"login" => array("Авторизация", "Что бы на сайт войти логин и пароль нам нужно ввести", "%file:=auth"),
-		"reg" 	=> array("Регистрация", "Регистрируйтесь пожалуйста", "%file:=reg"));
+			"login" => array("Авторизация", "Что бы на сайт войти логин и пароль нам нужно ввести", "%file:=auth"),
+			"reg" 	=> array("Регистрация", "Регистрируйтесь пожалуйста", "%file:=reg")
+		);
+		
+		protected $modalsLogged = array(
+			"cp" => array("Личный кабинет", "Посмотрим, что мы тут можем поменять...", "%file:=cp")
+		);
 		
 		function __construct($debug = false) {
 			global $config;
@@ -28,14 +33,13 @@ session_start();
 			initFunctions::libFilesInclude(ENGINE_DIR.'/lib', $this->debug);
 			$this->logger = new Logger('lastlog');
 			$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
-			
-			require (ENGINE_DIR.'engine.php');
+
 			require (ENGINE_DIR.'lib/smarty/Smarty.class.php');
+			require (ENGINE_DIR.'classes/modules/user/userInit.class.php');
 			require (ENGINE_DIR.'classes/linkBuilder.class.php');
 			require (ENGINE_DIR.'classes/smartyInit.class.php');
-			require (ENGINE_DIR.'classes/notify/notify-parser.php');
-			require (ENGINE_DIR.'classes/user/userInit.class.php');
-
+			require (ENGINE_DIR.'classes/modules/notify/notify-parser.php');
+				
 				$userInit 	= new userInit($this->db, $this->logger);
 				$builtLinks = new linkBuilder;
 				$smartyInit = new smartyInit($builtLinks->buildLinks());
