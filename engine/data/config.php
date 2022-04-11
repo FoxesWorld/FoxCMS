@@ -15,8 +15,10 @@
 		
 		'siteTpl' => 'default',
 		'timezone'=> 'Europe/Moscow',
-		'webserviceName'=> 'FoxRadio',
+		'webserviceName'=> 'FoxEngine',
 		'secureKey' => 'ghYyufghVH',
+		
+		'radioStream' => "https://radio.macros-core.com:8443/live",
 		
 		/* AUTHORISATION */
 		'bantime'			=> CURRENT_TIME + (120),
@@ -25,7 +27,7 @@
 	/*WebSite Appeareance*/
 	
 		/*Title*/
-		'title' => 'FoxRadio',
+		'title' => 'FoxEngine',
 		'status' => 'Alpha',
 		
 		/* LINKS */

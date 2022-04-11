@@ -114,19 +114,11 @@ function addFreeImage(getFreeImage){
     });
 }
 	
-function closeImageGet() {
-    let notify_content = $('#notify-content');
-	$("#notify_block").removeClass('animated jackInTheBox');
-	$("#notify_block").addClass('animated zoomOutRight');
-    
-}
-	
 function closeNotify() {
     let notify_content = $('#notify-content');
-    //notify_content.animate({opacity: 0}, 200);
 	setCookie('advert', 'closed', 86400, '/', 'foxesworld.ru', true);
-	$("#notify_block").removeClass('animated jackInTheBox');
-	$("#notify_block").addClass('animated zoomOutRight');
+	$("#notify_block").removeClass('animate__delay-4s');
+	$("#notify_block").addClass('animate__zoomOutRight');
 	console.log('Advert skiped.');
     
 }

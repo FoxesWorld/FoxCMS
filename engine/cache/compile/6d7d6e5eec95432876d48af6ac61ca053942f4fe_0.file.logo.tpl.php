@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-04-04 14:05:04
+/* Smarty version 4.0.4, created on 2022-04-07 19:44:32
   from '/Avalon/sites/FoxRadio/www/templates/default/components/logo.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_624ad0e0ea59b7_34551012',
+  'unifunc' => 'content_624f14f0f30480_51414456',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_624ad0e0ea59b7_34551012 (Smarty_Internal_Template $_smarty_tpl) {
+function content_624f14f0f30480_51414456 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="logo" onclick="location.reload();">
 	<img src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /img/logo.png">

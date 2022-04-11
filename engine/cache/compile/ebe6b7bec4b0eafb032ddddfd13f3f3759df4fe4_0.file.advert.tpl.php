@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-04-05 19:25:58
+/* Smarty version 4.0.4, created on 2022-04-07 19:44:32
   from '/Avalon/sites/FoxRadio/www/templates/default/components/advert.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_624c6d96a9bdf7_35964591',
+  'unifunc' => 'content_624f14f0f3f9b4_89226987',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ebe6b7bec4b0eafb032ddddfd13f3f3759df4fe4' => 
     array (
       0 => '/Avalon/sites/FoxRadio/www/templates/default/components/advert.tpl',
-      1 => 1649175954,
+      1 => 1649176818,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_624c6d96a9bdf7_35964591 (Smarty_Internal_Template $_smarty_tpl) {
+function content_624f14f0f3f9b4_89226987 (Smarty_Internal_Template $_smarty_tpl) {
 ?>	<link href="/engine/classes/modules/advert/styles.css" rel="stylesheet" type="text/css">
 
 	<div style="display:none;" id="notify-content">

@@ -4,10 +4,12 @@
 
 	<body id="content">
 		{$builtInJS}
+	<header>
 		<div class="animate__animated animate__BounceInRight animate__delay-1s menu-top">
 			{include file='components/logo.tpl'}
 			{include file='components/nav.tpl'}
 		</div>
+	</header>
 
 		<main ID="mainCont" class="animate__animated animate__jackInTheBox animate__delay-2s">
 				<div class="wrap">
@@ -17,7 +19,7 @@
 				</div>
 			{$profile}
 			<div class="animate__animated animate__backInUp animate__delay-3s contInner">
-				{include file='components/radioPlayer.tpl'}
+
 			</div>
 		</main>
 		{include file='components/advert.tpl'}

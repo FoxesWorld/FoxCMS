@@ -22,51 +22,40 @@ if (!defined('FOXXEY')) {
 		
 		protected function smartyAssign(){
 			global $config;
-			$this->smarty->assign("systemJS", $this->getFilesInc('JS'));
-			$this->smarty->assign("systemCSS", $this->getFilesInc('CSS'));
+			$includeSkinFiles = new includeSkinFiles($this->toIncludeArray);
+			$this->smarty->assign("systemHeaders", includeSkinFiles::$outString);
 			$this->smarty->assign("links", $this->links);
 			$this->smarty->assign("title", $config['title']);
+			$this->smarty->assign("radioStream", $config['radioStream']);
 			$this->smarty->assign("status", $config['status']);
 			$this->smarty->assign("tplDir", "/templates/".$config['siteTpl']);
 			$this->smarty->assign("profile", init::$profileBlock);
 			$this->smarty->assign("isLogged", @$_SESSION['isLogged']);
 			$this->smarty->assign("builtInJS", '<script>request = new request("/", {key:"'.$config['secureKey'].'"}, false);formInit(500);</script>');
 		}
-		
-		protected function getFilesInc($filetype){
-			$allFilesArray = $this->systemLibsInc($this->toIncludeArray);
-			$outString = "";
-			foreach ($allFilesArray as $key){
-				switch($filetype){
-					case 'JS':
-						if(strpos($key[0], $this->toIncludeArray['JS'][0]) !== false){
-							foreach($key as $oneFile){
-								$outString .= '<script src="/engine/classes/js/'.$oneFile.'"></script>'."\n";
-							}
-							
-						}
-					break;
-					
-					case 'CSS':
-						if(strpos($key[0], $this->toIncludeArray['CSS'][0]) !== false) {
-							foreach($key as $oneFile){
-								$outString .= '<link rel="stylesheet" type="text/css" href="/engine/skins/css/'.$oneFile.'">'."\n";
-							}	
-						}
-					break;
-				}
-			}
-			return $outString;
-		}
+	}
 
-		private function systemLibsInc($array){
-			$filesArray = array();
-			foreach ($array as $key => $value){
-				if($value[2] === true) {
-					$filesArray[] = filesInDir::filesInDirArray($value[1], $value[0]);
+	class includeSkinFiles extends smartyInit {
+		
+		protected static $outString = '';
+		
+		function __construct($IncludeArray){
+			foreach($IncludeArray as $key => $value){
+				if($value[3] == true){
+					$thisFiles = filesInDir::filesInDirArray($value[1], $value[0]);
+					$thisPath = str_replace(ROOT_DIR, '', $value[1]);
+					foreach($thisFiles as $oneFile){
+						if(strpos($oneFile, '.css')){
+							if(!@strpos($oneFile, $value[2])) {
+								self::$outString .= '<link rel="stylesheet" type="text/css" href="'.$thisPath.$oneFile.'">'."\n";
+							}
+						} elseif(strpos($oneFile, '.js')){
+							if(!@strpos($oneFile, $value[2])) {
+								self::$outString .= '<script src="'.$thisPath.$oneFile.'"></script>'."\n";
+							}
+						}
+					}
 				}
 			}
-				
-			return $filesArray;
 		}
 	}

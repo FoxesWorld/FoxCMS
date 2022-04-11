@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-04-05 17:34:02
+/* Smarty version 4.0.4, created on 2022-04-07 19:44:32
   from '/Avalon/sites/FoxRadio/www/templates/default/components/nav.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_624c535aa19359_09846467',
+  'unifunc' => 'content_624f14f0f3bf98_29221368',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_624c535aa19359_09846467 (Smarty_Internal_Template $_smarty_tpl) {
+function content_624f14f0f3bf98_29221368 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="navigation">
 	<nav>
 	   <ul>				

@@ -1,56 +1,33 @@
+<html>
 	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css" /> -->
+		<link href="{$tplDir}/css/player.structure.min.css"  rel="stylesheet" type="text/css" media="screen" />
+		<link href="{$tplDir}/css/player.css"  rel="stylesheet" type="text/css" media="screen" />
+	</head>
+	<body>
+		
+		<div class="playerWrapper">
+			<div class="audio-player"></div>
+		</div>
 
-		<link href="{$tplDir}/css/foxRadio.css" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="{$tplDir}/js/foxRadio.min.js"></script>
-		<script type="text/javascript">
-			$("#jquery_jplayer_1").jPlayer({
-				ready: function () {
-
-					$(this).jPlayer("setMedia", {
-						mp3: "https://radio.macros-core.com:8443/live"
-					}).jPlayer("play");
-
-				},
-				ended: function (event) { 
-
-					//$('#artist').html(string[1]);
-					//$('#songname').html(string[2]);
-				},
-				swfPath: "{$tplDir}/js",
-				supplied: "mpeg"
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
+		<script src="{$tplDir}/js/player.js"></script>
+		<script>
+			$(function(){
+				var $audioPlayer = $(".audio-player").foxRadio(
+					{
+						songs:["{$radioStream}"],
+						onStatusChange: function(e){
+							console.log(e);
+						}
+					}
+				);
 			});
 		</script>
-	</head>
-<body>
-		<div id="jquery_jplayer_1" class="jp-jplayer"></div>
-
-		<div class="jp-audio">
-			<div class="jp-type-single">
-				<div id="jp_interface_1" class="jp-interface">
-					<ul class="jp-controls">
-						<li><a href="#" class="jp-play" tabindex="1">play</a></li>
-						<li><a href="#" class="jp-pause" tabindex="1">pause</a></li>
-						<li><a href="#" class="jp-stop" tabindex="1">stop</a></li>
-						<li><a href="#" class="jp-mute" tabindex="1">mute</a></li>
-						<li><a href="#" class="jp-unmute" tabindex="1">unmute</a></li>
-					</ul>
-					<div class="jp-progress">
-						<div class="jp-seek-bar">
-							<div class="jp-play-bar"></div>
-						</div>
-					</div>
-					<div class="jp-volume-bar">
-						<div class="jp-volume-bar-value"></div>
-					</div>
-					<div class="jp-current-time"></div>
-					<div class="jp-duration"></div>
-				</div>
-				<div id="jp_playlist_1" class="jp-playlist">
-					<ul>
-						<li><strong id="artist">Artist</strong> - <span id="songname">Song name</span></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-</body>
+		
+	</body>
 </html>

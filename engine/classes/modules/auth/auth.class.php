@@ -19,12 +19,24 @@
 		
 		protected $db;
 		protected $logger;
+		private $dbShape = "CREATE TABLE IF NOT EXISTS `users` (
+		  `user_id` int(8) NOT NULL,
+		  `login` varchar(16) NOT NULL,
+		  `password` varchar(128) NOT NULL,
+		  `email` varchar(64) NOT NULL,
+		  `user_group` int(4) NOT NULL,
+		  `realname` varchar(32) NOT NULL,
+		  `hash` varchar(64) NOT NULL,
+		  `reg_date` varchar(32) NOT NULL,
+		  `last_date` varchar(32) NOT NULL
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 		
 		private $plMount = 'classes';
 		
 		function __construct($request, $db, $logger){
 			$this->db = $db;
 			$this->logger = $logger;
+			$this->db->run($this->dbShape);
 			require (dirname(__FILE__).'/classes/groupAssociacion.class.php');
 			require(dirname(__FILE__).'/classes/sessionManager.class.php');
 			switch($request["userAction"]){

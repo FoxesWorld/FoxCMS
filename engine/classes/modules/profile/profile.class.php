@@ -8,7 +8,7 @@
 			function __construct(){
 				if(@$_SESSION['isLogged']) {
 					initFunctions::libFilesInclude(dirname(__FILE__).'/classes', false);
-					$shortProfile = new shortProfile();
+					$shortProfile = new shortProfile;
 					init::$profileBlock = $shortProfile->profileOut();
 					
 					foreach($this->modalsLogged as $key => $value){

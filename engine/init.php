@@ -10,11 +10,15 @@ session_start();
 		protected $logger;
 		protected static $profileBlock = '';
 		protected $db;
-		
+
 		//Files to include
+		//{Name} => (type, path, exclude, enabled)
 		protected $toIncludeArray = array(
-			"JS" =>	array('.js', ENGINE_DIR.'/classes/js/',	true), 
-			"CSS" =>array('.css',ENGINE_DIR.'/skins/css/',	true));
+			"FoxEngineJS" 		=>	array('.js',  ENGINE_DIR.'/skins/FoxEngine/js/', '', true), 
+			"FoxEngineCSS" 		=>	array('.css', ENGINE_DIR.'/skins/FoxEngine/css/', '', true),
+			"Bootstrap-icons" 	=>	array('.css', ENGINE_DIR.'/skins/Bootstrap-icons/', '', true),
+			"BootstrapJS" 		=>	array('.js',  ENGINE_DIR.'/skins/Bootstrap/js/', '.map', true),
+			"BootstrapCSS" 		=>	array('.css', ENGINE_DIR.'/skins/Bootstrap/css/', '.map', false));
 		
 		//Modals to unlogged
 		protected $modalsUnlogged = array(
@@ -35,15 +39,12 @@ session_start();
 			$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
 
 			require (ENGINE_DIR.'lib/smarty/Smarty.class.php');
-			
 			foreach(filesInDir::filesInDirArray(ENGINE_DIR.'classes/modules') as $key){
 				require(ENGINE_DIR.'classes/modules/'.$key.'/'.$key.'.class.php');
 			}
 			
 			require (ENGINE_DIR.'classes/smartyInit.class.php');
-
-				$smartyInit = new smartyInit(linkBuilder::buildLinks());
-
+			$smartyInit = new smartyInit(linkBuilder::buildLinks());
 		}
 
 	}

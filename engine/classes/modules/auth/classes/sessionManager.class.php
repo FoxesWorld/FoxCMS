@@ -2,7 +2,7 @@
 if(!defined('FOXXEY')) {
 	die ('{"message": "Not in FOXXEY thread"}');
 }
-	class sessionManager {
+	class sessionManager extends authWrapper {
 		
 		function __construct($userData) {
 			global $config;

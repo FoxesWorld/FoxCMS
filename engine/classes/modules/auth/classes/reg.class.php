@@ -2,13 +2,13 @@
 if(!defined('FOXXEY')) {
 	die ('{"message": "Not in FOXXEY thread"}');
 }
-	class reg extends engine{
+	class reg extends authWrapper{
 		
 		private $regData;
 		private $passminCount = 5;
 		private $baseUserGroup = 4;
-		private $logger;
-		private $db;
+		protected $logger;
+		protected $db;
 		
 		function __construct($input, $db, $logger){
 			$this->logger = $logger;
@@ -26,7 +26,7 @@ if(!defined('FOXXEY')) {
 						break;
 						
 						default:
-							functions::jsonAnswer("pass.notEquals", true);
+							functions::jsonAnswer("Пароли не совпадают", true);
 						break;
 					}
 				} else {

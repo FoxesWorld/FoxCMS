@@ -32,6 +32,13 @@ if (!defined('FOXXEY')) {
 		private $DBid;
 		private $DBtime;
 		private $DBattempts;
+		private $dbShape = "CREATE TABLE IF NOT EXISTS `antiBrute` (
+		  `id` int(11) NOT NULL,
+		  `time` varchar(255) DEFAULT NULL,
+		  `recordTime` datetime(4) NOT NULL DEFAULT current_timestamp(4),
+		  `ip` varchar(16) DEFAULT NULL,
+		  `attempts` int(16) NOT NULL DEFAULT 0
+		) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;";
 		/* DB DATA */
 
 		/**
@@ -45,6 +52,7 @@ if (!defined('FOXXEY')) {
 			$this->db = $db;
 			$this->debug = $debug;
 			$this->maxAttempts = $config['maxLoginAttempts'];
+			$this->db->run($this->dbShape);
 			$this->parseIpRow();
 
 			switch ($this->DBip) {

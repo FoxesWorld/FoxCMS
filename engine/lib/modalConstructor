@@ -24,19 +24,24 @@ if (!defined('FOXXEY')) {
 		private $modalFilesDir;
 		private $modalElements = array('mdlAdress', 'mdlTitle', 'mdlDesc', 'mdlContent');
 		private $modalShape = '';
+		private $tplFile = '/modalComponent.tpl';
 
 		
 		
 		function __construct($mdlAdress = "mdl", $mdlTitle = "modal title", $mdlDesc = "modalDescription", $mdlContent = "tes"){
 			global $config;
 			$this->modalFilesDir = ROOT_DIR."/templates/".$config['siteTpl'].'/modal/';
-			$this->modalShape = file::efile(ROOT_DIR."/templates/".$config['siteTpl'].'/modalComponent.tpl')["content"];
-			foreach($this->modalElements as $key){
+			$file = ROOT_DIR."/templates/".$config['siteTpl'].$this->tplFile;
+			if(file_exists($file)) {
+				$this->modalShape = file::efile($file)["content"];
+			
+				foreach($this->modalElements as $key){
 
-				if(strpos(${$key}, '%file:=') !== false){
-					${$key} = file::efile($this->modalFilesDir.explode("=", $mdlContent)[1].'.tpl')["content"];
+					if(strpos(${$key}, '%file:=') !== false){
+						${$key} = file::efile($this->modalFilesDir.explode("=", $mdlContent)[1].'.tpl')["content"];
+					}
+					$this->modalShape = str_replace("{".$key."}", ${$key}, $this->modalShape);
 				}
-				$this->modalShape = str_replace("{".$key."}", ${$key}, $this->modalShape);
 			}
 		}
 		

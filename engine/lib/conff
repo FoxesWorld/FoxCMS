@@ -1,0 +1,160 @@
+<?php
+if (!defined('NL')) {
+	define('NL',chr(13).chr(10));
+}
+
+class conff {
+
+    private $filename;
+	private $fileContent;
+	private $sectionTitle;
+	private $fileSize;
+	public $arr;
+	
+	/* INTENAL BOOLs */
+	private $debug;
+	private $readStatus;
+
+    public function __construct($file = null, $toRecord = null, $debug = false){
+		$this->debug = $debug;
+        if ($file) {
+			
+			$this->filename = $file;
+				//$dir = $this->prepareDir($this->filename);
+				$fullPath = ENGINE_DIR.'data/config/'.$this->filename;
+				file::efile($fullPath);
+				$this->arr = parse_ini_file($fullPath, true);
+				$this->readStatus = $this->readStatus($fullPath);
+				$this->fileSize = filesize($fullPath);
+				if($debug){echo "Array to record was passed \n";}
+				switch($toRecord){
+					case null:
+						return $this->arr;
+					break;
+					
+					default:
+						if($debug){echo 'filesize is - '.$this->fileSize."\n";}
+							switch($this->fileSize){				
+								case 0:
+									$this->writeFile($toRecord);
+									$this->updateFile();
+								break;
+								
+								default:
+									if($debug){echo 'Shoving file contents'."\n";}
+									return $this->arr;
+								break;
+							}
+					break;
+				}
+
+		} else {
+			return 'No file name was entered!';
+		}
+    }
+	
+	public static function confGen($mdlName, $confArray = null){
+		$ini = new conff($mdlName.'.ini', $confArray);
+
+		return $ini;
+	}
+	
+	private function prepareDir($file){
+		$dir = explode('.', $file)[0];
+		if(!is_dir($dir)){
+			mkdir($dir);
+		}
+		return $dir;
+	}
+
+    private function readStatus($file){
+		switch(is_readable($file)){
+			case true:
+				return true;
+			break;
+
+			case false:
+				return false;
+			break;
+		}
+    }
+
+    public function readInIarray(){
+		foreach($this->arr as $key => $value){
+			$header = $key;
+			foreach ($value as $key => $value){
+				$iniConf[$header][$key]=$value;
+			}
+		}
+
+		return $iniConf[$header];
+    }
+	
+
+	
+	/* File Formatting */
+	function eraseSection($section){
+        if (isset($this->arr[$section])) {
+			unset($this->arr[$section]);
+		}
+		$this->updateFile();
+    }
+	
+	function deleteKey($section, $key){
+        if (isset($this->arr[$section][$key]))
+            unset($this->arr[$section][$key]);
+		$this->updateFile();
+    }
+
+	private function writeFile($array){
+		foreach ($array as $key => $value){
+			$header = $key;
+			foreach($value as $key => $value){
+				$this->setWrite($header, $key, $value);
+			}
+		}
+	}
+
+	private function setWrite($section, $key, $value){
+			if (is_bool($value)) {
+				$value = $value ? 1 : 0;
+			}
+			$this->arr[$section][$key] = $value;
+	}
+
+    private function updateFile(){
+        $result = '';
+        foreach ($this->arr as $sname=>$section){
+            $result .= '['.$sname.']'.NL;
+            foreach ($section as $key=>$value){
+                $result .= $key .'='.$value . NL;
+            }
+            $result .= NL;
+        }
+           $result = file::efile($this->filename, false, $result);
+           return true;
+    }
+	
+	
+/*
+    function read($section, $key, $def = ''){
+        if (isset($this->arr[$section][$key])){
+            return $this->arr[$section][$key];
+        } else
+            return $def;
+    }
+
+    function readSections(&$array){
+        $array = array_keys($this->arr);
+        return $array;
+    }
+
+    function readKeys($section, &$array){
+        if (isset($this->arr[$section])){
+            $array = array_keys($this->arr[$section]);
+            return $array;
+        }
+        return array();
+    }
+	*/
+}

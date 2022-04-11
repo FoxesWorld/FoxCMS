@@ -16,7 +16,30 @@ main {
     min-height: 250px;
     width: auto;
 	display: flex;
-    margin: 15%;
+    margin: 10% 15%;
+}
+
+footer {
+    background-color: #4e5357d6;
+    position: fixed;
+	height: 45px;
+	width: 100%;
+    left: 0;
+    bottom: 0;
+	z-index: -1;
+}
+
+footer > span {
+	color: #e9cb95;
+	margin: 10px auto;
+    width: fit-content;
+    display: block;
+    height: 100%;
+	font-family: 'Intro-Black';
+}
+
+footer > span > b {
+	color: #ba6334;
 }
 
 li {
@@ -45,12 +68,12 @@ li {
 .logo > span {
 	vertical-align: super;
     display: inline-block;
-    font-size: 20pt;
+    font-size: 3vh;
 }
 
 .logo > small {
 	font-family: 'Minecraft';
-	font-size: 8pt;
+	font-size: 0.8vh;
     float: right;
 }
 
@@ -108,7 +131,7 @@ nav, nav ul li, nav ul li a {
 	display: inline-block;
     vertical-align: top;
 	width: max-content;
-    margin: 0 10px;
+    margin: 0 0.5vw;
 }
 
 ol, ul {
@@ -116,186 +139,3 @@ ol, ul {
 	position: relative;
 	padding: 0px;
 }
-
-footer {
-    background-color: #4e5357d6;
-    position: fixed;
-	height: 45px;
-	width: 100%;
-    left: 0;
-    bottom: 0;
-	z-index: -1;
-}
-
-footer > span {
-	color: #e9cb95;
-	margin: 10px auto;
-    width: fit-content;
-    display: block;
-    height: 100%;
-	font-family: 'Intro-Black';
-}
-
-footer > span > b {
-	color: #ba6334;
-}
-
-.input_block {
-	position: relative;
-	height: 60px;
-	margin: 10px 0 5px;
-	-webkit-box-shadow: 0 5px 35px rgba(206, 194, 171, .35);
-	-moz-box-shadow: 0 5px 35px rgba(206, 194, 171, .35);
-	box-shadow: 0 5px 35px rgba(206, 194, 171, .35);
-	transition: .2s ease;
-	box-sizing: border-box;
-	border-radius: 4px;
-}
-
-.input_block .input {
-	-webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
-    -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
-    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
-    background: linear-gradient(-30deg, #d5983787, #8c56317a);
-	width: 100%;
-	height: 60px;
-	padding: 18px 14px 4px;
-	color: #765947;
-	box-sizing: border-box;
-	font-weight: 600;
-	font-size: 14px;
-	transition: .2s ease;
-	border-radius: 4px;
-	border: 0;
-}
-
-.input_block .input:focus, .input_block .input:hover {
-	transition: 1s;
-	background: linear-gradient(-30deg, #e0903087, #e06f227a);
-	color: #343434;
-}
-
-.input_block .input:focus~.label,
-.input_block .input:not(:focus):valid~.label {
-	top: 10px;
-	left: 14px;
-	font-size: 9px;
-}
-
-.input_block .label {
-	position: absolute;
-	pointer-events: none;
-	transition: .3s;
-	font-family: montserrat, sans-serif;
-	font-weight: 600;
-	color: #938972;
-	left: 18px;
-	top: 24px;
-	font-size: 13px;
-	text-transform: uppercase;
-}
-
-.c-captcha {
-	width: auto;
-    margin: 0 auto;
-}
-
-input[type="submit"]{
-	font-family: 'FSElliotPro-Bold';
-	color: white;
-}
-
-input[type="submit"].login {
-	display: block;
-	border: 0;
-    width: 276px;
-    height: 60px;
-    background-color: #adc835;
-    -webkit-box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
-    -moz-box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
-    box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
-    text-align: center;
-    color: #fff;
-    font-size: 22px;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 4px
-}
-
-
-input[type="submit"]:hover.login  {
-    background: #bbd641;
-}
-
-input[type="submit"].logout {
-	-webkit-box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
-    -moz-box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
-    box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
-	background-color: #d77c2e;
-    padding: 10px;
-    margin: 5px 0px;
-	cursor: pointer;
-    border: 0;
-}
-
-input[type="submit"]:hover.logout  {
-	transition: 0.5s;
-    background: #f15b21c7;
-	box-shadow: 0 5px 20px 0 rgb(219 113 23 / 98%);
-}
-
-/* RIBBON */
-.wrap {
-  z-index: 99;
-}
-
-.ribbon {
-    position: relative;
-    width: 150px;
-	background-image: -moz-linear-gradient(#BFDC7A, #a7bc61);
-	background-image: -webkit-linear-gradient(#BFDC7A, #a7bc61);
-	background-image: -o-linear-gradient(rgba(#BFDC7A, #a7bc61));
-	background-image: -ms-linear-gradient(#BFDC7A, #a7bc61);
-    color: #333;
-	font-family: 'Intro-Black';
-    text-align: center;
-    text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
-    padding: 7px 0;
-    top: 25px;
-    left: -10px;
-    -webkit-transform: rotate(45deg);
-    -moz-transform:    rotate(45deg);
-    -ms-transform:     rotate(45deg);
-    -o-transform:      rotate(45deg);
-}
-
-/*
-.ribbon:before, .ribbon:after {
-content: '';
-position: absolute;
-border-style: solid;
-border-color: transparent;
-bottom: -20px;
-}
-.ribbon:before {
-border-width: 0 30px 20px 0;
-border-right-color: #892b2b;
-left: 0;
-}
- 
-.ribbon:after {
-border-width: 0 0 20px 30px;
-border-left-color: #892b2b;
-right: 0;
-} */
-
-.wrap-ribbon {
-	width: 106px;
-    height: 106px;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-   

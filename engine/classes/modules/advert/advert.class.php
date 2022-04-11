@@ -8,41 +8,23 @@ if(!defined('FOXXEY')) {
 	class notifyParser {
 		
 		private $db;
+		private $dbShape = "CREATE TABLE IF NOT EXISTS `notify` (
+						  `status` int(11) NOT NULL,
+						  `title` varchar(120) CHARACTER SET utf8 NOT NULL,
+						  `message` varchar(1000) CHARACTER SET utf8 NOT NULL,
+						  `link_name` varchar(90) CHARACTER SET utf8 NOT NULL,
+						  `link` varchar(250) CHARACTER SET utf8 NOT NULL
+						) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+
+		private $dbVal = "INSERT INTO `notify` 
+		(`status`, `title`, `message`, `link_name`, `link`) VALUES 
+		(1, 'You did it!', 'Advert module succesfully installed!', '', '');";
 		
 		function __construct($advRequest, $db){
 		global $config;
 			if($advRequest){
 				$this->db = $db;
-			/*
-				if($is_logged) {
-					$steamBG = new steamBackground($member_id['name']);
-					$FreeImageFileList = backgroundDB::FreeImagesSelect();	
-					$counter = 0;
-					$imagesGot = 0;
-					$FreeImagesCount = count(backgroundDB::FreeImagesSelect());
-					while($counter < $FreeImagesCount){
-						if($steamBG->hasTheImage($FreeImageFileList[$counter]) === 'NO') {
-							$thisImageAmmount = backgroundDB::selectDataOfImage($FreeImageFileList[$counter], 'Ammount');
-							if($thisImageAmmount > 0) {
-									$ImageFileName 	  = backgroundDB::selectDataOfImage($FreeImageFileList[$counter], 'FileName');
-									$ImageRealName    = backgroundDB::selectDataOfImage($FreeImageFileList[$counter], 'Name');
-									$request_success = array(
-									'type' 		=> 	'freeImage',
-									'status' 	=> 	1,
-									'ammount' 	=> 	$thisImageAmmount,
-									'title' 	=> 	"Раздача фона ".$ImageFileName,
-									'message' 	=> 	"Фон профиля - '".$ImageRealName."' может быть получен бесплатно! Для этого нажмите на ссылку.",
-									'link_name' => 	"Получить Фон",
-									'link' 		=> 	"javascript:addFreeImage('".$ImageFileName."');");
-									$request_success = json_encode($request_success);
-							} else {$imagesGot++;}
-							} else {
-								$imagesGot++;
-							}		
-						$counter++;
-					}
-				} */
-
+				$this->dbPrepare();
 					$row = $this->parseAdvert();
 					$title = $row['title'];
 					$message = $row['message'];
@@ -65,8 +47,14 @@ if(!defined('FOXXEY')) {
 		
 		private function parseAdvert(){	
 			$row = $this->db->getRow("SELECT * FROM notify");
-			
 		return $row;
+		}
+		
+		private function dbPrepare(){
+			$creation = $this->db->run($this->dbShape);
+			if($this->parseAdvert() === false){
+				$this->db->run($this->dbVal);
+			}
 		}
 	}
 ?>
