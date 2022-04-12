@@ -4,32 +4,13 @@ define('FOXXEY', true);
 require ('data/config.php');
 session_start();
 
-	class init {
+	class init extends initConfig {
 		
 		protected $debug;
 		protected $logger;
 		protected static $profileBlock = '';
 		protected $db;
 
-		//Files to include
-		//{Name} => (type, path, exclude, enabled)
-		protected $toIncludeArray = array(
-			"FoxEngineJS" 		=>	array('.js',  ENGINE_DIR.'/skins/FoxEngine/js/', '', true), 
-			"FoxEngineCSS" 		=>	array('.css', ENGINE_DIR.'/skins/FoxEngine/css/', '', true),
-			"Bootstrap-icons" 	=>	array('.css', ENGINE_DIR.'/skins/Bootstrap-icons/', '', true),
-			"BootstrapJS" 		=>	array('.js',  ENGINE_DIR.'/skins/Bootstrap/js/', '.map', true),
-			"BootstrapCSS" 		=>	array('.css', ENGINE_DIR.'/skins/Bootstrap/css/', '.map', false));
-		
-		//Modals to unlogged
-		protected $modalsUnlogged = array(
-			"login" => array("Авторизация", "Что бы на сайт войти логин и пароль нам нужно ввести", "%file:=auth"),
-			"reg" 	=> array("Регистрация", "Регистрируйтесь пожалуйста", "%file:=reg")
-		);
-		
-		protected $modalsLogged = array(
-			"cp" => array("Личный кабинет", "Посмотрим, что мы тут можем поменять...", "%file:=cp")
-		);
-		
 		function __construct($debug = false) {
 			global $config;
 			

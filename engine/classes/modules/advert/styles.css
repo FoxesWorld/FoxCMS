@@ -33,6 +33,7 @@
 	margin-top: -16px;
 	margin-left: 210px;
 	cursor: pointer;
+	color: white;
 }
 
 .notify_block a.notify_block_close:hover {

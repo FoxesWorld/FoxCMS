@@ -1,5 +1,7 @@
 <?php
-
+if(!defined('FOXXEY')) {
+	die("Hacking attempt!");
+}
 	if(isset($_REQUEST['userAction'])) {
 		if(@$_REQUEST['key'] === $config['secureKey']) {
 			$authWrapper = new authWrapper($_REQUEST, $this->db, $this->logger);
@@ -49,7 +51,13 @@
 				case 'reg':
 					require (dirname(__FILE__).'/classes/reg.class.php');
 					$req = new reg($_REQUEST, $this->db, $this->logger);
-				break; 
+				break;
+				
+				case 'subscribe':
+					require (dirname(__FILE__).'/classes/subscribe.class.php');
+					$subscribe = new subscribe($_REQUEST, $this->db, $this->logger);
+					$subscribe->subscribe();
+				break;
 						
 				default:
 					functions::jsonAnswer('You shall not pass!', true);

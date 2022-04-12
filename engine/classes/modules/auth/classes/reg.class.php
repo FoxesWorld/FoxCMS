@@ -15,6 +15,12 @@ if(!defined('FOXXEY')) {
 			$this->db = $db;
 			$this->regData = functions::collectData($input, true);
 			$this->checkPass();
+			if(functions::checkExistingData($this->db, 'login', $this->regData['login']) === true){
+				exit('{"message": "Данный логин уже зарегистрирован!", "type": "warn"}');
+			}
+			if(functions::checkExistingData($this->db, 'email', $this->regData['email']) === true){
+				exit('{"message": "Данная почта уже была зарегистрирована!", "type": "warn"}');
+			}
 			$this->regiter();
 		}
 		

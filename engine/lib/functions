@@ -48,6 +48,16 @@ if (!defined('FOXXEY')) {
 			return $selectedValue;
 		}
 		
+		public static function checkExistingData($db, $data, $order){
+			$query = "SELECT * FROM users WHERE ".$data." = '".$order."'";
+			$status = $db->run($query);
+			if($status == false) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+		
 		public static function checkSA($array){
 			foreach($array as $key => $value){
 				if(preg_match("/[А-Яа-я]/", $value)) {

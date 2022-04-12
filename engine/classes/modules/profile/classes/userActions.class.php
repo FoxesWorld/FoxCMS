@@ -13,7 +13,12 @@
 							$this->logout();
 						break;
 						
-						case 'profile':
+						case 'editProfile':
+							functions::jsonAnswer('Let`s edit!', true);
+						break;
+						
+						case 'userInfo':
+							$userInfo = new userInfo($_REQUEST['data']);
 						break;
 						
 						default:

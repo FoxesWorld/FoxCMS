@@ -28,7 +28,7 @@ if (!defined('FOXXEY')) {
 
 		
 		
-		function __construct($mdlAdress = "mdl", $mdlTitle = "modal title", $mdlDesc = "modalDescription", $mdlContent = "tes"){
+		function __construct($mdlAdress = "mdl", $mdlTitle = "modal title", $mdlDesc = "modalDescription", $mdlContent = "tes") {
 			global $config;
 			$this->modalFilesDir = ROOT_DIR."/templates/".$config['siteTpl'].'/modal/';
 			$file = ROOT_DIR."/templates/".$config['siteTpl'].$this->tplFile;
@@ -44,7 +44,7 @@ if (!defined('FOXXEY')) {
 				}
 			}
 		}
-		
+
 		public function mdlOut(){
 			echo $this->modalShape;
 		}
