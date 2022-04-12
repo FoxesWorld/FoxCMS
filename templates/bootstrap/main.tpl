@@ -26,7 +26,7 @@
 		  </div>
 		{else}
 		  <div class="cta d-none d-md-flex align-items-center">
-			Hey you {$LoggedName}!
+			{$greetings} {$realname}!
 		  </div>
 		 {/if}
     </div>

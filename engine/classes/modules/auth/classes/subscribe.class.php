@@ -1,6 +1,6 @@
 <?php
-if(!defined('FOXXEY')) {
-	die("Hacking attempt!");
+if(!defined('auth')) {
+	die ('{"message": "Not in auth thread"}');
 }
 	class subscribe extends authWrapper {
 		

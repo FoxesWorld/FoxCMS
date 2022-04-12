@@ -1,4 +1,4 @@
-  <footer id="footer" data-aos="fade-up">
+  <footer id="footer">
     <div class="footer-top">
       <div class="container">
         <div class="row">

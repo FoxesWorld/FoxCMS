@@ -49,6 +49,7 @@
 		//Plugins to include
 		//{Name} => (type, path, exclude, enabled)
 		protected $toIncludeArray = array(
+			"BaseJS" 			=>	array('.js',  ENGINE_DIR.'plugins/', 				'', 	true),
 			"FoxEngineJS" 		=>	array('.js',  ENGINE_DIR.'plugins/FoxEngine/js/', 	'', 	true),
 			"FoxEngineCSS" 		=>	array('.css', ENGINE_DIR.'plugins/FoxEngine/css/', 	'', 	true),
 			"PopperJS" 			=>	array('.js',  ENGINE_DIR.'plugins/Popper/', 		'.map', true),
@@ -57,6 +58,8 @@
 			"Bootstrap-icons" 	=>	array('.css', ENGINE_DIR.'plugins/Bootstrap-icons/','', 	true),
 			"GlightboxCSS" 		=>	array('.css', ENGINE_DIR.'plugins/Glightbox/css/', 	'', 	true),
 			"GlightboxJS" 		=>	array('.js',  ENGINE_DIR.'plugins/Glightbox/js/', 	'', 	true),
+			"FoxModalCSS" 		=>	array('.css', ENGINE_DIR.'plugins/FoxModal/css/', 	'', 	true),
+			"FoxModalJS" 		=>	array('.js',  ENGINE_DIR.'plugins/FoxModal/js/', 	'', 	true),
 			"SwipwerCSS" 		=>	array('.css', ENGINE_DIR.'plugins/Swiper/', 		'', 	true),
 			"SwiperJS" 			=>	array('.js',  ENGINE_DIR.'plugins/Swiper/', 		'.map', true),
 			"PaceCSS" 			=>	array('.css', ENGINE_DIR.'plugins/Pace/', 			'', 	true),

@@ -1,19 +1,14 @@
 <?php
 if(!defined('FOXXEY')) {
 	die("Hacking attempt!");
+} else {
+	define('auth', true);
 }
 	if(isset($_REQUEST['userAction'])) {
 		if(@$_REQUEST['key'] === $config['secureKey']) {
 			$authWrapper = new authWrapper($_REQUEST, $this->db, $this->logger);
 		} else {
 			functions::jsonAnswer('Wrong secure key!', true);
-		}
-	} else {
-		if(@!$_SESSION['isLogged']) {
-			foreach($this->modalsUnlogged as $key => $value){
-				$thisField = new modalConstructor($key, $value[0], $value[1], $value[2]);
-				$thisField->mdlOut();
-			}
 		}
 	}
 
@@ -41,7 +36,7 @@ if(!defined('FOXXEY')) {
 			$this->db->run($this->dbShape);
 			require (dirname(__FILE__).'/classes/groupAssociacion.class.php');
 			require(dirname(__FILE__).'/classes/sessionManager.class.php');
-			switch($request["userAction"]){
+			switch(@$request["userAction"]){
 						
 				case 'auth':
 					require (dirname(__FILE__).'/classes/auth.class.php');
@@ -60,7 +55,6 @@ if(!defined('FOXXEY')) {
 				break;
 						
 				default:
-					functions::jsonAnswer('You shall not pass!', true);
 				break;
 				
 			}

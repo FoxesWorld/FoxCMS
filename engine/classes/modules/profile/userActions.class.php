@@ -6,23 +6,30 @@ if(!defined('profile')) {
 	class userActions extends profile {
 		
 		private $userActionReq = "userProfileAction";
+		protected $db;
+		protected $logger;
+		private $fRequest;
 		
-		function __construct(){
+		function __construct($db = '', $logger = '', $request = ''){
 			global $config;
+			$this->db = $db;
+			$this->logger = $logger;
 			if(@$_REQUEST[$this->userActionReq]){
 				if(@$_REQUEST['key'] === $config['secureKey']) {
+					$this->fRequest = functions::collectData($request, true);
 					switch(@$_REQUEST[$this->userActionReq]){
 						case 'logout':
 							$this->logout();
 						break;
 						
 						case 'editProfile':
-							functions::jsonAnswer('Let`s edit!', true);
-							//$editProfile = new editProfile($_REQUEST);
+							require ('classes/editProfile.class.php');
+							$editProfile = new editProfile($this->fRequest, $db, $logger);
 						break;
 						
 						case 'userInfo':
-							$userInfo = new userInfo($_REQUEST['data']);
+							require ('classes/userInfo.class.php');
+							$userInfo = new userInfo($this->fRequest['data']);
 						break;
 						
 						default:

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-04-12 09:18:37
+/* Smarty version 4.0.4, created on 2022-04-12 15:29:53
   from '/Avalon/sites/FoxRadio/www/templates/bootstrap/footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_625519bd2e10f7_72047100',
+  'unifunc' => 'content_625570c1ee2723_66309469',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c0e3eb39272dcdb586bc8405641543a39ecc8f06' => 
     array (
       0 => '/Avalon/sites/FoxRadio/www/templates/bootstrap/footer.tpl',
-      1 => 1649744299,
+      1 => 1649766591,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,8 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_625519bd2e10f7_72047100 (Smarty_Internal_Template $_smarty_tpl) {
-?>  <footer id="footer" data-aos="fade-up">
+function content_625570c1ee2723_66309469 (Smarty_Internal_Template $_smarty_tpl) {
+?>  <footer id="footer">
     <div class="footer-top">
       <div class="container">
         <div class="row">

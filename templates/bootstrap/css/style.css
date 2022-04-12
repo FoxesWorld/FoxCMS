@@ -1419,11 +1419,16 @@ section {
 #footer {
   color: #313030;
   font-size: 14px;
-  background: #fff;
+  background: blanchedalmond;
+  -webkit-box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
+  -moz-box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
+  position: relative;
+  z-index: -1;
+  box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
 }
 #footer .footer-top {
-  padding: 60px 0 30px 0;
-  background: #fff9f7;
+  padding: 55px 0 0px 0;
+  background: url(/templates/bootstrap/img/header.jpg);
 }
 #footer .footer-top .footer-contact {
   margin-bottom: 30px;

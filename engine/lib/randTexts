@@ -63,10 +63,10 @@ if (!defined('FOXXEY')) {
 			//WIP
 		}
 
-		public static function getUserName(){
+		public static function getRandText($file){
 			global $config;
 				if(class_exists('randTexts')) {
-					$randTexts = new randTexts('noName', false);
+					$randTexts = new randTexts($file, false);
 						$name = $randTexts->textOut();
 					} else {
 						echo '{"message": "Module randTexts not found!", "desc": "Can`t say an unknown user who is he today!"},';
@@ -74,18 +74,4 @@ if (!defined('FOXXEY')) {
 					}
 				return $name;
 			}
-		
-
-		public static function tempban(){
-			global $config;
-					if(class_exists('randTexts')) {
-						$randTexts = new randTexts('tempban', false);
-						$name = $randTexts->textOut();
-					} else {
-						echo '{"message": "Module randTexts not found!", "desc": "Can`t say user how wrong he is!"},';
-						$name = 'Incorrect HWID';
-					}
-			return $name;
-		}
-	
 	}

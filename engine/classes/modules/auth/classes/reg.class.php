@@ -1,6 +1,6 @@
 <?php
-if(!defined('FOXXEY')) {
-	die ('{"message": "Not in FOXXEY thread"}');
+if(!defined('auth')) {
+	die ('{"message": "Not in auth thread"}');
 }
 	class reg extends authWrapper{
 		
@@ -49,7 +49,7 @@ if(!defined('FOXXEY')) {
 			$this->logger->WriteLine("Trying to register user '".$this->regData['login']."'");
 			$password = password_hash($this->regData['password'], PASSWORD_DEFAULT);
 			$query = "INSERT INTO `users`(`login`, `password`, `email`, `user_group`, `realname`, `hash`, `reg_date`, `last_date`) 
-			VALUES ('".$this->regData['login']."', '".$password."', '".$this->regData['email']."', '".$this->baseUserGroup."', '".randTexts::getUserName()."', '".authorize::generateLoginHash()."', '".CURRENT_TIME."', '".CURRENT_TIME."')";
+			VALUES ('".$this->regData['login']."', '".$password."', '".$this->regData['email']."', '".$this->baseUserGroup."', '".randTexts::getRandText('noName')."', '".authorize::generateLoginHash()."', '".CURRENT_TIME."', '".CURRENT_TIME."')";
 			$userReg = $this->db->run($query);
 			if($userReg) {
 				foreach($config['userDatainDb'] as $key){

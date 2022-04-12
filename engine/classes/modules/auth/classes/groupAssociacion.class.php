@@ -1,5 +1,7 @@
 <?php 
-
+if(!defined('auth')) {
+	die ('{"message": "Not in auth thread"}');
+}
 	class groupAssociacion extends authWrapper {
 		
 		private $userGroup;

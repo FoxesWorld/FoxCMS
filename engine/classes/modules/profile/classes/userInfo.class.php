@@ -1,10 +1,12 @@
 <?php
-
+if(!defined('profile')) {
+	die ('{"message": "Not in profile thread"}');
+}
 	class userInfo {
 
 		private $data;
 		
-		function __construct($data){
+		function __construct($data) {
 			$this->data = functions::filterString($data);
 			if($_SESSION['isLogged'] === true) {
 				if(@$_SESSION[$this->data] !== null){

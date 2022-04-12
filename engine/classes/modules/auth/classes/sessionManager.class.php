@@ -1,6 +1,6 @@
 <?php
-if(!defined('FOXXEY')) {
-	die ('{"message": "Not in FOXXEY thread"}');
+if(!defined('auth')) {
+	die ('{"message": "Not in auth thread"}');
 }
 	class sessionManager extends authWrapper {
 		
@@ -10,7 +10,7 @@ if(!defined('FOXXEY')) {
 				if($userData[$i]) {
 					$_SESSION[$config['userDatainDb'][$i]] = $userData[$i];
 				} else {
-					$_SESSION[$config['userDatainDb'][$i]] = randTexts::getUserName();
+					$_SESSION[$config['userDatainDb'][$i]] = randTexts::getRandText('noName');
 				}
 			}
 			$_SESSION['isLogged'] = true;

@@ -1,6 +1,6 @@
 <?php
-if(!defined('FOXXEY')) {
-	die ('{"message": "Not in FOXXEY thread"}');
+if(!defined('auth')) {
+	die ('{"message": "Not in auth thread"}');
 }
 	class auth extends authWrapper {
 		

@@ -2,6 +2,7 @@
 
 define('FOXXEY', true);
 require ('data/config.php');
+require (ENGINE_DIR.'classes/modules/modalsToShow.class.php');
 session_start();
 
 	class init extends initConfig {
@@ -21,8 +22,12 @@ session_start();
 
 			require (ENGINE_DIR.'lib/smarty/Smarty.class.php');
 			foreach(filesInDir::filesInDirArray(ENGINE_DIR.'classes/modules') as $key){
-				require(ENGINE_DIR.'classes/modules/'.$key.'/'.$key.'.class.php');
+				$file = ENGINE_DIR.'classes/modules/'.$key.'/'.$key.'.class.php';
+				if(file_exists($file)) {
+					require($file);
+				}
 			}
+			$modalsToShow = new modalsToShow($this->modalsLogged, $this->modalsUnlogged);
 			
 			require (ENGINE_DIR.'classes/smartyInit.class.php');
 			$smartyInit = new smartyInit(linkBuilder::buildLinks());
@@ -49,6 +54,16 @@ session_start();
 			}
 			if($debug){
 				echo "<br />";
+			}
+		}
+		
+		public static function modulesInc($path){
+			$modulesArray = filesInDir::filesInDirArray($path);
+			foreach($modulesArray as $key){
+				$file = ENGINE_DIR.'classes/modules/'.$key.'/'.$key.'.class.php';
+				if(file_exists($file)) {
+					require($file);
+				}
 			}
 		}
 

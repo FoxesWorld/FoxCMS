@@ -19,7 +19,7 @@ if (!defined('FOXXEY')) {
 	die ('{"message": "Not in FOXXEY thread"}');
 }
  
-	class modalConstructor {
+	class modalConstructor extends init {
 
 		private $modalFilesDir;
 		private $modalElements = array('mdlAdress', 'mdlTitle', 'mdlDesc', 'mdlContent');
@@ -28,10 +28,10 @@ if (!defined('FOXXEY')) {
 
 		
 		
-		function __construct($mdlAdress = "mdl", $mdlTitle = "modal title", $mdlDesc = "modalDescription", $mdlContent = "tes") {
+		function __construct($mdlAdress = "mdl", $mdlTitle = "modal title", $mdlDesc = "modalDescription", $mdlContent = "tes", $replaceArray ='') {
 			global $config;
 			$this->modalFilesDir = ROOT_DIR."/templates/".$config['siteTpl'].'/modal/';
-			$file = ROOT_DIR."/templates/".$config['siteTpl'].$this->tplFile;
+			$file = ROOT_DIR."/templates/".$config['siteTpl'].'/components/'.$this->tplFile;
 			if(file_exists($file)) {
 				$this->modalShape = file::efile($file)["content"];
 			
@@ -41,6 +41,11 @@ if (!defined('FOXXEY')) {
 						${$key} = file::efile($this->modalFilesDir.explode("=", $mdlContent)[1].'.tpl')["content"];
 					}
 					$this->modalShape = str_replace("{".$key."}", ${$key}, $this->modalShape);
+					if(is_array($replaceArray)){
+						foreach($replaceArray as $key => $value){
+							$this->modalShape = str_replace("{".$key."}", $value, $this->modalShape);
+						}
+					}
 				}
 			}
 		}

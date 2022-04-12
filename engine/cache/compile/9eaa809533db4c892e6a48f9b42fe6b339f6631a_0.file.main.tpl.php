@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-04-12 09:18:37
+/* Smarty version 4.0.4, created on 2022-04-12 15:47:17
   from '/Avalon/sites/FoxRadio/www/templates/bootstrap/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_625519bd2dbb82_87998989',
+  'unifunc' => 'content_625574d5d0ed29_17135073',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9eaa809533db4c892e6a48f9b42fe6b339f6631a' => 
     array (
       0 => '/Avalon/sites/FoxRadio/www/templates/bootstrap/main.tpl',
-      1 => 1649744313,
+      1 => 1649767635,
       2 => 'file',
     ),
   ),
@@ -23,7 +23,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_625519bd2dbb82_87998989 (Smarty_Internal_Template $_smarty_tpl) {
+function content_625574d5d0ed29_17135073 (Smarty_Internal_Template $_smarty_tpl) {
 ?><head>
 	<?php echo $_smarty_tpl->tpl_vars['systemHeaders']->value;?>
 	
@@ -62,7 +62,8 @@ function content_625519bd2dbb82_87998989 (Smarty_Internal_Template $_smarty_tpl)
 		  </div>
 		<?php } else { ?>
 		  <div class="cta d-none d-md-flex align-items-center">
-			Hey you <?php echo $_smarty_tpl->tpl_vars['LoggedName']->value;?>
+			<?php echo $_smarty_tpl->tpl_vars['greetings']->value;?>
+ <?php echo $_smarty_tpl->tpl_vars['realname']->value;?>
 !
 		  </div>
 		 <?php }?>

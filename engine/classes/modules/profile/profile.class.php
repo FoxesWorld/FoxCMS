@@ -1,20 +1,24 @@
 <?php
-	
-	$profile = new profile();
+if(!defined('FOXXEY')) {
+	die("Hacking attempt!");
+} else {
+	define('profile', true);
+}
+	$profile = new profile($this->db, $this->logger);
 
 
 		class profile extends init {
 			
-			function __construct(){
+			protected $db;
+			protected $logger;
+			
+			function __construct($db, $logger){
 				if(@$_SESSION['isLogged']) {
-					initFunctions::libFilesInclude(dirname(__FILE__).'/classes', false);
-					$shortProfile = new shortProfile;
-					init::$profileBlock = $shortProfile->profileOut();
-					
-					foreach($this->modalsLogged as $key => $value){
-						$thisField = new modalConstructor($key, $value[0], $value[1], $value[2]);
-						$thisField->mdlOut();
-					}
+				$this->db = $db;
+				$this->logger = $logger;
+					require ('userActions.class.php');
+					$userActions = new userActions($this->db, $this->logger, $_REQUEST);
+					require(dirname(__FILE__).'/classes/shortProfile.class.php');
 				}
 			}
 			

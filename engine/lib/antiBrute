@@ -69,7 +69,7 @@ if (!defined('FOXXEY')) {
 			}
 
 			if(date::checkTime($this->DBtime) === false){
-				functions::jsonAnswer(randTexts::tempban(), true);
+				functions::jsonAnswer(randTexts::getRandText('tempban'), true);
 			}
 		}
 
