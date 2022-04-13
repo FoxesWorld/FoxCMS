@@ -50,12 +50,8 @@ if (!defined('FOXXEY')) {
 		
 		public static function checkExistingData($db, $data, $order){
 			$query = "SELECT * FROM users WHERE ".$data." = '".$order."'";
-			$status = $db->run($query);
-			if($status == false) {
-				return false;
-			} else {
-				return true;
-			}
+			$status = $db->getValue($query);
+			return $status;
 		}
 		
 		public static function checkSA($array){

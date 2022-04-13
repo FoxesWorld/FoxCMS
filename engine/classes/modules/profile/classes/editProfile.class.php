@@ -11,6 +11,11 @@
 			$query = "UPDATE `users` SET `email`='".$request['email']."', `realname`='".$request['realname']."' WHERE login = '".$request['login']."'";
 			$status = $db->run($query);
 			if($status == true){
+				require(MODULES_DIR.'auth/classes/utilsLoader.class.php');
+				$utilsLoader = new utilsLoader;
+				$loadUserInfo = new loadUserInfo($request['login'], $db);
+				$userData = $loadUserInfo->userInfoArray();
+				$sessionManager = new sessionManager($userData);
 				functions::jsonAnswer('Данные изменены!', false);
 			}
 		}

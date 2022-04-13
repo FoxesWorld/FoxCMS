@@ -34,29 +34,31 @@ if(!defined('FOXXEY')) {
 			$this->db = $db;
 			$this->logger = $logger;
 			$this->db->run($this->dbShape);
-			require (dirname(__FILE__).'/classes/groupAssociacion.class.php');
-			require(dirname(__FILE__).'/classes/sessionManager.class.php');
-			switch(@$request["userAction"]){
-						
-				case 'auth':
-					require (dirname(__FILE__).'/classes/auth.class.php');
-					$auth = new auth($_POST, $this->db, $this->logger);
-				break;
-						
-				case 'reg':
-					require (dirname(__FILE__).'/classes/reg.class.php');
-					$req = new reg($_REQUEST, $this->db, $this->logger);
-				break;
-				
-				case 'subscribe':
-					require (dirname(__FILE__).'/classes/subscribe.class.php');
-					$subscribe = new subscribe($_REQUEST, $this->db, $this->logger);
-					$subscribe->subscribe();
-				break;
-						
-				default:
-				break;
-				
+			require(dirname(__FILE__).'/classes/utilsLoader.class.php');
+			$utilsLoader = new utilsLoader;
+			if(@$request["userAction"] !== '') {
+				switch(@$request["userAction"]){
+					
+					case 'auth':
+						require (dirname(__FILE__).'/classes/auth.class.php');
+						$auth = new auth($_POST, $this->db, $this->logger);
+					break;
+							
+					case 'reg':
+						require (dirname(__FILE__).'/classes/reg.class.php');
+						$req = new reg($_REQUEST, $this->db, $this->logger);
+					break;
+					
+					case 'subscribe':
+						require (dirname(__FILE__).'/classes/subscribe.class.php');
+						$subscribe = new subscribe($_REQUEST, $this->db, $this->logger);
+						$subscribe->subscribe();
+					break;
+							
+					default:
+					break;
+					
+				}
 			}
 		}
 		

@@ -15,10 +15,10 @@ if(!defined('auth')) {
 			$this->db = $db;
 			$this->regData = functions::collectData($input, true);
 			$this->checkPass();
-			if(functions::checkExistingData($this->db, 'login', $this->regData['login']) === true){
+			if(!functions::checkExistingData($this->db, 'login', $this->regData['login']) === false){
 				exit('{"message": "Данный логин уже зарегистрирован!", "type": "warn"}');
 			}
-			if(functions::checkExistingData($this->db, 'email', $this->regData['email']) === true){
+			if(!functions::checkExistingData($this->db, 'email', $this->regData['email']) === false){
 				exit('{"message": "Данная почта уже была зарегистрирована!", "type": "warn"}');
 			}
 			$this->regiter();
@@ -52,18 +52,9 @@ if(!defined('auth')) {
 			VALUES ('".$this->regData['login']."', '".$password."', '".$this->regData['email']."', '".$this->baseUserGroup."', '".randTexts::getRandText('noName')."', '".authorize::generateLoginHash()."', '".CURRENT_TIME."', '".CURRENT_TIME."')";
 			$userReg = $this->db->run($query);
 			if($userReg) {
-				foreach($config['userDatainDb'] as $key){
-					switch($key){
-						case 'user_group':
-							$groupAssociacion = new groupAssociacion(functions::getUserData($this->authData['login'], $key, $db), $db);
-							$userData[] = $groupAssociacion->userGroupName()["groupType"];
-						break;
-						
-						default:
-							$userData[] = functions::getUserData($this->authData['login'], $key, $db);
-						break;
-					}
-				}
+				require ('loadUserInfo.class.php');
+				$loadUserInfo = new loadUserInfo($this->regData['login'], $this->db);
+				$userData = $loadUserInfo->userInfoArray();
 				$this->logger->WriteLine("User has completed registration '".$this->regData['login']."'");
 				$sessionManager = new sessionManager($userData);
 				functions::jsonAnswer("Registration complete!", false); 

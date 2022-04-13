@@ -1,6 +1,7 @@
 <?php
 	define('ROOT_DIR', 	$_SERVER['DOCUMENT_ROOT']);
 	define('ENGINE_DIR',ROOT_DIR.'/engine/');
+	define('MODULES_DIR',ROOT_DIR.'/engine/classes/modules/');
 	define('CURRENT_TIME',time());
 	define('CURRENT_DATE',date("d.m.Y"));
 	define('REMOTE_IP',   getenv('REMOTE_ADDR'));

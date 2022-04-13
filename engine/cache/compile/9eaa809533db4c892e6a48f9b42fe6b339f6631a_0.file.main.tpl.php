@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-04-12 15:47:17
+/* Smarty version 4.0.4, created on 2022-04-13 12:11:45
   from '/Avalon/sites/FoxRadio/www/templates/bootstrap/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_625574d5d0ed29_17135073',
+  'unifunc' => 'content_625693d1582749_97445007',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9eaa809533db4c892e6a48f9b42fe6b339f6631a' => 
     array (
       0 => '/Avalon/sites/FoxRadio/www/templates/bootstrap/main.tpl',
-      1 => 1649767635,
+      1 => 1649841077,
       2 => 'file',
     ),
   ),
@@ -23,7 +23,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_625574d5d0ed29_17135073 (Smarty_Internal_Template $_smarty_tpl) {
+function content_625693d1582749_97445007 (Smarty_Internal_Template $_smarty_tpl) {
 ?><head>
 	<?php echo $_smarty_tpl->tpl_vars['systemHeaders']->value;?>
 	
