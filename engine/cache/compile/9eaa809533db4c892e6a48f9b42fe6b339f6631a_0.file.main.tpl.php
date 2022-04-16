@@ -1,29 +1,29 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-04-13 12:11:45
+/* Smarty version 4.0.4, created on 2022-04-16 19:02:51
   from '/Avalon/sites/FoxRadio/www/templates/bootstrap/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_625693d1582749_97445007',
+  'unifunc' => 'content_625ae8ab8cdb80_40883417',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9eaa809533db4c892e6a48f9b42fe6b339f6631a' => 
     array (
       0 => '/Avalon/sites/FoxRadio/www/templates/bootstrap/main.tpl',
-      1 => 1649841077,
+      1 => 1650124968,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
     'file:header.tpl' => 1,
-    'file:components/advert.tpl' => 1,
+    'file:components/advertComponent.tpl' => 1,
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_625693d1582749_97445007 (Smarty_Internal_Template $_smarty_tpl) {
+function content_625ae8ab8cdb80_40883417 (Smarty_Internal_Template $_smarty_tpl) {
 ?><head>
 	<?php echo $_smarty_tpl->tpl_vars['systemHeaders']->value;?>
 	
@@ -38,8 +38,6 @@ function content_625693d1582749_97445007 (Smarty_Internal_Template $_smarty_tpl)
 	<meta name="apple-mobile-web-app-status-bar-style" content="default">
 	<link href="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /css/style.css" rel="stylesheet">
-	<link href="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
-/css/input.css" rel="stylesheet">
 	<?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /js/main.js"><?php echo '</script'; ?>
@@ -52,13 +50,16 @@ function content_625693d1582749_97445007 (Smarty_Internal_Template $_smarty_tpl)
   <section id="topbar" class="d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
       <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">Tres.com</a></i>
+        <!-- 
+		<i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">Tres.com</a></i>
         <i class="bi bi-phone d-flex align-items-center ms-4"><span><?php echo $_smarty_tpl->tpl_vars['status']->value;?>
-</span></i>
+</span></i> 
+		-->
       </div>
 		<?php if (!$_smarty_tpl->tpl_vars['isLogged']->value) {?>
 		  <div class="cta d-none d-md-flex align-items-center">
-			<a href="#login" class="scrollto">LogIn</a>
+			<!-- <a href="#login" class="scrollto">LogIn</a> -->
+			<a href="#login"><button class="logInBtn"><span>Войти</span></button></a>
 		  </div>
 		<?php } else { ?>
 		  <div class="cta d-none d-md-flex align-items-center">
@@ -78,7 +79,7 @@ function content_625693d1582749_97445007 (Smarty_Internal_Template $_smarty_tpl)
 
 	</div>
   </div>
-  <?php $_smarty_tpl->_subTemplateRender('file:components/advert.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+  <?php $_smarty_tpl->_subTemplateRender('file:components/advertComponent.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
   
   <?php $_smarty_tpl->_subTemplateRender('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);

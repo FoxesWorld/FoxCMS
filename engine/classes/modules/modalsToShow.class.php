@@ -2,7 +2,7 @@
 if(!defined('FOXXEY')) {
 	die("Hacking attempt!");
 }
-	class modalsToShow {
+	class modalsToShow extends init {
 		
 		function __construct($logged, $notLogged){
 			if(@!$_SESSION['isLogged']) {

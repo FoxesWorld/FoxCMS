@@ -11,7 +11,7 @@
 		</div>
 
 		<div class="input_block">
-			<input id="password" class="input" type="text" autocomplete="off" required>
+			<input id="password" class="input" type="text" autocomplete="off" name="required">
 			<label class="label">Текущий пароль</label>
 		</div>
 		

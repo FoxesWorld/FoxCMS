@@ -52,7 +52,6 @@ if(!defined('auth')) {
 			VALUES ('".$this->regData['login']."', '".$password."', '".$this->regData['email']."', '".$this->baseUserGroup."', '".randTexts::getRandText('noName')."', '".authorize::generateLoginHash()."', '".CURRENT_TIME."', '".CURRENT_TIME."')";
 			$userReg = $this->db->run($query);
 			if($userReg) {
-				require ('loadUserInfo.class.php');
 				$loadUserInfo = new loadUserInfo($this->regData['login'], $this->db);
 				$userData = $loadUserInfo->userInfoArray();
 				$this->logger->WriteLine("User has completed registration '".$this->regData['login']."'");

@@ -3,7 +3,7 @@
 		<tr>
 			<td colspan="2">
 			<div class="input_block animated fadeInRight">
-				<input id="login" class="input" autocomplete="off" required="">
+				<input id="login" class="input" autocomplete="off" name='required'>
 				<label class="label">Логин</label>
 			</div>
 			</td>
@@ -15,7 +15,7 @@
 			</td>
 			<td>
 				<div class="input_block animated fadeInLeft">
-					<input id="password" class="input" type="password" autocomplete="off" required="">
+					<input id="password" class="input" type="password" autocomplete="off" name='required'>
 					<label class="label">Пароль</label>
 				</div>
 			</td>

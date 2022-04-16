@@ -1,4 +1,27 @@
+<?php
+/* Smarty version 4.0.4, created on 2022-04-13 19:35:12
+  from '/Avalon/sites/FoxRadio/www/templates/bootstrap/cat.tpl' */
 
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.0.4',
+  'unifunc' => 'content_6256fbc08347b3_50233796',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '9a6bdf96e2436ba086e31ff7f7fd782126cdfd39' => 
+    array (
+      0 => '/Avalon/sites/FoxRadio/www/templates/bootstrap/cat.tpl',
+      1 => 1649867710,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_6256fbc08347b3_50233796 (Smarty_Internal_Template $_smarty_tpl) {
+?>
 <canvas></canvas>
 
 <style>
@@ -8,7 +31,8 @@ canvas {
   z-index: -999999999;
 }
 </style>
-<script>
+<?php echo '<script'; ?>
+>
 'use strict';
 
 var canvas = document.getElementsByTagName( 'canvas' )[ 0 ];
@@ -431,4 +455,6 @@ canvas.addEventListener('touchmove', function(e) {
     }
 
 }, false);
-</script>
+<?php echo '</script'; ?>
+><?php }
+}

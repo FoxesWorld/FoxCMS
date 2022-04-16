@@ -18,13 +18,18 @@
 				}
 			}, sleep);
 		};
-			
+
 		function collectFormData(form) {
 			let inputFields = form.querySelectorAll("input, select, textarea");
 			let inputObjArr = {};
 			
 			inputFields.forEach(input => {
 				let value;
+				 if($(input).prop('name') === 'required' && input.value == ''){
+					$('.input_block > ' + '#'+input.id).notify(input.id + ' is requiered');
+					throw new Error(input.id + ' is requiered');
+				 }
+	
 				switch(input.type){
 					case "checkbox":
 						value = (input.checked) ? 1 : 0;
@@ -41,7 +46,7 @@
 		
 		function submitForm(data, url, method, button){
 			let answer = 'notSent';
-			console.log(data);
+			//console.log(data);
 			switch(method){
 				case 'post':
 					answer = request.send_post(data);
