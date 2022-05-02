@@ -6,8 +6,7 @@ if(!defined('profile')) {
 	class userActions extends profile {
 		
 		private $userActionReq = "userProfileAction";
-		protected $db;
-		protected $logger;
+		protected $db, $logger;
 		private $fRequest;
 		
 		function __construct($db = '', $logger = '', $request = ''){

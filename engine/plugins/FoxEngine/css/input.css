@@ -2,7 +2,7 @@
 .input_block {
 	position: relative;
 	height: 60px;
-	margin: 10px 0 5px;
+	margin: 0px 0px 5px 0px;
 	-webkit-box-shadow: 0 5px 35px rgba(206, 194, 171, .35);
 	-moz-box-shadow: 0 5px 35px rgba(206, 194, 171, .35);
 	box-shadow: 0 5px 35px rgba(206, 194, 171, .35);
@@ -38,7 +38,8 @@
 	color: #343434;
 }
 
-.input_block > .input:focus~.label {
+.input_block > .input:focus~.label,
+.input_block > .input:not([value = ''])~.label {
 	top: 10px;
 	left: 14px;
 	font-size: 9px;

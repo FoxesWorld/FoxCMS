@@ -30,6 +30,9 @@
 		/*Title*/
 		'title' => 'FoxEngine',
 		'status' => 'Alpha',
+		'vkGroup' => '<script>
+						VK.Widgets.Group("vkGroup", {mode: 2, width: "617", height: "700", color1: \'DADADA\', color2: \'2E2D2B\', color3: \'2E2D2B\'}, 168368623);
+		</script>',
 		
 		/* LINKS */
 		'links' => array(
@@ -76,7 +79,7 @@
 		
 		//Modals to logged
 		protected $modalsLogged = array(
-			"cp" => array("Личный кабинет", "Посмотрим <b>{realname}</b>, что мы тут можем поменять...", "%file:=cp")
+			"cp" => array("Личный кабинет", "Посмотрим <b>{realname}</b>, что ты тут можешь поменять...", "%file:=cp")
 		);
 		
 	}

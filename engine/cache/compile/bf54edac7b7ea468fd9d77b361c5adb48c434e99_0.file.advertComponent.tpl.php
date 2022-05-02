@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-04-15 09:43:55
+/* Smarty version 4.0.4, created on 2022-04-26 12:23:13
   from '/Avalon/sites/FoxRadio/www/templates/bootstrap/components/advertComponent.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6259142bb154b9_12992052',
+  'unifunc' => 'content_6267ba0169e818_61694393',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'bf54edac7b7ea468fd9d77b361c5adb48c434e99' => 
     array (
       0 => '/Avalon/sites/FoxRadio/www/templates/bootstrap/components/advertComponent.tpl',
-      1 => 1649692593,
+      1 => 1650964972,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6259142bb154b9_12992052 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6267ba0169e818_61694393 (Smarty_Internal_Template $_smarty_tpl) {
 ?>	<link href="/engine/classes/modules/advert/styles.css" rel="stylesheet" type="text/css">
 
 	<div style="display:none;" id="notify-content">
@@ -37,6 +37,6 @@ function content_6259142bb154b9_12992052 (Smarty_Internal_Template $_smarty_tpl)
 	</div>
 
 	<?php echo '<script'; ?>
- src="/engine/classes/modules/advert/notify-0.1.5.js"><?php echo '</script'; ?>
+ src="/engine/classes/modules/advert/notify-0.1.6.js"><?php echo '</script'; ?>
 ><?php }
 }

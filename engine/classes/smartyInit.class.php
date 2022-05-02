@@ -31,8 +31,10 @@ if (!defined('FOXXEY')) {
 			$this->smarty->assign("profile", init::$profileBlock);
 			$this->smarty->assign("isLogged",   @$_SESSION['isLogged']);
 			$this->smarty->assign("LoggedName", @$_SESSION['login']);
+			$this->smarty->assign("userGroup", @$_SESSION['user_group']);
 			$this->smarty->assign("greetings", randTexts::getRandText('greetings'));
 			$this->smarty->assign("realname", 	@$_SESSION['realname']);
+			$this->smarty->assign("vkGroup", 	$config['vkGroup']);
 			$this->smarty->assign("builtInJS", '<script>request = new request("/", {key:"'.$config['secureKey'].'"}, false);formInit(500);</script>');
 		}
 	}

@@ -2,15 +2,12 @@
 
 define('FOXXEY', true);
 require ('data/config.php');
-
 session_start();
 
 	class init extends initConfig {
 		
-		protected $debug;
-		protected $logger;
+		protected $debug, $logger, $db;
 		protected static $profileBlock = '';
-		protected $db;
 
 		function __construct($debug = false) {
 			require (ENGINE_DIR.'classes/modules/modalsToShow.class.php');

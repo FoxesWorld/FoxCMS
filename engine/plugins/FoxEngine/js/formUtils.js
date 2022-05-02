@@ -1,6 +1,7 @@
 	
 		function formInit(sleep) {
 			setTimeout(() => {
+				console.info('%c Using FoxesWorld Form Utils...', 'background: #39312fc7; color: yellow');
 				let forms = document.querySelectorAll("form");
 				if (forms.length >= 1) {
 					console.log("Found forms: " + forms.length);
@@ -75,7 +76,7 @@
 			};			
 		}
 		
-		function removeHash () {
+		function removeHash() {
 			var scrollV, scrollH, loc = window.location;
 			if ("pushState" in history)
 				history.pushState("", document.title, loc.pathname + loc.search);

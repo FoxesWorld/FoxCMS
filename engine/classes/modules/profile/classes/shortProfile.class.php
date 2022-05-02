@@ -8,8 +8,7 @@ if(!defined('profile')) {
 					
 	class shortProfile extends profile {
 		
-		private $shortProfileBlock;
-		private $selectedData;
+		private $shortProfileBlock, $selectedData;
 		private $profileShape = '';
 		private $profileCompoonentFile = 'profileComponent.tpl';
 		

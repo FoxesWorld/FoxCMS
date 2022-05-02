@@ -13,4 +13,4 @@
 			</div>
 	</div>
 
-	<script src="/engine/classes/modules/advert/notify-0.1.5.js"></script>
+	<script src="/engine/classes/modules/advert/notify-0.1.6.js"></script>

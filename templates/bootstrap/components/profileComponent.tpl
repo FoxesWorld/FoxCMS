@@ -1,11 +1,18 @@
-<div class="userProfile animate__animated animate__backInLeft animate__delay-1s">
+<div class="userProfile animate__animated animate__backInLeft animate__delay-1s card">
 	<ul>
 		{profileData}
 	</ul>
-	<form method="POST" action="/" id="loggedForm">
-		<input type="submit" value="logout" class="logout" />
-		<input id="userProfileAction" class="input" type="hidden" value="logout">
-	</form>
 	
-	<a href="#cp">CP</a>
+	<ul class="inline">
+	<li>
+		<form method="POST" action="/" id="loggedForm">
+			<input type="submit" value="logout" class="logout" />
+			<input id="userProfileAction" class="input" type="hidden" value="logout">
+		</form>
+	</li>
+	
+	<li>
+		<a href="#cp">CP</a>
+	</li>
+	</ul>
 </div>

@@ -22,16 +22,10 @@ if (!defined('FOXXEY')) {
 
 	class antiBrute {
 
-		private $debug;
-		private $ip;
-		private $db;
-		private $maxAttempts;
+		private $debug, $ip, $db, $maxAttempts;
 
 		/* DB DATA */
-		private $DBip;
-		private $DBid;
-		private $DBtime;
-		private $DBattempts;
+		private $DBip, $DBid, $DBtime, $DBattempts;
 		private $dbShape = "CREATE TABLE IF NOT EXISTS `antiBrute` (
 		  `id` int(11) NOT NULL,
 		  `time` varchar(255) DEFAULT NULL,

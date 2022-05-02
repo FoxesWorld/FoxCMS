@@ -7,8 +7,7 @@ if(!defined('auth')) {
 		private $regData;
 		private $passminCount = 5;
 		private $baseUserGroup = 4;
-		protected $logger;
-		protected $db;
+		protected $logger, $db;
 		
 		function __construct($input, $db, $logger){
 			$this->logger = $logger;

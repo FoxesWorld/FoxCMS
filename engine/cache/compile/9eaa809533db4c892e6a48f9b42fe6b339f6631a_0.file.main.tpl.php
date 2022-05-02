@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-04-16 19:02:51
+/* Smarty version 4.0.4, created on 2022-04-27 13:18:12
   from '/Avalon/sites/FoxRadio/www/templates/bootstrap/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_625ae8ab8cdb80_40883417',
+  'unifunc' => 'content_62691864dca3c2_46235885',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9eaa809533db4c892e6a48f9b42fe6b339f6631a' => 
     array (
       0 => '/Avalon/sites/FoxRadio/www/templates/bootstrap/main.tpl',
-      1 => 1650124968,
+      1 => 1651054672,
       2 => 'file',
     ),
   ),
@@ -23,7 +23,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_625ae8ab8cdb80_40883417 (Smarty_Internal_Template $_smarty_tpl) {
+function content_62691864dca3c2_46235885 (Smarty_Internal_Template $_smarty_tpl) {
 ?><head>
 	<?php echo $_smarty_tpl->tpl_vars['systemHeaders']->value;?>
 	
@@ -42,49 +42,64 @@ function content_625ae8ab8cdb80_40883417 (Smarty_Internal_Template $_smarty_tpl)
  src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /js/main.js"><?php echo '</script'; ?>
 >
+	<?php echo '<script'; ?>
+ type="text/javascript" src="//vk.com/js/api/openapi.js?130"><?php echo '</script'; ?>
+>
+	<?php echo $_smarty_tpl->tpl_vars['vkGroup']->value;?>
+
 </head>
 
 <body>
 	<?php $_smarty_tpl->_subTemplateRender('file:header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
-  <section id="topbar" class="d-flex align-items-center">
-    <div class="container d-flex justify-content-center justify-content-md-between">
-      <div class="contact-info d-flex align-items-center">
-        <!-- 
-		<i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">Tres.com</a></i>
-        <i class="bi bi-phone d-flex align-items-center ms-4"><span><?php echo $_smarty_tpl->tpl_vars['status']->value;?>
+
+		  <section id="topbar" class="d-flex align-items-center">
+			<div class="container d-flex justify-content-center justify-content-md-between">
+			  <div class="contact-info d-flex align-items-center">
+				<!-- 
+				<i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">Tres.com</a></i>
+				<i class="bi bi-phone d-flex align-items-center ms-4"><span><?php echo $_smarty_tpl->tpl_vars['status']->value;?>
 </span></i> 
-		-->
-      </div>
-		<?php if (!$_smarty_tpl->tpl_vars['isLogged']->value) {?>
-		  <div class="cta d-none d-md-flex align-items-center">
-			<!-- <a href="#login" class="scrollto">LogIn</a> -->
-			<a href="#login"><button class="logInBtn"><span>Войти</span></button></a>
-		  </div>
-		<?php } else { ?>
-		  <div class="cta d-none d-md-flex align-items-center">
-			<?php echo $_smarty_tpl->tpl_vars['greetings']->value;?>
- <?php echo $_smarty_tpl->tpl_vars['realname']->value;?>
+				-->
+			  </div>
+				<?php if (!$_smarty_tpl->tpl_vars['isLogged']->value) {?>
+				  <div class="cta d-none d-md-flex align-items-center">
+					<a href="#login"><button class="logInBtn"><span>Войти</span></button></a>
+				  </div>
+				<?php } else { ?>
+				  <div class="cta d-none d-md-flex align-items-center">
+					<?php echo $_smarty_tpl->tpl_vars['greetings']->value;?>
+ &nbsp; <?php echo $_smarty_tpl->tpl_vars['realname']->value;?>
 !
+					  <?php if ($_smarty_tpl->tpl_vars['userGroup']->value == 'admin') {?>
+							<a class="button-three" href="#adm">Adminpanel</a>
+					  <?php }?>
+				  </div>
+				 <?php }?>
+			</div>
+		  </section>
+		  
+		  <div id="content">
+			<?php echo $_smarty_tpl->tpl_vars['builtInJS']->value;?>
+
+			<div class="row">
+				<table>
+					<td>
+						<div id="vkGroup"></div>
+					</td>
+					<td>
+						<div id="userBlock">
+							<?php echo $_smarty_tpl->tpl_vars['profile']->value;?>
+
+						</div>
+					</td>
+			 </table>
+			</div>
 		  </div>
-		 <?php }?>
-    </div>
-  </section>
-  
-  <div id="content">
-	<?php echo $_smarty_tpl->tpl_vars['builtInJS']->value;?>
 
-	<div class="row">
-	 <?php echo $_smarty_tpl->tpl_vars['profile']->value;?>
-
-	</div>
-  </div>
   <?php $_smarty_tpl->_subTemplateRender('file:components/advertComponent.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
-  
   <?php $_smarty_tpl->_subTemplateRender('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
-  
-  
  </body><?php }
 }

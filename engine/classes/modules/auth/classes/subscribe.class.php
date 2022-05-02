@@ -5,8 +5,7 @@ if(!defined('auth')) {
 	class subscribe extends authWrapper {
 		
 		private $inputArray;
-		protected $db;
-		protected $logger;
+		protected $db, $logger;
 		
 		function __construct($input, $db, $logger){
 			$this->db = $db;
@@ -16,7 +15,7 @@ if(!defined('auth')) {
 		
 		protected function subscribe(){
 			$query = "INSERT INTO `subscribe`(`email`, `date`) VALUES ('".$this->inputArray['mail']."','".CURRENT_TIME."')";
-			if(functions::checkExistingData($this->db, 'email', $this->inputArray['mail']) === true){
+			if(functions::checkExistingData($this->db, 'email', $this->inputArray['mail']) == true){
 				exit('{"message": "Данная почта уже была зарегистрирована!", "type": "warn"}');
 			}
 			$this->db->run($query);

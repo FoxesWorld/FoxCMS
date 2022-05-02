@@ -11,9 +11,6 @@ define('userUtils', true);
 					require(dirname(__FILE__).$this->includePath.$key);
 				}
 			}
-			//require ('userUtilities/groupAssociacion.class.php');
-			//require ('userUtilities/loadUserInfo.class.php');
-			//require ('userUtilities/sessionManager.class.php');
 		}
 		
 	}
