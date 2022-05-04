@@ -38,8 +38,8 @@
 	color: #343434;
 }
 
-.input_block > .input:focus~.label,
-.input_block > .input:not([value = ''])~.label {
+.input_block .input:focus~.label,
+.input_block .input:not(:focus):valid~.label {
 	top: 10px;
 	left: 14px;
 	font-size: 9px;

@@ -41,18 +41,27 @@
 		  
 		  <div id="content">
 			{$builtInJS}
-			<div class="row">
+
 				<table>
-					<td>
-						<div id="vkGroup"></div>
-					</td>
+					{if $isLogged}
 					<td>
 						<div id="userBlock">
 							{$profile}
+							{include file='upload.tpl'}
 						</div>
 					</td>
+					
+					<td>
+						<div class="container-fluid" id="pageData">
+							Your files are...
+						</div>
+					</td>
+					{else}
+					<td>
+						<div class="container" id="vkGroup"></div>
+					</td>
+					{/if}
 			 </table>
-			</div>
 		  </div>
 
   {include file='components/advertComponent.tpl'}

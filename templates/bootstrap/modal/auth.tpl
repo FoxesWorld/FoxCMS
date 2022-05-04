@@ -1,4 +1,4 @@
-	<form method="POST" action="/" id="loginForm">
+<form method="POST" action="/" id="loginForm">
 	<table>
 		<tr>
 			<td colspan="2">

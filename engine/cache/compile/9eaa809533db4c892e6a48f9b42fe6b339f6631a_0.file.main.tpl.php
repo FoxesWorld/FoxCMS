@@ -1,29 +1,30 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-04-27 13:18:12
+/* Smarty version 4.0.4, created on 2022-05-04 13:12:05
   from '/Avalon/sites/FoxRadio/www/templates/bootstrap/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_62691864dca3c2_46235885',
+  'unifunc' => 'content_6272517582cf17_67625913',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9eaa809533db4c892e6a48f9b42fe6b339f6631a' => 
     array (
       0 => '/Avalon/sites/FoxRadio/www/templates/bootstrap/main.tpl',
-      1 => 1651054672,
+      1 => 1651659104,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
     'file:header.tpl' => 1,
+    'file:upload.tpl' => 1,
     'file:components/advertComponent.tpl' => 1,
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_62691864dca3c2_46235885 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6272517582cf17_67625913 (Smarty_Internal_Template $_smarty_tpl) {
 ?><head>
 	<?php echo $_smarty_tpl->tpl_vars['systemHeaders']->value;?>
 	
@@ -82,19 +83,29 @@ function content_62691864dca3c2_46235885 (Smarty_Internal_Template $_smarty_tpl)
 		  <div id="content">
 			<?php echo $_smarty_tpl->tpl_vars['builtInJS']->value;?>
 
-			<div class="row">
+
 				<table>
-					<td>
-						<div id="vkGroup"></div>
-					</td>
+					<?php if ($_smarty_tpl->tpl_vars['isLogged']->value) {?>
 					<td>
 						<div id="userBlock">
 							<?php echo $_smarty_tpl->tpl_vars['profile']->value;?>
 
+							<?php $_smarty_tpl->_subTemplateRender('file:upload.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
 						</div>
 					</td>
+					
+					<td>
+						<div class="container-fluid" id="pageData">
+							Your files are...
+						</div>
+					</td>
+					<?php } else { ?>
+					<td>
+						<div class="container" id="vkGroup"></div>
+					</td>
+					<?php }?>
 			 </table>
-			</div>
 		  </div>
 
   <?php $_smarty_tpl->_subTemplateRender('file:components/advertComponent.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);

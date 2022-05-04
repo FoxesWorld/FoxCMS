@@ -17,9 +17,9 @@ session_start();
 			initFunctions::libFilesInclude(ENGINE_DIR.'syslib', $this->debug);
 			$this->logger = new Logger('lastlog');
 			$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
-
 			require (ENGINE_DIR.'syslib/smarty/Smarty.class.php');
 			require (ENGINE_DIR.'classes/admin/admin.class.php');
+			require (ENGINE_DIR.'upload.php');
 
 			foreach(filesInDir::filesInDirArray(ENGINE_DIR.'classes/modules') as $key){
 				$file = ENGINE_DIR.'classes/modules/'.$key.'/'.$key.'.class.php';
@@ -31,7 +31,6 @@ session_start();
 			
 			require (ENGINE_DIR.'classes/smartyInit.class.php');
 			$smartyInit = new smartyInit(linkBuilder::buildLinks());
-			
 		}
 
 	}
