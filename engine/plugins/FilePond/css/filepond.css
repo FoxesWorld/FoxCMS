@@ -1010,7 +1010,7 @@
     font-size: inherit;
 }
 .filepond--root {
-	margin: 15 0;
+	margin: 0 0 10;
     /* block everything */
 }
 .filepond--root[data-disabled] {

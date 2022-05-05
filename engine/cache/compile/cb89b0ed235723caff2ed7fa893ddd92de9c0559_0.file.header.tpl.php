@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-04-13 12:18:39
+/* Smarty version 4.0.4, created on 2022-05-05 10:47:07
   from '/Avalon/sites/FoxRadio/www/templates/bootstrap/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6256956f2dea50_49434180',
+  'unifunc' => 'content_627380fb066517_72944917',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cb89b0ed235723caff2ed7fa893ddd92de9c0559' => 
     array (
       0 => '/Avalon/sites/FoxRadio/www/templates/bootstrap/header.tpl',
-      1 => 1649841514,
+      1 => 1651736430,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6256956f2dea50_49434180 (Smarty_Internal_Template $_smarty_tpl) {
+function content_627380fb066517_72944917 (Smarty_Internal_Template $_smarty_tpl) {
 ?>  <header id="header" class="d-flex align-items-center">
 		<div class="container d-flex align-items-center justify-content-between">
 
@@ -38,8 +38,7 @@ function content_6256956f2dea50_49434180 (Smarty_Internal_Template $_smarty_tpl)
 
 		  <nav id="navbar" class="navbar "> <!-- navbar-mobile -->
 			<ul>
-				<?php echo $_smarty_tpl->tpl_vars['links']->value;?>
-
+				<!-- links -->
 			  <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
 				<ul>
 				  <li><a href="#">Drop Down 1</a></li>

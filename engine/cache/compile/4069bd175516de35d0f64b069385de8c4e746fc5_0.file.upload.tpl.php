@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-05-04 10:09:19
+/* Smarty version 4.0.4, created on 2022-05-05 10:47:07
   from '/Avalon/sites/FoxRadio/www/templates/bootstrap/upload.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6272269f40ee94_60977353',
+  'unifunc' => 'content_627380fb069a19_98698216',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6272269f40ee94_60977353 (Smarty_Internal_Template $_smarty_tpl) {
+function content_627380fb069a19_98698216 (Smarty_Internal_Template $_smarty_tpl) {
 ?><form action="/" id="upload" method="POST">
 	
 	<input type="file" name="image[]" accept=".gif,.jpg,.jpeg,.png" /> 

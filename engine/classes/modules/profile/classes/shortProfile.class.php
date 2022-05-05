@@ -19,7 +19,7 @@ if(!defined('profile')) {
 				$this->profileShape = file::efile(ROOT_DIR."/templates/".$config['siteTpl'].'/components/'.$this->profileCompoonentFile)["content"];
 				foreach($_SESSION as $key => $value) {
 					if(in_array($key, $config['userDataToShow'], true)){
-						$this->selectedData .= '<li><b>'.$key.'</b>: '.$value.'<li>';
+							$this->selectedData .= '<li><b>'.$key.'</b>: '.$value.'<li>';
 					}
 				}
 				$this->shortProfileBlock = str_replace('{profileData}', $this->selectedData, $this->profileShape);

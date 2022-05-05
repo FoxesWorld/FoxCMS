@@ -19,8 +19,6 @@
 		'webserviceName'=> 'FoxEngine',
 		'secureKey' => 'ghYyufghVH',
 		
-		'radioStream' => "https://radio.macros-core.com:8443/live",
-		
 		/* AUTHORISATION */
 		'bantime'			=> CURRENT_TIME + (120),
 		'maxLoginAttempts'	=> 1,

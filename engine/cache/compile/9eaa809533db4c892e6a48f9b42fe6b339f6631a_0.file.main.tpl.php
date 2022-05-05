@@ -1,30 +1,30 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-05-04 13:12:05
+/* Smarty version 4.0.4, created on 2022-05-05 16:39:02
   from '/Avalon/sites/FoxRadio/www/templates/bootstrap/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6272517582cf17_67625913',
+  'unifunc' => 'content_6273d376b1de47_63999053',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9eaa809533db4c892e6a48f9b42fe6b339f6631a' => 
     array (
       0 => '/Avalon/sites/FoxRadio/www/templates/bootstrap/main.tpl',
-      1 => 1651659104,
+      1 => 1651757923,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
     'file:header.tpl' => 1,
-    'file:upload.tpl' => 1,
+    'file:fileManager.tpl' => 1,
     'file:components/advertComponent.tpl' => 1,
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_6272517582cf17_67625913 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6273d376b1de47_63999053 (Smarty_Internal_Template $_smarty_tpl) {
 ?><head>
 	<?php echo $_smarty_tpl->tpl_vars['systemHeaders']->value;?>
 	
@@ -46,6 +46,8 @@ function content_6272517582cf17_67625913 (Smarty_Internal_Template $_smarty_tpl)
 	<?php echo '<script'; ?>
  type="text/javascript" src="//vk.com/js/api/openapi.js?130"><?php echo '</script'; ?>
 >
+	<?php echo $_smarty_tpl->tpl_vars['builtInJS']->value;?>
+
 	<?php echo $_smarty_tpl->tpl_vars['vkGroup']->value;?>
 
 </head>
@@ -54,7 +56,7 @@ function content_6272517582cf17_67625913 (Smarty_Internal_Template $_smarty_tpl)
 	<?php $_smarty_tpl->_subTemplateRender('file:header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
-		  <section id="topbar" class="d-flex align-items-center">
+		  <section id="topbar" class="d-flex align-items-center shadow">
 			<div class="container d-flex justify-content-center justify-content-md-between">
 			  <div class="contact-info d-flex align-items-center">
 				<!-- 
@@ -81,25 +83,18 @@ function content_6272517582cf17_67625913 (Smarty_Internal_Template $_smarty_tpl)
 		  </section>
 		  
 		  <div id="content">
-			<?php echo $_smarty_tpl->tpl_vars['builtInJS']->value;?>
-
-
 				<table>
 					<?php if ($_smarty_tpl->tpl_vars['isLogged']->value) {?>
 					<td>
 						<div id="userBlock">
 							<?php echo $_smarty_tpl->tpl_vars['profile']->value;?>
 
-							<?php $_smarty_tpl->_subTemplateRender('file:upload.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-?>
+							
 						</div>
 					</td>
 					
-					<td>
-						<div class="container-fluid" id="pageData">
-							Your files are...
-						</div>
-					</td>
+					<?php $_smarty_tpl->_subTemplateRender('file:fileManager.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
 					<?php } else { ?>
 					<td>
 						<div class="container" id="vkGroup"></div>

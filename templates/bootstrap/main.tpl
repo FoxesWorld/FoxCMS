@@ -10,13 +10,14 @@
 	<link href="{$tplDir}/css/style.css" rel="stylesheet">
 	<script src="{$tplDir}/js/main.js"></script>
 	<script type="text/javascript" src="//vk.com/js/api/openapi.js?130"></script>
+	{$builtInJS}
 	{$vkGroup}
 </head>
 
 <body>
 	{include file='header.tpl'}
 
-		  <section id="topbar" class="d-flex align-items-center">
+		  <section id="topbar" class="d-flex align-items-center shadow">
 			<div class="container d-flex justify-content-center justify-content-md-between">
 			  <div class="contact-info d-flex align-items-center">
 				<!-- 
@@ -40,22 +41,16 @@
 		  </section>
 		  
 		  <div id="content">
-			{$builtInJS}
-
 				<table>
 					{if $isLogged}
 					<td>
 						<div id="userBlock">
 							{$profile}
-							{include file='upload.tpl'}
+							
 						</div>
 					</td>
 					
-					<td>
-						<div class="container-fluid" id="pageData">
-							Your files are...
-						</div>
-					</td>
+					{include file='fileManager.tpl'}
 					{else}
 					<td>
 						<div class="container" id="vkGroup"></div>

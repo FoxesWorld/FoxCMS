@@ -1,4 +1,4 @@
-  <footer class="navbar-fixed-bottom row-fluid" id="footer">
+  <footer class="navbar-fixed-bottom row-fluid shadow" id="footer">
     <div class="footer-top">
       <div class="container">
         <div class="row">
