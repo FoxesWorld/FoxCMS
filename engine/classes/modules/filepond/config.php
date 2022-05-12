@@ -1,7 +1,4 @@
 <?php
-if(!defined('upload')) {
-	die ('{"message": "Not in upload thread"}');
-}
 
 // where to get files from
 const ENTRY_FIELD = array('image');

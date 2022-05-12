@@ -60,5 +60,4 @@
 		  </div>
 
   {include file='components/advertComponent.tpl'}
-  {include file='footer.tpl'}
  </body>

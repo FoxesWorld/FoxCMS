@@ -8,9 +8,9 @@ if(!defined('profile')) {
 		
 		function __construct($data) {
 			$this->data = functions::filterString($data);
-			if($_SESSION['isLogged'] === true) {
-				if(@$_SESSION[$this->data] !== null){
-					functions::jsonAnswer($_SESSION[$this->data], false);
+			if(init::$isLogged) {
+				if(init::$usrArray[$this->data]){
+					functions::jsonAnswer(init::$usrArray[$this->data], false);
 				} else {
 					functions::jsonAnswer('No userfield - '.$this->data, true);
 				}

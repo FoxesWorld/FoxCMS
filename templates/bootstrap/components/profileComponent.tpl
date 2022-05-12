@@ -4,15 +4,15 @@
 	</ul>
 	
 	<ul class="inline">
-	<li>
-		<form method="POST" action="/" id="loggedForm">
-			<input type="submit" value="logout" class="logout" />
-			<input id="userProfileAction" class="input" type="hidden" value="logout">
-		</form>
-	</li>
-	
-	<li>
-		<a href="#cp">CP</a>
-	</li>
+		<li>
+			<form method="POST" action="/" id="loggedForm">
+				<input type="submit" value="logout" class="logout" />
+				<input id="userProfileAction" class="input" type="hidden" value="logout">
+			</form>
+		</li>
+		
+		<li>
+			<a href="#cp" class="actionButton">CP</a>
+		</li>
 	</ul>
 </div>

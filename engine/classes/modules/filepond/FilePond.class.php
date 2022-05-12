@@ -1,375 +1,216 @@
 <?php
-namespace FilePond;
-if(!defined('upload')) {
-	die ('{"message": "Not in upload thread"}');
+if(!defined('FOXXEY')) {
+	die("Hacking attempt!");
 }
+//header('Access-Control-Allow-Methods: OPTIONS, GET, DELETE, POST, HEAD, PATCH');
+//header('Access-Control-Allow-Headers: content-type, upload-length, upload-offset, upload-name');
+//header('Access-Control-Expose-Headers: upload-offset');
 
-require_once(__DIR__ . '/Helper/Transfer.class.php');
-require_once(__DIR__ . '/Helper/Post.class.php');
-require_once(__DIR__ . '/Helper/ServerExceptions.php');
+require_once('FilePond.class.php');
+require_once('config.php');
 
-define('FOXXEYENGINE', true);
+// catch server exceptions and auto jump to 500 response code if caught
+FilePond\catch_server_exceptions();
 
-function fetch($url) {
-    try {
-        // create temp file
-        $out = tmpfile();
+// Route request to handler method
+FilePond\route_api_request(ENTRY_FIELD, [
+    'FILE_TRANSFER' => 'handle_file_transfer',
+    'PATCH_FILE_TRANSFER' => 'handle_patch_file_transfer',
+    'REVERT_FILE_TRANSFER' => 'handle_revert_file_transfer',
+    'RESTORE_FILE_TRANSFER' => 'handle_restore_file_transfer',
+    'LOAD_LOCAL_FILE' => 'handle_load_local_file',
+    'FETCH_REMOTE_FILE' => 'handle_fetch_remote_file'
+]);
 
-        // go!
-        $ch = curl_init(str_replace(' ','%20',$url));
-        curl_setopt($ch, CURLOPT_FILE, $out);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 50);
+function handle_file_transfer($transfer) {
+    $metadata = $transfer->getMetadata();
+    $files = $transfer->getFiles();
+    // something went wrong, most likely a field name mismatch
+    if ($files !== null && count($files) === 0) return http_response_code(400);
 
-        if (!curl_exec($ch)) throw new \Exception(curl_error($ch), curl_errno($ch));
+    // store data
+    FilePond\store_transfer(TRANSFER_DIR, $transfer);
 
-        $type = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
-        $length = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
-        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        curl_close ($ch);
-        return array(
-            'tmp_name' => stream_get_meta_data($out)['uri'],
-            'name' => sanitize_filename(pathinfo($url)['basename']),
-            'type' => $type,
-            'length' => $length,
-            'error' => $code >= 200 && $code < 300 ? 0 : $code,
-            'ref' => $out, // need this so the file is not automatically removed
-        );
-    } catch(Exception $e) {
-        return false;
-    }
-}
-
-function sanitize_filename($filename) {
-    $info = pathinfo($filename);
-    $name = sanitize_filename_part($info['filename']);
-	$extension = $info['extension'];
-
-    return (strlen($name) > 0 ? $name : '_') . '.' . $extension;
-}
-
-function sanitize_filename_part($str) {
-    return translit($str);
-}
-
-function checkingExtension ($extension, $name = null){
-	/* if(is_array(getimagesize(ROOT.'/uploads/fotos/'.$name.'.'.$extension))){
-		switch ($extension){
-			
-			case 'jpg':
-			break;
-			
-			case 'png':
-			break;
-			
-			case 'gif':
-			break;
-			
-			default:
-				http_response_code(400);
-				die('{"message": "Unsupported extension - " '.$extension.'}');
-			break;
-		}
-	} else {
-		http_response_code(400);
-		die('{"message": "Not an image file'.ROOT.'/uploads/fotos/'.$name.'.'.$extension.'"}');
-	} */
-	
-	return $extension;
-}
-
-function remove_directory($path) {
-    if (!is_dir($path)) {return;}
-    $files = glob($path . DIRECTORY_SEPARATOR . '{.,}*', GLOB_BRACE);
-    @array_map('unlink', $files);
-    @rmdir($path);
-}
-
-function remove_transfer_directory($path, $id) {
-    // don't remove anything if the transfer id is not valid (just a security precaution)
-    if (!is_valid_transfer_id($id)) return;
-    remove_directory($path . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR . VARIANTS_DIR);
-    remove_directory($path . DIRECTORY_SEPARATOR . $id);
-}
-
-function create_directory($path) {
-    if (!is_dir($path)) {
-        mkdir($path, 0755, true);
-        return true;
-    }
-    return false;
-}
-
-function secure_directory($path) {
-    $content = '# Don\'t list directory contents
-IndexIgnore *
-# Disable script execution
-AddHandler cgi-script .php .pl .jsp .asp .sh .cgi
-Options -ExecCGI -Indexes';
-    file_put_contents($path . DIRECTORY_SEPARATOR . '.htaccess', $content);
-}
-
-function create_secure_directory($path) {
-    $created = create_directory($path);
-    if ($created) {
-        secure_directory($path);
-    }
-}
-
-function write_file($path, $data, $filename) {
-    $handle = fopen($path . DIRECTORY_SEPARATOR . $filename, 'w');
-    fwrite($handle, $data);
-    fclose($handle);
-}
-
-function translit($value){
-	if(preg_match("/[А-Яа-я]/", $value)) {
-			$converter = array(
-				'а' => 'a',    'б' => 'b',    'в' => 'v',    'г' => 'g',    'д' => 'd',
-				'е' => 'e',    'ё' => 'e',    'ж' => 'zh',   'з' => 'z',    'и' => 'i',
-				'й' => 'y',    'к' => 'k',    'л' => 'l',    'м' => 'm',    'н' => 'n',
-				'о' => 'o',    'п' => 'p',    'р' => 'r',    'с' => 's',    'т' => 't',
-				'у' => 'u',    'ф' => 'f',    'х' => 'h',    'ц' => 'c',    'ч' => 'ch',
-				'ш' => 'sh',   'щ' => 'sch',  'ь' => '',     'ы' => 'y',    'ъ' => '',
-				'э' => 'e',    'ю' => 'yu',   'я' => 'ya',
-				 
-				'А' => 'A',    'Б' => 'B',    'В' => 'V',    'Г' => 'G',    'Д' => 'D',
-				'Е' => 'E',    'Ё' => 'E',    'Ж' => 'Zh',   'З' => 'Z',    'И' => 'I',
-				'Й' => 'Y',    'К' => 'K',    'Л' => 'L',    'М' => 'M',    'Н' => 'N',
-				'О' => 'O',    'П' => 'P',    'Р' => 'R',    'С' => 'S',    'Т' => 'T',
-				'У' => 'U',    'Ф' => 'F',    'Х' => 'H',    'Ц' => 'C',    'Ч' => 'Ch',
-				'Ш' => 'Sh',   'Щ' => 'Sch',  'Ь' => '',     'Ы' => 'Y',    'Ъ' => '',
-				'Э' => 'E',    'Ю' => 'Yu',   'Я' => 'Ya',
-			);
-			$value = strtr($value, $converter);
-		}
-		return $value;
-	}
-
-function is_url($str) {
-    return filter_var($str, FILTER_VALIDATE_URL);
-}
-
-function echo_file($file) {
-
-    // read file object
-    if (is_string($file)) $file = read_file($file);
-
-    // something went wrong while reading the file
-    if (!$file) http_response_code(500);
+    // created the temp entry
+    http_response_code(201);
     
-    // Allow to read Content Disposition (so we can read the file name on the client side)
-    header('Access-Control-Expose-Headers: Content-Disposition, Content-Length, X-Content-Transfer-Id');
-    header('Content-Type: ' . $file['type']);
-    header('Content-Length: ' . $file['length']);
-    header('Content-Disposition: inline; filename="' . $file['name'] . '"');
-    echo isset($file['content']) ? $file['content'] : read_file_contents($file['tmp_name']);
+    // returns plain text content
+    header('Content-Type: text/plain');
+
+    // remove item from array Response contains uploaded file server id
+    die($transfer->getId());
 }
 
-function read_file_contents($filename) {
-    $file = read_file($filename);
-    if (!$file) return false;
-    return $file['content'];
-}
+function handle_patch_file_transfer($id) {
 
-function read_file($filename) {
-    $handle = fopen($filename, 'r');
-    if (!$handle) return false;
-    $content = fread($handle, filesize($filename));
-    fclose($handle);
-    if (!$content) return false;
-    return array(
-        'tmp_name' => $filename,
-        'name' => basename($filename),
-        'content' => $content,
-        'type' => mime_content_type($filename),
-        'length' => filesize($filename),
-        'error' => 0
-    );
-}
+    // location of patch files
+    $dir = TRANSFER_DIR . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR;
+ 
+    // exit if is get
+    if ($_SERVER['REQUEST_METHOD'] === 'HEAD') {
+        $patch = glob($dir . '.patch.*');
+        $offsets = array();
+        $size = '';
+        $last_offset = 0;
+        foreach ($patch as $filename) {
 
-		function move_temp_file($file, $path) {
-			move_uploaded_file($file['tmp_name'], $path . DIRECTORY_SEPARATOR . sanitize_filename($file['name']));
-		}
+            // get size of chunk
+            $size = filesize($filename);
 
-		function move_file($file, $path) {
-			if(strpos($path, UPLOAD_DIR) !== false){
-				$path = fileDir($file, $path);
-			}
-			if (is_uploaded_file($file['tmp_name'])) {
-				return move_temp_file($file, $path);
-			}
-			return rename($file['tmp_name'], $path . DIRECTORY_SEPARATOR . sanitize_filename($file['name']));
-		}
+            // get offset of chunk
+            list($dir, $offset) = explode('.patch.', $filename, 2);
 
-		function fileDir($file, $path){
-			//die($file['type']);
-			switch($file['type']){
-				case 'audio/mpeg':
-					$dirName = '/music/';
-				break;
-				
-				case 'image/jpeg':
-				case 'image/png':
-					$dirName = '/photo/';
-				break;
-				
-				case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-					$dirName = '/docs/';
-				break;
-				
-				case 'application/java-archive':
-					$dirName = '/jar/';
-				break;
-				
-				default:
-					$dirName = '/unknown/';
-				break;
-			}
+            // offsets
+            array_push($offsets, $offset);
 
-			$path.=$dirName;
-			if (!is_dir($path)) mkdir($path, 0755);
-			return $path;
-		}
+            // test if is missing previous chunk
+            // don't test first chunk (previous chunk is non existent)
+            if ($offset > 0 && !in_array($offset - $size, $offsets)) {
+                $last_offset = $offset - $size;
+                break;
+            }
 
-function store_transfer($path, $transfer) {
+            // last offset is at least next offset
+            $last_offset = $offset + $size;
+        }
 
-    // create transfer directory
-    $path = $path . DIRECTORY_SEPARATOR . $transfer->getId();
-    create_secure_directory($path);
-
-    // store metadata
-    if ($transfer->getMetadata()) {
-        write_file($path, @json_encode($transfer->getMetadata()), METADATA_FILENAME);
+        // return offset
+        http_response_code(200);
+        header('Upload-Offset: ' . $last_offset);
+        return;
     }
 
-    // store main file if set (if not set, we expect to receive chunks in the near future)
+    // get patch data
+    $offset = $_SERVER['HTTP_UPLOAD_OFFSET'];
+    $length = $_SERVER['HTTP_UPLOAD_LENGTH'];
+
+    // should be numeric values, else exit
+    if (!is_numeric($offset) || !is_numeric($length)) {
+        return http_response_code(400);
+    }
+
+    // get sanitized name
+    $name = FilePond\sanitize_filename($_SERVER['HTTP_UPLOAD_NAME']);
+
+    // write patch file for this request
+    file_put_contents($dir . '.patch.' . $offset, fopen('php://input', 'r'));
+
+    // calculate total size of patches
+    $size = 0;
+    $patch = glob($dir . '.patch.*');
+    foreach ($patch as $filename) {
+        $size += filesize($filename);
+    }
+
+    // if total size equals length of file we have gathered all patch files
+    if ($size == $length) {
+
+        // create output file
+        $file_handle = fopen($dir . $name, 'w');
+
+        // write patches to file
+        foreach ($patch as $filename) {
+
+            // get offset from filename
+            list($dir, $offset) = explode('.patch.', $filename, 2);
+
+            // read patch and close
+            $patch_handle = fopen($filename, 'r');
+            $patch_contents = fread($patch_handle, filesize($filename));
+            fclose($patch_handle); 
+            
+            // apply patch
+            fseek($file_handle, $offset);
+            fwrite($file_handle, $patch_contents);
+        }
+
+        // remove patches
+        foreach ($patch as $filename) {
+            unlink($filename);
+        }
+
+        // done with file
+        fclose($file_handle);
+    }
+
+    http_response_code(204);
+}
+
+function handle_revert_file_transfer($id) {
+
+    // test if id was supplied
+    if (!isset($id) || !FilePond\is_valid_transfer_id($id)) return http_response_code(400);
+
+    // remove transfer directory
+    FilePond\remove_transfer_directory(TRANSFER_DIR, $id);
+
+    // no content to return
+    http_response_code(204);
+}
+
+function handle_restore_file_transfer($id) {
+
+    // Stop here if no id supplied
+    if (empty($id) || !FilePond\is_valid_transfer_id($id)) return http_response_code(400);
+
+    // create transfer wrapper around upload
+    $transfer = FilePond\get_transfer(TRANSFER_DIR, $id);
+
+    // Let's get the temp file content
     $files = $transfer->getFiles();
 
-    if ($files === null) return;
-    $file = $files[0];
-    move_file($file, $path);
+    // No file returned, file not found
+    if (count($files) === 0) return http_response_code(404);
 
-    // store variants
-    if (count($transfer->getFiles()) > 1) {
+    // Return file
+    FilePond\echo_file($files[0]);
+}
 
-        $files = array_slice($files, 1);
-        $variants = $path . DIRECTORY_SEPARATOR . VARIANTS_DIR;
-        create_secure_directory($variants);
+function handle_load_local_file($ref) {
+
+    // Stop here if no id supplied
+    if (empty($ref)) return http_response_code(400);
+
+    // In this example implementation the file id is simply the filename and 
+    // we request the file from the uploads folder, it could very well be 
+    // that the file should be fetched from a database or a totally different system.
+    
+    // path to file
+    $path = UPLOAD_DIR .DIRECTORY_SEPARATOR . $_SESSION['login'] . DIRECTORY_SEPARATOR . FilePond\sanitize_filename($ref);
+
+    // Return file
+    FilePond\echo_file($path);
+}
+
+function handle_fetch_remote_file($url) {
+
+    // Stop here if no data supplied
+    if (empty($url)) return http_response_code(400);
+
+    // Is this a valid url
+    if (!FilePond\is_url($url)) return http_response_code(400);
+
+    // Let's try to get the remote file content
+    $file = FilePond\fetch($url);
+
+    // Something went wrong
+    if (!$file) return http_response_code(500);
+
+    // remote server returned invalid response
+    if ($file['error'] !== 0) return http_response_code($file['error']);
+    
+    // if we only return headers we store the file in the transfer folder
+    if ($_SERVER['REQUEST_METHOD'] === 'HEAD') {
         
-        foreach($files as $file) {
-            move_file($file, $variants);
-        }
+        // deal with this file as if it's a file transfer, will return unique id to client
+        $transfer = new FilePond\Transfer();
+        $transfer->restore($file);
+        FilePond\store_transfer(TRANSFER_DIR, $transfer);
+
+        // send transfer id back to client
+        header('X-Content-Transfer-Id: ' . $transfer->getId());
     }
-}
 
-function get_files($path, $pattern) {
-    $results = [];
-    $files = glob($path . DIRECTORY_SEPARATOR . $pattern);
-    foreach($files as $file) {
-        array_push($results, create_file_object($file));
-    }
-    return $results;
-}
-
-function get_file($path, $pattern) {
-    $result = get_files($path, $pattern);
-    if (count($result) > 0) {
-        return $result[0];
-    }
-    return;
-}
-
-function create_file_object($filename) {
-    return array(
-        'tmp_name' => $filename,
-        'name' => basename($filename),
-        'type' => mime_content_type($filename),
-        'length' => filesize($filename),
-        'error' => 0
-    );
-}
-
-function is_valid_transfer_id($id) {
-    return preg_match('/^[0-9a-fA-F]{32}$/', $id);
-}
-
-function get_transfer($path, $id) {
-
-    if (!is_valid_transfer_id($id)) return false;
-
-    $transfer = new Transfer($id);
-
-    $path = $path . DIRECTORY_SEPARATOR . $id;
-
-    $file = get_file($path, '*.*');
-    
-    $metadata = get_file($path, METADATA_FILENAME);
-
-    $variants = get_files($path . DIRECTORY_SEPARATOR . VARIANTS_DIR, '*.*');
-
-    $transfer->restore($file, $variants, null, $metadata);
-
-    return $transfer;
-}
-
-function get_post($entry) {
-    return isset($_FILES[$entry]) || isset($_POST[$entry]) ? new Post($entry) : false;
-}
-
-function route_form_post($entries, $routes) {
-
-    // if a singly field entry is supplied, turn it into an array
-    if (is_string($entries)) $entries = array($entries);
-    
-    foreach ($entries as $entry) {
-        $post = get_post($entry);
-        if (!$post) continue;
-        if (!isset($routes[$post->getFormat()])) continue;
-        call_user_func($routes[$post->getFormat()], $post->getValues());
-    }
-} 
-
-function route_api_request($entries, $routes) {
-
-    // if a singly field entry is supplied, turn it into an array
-    if (is_string($entries)) $entries = array($entries);
-    
-    // get the request method so we don't have to use $_SERVER each time
-    $request_method = $_SERVER['REQUEST_METHOD'];
-
-    // loop over all set entry fields to find posted values
-    foreach ($entries as $entry) {
-        
-        // post new files
-        if ($request_method === 'POST') {
-            $post = get_post($entry);
-            if (!$post) continue;
-            $transfer = new Transfer();
-            $transfer->populate($entry);
-            return call_user_func($routes['FILE_TRANSFER'], $transfer);
-        }
-
-        // revert existing transfer
-        if ($request_method === 'DELETE') {
-            return call_user_func($routes['REVERT_FILE_TRANSFER'], file_get_contents('php://input'));
-        }
-
-        // fetch, load, restore
-        if ($request_method === 'GET' || $request_method === 'HEAD' || $request_method === 'PATCH') {
-            $handlers = array(
-                'fetch' => 'FETCH_REMOTE_FILE',
-                'restore' => 'RESTORE_FILE_TRANSFER',
-                'load' => 'LOAD_LOCAL_FILE',
-                'patch' => 'PATCH_FILE_TRANSFER'
-            );
-            foreach ($handlers as $param => $handler) {
-                if (isset($_GET[$param])) {
-                    return call_user_func($routes[$handler], $_GET[$param], $entry);
-                }
-            }
-        }
-
-    }
+    // time to return the file to the client
+    FilePond\echo_file($file);
 }

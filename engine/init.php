@@ -8,15 +8,23 @@ session_start();
 		
 		protected $debug, $logger, $db;
 		protected static $profileBlock = '';
+		protected static $isLogged;
+		protected static $usrArray;
 
 		function __construct($debug = false) {
 			require (ENGINE_DIR.'classes/modules/modalsToShow.class.php');
 			global $config;
 			
-			$this->debug = $debug;
+			/* Variables assignment && userArr */
 			initFunctions::libFilesInclude(ENGINE_DIR.'syslib', $this->debug);
+			$this->debug = $debug;
 			$this->logger = new Logger('lastlog');
 			$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
+			self::$isLogged = @$_SESSION['isLogged'];
+			initFunctions::userArrInit();
+			/***********************************/
+			
+			/* Requiring modules  */
 			require (ENGINE_DIR.'syslib/smarty/Smarty.class.php');
 			require (ENGINE_DIR.'classes/admin/admin.class.php');
 			require (ENGINE_DIR.'upload.php');
@@ -27,10 +35,11 @@ session_start();
 					require($file);
 				}
 			}
-			$modalsToShow = new modalsToShow($this->modalsLogged, $this->modalsUnlogged);
+			/*************************************/
 			
+			$modalsToShow = new modalsToShow($this->modalsLogged, $this->modalsUnlogged);
 			require (ENGINE_DIR.'classes/smartyInit.class.php');
-			$smartyInit = new smartyInit(linkBuilder::buildLinks());
+			$smartyInit = new smartyInit(linkBuilder::buildLinks()); //Link builder - to remove with JS
 		}
 
 	}
@@ -54,6 +63,15 @@ session_start();
 			}
 			if($debug){
 				echo "<br />";
+			}
+		}
+		
+		public static function userArrInit(){
+			global $config;
+			if(init::$isLogged){
+				foreach($config['userDatainDb'] as $key){
+					init::$usrArray[$key] = $_SESSION[$key];
+				}
 			}
 		}
 		

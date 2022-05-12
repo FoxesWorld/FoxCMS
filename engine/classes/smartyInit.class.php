@@ -43,7 +43,7 @@ if (!defined('FOXXEY')) {
 			request = new request("/", {key:"'.$config['secureKey'].'"}, false);
 			formInit(500);
 			if(isLogged) {
-				scanDir({"scanDir": ""});
+				scanDir({"fAction": "scanDir", "dirScan": ""});
 			}</script>');
 		}
 	}

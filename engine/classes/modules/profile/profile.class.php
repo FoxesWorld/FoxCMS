@@ -13,7 +13,7 @@ if(!defined('FOXXEY')) {
 			protected $logger;
 			
 			function __construct($db, $logger){
-				if(@$_SESSION['isLogged']) {
+				if(init::$isLogged) {
 				$this->db = $db;
 				$this->logger = $logger;
 					require ('userActions.class.php');
