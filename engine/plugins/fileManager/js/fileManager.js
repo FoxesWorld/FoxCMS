@@ -9,7 +9,7 @@
 			],
 			'BTNS':
 			[
-				{"home": `<div class="btnElement home" onclick='scanDir({"fAction":"scanDir","dirScan":""})'><i class="bi bi-house-door-fill"></i></div>`},
+				{"home": `<div class="btnElement home" onclick='dirScanner({"fAction":"scanDir","dirScan":""})'><i class="bi bi-house-door-fill"></i></div>`},
 				//{"refresh": `<div class="btnElement home" onclick='scanDir({"fAction":"scanDir","dirScan":""})'><i class="bi bi-trash-fill"></i></div>`}
 			]
 		 };
@@ -17,42 +17,38 @@
 			get: function(name) {return private[name];}
 		};
 	})();
-
-	function scanDir(data){
-		if(data) {
-			let answer = request.send_post(data);
-			let filesBlock = [];
-			let filesArray = [];
-			filesBlock.push(findInJSON(CONFIG.get('PATTERNS'), 'BTN_GROUP').replace('{bitBTN}', findInJSON(CONFIG.get('BTNS'), '')));
+	
+	function dirScanner(data){
+		let answer = request.send_post(data);
+		let filesBlock = [];
+		let filesArray = [];
+		filesBlock.push(findInJSON(CONFIG.get('PATTERNS'), 'BTN_GROUP').replace('{bitBTN}', findInJSON(CONFIG.get('BTNS'), '')));
 			answer.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-						$(CONFIG.get('BIND_BLOCK')).fadeOut(500);
-						let response = JSON.parse(this.responseText);
-						
-							/*EachFile scanning*/
-							if(response.length > 0){
-								response.forEach(value => {
-									let fileAppearence;
-									/* DEFINING FILEinfo */
-									let fileData = new Object();
-										fileData.fileName = value.name;
-										fileData.dir = value.dir;
-										fileData.fileSize = value.fileSize;
-										fileData.filePath = value.filePath;
-									fileAppearence = fileDirDisplay(fileData);
-									filesArray.push(fileAppearence);
-								});
-							} else {
-									$(CONFIG.get('BIND_BLOCK')).html('NoContent!');
-							}
+					let response = JSON.parse(this.responseText);
+					$(CONFIG.get('BIND_BLOCK')).fadeOut(500);
+					if(!response.message){
+						response.forEach(value => {
+						let fileAppearence;
+							/* DEFINING FILEinfo */
+							let fileData = new Object();
+								fileData.fileName = value.name;
+								fileData.dir = value.dir;
+								fileData.fileSize = value.fileSize;
+								fileData.filePath = value.filePath;
+							fileAppearence = fileDirDisplay(fileData);
+							filesArray.push(fileAppearence);
+						});
 						filesBlock = filesBlock.concat(filesArray);
-						$(CONFIG.get('BIND_BLOCK')).fadeIn(500);
-						setTimeout(() => {
-							$(CONFIG.get('BIND_BLOCK')).html(filesBlock);
-						}, 500);
-				};
+					} else {
+						filesBlock = filesBlock + response.message;
+					}
+					$(CONFIG.get('BIND_BLOCK')).fadeIn(500);
+					setTimeout(() => {
+						$(CONFIG.get('BIND_BLOCK')).html(filesBlock);
+					}, 500);
+				}
 			}
-		}
 	}
 
 	function findInJSON(jsonArray, keyToFind){
@@ -77,7 +73,7 @@
 		let appearence = '';
 		switch(fileData.dir){
 			case true:
-				additional = `ondblclick='scanDir({"fAction": "scanDir", "dirScan": "`+fileData.fileName+`"})' onclick='getFileInfo(`+JSON.stringify(fileData)+`)'`;
+				additional = `ondblclick='dirScanner({"fAction": "scanDir", "dirScan": "`+fileData.fileName+`"})' onclick='getFileInfo(`+JSON.stringify(fileData)+`)'`;
 				appearence = `<img class="directory" alt="`+fileData.fileName+`" />
 							  <span class="filename">`+fileData.fileName+`</span>`;
 			break;
@@ -134,7 +130,7 @@
 			let response = JSON.parse(this.responseText);
 			switch(response.type){
 				case 'info':
-					scanDir({"fAction": "scanDir", "dirScan": path.replace('/uploads/'+userLogin+'/', '')});
+					dirScanner({"fAction": "scanDir", "dirScan": path.replace('/uploads/'+userLogin+'/', '')});
 				break;
 				
 				case 'warn':
