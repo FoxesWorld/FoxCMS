@@ -66,6 +66,8 @@
 			"SwiperJS" 			=>	array('.js',  ENGINE_DIR.'plugins/Swiper/', 		'.map', true),
 			"PaceCSS" 			=>	array('.css', ENGINE_DIR.'plugins/Pace/', 			'', 	true),
 			"PaceJS" 			=>	array('.js',  ENGINE_DIR.'plugins/Pace/', 			'',		true),
+			"fileManagerCSS" 	=>	array('.css', ENGINE_DIR.'plugins/fileManager/css/', 			'', 	true),
+			"fileManagerJS" 	=>	array('.js',  ENGINE_DIR.'plugins/fileManager/js/', 			'',		true),
 			"FilePondCSS" 		=>	array('.css', ENGINE_DIR.'plugins/FilePond/css/', 	'', 	true),
 			"FilePondJS" 		=>	array('.js',  ENGINE_DIR.'plugins/FilePond/js/', 	'.esm', true),
 			"aosJS" 			=>	array('.js',  ENGINE_DIR.'plugins/aos/', 			'', 	true),

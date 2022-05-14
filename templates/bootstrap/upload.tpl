@@ -7,6 +7,7 @@
 	<script>
 	    FilePond.registerPlugin(
 		FilePondPluginImageCrop,
+		FilePondPluginMediaPreview,
 		FilePondPluginImagePreview);
 		FilePond.setOptions({
 		maxFileSize: '15MB',

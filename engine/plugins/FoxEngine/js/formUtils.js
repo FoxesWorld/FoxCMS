@@ -27,13 +27,14 @@
 				checkFill(input);
 				let value;
 				if($(input).prop('name') && input.name !== 'required') {
+					let inputLength = $('input[name*="'+input.name+'"]').length;
 					switch(input.type){
 						case "checkbox":
 							value = (input.checked) ? 1 : 0;
 						break;
 						
 						default:
-							switch($('input[name*="'+input.name+'"]').length) {
+							switch(inputLength) {
 								case '':
 								case 0:
 								case 1:
@@ -41,7 +42,12 @@
 								break;
 								
 								default:
-									throw new Error(input.name + ' ' + $('input[name*="'+input.name+'"]').length +' is Array! Currently Unsupported!');
+									let inputArray = [];
+									for (let i = 0; i < inputLength; i++) {
+									    let thisVar = $('input[name*="'+ input.name +'"]')[i];
+										inputArray.push(thisVar.value);
+									}
+									value = inputArray;
 								break;
 							}
 							

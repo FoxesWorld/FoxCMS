@@ -1,4 +1,4 @@
-<div class="userProfile animate__animated animate__backInLeft animate__delay-1s card">
+<div class="userProfile animate__animated animate__backInLeft animate__delay-1s">
 	<ul>
 		{profileData}
 	</ul>
