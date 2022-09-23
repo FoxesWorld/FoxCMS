@@ -5,6 +5,15 @@ if(!defined('FOXXEY')) {
 	$advRequest = trim(strip_tags(stripslashes(@$_REQUEST['advert'])));
 	$notifyParser = new notifyParser($advRequest, $this->db);
 	
+	abstract class advert {
+		
+		protected $dataRow;
+		
+		
+		abstract function getData();
+	}
+	
+	
 	class notifyParser {
 		
 		private $db;

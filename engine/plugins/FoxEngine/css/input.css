@@ -29,7 +29,7 @@
 }
 
 .input_block > input:focus-visible {
-	
+	    outline: none;
 }
 
 .input_block .input:focus, .input_block .input:hover {
@@ -70,7 +70,7 @@ input[type="submit"]{
 input[type="submit"].login {
 	display: block;
 	border: 0;
-    width: 276px;
+    width: 100%;
     height: 60px;
     background-color: #adc835;
     -webkit-box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
@@ -145,7 +145,6 @@ input[type="submit"]:hover.logout  {
 .checkbox_container {
 	position: relative;
 	padding-left: 36px;
-	padding-top: 6px;
 	float: left;
 	margin-bottom: 12px;
 	cursor: pointer;
@@ -153,7 +152,6 @@ input[type="submit"]:hover.logout  {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	font-size: 14px;
 }
 
 .checkbox_container .checkmark {

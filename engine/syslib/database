@@ -40,9 +40,9 @@ class db {
 			  ]
 			);
 		  } catch (PDOException $e) {
-			  $query = strval($e->queryString);
+			  @$query = strval($e->queryString);
 			  $message = $e->getMessage();
-			  functions::display_error($message, $query, '1');
+			  self::display_error($message, $query, '1');
 		  }
 
 		  return self::$db;

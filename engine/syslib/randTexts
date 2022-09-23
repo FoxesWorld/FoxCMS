@@ -51,7 +51,7 @@ if (!defined('FOXXEY')) {
 			if(file_exists($filePath)) {
 				$this->textArr = file($filePath);
 				$randWord = rand(0, count($this->textArr)-1);
-				$answer = str_replace("\n", "", $this->textArr[$randWord]);
+				$answer = str_replace("", "", $this->textArr[$randWord]);
 			} else {
 			$answer = '{"message": "File '.$filePath.' not found!"}}';
 			}

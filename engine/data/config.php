@@ -11,8 +11,8 @@
 		/* DATABASE */
 		'dbHost' =>  'localhost',
 		'dbUser' =>  'root',
-		'dbPass' => 'P$Ak$O2sJZSu$aAKOBqkokf@Vs5%YCj',
-		'dbName' => 'fox_radio',
+		'dbPass' => 'Aiden2556308',
+		'dbName' => 'fox_engine',
 		
 		'siteTpl' => 'bootstrap',
 		'timezone'=> 'Europe/Moscow',
@@ -29,7 +29,7 @@
 		'title' => 'FoxEngine',
 		'status' => 'Alpha',
 		'vkGroup' => '<script>
-						VK.Widgets.Group("vkGroup", {mode: 2, width: "617", height: "700", color1: \'DADADA\', color2: \'2E2D2B\', color3: \'2E2D2B\'}, 168368623);
+			VK.Widgets.Group("vkGroup", {mode: 2, width: "450", height: "700", color1: \'DADADA\', color2: \'2E2D2B\', color3: \'2E2D2B\'}, 168368623);
 		</script>',
 		
 		/* LINKS */
@@ -41,9 +41,7 @@
 		
 		/* UserSettings */
 		'userDatainDb'   => array("user_id", "email", "login", "password", "user_group", "realname", "hash", "reg_date", "last_date"),
-		'userDataToShow' => array('login', 'realname', 'user_group', 'email'),
-		'filterSymbols'  => array ("\x22", "\x60", "\t", '\n', '\r', "\n", "\r", '\\', ",", "/", "¬", "#", ";", ":", "~", "[", "]", "{", "}", ")", "(", "*", "^", "%", "$", "<", ">", "?", "!", '"', "'", " ", "&", '"' )
-	
+		'userDataToShow' => array('login', 'realname', 'user_group', 'email')
 	);
 	
 	class initConfig {
@@ -54,24 +52,22 @@
 			"BaseJS" 			=>	array('.js',  ENGINE_DIR.'plugins/', 				'', 	true),
 			"FoxEngineJS" 		=>	array('.js',  ENGINE_DIR.'plugins/FoxEngine/js/', 	'', 	true),
 			"FoxEngineCSS" 		=>	array('.css', ENGINE_DIR.'plugins/FoxEngine/css/', 	'', 	true),
-			"PopperJS" 			=>	array('.js',  ENGINE_DIR.'plugins/Popper/', 		'.map', true),
+			//"PopperJS" 			=>	array('.js',  ENGINE_DIR.'plugins/Popper/', 		'.map', true),
 			"BootstrapJS" 		=>	array('.js',  ENGINE_DIR.'plugins/Bootstrap/js/', 	'.map', true),
 			"BootstrapCSS" 		=>	array('.css', ENGINE_DIR.'plugins/Bootstrap/css/', 	'.map', true),
 			"Bootstrap-icons" 	=>	array('.css', ENGINE_DIR.'plugins/Bootstrap-icons/','', 	true),
-			"GlightboxCSS" 		=>	array('.css', ENGINE_DIR.'plugins/Glightbox/css/', 	'', 	true),
-			"GlightboxJS" 		=>	array('.js',  ENGINE_DIR.'plugins/Glightbox/js/', 	'', 	true),
+			//"GlightboxCSS" 		=>	array('.css', ENGINE_DIR.'plugins/Glightbox/css/', 	'', 	true),
+			//"GlightboxJS" 		=>	array('.js',  ENGINE_DIR.'plugins/Glightbox/js/', 	'', 	true),
 			"FoxModalCSS" 		=>	array('.css', ENGINE_DIR.'plugins/FoxModal/css/', 	'', 	true),
 			"FoxModalJS" 		=>	array('.js',  ENGINE_DIR.'plugins/FoxModal/js/', 	'', 	true),
-			"SwipwerCSS" 		=>	array('.css', ENGINE_DIR.'plugins/Swiper/', 		'', 	true),
-			"SwiperJS" 			=>	array('.js',  ENGINE_DIR.'plugins/Swiper/', 		'.map', true),
+			//"SwipwerCSS" 		=>	array('.css', ENGINE_DIR.'plugins/Swiper/', 		'', 	true),
+			//"SwiperJS" 			=>	array('.js',  ENGINE_DIR.'plugins/Swiper/', 		'.map', true),
 			"PaceCSS" 			=>	array('.css', ENGINE_DIR.'plugins/Pace/', 			'', 	true),
 			"PaceJS" 			=>	array('.js',  ENGINE_DIR.'plugins/Pace/', 			'',		true),
-			"fileManagerCSS" 	=>	array('.css', ENGINE_DIR.'plugins/fileManager/css/', 			'', 	true),
-			"fileManagerJS" 	=>	array('.js',  ENGINE_DIR.'plugins/fileManager/js/', 			'',		true),
-			"FilePondCSS" 		=>	array('.css', ENGINE_DIR.'plugins/FilePond/css/', 	'', 	true),
-			"FilePondJS" 		=>	array('.js',  ENGINE_DIR.'plugins/FilePond/js/', 	'.esm', true),
-			"aosJS" 			=>	array('.js',  ENGINE_DIR.'plugins/aos/', 			'', 	true),
-			"aosCSS" 			=>	array('.css',  ENGINE_DIR.'plugins/aos/', 			'', 	true));
+			"FilePondJS" 		=>	array('.js',  ENGINE_DIR.'plugins/FilePond/js/', 	'',		true),
+			"FilePondCSS" 		=>	array('.css',  ENGINE_DIR.'plugins/FilePond/css/', 	'',		true));
+			//"aosJS" 			=>	array('.js',  ENGINE_DIR.'plugins/aos/', 			'', 	true),
+			//"aosCSS" 			=>	array('.css',  ENGINE_DIR.'plugins/aos/', 			'', 	true));
 		
 		//Modals to unlogged
 		protected $modalsUnlogged = array(
@@ -83,5 +79,4 @@
 		protected $modalsLogged = array(
 			"cp" => array("Личный кабинет", "Посмотрим <b>{realname}</b>, что ты тут можешь поменять...", "%file:=cp")
 		);
-		
 	}

@@ -8,38 +8,53 @@ session_start();
 		
 		protected $debug, $logger, $db;
 		protected static $profileBlock = '';
-		protected static $isLogged;
-		protected static $usrArray;
+		protected static $isLogged = false;
+		protected static $usrArray = array('login' => "anonymous");
+		protected static $links;
 
 		function __construct($debug = false) {
 			require (ENGINE_DIR.'classes/modules/modalsToShow.class.php');
 			global $config;
 			
 			/* Variables assignment && userArr */
-			initFunctions::libFilesInclude(ENGINE_DIR.'syslib', $this->debug);
-			$this->debug = $debug;
-			$this->logger = new Logger('lastlog');
-			$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
-			self::$isLogged = @$_SESSION['isLogged'];
-			initFunctions::userArrInit();
+				initFunctions::libFilesInclude(ENGINE_DIR.'syslib', $this->debug);
+				define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['siteTpl'].'/');
+				$this->debug = $debug;
+				$this->logger = new Logger('lastlog');
+				$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
+				self::$links = self::getLinks();
+				self::$isLogged = @$_SESSION['isLogged'];
+				initFunctions::userArrInit();
 			/***********************************/
 			
 			/* Requiring modules  */
-			require (ENGINE_DIR.'syslib/smarty/Smarty.class.php');
-			require (ENGINE_DIR.'classes/admin/admin.class.php');
-			require (ENGINE_DIR.'upload.php');
+				require (ENGINE_DIR.'syslib/smarty/Smarty.class.php');
 
-			foreach(filesInDir::filesInDirArray(ENGINE_DIR.'classes/modules') as $key){
-				$file = ENGINE_DIR.'classes/modules/'.$key.'/'.$key.'.class.php';
-				if(file_exists($file)) {
-					require($file);
+				foreach(filesInDir::filesInDirArray(ENGINE_DIR.'classes/modules') as $key){
+					$file = ENGINE_DIR.'classes/modules/'.$key.'/'.$key.'.class.php';
+					if(file_exists($file)) {
+						require($file);
+					} else {
+						$this->logger->WriteLine("Module ".$key." doesn't have a class file!");
+					}
 				}
-			}
 			/*************************************/
+				require (MODULES_DIR.'/FilePond/preLoad.php');
+				require (ENGINE_DIR.'classes/admin/admin.class.php');
 			
-			$modalsToShow = new modalsToShow($this->modalsLogged, $this->modalsUnlogged);
+			//FULL UI
 			require (ENGINE_DIR.'classes/smartyInit.class.php');
-			$smartyInit = new smartyInit(linkBuilder::buildLinks()); //Link builder - to remove with JS
+			$smartyInit = new smartyInit(self::$links);
+
+		}
+		
+		protected  static function getLinks(){
+			$strOut = "";
+			global $config;
+			foreach($config['links'] as $key => $value){
+				$strOut .= '<li><a '.$config['additionalString'].' href="'.$value[1].'">'.$value[2].$value[0].'</a><li>';
+			}
+			return $strOut;
 		}
 
 	}
@@ -78,9 +93,11 @@ session_start();
 		public static function modulesInc($path){
 			$modulesArray = filesInDir::filesInDirArray($path);
 			foreach($modulesArray as $key){
-				$file = ENGINE_DIR.'classes/modules/'.$key.'/'.$key.'.class.php';
-				if(file_exists($file)) {
-					require($file);
+				if(!file_exists(ENGINE_DIR.'classes/modules/'.$key.'/no_inc')) {
+					$file = ENGINE_DIR.'classes/modules/'.$key.'/'.$key.'.class.php';
+					if(file_exists($file)) {
+						require($file);
+					}
 				}
 			}
 		}

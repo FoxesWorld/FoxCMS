@@ -973,6 +973,7 @@
     /* layout*/
     box-sizing: border-box;
     margin-bottom: 1em;
+	min-height: 75px;
 
     /* base font size for whole component */
     font-size: 1rem;
@@ -1011,6 +1012,7 @@
 }
 .filepond--root {
 	margin: 0 0 10;
+	width: 100%;
     /* block everything */
 }
 .filepond--root[data-disabled] {

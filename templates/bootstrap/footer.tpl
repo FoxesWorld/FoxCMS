@@ -1,4 +1,4 @@
-  <footer class="shadow" id="footer">
+  <footer id="footer">
     <div class="footer-top">
       <div class="container">
         <div class="row">
@@ -6,7 +6,7 @@
           <div class="col-lg-3 col-md-6 footer-contact">
             <h3>{$title}</h3>
             <p>
-              FoxesWorld 2022<br>
+              FoxesWorld <span>{$year}</span><br />
               Avalon Inc
             </p>
           </div>

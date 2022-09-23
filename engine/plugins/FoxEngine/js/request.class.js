@@ -10,7 +10,7 @@ function request(path, args, timeDelay) {
 	this.send_post = function(params, after, antitimeDelay) {
 		let response = "notSent";
 		
-		if(this.timeDelay != false && antitimeDelay == null /*&& this.timeDelay_count ++ == this.timeDelay_maxCount*/){
+		if(this.timeDelay != false && antitimeDelay == true /*&& this.timeDelay_count ++ == this.timeDelay_maxCount*/){
 			let time = new Date().getTime();
 			let time_ = time - this.timeDelay_time;
 

@@ -73,6 +73,7 @@
 		
 		function submitForm(data, url, method, button){
 			let answer = 'notSent';
+			request.path = url;
 			switch(method){
 				case 'post':
 					answer = request.send_post(data);

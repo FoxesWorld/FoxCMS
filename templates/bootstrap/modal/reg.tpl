@@ -21,7 +21,7 @@
 		
 		
 		<div class="c-captcha">
-			<div class="g-recaptcha" data-sitekey="6Ld1xvkUAAAAAOxY99YbrZJsw8uv3b1Dt-NjNwUw" data-theme="Light"></div>
+			<div class="g-recaptcha" data-sitekey="6LcKeBoiAAAAAGnhfzZnLyzUApLmgnOpP4OfFOB7" data-theme="Light"></div>
 			<script src="https://www.google.com/recaptcha/api.js?hl={$lang['wysiwyg_language']}" async defer></script>
 		</div>
 		

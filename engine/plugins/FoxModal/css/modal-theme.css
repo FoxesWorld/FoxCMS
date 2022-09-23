@@ -1,8 +1,7 @@
 #modalTitle {
 	font-family: 'FSElliotPro-Heavy';
-	border-bottom: 2px solid coral;
+	border-bottom: 2px solid #998999db;
 	width: max-content;
-	display: table-cell;
 }
 
 #modalDesc {
@@ -11,11 +10,12 @@
     line-height: 1;
     text-align: -webkit-left;
     text-align: left;
+	margin: 0 0 5px;
 }
 
 #mdlContent {
-	margin: 5% auto;
-    padding: 25px;
+	margin: 0 auto;
+    padding: 40px 0px 0px;
 }
 
 .foxModal-bg.foxModal-is-opening,
@@ -24,7 +24,7 @@
 }
 
 .foxModal-overlay {
-  background: rgba(43, 46, 56, 0.9);
+  background: rgb(24 25 26 / 90%);
 }
 
 .foxModal-overlay.foxModal-is-opening,
@@ -79,46 +79,38 @@
 /* Close button */
 
 .foxModal-close {
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  display: block;
-  overflow: visible;
-
-  width: 35px;
-  height: 35px;
-  margin: 0;
-  padding: 0;
-
-  cursor: pointer;
-  transition: color 0.2s;
-  text-decoration: none;
-
-  color: #95979c;
-  border: 0;
-  outline: 0;
-  background: transparent;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    overflow: visible;
+    width: 35px;
+    height: 35px;
+    margin: 5px;
+    padding: 9;
+    cursor: pointer;
+    transition: color 0.2s;
+    text-decoration: none;
+    color: #95979c;
+    border: 0;
+    outline: 0;
+    background: transparent;
 }
 
 .foxModal-close:hover,
 .foxModal-close:focus {
-  color: #2b2e38;
+  color: #c32c2c80;
 }
 
 .foxModal-close:before {
   font-family: Arial, "Helvetica CY", "Nimbus Sans L", sans-serif !important;
-  font-size: 25px;
+      font-size: 31pt;
   line-height: 35px;
-
   position: absolute;
   top: 0;
   left: 0;
-
   display: block;
-
   width: 35px;
-
   content: "\00d7";
   text-align: center;
 }

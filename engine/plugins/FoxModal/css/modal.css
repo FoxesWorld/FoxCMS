@@ -1,8 +1,6 @@
 /* Hide scroll bar */
 
 html.foxModal-is-locked {
-  overflow: hidden;
-
   touch-action: none;
 }
 

@@ -5,46 +5,67 @@ if (!defined('FOXXEY')) {
 	class smartyInit extends init {
 		
 		protected $smarty;
-		private $links;
+		protected $profilePhoto;
 		
 		function __construct($builtLinks) {
-			$this->links = $builtLinks;
 			global $config;
+			$modalsToShow = new modalsToShow($this->modalsLogged, $this->modalsUnlogged);
 			$this->smarty 					= new Smarty;
 			$this->smarty->debugging 		= false;
 			$this->smarty->cache_lifetime 	= 120;
 			$this->smarty->template_dir 	= ROOT_DIR.'/templates/'.$config['siteTpl'];
 			$this->smarty->compile_dir 		= ENGINE_DIR.'/cache/compile/';
 			$this->smarty->cache_dir 		= ENGINE_DIR.'/cache/cache/';
-			$this->smartyAssign();
+			$this->smartyAssign($builtLinks);
 			$this->smarty->display('main.tpl');
 		}
 		
-		protected function smartyAssign(){
+		protected function smartyAssign($builtLinks){
 			global $config;
 			$includePlugins = new includePlugins($this->toIncludeArray);
+			define('UPLOADS', '../uploads/'.self::$usrArray['login'].'/');
 			$this->smarty->assign("systemHeaders", includePlugins::$outString);
-			$this->smarty->assign("links", $this->links);
+			$this->smarty->assign("links", $builtLinks);
 			$this->smarty->assign("title", $config['title']);
 			$this->smarty->assign("status", $config['status']);
+			$this->smarty->assign("year", date("Y"));
 			$this->smarty->assign("tplDir", "/templates/".$config['siteTpl']);
-			$this->smarty->assign("profile", 	init::$profileBlock);
-			$this->smarty->assign("isLogged",   @$_SESSION['isLogged']);
-			$this->smarty->assign("LoggedName", @$_SESSION['login']);
-			$this->smarty->assign("userGroup", @$_SESSION['user_group']);
-			$this->smarty->assign("greetings", randTexts::getRandText('greetings'));
-			$this->smarty->assign("realname", 	@$_SESSION['realname']);
 			$this->smarty->assign("vkGroup", 	$config['vkGroup']);
-			$this->smarty->assign("builtInJS", '<script>
-			let isLogged = "'.@$_SESSION['isLogged'].'";
-			let userLogin = "'.@$_SESSION['login'].'";
-			let userGroup = "'.@$_SESSION['user_group'].'";
-			let realname = "'.@$_SESSION['realname'].'";
-			request = new request("/", {key:"'.$config['secureKey'].'"}, false);
-			formInit(500);
-			if(isLogged) {
-				scanDir({"fAction": "scanDir", "dirScan": ""});
-			}</script>');
+			$this->smarty->assign("isLogged",   init::$isLogged);
+			
+			if(init::$isLogged) {
+				//$this->smarty->assign("profile", 		init::$profileBlock);
+				if(!file_exists(ROOT_DIR."/uploads/".self::$usrArray['login']."/profilePhoto.jpg")) {
+					$this->profilePhoto = TEMPLATE_DIR."no-photo.jpg";
+				} else {
+					$this->profilePhoto = UPLOADS."profilePhoto.jpg";
+				}
+				$this->smarty->assign("profilePhoto", 	$this->profilePhoto);	
+				$this->smarty->assign("LoggedName", init::$usrArray['login']);
+				$this->smarty->assign("userGroup", init::$usrArray['user_group']);
+				$this->smarty->assign("email", init::$usrArray['email']);
+				$this->smarty->assign("realname", 	init::$usrArray['realname']);	
+				$builtInJS = '
+				<script>
+					let isLogged = "'.init::$isLogged.'";
+					let userLogin = "'.init::$usrArray['login'].'";
+					let userGroup = "'.init::$usrArray['user_group'].'";
+					let realname = "'.init::$usrArray['realname'].'";
+					let email = "'.init::$usrArray['email'].'";
+					request = new request("/", {key:"'.$config['secureKey'].'", user:"'.init::$usrArray['login'].'"}, true);
+					formInit(500);
+				</script>';
+			} else {
+				$builtInJS = '
+				<script>
+					let isLogged = "'.init::$isLogged.'";
+					let userLogin = "'.init::$usrArray['login'].'";
+					request = new request("/", {key:"'.$config['secureKey'].'", user:"'.init::$usrArray['login'].'"}, true);
+					formInit(500);
+				</script>
+				';
+			}
+			$this->smarty->assign("builtInJS", $builtInJS);
 		}
 	}
 
@@ -61,11 +82,15 @@ if (!defined('FOXXEY')) {
 					foreach($thisFiles as $oneFile){
 						if(strpos($oneFile, '.css')){
 							if(!@strpos($oneFile, $value[2])) {
-								self::$outString .= '	<link rel="stylesheet" type="text/css" href="'.$thisPath.$oneFile.'">'."\n";
+								if(file_exists($value[1].$oneFile)) {
+									self::$outString .= '	<link rel="stylesheet" type="text/css" href="'.$thisPath.$oneFile.'">'."\n";
+								}
 							}
 						} elseif(strpos($oneFile, '.js')){
 							if(!@strpos($oneFile, $value[2])) {
-								self::$outString .= '	<script src="'.$thisPath.$oneFile.'"></script>'."\n";
+								if(file_exists($value[1].$oneFile)) {
+									self::$outString .= '	<script src="'.$thisPath.$oneFile.'"></script>'."\n";
+								}
 							}
 						}
 					}

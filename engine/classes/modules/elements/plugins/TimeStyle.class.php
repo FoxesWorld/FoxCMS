@@ -1,3 +1,0 @@
-<?php 
-
-//background-position-x

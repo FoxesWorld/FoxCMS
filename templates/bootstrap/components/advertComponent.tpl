@@ -1,4 +1,4 @@
-	<link href="/engine/classes/modules/advert/styles.css" rel="stylesheet" type="text/css">
+	<link href="/engine/classes/modules/Advert/styles.css" rel="stylesheet" type="text/css">
 
 	<div style="display:none;" id="notify-content">
 			<div class="animate__animated animate__bounceInRight notify_block animate__delay-4s" id="notify_block">	
@@ -13,4 +13,4 @@
 			</div>
 	</div>
 
-	<script src="/engine/classes/modules/advert/notify-0.1.6.js"></script>
+	<script src="/engine/classes/modules/Advert/notify-0.1.6.js"></script>
