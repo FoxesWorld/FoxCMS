@@ -12,8 +12,6 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="default">
 		<link href="{$tplDir}/css/style.css" rel="stylesheet">
 		<script src="{$tplDir}/js/main.js"></script>
-		<script type="text/javascript" src="//vk.com/js/api/openapi.js?130"></script>
-		{$vkGroup}
 	</head>
 
 	<body>
@@ -41,16 +39,14 @@
 			  <div id="content">
 						{if $isLogged}
 						<table>
-						<td id="userBlock">
-								{include file='components/profileComponent.tpl'}
-						</td>
-							
-						<td id="workPlace">
-							{include file='userMenu.tpl'}
-						</td>
+							<td id="userBlock">
+									{include file='components/profileComponent.tpl'}
+							</td>
+								
+							<td id="workPlace">
+								{include file='userMenu.tpl'}
+							</td>
 						</table>
-						{else}
-							<div class="container" id="vkGroup"></div>
 						{/if}
 			  </div>
 

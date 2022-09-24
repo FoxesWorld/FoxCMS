@@ -1,87 +1,63 @@
-								<div class="tabs animate__animated animate__backInRight animate__delay-1s">
-									<ul class="tab_caption">
+								<div class="tabs">
+									<ul class="tab_caption animate__animated animate__fadeInRightBig animate__delay-1s">
 										<li class="active" value="profile">Настройки профиля</li>
 										<li>Персонализация</li>
 										<li>Безопасность</li>
 									</ul>
-																	
-									<div class="tab_content active">
-										<h2 id="modalTitle">Давай меняй!</h2>
-										<span id="modalDesc">Посмотрим <b>{$realname}</b>, что ты тут можешь поменять...</span>
-										<section id="contentLoading">
-											<form method="POST" action="/" id="editProfileForm">
 
-												<div class="input_block">
-													<input id="realname" class="input" type="text" autocomplete="off" required value="{$realname}">
-													<label class="label">Полное имя</label>
-												</div>
-															
-												<div class="input_block">
-													<input id="email" class="input" type="text" autocomplete="off" required value="{$email}">
-													<label class="label">E-mail</label>
-												</div>
+									<form method="POST" action="/" id="editProfileForm">								
+										<div class="tab_content active">
+											<h2 id="modalTitle">Давай меняй!</h2>
+											<span id="modalDesc">Посмотрим <b>{$realname}</b>, что ты тут можешь поменять...</span>
+											<section>
+													<div class="input_block">
+														<input id="realname" class="input" type="text" autocomplete="off" required value="{$realname}">
+														<label class="label">Полное имя</label>
+													</div>
+																
+													<div class="input_block">
+														<input id="email" class="input" type="text" autocomplete="off" required value="{$email}">
+														<label class="label">E-mail</label>
+													</div>
 
-												<div class="input_block">
-													<input id="password" class="input" type="text" autocomplete="off" required name="required">
-													<label class="label">Текущий пароль</label>
-												</div>
-															
-												<input id="user_doaction" class="input" type="hidden" value="editProfile" />
-												<input id="login" class="input" type="hidden" value="{$LoggedName}" />
-												<input type="submit" class="login" />
-											</form>
-										</section>
-									</div>
+													<div class="input_block">
+														<input id="password" class="input" type="text" autocomplete="off">
+														<label class="label">Текущий пароль</label>
+													</div>
+											</section>
+										</div>
 
 										<div class="tab_content">
 											<h2 id="modalTitle">Давай украшать!</h2>
 											<span id="modalDesc">Посмотрим <b>{$realname}</b>, что ты тут можешь сделать...</span>
-											
-											<form method="POST" action="/" id="uploadForm">
 
-													<input type="file" name="image" accept=".gif,.jpg,.jpeg,.png" data-file-metadata-imagetype="profilePhoto" /> 
+													<input type="file" id="profilePhoto" name="image" accept=".jpeg" data-file-metadata-imagetype="profilePhoto" /> 
 
-												<div class="input_block inline">
-													<input type="submit" class="login" />
-												</div>
-												<input id="user_doaction" type="hidden" value="loadPhoto" />
-												<input id="login" class="input" type="hidden" value="{$LoggedName}" />
-											</form>
-											
-
-											<script>
-												FilePond.registerPlugin(
-													FilePondPluginImageCrop,
-													FilePondPluginMediaPreview,
-													FilePondPluginImagePreview,
-													FilePondPluginFileMetadata
-												);
-												FilePond.setOptions(
-												{
-													maxFileSize: '15MB',
-													imageCropAspectRatio: '3:5',
-													server: '/'
-												});
-																							
-												const inputElement = document.querySelector('input[type="file"]');
-												const pond = FilePond.create(
-													inputElement, {
-															allowMultiple: false,
-															allowReorder: false
-													}
-												);
-
-												window.pond = pond;
-											</script>
 										</div>
 													
 										<div class="tab_content">
 											<h2 id="modalTitle">Давай портить!</h2>
-											<span id="modalDesc">Да, <b>{$realname}</b>, тут уже всё испорчено...</span>
-											<section id="contentLoading">
-											
+											<span id="modalDesc">Настройки безопасности, <b>{$realname}</b>, изменить может тут</span>
+											<section>
+													
+													<div class="input_block">
+													<input id="newPass" class="input" type="text" autocomplete="off">
+														<label class="label">Новый пароль</label>
+													</div>
+													
+													<div class="input_block">
+													<input id="repeatPass" class="input" type="text" autocomplete="off">
+														<label class="label">Повтор пароля</label>
+													</div>
+													
 											</section>
 										</div>
+											<input id="user_doaction" class="input" type="hidden" value="editProfile" />
+											<input id="login" class="input" type="hidden" value="{$LoggedName}" />
+											<input id="userGroup" class="input" type="hidden" value="{$userGroup}" />
+											<input id="foxesHash" class="input" type="hidden" value="{$loginHash}" />
+											<button type="submit" class="login">Изменить <div class="fa fa-cog fa-spin"></div></button>
+									</form>
 								</div>
 												
 									<script>
@@ -94,3 +70,34 @@
 											});
 										});
 									</script>
+
+									<script>
+												FilePond.registerPlugin(
+													FilePondPluginImageCrop,
+													FilePondPluginMediaPreview,
+													FilePondPluginImagePreview,
+													FilePondPluginFileMetadata,
+													FilePondPluginFileRename
+												);
+												FilePond.setOptions(
+												{
+													maxFileSize: '15MB',
+													imageCropAspectRatio: '3:5',
+													server: '/'
+													   /*
+													   fileRenameFunction: (file) =>
+															new Promise((resolve) => {
+															resolve(window.prompt('Enter new filename', file.name));
+														}) */
+												});
+																							
+												const inputElement = document.querySelector('input[type="file"]');
+												const pond = FilePond.create(
+													inputElement, {
+															allowMultiple: false,
+															allowReorder: false
+													}
+												);
+
+												window.pond = pond;
+											</script>

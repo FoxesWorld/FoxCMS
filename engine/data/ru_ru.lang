@@ -1,0 +1,15 @@
+<?php
+
+	$lang = array(
+		'noLoginSent' => "Не передан логин!",
+		'noHashSent' => "Не передан хеш!",
+		'hashMismatch' => "Не подошёл хеш для {user}!",
+		'noPassword' => "Не введен пароль!",
+		'incorrectPassword' => "Неправильный пароль!",
+		'noEmail' => "Не введена почта!",
+		'invalidEmail' => "Не валидная почта!",
+		'noUsergroup' => "Не передана группа!",
+		'invalidUsergroup' => "Не твоя группа!",
+		'restrictdUsergroup' => "Вашей группе запрещено изменять профиль",
+		'profileUpdated' => "Профиль обновлен!"
+	);

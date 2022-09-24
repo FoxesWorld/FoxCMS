@@ -4,16 +4,18 @@
 			<img src="{$profilePhoto}">
 		</li>
 
-		<li><b>Логин</b>: {$LoggedName}</li>
-		<li><b>Почта</b>: {$email}</li>
-		<li><b>Группа</b>: {$userGroup}</li>
-		<li><b>Полное имя</b>: {$realname}</li>
+		<div class="userdata">
+			<li><b><i class="bi bi-person-circle"></i>Логин</b>: {$LoggedName}</li>
+			<li><b><i class="bi bi-envelope"></i>Почта</b>: {$email}</li>
+			<li><b><i class="bi bi-people"></i>Группа</b>: {$userGroup}</li>
+			<li><b><i class="bi bi-display"></i>Полное имя</b>: {$realname}</li>
+		</div>
 	</ul>
 	
-	<ul>
+	<ul class="userActions">
 		<li>
-			<form method="POST" action="/" id="loggedForm">
-				<input type="submit" value="logout" class="logout" />
+			<form method="POST" action="/" id="sessionActions">
+				<button type="submit" class="logout"><i class="bi bi-box-arrow-left"></i> logout</button>
 				<input id="user_doaction" class="input" type="hidden" value="logout">
 			</form>
 		</li>

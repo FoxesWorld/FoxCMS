@@ -1,3 +1,4 @@
+<mdlOpt>{"groupToShow": [1,4]}</mdlOpt>
 	<form method="POST" action="/" id="editProfileForm">
 
 		<div class="input_block">

@@ -9,11 +9,10 @@ session_start();
 		protected $debug, $logger, $db;
 		protected static $profileBlock = '';
 		protected static $isLogged = false;
-		protected static $usrArray = array('login' => "anonymous");
+		protected static $usrArray = array('login' => "anonymous", 'user_group' => 5);
 		protected static $links;
 
 		function __construct($debug = false) {
-			require (ENGINE_DIR.'classes/modules/modalsToShow.class.php');
 			global $config;
 			
 			/* Variables assignment && userArr */
@@ -93,11 +92,18 @@ session_start();
 		public static function modulesInc($path){
 			$modulesArray = filesInDir::filesInDirArray($path);
 			foreach($modulesArray as $key){
-				if(!file_exists(ENGINE_DIR.'classes/modules/'.$key.'/no_inc')) {
-					$file = ENGINE_DIR.'classes/modules/'.$key.'/'.$key.'.class.php';
+				$thisModule = ENGINE_DIR.'classes/modules/'.$key;
+				switch(file_exists($thisModule.'/incOptions')){
+					case true:
+						$includeOptions = file::efile($thisModule.'/incOptions')["content"];
+					break;
+					
+					case false:
+					$file = $thisModule.'/'.$key.'.class.php';
 					if(file_exists($file)) {
 						require($file);
 					}
+					break;
 				}
 			}
 		}

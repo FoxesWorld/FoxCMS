@@ -6,6 +6,7 @@ body {
 
 table, form {
 	width: 100%;
+	margin: 0;
 }
 
 a {
@@ -349,8 +350,8 @@ ul.inline > li {
 # Sections General
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
-  overflow: hidden;
+    display: flow-root;
+    width: 100%;
 }
 
 .section-bg {
@@ -395,6 +396,15 @@ section {
     height: 100%;
 	padding: 0;
     display: flow-root;
+}
+
+.userProfile .userdata {
+	margin: 10px;
+    font-size: smaller;
+}
+
+.userProfile .userActions {
+	margin: 10px;
 }
 
 .profilePhoto:before {
@@ -595,4 +605,36 @@ ul > li {
   background: #ff7e54;
   color: #fff;
   text-decoration: none;
+}
+
+
+
+.fa-spin-hover:hover {
+   animation:fa-spin 2s infinite linear;
+}
+
+@-webkit-keyframes fa-spin {
+   0% {
+      -webkit-transform:rotate(0deg);
+      transform:rotate(0deg)
+   }
+   
+   100% {
+      -webkit-transform:rotate(359deg);
+      transform:rotate(359deg)
+   }
+
+}
+
+@keyframes fa-spin {
+   0% {
+      -webkit-transform:rotate(0deg);
+      transform:rotate(0deg)
+   }
+   
+   100% {
+      -webkit-transform:rotate(359deg);
+      transform:rotate(359deg)
+   }
+
 }

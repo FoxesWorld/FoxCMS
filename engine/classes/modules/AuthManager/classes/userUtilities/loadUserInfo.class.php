@@ -10,10 +10,11 @@ if(!defined('userUtils')) {
 			global $config;
 			foreach($config['userDatainDb'] as $key){
 				switch($key){
+					/*
 					case 'user_group':
 						$groupAssociacion = new groupAssociacion(functions::getUserData($login, $key, $db), $db);
 						$this->userInfoArray[] = $groupAssociacion->userGroupName()["groupType"];
-					break;
+					break; */
 						
 					default:
 						$this->userInfoArray[] = functions::getUserData($login, $key, $db);

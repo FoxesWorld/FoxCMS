@@ -18,7 +18,6 @@ if(!defined('FOXXEY')) {
 				$this->logger = $logger;
 					require ('userActions.class.php');
 					$userActions = new userActions($this->db, $this->logger, $_REQUEST);
-					//require(dirname(__FILE__).'/classes/shortProfile.class.php');
 				}
 			}
 			

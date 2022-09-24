@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-09-24 00:43:45
+/* Smarty version 4.0.4, created on 2022-09-24 23:10:17
   from '/var/www/html/templates/bootstrap/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_632e28919d88f7_26301198',
+  'unifunc' => 'content_632f64294ee490_61675520',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd68e08da613ea444f068c09f2228c6d06b68346f' => 
     array (
       0 => '/var/www/html/templates/bootstrap/main.tpl',
-      1 => 1663966218,
+      1 => 1664042261,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:components/advertComponent.tpl' => 1,
   ),
 ),false)) {
-function content_632e28919d88f7_26301198 (Smarty_Internal_Template $_smarty_tpl) {
+function content_632f64294ee490_61675520 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html>
 
 	<head>
@@ -47,11 +47,6 @@ function content_632e28919d88f7_26301198 (Smarty_Internal_Template $_smarty_tpl)
  src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /js/main.js"><?php echo '</script'; ?>
 >
-		<?php echo '<script'; ?>
- type="text/javascript" src="//vk.com/js/api/openapi.js?130"><?php echo '</script'; ?>
->
-		<?php echo $_smarty_tpl->tpl_vars['vkGroup']->value;?>
-
 	</head>
 
 	<body>
@@ -81,18 +76,16 @@ function content_632e28919d88f7_26301198 (Smarty_Internal_Template $_smarty_tpl)
 			  <div id="content">
 						<?php if ($_smarty_tpl->tpl_vars['isLogged']->value) {?>
 						<table>
-						<td id="userBlock">
-								<?php $_smarty_tpl->_subTemplateRender('file:components/profileComponent.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+							<td id="userBlock">
+									<?php $_smarty_tpl->_subTemplateRender('file:components/profileComponent.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
-						</td>
-							
-						<td id="workPlace">
-							<?php $_smarty_tpl->_subTemplateRender('file:userMenu.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+							</td>
+								
+							<td id="workPlace">
+								<?php $_smarty_tpl->_subTemplateRender('file:userMenu.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
-						</td>
+							</td>
 						</table>
-						<?php } else { ?>
-							<div class="container" id="vkGroup"></div>
 						<?php }?>
 			  </div>
 

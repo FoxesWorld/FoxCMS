@@ -62,12 +62,12 @@
 	text-transform: uppercase;
 }
 
-input[type="submit"]{
+[type=button], [type=reset], [type=submit], button{
 	font-family: 'FSElliotPro-Bold';
 	color: white;
 }
 
-input[type="submit"].login {
+[type=button], [type=reset], [type=submit], button.login {
 	display: block;
 	border: 0;
     width: 100%;
@@ -85,11 +85,11 @@ input[type="submit"].login {
 }
 
 
-input[type="submit"]:hover.login  {
+[type=button], [type=reset], [type=submit], button:hover.login  {
     background: #bbd641;
 }
 
-input[type="submit"].logout {
+[type=button], [type=reset], [type=submit], button.logout {
 	-webkit-box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
     -moz-box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
     box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
@@ -100,7 +100,7 @@ input[type="submit"].logout {
     border: 0;
 }
 
-input[type="submit"]:hover.logout  {
+[type=button], [type=reset], [type=submit], button:hover.logout  {
 	transition: 0.5s;
     background: #f15b21c7;
 	box-shadow: 0 5px 20px 0 rgb(219 113 23 / 98%);

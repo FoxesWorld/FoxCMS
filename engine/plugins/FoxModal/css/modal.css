@@ -1,5 +1,9 @@
 /* Hide scroll bar */
 
+mdlOpt {
+	display: none;
+}
+
 html.foxModal-is-locked {
   touch-action: none;
 }

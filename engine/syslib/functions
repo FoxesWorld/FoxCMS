@@ -28,6 +28,23 @@ if (!defined('FOXXEY')) {
 		}
 		return $collectedData;
 	}
+	
+	public static function getStrBetween($string, $start, $end)	{
+		$result = array();
+		$string = " ".$string;
+		$offset = 0;
+		while(true)
+		{
+			$ini = strpos($string,$start,$offset);
+			if ($ini == 0)
+				break;
+			$ini += strlen($start);
+			$len = strpos($string,$end,$ini) - $ini;
+			$result[] = substr($string,$ini,$len);
+			$offset = $ini+$len;
+		}
+		return $result;
+	}
 
 	public static function filterString($input){
 		global $config; 

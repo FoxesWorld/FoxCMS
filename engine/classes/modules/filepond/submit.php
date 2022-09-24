@@ -8,16 +8,8 @@ if (!defined('profile')) {
 	require_once('FilePond.class.php');
 	FilePond\catch_server_exceptions();
 
-	routeEntry(ENTRY_FIELD, 
-			[
-				'FILE_OBJECTS' 				  => 'handle_file_post',
-				'BASE64_ENCODED_FILE_OBJECTS' => 'handle_base64_encoded_file_post',
-				'TRANSFER_IDS' 				  => 'handle_transfer_ids_post'
-			]
-		);
-
-	function routeEntry($entries, $routes){
-		$fileSubmit = new fileSubmit();
+	function routeEntry($entries, $routes, $db, $logger, $usrArray){
+		$fileSubmit = new fileSubmit($db, $logger, $usrArray);
 		foreach ($entries as $entry) {
 			$post = FilePond\get_post($entry);
 			if (!$post) continue;
@@ -28,7 +20,14 @@ if (!defined('profile')) {
 
 	class fileSubmit {
 		
-		function __construct(){
+		private $db;
+		private $logger;
+		private $usrArray;
+		
+		function __construct($db, $logger, $usrArray){
+			$this->db = $db;
+			$this->logger = $logger;
+			$this->usrArray = $usrArray;
 			define("USERDIR", UPLOAD_DIR.DIRECTORY_SEPARATOR.$_POST['login']);
 			if (!is_dir(USERDIR)) mkdir(USERDIR, 0755);
 		}
@@ -67,9 +66,12 @@ if (!defined('profile')) {
 				if($files != null){
 				   foreach($files as $file) {
 					   $nameOverride;
+					   $extension = explode('.', $file["name"])[1];
 					   switch($imageType){
 						   case "profilePhoto":
 							$nameOverride = $imageType;
+							$query = "UPDATE `users` SET profilePhoto='".$nameOverride.'.'.$extension."' WHERE login = '".$this->usrArray['login']."'";
+							$this->db->query($query);
 						   break;
 					   }
 						FilePond\move_file($file, USERDIR, $nameOverride);

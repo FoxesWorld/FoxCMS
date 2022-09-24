@@ -5,6 +5,7 @@
 	define('CURRENT_TIME',time());
 	define('CURRENT_DATE',date("d.m.Y"));
 	define('REMOTE_IP',   getenv('REMOTE_ADDR'));
+	require ('ru_ru.lang');
 	
 	$config = array(
 	
@@ -28,20 +29,17 @@
 		/*Title*/
 		'title' => 'FoxEngine',
 		'status' => 'Alpha',
-		'vkGroup' => '<script>
-			VK.Widgets.Group("vkGroup", {mode: 2, width: "450", height: "700", color1: \'DADADA\', color2: \'2E2D2B\', color3: \'2E2D2B\'}, 168368623);
-		</script>',
 		
 		/* LINKS */
 		'links' => array(
-		array('TressModal', '#tess', '<i class="bi bi-bug"></i>'),
-		array('Wesp', 'wesp.ru', '<i class="bi bi-emoji-wink"></i>')
+			array('TressModal', '#tess', '<i class="bi bi-bug"></i>'),
+			array('Wesp', 'wesp.ru', '<i class="bi bi-emoji-wink"></i>')
 		),
 		'additionalString' => 'onclick="$(this).notify(\'Work In Progress!\', \'info\'); return false" class="nav-link scrollto"',
 		
 		/* UserSettings */
-		'userDatainDb'   => array("user_id", "email", "login", "password", "user_group", "realname", "hash", "reg_date", "last_date"),
-		'userDataToShow' => array('login', 'realname', 'user_group', 'email')
+		'userDatainDb'   => array("user_id", "email", "login", "password", "user_group", "realname", "hash", "reg_date", "last_date", "profilePhoto"),
+		'allowedProfileEdit' => array(1,4)
 	);
 	
 	class initConfig {
@@ -52,31 +50,21 @@
 			"BaseJS" 			=>	array('.js',  ENGINE_DIR.'plugins/', 				'', 	true),
 			"FoxEngineJS" 		=>	array('.js',  ENGINE_DIR.'plugins/FoxEngine/js/', 	'', 	true),
 			"FoxEngineCSS" 		=>	array('.css', ENGINE_DIR.'plugins/FoxEngine/css/', 	'', 	true),
-			//"PopperJS" 			=>	array('.js',  ENGINE_DIR.'plugins/Popper/', 		'.map', true),
+			"FontAwesomeCSS" 	=>	array('.css', ENGINE_DIR.'plugins/FontAwesome/css/', 	'', 	true),
 			"BootstrapJS" 		=>	array('.js',  ENGINE_DIR.'plugins/Bootstrap/js/', 	'.map', true),
 			"BootstrapCSS" 		=>	array('.css', ENGINE_DIR.'plugins/Bootstrap/css/', 	'.map', true),
 			"Bootstrap-icons" 	=>	array('.css', ENGINE_DIR.'plugins/Bootstrap-icons/','', 	true),
-			//"GlightboxCSS" 		=>	array('.css', ENGINE_DIR.'plugins/Glightbox/css/', 	'', 	true),
-			//"GlightboxJS" 		=>	array('.js',  ENGINE_DIR.'plugins/Glightbox/js/', 	'', 	true),
 			"FoxModalCSS" 		=>	array('.css', ENGINE_DIR.'plugins/FoxModal/css/', 	'', 	true),
 			"FoxModalJS" 		=>	array('.js',  ENGINE_DIR.'plugins/FoxModal/js/', 	'', 	true),
-			//"SwipwerCSS" 		=>	array('.css', ENGINE_DIR.'plugins/Swiper/', 		'', 	true),
-			//"SwiperJS" 			=>	array('.js',  ENGINE_DIR.'plugins/Swiper/', 		'.map', true),
 			"PaceCSS" 			=>	array('.css', ENGINE_DIR.'plugins/Pace/', 			'', 	true),
 			"PaceJS" 			=>	array('.js',  ENGINE_DIR.'plugins/Pace/', 			'',		true),
 			"FilePondJS" 		=>	array('.js',  ENGINE_DIR.'plugins/FilePond/js/', 	'',		true),
 			"FilePondCSS" 		=>	array('.css',  ENGINE_DIR.'plugins/FilePond/css/', 	'',		true));
-			//"aosJS" 			=>	array('.js',  ENGINE_DIR.'plugins/aos/', 			'', 	true),
-			//"aosCSS" 			=>	array('.css',  ENGINE_DIR.'plugins/aos/', 			'', 	true));
 		
-		//Modals to unlogged
-		protected $modalsUnlogged = array(
+		//Modals to show
+		protected $modalsArray = array(
 			"login" => array("Авторизация", "Что бы на сайт войти логин и пароль нам нужно ввести", "%file:=auth"),
-			"reg" 	=> array("Регистрация", "Регистрируйтесь пожалуйста", "%file:=reg")
-		);
-		
-		//Modals to logged
-		protected $modalsLogged = array(
-			"cp" => array("Личный кабинет", "Посмотрим <b>{realname}</b>, что ты тут можешь поменять...", "%file:=cp")
+			"reg" 	=> array("Регистрация", "Регистрируйтесь пожалуйста", "%file:=reg"),
+			//"cp" => array("Личный кабинет", "Посмотрим <b>{realname}</b>, что ты тут можешь поменять...", "%file:=cp")
 		);
 	}

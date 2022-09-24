@@ -1,3 +1,6 @@
+<mdlOpt>
+{"groupToShow": 5}
+</mdlOpt>
 <form method="POST" action="/" id="loginForm">
 	<table>
 		<tr>
@@ -11,7 +14,7 @@
 		
 		<tr>
 			<td>
-				<input type="submit" class="login" />
+				<button type="submit" class="login">Войти <i class="bi bi-box-arrow-right"></i></button>
 			</td>
 			<td>
 				<div class="input_block animate__animated animate__fadeInLeft">

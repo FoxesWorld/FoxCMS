@@ -5,6 +5,7 @@
 				if (forms.length >= 1) {
 					console.log("Found forms: " + forms.length);
 					forms.forEach(form => {
+						console.log("    - "+form.id);
 						form.addEventListener("submit", function(event) {
 							event.preventDefault();
 							let data = collectFormData(form);

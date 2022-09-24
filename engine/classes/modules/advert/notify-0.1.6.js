@@ -116,7 +116,7 @@ function addFreeImage(getFreeImage){
 	
 function closeNotify() {
     let notify_content = $('#notify-content');
-	setCookie('advert', 'closed', 86400, '/', 'foxesworld.ru', true);
+	setCookie('advert', 'closed', 86400, '/', '192.168.0.100', true);
 	$("#notify_block").removeClass('animate__delay-4s');
 	$("#notify_block").addClass('animate__zoomOutRight');
 	console.log('Advert skiped.');

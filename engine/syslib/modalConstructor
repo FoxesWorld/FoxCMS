@@ -21,25 +21,19 @@ if (!defined('FOXXEY')) {
  
 	class modalConstructor extends init {
 
-		private $modalFilesDir;
 		private $modalElements = array('mdlAdress', 'mdlTitle', 'mdlDesc', 'mdlContent');
 		private $modalShape = '';
-		private $tplFile = '/modalComponent.tpl';
+		private $tplBase = '/modalComponent.tpl';
 
 		
 		
-		function __construct($mdlAdress = "mdl", $mdlTitle = "modal title", $mdlDesc = "modalDescription", $mdlContent = "tes", $replaceArray ='') {
+		function __construct($mdlAdress, $mdlTitle, $mdlDesc, $mdlContent, $replaceArray ='') {
 			global $config;
-			$this->modalFilesDir = ROOT_DIR."/templates/".$config['siteTpl'].'/modal/';
-			$file = ROOT_DIR."/templates/".$config['siteTpl'].'/components/'.$this->tplFile;
+			$file = ROOT_DIR."/templates/".$config['siteTpl'].'/components/'.$this->tplBase;
 			if(file_exists($file)) {
 				$this->modalShape = file::efile($file)["content"];
 			
 				foreach($this->modalElements as $key){
-
-					if(strpos(${$key}, '%file:=') !== false){
-						${$key} = file::efile($this->modalFilesDir.explode("=", $mdlContent)[1].'.tpl')["content"];
-					}
 					$this->modalShape = str_replace("{".$key."}", ${$key}, $this->modalShape);
 					if(is_array($replaceArray)){
 						foreach($replaceArray as $key => $value){

@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-09-24 00:43:45
+/* Smarty version 4.0.4, created on 2022-09-24 23:10:17
   from '/var/www/html/templates/bootstrap/components/advertComponent.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_632e28919eae64_02024883',
+  'unifunc' => 'content_632f6429502ed7_42675830',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_632e28919eae64_02024883 (Smarty_Internal_Template $_smarty_tpl) {
+function content_632f6429502ed7_42675830 (Smarty_Internal_Template $_smarty_tpl) {
 ?>	<link href="/engine/classes/modules/Advert/styles.css" rel="stylesheet" type="text/css">
 
 	<div style="display:none;" id="notify-content">

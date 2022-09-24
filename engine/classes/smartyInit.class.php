@@ -9,7 +9,7 @@ if (!defined('FOXXEY')) {
 		
 		function __construct($builtLinks) {
 			global $config;
-			$modalsToShow = new modalsToShow($this->modalsLogged, $this->modalsUnlogged);
+			$modalsToShow = new modalShow($this->modalsArray);
 			$this->smarty 					= new Smarty;
 			$this->smarty->debugging 		= false;
 			$this->smarty->cache_lifetime 	= 120;
@@ -30,19 +30,18 @@ if (!defined('FOXXEY')) {
 			$this->smarty->assign("status", $config['status']);
 			$this->smarty->assign("year", date("Y"));
 			$this->smarty->assign("tplDir", "/templates/".$config['siteTpl']);
-			$this->smarty->assign("vkGroup", 	$config['vkGroup']);
 			$this->smarty->assign("isLogged",   init::$isLogged);
 			
 			if(init::$isLogged) {
-				//$this->smarty->assign("profile", 		init::$profileBlock);
-				if(!file_exists(ROOT_DIR."/uploads/".self::$usrArray['login']."/profilePhoto.jpg")) {
+				if(!file_exists(ROOT_DIR."/uploads/".self::$usrArray['login'].'/'.init::$usrArray['profilePhoto'])) {
 					$this->profilePhoto = TEMPLATE_DIR."no-photo.jpg";
 				} else {
-					$this->profilePhoto = UPLOADS."profilePhoto.jpg";
+					$this->profilePhoto = UPLOADS.init::$usrArray['profilePhoto'];
 				}
 				$this->smarty->assign("profilePhoto", 	$this->profilePhoto);	
 				$this->smarty->assign("LoggedName", init::$usrArray['login']);
 				$this->smarty->assign("userGroup", init::$usrArray['user_group']);
+				$this->smarty->assign("loginHash", init::$usrArray['hash']);
 				$this->smarty->assign("email", init::$usrArray['email']);
 				$this->smarty->assign("realname", 	init::$usrArray['realname']);	
 				$builtInJS = '

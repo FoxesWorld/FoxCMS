@@ -17,22 +17,14 @@ if(!defined('profile')) {
 				if(@$_REQUEST['key'] === $config['secureKey']) {
 					$this->fRequest = functions::collectData($request, true);
 					switch(@$_REQUEST[$this->userActionReq]){
+
 						case 'logout':
 							$this->logout();
 						break;
 						
 						case 'editProfile':
-							require ('classes/editProfile.class.php');
+							require ('editProfile.class.php');
 							$editProfile = new editProfile($this->fRequest, $db, $logger);
-						break;
-						
-						case "loadPhoto":
-							require_once (MODULES_DIR."FilePond/submit.php");
-						break;
-						
-						case 'userInfo':
-							require ('classes/userInfo.class.php');
-							$userInfo = new userInfo($this->fRequest['data']);
 						break;
 						
 						case 'adminAction':
