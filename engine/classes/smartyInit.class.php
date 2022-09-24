@@ -34,7 +34,7 @@ if (!defined('FOXXEY')) {
 			
 			if(init::$isLogged) {
 				if(!file_exists(ROOT_DIR."/uploads/".self::$usrArray['login'].'/'.init::$usrArray['profilePhoto'])) {
-					$this->profilePhoto = TEMPLATE_DIR."no-photo.jpg";
+					$this->profilePhoto = "/templates/".$config['siteTpl']."/img/no-photo.jpg";
 				} else {
 					$this->profilePhoto = UPLOADS.init::$usrArray['profilePhoto'];
 				}

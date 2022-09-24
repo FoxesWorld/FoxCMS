@@ -21,6 +21,7 @@ if(!defined('profile')) {
 		
 		protected $db;
 		protected $logger;
+		private $userQuery;
 		
 	   /*################
 		*Security checks
@@ -54,7 +55,7 @@ if(!defined('profile')) {
 												if(in_array($this->inputGroup, $config['allowedProfileEdit'])) {
 												//ALL CHECKS PASSED
 													$this->profileChanges();
-													//if(@$request["profilePhoto"]) {
+													if(@$request["profilePhoto"]) {
 														require_once (MODULES_DIR."FilePond/submit.php");
 														routeEntry(ENTRY_FIELD, 
 															[
@@ -63,7 +64,7 @@ if(!defined('profile')) {
 																'TRANSFER_IDS' 				  => 'handle_transfer_ids_post'
 															], 
 															$this->db, $this->logger, $this->requestArray);
-													//}	
+													}	
 													$this->updateSession();
 												} else {
 													$this->status = "warn";
@@ -109,20 +110,21 @@ if(!defined('profile')) {
 		}
 		
 		private function profileChanges() {
-			$userQuery = "";
 			$symbol = ",";
 			$numItems = count($this->dataToChange);
 			$i = 0;
-			foreach($this->dataToChange as $key){
-				  if(++$i === $numItems) {		
-					  $symbol = "";
-				  }
-				$value = $this->requestArray[$key] ?? '';
-				$userQuery .= '`'.$key."` = '".$value."'".$symbol;	
+			$this->passCheck($this->requestArray['newPass'], $this->requestArray['repeatPass']);
+			if($this->status == "success") {
+				foreach($this->dataToChange as $key){
+					  if(++$i === $numItems) {		
+						  $symbol = "";
+					  }
+					$value = $this->requestArray[$key] ?? '';
+					$this->userQuery .= '`'.$key."` = '".$value."'".$symbol;	
+				}
+				$query = "UPDATE `users` SET ".$this->userQuery." WHERE login = '".$this->inputLogin."'";
+				$this->db->run($query);
 			}
-			$query = "UPDATE `users` SET ".$userQuery." WHERE login = '".$this->inputLogin."'";
-			$this->db->run($query);
-			
 		}
 		
 		private function updateSession() {
@@ -132,6 +134,28 @@ if(!defined('profile')) {
 			$userData = $loadUserInfo->userInfoArray();
 			$sessionManager = new sessionManager($userData);
 		}
+		
+		private function passCheck($newPass, $repeatPass){
+			if($newPass !== "null" || $repeatPass !== "null") {
+
+				if($newPass != $repeatPass) {
+					$this->statusInfo = "PassMismatch";
+					$this->status = "error";
+				}
+							
+				if(strlen($newPass) < 6) {
+					$this->status = "warn";
+					$this->statusInfo = "PassShorterThan6";
+				}
+							
+				if(strlen($newPass) > 72) {
+					$this->status = "warn";
+					$this->statusInfo = "PassLonger72";
+				}
+				$this->userQuery = '`password` = "'.password_hash($newPass, PASSWORD_DEFAULT).'",'; 
+			}
+		}
+		
 		
 		private function getUserfield($userfild){
 			return functions::getUserData($this->inputLogin, $userfild, $this->db);
