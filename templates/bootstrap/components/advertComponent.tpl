@@ -2,7 +2,7 @@
 
 	<div style="display:none;" id="notify-content">
 			<div class="animate__animated animate__bounceInRight notify_block animate__delay-4s" id="notify_block">	
-			<a class="notify_block_close" onclick="closeNotify();"><i class="bi bi-x-circle"></i></a>
+			<a class="notify_block_close" onclick="closeNotify();"><i class="fa fa-times" aria-hidden="true"></i></a>
 				<div class="content">
 					<h3 id="advertisment_title"></h3>
 					<div id="advertisment_text"></div>

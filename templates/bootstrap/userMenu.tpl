@@ -7,52 +7,17 @@
 
 									<form method="POST" action="/" id="editProfileForm">								
 										<div class="tab_content active">
-											<h2 id="modalTitle">Давай меняй!</h2>
-											<span id="modalDesc">Посмотрим <b>{$realname}</b>, что ты тут можешь поменять...</span>
-											<section>
-													<div class="input_block">
-														<input id="realname" class="input" type="text" autocomplete="off" required value="{$realname}">
-														<label class="label">Полное имя</label>
-													</div>
-																
-													<div class="input_block">
-														<input id="email" class="input" type="text" autocomplete="off" required value="{$email}">
-														<label class="label">E-mail</label>
-													</div>
-
-													<div class="input_block">
-														<input id="password" class="input" type="text" autocomplete="off">
-														<label class="label">Текущий пароль</label>
-													</div>
-											</section>
+											{include file = "user/baseInfo.tpl"}
 										</div>
 
 										<div class="tab_content">
-											<h2 id="modalTitle">Давай украшать!</h2>
-											<span id="modalDesc">Посмотрим <b>{$realname}</b>, что ты тут можешь сделать...</span>
-
-													<input type="file" id="profilePhoto" name="image" accept=".jpeg" data-file-metadata-imagetype="profilePhoto" /> 
-
+											{include file = "user/personalisation.tpl"}
 										</div>
 													
 										<div class="tab_content">
-											<h2 id="modalTitle">Давай портить!</h2>
-											<span id="modalDesc">Настройки безопасности, <b>{$realname}</b>, изменить может тут</span>
-											<section>
-													
-													<div class="input_block">
-													<input id="newPass" class="input" type="text" autocomplete="off">
-														<label class="label">Новый пароль</label>
-													</div>
-													
-													<div class="input_block">
-													<input id="repeatPass" class="input" type="text" autocomplete="off">
-														<label class="label">Повтор пароля</label>
-													</div>
-													
-											</section>
+											{include file = "user/security.tpl"}
 										</div>
-											<input id="user_doaction" class="input" type="hidden" value="editProfile" />
+											<input id="user_doaction" class="input" type="hidden" value="EditUser" />
 											<input id="login" class="input" type="hidden" value="{$login}" />
 											<input id="userGroup" class="input" type="hidden" value="{$user_group}" />
 											<input id="foxesHash" class="input" type="hidden" value="{$hash}" />
@@ -71,33 +36,3 @@
 										});
 									</script>
 
-									<script>
-												FilePond.registerPlugin(
-													FilePondPluginImageCrop,
-													FilePondPluginMediaPreview,
-													FilePondPluginImagePreview,
-													FilePondPluginFileMetadata,
-													FilePondPluginFileRename
-												);
-												FilePond.setOptions(
-												{
-													maxFileSize: '15MB',
-													imageCropAspectRatio: '3:5',
-													server: '/'
-													   /*
-													   fileRenameFunction: (file) =>
-															new Promise((resolve) => {
-															resolve(window.prompt('Enter new filename', file.name));
-														}) */
-												});
-																							
-												const inputElement = document.querySelector('input[type="file"]');
-												const pond = FilePond.create(
-													inputElement, {
-															allowMultiple: false,
-															allowReorder: false
-													}
-												);
-
-												window.pond = pond;
-											</script>

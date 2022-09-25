@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-09-25 14:08:39
+/* Smarty version 4.0.4, created on 2022-09-26 00:58:05
   from '/var/www/html/templates/bootstrap/components/advertComponent.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_633036b72b9e38_38358616',
+  'unifunc' => 'content_6330ceedcfbe52_30118017',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '740b38cfbb3de19ee82bc7f3b45edc20b9b593c0' => 
     array (
       0 => '/var/www/html/templates/bootstrap/components/advertComponent.tpl',
-      1 => 1663955298,
+      1 => 1664135465,
       2 => 'file',
     ),
   ),
@@ -20,12 +20,12 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_633036b72b9e38_38358616 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6330ceedcfbe52_30118017 (Smarty_Internal_Template $_smarty_tpl) {
 ?>	<link href="/engine/classes/modules/Advert/styles.css" rel="stylesheet" type="text/css">
 
 	<div style="display:none;" id="notify-content">
 			<div class="animate__animated animate__bounceInRight notify_block animate__delay-4s" id="notify_block">	
-			<a class="notify_block_close" onclick="closeNotify();"><i class="bi bi-x-circle"></i></a>
+			<a class="notify_block_close" onclick="closeNotify();"><i class="fa fa-times" aria-hidden="true"></i></a>
 				<div class="content">
 					<h3 id="advertisment_title"></h3>
 					<div id="advertisment_text"></div>

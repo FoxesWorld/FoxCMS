@@ -1,9 +1,11 @@
 <?php
+
+	
 if(!defined('profile')) {
 	die ('{"message": "Not in profile thread"}');
 }
 
-	class userActions extends profile {
+	class UserActions extends User {
 		
 		private $userActionReq = "user_doaction";
 		protected $db, $logger;
@@ -22,9 +24,9 @@ if(!defined('profile')) {
 							$this->logout();
 						break;
 						
-						case 'editProfile':
-							require ('editProfile.class.php');
-							$editProfile = new editProfile($this->fRequest, $db, $logger);
+						case 'EditUser':
+							require ('EditUser.class.php');
+							$EditUser = new EditUser($this->fRequest, $db, $logger);
 						break;
 						
 						case 'adminAction':

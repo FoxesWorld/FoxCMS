@@ -1,26 +1,29 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-09-25 14:08:39
+/* Smarty version 4.0.4, created on 2022-09-26 00:58:05
   from '/var/www/html/templates/bootstrap/userMenu.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_633036b72b5db8_23425588',
+  'unifunc' => 'content_6330ceedced5e0_29950803',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '01c6187b8af30e3f8096870f2ba77e1e5288cce5' => 
     array (
       0 => '/var/www/html/templates/bootstrap/userMenu.tpl',
-      1 => 1664090599,
+      1 => 1664140560,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
+    'file:user/baseInfo.tpl' => 1,
+    'file:user/personalisation.tpl' => 1,
+    'file:user/security.tpl' => 1,
   ),
 ),false)) {
-function content_633036b72b5db8_23425588 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6330ceedced5e0_29950803 (Smarty_Internal_Template $_smarty_tpl) {
 ?>								<div class="tabs">
 									<ul class="tab_caption animate__animated animate__fadeInRightBig animate__delay-1s">
 										<li class="active" value="profile">Настройки профиля</li>
@@ -30,57 +33,20 @@ function content_633036b72b5db8_23425588 (Smarty_Internal_Template $_smarty_tpl)
 
 									<form method="POST" action="/" id="editProfileForm">								
 										<div class="tab_content active">
-											<h2 id="modalTitle">Давай меняй!</h2>
-											<span id="modalDesc">Посмотрим <b><?php echo $_smarty_tpl->tpl_vars['realname']->value;?>
-</b>, что ты тут можешь поменять...</span>
-											<section>
-													<div class="input_block">
-														<input id="realname" class="input" type="text" autocomplete="off" required value="<?php echo $_smarty_tpl->tpl_vars['realname']->value;?>
-">
-														<label class="label">Полное имя</label>
-													</div>
-																
-													<div class="input_block">
-														<input id="email" class="input" type="text" autocomplete="off" required value="<?php echo $_smarty_tpl->tpl_vars['email']->value;?>
-">
-														<label class="label">E-mail</label>
-													</div>
-
-													<div class="input_block">
-														<input id="password" class="input" type="text" autocomplete="off">
-														<label class="label">Текущий пароль</label>
-													</div>
-											</section>
+											<?php $_smarty_tpl->_subTemplateRender("file:user/baseInfo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
 										</div>
 
 										<div class="tab_content">
-											<h2 id="modalTitle">Давай украшать!</h2>
-											<span id="modalDesc">Посмотрим <b><?php echo $_smarty_tpl->tpl_vars['realname']->value;?>
-</b>, что ты тут можешь сделать...</span>
-
-													<input type="file" id="profilePhoto" name="image" accept=".jpeg" data-file-metadata-imagetype="profilePhoto" /> 
-
+											<?php $_smarty_tpl->_subTemplateRender("file:user/personalisation.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
 										</div>
 													
 										<div class="tab_content">
-											<h2 id="modalTitle">Давай портить!</h2>
-											<span id="modalDesc">Настройки безопасности, <b><?php echo $_smarty_tpl->tpl_vars['realname']->value;?>
-</b>, изменить может тут</span>
-											<section>
-													
-													<div class="input_block">
-													<input id="newPass" class="input" type="text" autocomplete="off">
-														<label class="label">Новый пароль</label>
-													</div>
-													
-													<div class="input_block">
-													<input id="repeatPass" class="input" type="text" autocomplete="off">
-														<label class="label">Повтор пароля</label>
-													</div>
-													
-											</section>
+											<?php $_smarty_tpl->_subTemplateRender("file:user/security.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
 										</div>
-											<input id="user_doaction" class="input" type="hidden" value="editProfile" />
+											<input id="user_doaction" class="input" type="hidden" value="EditUser" />
 											<input id="login" class="input" type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['login']->value;?>
 " />
 											<input id="userGroup" class="input" type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['user_group']->value;?>
@@ -104,36 +70,5 @@ function content_633036b72b5db8_23425588 (Smarty_Internal_Template $_smarty_tpl)
 									<?php echo '</script'; ?>
 >
 
-									<?php echo '<script'; ?>
->
-												FilePond.registerPlugin(
-													FilePondPluginImageCrop,
-													FilePondPluginMediaPreview,
-													FilePondPluginImagePreview,
-													FilePondPluginFileMetadata,
-													FilePondPluginFileRename
-												);
-												FilePond.setOptions(
-												{
-													maxFileSize: '15MB',
-													imageCropAspectRatio: '3:5',
-													server: '/'
-													   /*
-													   fileRenameFunction: (file) =>
-															new Promise((resolve) => {
-															resolve(window.prompt('Enter new filename', file.name));
-														}) */
-												});
-																							
-												const inputElement = document.querySelector('input[type="file"]');
-												const pond = FilePond.create(
-													inputElement, {
-															allowMultiple: false,
-															allowReorder: false
-													}
-												);
-
-												window.pond = pond;
-											<?php echo '</script'; ?>
-><?php }
+<?php }
 }

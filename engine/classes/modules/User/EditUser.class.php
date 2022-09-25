@@ -1,8 +1,9 @@
 <?php
+
 if(!defined('profile')) {
 	die ('{"message": "Not in profile thread"}');
 }
-	class editProfile extends profile {
+	class EditUser extends User {
 		
 		/*CFG*/
 		private $dbQureyConstruct = array("realname", "email");
