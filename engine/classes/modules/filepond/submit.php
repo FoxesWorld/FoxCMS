@@ -10,12 +10,13 @@ if (!defined('profile')) {
 
 	function routeEntry($entries, $routes, $db, $logger, $usrArray){
 		$fileSubmit = new fileSubmit($db, $logger, $usrArray);
-		foreach ($entries as $entry) {
-			$post = FilePond\get_post($entry);
-			if (!$post) continue;
-			if (!isset($routes[$post->getFormat()])) continue;
-			$fileSubmit->{$routes[$post->getFormat()]}($post->getValues());
-		}
+			foreach ($entries as $entry) {
+				$post = FilePond\get_post($entry);
+					if (!$post) continue;
+					if (!isset($routes[$post->getFormat()])) continue;
+					$result = $fileSubmit->{$routes[$post->getFormat()]}($post->getValues());
+			}
+			return $result;
 	}
 
 	class fileSubmit {
@@ -59,40 +60,37 @@ if (!defined('profile')) {
 			global $lang;
 			foreach ($ids as $id) {
 				$transfer = FilePond\get_transfer(TRANSFER_DIR, $id);
-				$imageType = json_decode(file::efile($transfer->getMetadata()["tmp_name"])["content"])->imagetype;
 				if (!$transfer) continue;
-				$files = $transfer->getFiles(defined('TRANSFER_PROCESSOR') ? TRANSFER_PROCESSOR : null);
+				if(@file::efile($transfer->getMetadata()["tmp_name"])["status"] !== "error") {
+					$imageType = json_decode(file::efile($transfer->getMetadata()["tmp_name"])["content"])->imagetype;
+					$files = $transfer->getFiles(defined('TRANSFER_PROCESSOR') ? TRANSFER_PROCESSOR : null);
 
-				if($files != null){
-				   foreach($files as $file) {
-					   $nameOverride;
-					   $extension = explode('.', $file["name"])[1];
-					   switch($imageType){
-						   case "profilePhoto":
-							$nameOverride = $imageType;
-							$query = "UPDATE `users` SET profilePhoto='".$nameOverride.'.'.$extension."' WHERE login = '".$this->usrArray['login']."'";
-							$this->db->query($query);
-						   break;
-					   }
-						FilePond\move_file($file, USERDIR, $nameOverride);
-					} 
-				}
+					if($files != null){
+					   foreach($files as $file) {
+						   $nameOverride;
+						   $extension = explode('.', $file["name"])[1];
+						   switch($imageType){
+							   case "profilePhoto":
+								$nameOverride = $imageType;
+								$query = "UPDATE `users` SET profilePhoto='".$nameOverride.'.'.$extension."' WHERE login = '".$this->usrArray['login']."'";
+								$this->db->query($query);
+							   break;
+						   }
+							FilePond\move_file($file, USERDIR, $nameOverride);
+						} 
+					}
 
-				// remove transfer directory
-				FilePond\remove_transfer_directory(TRANSFER_DIR, $id);
-				if(FilePond\is_valid_transfer_id($id)) {
-					$status = true;
-					$message = "Well done!";
-				} else {
-					$status = false;
-					$message = $lang["errorLoad"];
+					// remove transfer directory
+					FilePond\remove_transfer_directory(TRANSFER_DIR, $id);
+					if(FilePond\is_valid_transfer_id($id)) {
+						$status = "success";
+						$message = "Well done!";
+					} else {
+						$status = "warn";
+						$message = $lang["errorLoad"];
+					}
+					return array($status, $message);
 				}
-				$this->send_status($status, $message);
 			}
 		}
-
-		function send_status($status, $message){
-			$type = ($status) ? "success" : "warn";
-			die('{"message": "'.$message.'", "type": "'.$type.'"}');
-		}	
 	}

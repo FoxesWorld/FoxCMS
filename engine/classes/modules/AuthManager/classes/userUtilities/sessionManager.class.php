@@ -7,11 +7,7 @@ if(!defined('userUtils')) {
 		function __construct($userData) {
 			global $config;
 			for($i = 0; $i < count($userData); $i++) {
-				if($userData[$i] !== null) {
-					$_SESSION[$config['userDatainDb'][$i]] = $userData[$i];
-				} else {
-					$_SESSION[$config['userDatainDb'][$i]] = randTexts::getRandText('noName');
-				}
+				$_SESSION[$config['userDatainDb'][$i]] = $userData[$i];
 			}
 			$_SESSION['isLogged'] = true;
 		}

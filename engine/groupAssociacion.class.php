@@ -1,8 +1,6 @@
-<?php 
-if(!defined('userUtils')) {
-	die ('{"message": "Not in userUtils thread"}');
-}
-	class groupAssociacion extends utilsLoader {
+<?php
+ 
+	class groupAssociacion extends init {
 		
 		private $userGroup;
 		protected $db;
@@ -17,7 +15,7 @@ if(!defined('userUtils')) {
 			$query = "SELECT * FROM `".$this->dbTabble."` WHERE groupNum = ".$this->userGroup."";
 			$answer = $this->db->getRow($query);
 			
-			return $answer;
+			return $answer["groupType"];
 		}
 		
 	}

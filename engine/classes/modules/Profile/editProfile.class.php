@@ -5,7 +5,7 @@ if(!defined('profile')) {
 	class editProfile extends profile {
 		
 		/*CFG*/
-		private $dataToChange = array("realname", "email");
+		private $dbQureyConstruct = array("realname", "email");
 		
 		/*EditStatus*/
 		private $status = "success";
@@ -38,33 +38,31 @@ if(!defined('profile')) {
 			$this->logger = $logger;
 			$this->requestArray = $request;
 			$this->statusInfo = $lang['profileUpdated'];
-			if(@$request['login']) {
+			if(@$request['login'] !== "null") {
 				$this->inputLogin = $request['login'];
-				if(@$request['foxesHash']) {
+				if($this->inputLogin !== "anonymous") {
+				if(@$request['foxesHash'] !== "null") {
 					$this->inputHash = $request['foxesHash'];
 					if($this->inputHash === $this->getUserfield("hash")) {
-						if(@$request['password']) {
+						if(@$request['password'] !== "null") {
 							$this->inputPassword = $request['password'];
 							if(authorize::passVerify($this->inputPassword, $this->getUserfield("password"))) {
-								if(@$request['email']) {
+								if(@$request['email'] !== "null") {
 									$this->inputEmail = $request['email'];
 									if (filter_var($this->inputEmail, FILTER_VALIDATE_EMAIL)) {
-										if(@$request['userGroup']) {
+										if(@$request['userGroup'] !== "null") {
 											$this->inputGroup = $request['userGroup'];
 											if($this->inputGroup === $this->getUserfield("user_group")) {
 												if(in_array($this->inputGroup, $config['allowedProfileEdit'])) {
 												//ALL CHECKS PASSED
 													$this->profileChanges();
-													if(@$request["profilePhoto"]) {
 														require_once (MODULES_DIR."FilePond/submit.php");
-														routeEntry(ENTRY_FIELD, 
+														$loadImage = routeEntry(ENTRY_FIELD, 
 															[
 																'FILE_OBJECTS' 				  => 'handle_file_post',
 																'BASE64_ENCODED_FILE_OBJECTS' => 'handle_base64_encoded_file_post',
 																'TRANSFER_IDS' 				  => 'handle_transfer_ids_post'
-															], 
-															$this->db, $this->logger, $this->requestArray);
-													}	
+															], $this->db, $this->logger, $this->requestArray);
 													$this->updateSession();
 												} else {
 													$this->status = "warn";
@@ -102,6 +100,10 @@ if(!defined('profile')) {
 					$this->status = "error";
 					$this->statusInfo = $lang['noHashSent'];
 				}
+				} else {
+					$this->status = "warn";
+					$this->statusInfo = $lang['needAuthorise'];	
+				}
 			} else {
 				$this->status = "error";
 				$this->statusInfo = $lang['noLoginSent'];
@@ -111,11 +113,11 @@ if(!defined('profile')) {
 		
 		private function profileChanges() {
 			$symbol = ",";
-			$numItems = count($this->dataToChange);
+			$numItems = count($this->dbQureyConstruct);
 			$i = 0;
 			$this->passCheck($this->requestArray['newPass'], $this->requestArray['repeatPass']);
 			if($this->status == "success") {
-				foreach($this->dataToChange as $key){
+				foreach($this->dbQureyConstruct as $key){
 					  if(++$i === $numItems) {		
 						  $symbol = "";
 					  }

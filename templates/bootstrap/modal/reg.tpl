@@ -29,11 +29,11 @@
 		</div>
 		
 		<label for="acceptForm" class="checkbox_container">
-			Даю согласие на обработку персональных данных <i class="bi bi-journal-text"></i>
+			Даю согласие на обработку персональных данных <i class="fa fa-address-card" aria-hidden="true"></i>
 			<input type="radio" style="display: none;" id="acceptForm" value="1">
 			<span class="checkmark"></span>
 		</label>
 
 		<input id="userAction" class="input" type="hidden" value="reg">
-		<button type="submit" class="login">Зарегистрироваться <i class="bi bi-person-plus"></i></button>
+		<button type="submit" class="login">Зарегистрироваться <i class="fa fa-user-plus" aria-hidden="true"></i></button>
 	</form>

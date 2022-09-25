@@ -11,5 +11,6 @@
 		'noUsergroup' => "Не передана группа!",
 		'invalidUsergroup' => "Не твоя группа!",
 		'restrictdUsergroup' => "Вашей группе запрещено изменять профиль",
-		'profileUpdated' => "Профиль обновлен!"
+		'profileUpdated' => "Профиль обновлен!",
+		'needAuthorise' => "Необходима авторизация!"
 	);

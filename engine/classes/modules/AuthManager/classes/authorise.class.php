@@ -8,6 +8,7 @@ if(!defined('auth')) {
 		
 		function __construct($input, $db, $logger){
 			global $config;
+			//die('{"message": "GG"}');
 			$this->authData = functions::collectData($input, true);
 			$inputPassword = $this->authData['password'];
 			$userPassword = functions::getUserData($this->authData['login'], 'password', $db);

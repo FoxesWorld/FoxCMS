@@ -53,9 +53,9 @@
 											</section>
 										</div>
 											<input id="user_doaction" class="input" type="hidden" value="editProfile" />
-											<input id="login" class="input" type="hidden" value="{$LoggedName}" />
-											<input id="userGroup" class="input" type="hidden" value="{$userGroup}" />
-											<input id="foxesHash" class="input" type="hidden" value="{$loginHash}" />
+											<input id="login" class="input" type="hidden" value="{$login}" />
+											<input id="userGroup" class="input" type="hidden" value="{$user_group}" />
+											<input id="foxesHash" class="input" type="hidden" value="{$hash}" />
 											<button type="submit" class="login">Изменить <div class="fa fa-cog fa-spin"></div></button>
 									</form>
 								</div>

@@ -444,7 +444,7 @@ section {
 
 .profilePhoto img {
     width: fit-content;
-    height: 256px;
+	height: 256;
 }
 
 ul > li {

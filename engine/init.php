@@ -8,27 +8,43 @@ session_start();
 		
 		protected $debug, $logger, $db;
 		protected static $profileBlock = '';
-		protected static $isLogged = false;
-		protected static $usrArray = array('login' => "anonymous", 'user_group' => 5);
+		protected static $usrArray = array(
+			'user_id' => 0,
+			'email' => "foxengine@foxes.ru",
+			'login' => "anonymous",
+			'realname' => "",
+			'hash' => "",
+			'reg_date' => 1664055169,
+			'last_date' => 1664055169,
+			'password' => "",
+			'user_group' => 5,
+			'profilePhoto' => "avatar.jpg"
+		);
 		protected static $links;
 
 		function __construct($debug = false) {
 			global $config;
+			require ('groupAssociacion.class.php');
 			
 			/* Variables assignment && userArr */
+				$initFunctions = new initFunctions();
 				initFunctions::libFilesInclude(ENGINE_DIR.'syslib', $this->debug);
-				define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['siteTpl'].'/');
 				$this->debug = $debug;
 				$this->logger = new Logger('lastlog');
 				$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
 				self::$links = self::getLinks();
-				self::$isLogged = @$_SESSION['isLogged'];
+				self::$usrArray['isLogged'] = @$_SESSION['isLogged'];
+				self::$usrArray['realname'] = randTexts::getRandText('noName');
 				initFunctions::userArrInit();
+				
+				$groupAssociacion = new groupAssociacion(self::$usrArray['user_group'], $this->db);
+				self::$usrArray['group_name'] = $groupAssociacion->userGroupName();
 			/***********************************/
 			
 			/* Requiring modules  */
 				require (ENGINE_DIR.'syslib/smarty/Smarty.class.php');
 
+				
 				foreach(filesInDir::filesInDirArray(ENGINE_DIR.'classes/modules') as $key){
 					$file = ENGINE_DIR.'classes/modules/'.$key.'/'.$key.'.class.php';
 					if(file_exists($file)) {
@@ -36,15 +52,20 @@ session_start();
 					} else {
 						$this->logger->WriteLine("Module ".$key." doesn't have a class file!");
 					}
-				}
+				} 
+				//$initFunctions->modulesInc(ENGINE_DIR.'classes/modules');
 			/*************************************/
+			//echo "<pre>";
+			//die(var_dump(self::$usrArray));
+			//echo "</pre>";
+				define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['siteTpl'].'/');
+				define('UPLOADS', '/uploads/'.self::$usrArray['login'].'/');
 				require (MODULES_DIR.'/FilePond/preLoad.php');
 				require (ENGINE_DIR.'classes/admin/admin.class.php');
 			
 			//FULL UI
-			require (ENGINE_DIR.'classes/smartyInit.class.php');
+			require (ENGINE_DIR.'classes/SmartyInit.class.php');
 			$smartyInit = new smartyInit(self::$links);
-
 		}
 		
 		protected  static function getLinks(){
@@ -59,6 +80,10 @@ session_start();
 	}
 	
 	class initFunctions extends init {
+		
+		function __construct() {
+			
+		}
 		
 		public static function libFilesInclude($libDir, $debug) {
 			global $config;
@@ -82,24 +107,25 @@ session_start();
 		
 		public static function userArrInit(){
 			global $config;
-			if(init::$isLogged){
+			if(init::$usrArray['isLogged']){
 				foreach($config['userDatainDb'] as $key){
 					init::$usrArray[$key] = $_SESSION[$key];
 				}
 			}
 		}
 		
-		public static function modulesInc($path){
+		
+		public function modulesInc($path){
 			$modulesArray = filesInDir::filesInDirArray($path);
 			foreach($modulesArray as $key){
-				$thisModule = ENGINE_DIR.'classes/modules/'.$key;
+				$thisModule = $path.'/'.$key;
+				$file = $thisModule.'/'.$key.'.class.php';
 				switch(file_exists($thisModule.'/incOptions')){
 					case true:
 						$includeOptions = file::efile($thisModule.'/incOptions')["content"];
 					break;
 					
 					case false:
-					$file = $thisModule.'/'.$key.'.class.php';
 					if(file_exists($file)) {
 						require($file);
 					}
@@ -107,5 +133,4 @@ session_start();
 				}
 			}
 		}
-
 	}

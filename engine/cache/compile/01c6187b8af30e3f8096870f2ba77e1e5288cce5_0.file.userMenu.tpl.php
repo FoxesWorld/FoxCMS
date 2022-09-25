@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-09-24 23:10:17
+/* Smarty version 4.0.4, created on 2022-09-25 14:08:39
   from '/var/www/html/templates/bootstrap/userMenu.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_632f64294feb28_83946638',
+  'unifunc' => 'content_633036b72b5db8_23425588',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '01c6187b8af30e3f8096870f2ba77e1e5288cce5' => 
     array (
       0 => '/var/www/html/templates/bootstrap/userMenu.tpl',
-      1 => 1664050103,
+      1 => 1664090599,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_632f64294feb28_83946638 (Smarty_Internal_Template $_smarty_tpl) {
+function content_633036b72b5db8_23425588 (Smarty_Internal_Template $_smarty_tpl) {
 ?>								<div class="tabs">
 									<ul class="tab_caption animate__animated animate__fadeInRightBig animate__delay-1s">
 										<li class="active" value="profile">Настройки профиля</li>
@@ -81,11 +81,11 @@ function content_632f64294feb28_83946638 (Smarty_Internal_Template $_smarty_tpl)
 											</section>
 										</div>
 											<input id="user_doaction" class="input" type="hidden" value="editProfile" />
-											<input id="login" class="input" type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['LoggedName']->value;?>
+											<input id="login" class="input" type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['login']->value;?>
 " />
-											<input id="userGroup" class="input" type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['userGroup']->value;?>
+											<input id="userGroup" class="input" type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['user_group']->value;?>
 " />
-											<input id="foxesHash" class="input" type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['loginHash']->value;?>
+											<input id="foxesHash" class="input" type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['hash']->value;?>
 " />
 											<button type="submit" class="login">Изменить <div class="fa fa-cog fa-spin"></div></button>
 									</form>

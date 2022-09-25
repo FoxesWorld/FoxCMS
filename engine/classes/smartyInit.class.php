@@ -5,10 +5,10 @@ if (!defined('FOXXEY')) {
 	class smartyInit extends init {
 		
 		protected $smarty;
-		protected $profilePhoto;
 		
 		function __construct($builtLinks) {
 			global $config;
+			require ("SmartyUtils.class.php");
 			$modalsToShow = new modalShow($this->modalsArray);
 			$this->smarty 					= new Smarty;
 			$this->smarty->debugging 		= false;
@@ -22,78 +22,30 @@ if (!defined('FOXXEY')) {
 		
 		protected function smartyAssign($builtLinks){
 			global $config;
-			$includePlugins = new includePlugins($this->toIncludeArray);
-			define('UPLOADS', '../uploads/'.self::$usrArray['login'].'/');
-			$this->smarty->assign("systemHeaders", includePlugins::$outString);
+
+			$smartyUtils = new smartyUtils;
+			$profilePhotoPath = ROOT_DIR.UPLOADS.init::$usrArray['profilePhoto'];
+			$smartyUtils->pluginsInclude($this->toIncludeArray);
+			$this->smarty->assign("systemHeaders", smartyUtils::$outString);
 			$this->smarty->assign("links", $builtLinks);
 			$this->smarty->assign("title", $config['title']);
 			$this->smarty->assign("status", $config['status']);
 			$this->smarty->assign("year", date("Y"));
 			$this->smarty->assign("tplDir", "/templates/".$config['siteTpl']);
-			$this->smarty->assign("isLogged",   init::$isLogged);
-			
-			if(init::$isLogged) {
-				if(!file_exists(ROOT_DIR."/uploads/".self::$usrArray['login'].'/'.init::$usrArray['profilePhoto'])) {
-					$this->profilePhoto = "/templates/".$config['siteTpl']."/img/no-photo.jpg";
-				} else {
-					$this->profilePhoto = UPLOADS.init::$usrArray['profilePhoto'];
-				}
-				$this->smarty->assign("profilePhoto", 	$this->profilePhoto);	
-				$this->smarty->assign("LoggedName", init::$usrArray['login']);
-				$this->smarty->assign("userGroup", init::$usrArray['user_group']);
-				$this->smarty->assign("loginHash", init::$usrArray['hash']);
-				$this->smarty->assign("email", init::$usrArray['email']);
-				$this->smarty->assign("realname", 	init::$usrArray['realname']);	
-				$builtInJS = '
-				<script>
-					let isLogged = "'.init::$isLogged.'";
-					let userLogin = "'.init::$usrArray['login'].'";
-					let userGroup = "'.init::$usrArray['user_group'].'";
-					let realname = "'.init::$usrArray['realname'].'";
-					let email = "'.init::$usrArray['email'].'";
-					request = new request("/", {key:"'.$config['secureKey'].'", user:"'.init::$usrArray['login'].'"}, true);
-					formInit(500);
-				</script>';
-			} else {
-				$builtInJS = '
-				<script>
-					let isLogged = "'.init::$isLogged.'";
-					let userLogin = "'.init::$usrArray['login'].'";
-					request = new request("/", {key:"'.$config['secureKey'].'", user:"'.init::$usrArray['login'].'"}, true);
-					formInit(500);
-				</script>
-				';
-			}
-			$this->smarty->assign("builtInJS", $builtInJS);
-		}
-	}
+			$this->smarty->assign("isLogged",   init::$usrArray['isLogged']);
+			$this->smarty->assign("builtInJS", $smartyUtils->assignJs());
 
-	class includePlugins extends smartyInit {
-		
-		protected static $outString = '';
-		
-		function __construct($IncludeArray){
-			foreach($IncludeArray as $key => $value){
-				if($value[3] == true){
-					self::$outString .= "<!-- ".$key." -->";
-					$thisFiles = filesInDir::filesInDirArray($value[1], $value[0]);
-					$thisPath = str_replace(ROOT_DIR, '', $value[1]);
-					foreach($thisFiles as $oneFile){
-						if(strpos($oneFile, '.css')){
-							if(!@strpos($oneFile, $value[2])) {
-								if(file_exists($value[1].$oneFile)) {
-									self::$outString .= '	<link rel="stylesheet" type="text/css" href="'.$thisPath.$oneFile.'">'."\n";
-								}
-							}
-						} elseif(strpos($oneFile, '.js')){
-							if(!@strpos($oneFile, $value[2])) {
-								if(file_exists($value[1].$oneFile)) {
-									self::$outString .= '	<script src="'.$thisPath.$oneFile.'"></script>'."\n";
-								}
-							}
-						}
-					}
-				}
+			switch(file_exists($profilePhotoPath)) {
+				case true:
+					init::$usrArray["profilePhoto"] = UPLOADS.init::$usrArray['profilePhoto'];
+				break;
+				
+				default:
+					init::$usrArray["profilePhoto"] = "/templates/".$config['siteTpl']."/img/no-photo.jpg";
+				break;
 			}
+		
+			$smartyUtils->assignUserFields($this->smarty);	
+			
 		}
 	}

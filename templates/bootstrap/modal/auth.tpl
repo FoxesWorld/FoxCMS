@@ -14,7 +14,7 @@
 		
 		<tr>
 			<td>
-				<button type="submit" class="login">Войти <i class="bi bi-box-arrow-right"></i></button>
+				<button type="submit" class="login">Войти <i class="fa fa-sign-in" aria-hidden="true"></i></button>
 			</td>
 			<td>
 				<div class="input_block animate__animated animate__fadeInLeft">

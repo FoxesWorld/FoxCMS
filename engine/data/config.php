@@ -53,7 +53,6 @@
 			"FontAwesomeCSS" 	=>	array('.css', ENGINE_DIR.'plugins/FontAwesome/css/', 	'', 	true),
 			"BootstrapJS" 		=>	array('.js',  ENGINE_DIR.'plugins/Bootstrap/js/', 	'.map', true),
 			"BootstrapCSS" 		=>	array('.css', ENGINE_DIR.'plugins/Bootstrap/css/', 	'.map', true),
-			"Bootstrap-icons" 	=>	array('.css', ENGINE_DIR.'plugins/Bootstrap-icons/','', 	true),
 			"FoxModalCSS" 		=>	array('.css', ENGINE_DIR.'plugins/FoxModal/css/', 	'', 	true),
 			"FoxModalJS" 		=>	array('.js',  ENGINE_DIR.'plugins/FoxModal/js/', 	'', 	true),
 			"PaceCSS" 			=>	array('.css', ENGINE_DIR.'plugins/Pace/', 			'', 	true),

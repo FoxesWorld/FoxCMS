@@ -65,8 +65,9 @@ FilePond\catch_server_exceptions();
 		}
 		
 		function handle_file_transfer($transfer) {
-			if(init::$isLogged) {
-				if(init::$usrArray['login']) {
+			global $config;
+			if(init::$usrArray['isLogged']) {
+				if(in_array(init::$usrArray['user_group'], $config['allowedProfileEdit'])) {
 					$files = $transfer->getFiles();
 					$this->metadata = $transfer->getMetadata();
 					$this->filesTest($files);

@@ -8,18 +8,8 @@ if(!defined('userUtils')) {
 		
 		function __construct($login, $db){
 			global $config;
-			foreach($config['userDatainDb'] as $key){
-				switch($key){
-					/*
-					case 'user_group':
-						$groupAssociacion = new groupAssociacion(functions::getUserData($login, $key, $db), $db);
-						$this->userInfoArray[] = $groupAssociacion->userGroupName()["groupType"];
-					break; */
-						
-					default:
-						$this->userInfoArray[] = functions::getUserData($login, $key, $db);
-					break;
-				}	
+			foreach($config['userDatainDb'] as $key){	
+				$this->userInfoArray[] = functions::getUserData($login, $key, $db);
 			}
 		}
 		

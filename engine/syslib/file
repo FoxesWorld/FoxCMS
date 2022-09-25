@@ -54,11 +54,13 @@
 					break;
 					
 					case false:
+					if($str) {
 						self::fcreate(self::$filePath, $str);
 						self::$message = 'Creating `'.self::$filePath.'` file';
 						self::efile(self::$filePath, $str);
 
 						self::$workDone = false;
+					}
 					break;					
 				}
 
@@ -68,7 +70,7 @@
 				}
 				return self::$outArray;
 			} else {
-				return $filePath.' is an unexisting Path!';
+				return array("status" => "error", "message" => $filePath.' is an unexisting Path!');
 			}
 		}
 		
