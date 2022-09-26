@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-09-26 17:27:54
+/* Smarty version 4.0.4, created on 2022-09-26 22:25:27
   from '/var/www/html/templates/bootstrap/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6331b6ea805904_68889803',
+  'unifunc' => 'content_6331fca706c581_85352602',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '530674da955089480b15e1a2747d9ab7b8262736' => 
     array (
       0 => '/var/www/html/templates/bootstrap/header.tpl',
-      1 => 1663522044,
+      1 => 1664220143,
       2 => 'file',
     ),
   ),
@@ -20,20 +20,24 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6331b6ea805904_68889803 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6331fca706c581_85352602 (Smarty_Internal_Template $_smarty_tpl) {
 ?>  <header id="header" class="d-flex align-items-center">
 		<div class="container d-flex align-items-center justify-content-between">
 
 		  <div class="logo">
 			<h1>
 				<a href="/">
-					<small><?php echo $_smarty_tpl->tpl_vars['status']->value;?>
+					<small class="status"><?php echo $_smarty_tpl->tpl_vars['status']->value;?>
 </small>
 					<img src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
-/img/logo.png" alt="" class="img-fluid"><?php echo $_smarty_tpl->tpl_vars['title']->value;?>
-
+/img/logo.png" alt="" class="img-fluid" />
+					<div class="title"><?php echo $_smarty_tpl->tpl_vars['title']->value;?>
+</div>
+				<span class="line"></span>
 				</a>
+					 
 			</h1>
+			
 		  </div>
 
 		  <nav id="navbar" class="navbar "> <!-- navbar-mobile -->

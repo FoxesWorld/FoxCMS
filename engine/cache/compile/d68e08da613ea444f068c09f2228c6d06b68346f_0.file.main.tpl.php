@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-09-26 17:51:51
+/* Smarty version 4.0.4, created on 2022-09-26 22:25:27
   from '/var/www/html/templates/bootstrap/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6331bc87a04d92_38883779',
+  'unifunc' => 'content_6331fca7066f75_08503551',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd68e08da613ea444f068c09f2228c6d06b68346f' => 
     array (
       0 => '/var/www/html/templates/bootstrap/main.tpl',
-      1 => 1664202517,
+      1 => 1664216085,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:components/advertComponent.tpl' => 1,
   ),
 ),false)) {
-function content_6331bc87a04d92_38883779 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6331fca7066f75_08503551 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html>
 
 	<head>
@@ -57,7 +57,7 @@ function content_6331bc87a04d92_38883779 (Smarty_Internal_Template $_smarty_tpl)
 						  <div class="contact-info d-flex align-items-center">
 
 						  </div>
-							  <div class="cta d-none d-md-flex align-items-center" id="actionBlock">
+							  <div class="cta d-none d-md-flex align-items-center" data-in-effect="fadeIn" id="actionBlock">
 
 							  </div>
 						</div>

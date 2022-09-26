@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-09-26 17:27:54
+/* Smarty version 4.0.4, created on 2022-09-26 22:25:27
   from '/var/www/html/templates/bootstrap/components/profileComponent.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6331b6ea80c067_41159672',
+  'unifunc' => 'content_6331fca7072f32_15357123',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6331b6ea80c067_41159672 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6331fca7072f32_15357123 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="userProfile animate__animated animate__backInLeft animate__delay-1s">
 	<ul>
 		<li class="profilePhoto">

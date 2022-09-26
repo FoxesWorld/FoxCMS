@@ -125,16 +125,34 @@ ul {
   text-decoration: none;
 }
 #header .logo img {
+  opacity: 0;
   padding: 0;
   margin: 0;
   max-height: 40px;
 }
-.logo > h1 > a > small {
+
+#header .logo .title {
+	opacity: 0;
+	display: inline-table;
+}
+.logo .status {
+	opacity: 0;
 	font-family: 'Minecraft';
-	font-size: 0.8vh;
+	font-size: 12pt;
+	margin: -5px 0px;
     float: right;
 	color: #89513b;
 	text-transform: capitalize;
+}
+.logo .line {
+  opacity: 0;
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: #a54e39;
+  transform-origin: 0 0;
 }
 .scrolled-offset {
   margin-top: 70px;
@@ -385,6 +403,10 @@ section {
 
 #workPlace {
 	display: contents;
+}
+
+#actionBlock {
+	opacity: 0;
 }
 
 .userProfile {

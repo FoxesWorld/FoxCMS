@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-09-26 17:27:54
+/* Smarty version 4.0.4, created on 2022-09-26 22:25:27
   from '/var/www/html/templates/bootstrap/userMenu.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6331b6ea813c73_41748956',
+  'unifunc' => 'content_6331fca707a9d9_89250700',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -23,7 +23,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:user/security.tpl' => 1,
   ),
 ),false)) {
-function content_6331b6ea813c73_41748956 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6331fca707a9d9_89250700 (Smarty_Internal_Template $_smarty_tpl) {
 ?>								<div class="tabs">
 									<ul class="tab_caption animate__animated animate__fadeInRightBig animate__delay-1s">
 										<li class="active" value="profile">Настройки профиля</li>

@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-09-26 17:27:54
+/* Smarty version 4.0.4, created on 2022-09-26 22:25:27
   from '/var/www/html/templates/bootstrap/user/personalisation.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6331b6ea81bcd4_62973389',
+  'unifunc' => 'content_6331fca7082b24_96259489',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6331b6ea81bcd4_62973389 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6331fca7082b24_96259489 (Smarty_Internal_Template $_smarty_tpl) {
 ?>											<h2 id="modalTitle">Давай украшать!</h2>
 											<span id="modalDesc">Посмотрим <b><?php echo $_smarty_tpl->tpl_vars['realname']->value;?>
 </b>, что ты тут можешь сделать...</span>

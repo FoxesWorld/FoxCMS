@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-09-26 17:27:54
+/* Smarty version 4.0.4, created on 2022-09-26 22:25:27
   from '/var/www/html/templates/bootstrap/user/security.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6331b6ea81f438_02437972',
+  'unifunc' => 'content_6331fca7086276_55806987',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6331b6ea81f438_02437972 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6331fca7086276_55806987 (Smarty_Internal_Template $_smarty_tpl) {
 ?>											<h2 id="modalTitle">Давай портить!</h2>
 											<span id="modalDesc">Настройки безопасности, <b><?php echo $_smarty_tpl->tpl_vars['realname']->value;?>
 </b>, изменить может тут</span>

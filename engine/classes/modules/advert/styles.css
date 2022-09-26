@@ -5,7 +5,11 @@
 
 #advertisment_text{
 	margin: 5px 0;
-} 
+}
+
+#advertisment_title {
+	opacity: 0;
+}
 
 .notify_block {
 	line-height: 1.15;

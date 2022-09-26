@@ -23,7 +23,7 @@
 				let advertisment_text = $("#advertisment_text");
 				let advertisment_link_name = $("#link"); 
 				let present = ' <i class="fa fa-gift" aria-hidden="true"></i>';
-                
+
 				if (type === 'error') {
 					if(debug === true)
 					console.warn('Error showing advertisment, so destroying it');
@@ -43,6 +43,7 @@
 							console.log('Showing Advertisment');
 							setTimeout(() => { 
 								$('#notify-content').css('display','block');
+								advAnimate();
 							}, 2000);
 						} else {
 							if(debug === true)
@@ -97,28 +98,35 @@
 		content.remove();
 	}
 }());
-
-function addFreeImage(getFreeImage){
-	$.post('', { 
-		getFreeImage: getFreeImage
-	}, function (data) {
-		data = JSON.parse(data);
-		let type = data['type'];
-		let message = data['message'];
-		$("#advertisment_text").notify(message,type);
-		if(type === 'success'){
-			setTimeout(function(){
-				closeImageGet();
-			}, 1500);
-		}
-    });
-}
 	
 function closeNotify() {
     let notify_content = $('#notify-content');
 	setCookie('advert', 'closed', 86400, '/', '192.168.0.100', true);
 	$("#notify_block").removeClass('animate__delay-4s');
 	$("#notify_block").addClass('animate__zoomOutRight');
-	console.log('Advert skiped.');
-    
+	console.log('Advert skiped.');    
+}
+
+function advAnimate() {
+var textWrapper = document.querySelector('#advertisment_text');
+textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+anime.timeline({loop: false})
+  .add({
+    targets: '#advertisment_text .letter',
+    scale: [4,1],
+    opacity: [0,1],
+    translateZ: 0,
+    easing: "easeOutExpo",
+    duration: 850,
+    delay: (el, i) => 70 * i
+  }).add({
+    targets: '#advertisment_title',
+    scale: [4,1],
+    opacity: [0,1],
+    translateZ: 0,
+    easing: "easeOutExpo",
+    duration: 950,
+    delay: (el, i) => 70 * i
+  });
 }

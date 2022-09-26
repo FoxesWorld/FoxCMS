@@ -21,7 +21,7 @@
 						  <div class="contact-info d-flex align-items-center">
 
 						  </div>
-							  <div class="cta d-none d-md-flex align-items-center" id="actionBlock">
+							  <div class="cta d-none d-md-flex align-items-center" data-in-effect="fadeIn" id="actionBlock">
 
 							  </div>
 						</div>

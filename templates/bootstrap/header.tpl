@@ -4,10 +4,14 @@
 		  <div class="logo">
 			<h1>
 				<a href="/">
-					<small>{$status}</small>
-					<img src="{$tplDir}/img/logo.png" alt="" class="img-fluid">{$title}
+					<small class="status">{$status}</small>
+					<img src="{$tplDir}/img/logo.png" alt="" class="img-fluid" />
+					<div class="title">{$title}</div>
+				<span class="line"></span>
 				</a>
+					 
 			</h1>
+			
 		  </div>
 
 		  <nav id="navbar" class="navbar "> <!-- navbar-mobile -->
