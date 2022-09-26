@@ -6,30 +6,29 @@ if (!defined('FOXXEY')) {
 		
 		protected $smarty;
 		
-		function __construct($builtLinks) {
+		function __construct() {
 			global $config;
-			require ("SmartyUtils.class.php");
-			$modalsToShow = new modalShow();
+			init::requireNestedClasses(basename(__FILE__), __DIR__);
+			$modalsToShow = new modalShow;
 			$this->smarty 					= new Smarty;
 			$this->smarty->debugging 		= false;
 			$this->smarty->cache_lifetime 	= 120;
 			$this->smarty->template_dir 	= ROOT_DIR.'/templates/'.$config['siteTpl'];
 			$this->smarty->compile_dir 		= ENGINE_DIR.'/cache/compile/';
 			$this->smarty->cache_dir 		= ENGINE_DIR.'/cache/cache/';
-			$this->smartyAssign($builtLinks);
+			$this->smartyAssign();
 			$this->smarty->display('main.tpl');
 		}
 		
-		protected function smartyAssign($builtLinks){
+		protected function smartyAssign(){
 			global $config;
-
 			$smartyUtils = new smartyUtils;
 			$profilePhotoPath = ROOT_DIR.UPLOADS.init::$usrArray['profilePhoto'];
-			$smartyUtils->pluginsInclude($this->toIncludeArray);
+			$smartyUtils->pluginsInclude();
 			$this->smarty->assign("systemHeaders", smartyUtils::$outString);
 			
 			//@Deprecated
-			$this->smarty->assign("links", $builtLinks);
+			$this->smarty->assign("links", "");
 			
 			
 			$this->smarty->assign("title", $config['title']);

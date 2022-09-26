@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-09-26 00:58:05
+/* Smarty version 4.0.4, created on 2022-09-26 17:27:54
   from '/var/www/html/templates/bootstrap/user/baseInfo.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6330ceedcf1ed2_27089628',
+  'unifunc' => 'content_6331b6ea818147_71032809',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6330ceedcf1ed2_27089628 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6331b6ea818147_71032809 (Smarty_Internal_Template $_smarty_tpl) {
 ?>											<h2 id="modalTitle">Давай меняй!</h2>
 											<span id="modalDesc">Посмотрим <b><?php echo $_smarty_tpl->tpl_vars['realname']->value;?>
 </b>, что ты тут можешь поменять...</span>

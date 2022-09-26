@@ -4,7 +4,7 @@ define('FOXXEY', true);
 require ('data/config.php');
 session_start();
 
-	class init extends initConfig {
+	class init {
 		
 		private $initHelper;
 		private $groupAssociacion;
@@ -41,7 +41,7 @@ session_start();
 			global $config;
 			$this->debug = $debug;
 			self::libFilesInclude(ENGINE_DIR.'syslib', $this->debug); //Require Syslib
-			$this->requireNestedClasses();
+			self::requireNestedClasses(basename(__FILE__), __DIR__);
 			$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
 			$this->logger = new Logger('lastlog');
 			$this->initHelper = new initHelper($this->db, $this->logger);
@@ -58,7 +58,7 @@ session_start();
 				self::$usrArray['group_name'] = $this->groupAssociacion->userGroupName();
 				
 				//@Deprecated
-				self::$links = $this->initHelper->getLinks();
+				//self::$links = $this->initHelper->getLinks();
 			
 			require (ENGINE_DIR.'syslib/smarty/Smarty.class.php');
 			$this->initHelper->modulesInc(ENGINE_DIR.'classes/modules');
@@ -71,15 +71,15 @@ session_start();
 			define('UPLOADS', '/uploads/'.self::$usrArray['login'].'/');
 			require (MODULES_DIR.'/FilePond/preLoad.php');
 			require (ENGINE_DIR.'classes/SmartyInit.class.php');
-			$smartyInit = new smartyInit(self::$links);
+			$smartyInit = new smartyInit();
 		}
 		
 		//CLASS METHODS
-		private function requireNestedClasses(){
-			$nestedClasses = filesInDir::filesInDirArray(__DIR__, ".php");
-			foreach($nestedClasses as $key){
-				if($key !== basename(__FILE__)) {
-					require($key);
+		protected static function requireNestedClasses($FILE, $DIR){
+			$nestedClasses = filesInDir::filesInDirArray($DIR, ".php");
+			foreach($nestedClasses as $DIR_FILE){
+				if($DIR_FILE !== $FILE) {
+					require($DIR.'/'.$DIR_FILE);
 				}
 			}
 		}

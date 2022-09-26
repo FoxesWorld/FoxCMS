@@ -417,13 +417,12 @@ section {
 	filter: grayscale(.8);
     width: 128;
     height: 128;
-	margin: 0px;
-	border-radius: 0px 0px 15px 0px;
-	overflow: hidden;
-	border: 1px solid #b1784a;
-	-webkit-box-shadow: 4px 2px 79px 3px rgba(214, 202, 50, 0.55);
-	-moz-box-shadow: 4px 2px 79px 3px rgba(214, 202, 50, 0.55);
-	box-shadow: 4px 2px 79px 3px rgba(214, 202, 50, 0.55);
+    margin: -2px;
+    border-radius: 10px 0px 15px 0px;
+    overflow: hidden;
+    -webkit-box-shadow: 4px 2px 79px 3px rgb(214 202 50 / 55%);
+    -moz-box-shadow: 4px 2px 79px 3px rgba(214, 202, 50, 0.55);
+    box-shadow: 4px 2px 79px 3px rgb(214 202 50 / 55%);
 }
 
 .profilePhoto:hover {

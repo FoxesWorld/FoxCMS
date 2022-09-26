@@ -30,13 +30,6 @@
 		'title' => 'FoxEngine',
 		'status' => 'Alpha',
 		
-		/* LINKS */
-		'links' => array(
-			array('TressModal', '#tess', '<i class="bi bi-bug"></i>'),
-			array('Wesp', 'wesp.ru', '<i class="bi bi-emoji-wink"></i>')
-		),
-		'additionalString' => 'onclick="$(this).notify(\'Work In Progress!\', \'info\'); return false" class="nav-link scrollto"',
-		
 		/* UserSettings */
 		'userDatainDb'   => array("user_id", "email", "login", "password", "user_group", "realname", "hash", "reg_date", "last_date", "profilePhoto"),
 		'Prmissions' => array(
@@ -44,23 +37,3 @@
 		)
 		
 	);
-	
-	class initConfig {
-		
-		//Plugins to include
-		//{Name} => (type, path, exclude, enabled)
-		//Will later be scanned automaticly
-		protected $toIncludeArray = array(
-			"BaseJS" 			=>	array('.js',  ENGINE_DIR.'plugins/', 				'', 	true),
-			"FoxEngineJS" 		=>	array('.js',  ENGINE_DIR.'plugins/FoxEngine/js/', 	'', 	true),
-			"FoxEngineCSS" 		=>	array('.css', ENGINE_DIR.'plugins/FoxEngine/css/', 	'', 	true),
-			"FontAwesomeCSS" 	=>	array('.css', ENGINE_DIR.'plugins/FontAwesome/css/', 	'', 	true),
-			"BootstrapJS" 		=>	array('.js',  ENGINE_DIR.'plugins/Bootstrap/js/', 	'.map', true),
-			"BootstrapCSS" 		=>	array('.css', ENGINE_DIR.'plugins/Bootstrap/css/', 	'.map', true),
-			"FoxModalCSS" 		=>	array('.css', ENGINE_DIR.'plugins/FoxModal/css/', 	'', 	true),
-			"FoxModalJS" 		=>	array('.js',  ENGINE_DIR.'plugins/FoxModal/js/', 	'', 	true),
-			"PaceCSS" 			=>	array('.css', ENGINE_DIR.'plugins/Pace/', 			'', 	true),
-			"PaceJS" 			=>	array('.js',  ENGINE_DIR.'plugins/Pace/', 			'',		true),
-			"FilePondJS" 		=>	array('.js',  ENGINE_DIR.'plugins/FilePond/js/', 	'',		true),
-			"FilePondCSS" 		=>	array('.css',  ENGINE_DIR.'plugins/FilePond/css/', 	'',		true));
-	}
