@@ -9,7 +9,7 @@ if (!defined('FOXXEY')) {
 		function __construct($builtLinks) {
 			global $config;
 			require ("SmartyUtils.class.php");
-			$modalsToShow = new modalShow($this->modalsArray);
+			$modalsToShow = new modalShow();
 			$this->smarty 					= new Smarty;
 			$this->smarty->debugging 		= false;
 			$this->smarty->cache_lifetime 	= 120;
@@ -27,7 +27,11 @@ if (!defined('FOXXEY')) {
 			$profilePhotoPath = ROOT_DIR.UPLOADS.init::$usrArray['profilePhoto'];
 			$smartyUtils->pluginsInclude($this->toIncludeArray);
 			$this->smarty->assign("systemHeaders", smartyUtils::$outString);
+			
+			//@Deprecated
 			$this->smarty->assign("links", $builtLinks);
+			
+			
 			$this->smarty->assign("title", $config['title']);
 			$this->smarty->assign("status", $config['status']);
 			$this->smarty->assign("year", date("Y"));
@@ -44,8 +48,6 @@ if (!defined('FOXXEY')) {
 					init::$usrArray["profilePhoto"] = "/templates/".$config['siteTpl']."/img/no-photo.jpg";
 				break;
 			}
-		
 			$smartyUtils->assignUserFields($this->smarty);	
-			
 		}
 	}

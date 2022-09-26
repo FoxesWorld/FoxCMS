@@ -54,7 +54,7 @@ if(!defined('profile')) {
 										if(@$request['userGroup'] !== "null") {
 											$this->inputGroup = $request['userGroup'];
 											if($this->inputGroup === $this->getUserfield("user_group")) {
-												if(in_array($this->inputGroup, $config['allowedProfileEdit'])) {
+												if(in_array($this->inputGroup, $config['Prmissions']['allowedProfileEdit'])) {
 												//ALL CHECKS PASSED
 													$this->profileChanges();
 														require_once (MODULES_DIR."FilePond/submit.php");

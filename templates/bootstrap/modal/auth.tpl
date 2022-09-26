@@ -1,5 +1,10 @@
 <mdlOpt>
-{"groupToShow": 5}
+{
+  "mdlAdress": "login",
+  "mdlTitle": "Авторизация",
+  "mdlDesc": "Я увольняюсь...",
+  "groupToShow": 5
+}
 </mdlOpt>
 <form method="POST" action="/" id="loginForm">
 	<table>

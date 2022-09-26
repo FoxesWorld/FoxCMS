@@ -1,5 +1,10 @@
 <mdlOpt>
-{"groupToShow": 5}
+{
+  "mdlAdress": "reg",
+  "mdlTitle": "Регистрация",
+  "mdlDesc": "Я увольняюсь...",
+  "groupToShow": 5
+}
 </mdlOpt>
 	<form method="POST" action="/" id="registerForm" autocomplete="false">
 		<div class="input_block animated fadeInRight">

@@ -22,30 +22,75 @@ if (!defined('FOXXEY')) {
 	class modalConstructor extends init {
 
 		private $modalElements = array('mdlAdress', 'mdlTitle', 'mdlDesc', 'mdlContent');
-		private $modalShape = '';
+		private $allowedModals = array();
+		private $modalContents = '';
 		private $tplBase = '/modalComponent.tpl';
+		private $allModals;
+		private $mdlOut;
 
-		
-		
-		function __construct($mdlAdress, $mdlTitle, $mdlDesc, $mdlContent, $replaceArray ='') {
-			global $config;
-			$file = ROOT_DIR."/templates/".$config['siteTpl'].'/components/'.$this->tplBase;
-			if(file_exists($file)) {
-				$this->modalShape = file::efile($file)["content"];
+		function __construct($modalFileDir, $modalsArray, $UserArray) {
 			
-				foreach($this->modalElements as $key){
-					$this->modalShape = str_replace("{".$key."}", ${$key}, $this->modalShape);
-					if(is_array($replaceArray)){
-						foreach($replaceArray as $key => $value){
-							$this->modalShape = str_replace("{".$key."}", $value, $this->modalShape);
+			if($UserArray['user_group']) {
+				$this->setBaseContent();
+				
+				//Getting all found modals + their options
+				foreach($modalsArray as $key) {
+					$modalTemplateContents = $this->getModalContent($modalFileDir, $key);
+					$this->allModals[$key] = $this->getModalOptions($modalTemplateContents);
+					$this->allModals[$key]['mdlContent'] = $modalTemplateContents;	
+					$this->groupCheck($UserArray["user_group"], $this->allModals[$key]["groupToShow"], $key);  //Selcting allowed modals
+				}
+
+				//Selected modals for current user
+				foreach($this->allowedModals as $filteredName){
+					foreach($this->modalElements as $modalElement) {
+						$currentValue = $this->allModals[$filteredName][$modalElement];
+						$currentElement = "{".$modalElement."}";
+						if($currentValue) {
+							$this->modalContents = str_replace($currentElement, $currentValue, $this->modalContents);
 						}
 					}
+					$this->mdlOut[] = $this->modalContents;
+					$this->setBaseContent();
 				}
 			}
 		}
-
-		public function mdlOut(){
-			echo $this->modalShape;
+		
+		private function groupCheck($userGroup = 5, $modalGroup, $modalName) {
+			switch(is_array($modalGroup)){
+				case false:
+					if($userGroup === $modalGroup){
+							$this->allowedModals[] = $modalName;
+					}
+				break;
+						
+				case true:
+					if(in_array($userGroup, $modalGroup)) {
+						$this->allowedModals[] = $modalName;
+					}
+				break;
+			}
 		}
 		
+		private function getModalOptions($modalContents) {
+				$optionsArray = functions::getStrBetween($modalContents, "<mdlOpt>","</mdlOpt>")[0];
+				$decodedOptions = json_decode($optionsArray, true);
+				
+				return $decodedOptions;
+		}
+		
+		private function getModalContent($path, $modalFile) {
+			$modalTemplateContents = file::efile($path.$modalFile)["content"];
+			
+			return $modalTemplateContents;
+		}
+		
+		private function setBaseContent() {
+			global $config;
+			$this->modalContents = file::efile(ROOT_DIR."/templates/".$config['siteTpl'].'/components/'.$this->tplBase)["content"];
+		}
+
+		public function mdlOut(){
+			return $this->mdlOut;
+		}	
 	}

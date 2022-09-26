@@ -39,13 +39,17 @@
 		
 		/* UserSettings */
 		'userDatainDb'   => array("user_id", "email", "login", "password", "user_group", "realname", "hash", "reg_date", "last_date", "profilePhoto"),
-		'allowedProfileEdit' => array(1,4)
+		'Prmissions' => array(
+			'allowedProfileEdit' => array(1,4)
+		)
+		
 	);
 	
 	class initConfig {
 		
 		//Plugins to include
 		//{Name} => (type, path, exclude, enabled)
+		//Will later be scanned automaticly
 		protected $toIncludeArray = array(
 			"BaseJS" 			=>	array('.js',  ENGINE_DIR.'plugins/', 				'', 	true),
 			"FoxEngineJS" 		=>	array('.js',  ENGINE_DIR.'plugins/FoxEngine/js/', 	'', 	true),
@@ -59,11 +63,4 @@
 			"PaceJS" 			=>	array('.js',  ENGINE_DIR.'plugins/Pace/', 			'',		true),
 			"FilePondJS" 		=>	array('.js',  ENGINE_DIR.'plugins/FilePond/js/', 	'',		true),
 			"FilePondCSS" 		=>	array('.css',  ENGINE_DIR.'plugins/FilePond/css/', 	'',		true));
-		
-		//Modals to show
-		protected $modalsArray = array(
-			"login" => array("Авторизация", "Что бы на сайт войти логин и пароль нам нужно ввести", "%file:=auth"),
-			"reg" 	=> array("Регистрация", "Регистрируйтесь пожалуйста", "%file:=reg"),
-			//"cp" => array("Личный кабинет", "Посмотрим <b>{realname}</b>, что ты тут можешь поменять...", "%file:=cp")
-		);
 	}
