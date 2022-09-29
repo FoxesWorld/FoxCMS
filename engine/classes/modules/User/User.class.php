@@ -24,5 +24,4 @@
 					require ('UserActions.class.php');
 					$userActions = new UserActions($this->db, $this->logger, $_REQUEST);
 			}
-			
 		}

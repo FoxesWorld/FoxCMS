@@ -9,12 +9,14 @@ if(!defined('FOXXEY')) {
 		
 		function __construct(){
 			global $config;
-			$this->modalFilesDir = ROOT_DIR."/templates/".$config['siteTpl'].'/modal/';
+			$this->modalFilesDir = ROOT_DIR."/templates/".$config['siteTpl'].$config['modalSearch'];
 			$modalsArray = filesInDir::filesInDirArray($this->modalFilesDir, ".tpl");
 			$getModals = new modalConstructor($this->modalFilesDir, $modalsArray, init::$usrArray);
 			$availableModals = $getModals->mdlOut();
-			foreach($availableModals as $modal){
-				echo $modal;
+			if(is_array($availableModals)) {
+				foreach($availableModals as $modal){
+					echo $modal;
+				}
 			}
 		}
 	}

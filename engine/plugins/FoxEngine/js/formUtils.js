@@ -1,11 +1,17 @@
+/*
+*	Form Utils ver - 0.1.0
+*	Copyright Foxesworld.ru
+*/	
+	let debug = true;
+	
 	function formInit(sleep) {
 			setTimeout(() => {
-				console.info('%c Using FoxesWorld Form Utils...', 'background: #39312fc7; color: yellow');
+				if(debug)console.info('%c Using FoxesWorld Form Utils', 'background: #39312fc7; color: yellow');
 				let forms = document.querySelectorAll("form");
 				if (forms.length >= 1) {
-					console.log("Found forms: " + forms.length);
+					if(debug)console.log("Found forms: " + forms.length);
 					forms.forEach(form => {
-						console.log("    - "+form.id);
+						if(debug)console.log("    - "+form.id);
 						form.addEventListener("submit", function(event) {
 							event.preventDefault();
 							let data = collectFormData(form);
@@ -15,7 +21,7 @@
 						});
 					});
 				} else {
-					console.warn("No forms were found!");
+					if(debug)console.warn("No forms were found!");
 				}
 			}, sleep);
 		};

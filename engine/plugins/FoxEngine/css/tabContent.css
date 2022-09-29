@@ -1,5 +1,5 @@
 .tabs {
-	display: contents;
+	height: 100%;
 }
 
 .tabs input[type="submit"] {

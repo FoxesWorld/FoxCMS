@@ -1,8 +1,8 @@
 <?php
-if(!defined('userUtils')) {
+if(!defined('auth')) {
 	die ('{"message": "Not in userUtils thread"}');
 }
-	class loadUserInfo extends utilsLoader {
+	class loadUserInfo extends AuthManager {
 		
 		private $userInfoArray = array();
 		

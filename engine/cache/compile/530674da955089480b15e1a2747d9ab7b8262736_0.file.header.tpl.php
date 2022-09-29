@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-09-26 22:25:27
+/* Smarty version 4.0.4, created on 2022-09-29 16:30:00
   from '/var/www/html/templates/bootstrap/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6331fca706c581_85352602',
+  'unifunc' => 'content_63359dd8bcf6c8_18626408',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '530674da955089480b15e1a2747d9ab7b8262736' => 
     array (
       0 => '/var/www/html/templates/bootstrap/header.tpl',
-      1 => 1664220143,
+      1 => 1664298511,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6331fca706c581_85352602 (Smarty_Internal_Template $_smarty_tpl) {
+function content_63359dd8bcf6c8_18626408 (Smarty_Internal_Template $_smarty_tpl) {
 ?>  <header id="header" class="d-flex align-items-center">
 		<div class="container d-flex align-items-center justify-content-between">
 
@@ -29,8 +29,7 @@ function content_6331fca706c581_85352602 (Smarty_Internal_Template $_smarty_tpl)
 				<a href="/">
 					<small class="status"><?php echo $_smarty_tpl->tpl_vars['status']->value;?>
 </small>
-					<img src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
-/img/logo.png" alt="" class="img-fluid" />
+					<img alt="" class="img-fluid" />
 					<div class="title"><?php echo $_smarty_tpl->tpl_vars['title']->value;?>
 </div>
 				<span class="line"></span>
@@ -40,7 +39,7 @@ function content_6331fca706c581_85352602 (Smarty_Internal_Template $_smarty_tpl)
 			
 		  </div>
 
-		  <nav id="navbar" class="navbar "> <!-- navbar-mobile -->
+		  <nav id="navbar" class="navbar ">
 			<ul id="links">
 				<?php echo $_smarty_tpl->tpl_vars['links']->value;?>
 
@@ -64,7 +63,7 @@ function content_6331fca706c581_85352602 (Smarty_Internal_Template $_smarty_tpl)
 			  </li>
 			  <li><a class="nav-link scrollto" href="#contact">Contact</a></li> -->
 			</ul>
-			<i class="bi mobile-nav-toggle bi-list"></i>
+
 		  </nav>
 
 		</div>

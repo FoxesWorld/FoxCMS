@@ -23,13 +23,15 @@ if (!defined('FOXXEY')) {
 		protected function smartyAssign(){
 			global $config;
 			$smartyUtils = new smartyUtils;
+			$PluginsScanner = new PluginsScanner(ENGINE_DIR.'plugins/');
+			$PluginsScanner->pluginsInclude();
+			
 			$profilePhotoPath = ROOT_DIR.UPLOADS.init::$usrArray['profilePhoto'];
-			$smartyUtils->pluginsInclude();
-			$this->smarty->assign("systemHeaders", smartyUtils::$outString);
+			$this->smarty->assign("systemHeaders", $PluginsScanner->outString);
 			
 			//@Deprecated
 			$this->smarty->assign("links", "");
-			
+
 			
 			$this->smarty->assign("title", $config['title']);
 			$this->smarty->assign("status", $config['status']);
@@ -44,7 +46,7 @@ if (!defined('FOXXEY')) {
 				break;
 				
 				default:
-					init::$usrArray["profilePhoto"] = "/templates/".$config['siteTpl']."/img/no-photo.jpg";
+					init::$usrArray["profilePhoto"] = "/templates/".$config['siteTpl']."/assets/img/no-photo.jpg";
 				break;
 			}
 			$smartyUtils->assignUserFields($this->smarty);	

@@ -35,8 +35,7 @@ if(!defined('FOXXEY')) {
 			$this->db = $db;
 			$this->logger = $logger;
 			$this->db->run($this->dbShape);
-			require(dirname(__FILE__).'/classes/utilsLoader.class.php');
-			$utilsLoader = new utilsLoader;
+			init::requireNestedClasses(basename(__FILE__), __DIR__."/classes/userUtilities/");
 			$this->typeAction();
 		}
 		
@@ -46,20 +45,18 @@ if(!defined('FOXXEY')) {
 		
 		private function typeAction(){
 			if(@$this->actionType) {
+				init::requireNestedClasses(basename(__FILE__), __DIR__."/classes/actions/");
 				switch($this->actionType){
 					
 					case 'auth':
-						require (dirname(__FILE__).'/classes/authorise.class.php');
 						$auth = new authorise($_POST, $this->db, $this->logger);
 					break;
 							
 					case 'reg':
-						require (dirname(__FILE__).'/classes/register.class.php');
 						$req = new register($_REQUEST, $this->db, $this->logger);
 					break;
 					
 					case 'subscribe':
-						require (dirname(__FILE__).'/classes/subscribe.class.php');
 						$subscribe = new subscribe($_REQUEST, $this->db, $this->logger);
 						$subscribe->subscribe();
 					break;
@@ -69,5 +66,12 @@ if(!defined('FOXXEY')) {
 
 				}
 			}
+		}
+		
+		public static function updateSession($db) {
+			init::requireNestedClasses(basename(__FILE__), __DIR__."/classes/userUtilities/");
+			$loadUserInfo = new loadUserInfo(init::$usrArray['login'], $db);
+			$userData = $loadUserInfo->userInfoArray();
+			$sessionManager = new sessionManager($userData);
 		}
 	}

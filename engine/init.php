@@ -52,6 +52,7 @@ session_start();
 		 * included and no UI is sent 
 		 */
 		private function init() {
+			global $config;
 				self::$usrArray['realname'] = randTexts::getRandText('noName');	
 				$this->initHelper->userArrFill(); //UsrArray Override (if IsLogged)
 				$this->groupAssociacion = new groupAssociacion(self::$usrArray['user_group'], $this->db);
@@ -59,7 +60,7 @@ session_start();
 				
 				//@Deprecated
 				//self::$links = $this->initHelper->getLinks();
-			
+			define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['siteTpl'].'/');
 			require (ENGINE_DIR.'syslib/smarty/Smarty.class.php');
 			$this->initHelper->modulesInc(ENGINE_DIR.'classes/modules');
 		}
@@ -67,7 +68,6 @@ session_start();
 		/* After postInit we have full UI sent */
 		private function postInit() {
 			global $config;
-			define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['siteTpl'].'/');
 			define('UPLOADS', '/uploads/'.self::$usrArray['login'].'/');
 			require (MODULES_DIR.'/FilePond/preLoad.php');
 			require (ENGINE_DIR.'classes/SmartyInit.class.php');
@@ -79,7 +79,7 @@ session_start();
 			$nestedClasses = filesInDir::filesInDirArray($DIR, ".php");
 			foreach($nestedClasses as $DIR_FILE){
 				if($DIR_FILE !== $FILE) {
-					require($DIR.'/'.$DIR_FILE);
+					require_once($DIR.'/'.$DIR_FILE);
 				}
 			}
 		}

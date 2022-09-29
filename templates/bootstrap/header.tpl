@@ -5,7 +5,7 @@
 			<h1>
 				<a href="/">
 					<small class="status">{$status}</small>
-					<img src="{$tplDir}/img/logo.png" alt="" class="img-fluid" />
+					<img alt="" class="img-fluid" />
 					<div class="title">{$title}</div>
 				<span class="line"></span>
 				</a>
@@ -14,7 +14,7 @@
 			
 		  </div>
 
-		  <nav id="navbar" class="navbar "> <!-- navbar-mobile -->
+		  <nav id="navbar" class="navbar ">
 			<ul id="links">
 				{$links}
 				<!--
@@ -37,7 +37,7 @@
 			  </li>
 			  <li><a class="nav-link scrollto" href="#contact">Contact</a></li> -->
 			</ul>
-			<i class="bi mobile-nav-toggle bi-list"></i>
+
 		  </nav>
 
 		</div>

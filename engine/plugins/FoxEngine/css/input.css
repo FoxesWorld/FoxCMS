@@ -62,7 +62,7 @@
 	text-transform: uppercase;
 }
 
-[type=button], [type=reset], [type=submit], button{
+[type=button], [type=reset], [type=submit], button {
 	font-family: 'FSElliotPro-Bold';
 	color: white;
 }
@@ -82,7 +82,8 @@
     font-size: 22px;
     font-weight: 600;
     cursor: pointer;
-    border-radius: 4px
+    border-radius: 4px;
+	font-size: inherit;
 }
 
 
@@ -99,6 +100,7 @@
     margin: 5px 0px;
 	cursor: pointer;
     border: 0;
+	font-size: inherit;
 }
 
 [type=button], [type=reset], [type=submit], button:hover.logout  {

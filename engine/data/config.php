@@ -5,7 +5,7 @@
 	define('CURRENT_TIME',time());
 	define('CURRENT_DATE',date("d.m.Y"));
 	define('REMOTE_IP',   getenv('REMOTE_ADDR'));
-	require ('ru_ru.lang');
+	require ('language/ru_ru.lang');
 	
 	$config = array(
 	
@@ -24,15 +24,17 @@
 		'bantime'			=> CURRENT_TIME + (120),
 		'maxLoginAttempts'	=> 1,
 		
+		'modalSearch' => '/modal/',
+		
 	/*WebSite Appeareance*/
 	
 		/*Title*/
 		'title' => 'FoxEngine',
-		'status' => 'Alpha',
+		'status' => '<span class="additionalStatus">Post-</span>Alpha',
 		
 		/* UserSettings */
 		'userDatainDb'   => array("user_id", "email", "login", "password", "user_group", "realname", "hash", "reg_date", "last_date", "profilePhoto"),
-		'Prmissions' => array(
+		'Permissions' => array(
 			'allowedProfileEdit' => array(1,4)
 		)
 		

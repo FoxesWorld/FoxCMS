@@ -84,7 +84,7 @@ if (!defined('profile')) {
 					FilePond\remove_transfer_directory(TRANSFER_DIR, $id);
 					if(FilePond\is_valid_transfer_id($id)) {
 						$status = "success";
-						$message = "Well done!";
+						$message = $lang['successLoad'];
 					} else {
 						$status = "warn";
 						$message = $lang["errorLoad"];

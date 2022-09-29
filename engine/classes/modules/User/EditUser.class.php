@@ -54,7 +54,7 @@ if(!defined('profile')) {
 										if(@$request['userGroup'] !== "null") {
 											$this->inputGroup = $request['userGroup'];
 											if($this->inputGroup === $this->getUserfield("user_group")) {
-												if(in_array($this->inputGroup, $config['Prmissions']['allowedProfileEdit'])) {
+												if(in_array($this->inputGroup, $config['Permissions']['allowedProfileEdit'])) {
 												//ALL CHECKS PASSED
 													$this->profileChanges();
 														require_once (MODULES_DIR."FilePond/submit.php");
@@ -64,7 +64,7 @@ if(!defined('profile')) {
 																'BASE64_ENCODED_FILE_OBJECTS' => 'handle_base64_encoded_file_post',
 																'TRANSFER_IDS' 				  => 'handle_transfer_ids_post'
 															], $this->db, $this->logger, $this->requestArray);
-													$this->updateSession();
+													AuthManager::updateSession($db);
 												} else {
 													$this->status = "warn";
 													$this->statusInfo = $lang['restrictdUsergroup'];
@@ -128,14 +128,6 @@ if(!defined('profile')) {
 				$query = "UPDATE `users` SET ".$this->userQuery." WHERE login = '".$this->inputLogin."'";
 				$this->db->run($query);
 			}
-		}
-		
-		private function updateSession() {
-			require(MODULES_DIR.'AuthManager/classes/utilsLoader.class.php');
-			$utilsLoader = new utilsLoader;
-			$loadUserInfo = new loadUserInfo(init::$usrArray['login'], $this->db);
-			$userData = $loadUserInfo->userInfoArray();
-			$sessionManager = new sessionManager($userData);
 		}
 		
 		private function passCheck($newPass, $repeatPass){

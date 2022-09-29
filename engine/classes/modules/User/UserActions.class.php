@@ -36,7 +36,7 @@ if(!defined('profile')) {
 								break;
 									
 								default:
-									$text = randTexts::getRandText('greetings')." ".init::$usrArray['realname']."!";
+									$text = randTexts::getRandText('greetings');
 								break;
 							} 
 							die('{"text": "'.$text.'"}');
@@ -53,8 +53,12 @@ if(!defined('profile')) {
 		}
 		
 		protected function logout(){
-			session_destroy();
-			functions::jsonAnswer('Logged out!', false);
+			global $lang;
+			if(init::$usrArray["isLogged"] === true) {
+				session_destroy();
+				functions::jsonAnswer($lang['loggedOut'], false);
+			} else {
+				functions::jsonAnswer("Cant logOut!", true);
+			}
 		}
-		
 	}

@@ -37,10 +37,16 @@ function request(path, args, timeDelay) {
 	};
 	
 	this.sendGet = function httpGet(theUrl) {
-		var xmlHttp = new XMLHttpRequest();
-		xmlHttp.open("GET", theUrl, false);
-		xmlHttp.send();
-		return xmlHttp.responseText.replace(/(\r\n|\n|\r|\t)/gm, "");
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+			if (this.readyState != 4) return;
+			if (this.status == 200) {
+				return this.responseText;
+			}
+		};
+
+		xhr.open('GET', theUrl, true);
+		xhr.send();
 	};
 	
 	this.upload = function( file, params, progress, load){

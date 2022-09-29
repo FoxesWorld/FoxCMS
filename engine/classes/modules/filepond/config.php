@@ -23,10 +23,5 @@ const ALLOWED_FILE_FORMATS = array(
     'text/plain', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
 );
 
-$lang = array(
-		"successLoad" => "Успешная загрузка",
-		"errorLoad" => "Ошибка загрузки",
-		"noFiles" => "Нет файла для загрузки!");
-
 if (!is_dir(UPLOAD_DIR)) mkdir(UPLOAD_DIR, 0755);
 if (!is_dir(TRANSFER_DIR)) mkdir(TRANSFER_DIR, 0755);

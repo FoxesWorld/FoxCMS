@@ -1,8 +1,8 @@
 <?php
-if(!defined('userUtils')) {
+if(!defined('auth')) {
 	die ('{"message": "Not in userUtils thread"}');
 }
-	class sessionManager extends utilsLoader {
+	class sessionManager extends AuthManager {
 		
 		function __construct($userData) {
 			global $config;

@@ -1,0 +1,8 @@
+		<li>
+		<a onclick="loadPage('{optionName}');return false; ">
+			<div class="rightIcon">
+				{optionPreText}
+			</div>
+		{optionTitle}
+		</a>
+		</li>

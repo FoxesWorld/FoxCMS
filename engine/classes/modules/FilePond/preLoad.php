@@ -20,6 +20,9 @@ FilePond\catch_server_exceptions();
 	header('Access-Control-Allow-Methods: OPTIONS, GET, DELETE, POST, HEAD, PATCH');
 	header('Access-Control-Allow-Headers: content-type, upload-length, upload-offset, upload-name');
 	header('Access-Control-Expose-Headers: upload-offset');
+	header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+	header("Cache-Control: post-check=0, pre-check=0", false);
+	header("Pragma: no-cache");
 
 	function route_PreLoad($entries, $routes) {
 		$preLoad = new preLoad();
@@ -67,7 +70,7 @@ FilePond\catch_server_exceptions();
 		function handle_file_transfer($transfer) {
 			global $config;
 			if(init::$usrArray['isLogged']) {
-				if(in_array(init::$usrArray['user_group'], $config['allowedProfileEdit'])) {
+				if(init::$usrArray['isLogged']) {
 					$files = $transfer->getFiles();
 					$this->metadata = $transfer->getMetadata();
 					$this->filesTest($files);

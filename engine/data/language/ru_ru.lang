@@ -1,0 +1,38 @@
+<?php
+
+	$lang = array(
+	
+		/*ProfilEdit*/
+		'noLoginSent' => "Не передан логин!",
+		'noHashSent' => "Не передан хеш!",
+		'hashMismatch' => "Не подошёл хеш для {user}!",
+		'noPassword' => "Не введен пароль!",
+		'incorrectPassword' => "Неправильный пароль!",
+		'noEmail' => "Не введена почта!",
+		'invalidEmail' => "Не валидная почта!",
+		'noUsergroup' => "Не передана группа!",
+		'invalidUsergroup' => "Не твоя группа!",
+		'restrictdUsergroup' => "Вашей группе запрещено изменять профиль",
+		'profileUpdated' => "Профиль обновлен!",
+		'needAuthorise' => "Необходима авторизация!",
+		
+		/*LoadFile*/
+		'successLoad' => "Успешная загрузка",
+		'errorLoad' => "Ошибка загрузки",
+		'noFiles' => "Нет файла для загрузки!",
+		
+		/*Auth*/
+		'authSuccess' => "Успешная авторизация!",
+		'authWrong' => "Неверный логин или пароль!",
+		
+		/*LogOut*/
+		'loggedOut' => "Выход произведен!",
+		
+		/*Register*/
+		'loginUsed' => "Данный логин уже зарегистрирован!",
+		'enailUsed' => "Данная почта уже была зарегистрирована!",
+		"passUnequals" => "Пароли не совпадают",
+		'passBadSyms' => "Плохие символы пароля!",
+		'passTooShort' => "Короткий пароль - ",
+		'regComplete' => "Регистрация завершена!"
+	);
