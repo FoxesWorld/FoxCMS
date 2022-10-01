@@ -5,9 +5,11 @@ if(!defined('auth')) {
 	class sessionManager extends AuthManager {
 		
 		function __construct($userData) {
+			
 			global $config;
-			for($i = 0; $i < count($userData); $i++) {
-				$_SESSION[$config['userDatainDb'][$i]] = $userData[$i];
+			
+			foreach($userData as $key => $value){
+				$_SESSION[$key] = $value;
 			}
 			$_SESSION['isLogged'] = true;
 		}

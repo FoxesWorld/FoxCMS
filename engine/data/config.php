@@ -37,7 +37,7 @@
 	
 		/*Title*/
 		'title' => 'FoxEngine',
-		'status' => '<span class="additionalStatus">Post-</span>Alpha',
+		'status' => '<span class="additionalStatus">EXPERI</span>MENTAL',
 		
 		/* UserSettings */
 		'userDatainDb'   => array("user_id", "email", "login", "password", "user_group", "realname", "hash", "reg_date", "last_date", "profilePhoto"),

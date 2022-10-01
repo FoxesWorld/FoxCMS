@@ -8,9 +8,8 @@ if(!defined('auth')) {
 		
 		function __construct($login, $db){
 			global $config;
-			foreach($config['userDatainDb'] as $key){	
-				$this->userInfoArray[] = functions::getUserData($login, $key, $db);
-			}
+			$query = "SELECT * FROM `users` WHERE login = '".$login."'";
+			$this->userInfoArray = $db->getRow($query);
 		}
 		
 		public function userInfoArray(){

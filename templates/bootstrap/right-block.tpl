@@ -25,7 +25,7 @@
 														<ul id="usrMenu">
 
 														</ul>
-														<input id="user_doaction" class="input" type="hidden" value="logout">
+														<input id="userAction" class="input" type="hidden" value="logout">
 														</form>
 											</div>
 												{if !$isLogged}

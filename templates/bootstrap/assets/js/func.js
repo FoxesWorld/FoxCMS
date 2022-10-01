@@ -43,8 +43,10 @@
 	  let answer;
 	  answer = request.send_post({user_doaction: "greeting"});
 	  answer.onreadystatechange = function() {
-		answer = JSON.parse(this.responseText);
-		$("#actionBlock").html(answer.text + ' ' + realname + '!');	
+	  try {
+			answer = JSON.parse(this.responseText);
+			$("#actionBlock").html(answer.text + ' ' + realname + '!');
+	  } catch(error) {}		
 	  };
 	textAnimate(); 
   }
@@ -135,4 +137,22 @@
 					break;
 				}
 			} */
+	}
+	
+	function parseModulesInfo() {
+	  let answer;
+	  answer = request.send_post({admPanel: "greeting"});
+	  answer.onreadystatechange = function() {
+		try {
+		  let json = JSON.parse(this.responseText);
+		  let modulesAmmount = json.modulesammount;
+		  let modulesArray = json.modulesArray;
+		  modulesArray.forEach(function(entry) {
+			console.log(entry);
+		  });
+		  
+		} catch (error) {
+			return null;
+		}
+	  };
 	}

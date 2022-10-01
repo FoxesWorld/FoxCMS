@@ -152,7 +152,7 @@ if(!defined('profile')) {
 		}
 		
 		
-		private function getUserfield($userfild){
-			return functions::getUserData($this->inputLogin, $userfild, $this->db);
+		private function getUserfield($userfiled){
+			return functions::getUserData($this->inputLogin, $userfiled, $this->db);
 		}
 	}

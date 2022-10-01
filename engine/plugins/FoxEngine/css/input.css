@@ -200,6 +200,7 @@
 	/*CAPTCHA*/
 
 .c-captcha {
+	display: inline-flex;
 	width: auto;
     margin: 0 auto;
 }

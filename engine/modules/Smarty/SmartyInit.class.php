@@ -1,4 +1,10 @@
 <?php
+/*FoxesModule%>
+{
+	"version": "V 1.3.2",
+	"description": "UI init"
+}
+<%FoxesModule*/
 if (!defined('FOXXEY')) {
 	die ('{"message": "Not in FOXXEY thread"}');
 }

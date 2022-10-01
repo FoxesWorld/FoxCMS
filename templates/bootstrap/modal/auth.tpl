@@ -31,13 +31,19 @@
 		</tr>
 		</table>
 		
-		
+		<label for="rememberMe" class="checkbox_container">
+			Запомнить меня
+			<input type="checkbox" style="display: none;" id="rememberMe">
+			<span class="checkmark"></span>
+		</label>
 		
 		<div class="c-captcha">
 			<div class="g-recaptcha" data-sitekey="6LcKeBoiAAAAAGnhfzZnLyzUApLmgnOpP4OfFOB7" data-theme="Light"></div>
 			<script src="https://www.google.com/recaptcha/api.js?hl={$lang['wysiwyg_language']}" async defer></script>
 		</div>	
-		<input id="userAction" class="input" type="hidden" value="auth">
+		<input id="userAction" class="input" type="hidden" value="auth" />
+		
+
 		
 	</form>
 	

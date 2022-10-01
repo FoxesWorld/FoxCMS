@@ -12,20 +12,20 @@
 				<input id="tab1" type="radio" name="tabs" checked /> 
 				<label for="tab1">Статистика</label> 
 
-				<input id="tab2" type="radio" name="tabs" onclick="loadModulesUnfo()" /> 
+				<input id="tab2" type="radio" name="tabs" onclick="parseModulesInfo()" /> 
 				<label for="tab2">Модули</label> 
 
 				<input id="tab3" type="radio" name="tabs" /> 
 				<label for="tab3">Пользователи</label> 
 
 				<input id="tab4" type="radio" name="tabs" /> 
-				  <label for="tab4">Ещё</label> 
+				<label for="tab4">Ещё</label> 
 			  
 				<section id="content1"> 
 					<p>Описание</p> 
 				</section>  
 
-				<section id="content2"> 
+				<section id="content2" class="modulesBlock"> 
 					<p>Описание</p> 
 				</section>  
 

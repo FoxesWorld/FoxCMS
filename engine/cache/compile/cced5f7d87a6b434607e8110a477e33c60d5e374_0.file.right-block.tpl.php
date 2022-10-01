@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-09-30 12:25:08
+/* Smarty version 4.0.4, created on 2022-10-01 22:21:45
   from '/var/www/html/templates/bootstrap/right-block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6336b5f47940e6_39990363',
+  'unifunc' => 'content_63389349f1ac19_32701512',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cced5f7d87a6b434607e8110a477e33c60d5e374' => 
     array (
       0 => '/var/www/html/templates/bootstrap/right-block.tpl',
-      1 => 1664465773,
+      1 => 1664650865,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6336b5f47940e6_39990363 (Smarty_Internal_Template $_smarty_tpl) {
+function content_63389349f1ac19_32701512 (Smarty_Internal_Template $_smarty_tpl) {
 ?>				  <div class="row rightBlock">
 							<div class="card">
 								<div id="userBlock">	
@@ -53,7 +53,7 @@ function content_6336b5f47940e6_39990363 (Smarty_Internal_Template $_smarty_tpl)
 														<ul id="usrMenu">
 
 														</ul>
-														<input id="user_doaction" class="input" type="hidden" value="logout">
+														<input id="userAction" class="input" type="hidden" value="logout">
 														</form>
 											</div>
 												<?php if (!$_smarty_tpl->tpl_vars['isLogged']->value) {?>

@@ -8,9 +8,11 @@ if(!defined('auth')) {
 		protected $db, $logger;
 		
 		function __construct($input, $db, $logger){
-			$this->db = $db;
-			$this->logger = $logger;
-			$this->inputArray = functions::collectData($input, true);
+			if(@init::$REQUEST["userAction"] === "subscribe") {
+				$this->db = $db;
+				$this->logger = $logger;
+				$this->inputArray = functions::collectData($input, true);
+			}
 		}
 		
 		protected function subscribe(){

@@ -13,7 +13,7 @@
 
 			public function userArrFill(){
 				global $config;
-				if(init::$usrArray['isLogged']){
+				if(init::$usrArray['isLogged'] === true){
 					foreach($config['userDatainDb'] as $key){
 						init::$usrArray[$key] = $_SESSION[$key];
 					}

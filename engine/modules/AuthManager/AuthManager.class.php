@@ -1,73 +1,60 @@
 <?php
 /*FoxesModule%>
 {
-	"version": "V 1.0.1",
+	"version": "V 1.2.0 Alpha",
 	"description": "Authorisation & Registration module"
 }
 <%FoxesModule*/
-if(!defined('FOXXEY')) {
-	die("Hacking attempt!");
-} else {
-	define('auth', true);
-}
 
-	if(isset(init::$REQUEST['userAction'])) {
-		$authWrapper = new AuthManager(init::$REQUEST, $this->db, $this->logger);
+	if(!defined('FOXXEY')) {
+		die("Hacking attempt!");
+	} else {
+		define('auth', true);
 	}
+
+	$authWrapper = new AuthManager($this->db, $this->logger);
 
 	class AuthManager extends init {
 		
 		protected $db;
 		protected $logger;
-		private $dbShape = "CREATE TABLE IF NOT EXISTS `users` (
-		  `user_id` int(8) NOT NULL,
-		  `login` varchar(16) NOT NULL,
-		  `password` varchar(128) NOT NULL,
-		  `email` varchar(64) NOT NULL,
-		  `user_group` int(4) NOT NULL,
-		  `realname` varchar(32) NOT NULL,
-		  `hash` varchar(64) NOT NULL,
-		  `reg_date` varchar(32) NOT NULL,
-		  `last_date` varchar(32) NOT NULL
-		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+		private $dbShape = "";
 		
-		private $actionType;
+		protected static $userToken = "userToken";
 		
-		function __construct($request, $db, $logger){
-			$this->requestInit($request);
+		function __construct($db, $logger){
 			$this->db = $db;
 			$this->logger = $logger;
-			$this->db->run($this->dbShape);
 			init::requireNestedClasses(basename(__FILE__), __DIR__."/classes/userUtilities/");
-			$this->typeAction();
+			$this->authActionsInit();
+			$this->checkUserToken();	
 		}
 		
-		protected function requestInit($request){
-			$this->actionType = $request["userAction"];
-		}
-		
-		private function typeAction(){
-			if(@$this->actionType) {
-				init::requireNestedClasses(basename(__FILE__), __DIR__."/classes/actions/");
-				switch($this->actionType){
+		private function authActionsInit(){
+			init::requireNestedClasses(basename(__FILE__), __DIR__."/classes/actions/");
+			if(!init::$usrArray['isLogged']) {
+				$auth = new authorise(init::$REQUEST, $this->db, $this->logger);
+				$reg = new register(init::$REQUEST, $this->db, $this->logger);
+				$subscribe = new subscribe(init::$REQUEST, $this->db, $this->logger);
+			}
+				
+			switch(@init::$REQUEST["userAction"]) {
 					
-					case 'auth':
-						$auth = new authorise(init::$REQUEST, $this->db, $this->logger);
-					break;
+				case 'auth':
+					$auth->auth();
+				break;
 							
-					case 'reg':
-						$req = new register(init::$REQUEST, $this->db, $this->logger);
-					break;
+				case 'reg':
+					$reg->register();
+				break;
 					
-					case 'subscribe':
-						$subscribe = new subscribe(init::$REQUEST, $this->db, $this->logger);
-						$subscribe->subscribe();
-					break;
-							
-					default:
-					break;
-
-				}
+				case 'subscribe':
+					$subscribe->subscribe();
+				break;
+					
+				case 'logout':
+					$this->logout();
+				break;
 			}
 		}
 		
@@ -76,5 +63,26 @@ if(!defined('FOXXEY')) {
 			$loadUserInfo = new loadUserInfo(init::$usrArray['login'], $db);
 			$userData = $loadUserInfo->userInfoArray();
 			$sessionManager = new sessionManager($userData);
+		}
+		
+		private function checkUserToken() {
+			$username = "";
+			if(isset($_COOKIE[self::$userToken])) {
+				$token = functions::filterString($_COOKIE[self::$userToken]);
+				$query = "SELECT login from `users` WHERE hash = '".$token."'";
+				$username = $this->db->getValue($query);
+				$auth = new authorise("", $this->db, $this->logger, $username);
+			}
+		}
+		
+		protected function logout(){
+			global $lang;
+			if(init::$usrArray["isLogged"] === true) {
+				session_destroy();
+				setcookie(self::$userToken, "", time() - 3600);
+				functions::jsonAnswer($lang['loggedOut'], false);
+			} else {
+				functions::jsonAnswer("Cant logOut!", true);
+			}
 		}
 	}

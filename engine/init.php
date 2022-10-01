@@ -11,6 +11,7 @@ session_start();
 		
 		protected $debug, $logger, $db;
 		protected static $usrArray = array(
+			'isLogged' => false,
 			'user_id' => 0,
 			'email' => "foxengine@foxes.ru",
 			'login' => "anonymous",
@@ -62,7 +63,7 @@ session_start();
 			define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['siteTpl'].'/');
 			define('UPLOADS', '/uploads/'.self::$usrArray['login'].'/');
 			
-			init::$modulesArray = $this->initHelper->modulesInc(MODULES_DIR, "primary");
+			init::$modulesArray = $this->initHelper->modulesInc(MODULES_DIR, "primary");	
 		}
 		
 		/* After postInit we have full UI sent */

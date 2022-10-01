@@ -5,30 +5,73 @@ if(!defined('auth')) {
 	class authorise extends AuthManager {
 		
 		private $authData = array();
+		protected $db;
+		protected $logger;
 		
-		function __construct($input, $db, $logger){
+		/*INPUT*/
+		private $inputPassword;
+		private $inputLogin;
+		private $rememberMe;
+		private $realPassword;
+		
+		function __construct($input = "", $db, $logger, $authLogin = ""){
 			global $config, $lang;
-			$this->authData = functions::collectData($input, true);
-			$inputPassword = $this->authData['password'];
-			$userPassword = functions::getUserData($this->authData['login'], 'password', $db);
-			if(authorize::passVerify($inputPassword, $userPassword)) {
-				$this->authUpdates($this->authData['login'], $db);
+			$this->db = $db;
+			$this->logger = $logger;
 
-				$loadUserInfo = new loadUserInfo($this->authData['login'], $db);
-				$userData = $loadUserInfo->userInfoArray();
+			if(@init::$REQUEST["userAction"] === "auth") {
+				$this->authData = functions::collectData($input, true);
+					
+				$this->inputPassword = $this->authData['password'];
+				$this->inputLogin = $this->authData['login'];
+				$this->rememberMe = $this->authData["rememberMe"];
+				$this->realPassword = functions::getUserData($this->inputLogin, 'password', $db);
 
-				$sessionManager = new sessionManager($userData);
-				$logger->WriteLine($this->authData['login']." successfuly authorised");
+			} elseif($authLogin !== "") {
+				$this->setUserdata($authLogin);
+			}
+		}
+		
+		protected function auth() {
+			global $lang;
+			if(authorize::passVerify($this->inputPassword, $this->realPassword)) {
+				$this->setUserdata($this->authData['login']);
+				$this->setTokenIfNeeded($this->rememberMe, $this->inputLogin);
+				$this->logger->WriteLine($this->inputLogin." successfuly authorised");
 				functions::jsonAnswer($lang['authSuccess'], false);
 			} else {
-				$logger->WriteLine($this->authData['login']." failed authorisation with password ".$this->authData['password']);
-				$antiBrute = new antiBrute(REMOTE_IP, $db, false);
+				$this->logger->WriteLine($this->authData['login']." failed authorisation with password ".$this->inputPassword);
+				$antiBrute = new antiBrute(REMOTE_IP, $this->db, false);
 				functions::jsonAnswer($lang['authWrong']);
 			}
 		}
 		
-		private function authUpdates($login, $db){
-			$query = "UPDATE `users` SET hash='".authorize::generateLoginHash()."', last_date='".CURRENT_TIME."' WHERE login = '".$login."'";
-			$db->query($query);
+		private function lastAuth($login, $db){
+			$query = "UPDATE `users` SET last_date='".CURRENT_TIME."' WHERE login = '".$login."'";
+			$this->db->query($query);
+		}
+		
+		private function setUserdata($login) {
+			$this->lastAuth($login, $this->db);
+			$loadUserInfo = new loadUserInfo($login, $this->db);
+			$userData = $loadUserInfo->userInfoArray();
+			$sessionManager = new sessionManager($userData);
+			init::$usrArray['isLogged'] = true;
+		}
+		
+		private function setTokenIfNeeded($checkbox, $login) {
+			$token = authorize::generateLoginHash();
+			switch($checkbox) {
+				case 1:
+					$query = "UPDATE `users` SET hash='".$token."' WHERE login = '".$login."'";
+					setcookie(AuthManager::$userToken, $token, time() + (1000 * 60 * 60 * 24 * 30));
+				break;
+				
+				default:
+					$query = "UPDATE `users` SET hash='' WHERE login = '".$login."'";
+					setcookie(AuthManager::$userToken, "", time() - 3600);
+				break;
+			}
+			$this->db->query($query);
 		}
 	}

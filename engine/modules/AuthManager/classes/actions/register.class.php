@@ -11,17 +11,11 @@ if(!defined('auth')) {
 		
 		function __construct($input, $db, $logger){
 			global $lang;
-			$this->logger = $logger;
-			$this->db = $db;
-			$this->regData = functions::collectData($input, true);
-			$this->checkPass();
-			if(!functions::checkExistingData($this->db, 'login', $this->regData['login']) === false){
-				exit('{"message": "'.$lang['loginUsed'].'", "type": "warn"}');
+			if(@init::$REQUEST["userAction"] === "register") {
+				$this->logger = $logger;
+				$this->db = $db;
+				$this->regData = functions::collectData($input, true);
 			}
-			if(!functions::checkExistingData($this->db, 'email', $this->regData['email']) === false){
-				exit('{"message": "'.$lang['emailUsed'].'", "type": "warn"}');
-			}
-			$this->regiter();
 		}
 		
 		private function checkPass() {
@@ -43,8 +37,16 @@ if(!defined('auth')) {
 			}
 		}
 		
-		private function regiter(){
+		protected function regiter(){
 			global $config;
+			
+			$this->checkPass();
+			if(!functions::checkExistingData($this->db, 'login', $this->regData['login']) === false){
+				exit('{"message": "'.$lang['loginUsed'].'", "type": "warn"}');
+			}
+			if(!functions::checkExistingData($this->db, 'email', $this->regData['email']) === false){
+				exit('{"message": "'.$lang['emailUsed'].'", "type": "warn"}');
+			}
 			functions::checkSA($this->regData);
 			$this->logger->WriteLine("Trying to register user '".$this->regData['login']."'");
 			$password = password_hash($this->regData['password'], PASSWORD_DEFAULT);

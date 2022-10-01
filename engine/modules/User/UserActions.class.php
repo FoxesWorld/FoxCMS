@@ -19,10 +19,6 @@ if(!defined('profile')) {
 				$this->fRequest = functions::collectData($request, true);
 				switch(init::$REQUEST[$this->userActionReq]){
 
-					case 'logout':
-						$this->logout();
-					break;
-						
 					case 'EditUser':
 						require ('EditUser.class.php');
 						$EditUser = new EditUser($this->fRequest, $db, $logger);
@@ -37,16 +33,6 @@ if(!defined('profile')) {
 						functions::jsonAnswer('Unknown userRequest!', true);
 					break;
 				}
-			}
-		}
-		
-		protected function logout(){
-			global $lang;
-			if(init::$usrArray["isLogged"] === true) {
-				session_destroy();
-				functions::jsonAnswer($lang['loggedOut'], false);
-			} else {
-				functions::jsonAnswer("Cant logOut!", true);
 			}
 		}
 	}
