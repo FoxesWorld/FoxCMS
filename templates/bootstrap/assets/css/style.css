@@ -120,6 +120,10 @@ ul {
 	    height: fit-content;
 		border-radius: 5px;
 	}
+	
+	.pageRoot .page-content {
+		display: flow-root;
+	}
 
 	.pageRoot .page-title {
 		background: #ffd9a78a;

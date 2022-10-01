@@ -12,10 +12,10 @@
 			}
 
 			public function userArrFill(){
-				global $config;
 				if(init::$usrArray['isLogged'] === true){
-					foreach($config['userDatainDb'] as $key){
-						init::$usrArray[$key] = $_SESSION[$key];
+					
+					foreach($_SESSION as $key => $value){
+						init::$usrArray[$key] = $value;
 					}
 				}
 			}

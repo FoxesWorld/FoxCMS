@@ -42,12 +42,16 @@ session_start();
 			global $config;
 			$this->debug = $debug;
 			self::libFilesInclude(ENGINE_DIR.'syslib', $this->debug); //Require Syslib
-			require (ENGINE_DIR.'syslib/smarty/Smarty.class.php');
 			self::requireNestedClasses(basename(__FILE__), __DIR__);
 			$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
 			$this->logger = new Logger('lastlog');
 			$this->initHelper = new initHelper($this->db, $this->logger);
-			self::$usrArray['isLogged'] = @$_SESSION['isLogged'];
+
+			init::$modulesArray = $this->initHelper->modulesInc(MODULES_DIR, "preInit");
+			
+			self::$usrArray['realname'] = randTexts::getRandText('noName');	
+			$this->initHelper->userArrFill(); //UsrArray Override (if IsLogged)
+			require (ENGINE_DIR.'syslib/smarty/Smarty.class.php');
 		}
 		
 		/* After init we have all modules
@@ -55,10 +59,9 @@ session_start();
 		 */
 		private function init() {
 			global $config;
-				self::$usrArray['realname'] = randTexts::getRandText('noName');	
-				$this->initHelper->userArrFill(); //UsrArray Override (if IsLogged)
-				$this->groupAssociacion = new groupAssociacion(self::$usrArray['user_group'], $this->db);
-				self::$usrArray['group_name'] = $this->groupAssociacion->userGroupName();
+				
+			$this->groupAssociacion = new groupAssociacion(self::$usrArray['user_group'], $this->db);
+			self::$usrArray['group_name'] = $this->groupAssociacion->userGroupName();
 				
 			define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['siteTpl'].'/');
 			define('UPLOADS', '/uploads/'.self::$usrArray['login'].'/');

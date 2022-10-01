@@ -35,7 +35,7 @@
 		
 		<label for="acceptForm" class="checkbox_container">
 			Даю согласие на обработку персональных данных <i class="fa fa-address-card" aria-hidden="true"></i>
-			<input type="radio" style="display: none;" id="acceptForm" value="1">
+			<input type="checkbox" style="display: none;" id="acceptForm" value="1">
 			<span class="checkmark"></span>
 		</label>
 

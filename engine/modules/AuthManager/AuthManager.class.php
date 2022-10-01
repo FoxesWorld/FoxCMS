@@ -26,12 +26,12 @@
 			$this->db = $db;
 			$this->logger = $logger;
 			init::requireNestedClasses(basename(__FILE__), __DIR__."/classes/userUtilities/");
-			$this->authActionsInit();
-			$this->checkUserToken();	
+			init::requireNestedClasses(basename(__FILE__), __DIR__."/classes/actions/");
+			$this->checkUserToken();
+			$this->authActionsInit();	
 		}
 		
 		private function authActionsInit(){
-			init::requireNestedClasses(basename(__FILE__), __DIR__."/classes/actions/");
 			if(!init::$usrArray['isLogged']) {
 				$auth = new authorise(init::$REQUEST, $this->db, $this->logger);
 				$reg = new register(init::$REQUEST, $this->db, $this->logger);
