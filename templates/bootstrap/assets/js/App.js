@@ -1,7 +1,7 @@
 const App = new Vue({
 	delimiters: ["<%","%>"],
 	el: '#content',
-	data: {contentData: 'GG'},
+	data: {contentData: ' Waiting for you!'},
 	
 
 	mounted() {

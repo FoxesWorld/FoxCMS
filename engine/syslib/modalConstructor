@@ -24,7 +24,7 @@ if (!defined('FOXXEY')) {
 		private $modalElements = array('mdlAdress', 'mdlTitle', 'mdlDesc', 'mdlContent');
 		private $allowedModals = array();
 		private $modalContents = '';
-		private $tplBase = '/modalComponent.tpl';
+		private $tplBase;
 		private $allModals;
 		private $mdlOut;
 
@@ -87,7 +87,7 @@ if (!defined('FOXXEY')) {
 		
 		private function setBaseContent() {
 			global $config;
-			$this->modalContents = file::efile(ROOT_DIR."/templates/".$config['siteTpl'].'/components/'.$this->tplBase)["content"];
+			$this->modalContents = file::efile(ROOT_DIR."/templates/".$config['siteTpl'].$config['modalTplBase'])["content"];
 		}
 
 		public function mdlOut(){

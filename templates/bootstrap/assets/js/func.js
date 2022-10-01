@@ -1,17 +1,17 @@
 
   	function loadPage(page) {
-		addAnimation('animate__backOutRight', $('#content'));
+		addAnimation('animate__backOutRight', $(contentBlock));
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 		setTimeout(() => {
 			let optionContent;
 			  optionContent = request.send_post({"getOption": page});
 			  optionContent.onreadystatechange = function() {
-				$("#content").html(this.responseText);
+				$(contentBlock).html(this.responseText);
 			  }
 			  formInit(100);
 		}, 500);
 		setTimeout(() => {
-			addAnimation('animate__bounceInDown', $('#content'));
+			addAnimation('animate__bounceInDown', $(contentBlock));
 		}, 400);
 	}
 
@@ -41,7 +41,7 @@
 
   function userAction() {
 	  let answer;
-	  answer = request.send_post({user_doaction: "adminAction"});
+	  answer = request.send_post({user_doaction: "greeting"});
 	  answer.onreadystatechange = function() {
 		answer = JSON.parse(this.responseText);
 		$("#actionBlock").html(answer.text + ' ' + realname + '!');	

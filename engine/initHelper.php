@@ -1,9 +1,11 @@
 <?php
 		class initHelper extends init {
-			
+
 			protected $db;
 			protected $logger;
-			
+
+			private $moduleIncOptionsFile = "incOptions";
+
 			function __construct($db, $logger) {
 				$this->db = $db;
 				$this->logger = $logger;
@@ -18,63 +20,101 @@
 				}
 			}
 
-			public function modulesInc($path){
-				global $config;
+			protected function modulesInc($path, $includePriority = "") {
+				
+				$modulesIncluded = array();
+				$counter = 0;
+				$modulePriority = "primary";
 				$modulesArray = filesInDir::filesInDirArray($path);
-				foreach($modulesArray as $key){
-					$thisModule = $path.'/'.$key;
-					$file = $thisModule.'/'.$key.'.class.php';
-					switch(file_exists($thisModule.'/incOptions')){
-						case true:
-							$includeOptions = json_decode(file::efile($thisModule.'/incOptions')["content"], false);
-							switch($includeOptions->classFile){
-								
-								case "noInclude":
-								break;
-								
-								case "includeFile":
-									require ($thisModule.'/'.$includeOptions->mainclass);
-								break;
+
+				foreach($modulesArray as $moduleName){
+					$currentModuleDirectory = $path.DIRECTORY_SEPARATOR.$moduleName;
+					$mainClassFile = $moduleName.'.class.php';
+					$moduleIncOptFile = $currentModuleDirectory.DIRECTORY_SEPARATOR.$this->moduleIncOptionsFile;
+					$moduleMainFilePath = $currentModuleDirectory.DIRECTORY_SEPARATOR.$mainClassFile;
+
+					if(file_exists($moduleIncOptFile)) {
+						$moduleIncOptFileContents = file::efile($moduleIncOptFile)["content"];
+						$moduleIncOptFileArray = json_decode($moduleIncOptFileContents, true);
+						foreach($moduleIncOptFileArray as $optionName => $optionValue) {
+							if($optionName === "classFile") {
+								switch($optionValue) {
+
+
+									case "includeFile":
+										$mainClassFile = $moduleIncOptFileArray["mainClass"];
+										$moduleMainFilePath = $currentModuleDirectory.DIRECTORY_SEPARATOR.$mainClassFile;
+									break;
+
+									case "noInclude":
+										unset($moduleMainFilePath);
+									break;
+								}
 							}
-							
-						break;
-						
-						case false:
-						if(file_exists($file)) {
-							require($file);
+
+							if($optionName === "priority") {
+								$modulePriority = $optionValue;
+							}
 						}
-						break;
+					}
+
+					if(isset($moduleMainFilePath)) {
+						if(file_exists($moduleMainFilePath)) {
+						$moduleInfo = $this->readModuleInfo($moduleMainFilePath);
+							$version = $moduleInfo["version"] ?? "unknown";
+							$description = $moduleInfo["description"] ?? "No description";
+							$modulesIncluded["modulesArray"][$moduleName] = array(
+								"moduleName" => $moduleName,
+								"version" => $version,
+								"description" => $description,
+								"moduleMainClass" => $mainClassFile,
+								"modulePriority" => $modulePriority
+							);
+
+							if(isset($modulePriority)) {
+								if($modulePriority === $includePriority) {
+									require_once($moduleMainFilePath);
+								}
+							} else {
+								require_once($moduleMainFilePath);
+							}
+							$counter++;
+						}
 					}
 				}
-			}
+				$modulesIncluded["modulesammount"] = $counter;
 
-			//@Deprecated
-			protected  function getLinks(){
-				$strOut = "";
-				global $config;
-				foreach($config['links'] as $key => $value){
-					$strOut .= '<li><a '.$config['additionalString'].' href="'.$value[1].'">'.$value[2].$value[0].'</a><li>';
+				return $modulesIncluded;
+			}
+			
+			private function readModuleInfo($path) {
+				$decodedOptions = "";
+				$moduleContents = file::efile($path)["content"];
+				$moduleInfo = functions::getStrBetween($moduleContents, "/*FoxesModule%>","<%FoxesModule*/");
+				if(count($moduleInfo) > 0) {
+					$decodedOptions = json_decode($moduleInfo[0], true);
 				}
-				return $strOut;
+				
+				return $decodedOptions;
 			}
 		}
-		
+
 		class groupAssociacion extends init {
-			
+
 			private $userGroup;
 			protected $db;
 			private $dbTabble = "groupAssociation";
-			
+
 			function __construct($userGroup, $db){
 				$this->userGroup = $userGroup;
 				$this->db = $db;
 			}
-			
+
 			public function userGroupName(){
 				$query = "SELECT * FROM `".$this->dbTabble."` WHERE groupNum = ".$this->userGroup."";
 				$answer = $this->db->getRow($query);
-				
+
 				return $answer["groupType"];
 			}
-			
+
 		}

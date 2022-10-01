@@ -66,14 +66,13 @@ html.foxModal-is-locked {
 
 .foxModal {
   position: relative;
-
   outline: none;
-
   text-size-adjust: 100%;
 }
 
 .foxModal-is-initialized {
   /* Disable Anti-FOUC */
   border-radius: 10px;
+  overflow-x: hidden;
   display: inline-block;
 }

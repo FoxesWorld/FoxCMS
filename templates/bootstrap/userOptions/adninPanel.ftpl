@@ -1,0 +1,41 @@
+<useroption>
+{
+	"optionTitle": "Админ панель",
+	"optionPreText": "<i class=\"fa fa-bolt\"></i>",
+	"optionGroup": 1
+}
+</useroption>
+    <div class="adminPanel">
+		<div id="container"> 
+			<div class="tabs">
+
+				<input id="tab1" type="radio" name="tabs" checked /> 
+				<label for="tab1">Статистика</label> 
+
+				<input id="tab2" type="radio" name="tabs" onclick="loadModulesUnfo()" /> 
+				<label for="tab2">Модули</label> 
+
+				<input id="tab3" type="radio" name="tabs" /> 
+				<label for="tab3">Пользователи</label> 
+
+				<input id="tab4" type="radio" name="tabs" /> 
+				  <label for="tab4">Ещё</label> 
+			  
+				<section id="content1"> 
+					<p>Описание</p> 
+				</section>  
+
+				<section id="content2"> 
+					<p>Описание</p> 
+				</section>  
+
+				<section id="content3"> 
+					<p>Веселимся</p> 
+				</section> 
+			 
+				<section id="content4"> 
+					<p>Описание</p> 
+				</section>  
+			</div> 
+		</div>
+	</div>

@@ -20,7 +20,14 @@
 										<ul class="userActions">
 											<li>
 											
-											{include file="user/userMenu.tpl"}
+											<div class="right-profile-menu">
+														<form method="POST" action="/" id="sessionActions">
+														<ul id="usrMenu">
+
+														</ul>
+														<input id="user_doaction" class="input" type="hidden" value="logout">
+														</form>
+											</div>
 												{if !$isLogged}
 														<a href="#login">
 															<button type="submit" class="login">Авторизация <i class="fa fa-sign-in"></i>

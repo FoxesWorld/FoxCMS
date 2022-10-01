@@ -2,7 +2,6 @@
 
 	<head>
 		{$systemHeaders}
-		{$builtInJS}	
 		<meta charset="utf-8">
 		<meta name="HandheldFriendly" content="true">
 		<title>{$title}</title>
@@ -13,6 +12,7 @@
 		<link href="{$tplDir}/assets/css/style.css" rel="stylesheet">
 		<script src="{$tplDir}/assets/js/func.js"></script>
 		<script type="module" src="{$tplDir}/assets/js/App.js"></script>
+		{$builtInJS}
 	</head>
 
 	<body>
@@ -42,7 +42,7 @@
 				</div>
 			</div>
 		</div>
-		{include file='components/advertComponent.tpl'}
+
 	{include file='footer.tpl'}
 	 </body>
  </html>

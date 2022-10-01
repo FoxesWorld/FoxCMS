@@ -7,13 +7,12 @@
 (function () {	
 
 	let debug = false;
+	let advertRequest;
 
 	if(debug)console.info('%c Using FoxesWorld Advert 0.1.7...', 'background: #39312fc7; color: yellow');
-	$.post('', {
-          advert: "!"
-			}, function (advertData) {
-				if(debug)
-				console.log('parsed advertData '+advertData);
+	advertRequest = request.send_post({"advert": "HH"});
+	advertRequest.onreadystatechange = function() {
+	if(debug)console.log('parsed advertData '+advertData);
             try {
                 advertData = JSON.parse(advertData);
                 let type = advertData['type'];
@@ -23,9 +22,10 @@
 				let advertisment_text = $("#advertisment_text");
 				let advertisment_link_name = $("#link"); 
 
-				if (type === 'error') {
-					if(debug)
-					console.warn('Error showing advertisment, so destroying it');
+				if (!type || type === 'error') {
+					if(debug) {
+						console.warn('Error showing advertisment, so destroying it');
+					}
 					content.remove();
                     return;
                 }
@@ -53,11 +53,12 @@
 					advAnimate();
                     return;
 			}
-            
+           
 			} catch (e) {
                 //console.log(e); Debug logging
             }
-        });
+		}
+
 		
 	let content = document.getElementById('notify-content');
 	if (getCookie('advert') === "closed"){

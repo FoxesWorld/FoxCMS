@@ -23,8 +23,8 @@ session_start();
 			'profilePhoto' => "avatar.jpg"
 		);
 		
-		//@Deprecated
-		protected static $links;
+		protected static $REQUEST;
+		protected static $modulesArray = array();
 
 		function __construct($debug = false) {
 			global $config;
@@ -41,6 +41,7 @@ session_start();
 			global $config;
 			$this->debug = $debug;
 			self::libFilesInclude(ENGINE_DIR.'syslib', $this->debug); //Require Syslib
+			require (ENGINE_DIR.'syslib/smarty/Smarty.class.php');
 			self::requireNestedClasses(basename(__FILE__), __DIR__);
 			$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
 			$this->logger = new Logger('lastlog');
@@ -58,19 +59,15 @@ session_start();
 				$this->groupAssociacion = new groupAssociacion(self::$usrArray['user_group'], $this->db);
 				self::$usrArray['group_name'] = $this->groupAssociacion->userGroupName();
 				
-				//@Deprecated
-				//self::$links = $this->initHelper->getLinks();
 			define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['siteTpl'].'/');
-			require (ENGINE_DIR.'syslib/smarty/Smarty.class.php');
-			$this->initHelper->modulesInc(ENGINE_DIR.'classes/modules');
+			define('UPLOADS', '/uploads/'.self::$usrArray['login'].'/');
+			
+			init::$modulesArray = $this->initHelper->modulesInc(MODULES_DIR, "primary");
 		}
 		
 		/* After postInit we have full UI sent */
 		private function postInit() {
-			global $config;
-			define('UPLOADS', '/uploads/'.self::$usrArray['login'].'/');
-			require (MODULES_DIR.'/FilePond/preLoad.php');
-			require (ENGINE_DIR.'classes/SmartyInit.class.php');
+			init::$modulesArray = $this->initHelper->modulesInc(MODULES_DIR, "secondary");
 			$smartyInit = new smartyInit();
 		}
 		

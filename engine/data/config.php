@@ -1,7 +1,7 @@
 <?php
 	define('ROOT_DIR', 	$_SERVER['DOCUMENT_ROOT']);
 	define('ENGINE_DIR',ROOT_DIR.'/engine/');
-	define('MODULES_DIR',ROOT_DIR.'/engine/classes/modules/');
+	define('MODULES_DIR',ENGINE_DIR.'modules/');
 	define('CURRENT_TIME',time());
 	define('CURRENT_DATE',date("d.m.Y"));
 	define('REMOTE_IP',   getenv('REMOTE_ADDR'));
@@ -18,15 +18,22 @@
 		'siteTpl' => 'bootstrap',
 		'timezone'=> 'Europe/Moscow',
 		'webserviceName'=> 'FoxEngine',
-		'secureKey' => 'ghYyufghVH',
+		'keyCheck' => true,
 		
 		/* AUTHORISATION */
 		'bantime'			=> CURRENT_TIME + (120),
 		'maxLoginAttempts'	=> 1,
 		
-		'modalSearch' => '/modal/',
+		/*JavaScript*/
+		'javascript' => array(
+			'contentBlock' => "#content",
+			'secureKey' => 'ghYyufghVH'),
 		
-	/*WebSite Appeareance*/
+		/*Content options*/
+		'modalSearch' => '/modal',
+		'modalTplBase' => '/modal/modalView/modalBase.tpl',
+		'userOptions' => "/userOptions",
+		'userOptionsTplBase' => "/userOptions/optionsView/optionBase.ftpl",
 	
 		/*Title*/
 		'title' => 'FoxEngine',
@@ -37,5 +44,4 @@
 		'Permissions' => array(
 			'allowedProfileEdit' => array(1,4)
 		)
-		
 	);

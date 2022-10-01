@@ -1,27 +1,26 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-09-29 16:30:00
+/* Smarty version 4.0.4, created on 2022-09-30 12:25:08
   from '/var/www/html/templates/bootstrap/right-block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_63359dd8bd6bd8_57707327',
+  'unifunc' => 'content_6336b5f47940e6_39990363',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cced5f7d87a6b434607e8110a477e33c60d5e374' => 
     array (
       0 => '/var/www/html/templates/bootstrap/right-block.tpl',
-      1 => 1664455780,
+      1 => 1664465773,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
-    'file:user/userMenu.tpl' => 1,
   ),
 ),false)) {
-function content_63359dd8bd6bd8_57707327 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6336b5f47940e6_39990363 (Smarty_Internal_Template $_smarty_tpl) {
 ?>				  <div class="row rightBlock">
 							<div class="card">
 								<div id="userBlock">	
@@ -49,8 +48,14 @@ function content_63359dd8bd6bd8_57707327 (Smarty_Internal_Template $_smarty_tpl)
 										<ul class="userActions">
 											<li>
 											
-											<?php $_smarty_tpl->_subTemplateRender("file:user/userMenu.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-?>
+											<div class="right-profile-menu">
+														<form method="POST" action="/" id="sessionActions">
+														<ul id="usrMenu">
+
+														</ul>
+														<input id="user_doaction" class="input" type="hidden" value="logout">
+														</form>
+											</div>
 												<?php if (!$_smarty_tpl->tpl_vars['isLogged']->value) {?>
 														<a href="#login">
 															<button type="submit" class="login">Авторизация <i class="fa fa-sign-in"></i>
