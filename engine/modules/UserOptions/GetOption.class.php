@@ -6,14 +6,15 @@ if(!defined('FOXXEY')) {
 		
 		private $getOptionRequest = "getOption";
 		private $pageRplace = array();
-		private $pageTplFile = "/pageTpl.ftpl";
+		private $pageTplFile;
 		private $pageTemplate;
 		private $requestedOption;
 		private $requestLogin;
 		
 		function __construct($userLogin){
 			global $config;
-			if(@isset($_POST[$this->getOptionRequest])){
+			if(@isset(init::$REQUEST[$this->getOptionRequest])){
+				$this->pageTplFile = TEMPLATE_DIR.$config['pageTplFile'];
 				$this->requestedOption = functions::filterString($_POST[$this->getOptionRequest]);
 					if(in_array($this->requestedOption, UserOptions::$availableForCurrentUser["optionNames"])) {
 						$this->buildPage(UserOptions::$availableForCurrentUser[$this->requestedOption]);
@@ -35,6 +36,6 @@ if(!defined('FOXXEY')) {
 		}
 		
 		private function setTpl() {
-			$this->pageTemplate = file::efile(__DIR__.$this->pageTplFile)["content"];
+			$this->pageTemplate = file::efile($this->pageTplFile)["content"];
 		}
 	}

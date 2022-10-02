@@ -6,7 +6,6 @@
 }
 </useroption>
     <div class="adminPanel">
-		<div id="container"> 
 			<div class="tabs">
 
 				<input id="tab1" type="radio" name="tabs" checked /> 
@@ -37,5 +36,4 @@
 					<p>Описание</p> 
 				</section>  
 			</div> 
-		</div>
 	</div>

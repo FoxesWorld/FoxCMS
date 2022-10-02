@@ -14,11 +14,10 @@ class Logger {
 		global $config;
 		$this->logDate = '['.CURRENT_DATE.'] ('.date("H:i:s").') ';
 		$this->file = $this->bindDir.$logname.'.log';
-		//$this->WriteLine("Log started...");
-
     }
 
     function WriteLine($text) {
+		try {
         $fp = fopen($this->file, "a+");
         if($fp) {
             fwrite($fp,$this->logDate.$text . "\n");
@@ -26,6 +25,9 @@ class Logger {
             $this->error = "Error writing logFile";
         }
         fclose($fp);
+		} catch(Exception $e) {
+			die('{"message": "Error in log writing - '.$e.'"}');
+		}
     }
 
     function Read() {

@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-10-01 22:21:45
+/* Smarty version 4.0.4, created on 2022-10-02 10:11:31
   from '/var/www/html/templates/bootstrap/footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_63389349f21801_98513012',
+  'unifunc' => 'content_633939a3c53de5_46694936',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_63389349f21801_98513012 (Smarty_Internal_Template $_smarty_tpl) {
+function content_633939a3c53de5_46694936 (Smarty_Internal_Template $_smarty_tpl) {
 ?>  		<footer class="bar">
 			<div class="container footer--flex">
 				<div class="footer-copyright">

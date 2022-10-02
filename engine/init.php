@@ -63,7 +63,7 @@ session_start();
 			$this->groupAssociacion = new groupAssociacion(self::$usrArray['user_group'], $this->db);
 			self::$usrArray['group_name'] = $this->groupAssociacion->userGroupName();
 				
-			define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['siteTpl'].'/');
+			define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['javascript']['siteTpl'].'/');
 			define('UPLOADS', '/uploads/'.self::$usrArray['login'].'/');
 			
 			init::$modulesArray = $this->initHelper->modulesInc(MODULES_DIR, "primary");	

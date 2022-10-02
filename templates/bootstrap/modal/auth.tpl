@@ -2,7 +2,7 @@
 {
   "mdlAdress": "login",
   "mdlTitle": "Авторизация",
-  "mdlDesc": "Я увольняюсь...",
+  "mdlDesc": "Что бы войти, логин и пароль нужно ввести!",
   "groupToShow": 5
 }
 </mdlOpt>

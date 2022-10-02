@@ -20,12 +20,16 @@ if(!defined('auth')) {
 			$this->logger = $logger;
 
 			if(@init::$REQUEST["userAction"] === "auth") {
-				$this->authData = functions::collectData($input, true);
-					
-				$this->inputPassword = $this->authData['password'];
-				$this->inputLogin = $this->authData['login'];
-				$this->rememberMe = $this->authData["rememberMe"];
-				$this->realPassword = functions::getUserData($this->inputLogin, 'password', $db);
+				if(!init::$usrArray['isLogged']) {
+					if(is_array($input)) {
+						$this->authData = functions::collectData($input, true);
+							
+						$this->inputPassword = $this->authData['password'];
+						$this->inputLogin = $this->authData['login'];
+						$this->rememberMe = $this->authData["rememberMe"];
+						$this->realPassword = functions::getUserData($this->inputLogin, 'password', $db);
+					}
+				}
 
 			} elseif($authLogin !== "") {
 				$this->setUserdata($authLogin);

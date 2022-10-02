@@ -141,18 +141,40 @@
 	
 	function parseModulesInfo() {
 	  let answer;
-	  answer = request.send_post({admPanel: "greeting"});
+	  
+	  answer = request.send_post({admPanel: "gg"});
 	  answer.onreadystatechange = function() {
-		try {
-		  let json = JSON.parse(this.responseText);
-		  let modulesAmmount = json.modulesammount;
-		  let modulesArray = json.modulesArray;
-		  modulesArray.forEach(function(entry) {
-			console.log(entry);
-		  });
-		  
-		} catch (error) {
-			return null;
-		}
+		  $(".modulesBlock").html("");
+		  if (answer.readyState === 4) {  
+				try {
+					  let json = JSON.parse(this.responseText);
+					  let modulesAmmount = json.modulesammount;
+					  let modulesArray = json.modulesArray;
+					  let moduleOut;
+					for (var i = 0; i < modulesAmmount; i++){
+					  var obj = modulesArray[i];
+					  for (var key in obj){
+						var value = obj[key];
+						moduleOut = `<div class="module">
+											<span class="moduleSettings"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+											<b class="moduleName">`+obj["moduleName"]+`</b> <img class="modulePriority" alt="`+obj["modulePriority"]+`" src="/templates/`+siteTpl+`/assets/img/admin/modules/`+obj["modulePriority"]+`.png" />
+											
+											<ul>
+											<li><img class="modulePicture" src="`+obj["modulePicture"]+`" /> </li>
+											<li>Version: `+obj["version"]+`</li>
+											<li>Description: `+obj["description"]+`</li>
+											<li>Priority: `+obj["modulePriority"]+`</li>
+											<li>Mainclass: `+obj["moduleMainClass"]+`</li>
+											</ul>
+										</div>`;
+					 
+					  }
+					  $(".modulesBlock").append(moduleOut);
+					}
+					  
+				} catch (error) {
+					return null;
+				}
+		  }
 	  };
 	}

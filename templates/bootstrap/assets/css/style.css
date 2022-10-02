@@ -51,7 +51,7 @@ ul {
 .mainBlock {
     background-color: #e1dfdda3;
     border-radius: 10px;
-    height: fit-content;
+    height: 100%;
 }
 
 .rightBlock {
@@ -117,8 +117,9 @@ ul {
 --------------------------------------------------------------*/
 	.pageRoot {
 		background: #594316a1;
-	    height: fit-content;
+	    height: 100%;
 		border-radius: 5px;
+		overflow: hidden;
 	}
 	
 	.pageRoot .page-content {
@@ -249,6 +250,7 @@ ul {
 	  padding: 0px;
 	  margin: 0 auto;
 	  position: relative;
+      font-size: 0.95vw;
 	}
 	.adminPanel section {
 	  display: none;
@@ -283,6 +285,48 @@ ul {
 	.adminPanel section {
 	  animation: scale 0.7s ease-in-out;
 	}
+	
+	.module {
+		border: 1px solid;
+		border-radius: 5px;
+		margin: 5px;
+	}
+	
+	.module .moduleName {
+		padding: 5px;
+	}
+	
+	.module .moduleSettings {
+	    float: right;
+		background: #d1ab48;
+		margin: -1px;
+		padding: 5;
+		border-radius: 0px 5px 0px;
+	}
+	
+	.module .moduleSettings:hover {
+		transition: 0.5s;
+		background: #9f8f37;
+	}
+	
+	.module ul {
+		padding: 5;
+	}
+	
+	.module li {
+		margin: 0;
+	}
+	
+	.module .modulePriority {
+		height: 32;
+		width: fit-content;
+	}
+	
+	.module .modulePicture {
+		float: left;
+		padding: 5;
+	}
+	
 	@keyframes scale {
 	  0% {
 	  transform: scale(0.9);

@@ -15,7 +15,6 @@
 		'dbPass' => 'Aiden2556308',
 		'dbName' => 'fox_engine',
 		
-		'siteTpl' => 'bootstrap',
 		'timezone'=> 'Europe/Moscow',
 		'webserviceName'=> 'FoxEngine',
 		'keyCheck' => true,
@@ -27,13 +26,15 @@
 		/*JavaScript*/
 		'javascript' => array(
 			'contentBlock' => "#content",
-			'secureKey' => 'ghYyufghVH'),
+			'secureKey' => 'ghYyufghVH',
+			'siteTpl' => 'bootstrap'),
 		
 		/*Content options*/
 		'modalSearch' => '/modal',
 		'modalTplBase' => '/modal/modalView/modalBase.tpl',
 		'userOptions' => "/userOptions",
 		'userOptionsTplBase' => "/userOptions/optionsView/optionBase.ftpl",
+		'pageTplFile' => "pageTpl.ftpl",
 	
 		/*Title*/
 		'title' => 'FoxEngine',

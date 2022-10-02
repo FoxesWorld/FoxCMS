@@ -87,7 +87,7 @@ if (!defined('FOXXEY')) {
 		
 		private function setBaseContent() {
 			global $config;
-			$this->modalContents = file::efile(ROOT_DIR."/templates/".$config['siteTpl'].$config['modalTplBase'])["content"];
+			$this->modalContents = file::efile(ROOT_DIR."/templates/".$config['javascript']['siteTpl'].$config['modalTplBase'])["content"];
 		}
 
 		public function mdlOut(){
