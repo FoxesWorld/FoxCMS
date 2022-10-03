@@ -11,8 +11,8 @@
 	
 		/* DATABASE */
 		'dbHost' =>  'localhost',
-		'dbUser' =>  'root',
-		'dbPass' => 'Aiden2556308',
+		'dbUser' =>  'foxengine',
+		'dbPass' => 'foxengine2556308',
 		'dbName' => 'fox_engine',
 		
 		'timezone'=> 'Europe/Moscow',
@@ -38,7 +38,7 @@
 	
 		/*Title*/
 		'title' => 'FoxEngine',
-		'status' => '<span class="additionalStatus">EXPERI</span>MENTAL',
+		'status' => '<span class="additionalStatus">Early-</span>Beta',
 		
 		/* UserSettings */
 		'userDatainDb'   => array("user_id", "email", "login", "password", "user_group", "realname", "hash", "reg_date", "last_date", "profilePhoto"),

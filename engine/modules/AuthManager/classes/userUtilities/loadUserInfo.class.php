@@ -7,7 +7,6 @@ if(!defined('auth')) {
 		private $userInfoArray = array();
 		
 		function __construct($login, $db){
-			global $config;
 			$query = "SELECT * FROM `users` WHERE login = '".$login."'";
 			$this->userInfoArray = $db->getRow($query);
 		}

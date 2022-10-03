@@ -19,6 +19,7 @@ if(!defined('auth')) {
 		}
 		
 		private function checkPass() {
+			global $lang;
 			if(functions::FoxesStrlen($this->regData['password']) >= $this->passminCount) {
 				if(!preg_match("/[А-Яа-я]/", $this->regData['password'])) {
 					switch($this->regData['password']){
@@ -37,8 +38,8 @@ if(!defined('auth')) {
 			}
 		}
 		
-		protected function regiter(){
-			global $config;
+		protected function register(){
+			global $lang;
 			
 			$this->checkPass();
 			if(!functions::checkExistingData($this->db, 'login', $this->regData['login']) === false){

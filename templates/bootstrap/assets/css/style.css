@@ -4,6 +4,7 @@ body {
   background: url(../img/header.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   overflow-x: hidden;
 }
 
@@ -11,7 +12,7 @@ useroption {
 	display: none;
 }
 
-table, form {
+table {
 	width: 100%;
 	margin: 0;
 }
@@ -180,7 +181,6 @@ ul {
   height: 70px;
   transition: all 0.5s;
   z-index: 997;
-  background: url('../img/header.jpg');
   background-repeat: no-repeat;
 }
 #header.header-fixed {
@@ -256,7 +256,6 @@ ul {
 	  display: none;
 	  padding: 15px;
 	  background: white;
-	  position: absolute;
 	  top: 0;
 	  left: 180px;
 	}
@@ -267,7 +266,7 @@ ul {
 	  display: none;
 	}
 	.adminPanel label {
-	  display: block;
+	  display: table-cell;
 	  width: 180px;
 	  padding: 15px;
 	  color: #4F5966;
@@ -290,6 +289,7 @@ ul {
 		border: 1px solid;
 		border-radius: 5px;
 		margin: 5px;
+		background: linear-gradient(156deg, #dccba9a8, #ff9a00) !important;
 	}
 	
 	.module .moduleName {
@@ -309,11 +309,20 @@ ul {
 		background: #9f8f37;
 	}
 	
-	.module ul {
+	.module .moduleContents {
 		padding: 5;
 	}
 	
-	.module li {
+	.module .moduleContents .moduleKey {
+		font-family: 'GothamPro';
+		color: #de6d22;
+	}
+	
+	.module .moduleContents .moduleValue {
+		font-weight: inherit;
+	}
+	
+	.module .moduleContents li {
 		margin: 0;
 	}
 	
@@ -325,6 +334,10 @@ ul {
 	.module .modulePicture {
 		float: left;
 		padding: 5;
+	}
+	
+	.module td {
+		display: contents;
 	}
 	
 	@keyframes scale {

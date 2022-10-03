@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-10-02 10:11:31
-  from '/var/www/html/templates/bootstrap/right-block.tpl' */
+/* Smarty version 4.0.4, created on 2022-10-03 19:09:20
+  from '/var/www/foxeswor/data/www/foxesworld.ru/templates/bootstrap/right-block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_633939a3c50ab0_79312969',
+  'unifunc' => 'content_633b0930adbd40_49219864',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'cced5f7d87a6b434607e8110a477e33c60d5e374' => 
+    '4de5aa8ba73ad882165c57a3d4b87fe0e2c4d556' => 
     array (
-      0 => '/var/www/html/templates/bootstrap/right-block.tpl',
-      1 => 1664650865,
+      0 => '/var/www/foxeswor/data/www/foxesworld.ru/templates/bootstrap/right-block.tpl',
+      1 => 1664812194,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_633939a3c50ab0_79312969 (Smarty_Internal_Template $_smarty_tpl) {
+function content_633b0930adbd40_49219864 (Smarty_Internal_Template $_smarty_tpl) {
 ?>				  <div class="row rightBlock">
 							<div class="card">
 								<div id="userBlock">	
@@ -82,13 +82,12 @@ function content_633939a3c50ab0_79312969 (Smarty_Internal_Template $_smarty_tpl)
 
 							<div class="card">				
 								<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-								  <div class="card-header">Tests</div>
+								  <div class="card-header">Help2</div>
 									  <div class="card-body">
-											<h5 class="card-title">Awesome widget</h5>
+											<h5 class="card-title">Get help by here</h5>
 											<p class="card-text">Some quick example text</p>
 									  </div>
 								</div>
 							</div>
-
 					</div><?php }
 }

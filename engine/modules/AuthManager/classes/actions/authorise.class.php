@@ -38,16 +38,18 @@ if(!defined('auth')) {
 		
 		protected function auth() {
 			global $lang;
+			
 			if(authorize::passVerify($this->inputPassword, $this->realPassword)) {
 				$this->setUserdata($this->authData['login']);
 				$this->setTokenIfNeeded($this->rememberMe, $this->inputLogin);
 				$this->logger->WriteLine($this->inputLogin." successfuly authorised");
-				functions::jsonAnswer($lang['authSuccess'], false);
+				$status = true;
 			} else {
 				$this->logger->WriteLine($this->authData['login']." failed authorisation with password ".$this->inputPassword);
 				$antiBrute = new antiBrute(REMOTE_IP, $this->db, false);
-				functions::jsonAnswer($lang['authWrong']);
+				$status = false;
 			}
+			return $status;
 		}
 		
 		private function lastAuth($login, $db){
@@ -64,7 +66,7 @@ if(!defined('auth')) {
 		}
 		
 		private function setTokenIfNeeded($checkbox, $login) {
-			$token = authorize::generateLoginHash();
+			$token = authorize::generateLoginHash($login);
 			switch($checkbox) {
 				case 1:
 					$query = "UPDATE `users` SET hash='".$token."' WHERE login = '".$login."'";

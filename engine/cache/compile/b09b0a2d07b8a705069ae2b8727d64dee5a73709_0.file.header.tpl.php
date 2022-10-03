@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-10-02 10:11:31
-  from '/var/www/html/templates/bootstrap/header.tpl' */
+/* Smarty version 4.0.4, created on 2022-10-03 19:09:20
+  from '/var/www/foxeswor/data/www/foxesworld.ru/templates/bootstrap/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_633939a3c48685_44812929',
+  'unifunc' => 'content_633b0930ad5c76_83677722',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '530674da955089480b15e1a2747d9ab7b8262736' => 
+    'b09b0a2d07b8a705069ae2b8727d64dee5a73709' => 
     array (
-      0 => '/var/www/html/templates/bootstrap/header.tpl',
-      1 => 1664298511,
+      0 => '/var/www/foxeswor/data/www/foxesworld.ru/templates/bootstrap/header.tpl',
+      1 => 1664733004,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_633939a3c48685_44812929 (Smarty_Internal_Template $_smarty_tpl) {
+function content_633b0930ad5c76_83677722 (Smarty_Internal_Template $_smarty_tpl) {
 ?>  <header id="header" class="d-flex align-items-center">
 		<div class="container d-flex align-items-center justify-content-between">
 

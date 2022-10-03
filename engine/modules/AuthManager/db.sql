@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `users` (
-	`user_id` int(8) NOT NULL,
+	`user_id` `user_id` INT(8) NOT NULL AUTO_INCREMENT;
 	`login` varchar(16) NOT NULL,
 	`password` varchar(128) NOT NULL,
 	`email` varchar(64) NOT NULL,

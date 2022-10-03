@@ -8,12 +8,13 @@ session_start();
 		
 		private $initHelper;
 		private $groupAssociacion;
+		private $ModulesLoader;
 		
 		protected $debug, $logger, $db;
 		protected static $usrArray = array(
 			'isLogged' => false,
 			'user_id' => 0,
-			'email' => "foxengine@foxes.ru",
+			'email' => "admin@foxesworld.ru",
 			'login' => "anonymous",
 			'realname' => "",
 			'hash' => "",
@@ -43,14 +44,16 @@ session_start();
 			$this->debug = $debug;
 			self::libFilesInclude(ENGINE_DIR.'syslib', $this->debug); //Require Syslib
 			self::requireNestedClasses(basename(__FILE__), __DIR__);
+			
 			$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
 			$this->logger = new Logger('lastlog');
+			$this->ModulesLoader = new ModulesLoader($this->db, $this->logger);
 			$this->initHelper = new initHelper($this->db, $this->logger);
 
-			init::$modulesArray = $this->initHelper->modulesInc(MODULES_DIR, "preInit");
+			init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "preInit");
 			
 			self::$usrArray['realname'] = randTexts::getRandText('noName');	
-			$this->initHelper->userArrFill(); //UsrArray Override (if IsLogged)
+			initHelper::userArrFill(); //UsrArray Override (if IsLogged)
 			require (ENGINE_DIR.'syslib/smarty/Smarty.class.php');
 		}
 		
@@ -62,16 +65,14 @@ session_start();
 				
 			$this->groupAssociacion = new groupAssociacion(self::$usrArray['user_group'], $this->db);
 			self::$usrArray['group_name'] = $this->groupAssociacion->userGroupName();
-				
 			define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['javascript']['siteTpl'].'/');
 			define('UPLOADS', '/uploads/'.self::$usrArray['login'].'/');
-			
-			init::$modulesArray = $this->initHelper->modulesInc(MODULES_DIR, "primary");	
+			init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "primary");	
 		}
 		
 		/* After postInit we have full UI sent */
 		private function postInit() {
-			init::$modulesArray = $this->initHelper->modulesInc(MODULES_DIR, "secondary");
+			init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "secondary");
 			$smartyInit = new smartyInit();
 		}
 		
@@ -85,8 +86,8 @@ session_start();
 			}
 		}
 
-		private static function libFilesInclude($libDir, $debug) {
-				global $config;
+		protected static function libFilesInclude($libDir, $debug) {
+			global $config;
 				$visualCounter = 1;
 				$openDir = opendir($libDir);
 				if($debug){echo "libraries to include: <br />";}
@@ -103,5 +104,5 @@ session_start();
 				if($debug){
 					echo "<br />";
 				}
-			}
+		}
 	}

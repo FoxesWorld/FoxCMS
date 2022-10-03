@@ -14,8 +14,8 @@
 	src: url('../fonts/FSElliotPro-Bold.ttf') format('truetype'),
 	url('../fonts/FSElliotPro-Bold.svg#FSElliotPro-Bold') format('svg'),
 	url('../fonts/FSElliotPro-Bold.eot?#iefix') format('embedded-opentype');
-	font-weight: normal;
-	font-style: normal;
+	font-weight: bold;
+	font-style: bold;
 }
 
 @font-face {
@@ -34,6 +34,20 @@
        url('../fonts/FSElliotPro-Heavy.eot?#iefix') format('embedded-opentype');
   font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'GothamPro';
+  src: url("../fonts/GothamPro.woff") format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GothamPro-Bold';
+  src: url("../fonts/GothamPro-Bold.woff") format('woff');
+  font-weight: bold;
+  font-style: bold;
 }
 
 @font-face {

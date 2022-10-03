@@ -7,20 +7,21 @@ if (!defined('FOXXEY')) {
 	private static $filterSymbols = array ("\x22", "\x60", "\t", '\n', '\r', "\n", "\r", '\\', ",", "/", "¬", "#", ";", ":", "~", "[", "]", "{", "}", ")", "(", "*", "^", "%", "$", "<", ">", "?", "!", '"', "'", " ", "&", '"' );
 		
 	public static function collectData($data, $captchaCheck = false){
+	global $lang;
 	$collectedData = array();
 	if(is_array($data)){
 			foreach($data as $key => $value){
 				if($captchaCheck) {
 					if(strpos($key, 'captcha') !== false){
 						if($value === "null"){
-							self::jsonAnswer("enter.captcha", true);
+							self::jsonAnswer($lang["enterCaptcha"], true);
 						}
 					}
 				}
 
 				if(strpos($key, 'acceptForm') !== false) {
 						if($value == null){
-							self::jsonAnswer("Accept checkbox!", true);
+							self::jsonAnswer($lang["acceptCheckbox"], true);
 						}
 				}
 				$collectedData[$key] = self::filterString($value);
@@ -46,7 +47,7 @@ if (!defined('FOXXEY')) {
 		return $result;
 	}
 	
-	public static function daysRegistereed($date_reg) {
+	public static function daysRegistered($date_reg) {
 			return round((time() - $date_reg) / 86400);
 	}
 

@@ -54,12 +54,11 @@
 
 							<div class="card">				
 								<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-								  <div class="card-header">Tests</div>
+								  <div class="card-header">Help2</div>
 									  <div class="card-body">
-											<h5 class="card-title">Awesome widget</h5>
+											<h5 class="card-title">Get help by here</h5>
 											<p class="card-text">Some quick example text</p>
 									  </div>
 								</div>
 							</div>
-
 					</div>

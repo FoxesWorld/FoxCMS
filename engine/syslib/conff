@@ -15,23 +15,24 @@ class conff {
 	private $debug;
 	private $readStatus;
 
-    public function __construct($file = null, $toRecord = null, $debug = false){
+    public function __construct($fullPath = null, $toRecord = null, $debug = false){
 		$this->debug = $debug;
-        if ($file) {
+        if ($fullPath) {
 			
-			$this->filename = $file;
+			$this->fullPath = $fullPath.'.ini';
+			if(file_exists($this->fullPath)) {			
 				//$dir = $this->prepareDir($this->filename);
-				$fullPath = ENGINE_DIR.'data/config/'.$this->filename;
-				file::efile($fullPath);
-				$this->arr = parse_ini_file($fullPath, true);
-				$this->readStatus = $this->readStatus($fullPath);
-				$this->fileSize = filesize($fullPath);
+				//$fullPath = ENGINE_DIR.'data/config/'.$this->filename;
+				file::efile($fullPath, $toRecord);
+				$this->arr = parse_ini_file($this->fullPath, true);
+				$this->readStatus = $this->readStatus($this->fullPath);
+				$this->fileSize = filesize($this->fullPath);
 				if($debug){echo "Array to record was passed \n";}
 				switch($toRecord){
 					case null:
 						return $this->arr;
 					break;
-					
+						
 					default:
 						if($debug){echo 'filesize is - '.$this->fileSize."\n";}
 							switch($this->fileSize){				
@@ -47,10 +48,10 @@ class conff {
 							}
 					break;
 				}
-
-		} else {
-			return 'No file name was entered!';
-		}
+			} else {
+				$this->writeFile($toRecord);
+			}
+		} 
     }
 	
 	public static function confGen($mdlName, $confArray = null){
@@ -131,7 +132,7 @@ class conff {
             }
             $result .= NL;
         }
-           $result = file::efile($this->filename, false, $result);
+           $result = file::efile($this->fullPath, false, $result);
            return true;
     }
 	

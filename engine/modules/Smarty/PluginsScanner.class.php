@@ -6,6 +6,7 @@
 		private $pluginsDir;
 		private $excludeFileName = 'exclude';
 		private $skipFile = "skip";
+		protected static $pluginsArray = array();
 		
 		function __construct($pluginsDir) {
 			$this->pluginsDir = $pluginsDir;
@@ -15,54 +16,43 @@
 			
 			$this->outString .= $this->requireJS("jquery.min.js", $this->pluginsDir);
 			$scanDir = filesInDir::filesInDirArray($this->pluginsDir);
-			
 			foreach($scanDir as $object) {
 				$currentObjectDir = $this->pluginsDir.$object;
 				if(is_dir($currentObjectDir)){
 					if(!$this->checkDirSkip($currentObjectDir)) {
 						$pluginDirScan = filesInDir::filesInDirArray($currentObjectDir);
 						foreach($pluginDirScan as $pluginDirContents){
-							$this->scanPluginDir($pluginDirContents, $currentObjectDir);
-						}	
+							$this->directoryScanner($pluginDirContents, $currentObjectDir);
+						}
+						self::$pluginsArray["pluginName"][] = $object;
 					}
 				}
 			}
 		}
 		
-		private function scanPluginDir($assetsDir, $currentObjectDir, $debug = false) {
-			switch($assetsDir){
-				case "css":
-					$currentCSSDir = $currentObjectDir.'/css/';
-					if($debug)echo "Scanning ".$currentCSSDir."<br />";
-					$cssScan = filesInDir::filesInDirArray($currentCSSDir, 'css');
-					
-						foreach($cssScan as $cssFile){
-							$exclude = $this->checkExclude($cssFile, $currentCSSDir);
-							if($exclude === false) {
-								if($debug)echo "		- File adding ".$cssFile."<br />";
-								$this->outString .= $this->requireCSS($cssFile, $currentCSSDir);
-							} else {
-								if($debug)echo "Excluding ".$cssFile."<br />";
-							}
+		private function directoryScanner($type, $currentObjectDir, $debug = false) {
+			$currentScanDir = $currentObjectDir.'/'.$type.'/';
+				if($debug)echo "Scanning ".$currentScanDir."<br />";
+				$dirScan = filesInDir::filesInDirArray($currentScanDir, $type);
+
+				foreach($dirScan as $dirFile){
+					$exclude = $this->checkExclude($dirFile, $currentScanDir);
+					if($exclude === false) {
+						if($debug)echo "		- File adding ".$dirFile."<br />";
+						switch($type) {
+							case "js":
+								$this->outString .= $this->requireJS($dirFile, $currentScanDir);
+							break;
+							
+							case "css":
+								$this->outString .= $this->requireCSS($dirFile, $currentScanDir);
+							break;
 						}
-				break;
 						
-				case "js":
-					$currentJSDir = $currentObjectDir.'/js/';
-					if($debug)echo "Scanning ".$currentJSDir."<br />";
-					
-					$jsScan = filesInDir::filesInDirArray($currentJSDir, 'js');
-					foreach($jsScan as $jsFile){
-						$exclude = $this->checkExclude($jsFile, $currentJSDir);
-						if($exclude === false) {
-							if($debug)echo "		- File adding ".$jsFile."<br />";
-							$this->outString .= $this->requireJS($jsFile, $currentJSDir);
-						} else {
-							if($debug)echo "Excluding ".$jsFile."<br />";
-						}
+					} else {
+						if($debug)echo "Excluding ".$dirFile."<br />";
 					}
-				break;
-			}
+				}
 		}
 		
 		private function checkExclude($FILE, $DIR) {

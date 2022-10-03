@@ -6,8 +6,6 @@ if(!defined('auth')) {
 		
 		function __construct($userData) {
 			
-			global $config;
-			
 			foreach($userData as $key => $value){
 				$_SESSION[$key] = $value;
 			}

@@ -37,7 +37,6 @@ if (!defined('FOXXEY')) {
 			
 			//@Deprecated
 			$this->smarty->assign("links", "");
-			
 			$this->smarty->assign("title", $config['title']);
 			$this->smarty->assign("status", $config['status']);
 			$this->smarty->assign("year", date("Y"));

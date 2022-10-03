@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-10-02 10:11:31
-  from '/var/www/html/templates/bootstrap/footer.tpl' */
+/* Smarty version 4.0.4, created on 2022-10-03 19:09:20
+  from '/var/www/foxeswor/data/www/foxesworld.ru/templates/bootstrap/footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_633939a3c53de5_46694936',
+  'unifunc' => 'content_633b0930adebc1_63551133',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '02773e628c93ad0e80828a666a6f981a0e62c3c2' => 
+    '16ee20679c430097e1f9d148a3384527e903fda5' => 
     array (
-      0 => '/var/www/html/templates/bootstrap/footer.tpl',
-      1 => 1664435521,
+      0 => '/var/www/foxeswor/data/www/foxesworld.ru/templates/bootstrap/footer.tpl',
+      1 => 1664733004,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_633939a3c53de5_46694936 (Smarty_Internal_Template $_smarty_tpl) {
+function content_633b0930adebc1_63551133 (Smarty_Internal_Template $_smarty_tpl) {
 ?>  		<footer class="bar">
 			<div class="container footer--flex">
 				<div class="footer-copyright">
