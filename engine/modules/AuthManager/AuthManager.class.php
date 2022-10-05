@@ -29,7 +29,7 @@
 			$this->db = $db;
 			$this->logger = $logger;
 			$this->moduleName = basename(__FILE__, '.class.php');
-			init::requireNestedClasses($this->moduleName, __DIR__."/classes/userUtilities/");
+			init::requireNestedClasses($this->moduleName, __DIR__."/classes/Utilities/");
 			init::requireNestedClasses($this->moduleName, __DIR__."/classes/actions/");
 			$this->checkUserToken();
 			$this->authActionsInit();	

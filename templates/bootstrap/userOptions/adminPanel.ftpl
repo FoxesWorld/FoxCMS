@@ -1,8 +1,10 @@
 <useroption>
 {
 	"optionTitle": "Админ панель",
+	"optionBlock": "#usrMenu",
 	"optionPreText": "<i class=\"fa fa-bolt\"></i>",
-	"optionGroup": 1
+	"optionGroup": 1,
+	"type": "link"
 }
 </useroption>
     <div class="adminPanel">

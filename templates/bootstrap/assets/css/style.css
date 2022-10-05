@@ -418,6 +418,12 @@ section {
 
 .userProfile .userActions {
 	margin: 10px;
+	font-size: 10pt;
+}
+
+.rightIcon {
+	    display: contents;
+		color: burlywood;
 }
 
 .profilePhoto:before {

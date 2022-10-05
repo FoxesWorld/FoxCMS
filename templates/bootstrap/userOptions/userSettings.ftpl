@@ -1,8 +1,10 @@
 <useroption>
 {
 	"optionTitle": "Настройки профиля",
+	"optionBlock": "#usrMenu",
 	"optionPreText": "<i class=\"fa fa-cog fa-spin\"></i>",
-	"optionGroup": [1,4]
+	"optionGroup": [1,4],
+	"type": "link"
 }
 </useroption>
 

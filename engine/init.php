@@ -9,6 +9,7 @@ session_start();
 		private $initHelper;
 		private $groupAssociacion;
 		private $ModulesLoader;
+		private $initLevels;
 		
 		protected $debug, $logger, $db;
 		protected static $usrArray = array(
@@ -28,8 +29,9 @@ session_start();
 		protected static $REQUEST;
 		protected static $modulesArray = array();
 
-		function __construct($debug = false) {
+		function __construct($initLevels, $debug = false) {
 			global $config;
+			$this->initLevels = $initLevels;
 			$this->preInit($debug);
 			$this->init();
 			$this->postInit();
@@ -42,19 +44,21 @@ session_start();
 		private function preInit($debug) {
 			global $config;
 			$this->debug = $debug;
-			self::libFilesInclude(ENGINE_DIR.'syslib', $this->debug); //Require Syslib
-			self::requireNestedClasses(basename(__FILE__), __DIR__);
-			
-			$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
-			$this->logger = new Logger('lastlog');
-			$this->ModulesLoader = new ModulesLoader($this->db, $this->logger);
-			$this->initHelper = new initHelper($this->db, $this->logger);
+			if($this->initLevels["preInit"] === true) {
+				self::libFilesInclude(ENGINE_DIR.'syslib', $this->debug); //Require Syslib
+				self::requireNestedClasses(basename(__FILE__), __DIR__);
+				
+				$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
+				$this->logger = new Logger('lastlog');
+				$this->ModulesLoader = new ModulesLoader($this->db, $this->logger);
+				$this->initHelper = new initHelper($this->db, $this->logger);
 
-			init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "preInit");
-			
-			self::$usrArray['realname'] = randTexts::getRandText('noName');	
-			initHelper::userArrFill(); //UsrArray Override (if IsLogged)
-			require (ENGINE_DIR.'syslib/smarty/Smarty.class.php');
+				init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "preInit");
+				
+				self::$usrArray['realname'] = randTexts::getRandText('noName');	
+				initHelper::userArrFill(); //UsrArray Override (if IsLogged)
+				require (ENGINE_DIR.'syslib/smarty/Smarty.class.php');
+			}
 		}
 		
 		/* After init we have all modules
@@ -62,18 +66,21 @@ session_start();
 		 */
 		private function init() {
 			global $config;
-				
-			$this->groupAssociacion = new groupAssociacion(self::$usrArray['user_group'], $this->db);
-			self::$usrArray['group_name'] = $this->groupAssociacion->userGroupName();
-			define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['javascript']['siteTpl'].'/');
-			define('UPLOADS', '/uploads/'.self::$usrArray['login'].'/');
-			init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "primary");	
+			if($this->initLevels["init"] === true) {
+				$this->groupAssociacion = new groupAssociacion(self::$usrArray['user_group'], $this->db);
+				self::$usrArray['group_name'] = $this->groupAssociacion->userGroupName();
+				define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['javascript']['siteTpl'].'/');
+				define('UPLOADS', '/uploads/'.self::$usrArray['login'].'/');
+				init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "primary");	
+			}
 		}
 		
 		/* After postInit we have full UI sent */
 		private function postInit() {
-			init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "secondary");
-			$smartyInit = new smartyInit();
+			if($this->initLevels["postInit"] === true) {
+				init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "secondary");
+				$smartyInit = new smartyInit();
+			}
 		}
 		
 		//CLASS METHODS

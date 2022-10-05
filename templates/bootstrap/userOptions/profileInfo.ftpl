@@ -1,8 +1,10 @@
 <useroption>
 {
 	"optionTitle": "Информация",
+	"optionBlock": ".leftAction",
 	"optionPreText": "<i class=\"fa fa-question-circle\"></i>",
-	"optionGroup": [1,4]
+	"optionGroup": [1,4],
+	"type": "link"
 }
 </useroption>
 

@@ -26,7 +26,7 @@ if(!defined('auth')) {
 							
 						$this->inputPassword = $this->authData['password'];
 						$this->inputLogin = $this->authData['login'];
-						$this->rememberMe = $this->authData["rememberMe"];
+						@$this->rememberMe = $this->authData["rememberMe"];
 						$this->realPassword = functions::getUserData($this->inputLogin, 'password', $db);
 					}
 				}

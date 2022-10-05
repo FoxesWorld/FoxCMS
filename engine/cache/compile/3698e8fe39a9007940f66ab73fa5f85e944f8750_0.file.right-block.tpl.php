@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-10-04 19:57:20
-  from '/var/www/foxeswor/data/www/foxesworld.ru/templates/bootstrap/right-block.tpl' */
+/* Smarty version 4.0.4, created on 2022-10-04 15:51:50
+  from '/var/www/foxeswor/data/www/foxesworld.ru/templates/bootstrapENG/right-block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_633c65f018e610_24897936',
+  'unifunc' => 'content_633c2c66890f96_21674362',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '4de5aa8ba73ad882165c57a3d4b87fe0e2c4d556' => 
+    '3698e8fe39a9007940f66ab73fa5f85e944f8750' => 
     array (
-      0 => '/var/www/foxeswor/data/www/foxesworld.ru/templates/bootstrap/right-block.tpl',
-      1 => 1664812194,
+      0 => '/var/www/foxeswor/data/www/foxesworld.ru/templates/bootstrapENG/right-block.tpl',
+      1 => 1664827086,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,9 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_633c65f018e610_24897936 (Smarty_Internal_Template $_smarty_tpl) {
+function content_633c2c66890f96_21674362 (Smarty_Internal_Template $_smarty_tpl) {
 ?>				  <div class="row rightBlock">
+				  <?php if ($_smarty_tpl->tpl_vars['isLogged']->value) {?>
 							<div class="card">
 								<div id="userBlock">	
 									<div class="userProfile animate__animated animate__backInRight animate__delay-1s">
@@ -54,6 +55,7 @@ function content_633c65f018e610_24897936 (Smarty_Internal_Template $_smarty_tpl)
 
 														</ul>
 														<input id="userAction" class="input" type="hidden" value="logout">
+														<button type="submit" class="logout"><i class="fa fa-sign-out"></i> Выйти</button>
 														</form>
 											</div>
 												<?php if (!$_smarty_tpl->tpl_vars['isLogged']->value) {?>
@@ -69,7 +71,42 @@ function content_633c65f018e610_24897936 (Smarty_Internal_Template $_smarty_tpl)
 								
 								</div>
 							</div>
+						<?php }?>
 
+							<div class="card">		
+								<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+								  <div class="card-header">Последние проекты</div>
+									  <div class="card-body">
+											<p class="card-text">
+											<ul>
+												<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											<li>Сколково</li>
+											</ul></p>
+									  </div>
+								</div>
+							</div>
+							
 							<div class="card">		
 								<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
 								  <div class="card-header">Help</div>
@@ -80,14 +117,5 @@ function content_633c65f018e610_24897936 (Smarty_Internal_Template $_smarty_tpl)
 								</div>
 							</div>
 
-							<div class="card">				
-								<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-								  <div class="card-header">Help2</div>
-									  <div class="card-body">
-											<h5 class="card-title">Get help by here</h5>
-											<p class="card-text">Some quick example text</p>
-									  </div>
-								</div>
-							</div>
 					</div><?php }
 }

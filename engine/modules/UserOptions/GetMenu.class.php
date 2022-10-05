@@ -4,12 +4,12 @@ if(!defined('FOXXEY')) {
 }
 	class GetMenu extends UserOptions {
 		
-		private $GetMenuReguest = "getUserOptionsMenu";
+		private $GetMenuRequest = "getUserOptionsMenu";
 		private $requestLogin;
 		
 		function __construct($userLogin) {
-			if(isset($_POST[$this->GetMenuReguest])){
-				$this->requestLogin = functions::filterString($_POST[$this->GetMenuReguest]);
+			if(isset(init::$REQUEST[$this->GetMenuRequest])){
+				$this->requestLogin = functions::filterString(init::$REQUEST[$this->GetMenuRequest]);
 				if($this->requestLogin === $userLogin){
 					die(UserOptions::$builtMenu);
 				} else {

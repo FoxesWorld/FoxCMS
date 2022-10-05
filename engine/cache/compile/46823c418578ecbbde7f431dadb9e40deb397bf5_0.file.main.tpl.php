@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-10-04 19:57:20
-  from '/var/www/foxeswor/data/www/foxesworld.ru/templates/bootstrap/main.tpl' */
+/* Smarty version 4.0.4, created on 2022-10-04 15:51:50
+  from '/var/www/foxeswor/data/www/foxesworld.ru/templates/bootstrapENG/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_633c65f0183869_52707636',
+  'unifunc' => 'content_633c2c66884446_81191605',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'b6b4bda733e2896008d4690e9a7daf7a039e4f79' => 
+    '46823c418578ecbbde7f431dadb9e40deb397bf5' => 
     array (
-      0 => '/var/www/foxeswor/data/www/foxesworld.ru/templates/bootstrap/main.tpl',
-      1 => 1664874354,
+      0 => '/var/www/foxeswor/data/www/foxesworld.ru/templates/bootstrapENG/main.tpl',
+      1 => 1664878765,
       2 => 'file',
     ),
   ),
@@ -23,7 +23,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_633c65f0183869_52707636 (Smarty_Internal_Template $_smarty_tpl) {
+function content_633c2c66884446_81191605 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html>
 
 	<head>
@@ -34,7 +34,7 @@ function content_633c65f0183869_52707636 (Smarty_Internal_Template $_smarty_tpl)
 		<title><?php echo $_smarty_tpl->tpl_vars['title']->value;?>
 </title>
 		<meta name="format-detection" content="telephone=no">
-		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height"> 
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height" /> 
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="default">
 		<link href="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
@@ -42,6 +42,10 @@ function content_633c65f0183869_52707636 (Smarty_Internal_Template $_smarty_tpl)
 		<?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/js/func.js"><?php echo '</script'; ?>
+>
+		<?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
+/assets/js/constructions.js"><?php echo '</script'; ?>
 >
 		<?php echo '<script'; ?>
  type="module" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
@@ -55,14 +59,15 @@ function content_633c65f0183869_52707636 (Smarty_Internal_Template $_smarty_tpl)
 		<?php $_smarty_tpl->_subTemplateRender('file:header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 		<section id="topbar" class="d-flex align-items-center shadow bar">
-			<div class="container d-flex justify-content-center justify-content-md-between">
-					<div class="leftAction d-flex align-items-center">
+			<div class="container d-flex justify-content-center">
+					<ul class="leftAction d-flex align-items-center menu" id="menu">
 
-					</div>
+					</ul>
 
+					<!--
 					<div class="rightAction d-none d-md-flex align-items-center" data-in-effect="fadeIn" id="actionBlock">
 
-					</div>
+					</div> -->
 			</div>
 		</section>
 					  
@@ -80,6 +85,7 @@ contentData<?php echo '%>'; ?>
 					<?php $_smarty_tpl->_subTemplateRender("file:right-block.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 				</div>
+
 			</div>
 		</div>
 

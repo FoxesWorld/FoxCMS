@@ -22,23 +22,6 @@
 		}, 1000);
 	}
 
-	/*
-	function postRequest(data){
-		let response;
-		let rsrp;
-		response = request.send_post(data);
-		response.onreadystatechange = function() {	
-			if (this.readyState == 4) {
-				if(this.status == 200) {
-					var responseText = this.responseText;
-					rsrp = JSON.parse(responseText);
-				}; 
-			};
-		};
-		return rsrp;
-	} 
-	*/
-
   function userAction() {
 	  let answer;
 	  answer = request.send_post({user_doaction: "greeting"});
@@ -55,7 +38,48 @@
 	  let usrOptions;
 	  usrOptions = request.send_post({"getUserOptionsMenu": login});
 	  usrOptions.onreadystatechange = function() {
-		$("#usrMenu").html(this.responseText);  
+		if (usrOptions.readyState === 4) {
+			try {
+				let json = JSON.parse(this.responseText);
+				
+				let optionAmmount = json.optionAmmount;
+				let optionArray = json.optionArray;
+				let optionTpl;
+				let type;
+					for (var i = 0; i < optionAmmount; i++){
+						var obj = optionArray[i];
+						let appendBlock;
+							for (var key in obj){
+								  var value = obj[key];
+								  type = obj["type"];
+								  appendBlock = obj["optionBlock"];
+								  switch(type){
+									  case "link":
+									  optionTpl = `
+										  <li>
+											<a onclick="loadPage('`+obj["optionName"]+`'); return false; ">
+												<div class="rightIcon">
+													`+obj["optionPreText"]+`
+												</div>
+											`+obj["optionTitle"]+`
+											</a>
+											</li>`;
+									  break;
+									  
+									  case "plainText":
+										optionTpl = obj["optionTitle"];
+									  break;
+								  }
+
+
+							}
+							console.log(appendBlock);
+						$(appendBlock).append(optionTpl);
+					}
+			} catch(error) {}
+		}
+		
+		//$("#usrMenu").html(this.responseText);  
 	  }
   }
 
@@ -121,22 +145,7 @@
 			easing: "easeOutExpo",
 			duration: 1000,
 			delay: 3000
-		  });/*.add({
-			targets: '.container #actionBlock .letter',
-			translateX: [0,-30],
-			opacity: [1,0],
-			easing: "easeInExpo",
-			duration: 1000,
-			delay: 3000
-			loopComplete: function(anim) {
-				userAction();
-				progress = Math.round(anim.progress);
-				switch(progress){
-					case 100:
-						console.log(progress);
-					break;
-				}
-			} */
+		  });
 	}
 	
 	function parseModulesInfo() {
