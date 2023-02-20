@@ -27,7 +27,7 @@
 		}
 
 		class groupAssociacion extends init {
-
+			
 			private $userGroup;
 			protected $db;
 			private $dbTabble = "groupAssociation";

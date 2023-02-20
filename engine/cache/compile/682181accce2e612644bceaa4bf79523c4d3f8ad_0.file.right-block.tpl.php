@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2022-10-04 19:57:20
-  from '/var/www/foxeswor/data/www/foxesworld.ru/templates/bootstrap/right-block.tpl' */
+/* Smarty version 4.0.4, created on 2023-02-20 13:50:22
+  from '/var/www/foxcms/templates/bootstrap/right-block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_633c65f018e610_24897936',
+  'unifunc' => 'content_63f3506e307b98_47394081',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '4de5aa8ba73ad882165c57a3d4b87fe0e2c4d556' => 
+    '682181accce2e612644bceaa4bf79523c4d3f8ad' => 
     array (
-      0 => '/var/www/foxeswor/data/www/foxesworld.ru/templates/bootstrap/right-block.tpl',
-      1 => 1664812194,
+      0 => '/var/www/foxcms/templates/bootstrap/right-block.tpl',
+      1 => 1664928560,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_633c65f018e610_24897936 (Smarty_Internal_Template $_smarty_tpl) {
+function content_63f3506e307b98_47394081 (Smarty_Internal_Template $_smarty_tpl) {
 ?>				  <div class="row rightBlock">
 							<div class="card">
 								<div id="userBlock">	

@@ -86,10 +86,12 @@ session_start();
 		//CLASS METHODS
 		protected static function requireNestedClasses($FILE, $DIR){
 			$nestedClasses = filesInDir::filesInDirArray($DIR, ".php");
+			if(is_array($nestedClasses)) {
 			foreach($nestedClasses as $DIR_FILE){
 				if($DIR_FILE !== $FILE) {
 					require_once($DIR.'/'.$DIR_FILE);
 				}
+			}
 			}
 		}
 

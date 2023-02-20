@@ -30,7 +30,7 @@ if (!defined('FOXXEY')) {
 		protected function smartyAssign(){
 			global $config;
 			$smartyUtils = new smartyUtils;
-			$PluginsScanner = new PluginsScanner(ENGINE_DIR.'plugins/');
+			$PluginsScanner = new PluginsScanner(ROOT_DIR.'/templates/'.$config['javascript']['siteTpl'].'/plugins/');
 			$PluginsScanner->pluginsInclude();
 			
 			$profilePhotoPath = ROOT_DIR.UPLOADS.init::$usrArray['profilePhoto'];

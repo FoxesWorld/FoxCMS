@@ -1,4 +1,3 @@
-
   	function loadPage(page) {
 		addAnimation('animate__backOutRight', $(contentBlock));
 		window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -41,11 +40,11 @@
 		if (usrOptions.readyState === 4) {
 			try {
 				let json = JSON.parse(this.responseText);
-				
 				let optionAmmount = json.optionAmmount;
 				let optionArray = json.optionArray;
 				let optionTpl;
 				let type;
+				console.log("UserOptions available: " + optionAmmount);
 					for (var i = 0; i < optionAmmount; i++){
 						var obj = optionArray[i];
 						let appendBlock;
@@ -70,69 +69,16 @@
 										optionTpl = obj["optionTitle"];
 									  break;
 								  }
-
-
 							}
-							console.log(appendBlock);
+						console.log("["+ i + "]" + "Appending " + obj["optionName"] + " to " +appendBlock + " block");
 						$(appendBlock).append(optionTpl);
 					}
 			} catch(error) {}
 		}
-		
 		//$("#usrMenu").html(this.responseText);  
 	  }
   }
 
-  function animate() {
-	var textWrapper = document.querySelector('.status .additionalStatus');
-	textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-	
-	
-	var logoTimeline = anime.timeline({
-		loop: false
-	});
-
-	logoTimeline.add({
-		targets: '.logo .title',
-		scaleX: [0,1],
-		opacity: [0.5,1],
-		easing: "easeInOutSine",
-		duration: 300,
-		delay: 0
-	  }).add({
-		targets: '.logo img',
-		scale: [0.1,1],
-		opacity: [0,1],
-		translateZ: 0,
-		easing: "easeInExpo",
-		duration: 450,
-		delay: (el, i) => 0
-	  }).add({
-		targets: '.logo .line',
-		scaleX: [0,1],
-		opacity: [0.01,1],
-		easing: "easeOutExpo",
-		duration: 650,
-		delay: (el, i, l) => 500 * (l - i)
-	  }).add({
-		targets: '.logo .status',
-		scale: [0, 1],
-		duration: 250,
-		elasticity: 600,
-		opacity: [0.5,1],
-		easing: "easeOutExpo",
-		delay: (el, i, l) => 1500 * (l - i)
-	  }).add({
-		targets: '.status .additionalStatus',
-		scale: [0, 1],
-		duration: 500,
-		elasticity: 600,
-		opacity: [0,1],
-		easing: "easeOutExpo",
-		delay: (el, i, l) => 300
-	  });
-	}
-	
 	  function textAnimate() {
 		  var textWrapper = document.querySelector('.container #actionBlock');
 		  textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");

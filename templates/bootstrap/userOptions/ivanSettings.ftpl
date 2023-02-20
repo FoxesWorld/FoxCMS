@@ -1,9 +1,9 @@
 <useroption>
 {
 	"optionTitle": "Настройки Ивана",
-	"optionPosition": "#optionBlock",
+	"optionBlock": ".leftAction",
 	"optionPreText": "<i class=\"fa fa-user-circle-o\"></i>",
-	"optionGroup": 5,
+	"optionGroup": 1,
 	"type": "link"
 }
 </useroption>

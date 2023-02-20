@@ -14,7 +14,10 @@ const App = new Vue({
   created: function () {
 	parseUsrOptionsMenu();
 	setTimeout(() => {
-		animate(); 
+		//animate(); 
+		splitWrapLetters('.logo .title', 'letter');
+splitWrapLetters('.logo .status', 'letterStatus');
+logoAnimation();
 	}, 2000);
   }
   });

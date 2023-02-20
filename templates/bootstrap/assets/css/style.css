@@ -63,10 +63,15 @@ ul {
 	color: #fff3c7;
 }
 
+.container {
+	height: 100%;
+    display: block;
+}
+
 .rightBlock .card {
 	margin: 0 10 15;
 	padding: 5px;
-	max-width: 220px;
+	max-width: 300px;
 	-webkit-box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
     -moz-box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
     box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
@@ -150,7 +155,6 @@ ul {
     padding: 0;
     color: rgba(255, 255, 255, 0.8);
     height: 40px;
-	position: relative;
 }
 #topbar .leftAction i {
   font-style: normal;
@@ -178,7 +182,7 @@ ul {
 # Header
 --------------------------------------------------------------*/
 #header {
-  height: 70px;
+  height: 128px;
   transition: all 0.5s;
   z-index: 997;
   background-repeat: no-repeat;
@@ -186,60 +190,6 @@ ul {
 #header.header-fixed {
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 }
-
-/*LOGO*/
-	#header .logo h1 {
-	  font-size: 28px;
-	  margin: 0;
-	  line-height: 0;
-	  font-weight: 700;
-	  font-family: "Open Sans", sans-serif;
-	}
-	#header .logo h1 a, #header .logo h1 a:hover {
-	  color: #635551;
-	  text-decoration: none;
-	}
-	#header .logo img {
-	  opacity: 0;
-	  padding: 0;
-	  margin: 0;
-	  max-height: 40px;
-	}
-
-	#header .logo .title {
-		opacity: 0;
-		display: inline-table;
-	}
-
-	.logo img {
-		content: url('../img/logo.png');
-	}
-
-	.logo .status {
-		opacity: 0;
-		font-family: 'Minecraft';
-		font-size: 12pt;
-		margin: -5px 0px;
-		float: right;
-		color: #a54e39;
-		text-transform: capitalize;
-	}
-	.logo .additionalStatus {
-	  display: inline-block;
-	  transform-origin: 0 0;
-	  opacity:0;
-	}
-
-	.logo .line {
-	  opacity: 0;
-	  position: absolute;
-	  bottom: -15px;
-	  left: 0;
-	  height: 3px;
-	  width: 100%;
-	  background-color: #a54e39;
-	  transform-origin: 0 0;
-	}
 
 /*--------------------------------------------------------------
 # Admin Panel
@@ -406,7 +356,7 @@ section {
     background: url(../img/short.png);
     background-repeat: no-repeat;
     background-size: contain;
-    margin: 0;
+    margin: 0 15px;
     height: 15px;
     display: block;
 }
@@ -493,6 +443,12 @@ ul > li {
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
+
+footer {
+	margin: 15px 0 0;
+    width: 100%;
+    bottom: 0;
+}
 
 .footer--flex, .footer-end {
     display: -webkit-box;

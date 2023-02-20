@@ -31,7 +31,7 @@ if(!defined('FOXXEY')) {
 		private $addTheLast =
 			array(
 			"optionTitle" => '<button type="submit" class="logout"><i class="fa fa-sign-out"></i> Выйти</button>',
-			"optionName" => "",
+			"optionName" => "logout",
 			"optionBlock" => "#usrMenu",
 			"optionPreText" => "",
 			"type" => "plainText"

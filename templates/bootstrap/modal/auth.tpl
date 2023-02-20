@@ -38,7 +38,7 @@
 		</label>
 		
 		<div class="c-captcha">
-			<div class="g-recaptcha" data-sitekey="6Lf5iE4iAAAAAGSHa5TCQQKQWpDLOs076Ej-dxu9" data-theme="Light"></div>
+			<div class="g-recaptcha" data-sitekey="6LcKeBoiAAAAAGnhfzZnLyzUApLmgnOpP4OfFOB7" data-theme="Light"></div>
 			<script src="https://www.google.com/recaptcha/api.js?hl={$lang['wysiwyg_language']}" async defer></script>
 		</div>	
 		<input id="userAction" class="input" type="hidden" value="auth" />
