@@ -17,16 +17,6 @@ table {
 	margin: 0;
 }
 
-a {
-  color: #ff5821;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #ff7e54;
-  text-decoration: none;
-}
-
 h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
 }
@@ -130,6 +120,7 @@ ul {
 	
 	.pageRoot .page-content {
 		display: flow-root;
+		padding: 5px;
 	}
 
 	.pageRoot .page-title {
@@ -416,6 +407,58 @@ section {
 
 ul > li {
 	margin: 5px 0;
+}
+
+/* Status Blocks*/
+.infoBlock:before {
+	background: url(../img/info.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-flex;
+    width: 30px;
+    height: 30px;
+    content: "";
+}
+
+.infoBlock {
+	margin: 35px;
+    padding: 10px;
+    background: #3fc5d18c;
+    border-radius: 5px;
+}
+
+.warnBlock:before {
+	background: url(../img/warn.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-flex;
+    width: 30px;
+    height: 30px;
+    content: "";
+}
+
+.warnBlock {
+	margin: 35px;
+    padding: 10px;
+    background: #bbb8378c;
+    border-radius: 5px;
+}
+
+.errorBlock:before {
+	background: url(../img/error.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-flex;
+    width: 30px;
+    height: 30px;
+    content: "";
+}
+
+.errorBlock {
+	margin: 35px;
+    padding: 10px;
+    background: #9725256e;
+    border-radius: 5px;
 }
 /*--------------------------------------------------------------
 # row

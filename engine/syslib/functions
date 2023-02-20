@@ -4,7 +4,7 @@ if (!defined('FOXXEY')) {
 }
 	class functions {
 		
-	private static $filterSymbols = array ("\x22", "\x60", "\t", '\n', '\r', "\n", "\r", '\\', ",", "/", "¬", "#", ";", ":", "~", "[", "]", "{", "}", ")", "(", "*", "^", "%", "$", "<", ">", "?", "!", '"', "'", " ", "&", '"' );
+	private static $filterSymbols = array ("\x22", "\x60", "\t", '\n', '\r', "\n", "\r", '\\', ",", "/", "¬", "#", ";", ":", "~", "[", "]", "{", "}", ")", "(", "*", "^", "%", "$", "<", ">", "?", "!", '"', "'", "&", '"' );
 		
 	public static function collectData($data, $captchaCheck = false){
 	global $lang;

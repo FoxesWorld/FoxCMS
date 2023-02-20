@@ -6,6 +6,7 @@ a {
   font-size: 1em;
   position: relative;
   transition: all 0.6s;
+  margin: 0px 10px;
 }
 
 a:before {
@@ -20,8 +21,9 @@ a:before {
 }
 
 a:hover{
-    color: #ff9100;
+    color: #ff7e54;
     transition-duration: 0.5s;
+	cursor: pointer;
 }
 
 li > a:hover:before {

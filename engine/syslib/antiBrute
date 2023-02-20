@@ -11,7 +11,7 @@
 -----------------------------------------------------
  File: antiBrute.class.php
 -----------------------------------------------------
- Verssion: 0.1.4.7 Final
+ Verssion: 0.1.5.7 Final
 -----------------------------------------------------
  Usage: Prevent users bruting passwords
 =====================================================
@@ -49,15 +49,6 @@ if (!defined('FOXXEY')) {
 			$this->db->run($this->dbShape);
 			$this->parseIpRow();
 
-			switch ($this->DBip) {
-				case ($ip):
-					$this->increaseAttempts();
-				break;
-
-				default:
-					$this->insertIp();
-			}
-
 			if($this->DBattempts >= $this->maxAttempts) {
 				$this->banIp();
 			}
@@ -83,24 +74,25 @@ if (!defined('FOXXEY')) {
 				"<b>Auth attempts: </b>".$this->DBattempts."<br>".
 				"<b>DBtime: </b>".$this->DBtime;
 			}
-
-			$this->removeRow();
+			$this->db->run("DELETE FROM antiBrute WHERE time < '".CURRENT_TIME."';");
 		}
+		
+		public function failedAuth($ip) {
+				switch ($this->DBip) {
+				case ($ip):
+					$query = "UPDATE `antiBrute` SET `attempts`=attempts+1 WHERE ip = '".$this->ip."'";
+					$this->db::run($query);
+				break;
 
-		private function insertIp(){
-			if(!$this->DBip) {
-
-				if($this->debug === true) {
-					echo "Adding ".$this->ip." to DB";
+				default:
+				if(!$this->DBip) {
+					if($this->debug === true) {
+						echo "Adding ".$this->ip." to DB";
+					}
+					$query = "INSERT INTO `antiBrute`(`ip`) VALUES ('".$this->ip."')";
+					$this->db::run($query);
 				}
-				$query = "INSERT INTO `antiBrute`(`ip`) VALUES ('".$this->ip."')";
-				$this->db::run($query);
 			}
-		}
-
-		private function increaseAttempts(){
-			$query = "UPDATE `antiBrute` SET `attempts`=attempts+1 WHERE ip = '".$this->ip."'";
-			$this->db::run($query);
 		}
 
 		private function banIp(){
@@ -115,8 +107,10 @@ if (!defined('FOXXEY')) {
 			$query = "UPDATE `antiBrute` SET `time`=".$config['bantime']." WHERE ip = '".$this->ip."'";
 			$this->db::run($query);
 		}
-
-		private function removeRow(){
-			$this->db->run("DELETE FROM antiBrute WHERE time < '".CURRENT_TIME."';");
+		
+		public function clearIp($ip){
+			if($this->DBip == $ip) {
+				$this->db->run("DELETE FROM antiBrute WHERE ip = '".$ip."';");
+			}
 		}
 	}

@@ -46,7 +46,7 @@
 			switch(@init::$REQUEST[$this->requestListener]) {	
 				case 'auth':
 					$authorisationStatus = $auth->auth();
-					switch($authorisationStatus ) {
+					switch($authorisationStatus) {
 						case true:
 							init::$usrArray['isLogged'] = true;
 							functions::jsonAnswer($lang['authSuccess'], false);

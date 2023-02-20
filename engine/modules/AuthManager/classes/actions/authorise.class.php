@@ -38,15 +38,16 @@ if(!defined('auth')) {
 		
 		protected function auth() {
 			global $lang;
-			
+			$antiBrute = new antiBrute(REMOTE_IP, $this->db, false);
 			if(authorize::passVerify($this->inputPassword, $this->realPassword)) {
 				$this->setUserdata($this->authData['login']);
 				$this->setTokenIfNeeded($this->rememberMe, $this->inputLogin);
 				$this->logger->WriteLine($this->inputLogin." successfuly authorised");
+				$antiBrute->clearIp(REMOTE_IP);
 				$status = true;
 			} else {
 				$this->logger->WriteLine($this->authData['login']." failed authorisation with password ".$this->inputPassword);
-				$antiBrute = new antiBrute(REMOTE_IP, $this->db, false);
+				$antiBrute->failedAuth(REMOTE_IP);
 				$status = false;
 			}
 			return $status;

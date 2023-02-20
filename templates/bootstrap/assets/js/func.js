@@ -5,7 +5,8 @@
 			let optionContent;
 			  optionContent = request.send_post({"getOption": page});
 			  optionContent.onreadystatechange = function() {
-				$(contentBlock).html(this.responseText);
+				$(contentBlock).html(replaceText(this.responseText));
+				//scanText(this.responseText);
 			  }
 			  formInit(100);
 		}, 500);
@@ -35,7 +36,7 @@
   
   function parseUsrOptionsMenu() {
 	  let usrOptions;
-	  usrOptions = request.send_post({"getUserOptionsMenu": login});
+	  usrOptions = request.send_post({"getUserOptionsMenu": userData.login});
 	  usrOptions.onreadystatechange = function() {
 		if (usrOptions.readyState === 4) {
 			try {
@@ -144,4 +145,10 @@
 				}
 		  }
 	  };
+	}
+	
+	function debugSend(message, style){
+		if(debug){
+			console.log(message, style);
+		}
 	}

@@ -18,15 +18,15 @@
 									<form method="POST" action="/" id="editProfileForm">								
 										<div class="tab_content active">
 											<h2 id="modalTitle">Давай меняй!</h2>
-											<span id="modalDesc">Посмотрим <b>[realname]</b>, что ты тут можешь поменять...</span>
+											<span id="modalDesc">Посмотрим %realname%, что ты тут можешь поменять...</span>
 											<section>
 													<div class="input_block">
-														<input id="realname" class="input" type="text" autocomplete="off" required value="[realname]">
+														<input id="realname" class="input" type="text" autocomplete="off" required value="%realname%">
 														<label class="label">Полное имя</label>
 													</div>
 																
 													<div class="input_block">
-														<input id="email" class="input" type="text" autocomplete="off" required value="[email]">
+														<input id="email" class="input" type="text" autocomplete="off" required value="%email%">
 														<label class="label">E-mail</label>
 													</div>
 
@@ -39,7 +39,7 @@
 
 										<div class="tab_content">
 											<h2 id="modalTitle">Давай украшать!</h2>
-											<span id="modalDesc">Посмотрим <b>[realname]</b>, что ты тут можешь сделать...</span>
+											<span id="modalDesc">Посмотрим %realname%, что ты тут можешь сделать...</span>
 											<table>
 											<td>
 													<input type="file" id="profilePhoto" name="image" accept=".jpeg" data-file-metadata-imagetype="profilePhoto" /> 
@@ -88,7 +88,7 @@
 													
 										<div class="tab_content">
 											<h2 id="modalTitle">Давай портить!</h2>
-											<span id="modalDesc">Настройки безопасности, <b>[realname]</b>, изменить может тут</span>
+											<span id="modalDesc">Настройки безопасности, %realname%, изменить может тут</span>
 											<section>
 													
 													<div class="input_block">
@@ -104,9 +104,9 @@
 											</section>
 										</div>
 											<input id="user_doaction" class="input" type="hidden" value="EditUser" />
-											<input id="login" class="input" type="hidden" value="[login]" />
-											<input id="userGroup" class="input" type="hidden" value="[user_group]" />
-											<input id="foxesHash" class="input" type="hidden" value="[hash]" />
+											<input id="login" class="input" type="hidden" value="%login%" />
+											<input id="userGroup" class="input" type="hidden" value="%user_group%" />
+											<input id="foxesHash" class="input" type="hidden" value="%hash%" />
 											<button type="submit" class="login">Изменить <div class="fa fa-cog fa-spin"></div></button>
 									</form>
 								</div>

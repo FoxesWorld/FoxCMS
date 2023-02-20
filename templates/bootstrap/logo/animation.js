@@ -21,7 +21,6 @@ function logoAnimation() {
         delay: (el,i)=> 40 * i
     }).add({
         targets: '.logo .letterStatus',
-        translateX: [0, -30],
         opacity: [0, 1],
         easing: "easeInExpo",
         duration: 1100,

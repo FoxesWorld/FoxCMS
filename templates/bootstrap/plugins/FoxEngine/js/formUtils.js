@@ -6,7 +6,7 @@
 	
 	function formInit(sleep) {
 			setTimeout(() => {
-				if(debug)console.info('%c Using FoxesWorld Form Utils', 'background: #39312fc7; color: yellow');
+				debugSend('%c Using FoxesWorld Form Utils', 'background: #39312fc7; color: yellow');
 				let forms = document.querySelectorAll("form");
 				if (forms.length >= 1) {
 					if(debug)console.log("Found forms: " + forms.length);

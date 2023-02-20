@@ -43,8 +43,6 @@ if (!defined('profile')) {
 		}
 		
 		function handle_base64_encoded_file_post($files) {
-			var_dump($files);
-			die();
 			foreach ($files as $file) {
 				$file = @json_decode($file);
 				if (!is_object($file)) continue;
