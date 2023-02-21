@@ -1,7 +1,9 @@
 <?php
 	define('ROOT_DIR', 	$_SERVER['DOCUMENT_ROOT']);
 	define('ENGINE_DIR',ROOT_DIR.'/engine/');
-	define('MODULES_DIR',ENGINE_DIR.'modules/');
+	define('MODULES_DIR', ENGINE_DIR.'classes/modules/');
+	define('UTILS_DIR', ENGINE_DIR.'classes/utils/');
+	define('SYSLIB_DIR', ENGINE_DIR.'classes/syslib/');
 	define('CURRENT_TIME',time());
 	define('CURRENT_DATE',date("d.m.Y"));
 	define('REMOTE_IP',   getenv('REMOTE_ADDR'));
@@ -14,6 +16,8 @@
 		'dbUser' =>  'aidenfox',
 		'dbPass' => 'fNt5DL9dNcA347XG',
 		'dbName' => 'aidenfox',
+		
+		'pluginsDir' => ROOT_DIR.'/plugins/',
 		
 		'timezone'=> 'Europe/Moscow',
 		'webserviceName'=> 'FoxEngine',

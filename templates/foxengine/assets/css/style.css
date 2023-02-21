@@ -251,7 +251,7 @@ section {
 
 .userProfile .userdata {
     margin: 10px;
-    font-size: smaller;
+    font-size: 11pt;
 }
 
 .userProfile .userActions {
@@ -413,4 +413,13 @@ footer .footer-copyright {
 footer .footer-copyright b {
     color: #b77c4c;
     font-family: 'FSElliotPro-Heavy';
+}
+
+.text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
 }

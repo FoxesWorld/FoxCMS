@@ -39,39 +39,43 @@ function userAction() {
     answer.onreadystatechange = function() {
         try {
             answer = JSON.parse(this.responseText);
-            $("#actionBlock").html(answer.text + ' ' + userData.realname + '!');
+            $(".text-wrapper").html(answer.text + ' ' + userData.realname + '!');
         } catch (error) {}
         textAnimate();
-    }
-    ;
-
+    };
 }
 
 function textAnimate() {
-    splitWrapLetters('#actionBlock', 'letter');
+    splitWrapLetters('#actionBlock .text-wrapper', 'letter');
     let animation = anime.timeline({
         loop: false
     }).add({
         targets: '.container #actionBlock',
         scale: [14, 1],
+		rotateZ: [180, 0],
         opacity: [0, 1],
         easing: "easeOutExpo",
         duration: 1000,
-        delay: 3000
-    }).add({
-        targets: '#actionBlock .letter',
+        delay: 300
+    })/* .add({
+        targets: '.text-wrapper',
         translateY: ["1.1em", 0],
         translateX: ["0.55em", 0],
         translateZ: 0,
-        rotateZ: [180, 0],
-        duration: 750,
+        rotateZ: [-180, 0],
+        duration: 850,
         easing: "easeOutExpo",
-        delay: (el,i)=>50 * i
-    });
+        delay: (el,i)=>120*i
+    })*/;
 }
 
 function debugSend(message, style) {
     if (debug) {
         console.log(message, style);
     }
+}
+
+function splitWrapLetters(query, letterClass) {
+    let textWrapper = document.querySelector(query);
+    textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='" + letterClass + "'>$&</span>");
 }

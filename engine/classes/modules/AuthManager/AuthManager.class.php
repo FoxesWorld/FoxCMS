@@ -29,8 +29,9 @@
 			$this->db = $db;
 			$this->logger = $logger;
 			$this->moduleName = basename(__FILE__, '.class.php');
-			init::requireNestedClasses($this->moduleName, __DIR__."/classes/Utilities/");
-			init::requireNestedClasses($this->moduleName, __DIR__."/classes/actions/");
+			init::classUtil('LoadUserInfo');
+			init::classUtil('SessionManager');
+			init::requireNestedClasses($this->moduleName, __DIR__."/actions/");
 			$this->checkUserToken();
 			$this->authActionsInit();	
 		}
@@ -74,7 +75,6 @@
 		}
 		
 		public static function updateSession($db) {
-			init::requireNestedClasses(basename(__FILE__), __DIR__."/classes/userUtilities/");
 			$loadUserInfo = new loadUserInfo(init::$usrArray['login'], $db);
 			$userData = $loadUserInfo->userInfoArray();
 			$sessionManager = new sessionManager($userData);

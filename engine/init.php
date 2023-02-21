@@ -45,7 +45,7 @@ session_start();
 			global $config;
 			$this->debug = $debug;
 			if($this->initLevels["preInit"] === true) {
-				self::libFilesInclude(ENGINE_DIR.'syslib', $this->debug); //Require Syslib
+				self::libFilesInclude(SYSLIB_DIR, $this->debug); //Require Syslib
 				self::requireNestedClasses(basename(__FILE__), __DIR__);
 				
 				$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
@@ -57,7 +57,7 @@ session_start();
 				
 				self::$usrArray['realname'] = randTexts::getRandText('noName');	
 				initHelper::userArrFill(); //UsrArray Override (if IsLogged)
-				require (ENGINE_DIR.'syslib/smarty/Smarty.class.php');
+				require (SYSLIB_DIR.'smarty/Smarty.class.php');
 			}
 		}
 		
@@ -85,13 +85,22 @@ session_start();
 		
 		//CLASS METHODS
 		protected static function requireNestedClasses($FILE, $DIR){
-			$nestedClasses = filesInDir::filesInDirArray($DIR, ".php");
-			if(is_array($nestedClasses)) {
-			foreach($nestedClasses as $DIR_FILE){
-				if($DIR_FILE !== $FILE) {
-					require_once($DIR.'/'.$DIR_FILE);
+			if(is_dir($DIR)) {
+				$nestedClasses = filesInDir::filesInDirArray($DIR, ".php");
+				if(is_array($nestedClasses)) {
+					foreach($nestedClasses as $DIR_FILE){
+						if($DIR_FILE !== $FILE) {
+							require_once($DIR.'/'.$DIR_FILE);
+						}
+					}
 				}
 			}
+		}
+		
+		protected static function classUtil($className) {
+			$classPath = UTILS_DIR.$className.".class.php";
+			if(file_exists($classPath)){
+				require_once ($classPath);
 			}
 		}
 

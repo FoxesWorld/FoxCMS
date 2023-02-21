@@ -16,6 +16,7 @@ if (!defined('FOXXEY')) {
 		function __construct() {
 			global $config;
 			init::requireNestedClasses(basename(__FILE__), __DIR__);
+			init::classUtil('PluginScanner');
 			$modalsToShow = new modalShow;
 			$this->smarty 					= new Smarty;
 			$this->smarty->debugging 		= false;
@@ -30,9 +31,8 @@ if (!defined('FOXXEY')) {
 		protected function smartyAssign(){
 			global $config;
 			$smartyUtils = new smartyUtils;
-			$PluginsScanner = new PluginsScanner(ROOT_DIR.'/templates/'.$config['javascript']['siteTpl'].'/plugins/');
+			$PluginsScanner = new PluginsScanner($config['pluginsDir']);
 			$PluginsScanner->pluginsInclude();
-			
 			$profilePhotoPath = ROOT_DIR.UPLOADS.init::$usrArray['profilePhoto'];
 			
 			//@Deprecated

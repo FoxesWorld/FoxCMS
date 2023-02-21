@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2023-02-21 11:46:21
+/* Smarty version 4.0.4, created on 2023-02-21 13:24:08
   from '/var/www/foxcms/templates/foxengine/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_63f484dde7c922_50801540',
+  'unifunc' => 'content_63f49bc8cfc7a2_74442817',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:logo/logo.tpl' => 1,
   ),
 ),false)) {
-function content_63f484dde7c922_50801540 (Smarty_Internal_Template $_smarty_tpl) {
+function content_63f49bc8cfc7a2_74442817 (Smarty_Internal_Template $_smarty_tpl) {
 ?>  <header id="header" class="d-flex align-items-center">
 		<div class="container d-flex align-items-center justify-content-between">
 

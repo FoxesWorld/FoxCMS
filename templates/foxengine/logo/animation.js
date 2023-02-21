@@ -33,8 +33,3 @@ function logoAnimation() {
         duration: 600
     });
 }
-
-function splitWrapLetters(query, letterClass) {
-    let textWrapper = document.querySelector(query);
-    textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='" + letterClass + "'>$&</span>");
-}

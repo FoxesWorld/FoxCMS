@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2023-02-21 11:46:21
+/* Smarty version 4.0.4, created on 2023-02-21 13:24:08
   from '/var/www/foxcms/templates/foxengine/right-block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_63f484dde81202_27435659',
+  'unifunc' => 'content_63f49bc8d04b36_95050686',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_63f484dde81202_27435659 (Smarty_Internal_Template $_smarty_tpl) {
+function content_63f49bc8d04b36_95050686 (Smarty_Internal_Template $_smarty_tpl) {
 ?>				  <div class="row rightBlock">
 							<div class="card">
 								<div id="userBlock">	

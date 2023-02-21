@@ -24,7 +24,8 @@
 					</div>
 
 					<div class="rightAction d-none d-md-flex align-items-center" data-in-effect="fadeIn" id="actionBlock">
-
+						<span class="text-wrapper">
+						</span>
 					</div>
 			</div>
 		</section>
