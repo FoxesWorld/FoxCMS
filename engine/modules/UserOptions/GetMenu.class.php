@@ -13,7 +13,7 @@ if(!defined('FOXXEY')) {
 				if($this->requestLogin === $userLogin){
 					die(UserOptions::$builtMenu);
 				} else {
-					die('{"message": "Incorrect login is passed!"}');
+					die('{"message": "Incorrect login is supplied!"}');
 				}
 				
 			}

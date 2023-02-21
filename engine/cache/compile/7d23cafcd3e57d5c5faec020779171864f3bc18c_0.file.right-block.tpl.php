@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 4.0.4, created on 2023-02-21 11:43:37
-  from '/var/www/foxcms/templates/bootstrap/right-block.tpl' */
+/* Smarty version 4.0.4, created on 2023-02-21 11:46:21
+  from '/var/www/foxcms/templates/foxengine/right-block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_63f48439e48583_99938524',
+  'unifunc' => 'content_63f484dde81202_27435659',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '682181accce2e612644bceaa4bf79523c4d3f8ad' => 
+    '7d23cafcd3e57d5c5faec020779171864f3bc18c' => 
     array (
-      0 => '/var/www/foxcms/templates/bootstrap/right-block.tpl',
+      0 => '/var/www/foxcms/templates/foxengine/right-block.tpl',
       1 => 1676968944,
       2 => 'file',
     ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_63f48439e48583_99938524 (Smarty_Internal_Template $_smarty_tpl) {
+function content_63f484dde81202_27435659 (Smarty_Internal_Template $_smarty_tpl) {
 ?>				  <div class="row rightBlock">
 							<div class="card">
 								<div id="userBlock">	

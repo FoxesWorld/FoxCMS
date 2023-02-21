@@ -2,7 +2,7 @@
 {
   "mdlAdress": "reg",
   "mdlTitle": "Регистрация",
-  "mdlDesc": "Я увольняюсь...",
+  "mdlDesc": "Проходите пожалуйста!",
   "groupToShow": 5
 }
 </mdlOpt>

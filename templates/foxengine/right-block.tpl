@@ -41,7 +41,7 @@
 								
 								</div>
 							</div>
-
+							<!-- 
 							<div class="card">		
 								<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
 								  <div class="card-header">Help</div>
@@ -61,4 +61,5 @@
 									  </div>
 								</div>
 							</div>
+							-->
 					</div>

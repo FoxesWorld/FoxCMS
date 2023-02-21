@@ -53,13 +53,13 @@ if(!defined('auth')) {
 			return $status;
 		}
 		
-		private function lastAuth($login, $db){
+		private function lastAuth($login){
 			$query = "UPDATE `users` SET last_date='".CURRENT_TIME."' WHERE login = '".$login."'";
 			$this->db->query($query);
 		}
-		
+
 		private function setUserdata($login) {
-			$this->lastAuth($login, $this->db);
+			$this->lastAuth($login);
 			$loadUserInfo = new loadUserInfo($login, $this->db);
 			$userData = $loadUserInfo->userInfoArray();
 			$sessionManager = new sessionManager($userData);

@@ -146,6 +146,7 @@ if(!defined('FOXXEY')) {
 			}
 		}
 		
+		/* REPEATINC CODE FROM PluginScanner!!! */
 		private function checkUserAccess($usergroup, $optionAccessGroup){
 			switch(is_array($optionAccessGroup)){
 				case true:

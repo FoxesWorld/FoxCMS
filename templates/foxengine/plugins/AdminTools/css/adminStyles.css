@@ -1,0 +1,121 @@
+/*--------------------------------------------------------------
+# Admin Panel
+--------------------------------------------------------------*/
+.adminPanel .tabs {
+    width: initial;
+    padding: 0px;
+    margin: 0 auto;
+    position: relative;
+    font-size: 0.95vw;
+}
+
+.adminPanel section {
+    display: none;
+    padding: 15px;
+    background: white;
+    top: 0;
+    left: 180px;
+}
+
+.adminPanel p {
+    margin: 0;
+}
+
+.adminPanel input {
+    display: none;
+}
+
+.adminPanel label {
+    display: table-cell;
+    width: 180px;
+    padding: 15px;
+    color: #4F5966;
+    background: #DEE8F2;
+    cursor: pointer;
+}
+
+.adminPanel input:checked + label {
+    color: #555;
+    background: white;
+}
+
+#tab1:checked ~ #content1, #tab2:checked ~ #content2, #tab3:checked ~ #content3, #tab4:checked ~ #content4 {
+    display: block;
+    width: inherit;
+}
+
+.adminPanel section {
+    animation: scale 0.7s ease-in-out;
+}
+
+.module {
+    border: 1px solid;
+    border-radius: 5px;
+    margin: 5px;
+    background: linear-gradient(156deg, #dccba9a8, #ff9a00) !important;
+}
+
+.module .moduleName {
+    padding: 5px;
+}
+
+.module .moduleSettings {
+    float: right;
+    background: #d1ab48;
+    margin: -1px;
+    padding: 5;
+    border-radius: 0px 5px 0px;
+}
+
+.module .moduleSettings:hover {
+    transition: 0.5s;
+    background: #9f8f37;
+}
+
+.module .moduleContents {
+    padding: 5;
+}
+
+.module .moduleContents .moduleKey {
+    font-family: 'GothamPro';
+    color: #de6d22;
+}
+
+.module .moduleContents .moduleValue {
+    font-weight: inherit;
+}
+
+.module .moduleContents li {
+    margin: 0;
+}
+
+.module .modulePriority {
+    height: 32;
+    width: fit-content;
+}
+
+.module .modulePicture {
+    float: left;
+    padding: 5;
+}
+
+.module td {
+    display: contents;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.005);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
