@@ -35,6 +35,8 @@
 				<div class="col-8">
 				  <div id="content" class="mainBlock animate__animated">
 						<%contentData%>
+						<span id="test" style="height: 512px;width: auto;display: block; border: 2px solid #998f98ad;"></span>
+						<button class="login" onclick="loadPage('more', '#test', true)">LoadContent</button>
 				  </div>
 				</div>				  
 

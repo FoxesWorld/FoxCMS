@@ -1,10 +1,9 @@
 /*
-*	UserOptions ver - 0.1.0
-*	Copyright Foxesworld.ru
-*/
-
+ *	UserOptions ver - 0.2.0
+ *	Copyright Foxesworld.ru
+ */
 function parseUsrOptionsMenu() {
-	debugSend('%cUsing FoxesWorld UserOptions', 'background: #39312fc7; color: yellow');
+    debugSend('%cUsing FoxesWorld UserOptions', 'background: #39312fc7; color: yellow');
     let usrOptions;
     usrOptions = request.send_post({
         "getUserOptionsMenu": userData.login
@@ -20,34 +19,35 @@ function parseUsrOptionsMenu() {
                 console.log("UserOptions available: " + optionAmmount);
                 for (var i = 0; i < optionAmmount; i++) {
                     var obj = optionArray[i];
-                    let appendBlock;
-                    for (var key in obj) {
-                        var value = obj[key];
-                        type = obj["type"];
-                        appendBlock = obj["optionBlock"];
-                        switch (type) {
-                        case "link":
-                            optionTpl = `
+                    for (var optionName in obj) {
+                        let appendBlock = obj[optionName]["optionBlock"];
+                        switch (obj[optionName]["type"]) {
+                            case "link":
+                                optionTpl = `
 										  <li>
-											<a onclick="loadPage('` + obj["optionName"] + `'); return false; ">
+											<a onclick="loadPage('` + optionName + `', contentBlock, true); return false; ">
 												<div class="rightIcon">
-													` + obj["optionPreText"] + `
+													` + obj[optionName]["optionPreText"] + `
 												</div>
-											` + obj["optionTitle"] + `
+											` + obj[optionName]["optionTitle"] + `
 											</a>
 											</li>`;
-                            break;
+                                break;
 
-                        case "plainText":
-                            optionTpl = obj["optionTitle"];
-                            break;
+                            case "pageContent":
+                                break;
+
+                            case "plainText":
+                                optionTpl = obj[optionName]["optionTitle"];
+                                break;
+                        }
+                        if (appendBlock !== undefined) {
+                            console.log("[" + i + "]" + "Appending " + optionName + " to " + appendBlock + " block");
+                            $(appendBlock).append(optionTpl);
                         }
                     }
-                    console.log("[" + i + "]" + "Appending " + obj["optionName"] + " to " + appendBlock + " block");
-                    $(appendBlock).append(optionTpl);
                 }
             } catch (error) {}
         }
-        //$("#usrMenu").html(this.responseText);  
     }
 }

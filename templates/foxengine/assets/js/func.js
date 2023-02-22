@@ -1,5 +1,5 @@
-function loadPage(page) {
-    addAnimation('animate__backOutRight', $(contentBlock));
+function loadPage(page, block, animate) {
+    addAnimation('animate__backOutRight', $(block), animate);
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -11,24 +11,25 @@ function loadPage(page) {
         });
         optionContent.onreadystatechange = function() {
 			if (optionContent.readyState === 4) {
-				$(contentBlock).html(replaceText(this.responseText));
+				$(block).html(replaceText(this.responseText, page));
 			}
         }
         formInit(100);
-    }
-    , 700);
+    }, 700);
     setTimeout(()=>{
-        addAnimation('animate__bounceInDown', $(contentBlock));
+        addAnimation('animate__bounceInDown', $(block), animate);
     }
     , 600);
 }
 
-function addAnimation(animation, block) {
-    block.addClass(animation);
-    setTimeout(()=>{
-        block.removeClass(animation);
-    }
-    , 1000);
+function addAnimation(animation, block, animate) {
+	if(animate) {
+		block.addClass(animation);
+		setTimeout(()=>{
+			block.removeClass(animation);
+		}
+		, 1000);
+	}
 }
 
 function userAction() {

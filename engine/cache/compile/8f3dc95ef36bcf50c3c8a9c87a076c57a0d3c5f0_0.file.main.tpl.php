@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2023-02-21 13:24:08
+/* Smarty version 4.0.4, created on 2023-02-22 20:32:22
   from '/var/www/foxcms/templates/foxengine/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_63f49bc8cf8266_10103495',
+  'unifunc' => 'content_63f651a6749ea8_67703898',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '8f3dc95ef36bcf50c3c8a9c87a076c57a0d3c5f0' => 
     array (
       0 => '/var/www/foxcms/templates/foxengine/main.tpl',
-      1 => 1676974991,
+      1 => 1677087133,
       2 => 'file',
     ),
   ),
@@ -23,7 +23,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_63f49bc8cf8266_10103495 (Smarty_Internal_Template $_smarty_tpl) {
+function content_63f651a6749ea8_67703898 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html>
 
 	<head>
@@ -74,6 +74,8 @@ function content_63f49bc8cf8266_10103495 (Smarty_Internal_Template $_smarty_tpl)
 						<?php echo '<%'; ?>
 contentData<?php echo '%>'; ?>
 
+						<span id="test" style="height: 512px;width: auto;display: block; border: 2px solid #998f98ad;"></span>
+						<button class="login" onclick="loadPage('more', '#test', true)">LoadContent</button>
 				  </div>
 				</div>				  
 

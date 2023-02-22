@@ -92,7 +92,7 @@
 			}
 			
 			answer.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
+				if (answer.readyState === 4) {
 					let response = JSON.parse(this.responseText);
 					button.notify(response.message, response.type);
 					setTimeout(() => {

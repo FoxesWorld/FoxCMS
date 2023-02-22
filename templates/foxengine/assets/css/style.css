@@ -44,6 +44,7 @@ ul {
     background-color: #e1dfdda3;
     border-radius: 10px;
     height: 100%;
+	padding: 15px;
 }
 
 .rightBlock {
@@ -272,10 +273,8 @@ section {
 
 .profilePhoto {
     filter: grayscale(.8);
-    border-radius: 50%;
-    width: 75%;
+    border-radius: 50% 10% 50% 40%;
     overflow: hidden;
-    margin: 0 auto;
     -webkit-box-shadow: 4px 2px 79px 3px rgb(214 202 50 / 55%);
     -moz-box-shadow: 4px 2px 79px 3px rgba(214, 202, 50, 0.55);
     box-shadow: 4px 2px 79px 3px rgb(214 202 50 / 55%);

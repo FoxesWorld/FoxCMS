@@ -6,21 +6,21 @@
 let updatedText;
 let replacedTimes = 0;
 
-function replaceText(text) {
-    debugSend('%cUsing FoxesWorld TextReplacer', 'background: #39312fc7; color: yellow');
+function replaceText(text, page) {
+    debugSend('%cUsing FoxesWorld TextReplacer on page '+page, 'background: #39312fc7; color: yellow');
     updatedText = text;
     for (let j = 0; j < userFields.length; j++) {
         let value = userFields.at(j);
 		let mask = "%" + value + "%";
         while (updatedText.includes(mask)) {
-            debugSend("%c - Replacing " + value + " mask...", 'color: green');
+            debugSend("%c - Replacing " + value + " mask...", 'background: black; color: green');
             updatedText = updatedText.replace(mask, userData[userFields.at(j)]);
 			replacedTimes++;
         }
     }
 	switch(replacedTimes){
 		case 0:
-			debugSend("%cNo text for replacing was found", 'color: green');
+			debugSend("%cNo text for replacing was found", 'background: black; color: red');
 		break;
 		
 		case 1:

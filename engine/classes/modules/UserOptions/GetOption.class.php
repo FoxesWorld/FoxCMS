@@ -16,8 +16,8 @@ if(!defined('FOXXEY')) {
 			if(@isset(init::$REQUEST[$this->getOptionRequest])){
 				$this->pageTplFile = TEMPLATE_DIR.$config['pageTplFile'];
 				$this->requestedOption = functions::filterString($_POST[$this->getOptionRequest]);
-					if(in_array($this->requestedOption, UserOptions::$availableForCurrentUser["optionNames"])) {
-						$this->buildPage(UserOptions::$availableForCurrentUser[$this->requestedOption]);
+					if(in_array($this->requestedOption, UserOptions::$userOptions["optionNames"])) {
+						$this->buildPage(UserOptions::$userOptions[$this->requestedOption]);
 						die($this->pageTemplate);
 					} else {
 					die('{"message": "No acces for option - '.$this->requestedOption.'"}');

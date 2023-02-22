@@ -12,10 +12,10 @@
 			}
 
 			//Filling usrArray each time if SESSION is set
-			public static function userArrFill(){
-				if($_SESSION) {			
+			protected static function userArrFill(){
+				if($_SESSION) {		
 					if($_SESSION['isLogged'] === true){
-							
+						init::$usrArray['realname'] = randTexts::getRandText('noName');		
 						foreach($_SESSION as $key => $value){
 							init::$usrArray[$key] = $value;
 						}
@@ -37,7 +37,7 @@
 				$this->db = $db;
 			}
 
-			public function userGroupName(){
+			protected function userGroupName(){
 				$query = "SELECT * FROM `".$this->dbTabble."` WHERE groupNum = ".$this->userGroup."";
 				$answer = $this->db->getRow($query);
 
