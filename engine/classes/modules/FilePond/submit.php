@@ -29,7 +29,7 @@ if (!defined('profile')) {
 			$this->db = $db;
 			$this->logger = $logger;
 			$this->usrArray = $usrArray;
-			define("USERDIR", UPLOAD_DIR.DIRECTORY_SEPARATOR.$_POST['login']);
+			define("USERDIR", UPLOAD_DIR.DIRECTORY_SEPARATOR.'users'.DIRECTORY_SEPARATOR.$_POST['login']);
 			if (!is_dir(USERDIR)) mkdir(USERDIR, 0755);
 		}
 		

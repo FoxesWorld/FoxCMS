@@ -33,7 +33,7 @@ if (!defined('FOXXEY')) {
 
 		function __construct($textType, $debug = false){
 			
-			$this->textsDir 	= ENGINE_DIR.'data/randTexts/';
+			$this->textsDir 	= randTextsDir;
 			$this->debug 		= $debug;
 			$this->textToSend 	= $textType;
 

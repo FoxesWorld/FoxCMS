@@ -10,7 +10,7 @@
 											<div class="userdata">
 												<li><b><i class="fa fa-user-circle-o" aria-hidden="true"></i>Логин</b>: {$login}</li>
 												<li><b><i class="fa fa-address-card-o" aria-hidden="true"></i>Почта</b>: {$email}</li>
-												<li><b><i class="fa fa-users" aria-hidden="true"></i>Группа</b>: {$group_name}</li>
+												<li><b><i class="fa fa-users" aria-hidden="true"></i>Группа</b>: {$groupName}</li>
 												<li><b><i class="fa fa-diamond" aria-hidden="true"></i>Полное имя</b>: {$realname}</li>
 											</div>
 										</ul>

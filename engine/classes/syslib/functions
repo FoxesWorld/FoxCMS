@@ -70,9 +70,10 @@ if (!defined('FOXXEY')) {
 	}
 		
 	public static function checkSA($array){
+		global $lang;
 		foreach($array as $key => $value){
 			if(preg_match("/[А-Яа-я]/", $value)) {
-				self::jsonAnswer('text.badSym.'.$key, true);
+				self::jsonAnswer($lang['badSyms'].$key, true);
 			}
 		}
 	}
@@ -182,7 +183,6 @@ if (!defined('FOXXEY')) {
 				return iconv_strrpos($str, $needle, "utf-8");
 			}
 		}
-
 		return strrpos($str, $needle);
 
 	}

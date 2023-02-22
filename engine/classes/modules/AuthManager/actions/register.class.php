@@ -38,7 +38,7 @@ if(!defined('auth')) {
 			}
 		}
 		
-		protected function register(){
+		protected function register() {
 			global $lang;
 			
 			$this->checkPass();
@@ -60,6 +60,8 @@ if(!defined('auth')) {
 				$this->logger->WriteLine("User has completed registration '".$this->regData['login']."'");
 				$sessionManager = new sessionManager($userData);
 				functions::jsonAnswer($lang['regComplete'], false); 
+				$foxMail = new foxMail(true);
+				$foxMail->send($this->regData['email'], "", "GGWP");
 			} else {
 				
 			}

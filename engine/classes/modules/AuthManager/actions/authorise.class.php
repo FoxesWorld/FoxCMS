@@ -40,6 +40,7 @@ if(!defined('auth')) {
 			global $lang;
 			$antiBrute = new antiBrute(REMOTE_IP, $this->db, false);
 			if(authorize::passVerify($this->inputPassword, $this->realPassword)) {
+				$this->setLoginHash($this->inputLogin);
 				$this->setUserdata($this->authData['login']);
 				$this->setTokenIfNeeded($this->rememberMe, $this->inputLogin);
 				$this->logger->WriteLine($this->inputLogin." successfuly authorised");
@@ -66,16 +67,23 @@ if(!defined('auth')) {
 			init::$usrArray['isLogged'] = true;
 		}
 		
+		private function setLoginHash($login){
+			//TODO => If hash is older than a day => set new!!
+			$loginHash = authorize::generateLoginHash($login, 16);
+			$query = "UPDATE `users` SET hash='".$loginHash."' WHERE login = '".$login."'";
+			$this->db->query($query);
+		}
+		
 		private function setTokenIfNeeded($checkbox, $login) {
 			$token = authorize::generateLoginHash($login);
 			switch($checkbox) {
 				case 1:
-					$query = "UPDATE `users` SET hash='".$token."' WHERE login = '".$login."'";
+					$query = "UPDATE `users` SET token='".$token."' WHERE login = '".$login."'";
 					setcookie(AuthManager::$userToken, $token, time() + (1000 * 60 * 60 * 24 * 30));
 				break;
 				
 				default:
-					$query = "UPDATE `users` SET hash='' WHERE login = '".$login."'";
+					$query = "UPDATE `users` SET token='' WHERE login = '".$login."'";
 					setcookie(AuthManager::$userToken, "", time() - 3600);
 				break;
 			}

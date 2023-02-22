@@ -84,7 +84,7 @@
 			$username = "";
 			if(isset($_COOKIE[self::$userToken])) {
 				$token = functions::filterString($_COOKIE[self::$userToken]);
-				$query = "SELECT login from `users` WHERE hash = '".$token."'";
+				$query = "SELECT login from `users` WHERE token = '".$token."'";
 				$username = $this->db->getValue($query);
 				$auth = new authorise("", $this->db, $this->logger, $username);
 			}

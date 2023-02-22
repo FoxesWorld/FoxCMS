@@ -14,7 +14,7 @@
 		
 		function __construct() {
 			if(isset(init::$REQUEST[$this->requestListener])) {
-				if(init::$usrArray["group_name"] === "admin") {
+				if(init::$usrArray["user_group"] == 1) {
 					self::requireNestedClasses(basename(__FILE__), __DIR__);
 					$AdminOptions = new AdminOptions(init::$REQUEST["admPanel"]);
 				} else {

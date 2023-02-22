@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2023-02-21 13:24:08
+/* Smarty version 4.0.4, created on 2023-02-22 10:56:22
   from '/var/www/foxcms/templates/foxengine/right-block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_63f49bc8d04b36_95050686',
+  'unifunc' => 'content_63f5caa67f68a3_09453959',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7d23cafcd3e57d5c5faec020779171864f3bc18c' => 
     array (
       0 => '/var/www/foxcms/templates/foxengine/right-block.tpl',
-      1 => 1676968944,
+      1 => 1677052571,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_63f49bc8d04b36_95050686 (Smarty_Internal_Template $_smarty_tpl) {
+function content_63f5caa67f68a3_09453959 (Smarty_Internal_Template $_smarty_tpl) {
 ?>				  <div class="row rightBlock">
 							<div class="card">
 								<div id="userBlock">	
@@ -36,7 +36,7 @@ function content_63f49bc8d04b36_95050686 (Smarty_Internal_Template $_smarty_tpl)
 </li>
 												<li><b><i class="fa fa-address-card-o" aria-hidden="true"></i>Почта</b>: <?php echo $_smarty_tpl->tpl_vars['email']->value;?>
 </li>
-												<li><b><i class="fa fa-users" aria-hidden="true"></i>Группа</b>: <?php echo $_smarty_tpl->tpl_vars['group_name']->value;?>
+												<li><b><i class="fa fa-users" aria-hidden="true"></i>Группа</b>: <?php echo $_smarty_tpl->tpl_vars['groupName']->value;?>
 </li>
 												<li><b><i class="fa fa-diamond" aria-hidden="true"></i>Полное имя</b>: <?php echo $_smarty_tpl->tpl_vars['realname']->value;?>
 </li>

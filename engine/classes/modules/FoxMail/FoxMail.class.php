@@ -31,13 +31,13 @@ class foxMail extends init{
 			'smtp_host' 		=> 'smtp.yandex.ru',
 			'smtp_port' 		=> '465',
 			'smtp_user' 		=> 'no-reply@foxesworld.ru',
-			'smtp_pass' 		=> 'TeSt',
+			'smtp_pass' 		=> 'Aiden2556308',
 			'smtp_secure' 		=> 'ssl',
 			'smtp_mail' 		=> 'no-reply@foxesworld.ru',
 		);
 	
 	function __construct($is_html = false) {
-		init::requireNestedClasses(basename(__FILE__), __DIR__);
+		init::classUtil('Mailer');
 		$this->mail = new PHPMailer;
 		$this->mail->CharSet = $this->config['encoding'];
 		$this->mail->Encoding = "base64";
@@ -79,7 +79,6 @@ class foxMail extends init{
 	
 	function send($to, $subject, $message) {
 	
-		if(!strpos($to, '.fr')) {
 			if( $this->from ) {
 				$this->mail->addReplyTo($this->from, $this->from);
 			}
@@ -115,16 +114,17 @@ class foxMail extends init{
 			
 			$this->mail->clearAllRecipients();
 			$this->mail->clearAttachments();
-		}
 	
 	}
 	
+	/*
 	function getTemplate($name) {
 		ob_start();
 		include (ETC.'mail/'.$name.".tpl");
 		$text = ob_get_clean();
 		return $text;
     }
+	*/
 	
 	function addAttachment($path, $name = '', $encoding = 'base64', $type = '', $disposition = 'attachment') {
 		$this->mail->addAttachment( $path, $name, $encoding, $type, $disposition );

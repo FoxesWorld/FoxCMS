@@ -17,6 +17,7 @@ if (!defined('FOXXEY')) {
 			global $config;
 			init::requireNestedClasses(basename(__FILE__), __DIR__);
 			init::classUtil('PluginScanner');
+			define('UserUploadDir', UPLOADS_DIR.USR_SUBFOLDER.init::$usrArray['login'].'/');
 			$modalsToShow = new modalShow;
 			$this->smarty 					= new Smarty;
 			$this->smarty->debugging 		= false;
@@ -33,7 +34,7 @@ if (!defined('FOXXEY')) {
 			$smartyUtils = new smartyUtils;
 			$PluginsScanner = new PluginsScanner($config['pluginsDir']);
 			$PluginsScanner->pluginsInclude();
-			$profilePhotoPath = ROOT_DIR.UPLOADS.init::$usrArray['profilePhoto'];
+			$photoSystemPath = ROOT_DIR.UserUploadDir.init::$usrArray['profilePhoto'];
 			
 			//@Deprecated
 			$this->smarty->assign("links", "");
@@ -45,9 +46,9 @@ if (!defined('FOXXEY')) {
 			$this->smarty->assign("builtInJS", $smartyUtils->assignJs());
 			$this->smarty->assign("systemHeaders", $PluginsScanner->outString);
 
-			switch(file_exists($profilePhotoPath)) {
+			switch(file_exists($photoSystemPath)) {
 				case true:
-					init::$usrArray["profilePhoto"] = UPLOADS.init::$usrArray['profilePhoto'];
+					init::$usrArray["profilePhoto"] = UserUploadDir.init::$usrArray['profilePhoto'];
 				break;
 				
 				default:

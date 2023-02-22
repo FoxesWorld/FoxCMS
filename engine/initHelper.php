@@ -41,7 +41,7 @@
 				$query = "SELECT * FROM `".$this->dbTabble."` WHERE groupNum = ".$this->userGroup."";
 				$answer = $this->db->getRow($query);
 
-				return $answer["groupType"];
+				return $answer["groupName"];
 			}
 
 		}

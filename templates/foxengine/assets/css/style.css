@@ -302,6 +302,7 @@ section {
 .profilePhoto img {
     width: 100%;
     height: auto;
+	pointer-events: none;
 }
 
 ul > li {

@@ -11,17 +11,14 @@
 			foreach($config['userDatainDb'] as $key){
 				$smarty->assign($key, init::$usrArray[$key]);
 			}
-			$smarty->assign('group_name', init::$usrArray['group_name']);
+			$smarty->assign('groupName', init::$usrArray['groupName']);
 		}
 		
 		protected function assignJs(){
 			global $config;
 			$builtInJS = '<script>';
-			
-			//foreach(init::$usrArray as $key => $value){
-			//	$builtInJS .= 'const '.$key.' = "'.$value.'";'."\n";
-			//}
 
+			//Parse using JS to increase stability!11!111
 			foreach(init::$usrArray as $key => $value){
 				$jsData[] = '"'.$key.'": "'.$value.'"';
 			}
