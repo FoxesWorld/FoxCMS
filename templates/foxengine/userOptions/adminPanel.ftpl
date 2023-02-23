@@ -19,7 +19,7 @@
 				<input id="tab3" type="radio" name="tabs" /> 
 				<label for="tab3">Пользователи</label> 
 
-				<input id="tab4" type="radio" name="tabs" /> 
+				<input id="tab4" type="radio" onclick="loadPage('content/admMore', '#content4', true)" name="tabs" /> 
 				<label for="tab4">Ещё</label> 
 			  
 				<section id="content1"> 

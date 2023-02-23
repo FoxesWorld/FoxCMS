@@ -309,56 +309,54 @@ ul > li {
 }
 
 /* Status Blocks*/
-.infoBlock:before {
-    background: url(../img/info.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: inline-flex;
-    width: 30px;
-    height: 30px;
-    content: "";
-}
-
-.infoBlock {
+.statusBlock {
     margin: 35px;
     padding: 10px;
+    border-radius: 5px;
+}
+
+.statusBlock ul {
+	margin: 0;
+    padding: 0;
+    display: inline-flex;
+}
+
+.statusBlock img {
+    width: 47px;
+    height: 45px;
+	margin: 10px 0;
+}
+
+.statusBlock .blockText{
+	margin: 5px 10px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.statusBlock img.info {
+    content: url(../img/info.png);
+}
+
+.statusBlock.info {
     background: #3fc5d18c;
-    border-radius: 5px;
 }
 
-.warnBlock:before {
-    background: url(../img/warn.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: inline-flex;
-    width: 30px;
-    height: 30px;
-    content: "";
+.statusBlock img.warn {
+    content: url(../img/warn.png);
 }
 
-.warnBlock {
-    margin: 35px;
-    padding: 10px;
+.statusBlock.warn {
     background: #bbb8378c;
-    border-radius: 5px;
 }
 
-.errorBlock:before {
-    background: url(../img/error.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: inline-flex;
-    width: 30px;
-    height: 30px;
-    content: "";
+.statusBlock img.error {
+    content: url(../img/error.png);
 }
 
-.errorBlock {
-    margin: 35px;
-    padding: 10px;
+.statusBlock.error {
     background: #9725256e;
-    border-radius: 5px;
 }
+
 
 /*--------------------------------------------------------------
 # row

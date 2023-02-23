@@ -45,6 +45,8 @@ session_start();
 			global $config;
 			$this->debug = $debug;
 			if($this->initLevels["preInit"] === true) {
+				define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['javascript']['siteTpl'].'/');
+				define('RT_DIR', TEMPLATE_DIR.'randTexts/');
 				self::libFilesInclude(SYSLIB_DIR, $this->debug); //Require Syslib
 				self::requireNestedClasses(basename(__FILE__), __DIR__);
 				$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
@@ -52,8 +54,7 @@ session_start();
 				$this->ModulesLoader = new ModulesLoader($this->db, $this->logger);
 				$this->initHelper = new initHelper($this->db, $this->logger);
 				init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "preInit");
-				define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['javascript']['siteTpl'].'/');
-				define('randTextsDir', TEMPLATE_DIR.'randTexts/');
+
 				self::$usrArray['realname'] = randTexts::getRandText('noName');	
 				initHelper::userArrFill(); //UsrArray Override (if IsLogged)
 				require (SYSLIB_DIR.'smarty/Smarty.class.php');

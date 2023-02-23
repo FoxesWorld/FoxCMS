@@ -37,7 +37,8 @@
 		'javascript' => array(
 			'contentBlock' => "#content",
 			'secureKey' => 'ghYyufghVH',
-			'siteTpl' => 'foxengine'),
+			'siteTpl' => 'foxengine',
+			'debug' => true),
 		
 		/*Content options*/
 		'modalSearch' => '/modal',

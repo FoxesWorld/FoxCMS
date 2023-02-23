@@ -61,8 +61,10 @@ class UserOptions extends init {
         self::$allOptionsArray["optionFiles"] = filesInDir::filesInDirArray($this->scanOptionsDir, ".ftpl");
         foreach (self::$allOptionsArray["optionFiles"] as $optionFile) {
             $optionName = explode('.', $optionFile)[0];
+			$filePath = $this->scanOptionsDir.DIRECTORY_SEPARATOR.$optionFile;
+			if(is_dir($filePath)) { echo $optionFile;}
             self::$allOptionsArray["optionNames"][] = $optionName;
-            $optionContents = file::efile($this->scanOptionsDir.DIRECTORY_SEPARATOR.$optionFile)["content"];
+            $optionContents = file::efile($filePath)["content"];
             self::$allOptionsArray["options"][$optionName]["optContent"] = UserContent::contentTagsReplacing($optionContents);
             self::$allOptionsArray["options"][$optionName]["optSettings"] = functions::getStrBetween($optionContents, "<useroption>", "</useroption>")[0];
             $scanAmmount++;
@@ -95,7 +97,6 @@ class UserOptions extends init {
                     }
                     self::$userOptions[$optionFname]["optType"] = $decodedOption["type"];
                     $scanAmmount++;
-                    //echo $decodedOption["optionTitle"];
                 }
             }
         }
@@ -115,7 +116,7 @@ class UserOptions extends init {
                         }
                     }
                     self::$builtMenu["optionArray"][] = $arr;
-                    unset($arr);
+                    
 
                     if ($count === self::$userOptions["optionsAmmount"] -1) {
                         if (init::$usrArray['user_group'] !== 5) {
@@ -125,6 +126,7 @@ class UserOptions extends init {
                     }
                     self::$userOptions["optionNames"][] = $key;
                     $count++;
+					unset($arr);
                 }
             }
             self::$builtMenu["optionAmmount"] = $count;
@@ -155,6 +157,10 @@ class UserOptions extends init {
             return false;
         }
     }
+	
+	protected static function getOptionData($option){
+		return self::$allOptionsArray["options"][$option]["optSettings"];
+	}
 
     /* REPEATING CODE FROM PluginScanner!!! */
     private function checkUserAccess($usergroup, $optionAccessGroup) {
