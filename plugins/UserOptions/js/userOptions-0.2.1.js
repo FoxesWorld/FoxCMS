@@ -1,5 +1,5 @@
 /*
- *	UserOptions ver - 0.2.0
+ *	UserOptions ver - 0.2.1
  *	Copyright Foxesworld.ru
  */
 function parseUsrOptionsMenu() {
@@ -8,23 +8,23 @@ function parseUsrOptionsMenu() {
     usrOptions = request.send_post({
         "getUserOptionsMenu": userData.login
     });
-    usrOptions.onreadystatechange = function() {
+    usrOptions.onreadystatechange = function () {
         if (usrOptions.readyState === 4) {
             try {
                 let json = JSON.parse(this.responseText);
-                let optionAmmount = json.optionAmmount;
+                let optionAmount = json.optionAmount;
                 let optionArray = json.optionArray;
                 let optionTpl;
                 let type;
-				let optNamesArr = new Array();
-                debugSend("UserOptions available: " + optionAmmount, "");
-                for (var i = 0; i < optionAmmount; i++) {
+                let optNamesArr = new Array();
+                debugSend("UserOptions available: " + optionAmount, "");
+                for (var i = 0; i < optionAmount; i++) {
                     var obj = optionArray[i];
                     for (var optionName in obj) {
-						optNamesArr.push(optionName);
+                        optNamesArr.push(optionName);
                         let appendBlock = obj[optionName]["optionBlock"];
                         switch (obj[optionName]["type"]) {
-                            case "link":
+                            case "page":
                                 optionTpl = `
 										  <li>
 											<a onclick="loadPage('` + optionName + `', contentBlock, true); return false; ">
@@ -47,10 +47,11 @@ function parseUsrOptionsMenu() {
                             //debugSend("[" + i + "]" + "Appending " + optionName + " to " + appendBlock + " block", "");
                             $(appendBlock).append(optionTpl);
                         }
-                    }	
+                    }
                 }
-				debugSend(optNamesArr, "");
-            } catch (error) {}
+                debugSend(optNamesArr, "");
+            } catch (error) {
+            }
         }
     }
 }

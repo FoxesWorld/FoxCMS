@@ -4,8 +4,10 @@
 	"optionBlock": ".leftAction",
 	"optionPreText": "<i class=\"fa fa-user-circle-o\"></i>",
 	"optionGroup": 1,
-	"type": "link"
+	"type": "page"
 }
 </useroption>
 
+<pageContent>
 <h1>Ну что, %realname%???</h1>
+</pageContent>

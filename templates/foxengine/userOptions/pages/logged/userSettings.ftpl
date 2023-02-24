@@ -4,10 +4,10 @@
 	"optionBlock": "#usrMenu",
 	"optionPreText": "<i class=\"fa fa-cog fa-spin\"></i>",
 	"optionGroup": [1,4],
-	"type": "link"
+	"type": "page"
 }
 </useroption>
-
+<pageContent>
 								<div class="tabs">
 									<ul class="tab_caption animate__animated animate__fadeInRightTop animate__delay-1s">
 										<li class="active" value="profile">Настройки профиля</li>
@@ -121,4 +121,4 @@
 											});
 										});
 									</script>
-
+</pageContent>

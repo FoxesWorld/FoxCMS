@@ -6,10 +6,10 @@ if(!defined('profile')) {
 	class EditUser extends User {
 		
 		/*CFG*/
-		private $dbQureyConstruct = array("realname", "email");
+		private array $dbQureyConstruct = array("realname", "email");
 		
 		/*EditStatus*/
-		private $status = "success";
+		private string $status = "success";
 		private $statusInfo;
 		
 		/*INPUT*/

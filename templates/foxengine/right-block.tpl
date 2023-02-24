@@ -1,3 +1,4 @@
+<div class="col-4">
 <div class="row rightBlock">
    <div class="card">
       <div id="userBlock">
@@ -55,4 +56,5 @@
       	</div>
       </div>
       -->
+</div>
 </div>

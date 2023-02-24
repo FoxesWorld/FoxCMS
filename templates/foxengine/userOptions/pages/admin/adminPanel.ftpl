@@ -4,22 +4,24 @@
 	"optionBlock": "#usrMenu",
 	"optionPreText": "<i class=\"fa fa-bolt\"></i>",
 	"optionGroup": 1,
-	"type": "link"
+	"type": "page"
 }
 </useroption>
+
+<pageContent>
     <div class="adminPanel">
 			<div class="tabs">
 
-				<input id="tab1" type="radio" name="tabs" onclick="loadPage('stats', '#content1', true)" checked /> 
+				<input id="tab1" type="radio" name="tabs" onclick="loadPage('stats', '#content1', false)" checked /> 
 				<label for="tab1">Статистика</label> 
 
 				<input id="tab2" type="radio" name="tabs" onclick="parseModulesInfo()" /> 
 				<label for="tab2">Модули</label> 
 
-				<input id="tab3" type="radio" onclick="loadPage('usersList', '#content3', true)" name="tabs" /> 
+				<input id="tab3" type="radio" onclick="loadPage('usersList', '#content3', false)" name="tabs" /> 
 				<label for="tab3">Пользователи</label> 
 
-				<input id="tab4" type="radio" onclick="loadPage('admMore', '#content4', true)" name="tabs" /> 
+				<input id="tab4" type="radio" onclick="loadPage('admMore', '#content4', false)" name="tabs" /> 
 				<label for="tab4">Ещё</label> 
 			  
 				<section id="content1"> 
@@ -39,3 +41,4 @@
 				</section>  
 			</div> 
 	</div>
+</pageContent>

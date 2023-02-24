@@ -4,10 +4,11 @@
 	"optionBlock": ".leftAction",
 	"optionPreText": "<i class=\"fa fa-question-circle\"></i>",
 	"optionGroup": 5,
-	"type": "link"
+	"type": "page"
 }
 </useroption>
 
+<pageContent>
 Привет, %realname%! Рады видеть тебя, ты попал на сайт FoxesWorld, это - веб сервис, 
 сочетающий в себе множество передовых разработок, публикации контента и разграничения прав пользователей.
 	
@@ -28,3 +29,4 @@
 	</li>
 	</ul>
 </div>
+</pageContent>

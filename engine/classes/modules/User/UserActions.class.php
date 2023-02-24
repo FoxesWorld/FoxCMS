@@ -7,7 +7,7 @@ if(!defined('profile')) {
 
 	class UserActions extends User {
 		
-		private $userActionReq = "user_doaction";
+		private string $userActionReq = "user_doaction";
 		protected $db, $logger;
 		private $fRequest;
 		

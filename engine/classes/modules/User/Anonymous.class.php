@@ -2,7 +2,7 @@
 
 	class Anonymous extends User {
 		
-		protected static $AnonymousUser = array(
+		protected static array $AnonymousUser = array(
 			'user_id' => 0,
 			'email' => "foxengine@foxes.ru",
 			'login' => "anonymous",

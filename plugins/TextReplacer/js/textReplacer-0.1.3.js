@@ -1,6 +1,6 @@
 /*
-*	TextReplacer ver - 0.1.2
-*	Copyright Foxesworld.ru
+*	TextReplacer ver - 0.1.3
+*	Copyright FoxesWorld.ru
 */
 
 let updatedText;
@@ -24,11 +24,11 @@ function replaceText(text, page) {
 		break;
 		
 		case 1:
-			debugSend("%cReplaced "+ replacedTimes+" occurency", 'color: green');
+			debugSend("%cReplaced "+ replacedTimes+" occurrence", 'color: green');
 		break;
 		
 		default:
-			debugSend("%cReplaced "+ replacedTimes+" occurencies", 'color: green');
+			debugSend("%cReplaced "+ replacedTimes+" occurrences", 'color: green');
 		break;
 	}
 	replacedTimes = 0

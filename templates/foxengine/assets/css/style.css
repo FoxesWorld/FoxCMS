@@ -8,10 +8,6 @@ body {
     overflow-x: hidden;
 }
 
-useroption {
-    display: none;
-}
-
 table {
     width: 100%;
     margin: 0;
@@ -44,7 +40,6 @@ ul {
     background-color: #e1dfdda3;
     border-radius: 10px;
     height: 100%;
-    padding: 15px;
 }
 
 .rightBlock {
@@ -122,12 +117,11 @@ ul {
 }
 
 .pageRoot .page-content {
-    display: flow-root;
-    padding: 5px;
+
 }
 
 .pageRoot .page-title {
-    background: #ffd9a78a;
+    background: #97763f;
 }
 
 .pageRoot .page-title h1 {

@@ -1,9 +1,14 @@
 function loadPage(page, block, animate) {
+	let delay;
     addAnimation('animate__backOutRight', $(block), animate);
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
     });
+	switch(animate){
+		case true: delay = 700; break;
+		case false: delay = 0; break;
+	}
     setTimeout(()=>{
         let optionContent;
         optionContent = request.send_post({
@@ -15,11 +20,10 @@ function loadPage(page, block, animate) {
 			}
         }
         formInit(100);
-    }, 700);
+    }, delay);
     setTimeout(()=>{
         addAnimation('animate__bounceInDown', $(block), animate);
-    }
-    , 600);
+    }, 600);
 }
 
 function addAnimation(animation, block, animate) {

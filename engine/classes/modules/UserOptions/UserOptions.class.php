@@ -14,21 +14,18 @@ class UserOptions extends init {
 
     /* THIS CODE IS LEGACY!!!
 		 * A LOT OF THINGS MUST BE REDONE!!!
-		 * WILL BE IMPROVED LATRER!!!
+		 * WILL BE IMPROVED LATER!!!
 		 */
 
     /* UserOptions Configuration */
-    private $scanOptionsDir;
-    private $menuTpl;
-    private $dataToReplace = array(
+    private array $dataToReplace = array(
         "optionTitle",
         "optionPreText",
         "optionName",
         "optionBlock",
         "type"
     );
-    private $options;
-    private $addTheLast =
+    private array $addTheLast =
     array("logout" =>
         array(
             "optionTitle" => '<button type="submit" class="logout"><i class="fa fa-sign-out"></i> Выйти</button>',
@@ -36,10 +33,10 @@ class UserOptions extends init {
             "optionPreText" => "",
             "type" => "plainText"
         ));
-    protected static $allOptionsArray = array("optionObjects" => array(), "optionNames" => array());
+    protected static array $allOptionsArray = array("optionObjects" => array(), "optionNames" => array());
 
     /* UserOptionsExport Data*/
-    protected static $userOptions = array();
+    protected static array $userOptions = array();
     protected static $builtMenu;
 
     function __construct() {
@@ -56,7 +53,7 @@ class UserOptions extends init {
 		 * Filling all found options Array
 		 */
     private function allOptionsFilling($scanDir) {
-        $optionsAmmount = 0;
+        $optionsAmount = 0;
         self::$allOptionsArray["optionObjects"] = filesInDir::filesInDirArray($scanDir);
         foreach (self::$allOptionsArray["optionObjects"] as $optionObject) {
 			if(!is_dir($scanDir.DIRECTORY_SEPARATOR.$optionObject)) {
@@ -68,17 +65,17 @@ class UserOptions extends init {
 					$optionContents = file::efile($filePath)["content"];
 					self::$allOptionsArray["options"][$optionName]["optContent"] = UserContent::contentTagsReplacing($optionContents);
 					self::$allOptionsArray["options"][$optionName]["optSettings"] = functions::getStrBetween($optionContents, "<useroption>", "</useroption>")[0];
-					$optionsAmmount++;
+					$optionsAmount++;
 				}
 			} else {
 				$this->allOptionsFilling($scanDir.DIRECTORY_SEPARATOR.$optionObject);
 			}
         }
-        self::$allOptionsArray["optionsAmmount"] = $optionsAmmount;
+        self::$allOptionsArray["optionsAmount"] = $optionsAmount;
     }
 
     private function userOptionsArrayFilling() {
-        $optionsAmmount = 0;
+        $optionsAmount = 0;
         foreach (self::$allOptionsArray["options"] as $optionFname => $optionConf) {
             if ($this->isOption($optionFname)) {
                 $thisOptionSettings = self::$allOptionsArray["options"][$optionFname]["optSettings"];
@@ -88,7 +85,7 @@ class UserOptions extends init {
 
                     switch ($decodedOption["type"]) {
                         case "plainText":
-                            case "link":
+                            case "page":
                                 self::$userOptions[$optionFname]["optContent"] = $this->getContentByName($optionFname);
                                 self::$userOptions[$optionFname]["optSettings"] = $this->getConfigByName($optionFname);
                                 self::$userOptions[$optionFname]["optTitle"] = $decodedOption["optionTitle"];
@@ -101,16 +98,16 @@ class UserOptions extends init {
                                 break;
                     }
                     self::$userOptions[$optionFname]["optType"] = $decodedOption["type"];
-                    $optionsAmmount++;
+                    $optionsAmount++;
                 }
             }
         }
-        self::$userOptions["optionsAmmount"] = $optionsAmmount;
+        self::$userOptions["optionsAmount"] = $optionsAmount;
     }
 
 
     private function userMenuBuild() {
-        if (isset(self::$userOptions["optionsAmmount"])) {
+        if (isset(self::$userOptions["optionsAmount"])) {
             $count = 0;
             foreach (self::$userOptions as $key => $value) {
                 if ($this->isOption($key)) {
@@ -121,9 +118,7 @@ class UserOptions extends init {
                         }
                     }
                     self::$builtMenu["optionArray"][] = $arr;
-                    
-
-                    if ($count === self::$userOptions["optionsAmmount"] -1) {
+                    if ($count === self::$userOptions["optionsAmount"] -1) {
                         if (init::$usrArray['user_group'] !== 5) {
                             self::$builtMenu["optionArray"][] = $this->addTheLast;
                             $count++;
@@ -134,7 +129,7 @@ class UserOptions extends init {
 					unset($arr);
                 }
             }
-            self::$builtMenu["optionAmmount"] = $count;
+            self::$builtMenu["optionAmount"] = $count;
             self::$builtMenu = json_encode(self::$builtMenu, JSON_UNESCAPED_UNICODE);
         }
     }
@@ -147,7 +142,7 @@ class UserOptions extends init {
         return self::$allOptionsArray["options"][$name]["optContent"];
     }
 
-    private function isOption($option) {
+    private function isOption($option): bool {
         if (in_array($option, self::$allOptionsArray["optionNames"])) {
             return true;
         } else {
@@ -155,7 +150,7 @@ class UserOptions extends init {
         }
     }
 
-    private function isOptionFillValue($value) {
+    private function isOptionFillValue($value): bool {
         if (in_array($value, $this->dataToReplace)) {
             return true;
         } else {
@@ -168,7 +163,7 @@ class UserOptions extends init {
 	}
 
     /* REPEATING CODE FROM PluginScanner!!! */
-    private function checkUserAccess($usergroup, $optionAccessGroup) {
+    private function checkUserAccess($usergroup, $optionAccessGroup): bool {
         switch (is_array($optionAccessGroup)) {
             case true:
                 if (in_array($usergroup, $optionAccessGroup)) {

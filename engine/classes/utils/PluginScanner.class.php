@@ -6,7 +6,7 @@
 		private $pluginsDir;
 		private $excludeFileName = 'exclude';
 		private $skipFile = "skip";
-		private $incOptFile = "incOpt.json";
+		private $incOptFile = "incOption.json";
 		protected static $pluginsArray = array();
 		
 		function __construct($pluginsDir) {

@@ -34,9 +34,7 @@
                   <button class="login" onclick="loadPage('guestMore', '#test', true)">LoadContent</button>
                </div>
             </div>
-            <div class="col-4">
                {include file="right-block.tpl"}
-            </div>
          </div>
       </div>
       {include file='footer.tpl'}

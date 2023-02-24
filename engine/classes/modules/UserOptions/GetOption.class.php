@@ -20,28 +20,37 @@ class GetOption extends UserOptions {
                 $optionSettings = json_decode(UserOptions::getOptionData($this->requestedOption), true);
                 $optionBody = UserOptions::$userOptions[$this->requestedOption];
                 switch ($optionSettings["type"]) {
-                    case "link":
+                    case "page":
                         $this->buildPage($optionBody);
                         break;
 
                     case "pageContent":
-                        $this->pageTemplate = $optionBody["optContent"];
+                        $this->pageTemplate = $this->getPageContents($optionBody["optContent"]);
                         break;
                 }
                 $this->pageTemplate = preg_replace('|(<useroption>).*(</useroption>)|Uis', '', $this->pageTemplate);
                 die($this->pageTemplate);
             } else {
-                die('{"message": "No access for option  `'.$this->requestedOption.'`", "availableOptions": '.json_encode(UserOptions::$userOptions["optionNames"]).'}');
+                die('{"message": "No access for option  `'.$this->requestedOption.'`"}');
             }
         }
     }
+	
+	private function getPageContents($page) {
+		return functions::getStrBetween($page, "<pageContent>", "</pageContent>")[0];
+	}
 
     private function buildPage($requestedOption) {
         $this->setTpl();
         foreach ($requestedOption as $key => $value) {
             $toReplace = "{".$key."}";
             if (strpos($this->pageTemplate, $toReplace)) {
-                $this->pageTemplate = str_replace($toReplace, $value, $this->pageTemplate);
+				switch($toReplace){
+					case "{optContent}":
+						$value = $this->getPageContents($value);
+					break;
+				}
+			$this->pageTemplate = str_replace($toReplace, $value, $this->pageTemplate);
             }
         }
     }

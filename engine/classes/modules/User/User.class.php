@@ -17,7 +17,7 @@
 			
 			protected $db;
 			protected $logger;
-			protected static $AnonymousUser;
+			protected static array $AnonymousUser;
 			
 			function __construct($db, $logger){
 				$this->db = $db;
