@@ -31,7 +31,7 @@
                <div id="content" class="mainBlock animate__animated">
                   <%contentData%>
                   <span id="test" class="animate__animated" style="height: 512px;width: auto;display: block; border: 2px solid #998f98ad; border-radius: 10px;"></span>
-                  <button class="login" onclick="loadPage('more', '#test', true)">LoadContent</button>
+                  <button class="login" onclick="loadPage('guestMore', '#test', true)">LoadContent</button>
                </div>
             </div>
             <div class="col-4">

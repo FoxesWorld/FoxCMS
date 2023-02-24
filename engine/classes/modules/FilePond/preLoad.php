@@ -32,11 +32,11 @@ FilePond\catch_server_exceptions();
 	header("Pragma: no-cache");
 
 	function route_PreLoad($entries, $routes) {
-		$preLoad = new preLoad();
+		$preLoad = new preLoad;
 		if (is_string($entries)) $entries = array($entries);
 		$request_method = $_SERVER['REQUEST_METHOD'];
 		foreach ($entries as $entry) {
-			
+			//echo $entry;
 			if ($request_method === 'POST') {
 				$post = FilePond\get_post($entry);
 				if (!$post) continue;
@@ -77,18 +77,17 @@ FilePond\catch_server_exceptions();
 		function handle_file_transfer($transfer) {
 			global $config;
 			if(init::$usrArray['isLogged']) {
-				if(init::$usrArray['isLogged']) {
 					$files = $transfer->getFiles();
 					$this->metadata = $transfer->getMetadata();
 					$this->filesTest($files);
 					// store data
+					
 					FilePond\store_transfer(TRANSFER_DIR, $transfer);
 					http_response_code(201);
 					header('Content-Type: text/plain');
 
 					// remove item from array Response contains uploaded file server id
 					die($transfer->getId());
-				}
 			} else {
 				return http_response_code(403);
 			}
@@ -283,14 +282,28 @@ FilePond\catch_server_exceptions();
 				return http_response_code(500);
 			}
 
+			
 			// test if files are of invalid format
 			@$file_transfers_with_invalid_file_type = count(ALLOWED_FILE_FORMATS) ? array_filter($files, function($file) { return !in_array($file['type'], ALLOWED_FILE_FORMATS); }) : array();
 			if (@count($file_transfers_with_invalid_file_type)) {
-				foreach ($file_transfers_with_invalid_file_type as $file) {
-					trigger_error(sprintf("Uploading file \"%s\" failed with code \"" . $file['type'] . " is not allowed.\".", $file['name']), E_USER_WARNING);
+					foreach ($file_transfers_with_invalid_file_type as $file) {
+						//trigger_error(sprintf("Uploading file \"%s\" failed with code \"" . $file['type'] . " is not allowed.\".", $file['name']), E_USER_WARNING);
+						throw new FilePond\Exception(curl_error(403), curl_errno(403));
+						http_response_code(403);
 				}
 				return http_response_code(415);
 			}
+		}
+		
+		private function is_image($path){
+			$a = getimagesize($path);
+			$image_type = $a[2];
+			
+			if(in_array($image_type , array(IMAGETYPE_GIF , IMAGETYPE_JPEG ,IMAGETYPE_PNG , IMAGETYPE_BMP)))
+			{
+				return true;
+			}
+			return false;
 		}
 		
 		private function getFileName($imageType){

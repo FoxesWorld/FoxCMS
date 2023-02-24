@@ -1,0 +1,52 @@
+GTA 5 Ped Mod | Sims 4 Female Custom OC | v3.0
+
+-------------------------
+
+My Facebook Page - @alex189moddings
+Support Me on Patreon - https://www.patreon.com/user?u=4791823
+Instagram Account - @alex189mods
+
+-------------------------
+
+|Change-log v3.0|
+• Revamped model design
+• Improved face rigging
+• New skin/clothing varities (2 skintones each)
+• Better textures (Bump/Specular)
+
+-------------------------
+
+|Mod Feature|
+• 2 Models (Samantha & Lana), 2 Face/Body Textures Each, 3 Outfits
+• Fully Rigged/Full Facial Animation
+• Working LODs, Blood/Bullet Holes & Works as Pedestrian 
+• HQ In-Game Render (Shaders Fully Optimized) 
+
+-------------------------
+
+|INSTALLATION ADD-ON|
+
+1) In the zip file, there are 2 files, Sam & Lan Put all into mods\update\x64\dlcpacks\addonpeds\dlc.rpf\peds.rpf\
+
+2) Then open AddonPeds Editor 3.0 (outside of the game, not boot the game yet). Add new peds and named the exact name of the ped (Sam, etc). Set it Female and False (Is Streamed)
+
+3) Then press REBUILD (Skip this step and you'll never be able to spawn it).
+
+4) Once its done, open up GTA V, open Menyoo and Input Model the exact ped name.
+
+If the issue still persist, I bet the new GTA V patch is screwed up. I dunno if peds are affected with gameconfig.xml like cars but maybe that also might be an issue.
+
+-------------------------
+
+|Credits|
+
+• Model ripped from Sims 4 Game
+• Rigged,convert & scratch work stuff by alex189
+• saldin93 for the OC model & Texturing stuff.
+• Credits to all Ade_Darma, Anto, Cazy, EsyraM, Asteria, Kijiko, spectacledchic, Birba32, LeahLilith and other modders in thesimsresource.com for making awesome clothing/skintone/makeups/hair for Sims 4 game.
+
+-------------------------
+
+2017 | alex189 & saldin93
+
+

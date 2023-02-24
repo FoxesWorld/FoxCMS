@@ -43,7 +43,7 @@
 		/*Content options*/
 		'modalSearch' => '/modal',
 		'modalTplBase' => '/modal/modalView/modalBase.tpl',
-		'userOptions' => "/userOptions",
+		'userOptions' => "userOptions",
 		'userOptionsTplBase' => "/userOptions/optionsView/optionBase.ftpl",
 		'pageTplFile' => "pageTpl.ftpl",
 	

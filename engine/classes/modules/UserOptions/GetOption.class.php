@@ -31,7 +31,7 @@ class GetOption extends UserOptions {
                 $this->pageTemplate = preg_replace('|(<useroption>).*(</useroption>)|Uis', '', $this->pageTemplate);
                 die($this->pageTemplate);
             } else {
-                die('{"message": "No access for option - '.$this->requestedOption.'"}');
+                die('{"message": "No access for option  `'.$this->requestedOption.'`", "availableOptions": '.json_encode(UserOptions::$userOptions["optionNames"]).'}');
             }
         }
     }

@@ -44,7 +44,7 @@ ul {
     background-color: #e1dfdda3;
     border-radius: 10px;
     height: 100%;
-	padding: 15px;
+    padding: 15px;
 }
 
 .rightBlock {
@@ -55,8 +55,7 @@ ul {
 }
 
 .container {
-    height: 100%;
-    display: block;
+    min-height: 100%;
 }
 
 .rightBlock .card {
@@ -388,10 +387,8 @@ ul > li {
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
-footer {
-    margin: 15px 0 0;
-    width: 100%;
-    bottom: 0;
+footer{
+
 }
 
 .footer--flex, .footer-end {
