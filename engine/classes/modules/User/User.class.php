@@ -17,15 +17,13 @@
 			
 			protected $db;
 			protected $logger;
-			protected static $AnonymousUser;
+			protected static array $AnonymousUser;
 			
 			function __construct($db, $logger){
 				$this->db = $db;
 				$this->logger = $logger;
-				if(!init::$usrArray['isLogged']) {
-					require ("Anonymous.class.php");
-					self::$AnonymousUser = Anonymous::$AnonymousUser;
-				}
+					//require ("Anonymous.class.php");
+					//self::$AnonymousUser = Anonymous::$AnonymousUser;
 					require ('UserActions.class.php');
 					$userActions = new UserActions($this->db, $this->logger, init::$REQUEST);
 			}

@@ -1,3 +1,4 @@
+<div class="col-4">
 <div class="row rightBlock">
    <div class="card">
       <div id="userBlock">
@@ -13,22 +14,24 @@
                   <li><b><i class="fa fa-diamond" aria-hidden="true"></i>Полное имя</b>: {$realname}</li>
                </div>
             </ul>
-            <span class="short"></span>
+
             <ul class="userActions">
                <li>
-                  <div class="right-profile-menu">
-                     <form method="POST" action="/" id="sessionActions">
-                        <ul id="usrMenu">
-                        </ul>
-                        <input id="userAction" class="input" type="hidden" value="logout">
-                     </form>
-                  </div>
-                  {if !$isLogged}
+
+                  {if $user_group == 5}
                   <a href="#login">
                   <button type="submit" class="login">Авторизация <i class="fa fa-sign-in"></i>
                   </button>
                   </a>
-                  {/if}	
+                  {else}
+                  <div class="right-profile-menu">
+                     <form method="POST" action="/" id="sessionActions">
+                        <ul id="usrMenu">
+                        </ul>
+                        <input name="userAction" class="input" type="hidden" value="logout">
+                     </form>
+                  </div>
+				  {/if}				  
                </li>
             </ul>
          </div>
@@ -55,4 +58,5 @@
       	</div>
       </div>
       -->
+</div>
 </div>

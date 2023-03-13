@@ -38,12 +38,15 @@
 			'contentBlock' => "#content",
 			'secureKey' => 'ghYyufghVH',
 			'siteTpl' => 'foxengine',
+			'assets' => '/templates/foxengine/assets/',
+			'allowedColors' => array("#e4005d9e", "#3cc9489e", "#e72f00ad", "#2656caad"),
+			'uploads' => UPLOADS_DIR.USR_SUBFOLDER,
 			'debug' => true),
 		
 		/*Content options*/
 		'modalSearch' => '/modal',
 		'modalTplBase' => '/modal/modalView/modalBase.tpl',
-		'userOptions' => "/userOptions",
+		'userOptions' => "userOptions",
 		'userOptionsTplBase' => "/userOptions/optionsView/optionBase.ftpl",
 		'pageTplFile' => "pageTpl.ftpl",
 	
@@ -52,7 +55,7 @@
 		'status' => 'Alpha',
 		
 		/* UserSettings */
-		'userDatainDb'   => array("user_id", "email", "login", "password", "user_group", "realname", "hash", "reg_date", "last_date", "profilePhoto"),
+		'userDatainDb'   => array("user_id", "email", "login", "password", "user_group", "realname", "hash", "reg_date", "last_date", "profilePhoto", "userStatus", "land", "colorScheme"),
 		'Permissions' => array(
 			'allowedProfileEdit' => array(1,4)
 		)

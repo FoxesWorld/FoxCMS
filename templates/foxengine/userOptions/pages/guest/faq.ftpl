@@ -1,0 +1,32 @@
+<useroption>
+{
+	"optionTitle": "Куда я попал?",
+	"optionBlock": ".leftAction",
+	"optionPreText": "<i class=\"fa fa-question-circle\"></i>",
+	"optionGroup": 5,
+	"type": "page"
+}
+</useroption>
+
+<pageContent>
+Привет, %realname%! Рады видеть тебя, ты попал на сайт FoxesWorld, это - веб сервис, 
+сочетающий в себе множество передовых разработок, публикации контента и разграничения прав пользователей.
+	
+	<hr>
+	
+
+<div class="statusBlock info">
+	<ul>
+	<li>
+		<img class="info"/>
+	</li>
+	<li>	
+		<div class="blockText">
+			Регистрация доступна для всех желающих, веб сервис находится в состоянии разработки и может перетерпеть множество изменений.
+Основная задача данного веб сервиса заключается в предоставлении пользователям доступа к игровому проекту FoxesWorld.
+Следите за новостями!
+		</div>
+	</li>
+	</ul>
+</div>
+</pageContent>

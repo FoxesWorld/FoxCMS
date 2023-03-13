@@ -13,13 +13,14 @@ if (!defined('FOXXEY')) {
 		
 		protected $smarty;
 		
-		function __construct() {
+		function __construct($tpl) {
 			global $config;
 			init::requireNestedClasses(basename(__FILE__), __DIR__);
-			init::classUtil('PluginScanner');
+			init::classUtil('CheckUserAccess', "1.0.0");
+			init::classUtil('PluginScanner', "1.2.7-exp");
 			define('UserUploadDir', UPLOADS_DIR.USR_SUBFOLDER.init::$usrArray['login'].'/');
-			$modalsToShow = new modalShow;
-			$this->smarty 					= new Smarty;
+			if(!init::$usrArray['isLogged'])$modalsToShow = new modalShow;
+			$this->smarty 					= $tpl;
 			$this->smarty->debugging 		= false;
 			$this->smarty->cache_lifetime 	= 120;
 			$this->smarty->template_dir 	= ROOT_DIR.'/templates/'.$config['javascript']['siteTpl'];
@@ -33,7 +34,7 @@ if (!defined('FOXXEY')) {
 			global $config;
 			$smartyUtils = new smartyUtils;
 			$PluginsScanner = new PluginsScanner($config['pluginsDir']);
-			$PluginsScanner->pluginsInclude();
+			//$PluginsScanner->pluginsInclude();
 			$photoSystemPath = ROOT_DIR.UserUploadDir.init::$usrArray['profilePhoto'];
 			
 			//@Deprecated
@@ -56,5 +57,7 @@ if (!defined('FOXXEY')) {
 				break;
 			}
 			$smartyUtils->assignUserFields($this->smarty);	
+			return $this->smarty;
 		}
+		
 	}

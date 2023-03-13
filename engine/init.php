@@ -11,7 +11,7 @@ session_start();
 		private $ModulesLoader;
 		private $initLevels;
 		
-		protected $debug, $logger, $db;
+		protected $debug, $logger, $db, $tpl;
 		protected static $usrArray = array(
 			'isLogged' => false,
 			'user_id' => 0,
@@ -27,6 +27,7 @@ session_start();
 		);
 		
 		protected static $REQUEST;
+		protected static array $userOptions = array();
 		protected static $modulesArray = array();
 
 		function __construct($initLevels, $debug = false) {
@@ -69,7 +70,8 @@ session_start();
 			if($this->initLevels["init"] === true) {
 				$this->groupAssociacion = new groupAssociacion(self::$usrArray['user_group'], $this->db);
 				self::$usrArray['groupName'] = $this->groupAssociacion->userGroupName();
-				init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "primary");	
+				self::$usrArray['groupTag'] = $this->groupAssociacion->userGroupTag();
+				init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "primary");
 			}
 		}
 		
@@ -77,7 +79,8 @@ session_start();
 		private function postInit() {
 			if($this->initLevels["postInit"] === true) {
 				init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "secondary");
-				$smartyInit = new smartyInit();
+				$this->tpl = new Smarty;
+				$smartyInit = new smartyInit($this->tpl);
 			}
 		}
 		
@@ -95,14 +98,14 @@ session_start();
 			}
 		}
 		
-		protected static function classUtil($className) {
-			$classPath = UTILS_DIR.$className.".class.php";
+		protected static function classUtil($className, $version) {
+			$classPath = UTILS_DIR.$className.DIRECTORY_SEPARATOR.$version.DIRECTORY_SEPARATOR.$className.".class.php";
 			if(file_exists($classPath)){
 				require_once ($classPath);
 			}
 		}
 
-		protected static function libFilesInclude($libDir, $debug) {
+		protected static function libFilesInclude($libDir, $debug = false) {
 			global $config;
 				$visualCounter = 1;
 				$openDir = opendir($libDir);

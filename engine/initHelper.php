@@ -4,8 +4,6 @@
 			protected $db;
 			protected $logger;
 
-			private $moduleIncOptionsFile = "incOptions";
-
 			function __construct($db, $logger) {
 				$this->db = $db;
 				$this->logger = $logger;
@@ -36,12 +34,20 @@
 				$this->userGroup = $userGroup;
 				$this->db = $db;
 			}
-
-			protected function userGroupName(){
+			
+			private function dbRequest(){
 				$query = "SELECT * FROM `".$this->dbTabble."` WHERE groupNum = ".$this->userGroup."";
 				$answer = $this->db->getRow($query);
+				
+				return $answer;
+			}
 
-				return $answer["groupName"];
+			protected function userGroupName(){
+				return $this->dbRequest()["groupName"];
+			}
+			
+			protected function userGroupTag(){
+				return $this->dbRequest()["groupType"];
 			}
 
 		}

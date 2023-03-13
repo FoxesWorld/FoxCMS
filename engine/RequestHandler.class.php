@@ -29,9 +29,7 @@
 					switch($key) {
 						case "":
 						case null:
-						case false:
 							return false;
-						break;
 
 						default:
 						if($key === $config['javascript']["secureKey"]){
@@ -39,7 +37,6 @@
 							} else {
 								return false;
 							}
-						break;
 					}
 				} else {
 					die('{"message": "No secure key!"}');

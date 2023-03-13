@@ -1,0 +1,13 @@
+<useroption>
+{
+	"optionTitle": "Информация",
+	"optionBlock": ".leftAction",
+	"optionPreText": "<i class=\"fa fa-question-circle\"></i>",
+	"optionGroup": [1,4],
+	"type": "page"
+}
+</useroption>
+
+<pageContent>
+Тут - всё, что мы любим!
+</pageContent>

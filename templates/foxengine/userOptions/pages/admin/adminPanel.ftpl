@@ -1,0 +1,52 @@
+<useroption>
+{
+	"optionTitle": "Админ панель",
+	"optionBlock": "#usrMenu",
+	"optionPreText": "<i class=\"fa fa-bolt\"></i>",
+	"optionGroup": 1,
+	"type": "page"
+}
+</useroption>
+
+<pageContent>
+    <div class="adminPanel">
+			<div class="tabs">
+
+				<input id="tab1" type="radio" loadPage="stats" loadBlock="#content1" name="tabs" checked /> 
+				<label for="tab1">Статистика</label> 
+
+				<input id="tab2" type="radio"  loadPage="modules" loadBlock="#content2" name="tabs" /> 
+				<label for="tab2">Модули</label> 
+
+				<input id="tab3" type="radio" loadPage="usersList" loadBlock="#content3" name="tabs" /> 
+				<label for="tab3">Пользователи</label> 
+
+				<input id="tab4" type="radio"  loadPage="admMore" loadBlock="#content4" name="tabs" /> 
+				<label for="tab4">Ещё</label> 
+			  
+				<section id="content1"> 
+
+				</section>  
+
+				<section id="content2" class="modulesBlock"> 
+
+				</section>  
+
+				<section id="content3"> 
+
+				</section> 
+			 
+				<section id="content4"> 
+
+				</section>  
+			</div> 
+	</div>
+	
+	<script>
+	$('input[type="radio"]').on("click",function(){
+		let page = $(this).attr('loadPage');
+		let block = $(this).attr('loadBlock');
+		loadPage(page, block, false);
+	})
+</script>
+</pageContent>

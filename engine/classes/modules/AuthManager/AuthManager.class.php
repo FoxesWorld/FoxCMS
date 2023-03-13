@@ -29,8 +29,8 @@
 			$this->db = $db;
 			$this->logger = $logger;
 			$this->moduleName = basename(__FILE__, '.class.php');
-			init::classUtil('LoadUserInfo');
-			init::classUtil('SessionManager');
+			init::classUtil('LoadUserInfo', "1.0.0");
+			init::classUtil('SessionManager', "1.0.0");
 			init::requireNestedClasses($this->moduleName, __DIR__."/actions/");
 			$this->checkUserToken();
 			$this->authActionsInit();	
