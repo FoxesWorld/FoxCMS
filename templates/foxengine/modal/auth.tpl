@@ -6,7 +6,7 @@
   "groupToShow": 5
 }
 </mdlOpt>
-<form method="POST" action="/" id="loginForm">
+<form method="POST" action="/">
 	<table>
 		<tr>
 			<td colspan="2">

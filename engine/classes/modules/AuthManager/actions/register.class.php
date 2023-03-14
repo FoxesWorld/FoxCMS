@@ -51,8 +51,9 @@ if(!defined('auth')) {
 			functions::checkSA($this->regData);
 			$this->logger->WriteLine("Trying to register user '".$this->regData['login']."'");
 			$password = password_hash($this->regData['password'], PASSWORD_DEFAULT);
-			$query = "INSERT INTO `users`(`login`, `password`, `email`, `user_group`, `realname`, `hash`, `reg_date`, `last_date`) 
-			VALUES ('".$this->regData['login']."', '".$password."', '".$this->regData['email']."', '".$this->baseUserGroup."', '".randTexts::getRandText('noName')."', '".authorize::generateLoginHash()."', '".CURRENT_TIME."', '".CURRENT_TIME."')";
+			$photo = $config['javascript']['assets'].'img/no-photo.jpg';
+			$query = "INSERT INTO `users`(`login`, `password`, `email`, `user_group`, `realname`, `hash`, `reg_date`, `last_date`, `profilePhoto`) 
+			VALUES ('".$this->regData['login']."', '".$password."', '".$this->regData['email']."', '".$this->baseUserGroup."', '".randTexts::getRandText('noName')."', '".authorize::generateLoginHash()."', '".CURRENT_TIME."', '".CURRENT_TIME."', '".$photo."')";
 			$userReg = $this->db->run($query);
 			if($userReg) {
 				$loadUserInfo = new loadUserInfo($this->regData['login'], $this->db);

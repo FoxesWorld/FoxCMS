@@ -62,7 +62,7 @@
             <li>Персонализация</li>
             <li>Безопасность</li>
          </ul>
-         <form method="POST" action="/" id="editProfileForm">
+         <form method="POST" action="/" id="viewUserProfile">
             <div class="tab_content active">
                <h2 id="modalTitle">Давай меняй!</h2>
                <span id="modalDesc">Посмотрим [realname], что ты тут можешь поменять...</span>
@@ -180,7 +180,7 @@
                <span class="groupStatus-[user_group]">[userStatus]</span>
             </div>
             <div class="badgeBlock" title="In update Achievments&Advancements!">
-               <img src="%assets%/img/test.png" class="badgeIcon" />
+               <img src="/templates/foxengine/assets/img/test.png" class="badgeIcon" />
                <span class="badgesTexts">
                   <div class="badgeTitle">Badges</div>
                   <div class="badgeDesc">Coming Soon</div>

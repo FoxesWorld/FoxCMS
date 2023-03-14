@@ -42,17 +42,41 @@ function addAnimation(animation, block, animate) {
 	}
 }
 
+function getLastUser() {
+	let lastUserReq = request.send_post({userAction: "lastUser"});
+	    lastUserReq.onreadystatechange = function() {
+			if (lastUserReq.readyState === 4) {
+				let lastUser = JSON.parse(this.responseText);
+				let userView = `
+				<div id="profileContents" style="background: linear-gradient(45deg, #c5c5e19c, `+lastUser.colorScheme+`);">
+					<div class="avatar"> 
+					   <img class="profilePhoto" src="`+lastUser.profilePhoto+`" style="width: 64px;" alt="`+lastUser.login+`">
+					</div>
+					<div class="profile-title">
+					   <h1><a href="#" onclick="viewUserProfile('`+lastUser.login+`'); return false;">`+lastUser.login+`</a></h1>
+					   <span class="groupStatus-4">`+convertUnixTime(lastUser.reg_date)+`</span>
+					</div>
+				</div>`;
+				$("#lastUser").html(userView);
+				console.log(lastUser);
+			}
+		}
+		
+}
+
 function userAction() {
     let answer;
     answer = request.send_post({
         user_doaction: "greeting"
     });
     answer.onreadystatechange = function() {
-        try {
-            answer = JSON.parse(this.responseText);
-            $(".text-wrapper").html(answer.text + ' ' + replaceData.realname + '!');
-        } catch (error) {}
-        textAnimate();
+		if (answer.readyState === 4) {
+			try {
+				answer = JSON.parse(this.responseText);
+				$(".text-wrapper").html(answer.text + ' ' + replaceData.realname + '!');
+			} catch (error) {}
+			textAnimate();
+		}
     };
 }
 

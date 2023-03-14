@@ -35,7 +35,7 @@ if (!defined('FOXXEY')) {
 			$smartyUtils = new smartyUtils;
 			$PluginsScanner = new PluginsScanner($config['pluginsDir']);
 			//$PluginsScanner->pluginsInclude();
-			$photoSystemPath = ROOT_DIR.UserUploadDir.init::$usrArray['profilePhoto'];
+			//$photoSystemPath = ROOT_DIR.UserUploadDir.init::$usrArray['profilePhoto'];
 			
 			//@Deprecated
 			$this->smarty->assign("links", "");
@@ -46,16 +46,7 @@ if (!defined('FOXXEY')) {
 			$this->smarty->assign("isLogged",   init::$usrArray['isLogged']);
 			$this->smarty->assign("builtInJS", $smartyUtils->assignJs());
 			$this->smarty->assign("systemHeaders", $PluginsScanner->outString);
-
-			switch(file_exists($photoSystemPath)) {
-				case true:
-					init::$usrArray["profilePhoto"] = UserUploadDir.init::$usrArray['profilePhoto'];
-				break;
-				
-				default:
-					init::$usrArray["profilePhoto"] = "/templates/".$config['javascript']['siteTpl']."/assets/img/no-photo.jpg";
-				break;
-			}
+			
 			$smartyUtils->assignUserFields($this->smarty);	
 			return $this->smarty;
 		}

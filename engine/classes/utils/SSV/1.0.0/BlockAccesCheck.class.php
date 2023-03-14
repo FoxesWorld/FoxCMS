@@ -4,6 +4,7 @@
 		
 		private $content;
 		private $userDisplay;
+		private $blockSettings = array("hasPriviligies" => array("groupTag" => "admin", "login" => "->userDisplay"));
 		
 		function __construct($content, $userDisplay) {
 			$this->content = $content;
@@ -11,6 +12,20 @@
 		}
 		
 		protected function checkBlocks() {
+			/*
+			foreach($this->blockSettings as $blockName => $conditions){
+				$blockTag = "[".$blockName."]";
+				if(strpos($this->content, $blockTag)){
+					foreach($conditions as $userArrField => $required){
+						if(strpos($required, "->")) {
+							$required = explode("", $required)[1];
+							if(){
+								
+							}
+						}
+					}
+				}
+			} */
 			if(strpos($this->content, "[hasPriviligies]")){
 				if(init::$usrArray['login'] !== $this->userDisplay && init::$usrArray['groupTag'] !== "admin") {
 					$this->content = preg_replace("'\\[hasPriviligies\\](.*?)\\[/hasPriviligies\\]'si", '', $this->content);
@@ -20,8 +35,10 @@
 			}
 			
 			if(strpos($this->content, "[userOnly]")){
-				if(init::$usrArray['user_group'] == 1){
+				if(init::$usrArray['groupTag'] === "admin"){
 					$this->content = preg_replace("'\\[userOnly\\](.*?)\\[/userOnly\\]'si", '', $this->content);
+				} else {
+					$this->removeTags($this->content, "userOnly");
 				}
 			}
 			

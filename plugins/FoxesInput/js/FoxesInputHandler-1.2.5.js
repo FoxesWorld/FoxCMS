@@ -19,7 +19,7 @@ function formInit(sleep) {
                     event.preventDefault();
                     submitButton = event.submitter;
                     data = collectFormData(form);
-                    data["fname"] = form.id;
+                    data["onSuccess"] = form.id;
                     submitForm(data, $(this), submitButton);
                 }
             });
@@ -116,7 +116,11 @@ function submitForm(data, form, submitButton) {
             setTimeout(() => {
                 switch (response.type) {
                     case 'success':
-                        removeHash();
+						if(data['onSuccess']) {
+							window[data['onSuccess']](data['login']);
+						} else {
+							removeHash();
+						}
                         break;
 
                     case 'error':

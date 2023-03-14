@@ -6,7 +6,7 @@
   "groupToShow": 5
 }
 </mdlOpt>
-	<form method="POST" action="/" id="registerForm" autocomplete="false">
+	<form method="POST" action="/" autocomplete="false">
 		<div class="input_block animated fadeInRight">
 			<input id="login" class="input" type="text" autocomplete="off" required>
 			<label class="label">Логин</label>

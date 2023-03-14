@@ -1,29 +1,57 @@
-<div class="col-4">
+<?php
+/* Smarty version 4.0.4, created on 2023-03-14 10:10:26
+  from '/var/www/foxcms/templates/foxengine/right-block.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.0.4',
+  'unifunc' => 'content_64101de2b20991_46185944',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '7d23cafcd3e57d5c5faec020779171864f3bc18c' => 
+    array (
+      0 => '/var/www/foxcms/templates/foxengine/right-block.tpl',
+      1 => 1678777769,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_64101de2b20991_46185944 (Smarty_Internal_Template $_smarty_tpl) {
+?><div class="col-4">
 <div class="row rightBlock">
    <div class="card">
       <div id="userBlock">
          <div class="userProfile animate__animated animate__backInRight animate__delay-1s">
             <ul>
                <li class="profilePhoto">
-                  <img src="{$profilePhoto}">
+                  <img src="<?php echo $_smarty_tpl->tpl_vars['profilePhoto']->value;?>
+">
                </li>
                <div class="userdata">
-                  <li><b><i class="fa fa-user-circle-o" aria-hidden="true"></i>Логин</b>: {$login}</li>
-                  <li><b><i class="fa fa-address-card-o" aria-hidden="true"></i>Почта</b>: {$email}</li>
-                  <li><b><i class="fa fa-users" aria-hidden="true"></i>Группа</b>: {$groupName}</li>
-                  <li><b><i class="fa fa-diamond" aria-hidden="true"></i>Полное имя</b>: {$realname}</li>
+                  <li><b><i class="fa fa-user-circle-o" aria-hidden="true"></i>Логин</b>: <?php echo $_smarty_tpl->tpl_vars['login']->value;?>
+</li>
+                  <li><b><i class="fa fa-address-card-o" aria-hidden="true"></i>Почта</b>: <?php echo $_smarty_tpl->tpl_vars['email']->value;?>
+</li>
+                  <li><b><i class="fa fa-users" aria-hidden="true"></i>Группа</b>: <?php echo $_smarty_tpl->tpl_vars['groupName']->value;?>
+</li>
+                  <li><b><i class="fa fa-diamond" aria-hidden="true"></i>Полное имя</b>: <?php echo $_smarty_tpl->tpl_vars['realname']->value;?>
+</li>
                </div>
             </ul>
 
             <ul class="userActions">
                <li>
 
-                  {if $user_group == 5}
+                  <?php if ($_smarty_tpl->tpl_vars['user_group']->value == 5) {?>
                   <a href="#login">
                   <button type="submit" class="login">Авторизация <i class="fa fa-sign-in"></i>
                   </button>
                   </a>
-                  {else}
+                  <?php } else { ?>
                   <div class="right-profile-menu">
                      <form method="POST" action="/">
                         <ul id="usrMenu">
@@ -31,7 +59,7 @@
                         <input name="userAction" class="input" type="hidden" value="logout">
                      </form>
                   </div>
-				  {/if}				  
+				  <?php }?>				  
                </li>
             </ul>
          </div>
@@ -58,4 +86,5 @@
       </div>
       -->
 </div>
-</div>
+</div><?php }
+}

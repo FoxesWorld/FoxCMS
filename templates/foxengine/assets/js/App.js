@@ -15,10 +15,11 @@ const App = new Vue({
 
     created: function() {
         console.log('Foxengine started!');
+		getLastUser();
         setTimeout(()=>{
             splitWrapLetters('.logo .title', 'letter');
             splitWrapLetters('.logo .status', 'letterStatus');
-            logoAnimation();
+            logoAnimation();	
         }
         , 2000);
     }

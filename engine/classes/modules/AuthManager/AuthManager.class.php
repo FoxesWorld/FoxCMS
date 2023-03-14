@@ -38,10 +38,11 @@
 		
 		private function authActionsInit(){
 			global $lang;
+			$lastUser = new lastUser($this->db, $this->logger);
 			if(!init::$usrArray['isLogged']) {
 				$auth = new authorise(init::$REQUEST, $this->db, $this->logger);
 				$reg = new register(init::$REQUEST, $this->db, $this->logger);
-				$subscribe = new subscribe(init::$REQUEST, $this->db, $this->logger);
+				$subscribe = new subscribe(init::$REQUEST, $this->db, $this->logger);	
 			}
 				
 			switch(@init::$REQUEST[$this->requestListener]) {	
@@ -66,6 +67,10 @@
 					
 				case 'subscribe':
 					$subscribe->subscribe();
+				break;
+				
+				case "lastUser":
+					$lastUser->getUser();
 				break;
 					
 				case 'logout':

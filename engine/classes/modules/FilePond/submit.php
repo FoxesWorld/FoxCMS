@@ -73,7 +73,8 @@ if (!defined('profile')) {
 						   switch($imageType){
 							   case "profilePhoto":
 								$nameOverride = $imageType;
-								$query = "UPDATE `users` SET profilePhoto='".$nameOverride.'.'.$extension."' WHERE login = '".$this->usrArray['login']."'";
+								$fullPath = UPLOADS_DIR.USR_SUBFOLDER.$this->usrArray['login']."/".$nameOverride.'.'.$extension;
+								$query = "UPDATE `users` SET profilePhoto='".$fullPath."' WHERE login = '".$this->usrArray['login']."'";
 								$this->db->query($query);
 							   break;
 						   }
