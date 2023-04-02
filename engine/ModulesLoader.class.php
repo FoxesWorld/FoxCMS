@@ -16,7 +16,7 @@
 				$counter = 0;
 				$modulePriority = "primary";
 				$modulesArray = filesInDir::filesInDirArray($path);
-
+				init::classUtil('CheckUserAccess', "1.0.0");
 				foreach($modulesArray as $moduleName){
 					$currentModuleDirectory = $path.DIRECTORY_SEPARATOR.$moduleName;
 					$mainClassFile = $moduleName.'.class.php';
@@ -27,23 +27,31 @@
 						$moduleIncOptFileContents = file::efile($moduleIncOptFile)["content"];
 						$moduleIncOptFileArray = json_decode($moduleIncOptFileContents, true);
 						foreach($moduleIncOptFileArray as $optionName => $optionValue) {
-							if($optionName === "classInclude") {
-								switch($optionValue) {
+							$hasRights = true;
+							switch($optionName){
+								case "classInclude":
+									switch($optionValue) {
+										case true:
+											$mainClassFile = $moduleIncOptFileArray["mainClass"];
+											$moduleMainFilePath = $currentModuleDirectory.DIRECTORY_SEPARATOR.$mainClassFile;
+										break;
 
+										case false:
+											unset($moduleMainFilePath);
+										break;
+									}
+								break;
+							
 
-									case true:
-										$mainClassFile = $moduleIncOptFileArray["mainClass"];
-										$moduleMainFilePath = $currentModuleDirectory.DIRECTORY_SEPARATOR.$mainClassFile;
-									break;
-
-									case false:
-										unset($moduleMainFilePath);
-									break;
-								}
-							}
-
-							if($optionName === "priority") {
+							case "priority":
 								$modulePriority = $optionValue;
+							break;
+							
+							case "userGroup":
+								if(!CheckUserAccess::checkAccess(init::$usrArray['user_group'], $optionValue)){
+									$hasRights = false;
+								}
+							break;
 							}
 						}
 					}
@@ -62,15 +70,16 @@
 								"moduleMainClass" => $mainClassFile,
 								"modulePriority" => $modulePriority
 							);
-
-							if(isset($modulePriority)) {
-								if($modulePriority === $includePriority) {
+							if($hasRights === true) {
+								if(isset($modulePriority)) {
+									if($modulePriority === $includePriority) {
+										require_once($moduleMainFilePath);
+									}
+								} else {
 									require_once($moduleMainFilePath);
 								}
-							} else {
-								require_once($moduleMainFilePath);
-							}
 							$counter++;
+							}
 						}
 					}
 				}

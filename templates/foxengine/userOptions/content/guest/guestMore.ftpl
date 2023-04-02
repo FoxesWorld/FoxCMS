@@ -10,14 +10,14 @@
    <div class="page-content">
       <h4> Привет, %realname%! Это новая разработка динамической подгрузки контента! </h4>
       <hr>
-      <div class="statusBlock warn">
+      <div class="statusBlock info">
          <ul>
             <li>
-               <img class="warn"/>
+               <img class="info"/>
             </li>
             <li>
                <div class="blockText">
-                  Данная разработка находится в экспериментальном режиме и возможны баги и ошибки!
+                  Данная разработка находится на стадии Бета теста,возможны баги, но уже не так много как раньше!
                </div>
             </li>
          </ul>

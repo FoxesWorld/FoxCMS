@@ -1,0 +1,56 @@
+<useroption>
+   {
+   "optionGroup": 5,
+   "type": "pageContent"
+   }
+</useroption>
+
+<pageContent>
+<div class="pageRoot">
+	   <div class="page-content">
+	   <div class="formContent">
+	   <h1>Авторизация</h1>
+		<form method="POST" action="/">
+			<table>
+				<tr>
+					<td colspan="2">
+					<div class="input_block animate__animated animate__fadeInRight">
+						<input id="login" class="input" focusable="false" autocomplete="off" required name='required'>
+						<label class="label">Логин</label>
+					</div>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<button type="submit" class="login">Войти <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+					</td>
+					<td>
+						<div class="input_block animate__animated animate__fadeInLeft">
+							<input id="password" class="input" type="password" focusable="false" autocomplete="off" required name='required'>
+							<label class="label">Пароль</label>
+						</div>
+					</td>
+				
+				</tr>
+				</table>
+				
+				<label for="rememberMe" class="checkbox_container">
+					Запомнить меня
+					<input type="checkbox" style="display: none;" id="rememberMe">
+					<span class="checkmark"></span>
+				</label>
+				
+				<div class="c-captcha">
+					<div class="g-recaptcha" data-sitekey="6LcKeBoiAAAAAGnhfzZnLyzUApLmgnOpP4OfFOB7" data-theme="Light"></div>
+					<script src="https://www.google.com/recaptcha/api.js?hl={$lang['wysiwyg_language']}" async defer></script>
+				</div>	
+				<input id="userAction" class="input" type="hidden" value="auth" />
+				
+			</form>
+			
+			<a href="#" onclick="FoxEngine.loadPage('reg', replaceData.contentBlock); return false;">Нет аккаунта?</a>
+			</div>
+		</div>
+</div>
+	</pageContent>

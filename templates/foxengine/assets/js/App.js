@@ -2,24 +2,43 @@ const App = new Vue({
     delimiters: ["<%", "%>"],
     el: '#content',
     data: {
-        contentData: ' Waiting for you!'
+        contentData: FoxEngine.loadPage("tres", '#content')
     },
 
     mounted() {
 		parseUsrOptionsMenu();
         setTimeout(()=>{
-            userAction();
+            FoxEngine.userAction();
         }
         , 2000);
     },
 
     created: function() {
-        console.log('Foxengine started!');
+        FoxEngine.debugSend('Foxengine started!');
+		FoxEngine.getLastUser();
+		$("#dialog").dialog({
+			autoOpen: false,
+			show: 'fade',
+			hide: 'fade',
+			modal: true,
+			width: "55%",
+			height: 350,
+			appendTo: "#dialogContent",
+			close: function() {
+				$("#dialogContent").html("");
+			}
+		});
         setTimeout(()=>{
-            splitWrapLetters('.logo .title', 'letter');
-            splitWrapLetters('.logo .status', 'letterStatus');
-            logoAnimation();
+            FoxEngine.splitWrapLetters('.logo .title', 'letter');
+            FoxEngine.splitWrapLetters('.logo .status', 'letterStatus');
+            logoAnimation();	
         }
-        , 2000);
+        , 500);
     }
 });
+
+(function(){
+	if(location.hash.substring(1) !== undefined) {
+		FoxEngine.loadPage(location.hash.substring(1), '#content')
+	}
+}());

@@ -7,16 +7,16 @@
 }
 <%FoxesModule*/
 	define("ADMIN", true);
-	$AdminPanel = new AdminPanel();
+	$AdminPanel = new AdminPanel($this->db);
 	class AdminPanel extends init {
 		
 		private $requestListener = "admPanel";
 		
-		function __construct() {
-			if(isset(init::$REQUEST[$this->requestListener])) {
+		function __construct($db) {
+			if(isset(RequestHandler::$REQUEST[$this->requestListener])) {
 				if(init::$usrArray["user_group"] == 1) {
 					self::requireNestedClasses(basename(__FILE__), __DIR__);
-					$AdminOptions = new AdminOptions(init::$REQUEST["admPanel"]);
+					$AdminOptions = new AdminOptions(RequestHandler::$REQUEST, $db);
 				} else {
 					die('{"message": "Insufficent rights!"}');
 				}

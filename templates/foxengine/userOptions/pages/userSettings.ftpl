@@ -1,0 +1,268 @@
+<useroption>
+   {
+   "optionTitle": "Профиль",
+   "optionBlock": "#usrMenu",
+   "optionPreText": "<i class=\"fa fa-cog fa-spin\"></i>",
+   "optionGroup": [1,4,5],
+   "type": "page"
+   }
+</useroption>
+<pageContent>
+
+
+   <div class="tabs">
+      [hasPriviligies]
+	  <script>
+      function viewEdit(button){
+      	let toggleSwitch = $("#viewEdit").val();
+      	 let view = document.getElementById('view'); 
+      	 let edit = document.getElementById('edit'); 
+      	if (toggleSwitch === 'view') {
+      		view.style.display = "block";
+      		edit.style.display = "none";
+      	} else {
+      		view.style.display = "none";
+      		edit.style.display = "block";
+      	}
+      }
+	  
+	  $(function (){
+		let count = 0;
+		let checked;
+		let selectedColor = $("#colourVal").val();
+		let colors = replaceData.allowedColors;
+
+		if(!colors.includes(selectedColor)) {colors.push(selectedColor);}
+			console.log(colors);
+			colors.forEach(function(entry) {
+				if(entry == selectedColor) {
+					checked = 'checked';
+				} else {
+					checked = '';
+				}
+				let colorBlock = '<label for="ColorInput'+entry+'">'+
+										'<div class="colorBlock '+checked+'" id="Color'+ count +'" style="background-color: '+ entry +';">' +
+											'<input type="radio" id="ColorInput'+entry+'" name="colorPicker" style="display: none;" value="'+entry+'" '+checked+'>' +
+											'<div class="innerDiv">' +
+												'<i class="fa fa-check" aria-hidden="true"></i>' +
+											'</div>' +
+											'<span class="innerSpan"></span>' +
+											'</div>'+
+										'</label>';
+				$("#profileColors").append(colorBlock);
+				count++;
+			});
+		}());
+   </script>
+      <div class="option_select" style="margin: 10px; width: 220px;">
+         <select class="option_select_text" onchange="viewEdit($(this));" required id="viewEdit" style="width: inherit;">
+            <option value="view" selected>Просмотр</option>
+            <option value="edit">Правка</option>
+         </select>
+         <span class="option_select_bar"></span>
+         <label class="option_select_label">Тип действия</label>	
+      </div>
+      <div id="edit" style="display: none;">
+         <ul class="tab_caption animate__animated animate__fadeInRightTop animate__delay-1s">
+            <li class="active" value="profile">Настройки профиля</li>
+            <li>Персонализация</li>
+            <li>Безопасность</li>
+         </ul>
+         <form method="POST" action="/" id="viewUserProfile">
+            <div class="tab_content active">
+               <h2 id="modalTitle">Давай меняй!</h2>
+               <span id="modalDesc">Посмотрим [realname], что ты тут можешь поменять...</span>
+               <section>
+                  <div class="input_block">
+                     <input id="realname" class="input" type="text" required value="[realname]">
+                     <label class="label">Полное имя</label>
+                  </div>
+                  <div class="input_block">
+                     <input id="userStatus" class="input" type="text" required value="[userStatus]">
+                     <label class="label">Статус</label>
+                  </div>
+                  <div class="input_block">
+                     <input id="land" class="input" type="text" required value="[land]">
+                     <label class="label">Место обитания</label>
+                  </div>
+                  <div class="input_block">
+                     <input id="email" class="input" type="text" required value="[email]">
+                     <label class="label">E-mail</label>
+                  </div>
+				  [userOnly]
+                  <div class="input_block">
+                     <input id="password" class="input" type="password" autoComplete='off'>
+                     <label class="label">Текущий пароль</label>
+                  </div>
+				  [/userOnly]
+               </section>
+            </div>
+            <div class="tab_content">
+               <h2 id="modalTitle">Давай украшать!</h2>
+               <span id="modalDesc">Посмотрим [realname], что ты тут можешь сделать...</span>
+               <table>
+                  <td>
+                     <input type="file" id="profilePhoto" name="image" accept=".jpeg" data-file-metadata-imagetype="profilePhoto" /> 
+                  </td>
+               </table>
+               <script>
+                  FilePond.registerPlugin(
+                  	FilePondPluginImageCrop,
+                  	FilePondPluginMediaPreview,
+                  	FilePondPluginImagePreview,
+                  	FilePondPluginFileMetadata,
+                  	FilePondPluginFileRename
+                  );
+                  FilePond.setOptions({
+                  	maxFileSize: '15MB',
+                  	imageCropAspectRatio: '3:5',
+                  	server: {
+                  		process: {
+                  			url: '/',
+                  			method: 'POST',
+                  			ondata: (formData) => {
+                  				formData.append('key', replaceData.secureKey);
+                  				return formData;
+                  			}
+                  		}
+                  	} 
+                  
+                  	   /*
+                  	   fileRenameFunction: (file) =>
+                  			new Promise((resolve) => {
+                  			resolve(window.prompt('Enter new filename', file.name));
+                  		}) */
+                  });
+                  											
+                  const inputElement = document.querySelector('input[type="file"]');
+                  const pond = FilePond.create(
+                  	inputElement, {
+                  			allowMultiple: false,
+                  			allowReorder: false
+                  	}
+                  );
+                  
+                  window.pond = pond;
+               </script>
+			   
+			   	<div class="fields_item">
+						<h3 class="settingsTitle">Цветовая схема профиля:</h3>
+						<div class="profileedit_ItemPickerList" style="grid-template-columns: repeat(4, 1fr);" id="profileColors">
+							<!-- Colors go here -->
+							<input type="hidden" id="colourVal" value="[colorScheme]" name="colorScheme" />
+						</div>
+				</div>
+            </div>
+            <div class="tab_content">
+               <h2 id="modalTitle">Давай портить!</h2>
+               <span id="modalDesc">Настройки безопасности, [realname], изменить может тут</span>
+               <section>
+                  <div class="input_block">
+                     <input id="newPass" class="input" type="text" autoComplete='off'>
+                     <label class="label">Новый пароль</label>
+                  </div>
+                  <div class="input_block">
+                     <input id="repeatPass" class="input" type="text" autoComplete='off'>
+                     <label class="label">Повтор пароля</label>
+                  </div>
+               </section>
+            </div>
+            <input id="user_doaction" class="input" type="hidden" value="EditUser" />
+            <input id="login" class="input" type="hidden" value="[login]" />
+            <input id="userGroup" class="input" type="hidden" value="[user_group]" />
+            <input id="foxesHash" class="input" type="hidden" value="[hash]" />
+            <button type="submit" class="login">Изменить<div class="fa fa-cog fa-spin"></div>
+            </button>
+         </form>
+      </div>
+      [/hasPriviligies]
+      <div id="view" style="display: block;">
+         <div id="profileContents" style="background: linear-gradient(45deg, #c5c5e19c, [colorScheme]);">
+		 <table>
+		<tr>
+			<td>
+            <div class="avatar"> 
+               <img class="profilePhoto" src="[profilePhoto]" style="width: 170px;" alt="[login]" />
+            </div>
+            <div class="profile-title">
+               <h1 class="groupStatus-[user_group]">[login]</h1>
+               <span class="groupStatus-[user_group]">[userStatus]</span>
+            </div>
+			</td>
+			
+			<td>
+            <div class="badgeBlock" title="In update Achievments&Advancements!">
+               <img src="/templates/foxengine/assets/img/test.png" class="badgeIcon" />
+               <span class="badgesTexts">
+                  <div class="badgeTitle">Badges</div>
+                  <div class="badgeDesc">Coming Soon</div>
+               </span>
+            </div>
+			</td>
+		</tr>
+		</table>
+            <div class="basecont" style="opacity: 0.8;">
+               <div class="dpad">
+                  <div class="userinfo" style="width: 100%">
+                     <div class="statsTabbleItem">
+                        <div class="pageItemTitle">Полное имя</div>
+                        <div class="pageItemValue">
+                           <span style="color: #f1864e;">[realname]</span>
+                        </div>
+                     </div>
+                     <div class="statsTabbleItem">
+                        <div class="pageItemTitle">Группа</div>
+                        <div class="pageItemValue">
+                           <span style="color: #c25f73 !important;">[groupName]</span>
+                        </div>
+                     </div>
+                     <div class="statsTabbleItem">
+                        <div class="pageItemTitle">Был в сети</div>
+                        <div class="pageItemValue">
+                           <span style="color: #f1864e;">[last_date]</span>
+                        </div>
+                     </div>
+                     <div class="statsTabbleItem">
+                        <div class="pageItemTitle">Время на проекте</div>
+                        <div class="pageItemValue">
+                           <span style="color: #f1864e;">[reg_date]</span>
+                        </div>
+                     </div>
+                     <div class="statsTabbleItem">
+                        <div class="pageItemTitle">Место жительства</div>
+                        <div class="pageItemValue">[land]</div>
+                     </div>
+                     [hasPriviligies]
+                     <div class="statsTabbleItem">
+                        <div class="pageItemTitle">E-Mail</div>
+                        <div class="pageItemValue">[email]</div>
+                     </div>
+                     [/hasPriviligies]
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script>
+         $(function() {
+         	$('ul.tab_caption').on('click', 'li:not(.active)', function() {
+         		$(this)
+         			.addClass('active').siblings().removeClass('active')
+         			.closest('div.tabs').find('div.tab_content').removeClass('active').eq($(this).index()).addClass('active');
+         			let tab = $(this);
+         	});
+         });
+		 
+		 $('input[name*="colorPicker"]').click(function () {
+			let rad=document.getElementsByName('colorPicker');
+				for (let i=0;i<rad.length; i++) {
+					$('#Color'+i).removeClass('checked');
+					if (rad[i].checked === true) {
+						$('#Color'+i).addClass('checked');
+						$("#colourVal").val(rad[i].value);
+					}
+				}
+			});
+      </script>
+   </div>
+</pageContent>

@@ -38,21 +38,23 @@
 			'contentBlock' => "#content",
 			'secureKey' => 'ghYyufghVH',
 			'siteTpl' => 'foxengine',
+			'assets' => '/templates/foxengine/assets/',
+			'allowedColors' => array(
+				"admin" => array("#e4005d9e", "#3cc9489e", "#e72f00ad", "#2656caad"),
+				"user" => array("#e4005d9e", "#3cc9489e", "#2656caad", "#26caad")),
+			'uploads' => UPLOADS_DIR.USR_SUBFOLDER,
 			'debug' => true),
 		
 		/*Content options*/
-		'modalSearch' => '/modal',
-		'modalTplBase' => '/modal/modalView/modalBase.tpl',
 		'userOptions' => "userOptions",
-		'userOptionsTplBase' => "/userOptions/optionsView/optionBase.ftpl",
 		'pageTplFile' => "pageTpl.ftpl",
 	
 		/*Title*/
 		'title' => 'FoxEngine',
-		'status' => 'Alpha',
+		'status' => 'Modular',
 		
 		/* UserSettings */
-		'userDatainDb'   => array("user_id", "email", "login", "password", "user_group", "realname", "hash", "reg_date", "last_date", "profilePhoto"),
+		'userFieldsArray'   => array("user_id", "email", "login", "password", "user_group", "realname", "hash", "reg_date", "last_date", "logged_ip", "profilePhoto", "userStatus", "land", "colorScheme", "groupName"),
 		'Permissions' => array(
 			'allowedProfileEdit' => array(1,4)
 		)

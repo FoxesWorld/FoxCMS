@@ -1,7 +1,8 @@
 <useroption>
 {
 	"optionGroup": 1,
-	"type": "pageContent"
+	"type": "pageContent",
+	"parentPage": "adminPanel"
 }
 </useroption>
 

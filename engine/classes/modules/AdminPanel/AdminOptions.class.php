@@ -5,10 +5,14 @@ if(!defined("ADMIN")){
 
 	class AdminOptions extends AdminPanel {
 		
-		function __construct($option) {
-			switch($option){
+		function __construct($REQUEST, $db) {
+			switch($REQUEST["admPanel"]){
 				case "showModules":
 					die(json_encode(init::$modulesArray));
+				break;
+				
+				case "usersList":
+					$UsersList = new UsersList($db, $REQUEST);
 				break;
 			}
 		}

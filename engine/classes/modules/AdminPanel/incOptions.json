@@ -1,1 +1,4 @@
-{"priority": "secondary"}
+{
+	"priority": "secondary", 
+	"userGroup": 1
+}

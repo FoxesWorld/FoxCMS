@@ -8,18 +8,21 @@
 <%FoxesModule*/
 if (!defined('FOXXEY')) {
 	die ('{"message": "Not in FOXXEY thread"}');
+} else {
+	$this->tpl = new Smarty;
+	$smartyInit = new smartyInit($this->tpl);
 }
 	class smartyInit extends init {
 		
 		protected $smarty;
 		
-		function __construct() {
+		function __construct($tpl) {
 			global $config;
 			init::requireNestedClasses(basename(__FILE__), __DIR__);
-			init::classUtil('PluginScanner');
+			init::classUtil('CheckUserAccess', "1.0.0");
+			init::classUtil('PluginScanner', "1.2.7-exp");
 			define('UserUploadDir', UPLOADS_DIR.USR_SUBFOLDER.init::$usrArray['login'].'/');
-			$modalsToShow = new modalShow;
-			$this->smarty 					= new Smarty;
+			$this->smarty 					= $tpl;
 			$this->smarty->debugging 		= false;
 			$this->smarty->cache_lifetime 	= 120;
 			$this->smarty->template_dir 	= ROOT_DIR.'/templates/'.$config['javascript']['siteTpl'];
@@ -33,8 +36,6 @@ if (!defined('FOXXEY')) {
 			global $config;
 			$smartyUtils = new smartyUtils;
 			$PluginsScanner = new PluginsScanner($config['pluginsDir']);
-			$PluginsScanner->pluginsInclude();
-			$photoSystemPath = ROOT_DIR.UserUploadDir.init::$usrArray['profilePhoto'];
 			
 			//@Deprecated
 			$this->smarty->assign("links", "");
@@ -45,16 +46,8 @@ if (!defined('FOXXEY')) {
 			$this->smarty->assign("isLogged",   init::$usrArray['isLogged']);
 			$this->smarty->assign("builtInJS", $smartyUtils->assignJs());
 			$this->smarty->assign("systemHeaders", $PluginsScanner->outString);
-
-			switch(file_exists($photoSystemPath)) {
-				case true:
-					init::$usrArray["profilePhoto"] = UserUploadDir.init::$usrArray['profilePhoto'];
-				break;
-				
-				default:
-					init::$usrArray["profilePhoto"] = "/templates/".$config['javascript']['siteTpl']."/assets/img/no-photo.jpg";
-				break;
-			}
 			$smartyUtils->assignUserFields($this->smarty);	
+			return $this->smarty;
 		}
+		
 	}

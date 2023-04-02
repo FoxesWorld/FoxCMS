@@ -1,10 +1,29 @@
 <useroption>
 {
 	"optionGroup": 1,
-	"type": "pageContent"
+	"type": "pageContent",
+	"parentPage": "adminPanel",
+	"onLoad": "parseUsers"
 }
 </useroption>
 
 <pageContent>
-Список пользователей
+		<table class="table table-hover">
+		
+		  <thead>
+			<tr>
+			  <th scope="col">#</th>
+			  <th scope="col">Логин</th>
+			  <th scope="col">Почта</th>
+			  <th scope="col">Дата посещения</th>
+			  <th scope="col">
+				<input type="text" onKeyUp="parseUsers($(this).val());" class="input" placeholder="Поиск пользователя" required />
+			</th>
+			  
+			</tr>
+		  </thead>
+		  <tbody id="usersList">
+
+		  </tbody>
+		</table>
 </pageContent>

@@ -1,0 +1,27 @@
+<useroption>
+   {
+   "optionGroup": 5,
+   "type": "pageContent"
+   }
+</useroption>
+
+<pageContent>
+<div class="pageRoot">
+   <div class="page-content">
+      <h4> Привет, %realname%! Ты невероятно крут!</h4>
+      <hr>
+      <div class="statusBlock warn">
+         <ul>
+            <li>
+               <img class="warn"/>
+            </li>
+            <li>
+               <div class="blockText">
+                  Данная информация может расходиться с реальностью!
+               </div>
+            </li>
+         </ul>
+      </div>
+   </div>
+</div>
+</pageContent>

@@ -2,7 +2,7 @@
 /*FoxesModule%>
 {
 	"version": "V 1.0.0",
-	"description": "Module for sending Email"
+	"description": "EXP Module for sending Email"
 }
 <%FoxesModule*/
 
@@ -37,7 +37,7 @@ class foxMail extends init{
 		);
 	
 	function __construct($is_html = false) {
-		init::classUtil('Mailer');
+		init::classUtil('Mailer', "1.0.0");
 		$this->mail = new PHPMailer;
 		$this->mail->CharSet = $this->config['encoding'];
 		$this->mail->Encoding = "base64";

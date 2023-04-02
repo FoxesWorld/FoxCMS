@@ -9,23 +9,28 @@
     font-size: 0.95vw;
 }
 
-.adminPanel section {
-    display: none;
+.adminPanel #contentAdm {
     padding: 15px;
     background: white;
     top: 0;
     left: 180px;
+	min-height: 100%;
 }
 
 .adminPanel p {
     margin: 0;
 }
 
-.adminPanel input {
+.adminPanel > .tabs > input[type="radio"] {
     display: none;
 }
 
 .adminPanel label {
+	display: table-cell;
+	transition: 0.3s;
+}
+
+.adminPanel label:not(.selectedPage) {
     display: table-cell;
     width: 180px;
     padding: 15px;
@@ -34,9 +39,18 @@
     cursor: pointer;
 }
 
-.adminPanel input:checked + label {
-    color: #555;
-    background: white;
+.adminPanel #usersList .noUsers {
+	
+}
+
+.adminPanel #usersList .noUsers h1 {
+	font-size: 13pt;
+}
+
+.adminPanel #usersList .noUsers span {
+	color: darkorange;
+    font-family: 'Minecraft';
+    font-size: 13pt;
 }
 
 #tab1:checked ~ #content1, #tab2:checked ~ #content2, #tab3:checked ~ #content3, #tab4:checked ~ #content4 {

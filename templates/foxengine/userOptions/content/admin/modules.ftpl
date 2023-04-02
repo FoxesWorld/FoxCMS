@@ -1,0 +1,13 @@
+<useroption>
+{
+	"optionGroup": 1,
+	"type": "pageContent",
+	"parentPage": "adminPanel",
+	"onLoad": "parseModulesInfo",
+	"onLoadArgs": "#contentAdm"
+}
+</useroption>
+
+<pageContent>
+	
+</pageContent>

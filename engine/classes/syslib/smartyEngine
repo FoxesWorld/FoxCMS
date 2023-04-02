@@ -1,0 +1,2 @@
+<?php 
+	require (SYSLIB_DIR.'smarty/Smarty.class.php');

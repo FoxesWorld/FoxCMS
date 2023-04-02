@@ -49,7 +49,7 @@ function request(path, args, timeDelay) {
 		xhr.send();
 	};
 	
-	this.upload = function( file, params, progress, load){
+	this.upload = function(file, params, progress, load){
 		
 		let xhr = this.getXmlHttp();
 		let formData = new FormData();

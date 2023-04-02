@@ -17,19 +17,26 @@ function logoAnimation() {
         targets: '.logo .letter',
         opacity: [0, 1],
         rotateY: [-90, 0],
-        duration: 1300,
+        duration: 1000,
         delay: (el,i)=> 40 * i
     }).add({
         targets: '.logo .letterStatus',
         opacity: [0, 1],
-        easing: "easeInExpo",
+        easing: "easeInOutExpo",
         duration: 1100,
         delay: (el,i)=>100 + 30 * i
     }).add({
+        targets: '.logo .status',
+        opacity: [0, 1],
+		translateX: [-50, 0],
+		easing: "easeInOutExpo",
+		rotate: '3turn',
+        duration: 1000,
+    }).add({
         targets: '.logo .line',
         scaleX: [0, 1],
-        //opacity: [0.5, 1],
+        //opacity: [0, 1],
         easing: "easeInOutExpo",
-        duration: 600
+        duration: 800
     });
 }

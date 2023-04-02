@@ -31,11 +31,15 @@ ul {
     padding: 0px;
 }
 
+.formContent {
+	width: fit-content;
+    margin: 10% auto;
+}
+
 .siteContent {
     margin: 15px 0;
 }
 
-/*@media (max-width: 1366px) {} */
 .mainBlock {
     background-color: #e1dfdda3;
     border-radius: 10px;
@@ -55,7 +59,6 @@ ul {
 
 .rightBlock .card {
     margin: 0 10 15;
-    padding: 5px;
     max-width: 300px;
     -webkit-box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
     -moz-box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
@@ -64,7 +67,7 @@ ul {
 }
 
 .rightBlock .card:last-child {
-    margin: 0 10 0;
+    margin: 5px 10 0;
 }
 
 .rightBlock .right-profile-menu {
@@ -72,13 +75,17 @@ ul {
 
 .rightBlock .right-profile-menu ul li a {
     transition: 0.4s;
-    padding: 0px 0 3px;
     font-size: 10pt;
     color: #1d1d1c;
 }
 
-.rightBlock .right-profile-menu ul li a:hover {
+.rightBlock .right-profile-menu ul li a:hover:not(.selectedPage) {
     color: white;
+	padding: 0px 0 3px;
+}
+
+.rightBlock .right-profile-menu ul li a:not(.selectedPage) {
+	padding: 0px 0 3px;
 }
 
 .rightBlock .right-profile-menu ul li a .rightIcon {
@@ -106,6 +113,7 @@ ul {
     animation-iteration-count: infinite;
 }
 
+
 /*--------------------------------------------------------------
 # Page tmplate
 --------------------------------------------------------------*/
@@ -117,7 +125,15 @@ ul {
 }
 
 .pageRoot .page-content {
+}
 
+.page-content .formContent h1 {
+    font-size: 28px;
+    font-weight: 700;
+    font-family: 'FSElliotPro-Heavy';
+    color: #894324;
+    width: fit-content;
+    border-bottom: 2px solid #e8d3d0;
 }
 
 .pageRoot .page-title {
@@ -180,6 +196,7 @@ ul {
     transition: all 0.5s;
     z-index: 997;
     background-repeat: no-repeat;
+	background: #a9a094c2;
 }
 
 #header.header-fixed {
@@ -197,7 +214,7 @@ section {
     background-color: #fff9f7;
 }
 
-.inline {
+.inline > li, .inline > td {
     display: inline-block;
 }
 
@@ -225,6 +242,7 @@ section {
 
 #userBlock {
     z-index: 1;
+	padding: 5px;
 }
 
 .userProfile {
@@ -298,7 +316,7 @@ section {
 }
 
 ul > li {
-    margin: 5px 0;
+    line-height: 1;
 }
 
 /* Status Blocks*/

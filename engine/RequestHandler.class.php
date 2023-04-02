@@ -1,24 +1,38 @@
 <?php
 
-	$RequestHandler = new RequestHandler;
-
 	class RequestHandler extends init {
 		
-		function __construct() {
+		public static $REQUEST;
+
+		function __construct($db) {
+			self::ipCheck();
 			if(count($_POST) > 0) {
 				$thisRequest = $_POST;
+				$this->updateUserOnline($db, init::$usrArray);
 					@$keyCheck = $this->checkSecureKey($thisRequest["key"]);
 					if($keyCheck === true){
 						foreach($thisRequest as $key => $value){
 							if($value) {
-								init::$REQUEST[$key]  = functions::filterString($value);
+								self::$REQUEST[$key]  = functions::filterString($value);
 							} else {
-								init::$REQUEST[$key]  = functions::filterString("undefined");
+								self::$REQUEST[$key]  = functions::filterString("undefined");
 							}
 						}
 					} else {
 						die('{"message": "'.@$thisRequest["key"].' - Is a wrong secure key!"}');
 					}
+			}
+		}
+		
+		private static function ipCheck(){
+			if(init::$usrArray['logged_ip'] != REMOTE_IP) {
+				AuthManager::logout("Suspected ip change!");
+			}
+		}
+		
+		private function updateUserOnline($db, $usrArray){
+			if($usrArray['isLogged']) {
+				$db->query("UPDATE `users` SET last_date='".CURRENT_TIME."' WHERE login = '".$usrArray['login']."'");
 			}
 		}
 		
@@ -29,9 +43,7 @@
 					switch($key) {
 						case "":
 						case null:
-						case false:
 							return false;
-						break;
 
 						default:
 						if($key === $config['javascript']["secureKey"]){
@@ -39,7 +51,6 @@
 							} else {
 								return false;
 							}
-						break;
 					}
 				} else {
 					die('{"message": "No secure key!"}');

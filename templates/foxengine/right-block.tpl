@@ -14,38 +14,39 @@
                   <li><b><i class="fa fa-diamond" aria-hidden="true"></i>Полное имя</b>: {$realname}</li>
                </div>
             </ul>
-            <span class="short"></span>
+
             <ul class="userActions">
                <li>
-                  <div class="right-profile-menu">
-                     <form method="POST" action="/" id="sessionActions">
-                        <ul id="usrMenu">
-                        </ul>
-                        <input id="userAction" class="input" type="hidden" value="logout">
-                     </form>
-                  </div>
-                  {if !$isLogged}
-                  <a href="#login">
+
+                  {if $user_group == 5}
+                  <a href="#" onclick="FoxEngine.loadPage('auth', replaceData.contentBlock); return false;">
                   <button type="submit" class="login">Авторизация <i class="fa fa-sign-in"></i>
                   </button>
                   </a>
-                  {/if}	
+                  {else}
+                  <div class="right-profile-menu">
+                     <form method="POST" action="/">
+                        <ul id="usrMenu">
+                        </ul>
+                        <input name="userAction" class="input" type="hidden" value="logout">
+                     </form>
+                  </div>
+				  {/if}				  
                </li>
             </ul>
          </div>
       </div>
    </div>
-   <!-- 
+   
       <div class="card">		
       	<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-      	  <div class="card-header">Help</div>
-      		  <div class="card-body">
-      				<h5 class="card-title">Get help by here</h5>
-      				<p class="card-text">Some quick example text</p>
-      		  </div>
+      	  <div class="card-header">Последняя регистрация</div>
+			<div id="lastUser">
+			
+			</div>
       	</div>
       </div>
-      
+      <!-- 
       <div class="card">				
       	<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
       	  <div class="card-header">Help2</div>
