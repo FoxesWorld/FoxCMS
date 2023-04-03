@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2023-04-02 10:46:05
+/* Smarty version 4.0.4, created on 2023-04-02 15:57:48
   from '/var/www/foxcms/templates/foxengine/right-block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_642932bd4d41f0_05051662',
+  'unifunc' => 'content_64297bcc7ea640_41838864',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7d23cafcd3e57d5c5faec020779171864f3bc18c' => 
     array (
       0 => '/var/www/foxcms/templates/foxengine/right-block.tpl',
-      1 => 1680080761,
+      1 => 1680440153,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_642932bd4d41f0_05051662 (Smarty_Internal_Template $_smarty_tpl) {
+function content_64297bcc7ea640_41838864 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="col-4">
 <div class="row rightBlock">
    <div class="card">
@@ -66,7 +66,7 @@ function content_642932bd4d41f0_05051662 (Smarty_Internal_Template $_smarty_tpl)
       </div>
    </div>
    
-      <div class="card">		
+      <div class="card d-none d-md-block">		
       	<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
       	  <div class="card-header">Последняя регистрация</div>
 			<div id="lastUser">

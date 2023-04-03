@@ -16,7 +16,7 @@ function logoAnimation() {
     }).add({
         targets: '.logo .letter',
         opacity: [0, 1],
-        rotateY: [-90, 0],
+        rotateY: [-180, 0],
         duration: 1000,
         delay: (el,i)=> 40 * i
     }).add({
@@ -24,14 +24,14 @@ function logoAnimation() {
         opacity: [0, 1],
         easing: "easeInOutExpo",
         duration: 1100,
-        delay: (el,i)=>100 + 30 * i
+        delay: (el,i)=> 100 + 30 * i
     }).add({
         targets: '.logo .status',
         opacity: [0, 1],
-		translateX: [-50, 0],
+		translateX: [-200, 0],
 		easing: "easeInOutExpo",
-		rotate: '3turn',
-        duration: 1000,
+		rotate: '10turn',
+        duration: 1000
     }).add({
         targets: '.logo .line',
         scaleX: [0, 1],

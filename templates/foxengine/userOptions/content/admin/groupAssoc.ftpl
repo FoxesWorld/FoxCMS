@@ -1,0 +1,44 @@
+<useroption>
+{
+	"optionGroup": 1,
+	"type": "pageContent",
+	"parentPage": "adminPanel",
+	"onLoad": "parseGroups"
+}
+</useroption>
+
+<pageContent>
+		<table class="table table-hover table-striped">
+		
+		  <thead>
+			<tr>
+			  <th scope="col">#</th>
+			  <th scope="col">Номер группы</th>
+			  <th scope="col">Тип группы</th>
+			  <th scope="col">Локализация</th>
+			  <th scope="col">
+			</th>
+			  
+			</tr>
+		  </thead>
+		  <tbody id="groupAssoc">
+
+		  </tbody>
+		</table>
+		
+	<div class="statusBlock warn">
+         <ul>
+            <li>
+               <img class="warn"/>
+            </li>
+            <li>
+               <div class="blockText">
+                  Меняйте с осторожностью! При неправильном изменении настроек групп можно потерять доступ к админпанели!
+               </div>
+            </li>
+         </ul>
+    </div>
+	
+	<script>
+	</script>
+</pageContent>

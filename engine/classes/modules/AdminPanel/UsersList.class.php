@@ -16,7 +16,12 @@ if(!defined("ADMIN")){
 		}
 		
 		protected function parseUsers() {
-			$query = "SELECT * FROM `users` WHERE login LIKE '%".$this->request['userMask']."%'";
+			if($this->request['userMask'] == "*") {
+				$query = "SELECT * FROM `users`";
+			} else {
+				$query = "SELECT * FROM `users` WHERE login LIKE '%".$this->request['userMask']."%'";
+			}
+			
 			$usersArray = $this->db->getRows($query);
 			foreach($usersArray as $key => $value){
 				$this->usersArray[] = array($key => $value);

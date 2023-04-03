@@ -28,6 +28,7 @@
 .adminPanel label {
 	display: table-cell;
 	transition: 0.3s;
+	border-right: 2px solid;
 }
 
 .adminPanel label:not(.selectedPage) {
@@ -35,7 +36,7 @@
     width: 180px;
     padding: 15px;
     color: #4F5966;
-    background: #DEE8F2;
+    background: #b77c4c;
     cursor: pointer;
 }
 

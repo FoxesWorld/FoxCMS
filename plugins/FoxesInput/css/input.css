@@ -86,7 +86,7 @@ useroption {
     font-weight: 600;
     cursor: pointer;
     border-radius: 4px;
-	font-size: inherit;
+	font-size: 0.9vw;
 }
 
 [type=button], [type=reset], [type=submit], button:disabled .wait {

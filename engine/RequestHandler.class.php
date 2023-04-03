@@ -13,7 +13,7 @@
 					if($keyCheck === true){
 						foreach($thisRequest as $key => $value){
 							if($value) {
-								self::$REQUEST[$key]  = functions::filterString($value);
+								self::$REQUEST[$key]  = $value;//functions::filterString($value);
 							} else {
 								self::$REQUEST[$key]  = functions::filterString("undefined");
 							}

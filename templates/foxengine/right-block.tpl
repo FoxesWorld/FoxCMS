@@ -38,7 +38,7 @@
       </div>
    </div>
    
-      <div class="card">		
+      <div class="card d-none d-sm-block">		
       	<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
       	  <div class="card-header">Последняя регистрация</div>
 			<div id="lastUser">

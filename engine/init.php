@@ -6,6 +6,11 @@ session_start();
 
 	class init {
 		
+		/*
+			TODO
+			Module setings - JSON file for each module!!!
+		*/
+		
 		private $initHelper, $ModulesLoader, $initLevels;
 		protected $debug, $logger, $db, $tpl;
 		protected static $usrArray = array(

@@ -54,7 +54,7 @@
 			});
 		}());
    </script>
-      <div class="option_select" style="margin: 10px; width: 220px;">
+      <div class="option_select" style="margin: 10px; width: 25vw;">
          <select class="option_select_text" onchange="viewEdit($(this));" required id="viewEdit" style="width: inherit;">
             <option value="view" selected>Просмотр</option>
             <option value="edit">Правка</option>
@@ -63,7 +63,7 @@
          <label class="option_select_label">Тип действия</label>	
       </div>
       <div id="edit" style="display: none;">
-         <ul class="tab_caption animate__animated animate__fadeInRightTop animate__delay-1s">
+         <ul class="tab_caption">
             <li class="active" value="profile">Настройки профиля</li>
             <li>Персонализация</li>
             <li>Безопасность</li>
@@ -182,7 +182,7 @@
 		<tr>
 			<td>
             <div class="avatar"> 
-               <img class="profilePhoto" src="[profilePhoto]" style="width: 170px;" alt="[login]" />
+               <img class="profilePhoto" src="[profilePhoto]" alt="[login]" />
             </div>
             <div class="profile-title">
                <h1 class="groupStatus-[user_group]">[login]</h1>
@@ -191,7 +191,7 @@
 			</td>
 			
 			<td>
-            <div class="badgeBlock" title="In update Achievments&Advancements!">
+            <div class="badgeBlock d-none d-md-block" title="In update Achievments&Advancements!">
                <img src="/templates/foxengine/assets/img/test.png" class="badgeIcon" />
                <span class="badgesTexts">
                   <div class="badgeTitle">Badges</div>

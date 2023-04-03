@@ -46,24 +46,23 @@
 	}
 
 	.pageItemTitle {
-		width: 335px;
+		width: 65%;
 		display: inline-block;
 		vertical-align: top;
 		padding: 0 10px 0 15px;
 		line-height: 32px;
-		font-size: 14px;
+		/* font-size: 14px; */
 		color: #5d5a57
 	}
 
 	.pageItemValue {
-		width: 280px;
 		display: inline-flex;
 		vertical-align: top;
 		padding: 0 10px;
 		font-weight: 600;
 		line-height: 32px;
 		color: #5d5a57;
-		font-size: 14px
+		/* font-size: 14px; */
 	}
 
 	a.see_last_comments {
@@ -85,6 +84,10 @@
 	.avatar {
 		display: inline-block;
 		margin: 5;
+	}
+	
+	.dpad {
+		font-size: 1vw;
 	}
 
 	.toggleSwitch {

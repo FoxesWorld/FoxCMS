@@ -1,5 +1,4 @@
-
-	function parseUsers(input) {
+function parseUsers(input) {
 		$("#usersList").html("");
 		if(!input) input = '*';
 		let answer = request.send_post({admPanel: "usersList", userMask: input});

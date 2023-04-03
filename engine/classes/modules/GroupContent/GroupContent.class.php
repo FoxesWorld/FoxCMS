@@ -12,11 +12,6 @@ $UserOptions = new UserOptions($this->db, $this->logger);
 
 class UserOptions extends init {
 
-    /* THIS CODE IS LEGACY!!!
-		 * A LOT OF THINGS MUST BE REDONE!!!
-		 * WILL BE IMPROVED LATER!!!
-		 */
-
     /* UserOptions Configuration */
     private array $dataToReplace = array(
         "optionTitle",

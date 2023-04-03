@@ -12,17 +12,17 @@
     <div class="adminPanel">
 			<div class="tabs">
 				<!-- TO BE UPDATED -->
-				<input id="tab1" type="radio"  loadPage="stats" name="tabs" checked /> 
+				<input id="tab1" type="radio" loadPage="stats" name="tabs" checked /> 
 				<label for="tab1" class="pageLink-stats">Статистика</label> 
 
-				<input id="tab2" type="radio"  loadPage="modules" name="tabs" /> 
+				<input id="tab2" type="radio" loadPage="modules" name="tabs" /> 
 				<label for="tab2" class="pageLink-modules">Модули</label> 
 
 				<input id="tab3" type="radio" loadPage="usersList" name="tabs" /> 
 				<label for="tab3" class="pageLink-usersList">Пользователи</label> 
 
-				<input id="tab4" type="radio"  loadPage="admMore" name="tabs" /> 
-				<label for="tab4" class="pageLink-admMore">Ещё</label> 
+				<input id="tab4" type="radio" loadPage="groupAssoc" name="tabs" /> 
+				<label for="tab4" class="pageLink-groupAssoc">Группы</label> 
 			  
 				<section id="contentAdm"> 
 

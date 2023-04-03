@@ -14,6 +14,11 @@ if(!defined("ADMIN")){
 				case "usersList":
 					$UsersList = new UsersList($db, $REQUEST);
 				break;
+				
+				case "groupAssoc":
+					$groupAssoc = new GroupAssocAdmin($db);
+					die($groupAssoc->groupAssocParse());
+				break;
 			}
 		}
 		

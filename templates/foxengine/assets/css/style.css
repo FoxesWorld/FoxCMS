@@ -31,8 +31,14 @@ ul {
     padding: 0px;
 }
 
+img {
+	pointer-events: none;
+}
+
 .formContent {
-	width: fit-content;
+    width: 30vw;
+	max-width: 512px;
+    padding: 5px;
     margin: 10% auto;
 }
 
@@ -284,6 +290,9 @@ section {
 
 .profilePhoto {
     filter: grayscale(.8);
+	width: 12vw;
+	max-width: 256px;
+    margin: 0 auto;
     border-radius: 50% 10% 50% 40%;
     overflow: hidden;
     -webkit-box-shadow: 4px 2px 79px 3px rgb(214 202 50 / 55%);
@@ -312,7 +321,6 @@ section {
 .profilePhoto img {
     width: 100%;
     height: auto;
-	pointer-events: none;
 }
 
 ul > li {
@@ -321,7 +329,7 @@ ul > li {
 
 /* Status Blocks*/
 .statusBlock {
-    margin: 35px;
+    margin: 0 15px 10px 15px;
     padding: 10px;
     border-radius: 5px;
 }
@@ -333,8 +341,7 @@ ul > li {
 }
 
 .statusBlock img {
-    width: 47px;
-    height: 45px;
+    width: 5vw;
 	margin: 10px 0;
 }
 
@@ -342,6 +349,7 @@ ul > li {
 	margin: 5px 10px;
     padding: 5px;
     border-radius: 5px;
+	font-size: 1vw;
 }
 
 .statusBlock img.info {
