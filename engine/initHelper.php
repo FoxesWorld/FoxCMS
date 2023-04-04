@@ -8,30 +8,31 @@
 			function __construct($db, $logger) {
 				$this->db = $db;
 				$this->logger = $logger;
-				self::userArrFill();
-				self::$groupAssociacion = new groupAssociacion(self::$usrArray['user_group'], $db);
-				self::$usrArray['groupName'] = self::$groupAssociacion->userGroupName();
-				self::$usrArray['groupTag'] = self::$groupAssociacion->userGroupTag();
+				self::userArrFill($db);
+
 			}
 
 			//Filling usrArray each time if SESSION is set
-			public static function userArrFill(){
+			public static function userArrFill($db){
+				init::$usrArray['realname'] = randTexts::getRandText('noName');	
 				if($_SESSION) {
 					if($_SESSION['isLogged'] === true){
-						init::$usrArray['realname'] = randTexts::getRandText('noName');		
 						foreach($_SESSION as $key => $value){
 							init::$usrArray[$key] = $value;
 						}
-
 						init::$usrArray["isLogged"] = true;
 					}
+					self::$groupAssociacion = new groupAssociacion(self::$usrArray['user_group'], $db);
+					self::$usrArray['groupName'] = self::$groupAssociacion->userGroupName();
+					self::$usrArray['groupTag'] = self::$groupAssociacion->userGroupTag();
+					self::$usrArray['user_group'] = self::$groupAssociacion->userGroupNum();
 				}
 			}
 		}
 		
 
 
-		class groupAssociacion extends init {
+		class groupAssociacion extends initHelper {
 			
 			private $userGroup;
 			protected $db;
@@ -53,8 +54,12 @@
 				return $this->dbRequest()["groupName"];
 			}
 			
-			public function userGroupTag(){
+			protected function userGroupTag(){
 				return $this->dbRequest()["groupType"];
+			}
+			
+			protected function userGroupNum() {
+				return $this->dbRequest()["groupNum"];
 			}
 
 		}

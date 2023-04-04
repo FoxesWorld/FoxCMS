@@ -58,7 +58,7 @@ if(!defined('auth')) {
 		private function authQueries($login) {
 			$queryArray = array(
 			"lastDate" => "UPDATE `users` SET last_date='".CURRENT_TIME."' WHERE login = '".$login."'",
-			"loginHash" => "UPDATE `users` SET hash='".authorize::generateLoginHash($login, 16)."' WHERE login = '".$login."'",
+			"loginHash" =>"UPDATE `users` SET hash='".authorize::generateLoginHash($login, 16)."' WHERE login = '".$login."'",
 			"loggedIp" => "UPDATE `users` SET logged_ip='".REMOTE_IP."'  WHERE login = '".$login."'");
 			foreach($queryArray as $key => $value){
 				$this->db->query($value);
@@ -72,7 +72,7 @@ if(!defined('auth')) {
 			$userData = $loadUserInfo->userInfoArray();
 			$sessionManager = new sessionManager($userData);
 			init::$usrArray['isLogged'] = true;
-			initHelper::userArrFill();
+			initHelper::userArrFill($this->db);
 		}
 		
 		private function setTokenIfNeeded($checkbox, $login) {

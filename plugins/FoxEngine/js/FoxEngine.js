@@ -33,6 +33,7 @@ function foxEngine(login) {
 					
                     FoxEngine.loadData(replaceText(this.responseText, page), block);
                     FoxEngine.setPage(page);
+					location.hash = '#' + page;
                 }
             }
         }

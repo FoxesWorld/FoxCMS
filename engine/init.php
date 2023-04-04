@@ -49,7 +49,6 @@ session_start();
 			define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['javascript']['siteTpl'].'/');
 			define('RT_DIR', TEMPLATE_DIR.'randTexts/');
 			self::libFilesInclude(SYSLIB_DIR, $this->debug); //Require classes/Syslib
-			self::$usrArray['realname'] = randTexts::getRandText('noName');	
 			self::requireNestedClasses(basename(__FILE__), __DIR__); //Requiring nested classes from self directory
 			$this->db = new db($config['dbUser'], $config['dbPass'], $config['dbName'], $config['dbHost']);
 			$this->logger = new Logger('lastlog');
@@ -57,7 +56,6 @@ session_start();
 			$this->initHelper = new initHelper($this->db, $this->logger); //UsrArray Override (if IsLogged)
 			$RequestHandler = new RequestHandler($this->db);
 			init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "preInit");
-			
 		}
 		
 		/* After init we have all modules
