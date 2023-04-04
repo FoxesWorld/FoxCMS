@@ -25,7 +25,7 @@ class GetOption extends UserOptions {
     }
 	
 	public static function getPageContent($pageObject, $filePath){
-		 if (in_array($pageObject, self::$userOptions["optionNames"])) {
+		 if (@in_array($pageObject, self::$userOptions["optionNames"])) {
 				$optionJson = UserOptions::getOptionData($pageObject);
                 $optionSettings = json_decode($optionJson, true);
                 $optionBody = self::$userOptions[$pageObject];

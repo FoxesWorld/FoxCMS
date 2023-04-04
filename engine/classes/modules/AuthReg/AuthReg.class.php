@@ -60,7 +60,7 @@
 			}
 			switch(@RequestHandler::$REQUEST[$this->requestListener]) {	
 				case 'auth':
-					$authorisationStatus = $auth->auth();
+					@$authorisationStatus = $auth->auth();
 					switch($authorisationStatus) {
 						case true:
 							init::$usrArray['isLogged'] = true;

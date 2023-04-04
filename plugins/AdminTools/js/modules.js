@@ -28,6 +28,7 @@
 													</td>
 													
 													<td>
+														<li><b class="moduleKey">ModuleGroups: </b>  <b class="moduleValue">`+obj["moduleGroups"]+`</b></li>
 														<li><b class="moduleKey">Version: </b>  <b class="moduleValue">`+obj["version"]+`</b></li>
 														<li><b class="moduleKey">Description: </b> <b class="moduleValue">`+obj["description"]+`</b></li>
 														<li><b class="moduleKey">Priority: </b> <b class="moduleValue">`+obj["modulePriority"]+`</b></li>

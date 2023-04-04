@@ -50,6 +50,14 @@
 				}
 			}
 
+			if(strpos($this->content, "[adminOnly]")){
+				if(init::$usrArray['groupTag'] !== "admin"){
+					$this->content = preg_replace("'\\[adminOnly\\](.*?)\\[/adminOnly\\]'si", '', $this->content);
+				} else {
+					$this->removeTags($this->content, "adminOnly");
+				}
+			}
+
 			
 			return $this->content;
 		}

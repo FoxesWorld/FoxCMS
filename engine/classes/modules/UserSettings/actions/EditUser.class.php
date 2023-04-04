@@ -6,7 +6,7 @@ if(!defined('profile')) {
 	class EditUser extends User {
 		
 		/*CFG*/
-		private array $dbQureyConstruct = array("realname", "email", "userStatus", "land", "colorScheme");
+		private array $dbQureyConstruct = array("realname", "user_group", "email", "userStatus", "land", "colorScheme");
 		
 		/*EditStatus*/
 		private string $status = "success";
@@ -30,7 +30,7 @@ if(!defined('profile')) {
 		*	> foxesHash
 		*	> password
 		*	> email
-		*	> userGroup
+		*	> user_group
 		*###############*/
 		
 		function __construct($request, $db, $logger){
@@ -52,9 +52,10 @@ if(!defined('profile')) {
 									$this->inputEmail = $request['email'];
 									if (filter_var($this->inputEmail, FILTER_VALIDATE_EMAIL)) {
 										if($this->canSetColor(@$request['colorScheme'])){ //HERE
-											if(@$request['userGroup'] !== "null") {
-												$this->inputGroup = $request['userGroup'];
-												if($this->inputGroup === $this->getUserfield("user_group")) {
+											if(@$request['user_group'] !== "null") {
+												//if(@$request['user_group'] !== init::$usrArray['user_group'] && init::$usrArray['groupTag'] === "admin"){
+												$this->inputGroup = $request['user_group'];
+												if($this->inputGroup === $this->getUserfield("user_group") || init::$usrArray['groupTag'] === "admin") {
 													if(in_array(init::$usrArray['user_group'], $config['Permissions']['allowedProfileEdit'])) {
 													//ALL CHECKS PASSED
 														$this->profileChanges();
@@ -68,15 +69,19 @@ if(!defined('profile')) {
 														AuthManager::updateSession($db);
 													} else {
 														$this->status = "warn";
-														$this->statusInfo = $lang['restrictdUsergroup'];
+														$this->statusInfo = $lang['restrictduser_group'];
 													}
 												} else {
 													$this->status = "warn";
-													$this->statusInfo = $lang['invalidUsergroup'];
+													$this->statusInfo = $lang['invaliduser_group'];
 												}
+											//} else {
+											//	$this->status = "error";
+											//	$this->statusInfo = "Not enough right for shifting a group!";
+											//}
 											} else {
 												$this->status = "error";
-												$this->statusInfo = $lang['noUsergroup'];
+												$this->statusInfo = $lang['nouser_group'];
 											}
 										} else {
 										$this->status = "warn";

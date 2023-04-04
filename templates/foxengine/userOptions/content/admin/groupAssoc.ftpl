@@ -25,6 +25,7 @@
 
 		  </tbody>
 		</table>
+		<a class="addGroupAssoc text-success adminButtonCover"><i class="fa fa-plus" aria-hidden="true"></i></a>
 		
 	<div class="statusBlock warn">
          <ul>

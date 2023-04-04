@@ -22,11 +22,12 @@
 						}
 						init::$usrArray["isLogged"] = true;
 					}
-					self::$groupAssociacion = new groupAssociacion(self::$usrArray['user_group'], $db);
-					self::$usrArray['groupName'] = self::$groupAssociacion->userGroupName();
-					self::$usrArray['groupTag'] = self::$groupAssociacion->userGroupTag();
-					self::$usrArray['user_group'] = self::$groupAssociacion->userGroupNum();
+
 				}
+				self::$groupAssociacion = new groupAssociacion(self::$usrArray['user_group'], $db);
+				self::$usrArray['groupName'] = self::$groupAssociacion->userGroupName();
+				self::$usrArray['groupTag'] = self::$groupAssociacion->userGroupTag();
+				self::$usrArray['user_group'] = self::$groupAssociacion->userGroupNum();
 			}
 		}
 		
@@ -51,15 +52,15 @@
 			}
 
 			public function userGroupName(){
-				return $this->dbRequest()["groupName"];
+				return $this->dbRequest()["groupName"] ?? randTexts::getRandText('noGroup');
 			}
 			
 			protected function userGroupTag(){
-				return $this->dbRequest()["groupType"];
+				return $this->dbRequest()["groupType"] ?? "cursed";
 			}
 			
 			protected function userGroupNum() {
-				return $this->dbRequest()["groupNum"];
+				return $this->dbRequest()["groupNum"] ?? 3;
 			}
 
 		}

@@ -63,22 +63,6 @@
 							$startUpSound->generateAudio();
 						break;
 						
-						case "sqlQuery":
-						if(init::$usrArray['isLogged']){
-							if(init::$usrArray['groupTag'] === "admin"){
-								if(@RequestHandler::$REQUEST['query']){
-									if($this->db->run(RequestHandler::$REQUEST['query'])){
-										functions::jsonAnswer("Changed!!!");
-									}
-								} else {
-									functions::jsonAnswer("Empty query!", true);
-								}
-							} else {
-								functions::jsonAnswer("Insufficent rights!", true);
-							}
-						}
-						break;
-						
 						default:
 							die('{"message": "Unknown sysRequest option!"}');
 						break;
