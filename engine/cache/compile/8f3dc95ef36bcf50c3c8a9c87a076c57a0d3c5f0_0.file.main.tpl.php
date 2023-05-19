@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2023-04-02 10:46:05
+/* Smarty version 4.0.4, created on 2023-04-27 08:57:09
   from '/var/www/foxcms/templates/foxengine/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_642932bd4c6d21_45774831',
+  'unifunc' => 'content_644a0eb532b9e1_87043074',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '8f3dc95ef36bcf50c3c8a9c87a076c57a0d3c5f0' => 
     array (
       0 => '/var/www/foxcms/templates/foxengine/main.tpl',
-      1 => 1680421437,
+      1 => 1682574982,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:notify.tpl' => 1,
   ),
 ),false)) {
-function content_642932bd4c6d21_45774831 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644a0eb532b9e1_87043074 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html>
    <head>
       <?php echo $_smarty_tpl->tpl_vars['systemHeaders']->value;?>
@@ -43,7 +43,10 @@ function content_642932bd4c6d21_45774831 (Smarty_Internal_Template $_smarty_tpl)
 	  <meta property="og:site_name" content="FoxesWorld">
 	  <meta property="og:url" content="https://foxescraft.ru">
 	  <meta property="og:image" content="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
-/assets/logo.png" />
+/img/assets/logo.png" />
+	  <?php echo '<script'; ?>
+ src="//code.jivo.ru/widget/X47ofXrus3" async><?php echo '</script'; ?>
+>
       <link href="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/css/style.css" rel="stylesheet">
 	  <link rel="shortcut icon" href="/favicon.ico">
@@ -79,9 +82,9 @@ function content_642932bd4c6d21_45774831 (Smarty_Internal_Template $_smarty_tpl)
       <div class="container">
          <div class="row siteContent">
             <div class="col-8">
-               <div id="content" class="mainBlock animate__animated">
+               <div id="content" class="mainBlock">
 			   <?php if ($_smarty_tpl->tpl_vars['user_group']->value == 5) {?>
-				   <span id="test" class="animate__animated" style="height: 512px;width: auto;display: block; border: 2px solid #998f98ad; border-radius: 10px;"></span>
+				   <span id="test" style="height: 512px;width: auto;display: block; border: 2px solid #998f98ad; border-radius: 10px;"></span>
 				   <button class="login" onclick="loadPage('guestMore', '#test');">LoadContent</button>
 			   <?php } else { ?>
 				<?php echo '<%'; ?>

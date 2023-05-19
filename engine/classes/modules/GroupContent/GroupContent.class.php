@@ -117,8 +117,8 @@ class UserOptions extends init {
                     self::$builtMenu["optionArray"][] = $arr;
                     if ($count === self::$userOptions["optionsAmount"] -1) {
                         if (init::$usrArray['user_group'] !== 5) {
-                            self::$builtMenu["optionArray"][] = $this->addTheLast;
-                            $count++;
+                            //self::$builtMenu["optionArray"][] = $this->addTheLast;
+                            //$count++;
                         }
                     }
                     self::$userOptions["optionNames"][] = $key;

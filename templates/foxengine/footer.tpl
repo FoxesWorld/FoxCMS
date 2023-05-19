@@ -2,17 +2,12 @@
    <div class="container footer--flex">
       <div class="footer-copyright">
          {$title} {$status} <b>{$year}</b>
+		 <span>Powered by {$webserviceName} <img /></span>
       </div>
-      <!--
-         <form id="newsletter" action="" method="post">
-                 <div class="input_block">
-         <input id="mail" class="input" type="email" autocomplete="off" required />
-         <label class="label">E-mail</label>
-         </div>
-          <input type="submit" value="Subscribe" />
-          <input id="userAction" class="input" type="hidden" value="subscribe">
-                 </form> -->
+
       <ul class="footer-end">
+		<li><i class="fa fa-envelope-o"></i> Почта: <b>{$contactEmail}</b></li>
+		<li><a href="https://webmaster.yandex.ru/siteinfo/?site=foxescraft.ru"><img width="88" height="31" alt="" border="0" src="https://yandex.ru/cycounter?foxescraft.ru&theme=light&lang=ru"/></a></li>
       </ul>
    </div>
 </footer>

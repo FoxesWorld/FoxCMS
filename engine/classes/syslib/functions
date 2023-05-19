@@ -7,11 +7,11 @@ if (!defined('FOXXEY')) {
 	private static $filterSymbols = array ("\x22", "\x60", "\t", '\n', '\r', "\n", "\r", '\\', ",", "¬", ";", ":", "~", "[", "]", "{", "}", ")", "(", "*", "^", "%", "$", "<", ">", "?", "!", '"', "'", "&", '"' );
 		
 	public static function collectData($data, $captchaCheck = false){
-	global $lang;
+	global $lang, $config;
 	$collectedData = array();
 	if(is_array($data)){
 			foreach($data as $key => $value){
-				if($captchaCheck) {
+				if($captchaCheck && $config['reCaptchaCheck']) {
 					if(strpos($key, 'captcha') !== false){
 						if($value === "null"){
 							self::jsonAnswer($lang["enterCaptcha"], true);

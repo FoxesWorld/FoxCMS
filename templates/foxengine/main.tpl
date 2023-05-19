@@ -13,7 +13,8 @@
 	  <meta property="og:title" content="FoxesWorld">
 	  <meta property="og:site_name" content="FoxesWorld">
 	  <meta property="og:url" content="https://foxescraft.ru">
-	  <meta property="og:image" content="{$tplDir}/assets/logo.png" />
+	  <meta property="og:image" content="{$tplDir}/img/assets/logo.png" />
+	  <script src="//code.jivo.ru/widget/X47ofXrus3" async></script>
       <link href="{$tplDir}/assets/css/style.css" rel="stylesheet">
 	  <link rel="shortcut icon" href="/favicon.ico">
       {$builtInJS}
@@ -37,9 +38,9 @@
       <div class="container">
          <div class="row siteContent">
             <div class="col-8">
-               <div id="content" class="mainBlock animate__animated">
+               <div id="content" class="mainBlock">
 			   {if $user_group == 5}
-				   <span id="test" class="animate__animated" style="height: 512px;width: auto;display: block; border: 2px solid #998f98ad; border-radius: 10px;"></span>
+				   <span id="test" style="height: 512px;width: auto;display: block; border: 2px solid #998f98ad; border-radius: 10px;"></span>
 				   <button class="login" onclick="loadPage('guestMore', '#test');">LoadContent</button>
 			   {else}
 				<%contentData%>

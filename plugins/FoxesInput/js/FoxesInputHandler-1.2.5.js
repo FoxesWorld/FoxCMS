@@ -1,5 +1,5 @@
 /*
- *	FoxesInputHandler ver - 1.2.6
+ *	FoxesInputHandler ver - 1.2.7
  *	Copyright Foxesworld.ru
  */
 let data = new Array();

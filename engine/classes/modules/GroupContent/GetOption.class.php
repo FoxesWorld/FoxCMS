@@ -32,8 +32,6 @@ class GetOption extends UserOptions {
                 switch ($optionSettings["type"]) {
                     case "page":
                         $pageTemplate = self::buildPage($optionBody, $filePath);
-
-							
                         break;
 
                     case "pageContent":
@@ -41,7 +39,7 @@ class GetOption extends UserOptions {
                         break;
                 }
 
-				return '<useroption>'.$optionJson.'</useroption>'.$pageTemplate;
+				return $pageTemplate;
 
             } else {
                 die('{"message": "No access for option  `'.$pageObject.'`"}');

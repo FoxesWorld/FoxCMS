@@ -83,7 +83,7 @@
 			foreach($filesArray as $file){
 				$filePath = "/plugins/".$file;
 				$pathInfo = pathinfo(ROOT_DIR.$filePath);
-				$extension = $pathInfo["extension"];
+				$extension = @$pathInfo["extension"];
 				switch($extension){
 					case "js":
 						$this->outString .= $this->requireJS($filePath);

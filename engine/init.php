@@ -56,6 +56,7 @@ session_start();
 			$this->initHelper = new initHelper($this->db, $this->logger); //UsrArray Override (if IsLogged)
 			$RequestHandler = new RequestHandler($this->db);
 			init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "preInit");
+			
 		}
 		
 		/* After init we have all modules

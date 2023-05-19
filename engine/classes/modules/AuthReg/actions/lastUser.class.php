@@ -5,8 +5,8 @@ class lastUser extends AuthManager {
 		protected $db, $logger;
 		private $userParseData = array("colorScheme", "realname", "login", "profilePhoto", "reg_date");
 		
-		function __construct($db, $logger){
-			if(@RequestHandler::$REQUEST["userAction"] === "lastUser") {
+		function __construct($input, $db, $logger){
+			if(@$input["userAction"] === "lastUser") {
 				$this->db = $db;
 				$this->logger = $logger;	
 			}

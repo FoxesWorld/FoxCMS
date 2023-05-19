@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2023-04-02 15:57:48
+/* Smarty version 4.0.4, created on 2023-04-25 07:43:58
   from '/var/www/foxcms/templates/foxengine/right-block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_64297bcc7ea640_41838864',
+  'unifunc' => 'content_64475a8ecfda51_33520452',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7d23cafcd3e57d5c5faec020779171864f3bc18c' => 
     array (
       0 => '/var/www/foxcms/templates/foxengine/right-block.tpl',
-      1 => 1680440153,
+      1 => 1681885918,
       2 => 'file',
     ),
   ),
@@ -20,20 +20,39 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_64297bcc7ea640_41838864 (Smarty_Internal_Template $_smarty_tpl) {
+function content_64475a8ecfda51_33520452 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="col-4">
 <div class="row rightBlock">
    <div class="card">
       <div id="userBlock">
-         <div class="userProfile animate__animated animate__backInRight animate__delay-1s">
+         <div class="userProfile">
             <ul>
                <li class="profilePhoto">
                   <img src="<?php echo $_smarty_tpl->tpl_vars['profilePhoto']->value;?>
 ">
                </li>
                <div class="userdata">
-                  <li><b><i class="fa fa-user-circle-o" aria-hidden="true"></i>Логин</b>: <?php echo $_smarty_tpl->tpl_vars['login']->value;?>
-</li>
+                  <li>
+				  <div class="loginBox">
+				  <table>
+				  <tr>
+					<td>
+						<i class="loginInner"><?php echo $_smarty_tpl->tpl_vars['login']->value;?>
+</i>
+					</td>
+					<?php if ($_smarty_tpl->tpl_vars['user_group']->value != 5) {?>
+					<td class="logout">
+						<form method="POST" action="/">
+							<button type="submit" class="logout"><i class="fa fa-sign-out"></i> </button>
+							<input name="userAction" class="input" type="hidden" value="logout" />
+						</form>
+					</td>
+					<?php }?>
+					</tr>
+				  </table>
+					
+				  </div>
+				  </li>
                   <li><b><i class="fa fa-address-card-o" aria-hidden="true"></i>Почта</b>: <?php echo $_smarty_tpl->tpl_vars['email']->value;?>
 </li>
                   <li><b><i class="fa fa-users" aria-hidden="true"></i>Группа</b>: <?php echo $_smarty_tpl->tpl_vars['groupName']->value;?>
@@ -42,31 +61,37 @@ function content_64297bcc7ea640_41838864 (Smarty_Internal_Template $_smarty_tpl)
 </li>
                </div>
             </ul>
-
+			<?php if ($_smarty_tpl->tpl_vars['user_group']->value == 5) {?>
             <ul class="userActions">
-               <li>
-
-                  <?php if ($_smarty_tpl->tpl_vars['user_group']->value == 5) {?>
+               <li>                  
                   <a href="#" onclick="FoxEngine.loadPage('auth', replaceData.contentBlock); return false;">
-                  <button type="submit" class="login">Авторизация <i class="fa fa-sign-in"></i>
-                  </button>
+					  <button type="submit" class="login">
+						Авторизация <i class="fa fa-sign-in"></i>
+					  </button>
                   </a>
-                  <?php } else { ?>
-                  <div class="right-profile-menu">
-                     <form method="POST" action="/">
-                        <ul id="usrMenu">
-                        </ul>
-                        <input name="userAction" class="input" type="hidden" value="logout">
-                     </form>
-                  </div>
-				  <?php }?>				  
+				  				  
                </li>
             </ul>
+			<?php }?>
          </div>
       </div>
    </div>
    
-      <div class="card d-none d-md-block">		
+    <?php if ($_smarty_tpl->tpl_vars['user_group']->value != 5) {?>
+      <div class="card">				
+			<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+			  <div class="card-header">Меню пользователя</div>
+				  <div class="card-body">
+					  <div class="right-profile-menu">
+						<ul id="usrMenu">
+						</ul>
+					  </div>
+				  </div>
+			</div>
+      </div>
+	  <?php }?>
+   
+      <div class="card d-none d-sm-block">		
       	<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
       	  <div class="card-header">Последняя регистрация</div>
 			<div id="lastUser">
@@ -74,17 +99,6 @@ function content_64297bcc7ea640_41838864 (Smarty_Internal_Template $_smarty_tpl)
 			</div>
       	</div>
       </div>
-      <!-- 
-      <div class="card">				
-      	<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-      	  <div class="card-header">Help2</div>
-      		  <div class="card-body">
-      				<h5 class="card-title">Get help by here</h5>
-      				<p class="card-text">Some quick example text</p>
-      		  </div>
-      	</div>
-      </div>
-      -->
 </div>
 </div><?php }
 }

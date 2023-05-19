@@ -47,18 +47,20 @@
 			init::requireNestedClasses($this->moduleName, __DIR__."/actions/");
 			self::$usrArray['realname'] = randTexts::getRandText('noName');	
 			self::checkUserToken($db, $logger);
-			$this->authActionsInit();	
+			$this->authActionsInit(RequestHandler::$REQUEST);	
 		}
 		
-		private function authActionsInit(){
+		private function authActionsInit($request){
 			global $lang;
-			$lastUser = new lastUser($this->db, $this->logger);
+			$lastUser = new lastUser($request, $this->db, $this->logger);
 				
 			if(!RequestHandler::$usrArray['isLogged']) {
-				$auth = new authorise(RequestHandler::$REQUEST, $this->db, $this->logger);
-				$reg = new register(RequestHandler::$REQUEST, $this->db, $this->logger);	
+				$auth = new authorise($request, $this->db, $this->logger);
+				$reg = new register($request, $this->db, $this->logger);	
+			} else {
+				RequestHandler::ipCheck();
 			}
-			switch(@RequestHandler::$REQUEST[$this->requestListener]) {	
+			switch(@$request[$this->requestListener]) {	
 				case 'auth':
 					@$authorisationStatus = $auth->auth();
 					switch($authorisationStatus) {

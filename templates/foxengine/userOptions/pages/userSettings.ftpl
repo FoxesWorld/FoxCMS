@@ -27,6 +27,7 @@
       }
 	  
 	  $(function (){
+	  parseBadges('[login]');
 		let count = 0;
 		let checked;
 		let selectedColor = $("#colourVal").val();
@@ -198,13 +199,9 @@
 			</td>
 			
 			<td>
-            <div class="badgeBlock d-none d-md-block" title="In update Achievments&Advancements!">
-               <img src="/templates/foxengine/assets/img/test.png" class="badgeIcon" />
-               <span class="badgesTexts">
-                  <div class="badgeTitle">Badges</div>
-                  <div class="badgeDesc">Coming Soon</div>
-               </span>
-            </div>
+				 <ul class="profileBadges container-1gYwHN" id="userBadges">
+
+				</ul>			
 			</td>
 		</tr>
 		</table>

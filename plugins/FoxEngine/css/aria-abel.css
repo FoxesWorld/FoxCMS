@@ -1,0 +1,55 @@
+/** Code for hover info **/
+[aria-label].tip-over {
+  position: relative;
+}
+[aria-label].tip-over::before, [aria-label].tip-over::after {
+  transition: opacity 0.1s, top 0.s;
+  transition-delay: 0;
+}
+[aria-label].tip-over::after {
+  content: attr(aria-label);
+  display: inline;
+  position: absolute;
+  top: 22px;
+  left: 0;
+  opacity: 0;
+  width: 230px;
+  font-size: 13px;
+  font-style: normal;
+  line-height: 1.5em;
+  padding: 0.5em 0.8em;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  pointer-events: none;
+  /* This prevents the box from apearing when hovered. */
+  border-radius: 0.25em;
+  box-shadow: 0 0.175em 1em 0 rgba(0, 0, 0, 0.75);
+}
+[aria-label].tip-over::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 12px;
+    left: 7px;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    border: solid transparent 5px;
+    border-bottom-color: rgba(0, 0, 0, 0.8);
+}
+[aria-label].tip-over:hover {
+  z-index: 2;
+  font-family: 'FSElliotPro-Bold';
+}
+[aria-label].tip-over:hover::after, [aria-label].tip-over:hover::before {
+  opacity: 1;
+  transition-delay: 0.1s;
+}
+[aria-label].tip-over:hover::after {
+    top: 29px;
+    max-width: fit-content;
+}
+[aria-label].tip-over:hover::before {
+  top: 20px;
+}
+/* Keeps the info boxes on top of other elements */

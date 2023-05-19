@@ -19,7 +19,7 @@ function parseUsers(input) {
 							userHtml = `
 								<tr>
 								  <th scope="row">`+j+`</th>
-								  <td><a href="#" onclick="showProfilePopup('`+login+`'); return false;">`+login+`</a></td>
+								  <td><a href="#" onclick="FoxEngine.showProfilePopup('`+login+`'); return false;">`+login+`</a></td>
 								  <td>`+email+`</td>
 								  <td>`+FoxEngine.convertUnixTime(lastdate)+`</td>
 								  <td>GG</td>

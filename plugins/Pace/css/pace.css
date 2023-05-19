@@ -82,5 +82,7 @@
     position: fixed;
 	left: 0;
     top: 0;
-    background-color: #fec669;
+    background-color: #e97a05ad;
+	transition: 1s;
+	/* background: url('../img/diagmonds.png'); */
 }

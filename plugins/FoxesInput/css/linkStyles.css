@@ -12,14 +12,14 @@ a {
     background: #ffe4c43b;
     cursor: not-allowed;
 	display: block;
-	padding: 8px;
+	padding: 18px;
 }
 
 a:not(.selectedPage) {
 	color: #e9cb95;
 }
 
-a:not(.selectedPage):before {
+a:not(.selectedPage, .tip-over):before {
   content: "";
   width: 0;
   height: 0.1em;
@@ -30,13 +30,22 @@ a:not(.selectedPage):before {
   transition: all 0.3s;
 }
 
+.leftAction a:not(.selectedPage):hover {
+    color: #ff7e54;
+    background: #9a8b868a;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    display: block;
+    padding: 18px;
+}
+
 a:not(.selectedPage):hover {
     color: #ff7e54;
     transition-duration: 0.5s;
 	cursor: pointer;
 }
 
-li > a:hover:before {
+li > a:not(.tip-over):hover:before {
   width: 100%;
   left: 0;
   background: #ff9100;

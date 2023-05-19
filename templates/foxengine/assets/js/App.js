@@ -2,11 +2,11 @@ const App = new Vue({
     delimiters: ["<%", "%>"],
     el: '#content',
     data: {
-        contentData: FoxEngine.loadPage("tres", '#content')
+        contentData: FoxEngine.loadPage("Objects", '#content')
     },
 
     mounted() {
-		parseUsrOptionsMenu();
+		FoxEngine.parseUsrOptionsMenu(replaceData.login);
         setTimeout(()=>{
             FoxEngine.userAction();
         }

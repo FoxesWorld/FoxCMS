@@ -11,6 +11,7 @@ if(!defined('profile')) {
 		/*EditStatus*/
 		private string $status = "success";
 		private $statusInfo;
+		private $baseColor = "#bfc0c0ab";
 		
 		/*INPUT*/
 		private $requestArray;
@@ -164,12 +165,16 @@ if(!defined('profile')) {
 		
 		private function canSetColor($color){
 			global $config; 
-			if(in_array($color, $config['javascript']['allowedColors'][init::$usrArray['groupTag']])){
-					return true;
-			} else {
-				if(in_array(init::$usrArray['colorScheme'], $this->allColors())){
-					return true;
+			if($color != $this->baseColor){
+					if(@in_array($color, $config['javascript']['allowedColors'][init::$usrArray['groupTag']])){
+							return true;
+					} else {
+						if(in_array(init::$usrArray['colorScheme'], $this->allColors())){
+							return true;
+						}
 				}
+			} else {
+				return true;
 			}
 			return false;
 		}

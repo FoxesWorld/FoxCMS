@@ -49,7 +49,6 @@ img {
 .mainBlock {
     background-color: #e1dfdda3;
     border-radius: 10px;
-    height: 100%;
 }
 
 .rightBlock {
@@ -61,6 +60,16 @@ img {
 
 .container {
     min-height: 100%;
+}
+
+#game canvas {
+	width: 100%;
+	height: 100%;
+    padding: 0 0px 70px;
+}
+
+.rightBlock .card:first-child {
+	padding: 0px;
 }
 
 .rightBlock .card {
@@ -98,6 +107,10 @@ img {
     display: inline-block;
 }
 
+.rightIcon > img {
+	    max-height: 23px;
+}
+
 .rightBlock .right-profile-menu ul li a:hover i {
     text-shadow: 0 0 16px rgba(219, 114, 40, 0.9);
     color: #d77c2e;
@@ -105,11 +118,6 @@ img {
 
 .rightBlock .right-profile-menu ul li:last-child {
     border: 0;
-}
-
-.rightBlock .right-profile-menu ul li:last-child a {
-    color: #1a1f31;
-    font-weight: 700;
 }
 
 .rightBlock .right-profile-menu ul li:last-child a:hover {
@@ -125,9 +133,7 @@ img {
 --------------------------------------------------------------*/
 .pageRoot {
     background: #594316a1;
-    height: 100%;
     border-radius: 5px;
-    overflow: hidden;
 }
 
 .pageRoot .page-content {
@@ -165,12 +171,17 @@ img {
     font-size: 14px;
     padding: 0;
     color: rgba(255, 255, 255, 0.8);
-    height: 40px;
+    height: 60px;
+	display: flex;
 }
 
 #topbar .leftAction i {
     font-style: normal;
     color: #ff5821;
+}
+
+#topbar .leftAction li {
+	margin: 10px;
 }
 
 #topbar .leftAction i a, #topbar .leftAction i span {
@@ -248,7 +259,6 @@ section {
 
 #userBlock {
     z-index: 1;
-	padding: 5px;
 }
 
 .userProfile {
@@ -268,8 +278,29 @@ section {
 }
 
 .userProfile .userdata {
-    margin: 10px;
+    margin: 10px 0px 0px;
     font-size: 11pt;
+	background: #d59845cc;
+	width: 100%;
+}
+
+.userProfile .loginBox {
+	font-size: 1vw;
+    background: #57472e;
+}
+
+.userProfile table tr td .loginInner {
+	padding: 15px;
+    display: block;
+	color: aliceblue;
+    font-size: 2vh;
+}
+
+.userProfile table tr .logout {
+	background: #d02424cc;
+	vertical-align: inherit;
+	font-size: 2vh;
+    float: right;
 }
 
 .userProfile .userActions {
@@ -411,7 +442,7 @@ footer{
 
 }
 
-.footer--flex, .footer-end {
+footer .footer--flex, .footer-end {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -420,14 +451,34 @@ footer{
     align-items: center;
 }
 
+footer .footer-end {
+	font-size: 16pt;
+}
+
 footer .footer-copyright {
     color: #d3d1cf;
     margin: 5px auto;
 }
 
-footer .footer-copyright b {
+footer .footer-end li {
+	margin: 5px;
+}
+
+footer b {
     color: #b77c4c;
     font-family: 'FSElliotPro-Heavy';
+}
+
+footer .footer-copyright span {
+	margin: auto;
+    display: flex;
+    width: fit-content;
+}
+
+footer .footer-copyright span img {
+	height: 20px;
+    margin: 0px 10px;
+	content: url(/templates/foxengine/assets/img/foxengine.svg);
 }
 
 .text-wrapper {

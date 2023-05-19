@@ -14,7 +14,7 @@
 			protected $db;
 			
 			function __construct($db) {
-				init::classUtil('inDirScanner', "1.0.0");
+				init::classUtil('inDirScanner', "1.1.2");
 				//init::classUtil('Playlist', "1.0.0");
 				$this->db = $db;
 			}
@@ -23,13 +23,13 @@
 				global $config;
 				if(isset(RequestHandler::$REQUEST[$this->requestHeader])){
 					switch(RequestHandler::$REQUEST[$this->requestHeader]) {
-						case "tplScanAmount":
-							$inDirScanner = new inDirScanner(TEMPLATE_DIR, @RequestHandler::$REQUEST['path']);
-							die($inDirScanner->getFilesNum());
+						case "tplScan":
+							$inDirScanner = new inDirScanner(TEMPLATE_DIR, @RequestHandler::$REQUEST['path'], "*");
+							die($inDirScanner->getFiles());
 						break;
-
-						case "tplFileNamesScan":
-							$inDirScanner = new inDirScanner(TEMPLATE_DIR, @RequestHandler::$REQUEST['path']);
+						
+						case  "scanUploads":
+							$inDirScanner = new inDirScanner(ROOT_DIR.UPLOADS_DIR, @RequestHandler::$REQUEST['path'], @RequestHandler::$REQUEST['mask']);
 							die($inDirScanner->getFiles());
 						break;
 						
@@ -37,6 +37,7 @@
 							$albums = new Playlist();
 							die($albums->scanPlayListsDir());
 						break;
+						
 						case "scanAlbum":
 							$scanplaylist = new Playlist(@RequestHandler::$REQUEST['album']);
 							die($scanplaylist->formPlaylist());

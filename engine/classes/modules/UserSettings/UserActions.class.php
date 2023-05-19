@@ -28,6 +28,11 @@ if(!defined('profile')) {
 							case 'EditUser':
 								$EditUser = new EditUser($this->fRequest, $db, $logger);
 							break;
+							
+							case 'GetBadges':
+								$badges = new GetBadges($db, $this->fRequest);
+								die($badges->getBadgesHTML());
+							break;
 								
 							case 'greeting':
 								$text = randTexts::getRandText('greetings');

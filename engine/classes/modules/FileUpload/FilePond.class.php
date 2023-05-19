@@ -6,38 +6,38 @@ require_once(__DIR__ . '/Helper/Transfer.class.php');
 require_once(__DIR__ . '/Helper/Post.class.php');
 require_once(__DIR__ . '/Helper/ServerExceptions.php');
 
-function fetch($url) {
-    try {
+	function fetch($url) {
+		try {
 
-        // create temp file
-        $out = tmpfile();
+			// create temp file
+			$out = tmpfile();
 
-        // go!
-        $ch = curl_init(str_replace(' ','%20',$url));
-        curl_setopt($ch, CURLOPT_FILE, $out);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 50);
+			// go!
+			$ch = curl_init(str_replace(' ','%20',$url));
+			curl_setopt($ch, CURLOPT_FILE, $out);
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 50);
 
-        if (!curl_exec($ch)) throw new \Exception(curl_error($ch), curl_errno($ch));
+			if (!curl_exec($ch)) throw new \Exception(curl_error($ch), curl_errno($ch));
 
-        $type = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
-        $length = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
-        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close ($ch);
+			$type = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+			$length = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
+			$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+			curl_close ($ch);
 
-        return array(
-            'tmp_name' => stream_get_meta_data($out)['uri'],
-            'name' => sanitize_filename(pathinfo($url)['basename']),
-            'type' => $type,
-            'length' => $length,
-            'error' => $code >= 200 && $code < 300 ? 0 : $code,
-            'ref' => $out, // need this so the file is not automatically removed
-        );
-    }
-    catch(Exception $e) {
-        return false;
-    }
-}
+			return array(
+				'tmp_name' => stream_get_meta_data($out)['uri'],
+				'name' => sanitize_filename(pathinfo($url)['basename']),
+				'type' => $type,
+				'length' => $length,
+				'error' => $code >= 200 && $code < 300 ? 0 : $code,
+				'ref' => $out, // need this so the file is not automatically removed
+			);
+		}
+		catch(Exception $e) {
+			return false;
+		}
+	}
 
 	function sanitize_filename($filename) {
 		$info = pathinfo($filename);

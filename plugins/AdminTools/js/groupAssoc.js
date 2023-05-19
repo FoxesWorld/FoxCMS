@@ -22,7 +22,7 @@ function parseGroups() {
         }
     }
 
-    addListener();
+    addGroupListener();
 
 
     $('.addGroupAssoc').click(function() {
@@ -31,7 +31,7 @@ function parseGroups() {
     });
 }
 
-function addListener() {
+function addGroupListener() {
     setTimeout(() => {
         $('#groupAssoc input').on('input', function(e) {
             update(this);
@@ -74,7 +74,7 @@ function addRow(id) {
             let response = JSON.parse(queryRequest.responseText);
             index = response.lastIndex;
 			appendRow('', index+1, id);
-            addListener();
+            addGroupListener();
         }
     }
 }

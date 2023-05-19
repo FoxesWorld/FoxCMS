@@ -5,7 +5,6 @@
 		public static $REQUEST;
 
 		function __construct($db) {
-			self::ipCheck();
 			if(count($_POST) > 0) {
 				$thisRequest = $_POST;
 				$this->updateUserOnline($db, init::$usrArray);
@@ -24,7 +23,7 @@
 			}
 		}
 		
-		private static function ipCheck(){
+		public static function ipCheck(){
 			if(init::$usrArray['logged_ip'] != REMOTE_IP) {
 				AuthManager::logout("Suspected ip change!");
 			}

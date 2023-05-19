@@ -13,7 +13,7 @@
 					  for (let key in obj) {						 
 						let value = obj[key];
 						moduleOut = `<div class="module">
-											<span class="moduleSettings">
+											<span class="moduleSettings module-`+obj["moduleName"]+`">
 												<i class="fa fa-cogs" aria-hidden="true"></i>
 											</span>
 											<b class="moduleName">`
@@ -40,11 +40,26 @@
 					 
 					  }
 					  $(block).append(moduleOut);
+					  addModulesListener(obj);
 					}
-					  
+					
 				} catch (error) {
 					$(block).html(error);
 				}
 		  }
 	  };
+	}
+	
+	function addModulesListener(module) {
+		setTimeout(() => {
+		$('span.moduleSettings.module-'+module["moduleName"]).on('click', function(e) {
+				showModuleSettings(module);
+			});
+		}, 500);
+	}
+	
+	function showModuleSettings(module) {
+		$("#dialog").dialog("option", "title", module["moduleName"]);
+		FoxEngine.loadData(module["description"], '#dialogContent');
+		$("#dialog").dialog('open');
 	}

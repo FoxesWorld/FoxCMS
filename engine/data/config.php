@@ -23,6 +23,7 @@
 		'dbPass' => 'fNt5DL9dNcA347XG',
 		'dbName' => 'aidenfox',
 		
+		'reCaptchaCheck' => true,
 		'pluginsDir' => ROOT_DIR.'/plugins/',
 		
 		'timezone'=> 'Europe/Moscow',
@@ -47,7 +48,7 @@
 		
 		/*Content options*/
 		'userOptions' => "userOptions",
-		'pageTplFile' => "pageTpl.ftpl",
+		'pageTplFile' => "cfg/pageTpl.ftpl",
 	
 		/*Title*/
 		'title' => 'FoxEngine',

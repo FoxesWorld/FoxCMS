@@ -12,7 +12,7 @@ if(!defined('auth')) {
 		
 		function __construct($input, $db, $logger){
 			global $lang;
-			if(@RequestHandler::$REQUEST["userAction"] === "register") {
+			if(@$input["userAction"] === "register") {
 				$this->logger = $logger;
 				$this->db = $db;
 				$this->regData = functions::collectData($input, true);

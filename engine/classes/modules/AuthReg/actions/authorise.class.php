@@ -1,4 +1,5 @@
 <?php
+
 if(!defined('auth')) {
 	die ('{"message": "Not in auth thread"}');
 }
@@ -19,7 +20,7 @@ if(!defined('auth')) {
 			$this->db = $db;
 			$this->logger = $logger;
 
-			if(@RequestHandler::$REQUEST["userAction"] === "auth") {
+			if(@$input["userAction"] === "auth") {
 				if(!init::$usrArray['isLogged']) {
 					if(is_array($input)) {
 						$this->authData = functions::collectData($input, true);
