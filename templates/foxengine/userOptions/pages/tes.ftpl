@@ -1,6 +1,6 @@
 <useroption>
 {
-	"optionTitle": "Куда я попал?",
+	"optionTitle": "И что мне делать?",
 	"optionBlock": ".leftAction",
 	"optionPreText": "<i class=\"fa fa-question-circle\"></i>",
 	"optionGroup": [1,4,5],

@@ -7,8 +7,6 @@
 
 .profileBadges {
     position: relative;
-    top: 12px;
-    right: 16px;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
@@ -20,6 +18,10 @@
 	padding: 4px;
 }
 
+.profileBadges li {
+	padding: 5;
+}
+
 .container-1gYwHN {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -28,13 +30,14 @@
     flex-wrap: wrap;
     -webkit-box-pack: end;
     -ms-flex-pack: end;
-    justify-content: flex-end;
+    justify-content: space-between;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
     gap: 2px;
     min-height: 22px;
-	float: right;
+    float: right;
+    flex-direction: row-reverse;
 }
 
 img[alt] {

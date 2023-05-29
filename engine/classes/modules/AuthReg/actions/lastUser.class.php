@@ -1,6 +1,6 @@
 <?php
 
-class lastUser extends AuthManager {
+class lastUser extends AuthManager implements JsonSerializable {
 		
 		protected $db, $logger;
 		private $userParseData = array("colorScheme", "realname", "login", "profilePhoto", "reg_date");
@@ -24,8 +24,8 @@ class lastUser extends AuthManager {
 			return $userData;
 		}
 		
-		protected function getUser() {
-			die(json_encode($this->selectUser()));
-		}
+		public function jsonSerialize() {
+			return $this->selectUser();
+		} 
 		
 }

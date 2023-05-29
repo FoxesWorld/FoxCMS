@@ -30,8 +30,12 @@ if(!defined('profile')) {
 							break;
 							
 							case 'GetBadges':
-								$badges = new GetBadges($db, $this->fRequest);
-								die($badges->getBadgesHTML());
+								die(json_encode(new GetBadges($db, $this->fRequest), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+							break;
+							
+							case 'GiveBadge':
+								$GiveBadge = new GiveBadge($db, $this->fRequest);
+								$GiveBadge->giveBadge();
 							break;
 								
 							case 'greeting':
@@ -53,7 +57,20 @@ if(!defined('profile')) {
 							break;
 						}
 				}
-
+		}
+		
+		protected static function getUserBadges($db, $user){
+			$query = "SELECT * FROM `userBadges` WHERE userLogin = '".$user."'";
+			$badges = $db->getRow($query);
+			switch($badges){
+				case false:
+					return false;
+				break;
+				
+				default:
+					return $badges['badges'];
+				break;
+			}
 		}
 		
 

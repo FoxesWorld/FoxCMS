@@ -1,0 +1,49 @@
+a {
+  font-family: 'FSElliotPro-Heavy';
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 1em;
+  position: relative;
+  transition: all 0.6s;
+}
+
+.selectedPage {
+	color: #695f5f;
+    background: #504b4673;
+    cursor: not-allowed;
+}
+
+a:not(.selectedPage) {
+	color: #d99c2d;
+}
+
+a:not(.selectedPage, .tip-over):before {
+  content: "";
+  width: 0;
+  height: 0.1em;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  background: #ff9100;
+  transition: all 0.3s;
+}
+
+.leftAction a:not(.selectedPage):hover {
+    color: #97701f;
+    background: #9a8b868a;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    display: block;
+}
+
+a:not(.selectedPage):hover {
+    color: #ff7e54;
+    transition-duration: 0.5s;
+	cursor: pointer;
+}
+
+li > a:not(.tip-over):hover:before {
+  width: 100%;
+  left: 0;
+  background: #ff9100;
+}

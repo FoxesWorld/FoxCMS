@@ -52,7 +52,6 @@
 		
 		private function authActionsInit($request){
 			global $lang;
-			$lastUser = new lastUser($request, $this->db, $this->logger);
 				
 			if(!RequestHandler::$usrArray['isLogged']) {
 				$auth = new authorise($request, $this->db, $this->logger);
@@ -85,7 +84,8 @@
 				break;
 				
 				case "lastUser":
-					$lastUser->getUser();
+					//$lastUser->getUser();
+					die(json_encode(new lastUser($request, $this->db, $this->logger)));
 				break;
 					
 				case 'logout':

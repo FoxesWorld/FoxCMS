@@ -3,7 +3,7 @@ if(!defined("ADMIN")){
 	die();
 }
 
-	class UsersList extends AdminPanel {
+	class UsersList extends AdminPanel implements JsonSerializable {
 		
 		protected $db;
 		protected $request;
@@ -26,7 +26,10 @@ if(!defined("ADMIN")){
 			foreach($usersArray as $key => $value){
 				$this->usersArray[] = array($key => $value);
 			}
-			die(json_encode($this->usersArray));
 		}
+		
+		public function jsonSerialize() {
+			return $this->usersArray;
+		} 
 		
 	}

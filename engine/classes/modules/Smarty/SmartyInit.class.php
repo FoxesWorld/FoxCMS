@@ -39,7 +39,6 @@ if (!defined('FOXXEY')) {
 			$PluginsScanner = new PluginsScanner($config['pluginsDir']);
 			
 			//@Deprecated
-			$this->smarty->assign("links", "");
 			$this->smarty->assign("year", date("Y"));
 			$this->smarty->assign("tplDir", "/templates/".$config['javascript']['siteTpl']);
 			$this->smarty->assign("webserviceName", $config['webserviceName']);

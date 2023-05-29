@@ -86,7 +86,13 @@
 				$extension = @$pathInfo["extension"];
 				switch($extension){
 					case "js":
-						$this->outString .= $this->requireJS($filePath);
+					$jsModule = false;
+					$plCfg = str_replace("js","", $pathInfo['dirname']).$this->incOptFile;
+					if(file_exists($plCfg)) {
+						$jsModule = $this->readOptionFile($plCfg, "module");
+					}
+						
+						$this->outString .= $this->requireJS($filePath, $jsModule);
 					break;
 
 					case "css":
@@ -111,7 +117,17 @@
             return '<link rel="stylesheet" type="text/css" href="'.$file.'">'."\n";
 		}
 			
-		private function requireJS($file): string {
-            return '<script src="'.$file.'"></script>'."\n";
+		private function requireJS($file, $module = false): string {
+			$returnString = "";
+			switch($module){
+				case true:
+					$returnString = '<script type="module" src="'.$file.'"></script>'."\n";
+				break;
+				
+				case false: 
+					$returnString = '<script src="'.$file.'"></script>'."\n";
+				break;
+			}
+            return $returnString;
 		}
 	}

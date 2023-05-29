@@ -27,14 +27,12 @@
       }
 	  
 	  $(function (){
-	  parseBadges('[login]');
 		let count = 0;
 		let checked;
 		let selectedColor = $("#colourVal").val();
 		let colors = replaceData.allowedColors;
 
 		if(!colors.includes(selectedColor)) {colors.push(selectedColor);}
-			console.log(colors);
 			colors.forEach(function(entry) {
 				if(entry == selectedColor) {
 					checked = 'checked';
@@ -189,18 +187,19 @@
 		 <table>
 		<tr>
 			<td>
-            <div class="avatar"> 
-               <img class="profilePhoto" src="[profilePhoto]" alt="[login]" />
-            </div>
-            <div class="profile-title">
-               <h1 class="groupStatus-[user_group]">[login]</h1>
-               <span class="groupStatus-[user_group]">[userStatus]</span>
-            </div>
+				<ul class="inline">
+					<li class="avatar"> 
+					   <img class="profilePhoto" src="[profilePhoto]" alt="[login]" />
+					</li>
+					<li class="profile-title" style="position: absolute;margin: 75px 0px;">
+					   <h1 class="groupStatus-[user_group]">[login]</h1>
+					   <span class="groupStatus-[user_group]">[userStatus]</span>
+					</li>
+				</ul>
 			</td>
 			
-			<td>
+			<td style="vertical-align: bottom;">
 				 <ul class="profileBadges container-1gYwHN" id="userBadges">
-
 				</ul>			
 			</td>
 		</tr>
@@ -249,6 +248,7 @@
       </div>
       <script>
          $(function() {
+		 FoxEngine.parseBadges('[login]');
          	$('ul.tab_caption').on('click', 'li:not(.active)', function() {
          		$(this)
          			.addClass('active').siblings().removeClass('active')

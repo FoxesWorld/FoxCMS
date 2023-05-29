@@ -120,13 +120,28 @@ img {
     border: 0;
 }
 
-.rightBlock .right-profile-menu ul li:last-child a:hover {
-    color: #cc3636ed;
-    text-shadow: 0 0 16px rgb(226 77 77 / 55%);
-    animation: shakeAlert 1s;
-    animation-iteration-count: infinite;
+/*--------------------------------------------------------------
+# Navigation
+--------------------------------------------------------------*/
+.navbar {
+	margin: 0;
+    padding: 0;
 }
 
+nav > ul {
+	border-right: 2px solid;
+}
+
+nav .nav-item {
+	margin: 0px 30px;
+    background: antiquewhite;
+	display: block;
+}
+
+nav .nav-item > a {
+	padding: 12;
+    display: block;
+}
 
 /*--------------------------------------------------------------
 # Page tmplate
@@ -137,6 +152,7 @@ img {
 }
 
 .pageRoot .page-content {
+	height: fit-content;
 }
 
 .page-content .formContent h1 {
@@ -150,6 +166,7 @@ img {
 
 .pageRoot .page-title {
     background: #97763f;
+	border-radius: 5px 5px 0px 0px;
 }
 
 .pageRoot .page-title h1 {
@@ -253,12 +270,9 @@ section {
     margin-bottom: 0;
 }
 
-#actionBlock {
-    opacity: 0;
-}
-
 #userBlock {
     z-index: 1;
+	padding: 10px;
 }
 
 .userProfile {
@@ -290,10 +304,10 @@ section {
 }
 
 .userProfile table tr td .loginInner {
-	padding: 15px;
+    padding: 20px;
     display: block;
-	color: aliceblue;
-    font-size: 2vh;
+    color: aliceblue;
+    font-size: 12pt;
 }
 
 .userProfile table tr .logout {
@@ -303,6 +317,11 @@ section {
     float: right;
 }
 
+.userProfile table tr .logout:hover {
+	background: #ff0000cc;
+	transition: 0.2s;
+}
+
 .userProfile .userActions {
     margin: 10px;
     font-size: 10pt;
@@ -310,7 +329,6 @@ section {
 
 .rightIcon {
     display: contents;
-    color: burlywood;
 }
 
 .profilePhoto:before {
@@ -320,7 +338,7 @@ section {
 }
 
 .profilePhoto {
-    filter: grayscale(.8);
+    /* filter: grayscale(.8); */
 	width: 12vw;
 	max-width: 256px;
     margin: 0 auto;
@@ -330,6 +348,12 @@ section {
     -moz-box-shadow: 4px 2px 79px 3px rgba(214, 202, 50, 0.55);
     box-shadow: 4px 2px 79px 3px rgb(214 202 50 / 55%);
 }
+
+.avatar .profilePhoto {
+    width: 215px;
+    height: 215px;
+    border-radius: 50%;
+} 
 
 .profilePhoto:hover {
     animation: bloom ease-in-out .75s forwards;
@@ -363,6 +387,7 @@ ul > li {
     margin: 0 15px 10px 15px;
     padding: 10px;
     border-radius: 5px;
+	display: inline-block;
 }
 
 .statusBlock ul {
@@ -488,4 +513,5 @@ footer .footer-copyright span img {
   padding-right: 0.05em;
   padding-bottom: 0.1em;
   overflow: hidden;
+  width: max-content;
 }

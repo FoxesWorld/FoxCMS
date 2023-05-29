@@ -1,28 +1,32 @@
-<?php
+ <?php
 if(!defined("ADMIN")){
 	die();
 }
 
- class GroupAssocAdmin extends AdminPanel {
+ class GroupAssocAdmin extends AdminPanel implements JsonSerializable {
 	 
 	 protected $db;
+	 private $fields = array();
 	 
 	 function __construct($db) {
 		 $this->db = $db;
+		 $this->groupAssocParse();
 	 }
 	 
-	 public function groupAssocParse() {
+	 private function groupAssocParse() {
 		 $query = 'SELECT * FROM groupAssociation';
-		 $allFields = array();
 		 $groupsData = $this->db->getRows($query);
 		 foreach($groupsData as $row){
 			 $rowArray = array();
 			 foreach($row as $key => $value){
 				 $rowArray[$key] = $value;
 			 }
-			 $allFields[] = $rowArray;
+			 $this->fields[] = $rowArray;
 		 }
-		 return json_encode($allFields);
+		 return json_encode($this->fields);
 	 }
 	 
+	 public function jsonSerialize() {
+        return $this->fields;
+    } 
  }

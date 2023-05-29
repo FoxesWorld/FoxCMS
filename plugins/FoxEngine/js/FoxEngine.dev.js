@@ -52,10 +52,6 @@ function foxEngine(login) {
 		let Galleryinstance;
         $(block).fadeOut(500);
         setTimeout(() => {
-			if(data.indexOf('<section class="gallery"') > 0){
-				Galleryinstance = new Gallery(data);
-				Galleryinstance.loadGallery();
-			}
             $(block).html(data);
             $(block).fadeIn(500);
             formInit(100);
@@ -83,15 +79,15 @@ function foxEngine(login) {
 				<table>
 				<tr>
 					<td>
-					<div class="avatar"> 
+
 					   <img class="profilePhoto" src="` + lastUser.profilePhoto + `" style="width: 64px;" alt="` + lastUser.login + `">
-					</div>
+					
 					</td>
 					
 					<td>
 					<div class="profile-title">
 						<ul>
-					   <li><h1><a href="#" onclick="FoxEngine.viewUserProfile('` + lastUser.login + `'); return false;">` + lastUser.login + `</a></h1></li>
+					   <li><h1><a href="#" onclick="FoxEngine.showUserProfile('` + lastUser.login + `'); return false;">` + lastUser.login + `</a></h1></li>
 					   <li><span>` + lastUser.realname + `</span></li>
 					   <li><span class="groupStatus-4">` + FoxEngine.convertUnixTime(lastUser.reg_date) + `</span></li>
 					   </ul>
@@ -132,7 +128,7 @@ function foxEngine(login) {
             if (answer.readyState === 4) {
                 try {
                     answer = JSON.parse(this.responseText);
-                    $(".text-wrapper").html(answer.text + ' ' + replaceData.realname + '!');
+                    $("#actionBlock").html(answer.text + ' ' + replaceData.realname + '!');
                 } catch (error) {}
                 textAnimate();
             }
@@ -223,7 +219,7 @@ function foxEngine(login) {
                             switch (obj[optionName]["type"]) {
                                 case "page":
                                     optionTpl = `
-										  <li>
+										  <li class="nav-item">
 											<a  class="pageLink-` + optionName + `" onclick="FoxEngine.loadPage('` + optionName + `', replaceData.contentBlock); return false; ">
 												<div class="rightIcon">
 													` + obj[optionName]["optionPreText"] + `
@@ -251,7 +247,7 @@ function foxEngine(login) {
         }
     }
 
-    this.viewUserProfile = function(userDisplay) {
+    this.showUserProfile = function(userDisplay) {
         let userProfilePopup = request.send_post({
             "userDisplay": userDisplay,
             "user_doaction": "ViewProfile"
@@ -263,25 +259,32 @@ function foxEngine(login) {
                 formInit(100);
             }
         }
-    }
+		//setTimeout(() => {
+			//this.parseBadges(userDisplay);
+		//}, 600);
+    };
 
     this.showProfilePopup = function(user) {
         let userProfile = request.send_post({
             "userDisplay": user,
             "user_doaction": "ViewProfile"
         });
-
-        $("#dialog").dialog("option", "title", user);
+        //$("#dialog").dialog("option", "title", user);
 
         userProfile.onreadystatechange = function() {
             if (userProfile.readyState === 4) {
-                FoxEngine.loadData(userProfile.responseText, '#dialogContent');
-                //$("#dialog").dialog("option", "appendTo", userProfile.responseText);
+				let parser = new DOMParser();
+                let response = parser.parseFromString(userProfile.responseText, 'text/html');
+                FoxEngine.loadData(response.getElementById('view'), '#dialogContent');		
                 formInit(100);
             }
         }
         $("#dialog").dialog('open');
-    }
+		setTimeout(() => {
+			this.parseBadges(user);
+		}, 600);
+    };
+	
     /*ENTRY REPLACER*/
     this.replaceText = function(text, page) {
         updatedText = text;
@@ -310,4 +313,31 @@ function foxEngine(login) {
         replacedTimes = 0
         return updatedText;
     }
+	
+	/*Badges*/
+	this.parseBadges = function(user){
+		let badgesInstance = request.send_post(
+		{
+			user_doaction: 'GetBadges',
+			userDisplay: user
+		});
+	    badgesInstance.onreadystatechange = function() {
+            if (badgesInstance.readyState === 4) {
+				let parsedJson = JSON.parse(this.responseText);
+				if(parsedJson.length > 0) {
+					for (var k = 0; k < parsedJson.length; k++) {
+						let obj = parsedJson[k];
+						let BadgeHtml = `<li>
+							<a class="tip-over" aria-label="`+obj.BadgeDesc+`" href="#`+obj.BadgeName+`" rel="noreferrer noopener">
+								<img aria-hidden="true" src="`+obj.BadgeImg+`" class="profileBadge22-3GAYRy profileBadge-12r2Nm desaturate-_Twf3u">
+							</a>
+						</li>`;
+						$("#userBadges").append(BadgeHtml); 
+					}
+				} else {
+					$("#userBadges").remove();
+				}
+			}
+		}
+	};
 }

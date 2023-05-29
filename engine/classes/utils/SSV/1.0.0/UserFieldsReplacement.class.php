@@ -23,7 +23,7 @@
 						case "[last_date]":
 							$timeTwist = functions::showDateAgo($userData[$key]);
 							if($timeTwist[1] >= 360) {
-								$value = $timeTwist[0]." ago";
+								$value = $timeTwist[0]." назад";
 							} else {
 								$value = "Online";
 							}

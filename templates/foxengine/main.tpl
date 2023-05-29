@@ -1,18 +1,18 @@
 <html>
    <head>
       {$systemHeaders}
-      <meta charset="utf-8">
-      <meta name="HandheldFriendly" content="true">
+      <meta charset="utf-8" />
+      <meta name="HandheldFriendly" content="true" />
       <title>{$title}</title>
-      <meta name="format-detection" content="telephone=no">
-	  <meta name="author" content="FoxesWorld">
+      <meta name="format-detection" content="telephone=no" />
+	  <meta name="author" content="FoxesWorld" />
 	  <meta name="description" content="FoxEngine" />
-      <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height">
-      <meta name="apple-mobile-web-app-capable" content="yes">
-      <meta name="apple-mobile-web-app-status-bar-style" content="default">
-	  <meta property="og:title" content="FoxesWorld">
-	  <meta property="og:site_name" content="FoxesWorld">
-	  <meta property="og:url" content="https://foxescraft.ru">
+      <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+	  <meta property="og:title" content="FoxesWorld" />
+	  <meta property="og:site_name" content="FoxesWorld" />
+	  <meta property="og:url" content="https://foxescraft.ru" />
 	  <meta property="og:image" content="{$tplDir}/img/assets/logo.png" />
 	  <script src="//code.jivo.ru/widget/X47ofXrus3" async></script>
       <link href="{$tplDir}/assets/css/style.css" rel="stylesheet">
@@ -25,16 +25,8 @@
    </head>
    <body>
       {include file='header.tpl'}
-      <section id="topbar" class="d-flex align-items-center shadow bar">
-         <div class="container d-flex justify-content-center justify-content-md-between">
-            <div class="leftAction d-flex align-items-center">
-            </div>
-            <div class="rightAction d-none d-md-flex align-items-center" data-in-effect="fadeIn" id="actionBlock">
-               <span class="text-wrapper">
-               </span>
-            </div>
-         </div>
-      </section>
+	  {include file='navigation.tpl'}
+      
       <div class="container">
          <div class="row siteContent">
             <div class="col-8">

@@ -3,10 +3,6 @@
       <a href="/">
       {include file='logo/logo.tpl'}
       </a>
-      <nav id="navbar" class="navbar ">
-         <ul id="links">
-            {$links}
-         </ul>
-      </nav>
+
    </div>
 </header>

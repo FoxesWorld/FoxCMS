@@ -12,12 +12,11 @@ if(!defined("ADMIN")){
 				break;
 				
 				case "usersList":
-					$UsersList = new UsersList($db, $REQUEST);
+					die(json_encode(new UsersList($db, $REQUEST)));
 				break;
 				
 				case "groupAssoc":
-					$groupAssoc = new GroupAssocAdmin($db);
-					die($groupAssoc->groupAssocParse());
+					die(json_encode(new GroupAssocAdmin($db)));
 				break;
 			}
 		}
