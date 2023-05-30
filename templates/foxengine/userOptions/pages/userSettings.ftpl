@@ -184,6 +184,7 @@
       [/hasPriviligies]
       <div id="view" style="display: block;">
          <div id="profileContents" style="background: linear-gradient(45deg, #c5c5e19c, [colorScheme]);">
+					 
 		 <table>
 		<tr>
 			<td>

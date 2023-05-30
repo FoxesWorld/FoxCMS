@@ -78,13 +78,12 @@
 				case 'register':
 					$reg->register();
 				break;
-					
-				case 'subscribe':
-					$subscribe->subscribe();
+				
+				case 'checkPass':
+					die(json_encode(new PasswordStrength($request['password'])));
 				break;
 				
 				case "lastUser":
-					//$lastUser->getUser();
 					die(json_encode(new lastUser($request, $this->db, $this->logger)));
 				break;
 					

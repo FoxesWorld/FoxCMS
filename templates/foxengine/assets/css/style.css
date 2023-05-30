@@ -128,10 +128,6 @@ img {
     padding: 0;
 }
 
-nav > ul {
-	border-right: 2px solid;
-}
-
 nav .nav-item {
 	margin: 0px 30px;
     background: antiquewhite;
@@ -188,7 +184,6 @@ nav .nav-item > a {
     font-size: 14px;
     padding: 0;
     color: rgba(255, 255, 255, 0.8);
-    height: 60px;
 	display: flex;
 }
 
@@ -250,6 +245,7 @@ section {
 
 .inline > li, .inline > td {
     display: inline-block;
+	margin: 10px;
 }
 
 .section-title {

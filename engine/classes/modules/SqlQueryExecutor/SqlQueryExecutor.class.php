@@ -21,12 +21,10 @@
 		
 		function __construct($db) {
 			$this->db = $db;
-			if(isset(RequestHandler::$REQUEST['sqlOption'])) { //Send encrypted single use key later tp activate listener
+			if(isset(RequestHandler::$REQUEST['sqlOption'])) { //Send encrypted single use key later to activate listener
 				$this->queryData = $this->collectQuery();
 				$this->buildQuery($this->queryData);
 			}
-			
-
 		}
 		
 		private function collectQuery() {
@@ -45,7 +43,6 @@
 			$queryString = "";
 			if($this->colectedQuery === true){
 				$queryString = $queryData['sqlOption'].' `'.$queryData['sqlTable'].'`'.' '.$queryData['sqlSetter'].' '.' '.$queryData['selectKey'].' '.$queryData['selectValue'];
-				//die($queryString);
 				$this->queryRun($this->db, $queryString);
 			}
 		}

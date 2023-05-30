@@ -11,6 +11,7 @@ a {
 	color: #695f5f;
     background: #504b4673;
     cursor: not-allowed;
+	padding: 10px;
 }
 
 a:not(.selectedPage) {
