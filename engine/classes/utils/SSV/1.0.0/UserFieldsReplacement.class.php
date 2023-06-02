@@ -1,6 +1,6 @@
 <?php
 
-	class FieldsReplacement extends SSV {
+	class UserFieldsReplacement extends SSV {
 		
 		private $content;
 		

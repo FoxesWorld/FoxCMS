@@ -1,7 +1,7 @@
-<html>
+<html lang="ru">
    <head>
+	  <meta charset="utf-8" />
       {$systemHeaders}
-      <meta charset="utf-8" />
       <meta name="HandheldFriendly" content="true" />
       <title>{$title}</title>
       <meta name="format-detection" content="telephone=no" />

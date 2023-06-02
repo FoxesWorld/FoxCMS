@@ -4,36 +4,15 @@
 		
 		private $content;
 		private $requestedUserArray;
-		private $blockSettings = array("group-1" => 
-			array("groupTag" => "admin", "needsLogin" => true, "usrArrayVal" => "login"));
 		
 		function __construct($content, $requestedUserArray) {
 			$this->content = $content;
 			$this->requestedUserArray = $requestedUserArray;
-			//$this->test();
-		}
-		
-		protected function test() {
-			foreach($this->blockSettings as $blockTag => $blockOpt){
-				if(strpos($this->content, $blockTag)) {
-				foreach($blockOpt as $optKey => $optValue){
-					switch($optKey){
-						case "usrArrayVal":
-					if($this->requestedUserArray[$optValue] === init::$usrArray[$optValue]) {
-						die('GG');
-					} else {
-						die('Not GG');
-					}
-						break;
-					}
-				}
-				}
-			}
 		}
 		
 		protected function checkBlocks() {
 			
-			if(strpos($this->content, "[hasPriviligies]")){
+			if(stripos($this->content, "[hasPriviligies]")) {
 				if(init::$usrArray['isLogged']){
 					if(init::$usrArray['login'] === $this->requestedUserArray['login'] || init::$usrArray['groupTag'] === "admin") {
 						$this->removeTags($this->content, "hasPriviligies");
@@ -42,22 +21,9 @@
 				$this->content = preg_replace("'\\[hasPriviligies\\](.*?)\\[/hasPriviligies\\]'si", '', $this->content);
 			}
 			
-			if(strpos($this->content, "[userOnly]")){
-				if(init::$usrArray['groupTag'] === "admin"){
-					$this->content = preg_replace("'\\[userOnly\\](.*?)\\[/userOnly\\]'si", '', $this->content);
-				} else {
-					$this->removeTags($this->content, "userOnly");
-				}
+			if (stripos($this->content, "[group=") !== false OR stripos($this->content, "[not-group=") !== false) {
+				$this->content = $this->check_group($this->content);
 			}
-
-			if(strpos($this->content, "[adminOnly]")){
-				if(init::$usrArray['groupTag'] !== "admin"){
-					$this->content = preg_replace("'\\[adminOnly\\](.*?)\\[/adminOnly\\]'si", '', $this->content);
-				} else {
-					$this->removeTags($this->content, "adminOnly");
-				}
-			}
-
 			
 			return $this->content;
 		}
@@ -65,6 +31,23 @@
 		private function removeTags($content, $tag) {
 			$this->content = str_replace("[".$tag."]", ' ', $this->content);
 			$this->content = str_replace("[/".$tag."]", ' ', $this->content);
+		}
+		
+		private function check_group( $matches ) {
+			$regex = '/\[(group|not-group)=(.*?)\]((?>(?R)|.)*?)\[\/\1\]/is';
+			if (is_array($matches)) {
+				$groups = $matches[2];
+				$block = $matches[3];
+				if ($matches[1] == "group") $action = true; else $action = false;
+				$groups = explode( ',', $groups);
+				if( $action ) {
+					if(!in_array(init::$usrArray['user_group'], $groups)) $matches = ''; else $matches = $block;
+				} else {
+					if(in_array(init::$usrArray['user_group'], $groups ) ) $matches = ''; else $matches = $block;
+				}
+			}
+			
+			return preg_replace_callback($regex, array( &$this, 'check_group'), $matches);
 		}
 		
 	}

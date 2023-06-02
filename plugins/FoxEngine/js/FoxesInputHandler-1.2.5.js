@@ -114,22 +114,6 @@ function submitForm(data, form, submitButton) {
 			setTimeout(() => {
 				removeHash();
 			}, delay);
-			/*
-            
-                switch (response.type) {
-                    case 'success':
-						if(data['onSuccess']) {
-							window[data['onSuccess']](data['login']);
-						} else {
-							
-						}
-                        break;
-
-                    case 'error':
-                        break;
-                }
-            */
-			//
         }
     };
 }

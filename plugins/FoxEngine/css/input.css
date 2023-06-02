@@ -71,7 +71,7 @@ useroption {
 	color: white;
 }
 
-[type=button], [type=reset], [type=submit], button.login {
+button.login {
 	display: block;
 	border: 0;
     width: 100%;
@@ -89,17 +89,17 @@ useroption {
 	font-size: 0.9vw;
 }
 
-[type=button], [type=reset], [type=submit], button:disabled .wait {
+button:disabled .wait {
 	margin: 0px 0px 0px 15px;
 }
 
-[type=button], [type=reset], [type=submit], button.login:disabled {
+button.login:disabled {
 	display: block;
     background-color: #47501b;
 	cursor: wait;
 }
 
-[type=button], [type=reset], [type=submit], button.logout:disabled {
+button.logout:disabled {
 	display: block;
     background-color: #9b5b24;
 	cursor: wait;
@@ -107,7 +107,7 @@ useroption {
 
 
 
-[type=button], [type=reset], [type=submit], button:hover.login:not(:disabled)  {
+button:hover.login:not(:disabled)  {
     background: #bbd641;
 }
 

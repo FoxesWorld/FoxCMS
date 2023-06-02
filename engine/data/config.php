@@ -49,10 +49,7 @@
 		/*Content options*/
 		'userOptions' => "userOptions",
 		'pageTplFile' => "cfg/pageTpl.ftpl",
-	
-		/*Title*/
-		'title' => 'FoxEngine',
-		'status' => 'Modular',
+		'OptionReplaceValues'		=> array("{YEAR}" => date("Y")),
 		
 		/* UserSettings */
 		'userFieldsArray'   => array("user_id", "email", "login", "password", "user_group", "realname", "hash", "reg_date", "last_date", "logged_ip", "profilePhoto", "userStatus", "land", "colorScheme", "groupName"),

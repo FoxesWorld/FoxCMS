@@ -88,19 +88,19 @@
                      <input id="email" class="input" type="text" required value="[email]">
                      <label class="label">E-mail</label>
                   </div>
-				  [userOnly]
+				  [group=4]
                   <div class="input_block">
                      <input id="password" class="input" type="password" autoComplete='off'>
                      <label class="label">Текущий пароль</label>
                   </div>
-				  [/userOnly]
+				  [/group]
 				  
-				  [adminOnly]
+				  [group=1]
 				  <div class="input_block">
                      <input id="user_group" class="input" type="number" autoComplete='off' value="[user_group]">
                      <label class="label">Группа</label>
                   </div>
-				  [/adminOnly]
+				  [/group]
                </section>
             </div>
             <div class="tab_content">
@@ -175,7 +175,7 @@
             </div>
             <input id="user_doaction" class="input" type="hidden" value="EditUser" />
             <input id="login" class="input" type="hidden" value="[login]" />
-            [userOnly]<input id="user_group" class="input" type="hidden" value="[user_group]" />[/userOnly]
+            [not-group=1]<input id="user_group" class="input" type="hidden" value="[user_group]" />[/not-group]
             <input id="foxesHash" class="input" type="hidden" value="[hash]" />
             <button type="submit" class="login">Изменить<div class="fa fa-cog fa-spin"></div>
             </button>

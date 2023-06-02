@@ -46,6 +46,7 @@ session_start();
 		private function preInit($debug) {
 			global $config;
 			$this->debug = $debug;
+			init::classUtil('MobileDetect', "1.0.0");
 			define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['javascript']['siteTpl'].'/');
 			define('RT_DIR', TEMPLATE_DIR.'randTexts/');
 			self::libFilesInclude(SYSLIB_DIR, $this->debug); //Require classes/Syslib
@@ -56,7 +57,9 @@ session_start();
 			$this->initHelper = new initHelper($this->db, $this->logger); //UsrArray Override (if IsLogged)
 			$RequestHandler = new RequestHandler($this->db);
 			init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "preInit");
-			
+			$SystemRequests = new SystemRequests($this->db);
+			$mobile_detect = new \Detection\MobileDetect;
+			$SystemRequests->requestListener($mobile_detect);		
 		}
 		
 		/* After init we have all modules

@@ -499,7 +499,7 @@ footer .footer-copyright span {
 footer .footer-copyright span img {
 	height: 20px;
     margin: 0px 10px;
-	content: url(/templates/foxengine/assets/img/foxengine.svg);
+	content: url('../img/foxengine.svg');
 }
 
 .text-wrapper {
@@ -510,4 +510,51 @@ footer .footer-copyright span img {
   padding-bottom: 0.1em;
   overflow: hidden;
   width: max-content;
+}
+
+.berrors, .red_attention {
+    width: 658px;
+    background: url('../img/red_attention_middletop.png') no-repeat;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 50px 34px 15px;
+    margin: 5px auto 70px;
+    position: relative
+}
+
+.berrors:after, .red_attention:after {
+    width: 736px;
+    height: 56px;
+    display: block;
+    content: '';
+    background: url('../img/red_attention_bottom.png') no-repeat;
+    position: absolute;
+    left: 0;
+    bottom: -56px
+}
+
+.red_attention span {
+    display: block;
+    line-height: 21px
+}
+
+.clr.berrors {
+    margin: 0 auto 80px;
+    text-align: left;
+    padding: 48px 54px 24px;
+    max-width: 648px
+}
+
+.clr.berrors br {
+    display: none
+}
+
+.clr.berrors a {
+    color: #fff
+}
+
+.clr.berrors a:hover {
+    text-decoration: none
 }

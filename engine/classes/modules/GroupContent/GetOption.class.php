@@ -14,13 +14,17 @@ class GetOption extends UserOptions {
         global $config;
 		init::classUtil('SSV', "1.0.0");
         if (@isset(RequestHandler::$REQUEST[$this->getOptionRequest])) {
+			$login = functions::filterString($userLogin);
+			init::classUtil('LoadUserInfo', "1.0.0");
+			$loadUserInfo = new loadUserInfo($login, $db);
+			$userData = $loadUserInfo->userInfoArray();
             $this->pageTplFile = TEMPLATE_DIR.$config['pageTplFile'];
             $requestedOption = functions::filterString($_POST[$this->getOptionRequest]);
 			$pageTemplate = self::getPageContent($requestedOption, $this->pageTplFile);
 			/*
 			*	SERVER SIDE VERIFICATION
 			*/
-			$SSV = new SSV($pageTemplate, $userLogin, $db, $logger);
+			$SSV = new SSV($pageTemplate, $login, $userData, $db, $logger);
         }
     }
 	

@@ -9,7 +9,7 @@
 				$thisRequest = $_POST;
 				$this->updateUserOnline($db, init::$usrArray);
 					@$keyCheck = $this->checkSecureKey($thisRequest["key"]);
-					if($keyCheck === true){
+					if($keyCheck === true && $this->isSecure()){
 						foreach($thisRequest as $key => $value){
 							if($value) {
 								self::$REQUEST[$key]  = $value;//functions::filterString($value);
@@ -57,6 +57,35 @@
 			} else {
 				return true;
 			}
+		}
+		
+		private function isSecure() {
+			if( !empty( $_SERVER['HTTPS'] ) AND ( mb_strtolower( $_SERVER['HTTPS'] ) == 'on' or $_SERVER['HTTPS'] === '1' ) )
+			{
+				return TRUE;
+			}
+			else if( !empty( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) AND mb_strtolower( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) == 'https' )
+			{
+				return TRUE;
+			}
+			else if( !empty( $_SERVER['HTTP_CLOUDFRONT_FORWARDED_PROTO'] ) AND mb_strtolower( $_SERVER['HTTP_CLOUDFRONT_FORWARDED_PROTO'] ) == 'https' )
+			{
+				return TRUE;
+			}
+			else if ( !empty( $_SERVER['HTTP_X_FORWARDED_HTTPS'] ) AND mb_strtolower( $_SERVER['HTTP_X_FORWARDED_HTTPS'] ) == 'https' )
+			{
+				return TRUE;
+			}
+			else if( !empty( $_SERVER['HTTP_FRONT_END_HTTPS'] ) AND mb_strtolower( $_SERVER['HTTP_FRONT_END_HTTPS'] ) == 'on' )
+			{
+				return TRUE;
+			}
+			else if( !empty( $_SERVER['HTTP_SSLSESSIONID'] ) )
+			{
+				return TRUE;
+			}
+
+			return FALSE;
 		}
 		
 	}

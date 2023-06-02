@@ -16,7 +16,6 @@ if(!defined('profile')) {
 		
 		function __construct($db = '', $logger = '', $request = ''){
 			global $config;
-			
 				$this->db = $db;
 				$this->logger = $logger;
 				$userAction = @$request[$this->userActionReq];
@@ -44,12 +43,20 @@ if(!defined('profile')) {
 							break;
 
 							case 'ViewProfile':
-								$SSV = new SSV(
-									GetOption::getPageContent('userSettings', TEMPLATE_DIR.$config['pageTplFile']),
-									$request['userDisplay'],
-									$this->db, 
-									$this->logger
-								);
+								init::classUtil('LoadUserInfo', "1.0.0");
+								$loadUserInfo = new loadUserInfo(functions::filterString($request['userDisplay']), $this->db);
+								$userData = $loadUserInfo->userInfoArray();
+								if(@$userData['login']){
+									$SSV = new SSV(
+										GetOption::getPageContent('userSettings', TEMPLATE_DIR.$config['pageTplFile']),
+										$request['userDisplay'],
+										$userData,
+										$this->db, 
+										$this->logger
+									);
+								} else {
+									die('User not found!!!');
+								}
 							break;
 								
 							default:

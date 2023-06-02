@@ -13,7 +13,7 @@ function foxEngine(login) {
     let optNamesArr = new Array();
 
     this.loadPage = function(page, block) {
-        let delay, option, content;
+        let delay, option, content, func;
         let parser = new DOMParser();
         if (page !== FoxEngine.selectPage.thisPage && FoxEngine.selectPage.thisPage !== undefined) {
             window.scrollTo({
@@ -33,15 +33,25 @@ function foxEngine(login) {
                     if (option !== undefined) {
                         let jsonOption = JSON.parse(option.textContent);
                         if (jsonOption.onLoad) {
+							switch(jsonOption.onLoadArgs){
+								case undefined:
+									func = jsonOption.onLoad+"()";
+								break;
+								
+								default:
+									func = jsonOption.onLoad + "(" + jsonOption.onLoadArgs + ")";
+								break;
+							}
+							
                             setTimeout(() => {
-                                let args = jsonOption.onLoadArgs;
-                                window[jsonOption.onLoad](args);
-                            }, 700);
+                               eval(func);
+							   console.log(func);
+                            }, 500);
                         }
 						
 					FoxEngine.loadData(FoxEngine.replaceText(this.responseText, page), block);
 					FoxEngine.setPage(page);
-					location.hash = '#' + page;
+					location.hash = '#page/' + page;
                     }
                 }
             }
@@ -49,7 +59,6 @@ function foxEngine(login) {
     };
 
     this.loadData = function(data, block) {
-		let Galleryinstance;
         $(block).fadeOut(500);
         setTimeout(() => {
             $(block).html(data);
@@ -248,35 +257,31 @@ function foxEngine(login) {
     }
 
     this.showUserProfile = function(userDisplay) {
-        let userProfilePopup = request.send_post({
+        let userProfile = request.send_post({
             "userDisplay": userDisplay,
             "user_doaction": "ViewProfile"
         });
 
-        userProfilePopup.onreadystatechange = function() {
-            if (userProfilePopup.readyState === 4) {
-                FoxEngine.loadData(userProfilePopup.responseText, '#content');
-                formInit(100);
+        userProfile.onreadystatechange = function() {
+            if (userProfile.readyState === 4) {
+                FoxEngine.loadData(userProfile.responseText, '#content');
             }
         }
-		//setTimeout(() => {
-			//this.parseBadges(userDisplay);
-		//}, 600);
+		location.hash = 'user/' + userDisplay;
     };
 
     this.showProfilePopup = function(user) {
-        let userProfile = request.send_post({
+        let userProfilePopup = request.send_post({
             "userDisplay": user,
             "user_doaction": "ViewProfile"
         });
         //$("#dialog").dialog("option", "title", user);
 
-        userProfile.onreadystatechange = function() {
-            if (userProfile.readyState === 4) {
+        userProfilePopup.onreadystatechange = function() {
+            if (userProfilePopup.readyState === 4) {
 				let parser = new DOMParser();
-                let response = parser.parseFromString(userProfile.responseText, 'text/html');
+                let response = parser.parseFromString(userProfilePopup.responseText, 'text/html');
                 FoxEngine.loadData(response.getElementById('view'), '#dialogContent');		
-                formInit(100);
             }
         }
         $("#dialog").dialog('open');
@@ -340,4 +345,40 @@ function foxEngine(login) {
 			}
 		}
 	};
+	
+	
+	/*
+	this.parseEmojis = function(){
+		let emojiSectionHTML, emojiHTML;
+		let emojiInstance = request.send_post(
+		{
+			sysRequest: 'parseEmojis'
+		});
+		emojiInstance.onreadystatechange = function() {
+			if (emojiInstance.readyState === 4) {
+				let code, name;
+				emojiHTML = `<div class="emoji_box">`;
+				for(let m = 0; m < this.responseText; m++) {
+					let emojiSection = this.response.at(m);
+					emojiSectionHTML = ``;
+					JSON.parse(emojiSection, function (key, value) {
+						
+						switch(key){
+							case 'emojiCode':
+								code = value;
+							break;
+							
+							case 'emojiName':
+								name = value;
+							break;
+						}
+						emojiSectionHTML += `<div class="emoji_symbol" data-emoji="`+code+`"></div>`;
+					});
+					emojiHTML += emojiSectionHTML;
+				}
+				emojiHTML += `</div>`;
+			}
+		}
+		return emojiHTML;
+	} */
 }

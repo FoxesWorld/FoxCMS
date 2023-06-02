@@ -16,6 +16,7 @@ const App = new Vue({
     created: function() {
         FoxEngine.debugSend('Foxengine started!');
 		FoxEngine.getLastUser();
+		formInit(100);
 		$("#dialog").dialog({
 			autoOpen: false,
 			show: 'fade',
@@ -39,6 +40,17 @@ const App = new Vue({
 
 (function(){
 	if(location.hash.substring(1) !== undefined) {
-		FoxEngine.loadPage(location.hash.substring(1), '#content')
+		let linkTypes = [
+			{"keyWord": "user", "action": "FoxEngine.showUserProfile([arg])"},
+			{"keyWord": "page", "action": "FoxEngine.loadPage([arg], '#content')"}
+		];
+		for(let k = 0; k < linkTypes.length; k++){
+			console.log("Adding listener to "+linkTypes[k].keyWord);
+			if((location.hash+'').indexOf(linkTypes[k].keyWord, (0)) > 0){
+				let replaceValue = location.hash.split('#'+linkTypes[k].keyWord+'/')[1];
+				let runFunc = linkTypes[k].action.replace('[arg]', '"'+replaceValue+'"');
+				eval(runFunc);
+			}
+		}
 	}
 }());

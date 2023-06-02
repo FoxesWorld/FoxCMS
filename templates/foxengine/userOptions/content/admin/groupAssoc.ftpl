@@ -3,7 +3,8 @@
 	"optionGroup": 1,
 	"type": "pageContent",
 	"parentPage": "adminPanel",
-	"onLoad": "parseGroups"
+	"onLoad": "parseGroups",
+	"onLoadArgs": "'test'"
 }
 </useroption>
 
