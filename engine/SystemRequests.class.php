@@ -7,7 +7,7 @@
 }
 <%FoxesModule*/
 
-		class SystemRequests extends init {
+		class SystemRequests extends RequestHandler {
 		
 			private $requestHeader = "sysRequest";
 			protected $db;
@@ -48,25 +48,3 @@
 				}
 			} 	
 		}
-
-		/*case  "scanUploads":
-							$inDirScanner = new inDirScanner(ROOT_DIR.UPLOADS_DIR, @RequestHandler::$REQUEST['path'], @RequestHandler::$REQUEST['mask']);
-							die($inDirScanner->getFiles());
-						break;
-						
-						
-						case "replaceArray":
-							$replaceArray = array_merge($config['javascript'], init::$usrArray);
-							foreach($replaceArray as $key => $value){
-								$replaceFields[] = '"'.$key.'"';
-								if(!is_array($value)) {
-									$jsData[] = '"'.$key.'": "'.$value.'"';
-								} else {
-									foreach($value as $arrVal){
-										$thisArr[] = '"'.$arrVal.'"';
-									}
-									$jsData[] = '"'.$key.'"'.':['.implode(",", $thisArr).']';
-								}
-							}
-							die('{'.implode(",", $jsData).'}');
-						break; */

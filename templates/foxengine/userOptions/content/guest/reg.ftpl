@@ -26,6 +26,9 @@
                   <input id="password2" class="input" type="password" autocomplete="off" required>
                   <label class="label">Повторите пароль</label>
                </div>
+			   
+			   <span>Надежность пароля: <b id="passStrength"></b></span>
+			   
                <div class="c-captcha">
                   <div class="g-recaptcha" data-sitekey="6LcKeBoiAAAAAGnhfzZnLyzUApLmgnOpP4OfFOB7" data-theme="Light"></div>
                   <script src="https://www.google.com/recaptcha/api.js?hl={$lang['wysiwyg_language']}" async defer></script>
@@ -38,18 +41,45 @@
                <input id="userAction" class="input" type="hidden" value="register" />
                <button type="submit" class="login">Зарегистрироваться <i class="fa fa-user-plus" aria-hidden="true"></i></button>
             </form>
-			<span>Strength: <b id="str">1</b></span>
          </div>
       </div>
    </div>
    
    <script>
 	function CheckPassStrength(pass) {
+		let color, text;
 		let req = request.send_post({userAction: 'checkPass', password: pass});
 		    req.onreadystatechange = function() {
 				if (req.readyState === 4) {
 					let json = JSON.parse(this.responseText);
-					$("#str").html(json.PassStrength);
+					
+					switch(json.PassStrength){
+						case 1:
+							color = '#911414';
+							text = 'Очень слабый';
+						break;
+						
+						case 2:
+						color = '#cf6e11';
+							text = 'Слабый';
+						break;
+						
+						case 3:
+							color = '#cfc211';
+							text = 'Простой';
+						break;
+						
+						case 4:
+							color = '#81cf11';
+							text = 'Надежный';
+						break;
+						
+						case 5:
+							color = '#13d788';
+							text = 'Очень надежный!';
+						break;
+					}
+					$("#passStrength").html('<small style="color: '+color+'">'+text+'</small>');
 				}
 			}
 	}

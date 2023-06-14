@@ -78,7 +78,7 @@ session_start();
 			}
 		}
 		
-		/* After postInit we have full UI sent */
+		/* After GFX we have full UI sent */
 		private function GFXinit() {
 			if($this->initLevels["GFX"] === true) {
 				init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "GFX");

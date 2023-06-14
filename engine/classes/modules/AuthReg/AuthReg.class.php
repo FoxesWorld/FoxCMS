@@ -80,6 +80,7 @@
 				break;
 				
 				case 'checkPass':
+					init::classUtil('PasswordStrength', "1.0.0");
 					die(json_encode(new PasswordStrength($request['password'])));
 				break;
 				

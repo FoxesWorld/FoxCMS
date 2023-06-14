@@ -111,9 +111,14 @@ function submitForm(data, form, submitButton) {
             form.notify(response.message, response.type);
             FoxEngine.soundOnClick(response.type);
             FoxEngine.buttonFreeze(submitButton, delay + 1000);
-			setTimeout(() => {
-				removeHash();
-			}, delay);
+			switch(response.type){
+				case "success":
+					setTimeout(() => {
+						removeHash();
+					}, delay);
+				break;
+			}
+
         }
     };
 }

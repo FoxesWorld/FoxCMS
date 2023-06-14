@@ -8,7 +8,7 @@
 			if(count($_POST) > 0) {
 				$thisRequest = $_POST;
 				$this->updateUserOnline($db, init::$usrArray);
-					@$keyCheck = $this->checkSecureKey($thisRequest["key"]);
+					@$keyCheck = self::checkSecureKey($thisRequest["key"]);
 					if($keyCheck === true && $this->isSecure()){
 						foreach($thisRequest as $key => $value){
 							if($value) {
@@ -35,7 +35,7 @@
 			}
 		}
 		
-		private function checkSecureKey($key) {
+		protected static function checkSecureKey($key) {
 			global $config;
 			if($config["keyCheck"]) {
 				if(count($thisRequest["key"]) <= 0) {

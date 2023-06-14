@@ -145,6 +145,7 @@ nav .nav-item > a {
 .pageRoot {
     background: #594316a1;
     border-radius: 5px;
+	display: grid;
 }
 
 .pageRoot .page-content {
