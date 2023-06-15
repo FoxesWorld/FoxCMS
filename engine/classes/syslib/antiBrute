@@ -98,14 +98,15 @@ if (!defined('FOXXEY')) {
 
 		private function banIp(){
 			global $config;
+			$banTime = CURRENT_TIME + $config['bantime'];
 			if(class_exists('Logger')) {
 				$Logger = new Logger('AuthLog');
 				if($this->debug === true) {
-					echo "Banning ".$this->ip." till ".$config['bantime']."<br>";
+					echo "Banning ".$this->ip." till ".$banTime."<br>";
 				}
 				$Logger->WriteLine('Banning '.$this->ip.' for too many authorisation errors');
 			}
-			$query = "UPDATE `antiBrute` SET `time`=".$config['bantime']." WHERE ip = '".$this->ip."'";
+			$query = "UPDATE `antiBrute` SET `time`=".$banTime." WHERE ip = '".$this->ip."'";
 			$this->db::run($query);
 		}
 		

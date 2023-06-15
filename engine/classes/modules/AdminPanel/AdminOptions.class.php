@@ -7,6 +7,7 @@ if(!defined("ADMIN")){
 		
 		function __construct($REQUEST, $db) {
 			switch($REQUEST["admPanel"]){
+				
 				case "showModules":
 					die(json_encode(init::$modulesArray));
 				break;
@@ -17,6 +18,17 @@ if(!defined("ADMIN")){
 				
 				case "groupAssoc":
 					die(json_encode(new GroupAssocAdmin($db)));
+				break;
+				
+				case "cfgParse":
+					init::classUtil('ConfigUtils', "1.0.0");
+					$cfg = new ConfigParser();
+					die($cfg->buildConfigPage());
+				break;
+				
+				case "setConfig":
+					init::classUtil('ConfigUtils', "1.0.0");
+					die(ConfigParser::buildConfig(RequestHandler::$REQUEST));
 				break;
 			}
 		}

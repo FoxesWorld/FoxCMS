@@ -57,7 +57,8 @@ if(!defined('profile')) {
 												//if(@$request['user_group'] !== init::$usrArray['user_group'] && init::$usrArray['groupTag'] === "admin"){
 												$this->inputGroup = $request['user_group'];
 												if($this->inputGroup === $this->getUserfield("user_group") || init::$usrArray['groupTag'] === "admin") {
-													if(in_array(init::$usrArray['user_group'], $config['Permissions']['allowedProfileEdit'])) {
+													$profileEditGroups = explode(',', $config['canEditGroup']);
+													if(in_array(init::$usrArray['user_group'], $profileEditGroups)) {
 													//ALL CHECKS PASSED
 														$this->profileChanges();
 															require_once (MODULES_DIR."FileUpload/submit.php");
@@ -164,9 +165,9 @@ if(!defined('profile')) {
 		}
 		
 		private function canSetColor($color){
-			global $config; 
+			global $jsCfg; 
 			if($color != $this->baseColor){
-					if(@in_array($color, $config['javascript']['allowedColors'][init::$usrArray['groupTag']])){
+					if(@in_array($color, $jsCfg['javascript']['allowedColors'][init::$usrArray['groupTag']])){
 							return true;
 					} else {
 						if(in_array(init::$usrArray['colorScheme'], $this->allColors())){
@@ -180,9 +181,9 @@ if(!defined('profile')) {
 		}
 		
 		private function allColors(){
-			global $config;
+			global $jsCfg;
 			$allColors = array();
-			foreach($config['javascript']['allowedColors'] as $colorGroup => $groupColors){
+			foreach($jsCfg['javascript']['allowedColors'] as $colorGroup => $groupColors){
 				foreach($groupColors as $color){
 					$allColors[] = $color;
 				}

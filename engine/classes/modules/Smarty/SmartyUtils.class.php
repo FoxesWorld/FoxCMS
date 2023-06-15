@@ -8,15 +8,16 @@
 		
 		protected function assignUserFields($smarty) {
 			global $config;
-			foreach($config['userFieldsArray'] as $key){
+			$fieldsArray = explode(",", $config['userFieldsArray']);
+			foreach($fieldsArray as $key){
 				@$smarty->assign($key, init::$usrArray[$key]);
 			}
 		}
 		
 		protected function assignJs(){
-			global $config;
+			global $jsCfg;
 			$builtInJS = '<script>';
-				$replaceArray = array_merge($config['javascript'], init::$usrArray);
+				$replaceArray = array_merge($jsCfg['javascript'], init::$usrArray);
 				foreach($replaceArray as $key => $value){
 					$replaceFields[] = '"'.$key.'"';
 					$thisArr = array();
@@ -34,9 +35,8 @@
 					}
 				}
 				$builtInJS .= 'const replaceData = {'.implode(",", $jsData).'};'."\n";
-				
 				$builtInJS .= 'const userFields = ['.implode(",", $replaceFields).'];'."\n";
-				$builtInJS .= 'request = new request("/", {key:"'.$config['javascript']['secureKey'].'", user:"'.init::$usrArray['login'].'"}, true);';
+				$builtInJS .= 'request = new request("/", {key:"'.$jsCfg['javascript']['secureKey'].'", user:"'.init::$usrArray['login'].'"}, true);';
 			$builtInJS .= '</script>';
 			return $builtInJS;
 		}

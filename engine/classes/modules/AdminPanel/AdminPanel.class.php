@@ -15,7 +15,8 @@
 		function __construct($db) {
 			if(isset(RequestHandler::$REQUEST[$this->requestListener])) {
 				if(init::$usrArray["user_group"] == 1) {
-					self::requireNestedClasses(basename(__FILE__), __DIR__);
+					require('AdminOptions.class.php');
+					self::requireNestedClasses(basename(__FILE__), __DIR__.'/actions');
 					$AdminOptions = new AdminOptions(RequestHandler::$REQUEST, $db);
 				} else {
 					die('{"message": "Insufficent rights!"}');

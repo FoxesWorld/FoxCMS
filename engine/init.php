@@ -1,7 +1,9 @@
 <?php
 
 define('FOXXEY', true);
+require ('data/const.php');
 require ('data/config.php');
+require ('data/jsCfg.php');
 session_start();
 
 	class init {
@@ -47,7 +49,7 @@ session_start();
 			global $config;
 			$this->debug = $debug;
 			init::classUtil('MobileDetect', "1.0.0");
-			define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['javascript']['siteTpl'].'/');
+			define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['siteTpl'].'/');
 			define('RT_DIR', TEMPLATE_DIR.'randTexts/');
 			self::libFilesInclude(SYSLIB_DIR, $this->debug); //Require classes/Syslib
 			self::requireNestedClasses(basename(__FILE__), __DIR__); //Requiring nested classes from self directory

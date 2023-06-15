@@ -42,7 +42,7 @@ function collectFormData(form) {
             let inputLength = $('input[name*="' + input.name + '"]').length;
             switch (input.type) {
                 case "checkbox":
-                    value = (input.checked) ? 1 : 0;
+                    value = (input.checked) ? true : false;
                     break;
 
                 default:
@@ -69,7 +69,7 @@ function collectFormData(form) {
         } else {
             switch (input.type) {
                 case "checkbox":
-                    value = (input.checked) ? 1 : 0;
+                    value = (input.checked) ? true : false;
                     break;
 
                 default:

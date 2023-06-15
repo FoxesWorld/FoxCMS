@@ -36,7 +36,7 @@
 		}
 		
 		protected static function checkSecureKey($key) {
-			global $config;
+			global $config, $jsCfg;
 			if($config["keyCheck"]) {
 				if(count($thisRequest["key"]) <= 0) {
 					switch($key) {
@@ -45,7 +45,7 @@
 							return false;
 
 						default:
-						if($key === $config['javascript']["secureKey"]){
+						if($key === $jsCfg['javascript']["secureKey"]){
 								return true;
 							} else {
 								return false;

@@ -26,7 +26,7 @@ if (!defined('FOXXEY')) {
 			$this->smarty 					= $tpl;
 			$this->smarty->debugging 		= false;
 			$this->smarty->cache_lifetime 	= 120;
-			$this->smarty->template_dir 	= ROOT_DIR.'/templates/'.$config['javascript']['siteTpl'];
+			$this->smarty->template_dir 	= ROOT_DIR.'/templates/'.$config['siteTpl'];
 			$this->smarty->compile_dir 		= ENGINE_DIR.'/cache/compile/';
 			$this->smarty->cache_dir 		= ENGINE_DIR.'/cache/cache/';
 			$this->smartyAssign();
@@ -36,11 +36,11 @@ if (!defined('FOXXEY')) {
 		protected function smartyAssign(){
 			global $config;
 			$smartyUtils = new smartyUtils;
-			$PluginsScanner = new PluginsScanner($config['pluginsDir']);
+			$PluginsScanner = new PluginsScanner(PLUGINS_DIR);
 			
 			//@Deprecated
 			$this->smarty->assign("year", date("Y"));
-			$this->smarty->assign("tplDir", "/templates/".$config['javascript']['siteTpl']);
+			$this->smarty->assign("tplDir", "/templates/".$config['siteTpl']);
 			$this->smarty->assign("webserviceName", $config['webserviceName']);
 			$this->smarty->assign("isLogged",   init::$usrArray['isLogged']);
 			$this->smarty->assign("builtInJS", $smartyUtils->assignJs());
@@ -49,11 +49,11 @@ if (!defined('FOXXEY')) {
 			$this->readTplVars();			
 			return $this->smarty;
 		}
-		
+
 		private function readTplVars() {
 			global $config;
 			$readArray = array();
-			$thisTpl = ROOT_DIR."/templates/".$config['javascript']['siteTpl'];
+			$thisTpl = ROOT_DIR."/templates/".$config['siteTpl'];
 			$cfgFile = $thisTpl.DIRECTORY_SEPARATOR.'cfg'.DIRECTORY_SEPARATOR.$this->tplConfFile;
 			if(file_exists($cfgFile)){
 				$readArray = array("title", "status", "desc", "keywords", "contactEmail", "contactPhone");
