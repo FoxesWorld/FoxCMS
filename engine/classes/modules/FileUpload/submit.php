@@ -16,7 +16,7 @@ if (!defined('profile')) {
 					if (!isset($routes[$post->getFormat()])) continue;
 					$result = $fileSubmit->{$routes[$post->getFormat()]}($post->getValues());
 			}
-			return $result;
+			return @$result;
 	}
 
 	class fileSubmit {

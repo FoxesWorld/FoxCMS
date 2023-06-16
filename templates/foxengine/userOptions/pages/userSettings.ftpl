@@ -43,7 +43,7 @@
 										'<div class="colorBlock '+checked+'" id="Color'+ count +'" style="background-color: '+ entry +';">' +
 											'<input type="radio" id="ColorInput'+entry+'" name="colorPicker" style="display: none;" value="'+entry+'" '+checked+'>' +
 											'<div class="innerDiv">' +
-												'<i class="fa fa-check" aria-hidden="true"></i>' +
+												'<i class="fa fa-check"></i>' +
 											'</div>' +
 											'<span class="innerSpan"></span>' +
 											'</div>'+
@@ -73,31 +73,31 @@
                <span id="modalDesc">Посмотрим [realname], что ты тут можешь поменять...</span>
                <section>
                   <div class="input_block">
-                     <input id="realname" class="input" type="text" required value="[realname]">
+                     <input name="realname" class="input" type="text" required value="[realname]">
                      <label class="label">Полное имя</label>
                   </div>
                   <div class="input_block">
-                     <input id="userStatus" class="input" type="text" required value="[userStatus]">
+                     <input name="userStatus" class="input" type="text" required value="[userStatus]">
                      <label class="label">Статус</label>
                   </div>
                   <div class="input_block">
-                     <input id="land" class="input" type="text" required value="[land]">
+                     <input name="land" class="input" type="text" required value="[land]">
                      <label class="label">Место обитания</label>
                   </div>
                   <div class="input_block">
-                     <input id="email" class="input" type="text" required value="[email]">
+                     <input name="email" class="input" type="text" required value="[email]">
                      <label class="label">E-mail</label>
                   </div>
 				  [group=4]
                   <div class="input_block">
-                     <input id="password" class="input" type="password" autoComplete='off'>
+                     <input name="password" class="input" type="password" autoComplete='off'>
                      <label class="label">Текущий пароль</label>
                   </div>
 				  [/group]
 				  
 				  [group=1]
 				  <div class="input_block">
-                     <input id="user_group" class="input" type="number" autoComplete='off' value="[user_group]">
+                     <input name="user_group" class="input" type="number" autoComplete='off' value="[user_group]">
                      <label class="label">Группа</label>
                   </div>
 				  [/group]
@@ -155,7 +155,7 @@
 						<h3 class="settingsTitle">Цветовая схема профиля:</h3>
 						<div class="profileedit_ItemPickerList" style="grid-template-columns: repeat(4, 1fr);" id="profileColors">
 							<!-- Colors go here -->
-							<input type="hidden" id="colourVal" value="[colorScheme]" name="colorScheme" />
+							<input type="hidden" id="colourVal" name="colorScheme" value="[colorScheme]" name="colorScheme" />
 						</div>
 				</div>
             </div>
@@ -164,19 +164,19 @@
                <span id="modalDesc">Настройки безопасности, [realname], изменить может тут</span>
                <section>
                   <div class="input_block">
-                     <input id="newPass" class="input" type="text" autoComplete='off'>
+                     <input name="newPass" class="input" type="text" autoComplete='off'>
                      <label class="label">Новый пароль</label>
                   </div>
                   <div class="input_block">
-                     <input id="repeatPass" class="input" type="text" autoComplete='off'>
+                     <input name="repeatPass" class="input" type="text" autoComplete='off'>
                      <label class="label">Повтор пароля</label>
                   </div>
                </section>
             </div>
-            <input id="user_doaction" class="input" type="hidden" value="EditUser" />
-            <input id="login" class="input" type="hidden" value="[login]" />
-            [not-group=1]<input id="user_group" class="input" type="hidden" value="[user_group]" />[/not-group]
-            <input id="foxesHash" class="input" type="hidden" value="[hash]" />
+            <input name="user_doaction" class="input" type="hidden" value="EditUser" />
+            <input name="login" class="input" type="hidden" value="[login]" />
+            [not-group=1]<input name="user_group" class="input" type="hidden" value="[user_group]" />[/not-group]
+            <input name="foxesHash" class="input" type="hidden" value="[hash]" />
             <button type="submit" class="login">Изменить<div class="fa fa-cog fa-spin"></div>
             </button>
          </form>

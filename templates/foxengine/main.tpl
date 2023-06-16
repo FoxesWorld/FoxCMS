@@ -15,6 +15,7 @@
 	  <meta property="og:url" content="https://foxescraft.ru" />
 	  <meta property="og:image" content="{$tplDir}/img/assets/logo.png" />
 	  <script src="//code.jivo.ru/widget/X47ofXrus3" async></script>
+	  <script src="https://www.google.com/recaptcha/api.js?hl={$lang['wysiwyg_language']}" async defer></script>
       <link href="{$tplDir}/assets/css/style.css" rel="stylesheet">
 	  <link rel="shortcut icon" href="/favicon.ico">
       {$builtInJS}

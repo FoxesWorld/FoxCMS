@@ -10,12 +10,12 @@
 	   <div class="page-content">
 	   <div class="formContent">
 	   <h1>Авторизация</h1>
-		<form method="POST" action="/">
+		<form method="POST" action="/" id="auth">
 			<table>
 				<tr>
 					<td colspan="2">
 					<div class="input_block animate__animated animate__fadeInRight">
-						<input id="login" class="input" focusable="false" autocomplete="off" required name='required'>
+						<input id="login" class="input" focusable="false" autocomplete="off" required name='login'>
 						<label class="label">Логин</label>
 					</div>
 					</td>
@@ -27,7 +27,7 @@
 					</td>
 					<td>
 						<div class="input_block animate__animated animate__fadeInLeft">
-							<input id="password" class="input" type="password" focusable="false" autocomplete="off" required name='required'>
+							<input id="password" class="input" type="password" focusable="false" autocomplete="off" required name="password">
 							<label class="label">Пароль</label>
 						</div>
 					</td>
@@ -41,11 +41,19 @@
 					<span class="checkmark"></span>
 				</label>
 				
+
+				
 				<div class="c-captcha">
-					<div class="g-recaptcha" data-sitekey="6LcKeBoiAAAAAGnhfzZnLyzUApLmgnOpP4OfFOB7" data-theme="Light"></div>
+					<div class="g-recaptcha" data-callback="fillResponse" data-sitekey="6LcKeBoiAAAAAGnhfzZnLyzUApLmgnOpP4OfFOB7" data-theme="Light"></div>
 					<script src="https://www.google.com/recaptcha/api.js?hl={$lang['wysiwyg_language']}" async defer></script>
-				</div>	
-				<input id="userAction" class="input" type="hidden" value="auth" />
+				</div>
+
+				<script>
+					function fillResponse(){
+						$("#g-recaptcha-response").attr('value', grecaptcha.getResponse());
+					}
+				</script>	
+				<input name="userAction" type="hidden" value="auth" />
 				
 			</form>
 			

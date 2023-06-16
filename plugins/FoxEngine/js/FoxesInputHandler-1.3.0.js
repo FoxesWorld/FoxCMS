@@ -1,5 +1,5 @@
 /*
- *	FoxesInputHandler ver - 1.2.7
+ *	FoxesInputHandler ver - 1.3.0
  *	Copyright Foxesworld.ru
  */
 let data = new Array();
@@ -20,7 +20,7 @@ function formInit(sleep) {
                     event.preventDefault();
                     submitButton = event.submitter;
                     data = collectFormData(form);
-                    data["onSuccess"] = form.id;
+                    data["formId"] = form.id;
                     submitForm(data, $(this), submitButton);
                 }
             });
@@ -36,14 +36,17 @@ function collectFormData(form) {
     let inputObjArr = {};
 
     inputFields.forEach(input => {
-        checkFill(input);
         let value;
-        if ($(input).prop('name') && input.name !== 'required') {
             let inputLength = $('input[name*="' + input.name + '"]').length;
+			console.log(input.type + " " + input.value);
             switch (input.type) {
                 case "checkbox":
                     value = (input.checked) ? true : false;
                     break;
+					
+				case "textarea":
+					value = $("#"+input.id).val();
+				break;
 
                 default:
                     switch (inputLength) {
@@ -66,31 +69,10 @@ function collectFormData(form) {
                     break;
             }
             inputObjArr[input.name] = value;
-        } else {
-            switch (input.type) {
-                case "checkbox":
-                    value = (input.checked) ? true : false;
-                    break;
-
-                default:
-                    value = (Boolean(input.value)) ? input.value : null;
-                    break;
-            }
-            inputObjArr[input.id] = value;
-        }
-
     });
     return inputObjArr;
 };
 
-function checkFill(input) {
-    if ($(input).prop('name') === 'required') {
-        if (input.value == '') {
-            $('.input_block > ' + '#' + input.id).notify(input.id + ' is requiered');
-            throw new Error(input.id + ' is requiered');
-        }
-    }
-}
 
 function submitForm(data, form, submitButton) {
     let answer = 'notSent';
@@ -113,9 +95,16 @@ function submitForm(data, form, submitButton) {
             FoxEngine.buttonFreeze(submitButton, delay + 1000);
 			switch(response.type){
 				case "success":
+					//$.growl.notice({ title: "Информация", message: response.message});
+					
 					setTimeout(() => {
 						removeHash();
 					}, delay);
+					
+				break;
+				
+				case "error":
+					//$.growl.error({ title: "Информация", message: response.message});
 				break;
 			}
 

@@ -21,9 +21,9 @@ if(!defined('auth')) {
 		
 		private function checkPass() {
 			global $lang;
-			if(functions::FoxesStrlen($this->regData['password']) >= $this->passminCount) {
-				if(!preg_match("/[А-Яа-я]/", $this->regData['password'])) {
-					switch($this->regData['password']){
+			if(functions::FoxesStrlen($this->regData['password1']) >= $this->passminCount) {
+				if(!preg_match("/[А-Яа-я]/", $this->regData['password1'])) {
+					switch($this->regData['password1']){
 						case $this->regData['password2']:
 						break;
 						
@@ -35,7 +35,7 @@ if(!defined('auth')) {
 					functions::jsonAnswer($lang['passBadSyms'], true);
 				}
 			} else {
-				functions::jsonAnswer($lang['passTooShort'].functions::FoxesStrlen($this->regData['password']), true);
+				functions::jsonAnswer($lang['passTooShort'].functions::FoxesStrlen($this->regData['password1']), true);
 			}
 		}
 		
@@ -61,8 +61,8 @@ if(!defined('auth')) {
 			if($this->error === false) {
 				functions::checkSA($this->regData);
 				$this->logger->WriteLine("Trying to register user '".$this->regData['login']."'");
-				$password = password_hash($this->regData['password'], PASSWORD_DEFAULT);
-				$photo = $config['javascript']['assets'].'img/no-photo.jpg';
+				$password = password_hash($this->regData['password1'], PASSWORD_DEFAULT);
+				$photo = '/templates/'.$config['siteTpl'].'/assets/img/no-photo.jpg';
 				$query = "INSERT INTO `users`(`login`, `password`, `email`, `user_group`, `realname`, `hash`, `reg_date`, `reg_ip`, `logged_ip`, `last_date`, `profilePhoto`) 
 				VALUES ('".$this->regData['login']."', '".$password."', '".$this->regData['email']."', '".$this->baseUserGroup."', '".randTexts::getRandText('noName')."', '".authorize::generateLoginHash()."', '".CURRENT_TIME."', '".REMOTE_IP."', '".REMOTE_IP."', '".CURRENT_TIME."', '".$photo."')";
 				$userReg = $this->db->run($query);

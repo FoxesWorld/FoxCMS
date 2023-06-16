@@ -31,7 +31,7 @@
 							<span class="text-muted text-size-small hidden-xs">'.@$lang[$key.'-desc'].'</span>
 						</td>
 						<td class="col-xs-6 col-sm-6 col-md-5">
-							<input type="checkbox" id="'.$key.'" class="switch-'.$counter.'" '.$check.' />
+							<input type="checkbox" name="'.$key.'" class="switch-'.$counter.'" '.$check.' />
 						</td>
 						<script>new Switchery(document.querySelector(".switch-'.$counter.'"))</script>
         </tr> ';
@@ -44,13 +44,13 @@
 						<span class="text-muted text-size-small hidden-xs">'.@$lang[$key.'-desc'].'</span>
 					</td>
 					<td class="col-xs-6 col-sm-6 col-md-5">
-							<input type="text" class="form-control" value="'.$val.'" id="'.$key.'" />
+							<input type="text" class="form-control" value="'.$val.'" name="'.$key.'" />
 					</td>
 				</tr>';
 				}
 				$counter++;
 			}
-			$form .= implode('', $cfgValArr).'<input id="admPanel" class="input" type="hidden" value="setConfig" />
+			$form .= implode('', $cfgValArr).'<input name="admPanel" class="input" type="hidden" value="setConfig" />
 				</table>
 				<button type="submit" class="login"><i class="fa fa-floppy-o position-left"></i>Сохранить</button>
 				</form>
@@ -62,7 +62,7 @@
 		
 		
 		protected static function buildConfig($updatedCfg){
-			global $config;
+			global $config, $lang;
 			$date = '['.date::getCurrentDate("day").'.'.date::getCurrentDate("month").'.'.date::getCurrentDate("year").']';
 			$cfgString = '';
 			$cfgValues = array();
@@ -83,26 +83,27 @@
 						break;
 						
 						default:
+							$overrideVal = '"'.$val.'"';
+						/*
 							if(intval($val) > 0) {
 								$overrideVal = intval($val);
 							} else {
-								$overrideVal = '"'.$val.'"';
+								
 							}
-							
+							*/
 						break;
 					}
-					$cfgValues[] = "'{$key}' => ". $overrideVal;
+					$cfgValues[] = "	'{$key}' => ". $overrideVal;
 				}
 				$i++;
 			}
-			$cfgString =  '<?php '.PHP_EOL.'    /* '.$date.' */'.PHP_EOL.'$config = array('.PHP_EOL.implode(",".PHP_EOL, $cfgValues).");\n\n?>";
-			//die($cfgString);
-			$status = file::efile(ENGINE_DIR.'data/config.php', false, $cfgString);
-			
-			//return $cfgString;
-			
-		}
+			$cfgString =  '<?php '.PHP_EOL.'    /* '.$date.' */'.PHP_EOL.'$config = array('.PHP_EOL.implode(",".PHP_EOL.PHP_EOL, $cfgValues).");\n\n?>";
 
+			$status = file::efile(ENGINE_DIR.'data/config.php', false, $cfgString);
+			if($status){
+				functions::jsonAnswer($lang['configChanged'], false);
+			}
+		}
 	}
 
 

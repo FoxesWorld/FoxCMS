@@ -55,7 +55,7 @@
 				
 			if(!RequestHandler::$usrArray['isLogged']) {
 				$auth = new authorise($request, $this->db, $this->logger);
-				$reg = new register($request, $this->db, $this->logger);	
+				
 			} else {
 				RequestHandler::ipCheck();
 			}
@@ -76,6 +76,7 @@
 				break;
 							
 				case 'register':
+					$reg = new register($request, $this->db, $this->logger);	
 					$reg->register();
 				break;
 				
