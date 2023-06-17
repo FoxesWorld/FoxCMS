@@ -1,5 +1,5 @@
 <?php 
-    /* [16.06.2023] */
+    /* [17.06.2023] */
 $config = array(
 	'dbHost' => "localhost",
 
@@ -19,7 +19,7 @@ $config = array(
 
 	'maxLoginAttempts' => "1",
 
-	'reCaptchaCheck' => false,
+	'reCaptchaCheck' => true,
 
 	'timezone' => "Europe/Moscow",
 

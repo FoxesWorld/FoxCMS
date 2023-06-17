@@ -52,6 +52,8 @@
 			}
 			$form .= implode('', $cfgValArr).'<input name="admPanel" class="input" type="hidden" value="setConfig" />
 				</table>
+				<input name="refresh" type="hidden" value="false" />
+				<input name="sound" type="hidden" value="false" />
 				<button type="submit" class="login"><i class="fa fa-floppy-o position-left"></i>Сохранить</button>
 				</form>
 				';

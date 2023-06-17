@@ -63,7 +63,7 @@ function foxEngine(login) {
         setTimeout(() => {
             $(block).html(data);
             $(block).fadeIn(500);
-            formInit(100);
+            FoxesInput.formInit(100);
         }, 500);
     }
 

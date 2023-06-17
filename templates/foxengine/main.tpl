@@ -19,7 +19,10 @@
       <link href="{$tplDir}/assets/css/style.css" rel="stylesheet">
 	  <link rel="shortcut icon" href="/favicon.ico">
       {$builtInJS}
-	  <script>let FoxEngine = new foxEngine("{$login}");</script>
+	  <script>
+		  const FoxesInput = new inputHandler();
+		  let FoxEngine = new foxEngine("{$login}");
+	  </script>
 	  <script type="module" src="{$tplDir}/assets/js/App.js"></script>
 	  <script type="module" src="{$tplDir}/assets/js/metrics.js"></script>
 		

@@ -16,7 +16,7 @@ const App = new Vue({
     created: function() {
         FoxEngine.debugSend('Foxengine started!');
 		FoxEngine.getLastUser();
-		formInit(100);
+		FoxesInput.formInit(100);
 		$("#dialog").dialog({
 			autoOpen: false,
 			show: 'fade',
