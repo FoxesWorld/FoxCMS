@@ -49,12 +49,17 @@
 				</tr>';
 				}
 				$counter++;
+				if(stripos($val, ',')){
+					echo "<script>new Tagify(document.querySelector('input[name=".$key."]'))</script>";
+				}
 			}
 			$form .= implode('', $cfgValArr).'<input name="admPanel" class="input" type="hidden" value="setConfig" />
 				</table>
-				<input name="refresh" type="hidden" value="false" />
-				<input name="sound" type="hidden" value="false" />
-				<button type="submit" class="login"><i class="fa fa-floppy-o position-left"></i>Сохранить</button>
+				<input name="refreshPage" type="hidden" value="false" />
+				<input name="playSound" type="hidden" value="false" />
+				<button type="submit" class="btn bg-teal btn-sm btn-raised position-left legitRipple">
+					<i class="fa fa-floppy-o position-left"></i>Сохранить
+				</button>
 				</form>
 				';
 			return $form;
@@ -85,14 +90,15 @@
 						break;
 						
 						default:
+							if(is_array(json_decode($val, true))) {
+								$jsonString = json_decode($val, true);
+								$arr = array();
+								foreach($jsonString as $val => $value){
+									$arr[] = $value['value'];
+								}
+								$val = implode(',', $arr);
+							} 
 							$overrideVal = '"'.$val.'"';
-						/*
-							if(intval($val) > 0) {
-								$overrideVal = intval($val);
-							} else {
-								
-							}
-							*/
 						break;
 					}
 					$cfgValues[] = "	'{$key}' => ". $overrideVal;
@@ -100,7 +106,6 @@
 				$i++;
 			}
 			$cfgString =  '<?php '.PHP_EOL.'    /* '.$date.' */'.PHP_EOL.'$config = array('.PHP_EOL.implode(",".PHP_EOL.PHP_EOL, $cfgValues).");\n\n?>";
-
 			$status = file::efile(ENGINE_DIR.'data/config.php', false, $cfgString);
 			if($status){
 				functions::jsonAnswer($lang['configChanged'], false);

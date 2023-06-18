@@ -82,11 +82,11 @@ function inputHandler() {
 				break;
 		}
 
-		answer.onreadystatechange = function() {
+	answer.onreadystatechange = function() {
 			if (answer.readyState === 4) {   
 				let response = JSON.parse(this.responseText);
 				form.notify(response.message, response.type);
-				if(data.sound === true || data.sound === undefined){
+				if(data.playSound === true || data.playSound === undefined){
 					FoxEngine.soundOnClick(response.type);
 					FoxEngine.buttonFreeze(submitButton, delay + 1000);
 				}
@@ -94,7 +94,7 @@ function inputHandler() {
 				switch(response.type){
 					case "success":
 						//$.growl.notice({ title: "Информация", message: response.message});
-						if(data.refresh === true || data.refresh === undefined){
+						if(data.refreshPage === true || data.refreshPage === undefined){
 							setTimeout(() => {
 								refreshPage();
 							}, delay);

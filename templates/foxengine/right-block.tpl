@@ -52,7 +52,7 @@
    
     {if $user_group != 5}
       <div class="card">				
-			<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+			<div class="card text-white  mb-3" style="max-width: 18rem;">
 			  <div class="card-header">Меню пользователя</div>
 				  <div class="card-body">
 					  <div class="right-profile-menu">
@@ -65,7 +65,7 @@
 	  {/if}
    
       <div class="card d-none d-sm-block">		
-      	<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+      	<div class="card text-white  mb-3" style="max-width: 18rem;">
       	  <div class="card-header">Последняя регистрация</div>
 			<div id="lastUser">
 			

@@ -1,6 +1,6 @@
 function foxEngine(login) {
 
-    this.selectPage = {
+    let selectPage = {
         thisPage: "",
         thatPage: ""
     };
@@ -15,7 +15,7 @@ function foxEngine(login) {
     this.loadPage = function(page, block) {
         let delay, option, content, func;
         let parser = new DOMParser();
-        if (page !== FoxEngine.selectPage.thisPage && FoxEngine.selectPage.thisPage !== undefined) {
+        if (page !== selectPage.thisPage && selectPage.thisPage !== undefined) {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -49,31 +49,13 @@ function foxEngine(login) {
                             }, 500);
                         }
 						
-					FoxEngine.loadData(FoxEngine.replaceText(this.responseText, page), block);
-					FoxEngine.setPage(page);
+					loadData(replaceText(this.responseText, page), block);
+					setPage(page);
 					location.hash = '#page/' + page;
                     }
                 }
             }
         }
-    };
-
-    this.loadData = function(data, block) {
-        $(block).fadeOut(500);
-        setTimeout(() => {
-            $(block).html(data);
-            $(block).fadeIn(500);
-            FoxesInput.formInit(100);
-        }, 500);
-    }
-
-    this.setPage = function(page) {
-        $(".pageLink-" + page).addClass("selectedPage");
-        if (page != FoxEngine.selectPage.thisPage) {
-            FoxEngine.selectPage.thatPage = FoxEngine.selectPage.thisPage;
-            $(".pageLink-" + FoxEngine.selectPage.thatPage).removeClass("selectedPage");
-        }
-        FoxEngine.selectPage.thisPage = page;
     };
 
     this.getLastUser = function() {
@@ -98,7 +80,7 @@ function foxEngine(login) {
 						<ul>
 					   <li><h1><a href="#" onclick="FoxEngine.showUserProfile('` + lastUser.login + `'); return false;">` + lastUser.login + `</a></h1></li>
 					   <li><span>` + lastUser.realname + `</span></li>
-					   <li><span class="groupStatus-4">` + FoxEngine.convertUnixTime(lastUser.reg_date) + `</span></li>
+					   <li><span class="groupStatus-4">` + convertUnixTime(lastUser.reg_date) + `</span></li>
 					   </ul>
 					</div>
 					</td>
@@ -144,32 +126,9 @@ function foxEngine(login) {
         };
     };
 
-
-    this.debugSend = function(message, style) {
-        console.log("%c" + message, style);
-    };
-
     this.splitWrapLetters = function(query, letterClass) {
         let textWrapper = document.querySelector(query);
         textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='" + letterClass + "'>$&</span>");
-    };
-
-    this.convertUnixTime = function(unix) {
-        let a = new Date(unix * 1000),
-            year = a.getFullYear(),
-            months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            month = months[a.getMonth()],
-            date = a.getDate(),
-            hour = a.getHours(),
-            min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes(),
-            sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
-
-        return `${month} ${date}, ${year}, ${hour}:${min}:${sec}`;
-    };
-
-    this.randomNumber = function(min, max) {
-        const r = Math.random() * (max - min) + min + 1
-        return Math.floor(r)
     };
 
     this.buttonFreeze = function(button, delay) {
@@ -193,7 +152,7 @@ function foxEngine(login) {
         tplScan.onreadystatechange = function() {
             if (tplScan.readyState === 4) {
                 let sndAmount = JSON.parse(this.responseText).fileNum;
-                sndNum = FoxEngine.randomNumber(1, sndAmount);
+                sndNum = randomNumber(1, sndAmount);
                 if (sndAmount > 0) {
                     var sound = new Howl({
                         src: [replaceData.assets + 'snd/' + type + '/sound' + sndNum + '.mp3'],
@@ -264,7 +223,7 @@ function foxEngine(login) {
 
         userProfile.onreadystatechange = function() {
             if (userProfile.readyState === 4) {
-                FoxEngine.loadData(userProfile.responseText, '#content');
+                loadData(userProfile.responseText, '#content');
             }
         }
 		location.hash = 'user/' + userDisplay;
@@ -281,7 +240,7 @@ function foxEngine(login) {
             if (userProfilePopup.readyState === 4) {
 				let parser = new DOMParser();
                 let response = parser.parseFromString(userProfilePopup.responseText, 'text/html');
-                FoxEngine.loadData(response.getElementById('view'), '#dialogContent');		
+                loadData(response.getElementById('view'), '#dialogContent');		
             }
         }
         $("#dialog").dialog('open');
@@ -289,35 +248,6 @@ function foxEngine(login) {
 			this.parseBadges(user);
 		}, 600);
     };
-	
-    /*ENTRY REPLACER*/
-    this.replaceText = function(text, page) {
-        updatedText = text;
-        for (let j = 0; j < userFields.length; j++) {
-            let value = userFields.at(j);
-            let mask = "%" + value + "%";
-            while (updatedText.includes(mask) > 0) {
-                FoxEngine.debugSend(" - Replacing " + value + " mask...", 'color: green');
-                updatedText = updatedText.replace(mask, replaceData[userFields.at(j)]);
-                replacedTimes++;
-            }
-        }
-        switch (replacedTimes) {
-            case 0:
-                FoxEngine.debugSend("No text for replacing was found", 'color: red');
-                break;
-
-            case 1:
-                FoxEngine.debugSend("Replaced " + replacedTimes + " occurrence", 'color: green');
-                break;
-
-            default:
-                FoxEngine.debugSend("Replaced " + replacedTimes + " occurrences", 'color: green');
-                break;
-        }
-        replacedTimes = 0
-        return updatedText;
-    }
 	
 	/*Badges*/
 	this.parseBadges = function(user){
@@ -345,6 +275,75 @@ function foxEngine(login) {
 			}
 		}
 	};
+	
+	this.debugSend = function(message, style) {
+        console.log("%c" + message, style);
+    };
+	
+	loadData = function(data, block) {
+        $(block).fadeOut(500);
+        setTimeout(() => {
+            $(block).html(data);
+            $(block).fadeIn(500);
+            FoxesInput.formInit(100);
+        }, 500);
+    }
+
+    setPage = function(page) {
+        $(".pageLink-" + page).addClass("selectedPage");
+        if (page != selectPage.thisPage) {
+            selectPage.thatPage = selectPage.thisPage;
+            $(".pageLink-" + selectPage.thatPage).removeClass("selectedPage");
+        }
+        selectPage.thisPage = page;
+    };
+
+    convertUnixTime = function(unix) {
+        let a = new Date(unix * 1000),
+            year = a.getFullYear(),
+            months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            month = months[a.getMonth()],
+            date = a.getDate(),
+            hour = a.getHours(),
+            min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes(),
+            sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
+
+        return `${month} ${date}, ${year}, ${hour}:${min}:${sec}`;
+    };
+
+    randomNumber = function(min, max) {
+        const r = Math.random() * (max - min) + min + 1
+        return Math.floor(r)
+    };
+	
+	/*ENTRY REPLACER*/
+    replaceText = function(text, page) {
+        updatedText = text;
+        for (let j = 0; j < userFields.length; j++) {
+            let value = userFields.at(j);
+            let mask = "%" + value + "%";
+            while (updatedText.includes(mask) > 0) {
+                FoxEngine.debugSend(" - Replacing " + value + " mask...", 'color: green');
+                updatedText = updatedText.replace(mask, replaceData[userFields.at(j)]);
+                replacedTimes++;
+            }
+        }
+        switch (replacedTimes) {
+            case 0:
+                FoxEngine.debugSend("No text for replacing was found", 'color: red');
+                break;
+
+            case 1:
+                FoxEngine.debugSend("Replaced " + replacedTimes + " occurrence", 'color: green');
+                break;
+
+            default:
+                FoxEngine.debugSend("Replaced " + replacedTimes + " occurrences", 'color: green');
+                break;
+        }
+        replacedTimes = 0
+        return updatedText;
+    }
 	
 	
 	/*
