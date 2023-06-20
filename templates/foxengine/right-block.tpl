@@ -32,7 +32,7 @@
                   <li class="tip-over"><b><i class="fa fa-address-card-o" aria-hidden="true"></i>Почта</b>: {$email}</li>
                   <li class="tip-over"><b><i class="fa fa-users" aria-hidden="true"></i>Группа</b>: {$groupName}</li>
                   <li class="tip-over"><b><i class="fa fa-diamond" aria-hidden="true"></i>Полное имя</b>: {$realname}</li>
-				  {if $user_group != 5}<li class="tip-over" aria-label="Валюта проекта"><b><i class="fa fa-diamond"></i>Юниты</b>: 0</li>{/if}
+				  {if $user_group != 5}<li class="tip-over" aria-label="Валюта проекта"><b><i class="fa fa-krw"></i>Юниты</b>: 0</li>{/if}
                </div>
             </ul>
 			{if $user_group == 5}

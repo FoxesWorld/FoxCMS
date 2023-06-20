@@ -1,7 +1,7 @@
 <footer class="bar">
    <div class="container footer--flex">
       <div class="footer-copyright">
-         {$title} {$status} <b>{$year}</b>
+         {$siteTitle} {$siteStatus} <b>{$year}</b>
 		 <span>Powered by {$webserviceName} v.{$ServiceVersion}<img /></span>
       </div>
 

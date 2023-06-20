@@ -79,6 +79,7 @@ img {
     -moz-box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
     box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
     background: linear-gradient(156deg, #805511, #929089) !important;
+	border: 0;
 }
 
 .rightBlock .card:last-child {

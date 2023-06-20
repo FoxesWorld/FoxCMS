@@ -6,7 +6,7 @@ class GetOption extends UserOptions {
 
     private $getOptionRequest = "getOption";
     private $pageRplace = array();
-    private $pageTplFile;
+    private $pageTplFile = "staticPage.tpl";
     private $requestedOption;
     private $requestLogin;
 
@@ -18,9 +18,8 @@ class GetOption extends UserOptions {
 			init::classUtil('LoadUserInfo', "1.0.0");
 			$loadUserInfo = new loadUserInfo($login, $db);
 			$userData = $loadUserInfo->userInfoArray();
-            $this->pageTplFile = TEMPLATE_DIR.$config['pageTplFile'];
             $requestedOption = functions::filterString($_POST[$this->getOptionRequest]);
-			$pageTemplate = self::getPageContent($requestedOption, $this->pageTplFile);
+			$pageTemplate = self::getPageContent($requestedOption, TEMPLATE_DIR.$this->pageTplFile);
 			/*
 			*	SERVER SIDE VERIFICATION
 			*/

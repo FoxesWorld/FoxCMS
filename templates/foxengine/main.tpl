@@ -3,15 +3,15 @@
 	  <meta charset="utf-8" />
       {$systemHeaders}
       <meta name="HandheldFriendly" content="true" />
-      <title>{$title}</title>
+      <title>{$siteTitle}</title>
       <meta name="format-detection" content="telephone=no" />
 	  <meta name="author" content="FoxesWorld" />
-	  <meta name="description" content="FoxEngine" />
+	  <meta name="description" content="{$siteDesc}" />
       <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-	  <meta property="og:title" content="FoxesWorld" />
-	  <meta property="og:site_name" content="FoxesWorld" />
+	  <meta property="og:title" content="{$siteTitle}" />
+	  <meta property="og:site_name" content="{$siteTitle}" />
 	  <meta property="og:url" content="https://foxescraft.ru" />
 	  <meta property="og:image" content="{$tplDir}/img/assets/logo.png" />
 	  <script src="//code.jivo.ru/widget/X47ofXrus3" async></script>

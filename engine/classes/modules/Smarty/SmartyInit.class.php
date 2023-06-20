@@ -15,7 +15,6 @@ if (!defined('FOXXEY')) {
 	class smartyInit extends init {
 		
 		protected $smarty;
-		private $tplConfFile = "pageCfg.json";
 		
 		function __construct($tpl) {
 			global $config;
@@ -54,15 +53,9 @@ if (!defined('FOXXEY')) {
 
 		private function readTplVars() {
 			global $config;
-			$readArray = array();
-			$thisTpl = ROOT_DIR."/templates/".$config['siteTpl'];
-			$cfgFile = $thisTpl.DIRECTORY_SEPARATOR.'cfg'.DIRECTORY_SEPARATOR.$this->tplConfFile;
-			if(file_exists($cfgFile)){
-				$readArray = array("title", "status", "desc", "keywords", "contactEmail", "contactPhone", "ServiceVersion");
-				$fileContent = json_decode(file::efile($cfgFile)['content'], true);
-				foreach($readArray as $val){
-					$this->smarty->assign($val, $fileContent[$val]);
-				}
+			$readArray = array("siteTitle", "siteStatus", "siteDesc", "keywords", "contactEmail", "contactPhone", "ServiceVersion");
+			foreach($readArray as $val){
+				$this->smarty->assign($val, $config[$val]);
 			}
 		}	
 	}

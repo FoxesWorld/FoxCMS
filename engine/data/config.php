@@ -1,5 +1,5 @@
 <?php 
-
+    /* [20.06.2023] */
 $config = array(
 	'dbHost' => "localhost",
 
@@ -10,6 +10,20 @@ $config = array(
 	'dbName' => "aidenfox",
 
 	'siteTpl' => "foxengine",
+
+	'siteTitle' => "FoxesCraft",
+
+	'siteStatus' => "PostAlpha",
+
+	'siteDesc' => "A website engine",
+
+	'keywords' => "null",
+
+	'contactEmail' => "no-reply@foxesworld.ru",
+
+	'contactPhone' => "null",
+
+	'ServiceVersion' => "2.2.5",
 
 	'reCaptchaSecret' => "6LcKeBoiAAAAAK-dFGsiDyqZvO_1u7MKWscdEJqJ",
 
@@ -28,8 +42,6 @@ $config = array(
 	'keyCheck' => true,
 
 	'userOptions' => "userOptions",
-
-	'pageTplFile' => "cfg/pageTpl.ftpl",
 
 	'OptionReplaceValues' => "{TPL}->228Year,{YEAR}->2023,{TES}->8800,{siteKey}->cfgVal(reCaptchaWebsite)",
 

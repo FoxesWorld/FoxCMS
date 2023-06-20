@@ -5,12 +5,10 @@ if(!defined('profile')) {
 	die ('{"message": "Not in profile thread"}');
 }
 
-	Error_Reporting(E_ALL);
-	Ini_Set('display_errors', true);
-
 	class UserActions extends User {
 		
 		private string $userActionReq = "user_doaction";
+		private $pageTplFile = "staticPage.tpl";
 		protected $db, $logger;
 		private $fRequest;
 		
@@ -48,7 +46,7 @@ if(!defined('profile')) {
 								$userData = $loadUserInfo->userInfoArray();
 								if(@$userData['login']){
 									$SSV = new SSV(
-										GetOption::getPageContent('userSettings', TEMPLATE_DIR.$config['pageTplFile']),
+										GetOption::getPageContent('userSettings', TEMPLATE_DIR.$this->pageTplFile),
 										$request['userDisplay'],
 										$userData,
 										$this->db, 

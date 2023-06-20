@@ -9,11 +9,11 @@
 						
 						<li>
 							<div class="titleWrapper">
-								<h1 class="title">{$title}</h1>
+								<h1 class="title">{$siteTitle}</h1>
 							</div>
 						</li>
 						
-						<li><small class="status">{$status}</small></li>
+						<li><small class="status">{$siteStatus}</small></li>
 					</ul>
 				<span class="line"></span>
 		  </div>
