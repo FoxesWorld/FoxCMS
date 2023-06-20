@@ -17,7 +17,7 @@
 				$this->db = $db;
 			}
 			
-			public function requestListener($mobileDetect){
+			public function requestListener(){
 				global $config;
 				if(isset(RequestHandler::$REQUEST[$this->requestHeader])){
 					switch(RequestHandler::$REQUEST[$this->requestHeader]) {
@@ -38,7 +38,7 @@
 						break;
 						
 						case "detectTest":
-							die(var_dump($mobileDetect->isMobile()));
+							die(var_dump(init::$deviceType->isMobile()));
 						break;
 						
 						default:

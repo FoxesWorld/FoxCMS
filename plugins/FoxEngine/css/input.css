@@ -69,6 +69,7 @@ useroption {
 [type=button], [type=reset], [type=submit], button {
 	font-family: 'FSElliotPro-Bold';
 	color: white;
+	min-width: 110px;
 }
 
 button.login {
@@ -81,12 +82,7 @@ button.login {
     -webkit-box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
     -moz-box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
     box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
-    text-align: center;
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
     border-radius: 4px;
-	font-size: 0.9vw;
 }
 
 button:disabled .wait {
@@ -388,4 +384,8 @@ li > a:not(.tip-over):hover:before {
   width: 100%;
   left: 0;
   background: #ff9100;
+}
+
+.alert {
+	margin: 10px 0px;
 }

@@ -1,5 +1,5 @@
 <?php 
-    /* [18.06.2023] */
+
 $config = array(
 	'dbHost' => "localhost",
 
@@ -31,7 +31,7 @@ $config = array(
 
 	'pageTplFile' => "cfg/pageTpl.ftpl",
 
-	'OptionReplaceValues' => "{TPL}->228,{YEAR}->2023,{TES}->8800",
+	'OptionReplaceValues' => "{TPL}->228Year,{YEAR}->2023,{TES}->8800,{siteKey}->cfgVal(reCaptchaWebsite)",
 
 	'userFieldsArray' => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,colorScheme,groupName",
 

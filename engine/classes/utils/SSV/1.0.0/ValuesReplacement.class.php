@@ -9,11 +9,16 @@
 		}
 		
 		private function processContent($key, $value, $content){
+			global $config;
 			$this->content = $content;
 				if(stripos($this->content, $key)) {
-					//die(str_replace($key, $value, $this->content));
-					//TO FIX FIRST ARR ELEMENT
+					echo "<script>console.log('".$key." -> ".$value."')</script>";
+					$existance = functions::getStrBetween($value, "cfgVal(", ")")[0];
+					if($existance){
+						$value = $config[$existance];
+					}
 					$this->content = preg_replace("{".$key."}", $value, $this->content);
+
 				}
 		}
 		

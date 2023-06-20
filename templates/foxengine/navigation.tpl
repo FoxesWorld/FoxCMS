@@ -8,7 +8,19 @@
 
 		<li>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav leftAction me-auto mb-2 mb-lg-0"></ul>
+				<ul class="navbar-nav leftAction me-auto mb-2 mb-lg-0">
+				{if $isMobile}
+					{if $user_group == 5}
+						<li class="nav-item">
+							<a class="pageLink-faq selectedPage" onclick="FoxEngine.loadPage('auth', replaceData.contentBlock); return false; ">
+								<div class="rightIcon">
+									<i class="fa fa-sign-in"></i>
+								</div>
+							Авторизация
+							</a>
+						</li>
+					{/if}
+			{/if}</ul>
 			</div>
 		</li>
 		

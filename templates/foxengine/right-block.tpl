@@ -1,3 +1,4 @@
+{if !$isMobile}
 <div class="col-4">
 <div class="row rightBlock">
    <div class="card">
@@ -13,7 +14,7 @@
 				  <table>
 				  <tr>
 					<td>
-						<i class="fs-4 fw-bolder text-muted">{$login}</i>
+						<b>{$login}</b>
 					</td>
 					{if $user_group != 5}
 					<td class="logout">
@@ -74,3 +75,4 @@
       </div>
 </div>
 </div>
+{/if}

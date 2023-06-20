@@ -30,14 +30,15 @@
 			   <span>Надежность пароля: <b id="passStrength"></b></span>
 			   
                <div class="c-captcha">
-                  <div class="g-recaptcha" data-sitekey="6LcKeBoiAAAAAGnhfzZnLyzUApLmgnOpP4OfFOB7" data-theme="Light"></div>
+                  <div class="g-recaptcha" data-sitekey="{siteKey}" data-theme="Light"></div>
 				  <script src="https://www.google.com/recaptcha/api.js?hl={$lang['wysiwyg_language']}" async defer></script>
                </div>
-               <label for="acceptForm" class="checkbox_container">
-               Даю согласие на обработку персональных данных <i class="fa fa-address-card" aria-hidden="true"></i>
-               <input type="checkbox" style="display: none;" name="acceptForm" value="1">
-               <span class="checkmark"></span>
-               </label>
+			   
+			   	<label for="personalData" class="checkbox_container">
+					 Даю согласие на обработку персональных данных <i class="fa fa-address-card" aria-hidden="true"></i>
+					<input type="checkbox" style="display: none;" name="personalData" id="personalData">
+					<span class="checkmark"></span>
+				</label>
                <input name="userAction" class="input" type="hidden" value="register" />
                <button type="submit" class="login">Зарегистрироваться <i class="fa fa-user-plus" aria-hidden="true"></i></button>
             </form>

@@ -36,10 +36,10 @@ img {
 }
 
 .formContent {
-    width: 30vw;
 	max-width: 512px;
     padding: 5px;
-    margin: 10% auto;
+    margin: 10%;
+	font-size: 1rem;
 }
 
 .siteContent {
@@ -73,12 +73,12 @@ img {
 }
 
 .rightBlock .card {
-    margin: 0 10 15;
+	margin: 0 10 15;
     max-width: 300px;
     -webkit-box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
     -moz-box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
     box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
-    background: linear-gradient(156deg, #805511de, #8568079c) !important;
+    background: linear-gradient(156deg, #805511, #929089) !important;
 }
 
 .rightBlock .card:last-child {
@@ -150,10 +150,11 @@ nav .nav-item > a {
 
 .pageRoot .page-content {
 	height: fit-content;
+	font-size: 1.5rem;
 }
 
 .page-content .formContent h1 {
-    font-size: 28px;
+    font-size: 18pt;
     font-weight: 700;
     font-family: 'FSElliotPro-Heavy';
     color: #894324;
@@ -290,14 +291,12 @@ section {
 
 .userProfile .userdata {
     margin: 10px 0px 0px;
-    font-size: 11pt;
-	background: #d59845cc;
+    font-size: 1rem;
 	width: 100%;
 }
 
-.userProfile .loginBox {
-	font-size: 1vw;
-    background: #57472e;
+.userProfile .loginBox b {
+	font-size: 2rem;
 }
 
 .userProfile table tr td .loginInner {
@@ -402,7 +401,7 @@ ul > li {
 	margin: 5px 10px;
     padding: 5px;
     border-radius: 5px;
-	font-size: 1vw;
+	font-size: 2rem;
 }
 
 .statusBlock img.info {

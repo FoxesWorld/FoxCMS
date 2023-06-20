@@ -45,6 +45,8 @@ if (!defined('FOXXEY')) {
 			$this->smarty->assign("isLogged",   init::$usrArray['isLogged']);
 			$this->smarty->assign("builtInJS", $smartyUtils->assignJs());
 			$this->smarty->assign("systemHeaders", $PluginsScanner->outString);
+			$this->smarty->assign("isMobile", init::$deviceType->isMobile());
+			
 			$smartyUtils->assignUserFields($this->smarty);
 			$this->readTplVars();			
 			return $this->smarty;
@@ -56,7 +58,7 @@ if (!defined('FOXXEY')) {
 			$thisTpl = ROOT_DIR."/templates/".$config['siteTpl'];
 			$cfgFile = $thisTpl.DIRECTORY_SEPARATOR.'cfg'.DIRECTORY_SEPARATOR.$this->tplConfFile;
 			if(file_exists($cfgFile)){
-				$readArray = array("title", "status", "desc", "keywords", "contactEmail", "contactPhone");
+				$readArray = array("title", "status", "desc", "keywords", "contactEmail", "contactPhone", "ServiceVersion");
 				$fileContent = json_decode(file::efile($cfgFile)['content'], true);
 				foreach($readArray as $val){
 					$this->smarty->assign($val, $fileContent[$val]);

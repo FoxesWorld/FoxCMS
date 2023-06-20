@@ -15,7 +15,7 @@
 				<tr>
 					<td colspan="2">
 					<div class="input_block animate__animated animate__fadeInRight">
-						<input id="login" class="input" focusable="false" autocomplete="off" required name='login'>
+						<input name="login" class="input" focusable="false" autocomplete="off" required >
 						<label class="label">Логин</label>
 					</div>
 					</td>
@@ -27,7 +27,7 @@
 					</td>
 					<td>
 						<div class="input_block animate__animated animate__fadeInLeft">
-							<input id="password" class="input" type="password" focusable="false" autocomplete="off" required name="password">
+							<input name="password" class="input" type="password" focusable="false" autocomplete="off" required >
 							<label class="label">Пароль</label>
 						</div>
 					</td>
@@ -44,7 +44,7 @@
 
 				
 				<div class="c-captcha">
-					<div class="g-recaptcha" data-callback="fillResponse" data-sitekey="6LcKeBoiAAAAAGnhfzZnLyzUApLmgnOpP4OfFOB7" data-theme="Light"></div>
+					<div class="g-recaptcha" data-callback="fillResponse" data-sitekey="{siteKey}" data-theme="Light"></div>
 					<script src="https://www.google.com/recaptcha/api.js?hl={$lang['wysiwyg_language']}" async defer></script>
 				</div>
 

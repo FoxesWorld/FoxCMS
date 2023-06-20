@@ -15,7 +15,7 @@ session_start();
 		
 		private $initHelper, $ModulesLoader, $initLevels;
 		protected $debug, $logger, $db, $tpl;
-		protected static $usrArray = array(
+		protected static $deviceType, $usrArray = array(
 			'isLogged' => false,
 			'user_id' => 0,
 			'email' => "admin@foxesworld.ru",
@@ -60,8 +60,8 @@ session_start();
 			$RequestHandler = new RequestHandler($this->db);
 			init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "preInit");
 			$SystemRequests = new SystemRequests($this->db);
-			$mobile_detect = new \Detection\MobileDetect;
-			$SystemRequests->requestListener($mobile_detect);		
+			self::$deviceType = new \Detection\MobileDetect;
+			$SystemRequests->requestListener();		
 		}
 		
 		/* After init we have all modules

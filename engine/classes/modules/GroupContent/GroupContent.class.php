@@ -8,7 +8,11 @@
 if (!defined('FOXXEY')) {
     die("Hacking attempt!");
 }
-$UserOptions = new UserOptions($this->db, $this->logger);
+if(@functions::userExists(self::$usrArray['login'], $this->db)) {
+	$UserOptions = new UserOptions($this->db, $this->logger);
+} else {
+	//functions::jsonAnswer("User ".self::$usrArray['login']." not found!", true);
+}
 
 class UserOptions extends init {
 

@@ -2,7 +2,7 @@ const App = new Vue({
     delimiters: ["<%", "%>"],
     el: '#content',
     data: {
-        contentData: FoxEngine.loadPage("Objects", '#content')
+        contentData: FoxEngine.loadPage("faq", '#content')
     },
 
     mounted() {

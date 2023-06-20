@@ -2,7 +2,7 @@
    <div class="container footer--flex">
       <div class="footer-copyright">
          {$title} {$status} <b>{$year}</b>
-		 <span>Powered by {$webserviceName} <img /></span>
+		 <span>Powered by {$webserviceName} v.{$ServiceVersion}<img /></span>
       </div>
 
       <ul class="footer-end">

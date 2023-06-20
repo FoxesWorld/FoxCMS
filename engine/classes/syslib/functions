@@ -12,20 +12,24 @@ if (!defined('FOXXEY')) {
 	$collectedData = array();
 	if(is_array($data)){
 			foreach($data as $key => $value){
-				if($captchaCheck && $config['reCaptchaCheck']) {
-					$reCaptcha = new ReCaptcha($config['reCaptchaSecret']);
-					if($key === 'g-recaptcha-response'){
-						$resp = $reCaptcha->verifyResponse(REMOTE_IP, $value);
-						if (!$resp->success) {
-							self::jsonAnswer($lang["enterCaptcha"], true);
+				switch($key){
+					case "g-recaptcha-response":
+						if($captchaCheck && $config['reCaptchaCheck']) {
+							$reCaptcha = new ReCaptcha($config['reCaptchaSecret']);
+							if($key === 'g-recaptcha-response'){
+								$resp = $reCaptcha->verifyResponse(REMOTE_IP, $value);
+								if (!$resp->success) {
+									self::jsonAnswer($lang["enterCaptcha"], true);
+								}
+							}
 						}
-					}
-				}
-
-				if(strpos($key, 'acceptForm') !== false) {
-						if($value == null){
+					break;
+					
+					case "personalData":
+						if(!$value){
 							self::jsonAnswer($lang["acceptCheckbox"], true);
 						}
+					break;
 				}
 				$collectedData[$key] = self::filterString($value);
 			}
@@ -292,6 +296,11 @@ if (!defined('FOXXEY')) {
 			}
 			$response = '{"message": "'.$answer.'", "type": "'.$type.'"}';			
 			die($response);
+		}
+		
+		public static function userExists($user, $db){
+			$query = "SELECT * FROM `users` WHERE login = '".$user."'";
+			return $db->getRow($query);
 		}
 	
 	}

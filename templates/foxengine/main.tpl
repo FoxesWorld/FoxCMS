@@ -33,7 +33,7 @@
       
       <div class="container">
          <div class="row siteContent">
-            <div class="col-8">
+            <div class="{if !$isMobile}col-8{else}container{/if}">
                <div id="content" class="mainBlock">
 			   {if $user_group == 5}
 				   <span id="test" style="height: 512px;width: auto;display: block; border: 2px solid #998f98ad; border-radius: 10px;"></span>
