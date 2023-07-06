@@ -68,7 +68,6 @@ useroption {
 
 [type=button], [type=reset], [type=submit], button {
 	font-family: 'FSElliotPro-Bold';
-	color: white;
 	min-width: 110px;
 }
 

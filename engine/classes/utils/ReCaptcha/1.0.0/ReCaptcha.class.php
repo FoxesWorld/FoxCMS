@@ -22,7 +22,7 @@ class ReCaptcha
 	
         $this->_secret=$secret;
 		
-		if($config['reCaptchaCheck'] === 3) {
+		if($config['securitySetings']['reCaptchaCheck'] === 3) {
 			$this->_siteVerifyUrl = "https://hcaptcha.com/siteverify?";
 			$this->_hcaptha = true;
 		}

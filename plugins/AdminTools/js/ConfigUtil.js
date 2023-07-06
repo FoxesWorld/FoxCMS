@@ -1,4 +1,7 @@
-function configParse() {
+
+	function configParse() {
+
+	
     let cfgHTML;
     let answer = request.send_post({
         admPanel: "cfgParse"

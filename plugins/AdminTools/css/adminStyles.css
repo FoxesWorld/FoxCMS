@@ -11,155 +11,320 @@
 	min-height: 100%;
 }
 
-/*
-.adminPanel .tabs {
-    width: initial;
-    padding: 0px;
-    margin: 0 auto;
+.panel {
+    border-radius: 0px;
+    margin-bottom: 20px;
+    border-width: 0;
+    color: #333333;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24)
+}
+
+.panel.has-scroll {
+    max-width: 100%;
+    overflow-x: auto
+}
+
+.panel-flat > .panel-heading + .table,.panel-flat > .panel-heading + .table-responsive {
+    border-top: 1px solid #ddd
+}
+
+.panel[class*=bg-] > .panel-heading {
+    border-color: rgba(255,255,255,0.2)
+}
+
+@media (max-width: 768px) {
+    .panel[class*=bg-] > .panel-heading {
+        background-color:inherit
+    }
+}
+
+.panel[class*=bg-].panel-flat > .panel-heading {
+    border-bottom-color: transparent
+}
+
+.panel[class*=bg-] .panel-title {
+    color: #fff
+}
+
+.panel[class*=bg-] .table thead td,.panel[class*=bg-] .table tbody td,.panel[class*=bg-] .table thead th,.panel[class*=bg-] .table tbody th {
+    border-color: rgba(255,255,255,0.1)
+}
+
+.panel[class*=bg-] .text-muted,.panel[class*=bg-] .help-block,.panel[class*=bg-] .help-inline {
+    color: rgba(255,255,255,0.8)
+}
+
+.panel-bordered {
+    border-width: 1px
+}
+
+.panel[class*=border-top-] {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0
+}
+
+.panel[class*=border-top-]:not(.border-top-lg):not(.border-top-xlg) {
+    border-top-width: 1px
+}
+
+.panel[class*=border-bottom-] {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0
+}
+
+.panel[class*=border-bottom-]:not(.border-bottom-lg):not(.border-bottom-xlg) {
+    border-bottom-width: 1px
+}
+
+.panel[class*=border-left-] {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0
+}
+
+.panel[class*=border-left-]:not(.border-left-lg):not(.border-left-xlg) {
+    border-left-width: 1px
+}
+
+.panel[class*=border-right-] {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0
+}
+
+.panel[class*=border-right-]:not(.border-right-lg):not(.border-right-xlg) {
+    border-right-width: 1px
+}
+
+.panel-body {
+    position: relative
+}
+
+.panel-flat > .panel-heading + .panel-body {
+    padding-top: 0
+}
+
+.panel-body + .panel-body,.panel-body + .table,.panel-body + .table-responsive,.panel-body.has-top-border {
+    border-top: 1px solid #ddd
+}
+
+.panel[class*=bg-] .panel-body + .panel-body,.panel[class*=bg-] .panel-body + .table,.panel[class*=bg-] .panel-body + .table-responsive,.panel[class*=bg-] .panel-body.has-top-border {
+    border-top-color: rgba(255,255,255,0.5)
+}
+
+.panel-body-accent {
+    background-color: #fcfcfc
+}
+
+.panel[class*=bg-] .panel-body-accent {
+    background-color: rgba(0,0,0,0.1)
+}
+
+.panel-heading {
     position: relative;
-    font-size: 0.95vw;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px
 }
 
-.adminPanel p {
-    margin: 0;
+.panel-bordered > .panel-heading {
+    margin: 0
 }
 
-.adminPanel > .tabs > input[type="radio"] {
-    display: none;
+.panel-flat > .panel-heading {
+    background-color: #fff
 }
 
-.adminPanel > .tabs >label {
-	display: table-cell;
-	transition: 0.3s;
-	border-right: 2px solid;
+.panel-flat > .panel-heading > .panel-title {
+    margin-top: 2px;
+    margin-bottom: 2px
 }
 
-.adminPanel th {
-	vertical-align: middle;
+.panel-flat > .panel-heading + .tab-content > .has-padding {
+    padding-top: 0
 }
 
-.adminPanel > .tabs > label:not(.selectedPage) {
-    display: table-cell;
-    width: 180px;
-    padding: 15px;
-    color: #4F5966;
-    background: #b77c4c;
-    cursor: pointer;
+.panel-flat[class*=bg-] > .panel-heading {
+    background-color: inherit
 }
 
-.adminPanel #usersList .noUsers {
-	
+.panel-heading[class*=bg-],.panel-primary .panel-heading,.panel-danger .panel-heading,.panel-success .panel-heading,.panel-warning .panel-heading,.panel-info .panel-heading {
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px
 }
 
-.adminPanel #usersList .noUsers h1 {
-	font-size: 13pt;
+.panel-white > .panel-heading {
+    background-color: #fff;
+    border-bottom-color: #ddd
 }
 
-.adminPanel #usersList .noUsers span {
-	color: darkorange;
-    font-family: 'Minecraft';
-    font-size: 13pt;
+.panel-title {
+    position: relative;
+    font-size: 13px
 }
 
-#tab1:checked ~ #content1, #tab2:checked ~ #content2, #tab3:checked ~ #content3, #tab4:checked ~ #content4 {
-    display: block;
-    width: inherit;
+.panel-title.text-size-mini {
+    font-size: 11px
 }
 
-.adminButtonCover {
-	background: #ffda9a;
-    padding: 10px;
-    margin: 15px;
+.panel-title.text-size-small {
+    font-size: 12px
+}
+
+.panel-title.text-size-large {
+    font-size: 14px
+}
+
+a.panel-title {
+    display: block
+}
+
+.panel-title img {
+    max-height: 20px;
     display: inline-block;
-    border-radius: 15px;
+    vertical-align: top
 }
 
-.adminButtonCoverRed {
-	background: #a8141b;
-    padding: 10px;
-    margin: 5px;
-    font-size: 20px;
-    display: inline-block;
-    border-radius: 15px;
+.panel-title > small:not(.display-block),.panel-title > .small:not(.display-block) {
+    margin-left: 5px
 }
 
-.adminPanel section {
-    animation: scale 0.7s ease-in-out;
+h1.panel-title,.h1.panel-title {
+    font-size: 25px
 }
 
-.module {
-    border: 1px solid;
-    border-radius: 5px;
-    margin: 5px;
-    background: linear-gradient(156deg, #dccba9a8, #ff9a00) !important;
+h2.panel-title,.h2.panel-title {
+    font-size: 23px
 }
 
-.module .moduleName {
-    padding: 5px;
+h3.panel-title,.h3.panel-title {
+    font-size: 21px
 }
 
-.module .moduleSettings {
-    float: right;
-    background: #d1ab48;
-    margin: -1px;
-    padding: 5;
-    border-radius: 0px 5px 0px;
+h4.panel-title,.h4.panel-title {
+    font-size: 19px
 }
 
-.module .moduleSettings:hover {
-    transition: 0.5s;
-    background: #9f8f37;
+h5.panel-title,.h5.panel-title {
+    font-size: 17px
 }
 
-.module .moduleContents {
-    padding: 5;
+h6.panel-title,.h6.panel-title {
+    font-size: 15px
 }
 
-.module .moduleContents .moduleKey {
-    font-family: 'GothamPro';
-    color: #de6d22;
+.panel-footer {
+    position: relative
 }
 
-.module .moduleContents .moduleValue {
-    font-weight: inherit;
+.panel-footer:after {
+    content: '';
+    display: table;
+    clear: both
 }
 
-.module .moduleContents li {
-    margin: 0;
+.panel-footer .form-control,.panel-footer .selectboxit-btn,.panel-footer .multiselect.btn-default,.panel-footer .bootstrap-select .btn-default,.panel-footer .select2-selection--single:not([class*=bg-]):not([class*=border-]) {
+    border-color: transparent!important;
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important
 }
 
-.module .modulePriority {
-    height: 32;
-    width: fit-content;
+.panel-footer-transparent {
+    background-color: transparent;
+    border-top: 0;
+    padding-top: 0;
+    padding-bottom: 11px
 }
 
-.module .modulePicture {
-    float: left;
-    padding: 5;
+.panel-footer-condensed {
+    padding-top: 2px;
+    padding-bottom: 2px
 }
 
-.module td {
-    display: contents;
+.panel-footer-bordered {
+    background-color: #fff;
+    padding-right: 0;
+    margin-left: 20px;
+    margin-right: 20px
 }
 
-@keyframes scale {
-    0% {
-        transform: scale(0.9);
-        opacity: 0;
-    }
-
-    50% {
-        transform: scale(1.005);
-        opacity: 0.5;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+.panel > .panel-body + .table,.panel > .panel-body + .table-responsive {
+    border-top-width: 0
 }
 
-.cfgRow {
-    min-height: 120px;
-    border-bottom: 1px solid;
-} */
+.panel-group-control .panel-title > a {
+    padding-left: 26px;
+    display: inline-block
+}
+
+.panel-group-control .panel-title > a:before {
+    content: '\f068';
+    font-family: 'FontAwesome';
+    position: absolute;
+    top: 50%;
+    margin-top: -8px;
+    left: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+.panel-group-control .panel-title > a.collapsed:before {
+    content: '\e9b8'
+}
+
+.panel-group-control.panel-group-control-right .panel-title > a {
+    padding-left: 0;
+    padding-right: 26px
+}
+
+.panel-group-control.panel-group-control-right .panel-title > a:before {
+    left: auto;
+    right: 0
+}
+
+.panel-default {
+    border-color: transparent
+}
+
+.panel-primary {
+    border-color: transparent
+}
+
+.panel-primary.panel-bordered {
+    border-color: #2196F3
+}
+
+.panel-success {
+    border-color: transparent
+}
+
+.panel-success.panel-bordered {
+    border-color: #4CAF50
+}
+
+.panel-info {
+    border-color: transparent
+}
+
+.panel-info.panel-bordered {
+    border-color: #00BCD4
+}
+
+.panel-warning {
+    border-color: transparent
+}
+
+.panel-warning.panel-bordered {
+    border-color: #FF5722
+}
+
+.panel-danger {
+    border-color: transparent
+}
+
+.panel-danger.panel-bordered {
+    border-color: #F44336
+}

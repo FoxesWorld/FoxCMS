@@ -15,7 +15,7 @@
 					$this->content = $UFR->replaceUserTags($userData);
 					$BAC = new BlockAccessCheck($this->content, $userData);
 					$this->content = $BAC->checkBlocks();
-					$replaceValuesArray = explode(',', $config['OptionReplaceValues']);
+					$replaceValuesArray = explode(',', $config['other']['OptionReplaceValues']);
 					for($i = 0; $i < count($replaceValuesArray); $i++) {
 						$replaceInstance = explode('->', $replaceValuesArray[$i]);
 						$ValuesReplacement = new ValuesReplacement($replaceInstance[0], $replaceInstance[1], $this->content);

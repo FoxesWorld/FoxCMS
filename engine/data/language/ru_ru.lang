@@ -89,5 +89,11 @@
 		"canEditGroup-title" => "Группы, которым разрешено редактировать профиль",
 		"canEditGroup-desc" => "",
 		
+		/*Tabs*/
+		"databaseTab" => "База данных",
+		"siteSettingsTab" => "Настройки сайта",
+		"securitySetingsTab" => "Безопасность",
+		"otherTab" => "Другое",
+		
 		"configChanged" => "Конфигурация изменена"
 	);

@@ -74,11 +74,11 @@ img {
 
 .rightBlock .card {
 	margin: 0 10 15;
-    max-width: 300px;
-    -webkit-box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
-    -moz-box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
-    box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
-    background: linear-gradient(156deg, #805511, #929089) !important;
+	max-width: 300px;
+	-webkit-box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
+	-moz-box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
+	box-shadow: 0 5px 20px 0 rgb(31 31 28 / 50%);
+	background: linear-gradient(156deg, #07375b, #55a4af) !important;
 	border: 0;
 }
 
@@ -121,6 +121,11 @@ img {
     border: 0;
 }
 
+#profileContents > table > tbody > tr > td > img {
+    height: 64px;
+    margin: 5px;
+}
+
 /*--------------------------------------------------------------
 # Navigation
 --------------------------------------------------------------*/
@@ -144,14 +149,15 @@ nav .nav-item > a {
 # Page tmplate
 --------------------------------------------------------------*/
 .pageRoot {
-    background: #594316a1;
+    background: #f6efed;
     border-radius: 5px;
-	display: grid;
+    display: grid;
 }
 
 .pageRoot .page-content {
 	height: fit-content;
 	font-size: 1.5rem;
+	margin: 5px;
 }
 
 .page-content .formContent h1 {
@@ -164,8 +170,8 @@ nav .nav-item > a {
 }
 
 .pageRoot .page-title {
-    background: #97763f;
-	border-radius: 5px 5px 0px 0px;
+    background: #1f7396;
+    border-radius: 5px 5px 0px 0px;
 }
 
 .pageRoot .page-title h1 {
@@ -183,11 +189,11 @@ nav .nav-item > a {
 # Top Bar
 --------------------------------------------------------------*/
 .bar {
-    background: linear-gradient(156deg, #805511de, #3a3230) !important;
+    background: linear-gradient(156deg, #08162f, #3c91a4) !important;
     font-size: 14px;
     padding: 0;
     color: rgba(255, 255, 255, 0.8);
-	display: flex;
+    display: flex;
 }
 
 #topbar .leftAction i {

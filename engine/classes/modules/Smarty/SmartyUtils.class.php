@@ -8,7 +8,7 @@
 		
 		protected function assignUserFields($smarty) {
 			global $config;
-			$fieldsArray = explode(",", $config['userFieldsArray']);
+			$fieldsArray = explode(",", $config['other']['userFieldsArray']);
 			foreach($fieldsArray as $key){
 				@$smarty->assign($key, init::$usrArray[$key]);
 			}

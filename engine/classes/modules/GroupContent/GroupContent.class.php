@@ -40,7 +40,7 @@ class UserOptions extends init {
         global $config;
         init::requireNestedClasses(basename(__FILE__), __DIR__);
 		init::classUtil('CheckUserAccess', "1.0.0");
-        $this->allOptionsFilling(TEMPLATE_DIR.$config['userOptions']);
+        $this->allOptionsFilling(TEMPLATE_DIR.$config['other']['userOptions']);
         $this->userOptionsArrayFilling();
         $this->userMenuBuild();
         $GetMenu = new GetMenu(init::$usrArray['login']);

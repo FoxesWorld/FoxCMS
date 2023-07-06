@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set($config['timezone']);
+date_default_timezone_set($config['other']['timezone']);
 if (!defined('FOXXEY')) {
 	die ('{"message": "Not in FOXXEY thread"}');
 }

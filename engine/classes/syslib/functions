@@ -6,36 +6,62 @@ if (!defined('FOXXEY')) {
 		
 	private static $filterSymbols = array ("\x22", "\x60", "\t", '\n', '\r', "\n", "\r", '\\', ",", "¬", ";", ":", "~", "[", "]", "{", "}", ")", "(", "*", "^", "%", "$", "<", ">", "?", "!", '"', "'", "&", '"' );
 		
-	public static function collectData($data, $captchaCheck = false){
+	public static function collectData($data, $captchaCheck = false, $acceptCheckbox = false){
 	init::classUtil('ReCaptcha', "1.0.0");
 	global $lang, $config;
 	$collectedData = array();
+	if($acceptCheckbox) {
+		if(!isset($data['checkboxAccept']) || $data['checkboxAccept'] === 'false') {
+			self::jsonAnswer($lang["acceptCheckbox"], true);
+		}
+	}
 	if(is_array($data)){
 			foreach($data as $key => $value){
 				switch($key){
+
 					case "g-recaptcha-response":
-						if($captchaCheck && $config['reCaptchaCheck']) {
-							$reCaptcha = new ReCaptcha($config['reCaptchaSecret']);
-							if($key === 'g-recaptcha-response'){
-								$resp = $reCaptcha->verifyResponse(REMOTE_IP, $value);
-								if (!$resp->success) {
-									self::jsonAnswer($lang["enterCaptcha"], true);
-								}
+						if($captchaCheck && $config['securitySetings']['reCaptchaCheck']) {
+							$reCaptcha = new ReCaptcha($config['securitySetings']['reCaptchaSecret']);
+							$resp = $reCaptcha->verifyResponse(REMOTE_IP, $value);
+							if (!$resp->success) {
+								self::jsonAnswer($lang["enterCaptcha"], true);
 							}
 						}
 					break;
 					
-					case "personalData":
-						if(!$value){
-							self::jsonAnswer($lang["acceptCheckbox"], true);
-						}
-					break;
+
 				}
 				$collectedData[$key] = self::filterString($value);
 			}
 		}
 		return $collectedData;
 	}
+	
+	public static function check_xss() {
+		$url = html_entity_decode( urldecode( $_SERVER['QUERY_STRING'] ), ENT_QUOTES, 'ISO-8859-1' );
+		$url = str_replace( "\\", "/", $url );
+		
+		if( $url ) {			
+			if( (strpos( $url, '<' ) !== false) || (strpos( $url, '>' ) !== false) || (strpos( $url, './' ) !== false) || (strpos( $url, '../' ) !== false) || (strpos( $url, '\'' ) !== false) || (strpos( $url, '.php' ) !== false) ) {
+				if( $_GET['do'] != "search" OR $_GET['subaction'] != "search" ) {
+					header( "HTTP/1.1 403 Forbidden" );
+					die( "Hacking attempt!" );
+				}
+			}
+		}
+		
+		$url = html_entity_decode( urldecode( $_SERVER['REQUEST_URI'] ), ENT_QUOTES, 'ISO-8859-1' );
+		$url = str_replace( "\\", "/", $url );
+		if( $url ) {
+			if( (strpos( $url, '<' ) !== false) || (strpos( $url, '>' ) !== false) || (strpos( $url, '\'' ) !== false) ) {
+				if( $_GET['do'] != "search" OR $_GET['subaction'] != "search" ) {
+					header( "HTTP/1.1 403 Forbidden" );
+					die( "Hacking attempt!" );
+				}
+			}
+		}
+	}
+
 	
 	public static function getStrBetween($string, $start, $end)	{
 		$result = array();
@@ -84,6 +110,14 @@ if (!defined('FOXXEY')) {
 			}
 		}
 	}
+	
+	public static function isJson($data) {
+        if (!empty($data)) {
+            return is_string($data) && 
+              is_array(json_decode($data, true)) ? true : false;
+        }
+        return false;
+    }
 
 	private static function getPhrase($number, $titles){
 			$cases = array(

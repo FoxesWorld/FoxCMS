@@ -12,10 +12,13 @@
 			global $config;
 			$this->content = $content;
 				if(stripos($this->content, $key)) {
-					echo "<script>console.log('".$key." -> ".$value."')</script>";
 					$existance = functions::getStrBetween($value, "cfgVal(", ")")[0];
+	
 					if($existance){
-						$value = $config[$existance];
+						$keyVal = explode("|",$existance);	
+						$unit = $keyVal[0];
+						$unitVal = $keyVal[1];
+						$value = $config[$unit][$unitVal];
 					}
 					$this->content = preg_replace("{".$key."}", $value, $this->content);
 

@@ -11,7 +11,7 @@
 		protected function replaceUserTags($userData){
 			global $config;
 			$value = "";
-			$fieldsArray = explode(",", $config['userFieldsArray']);
+			$fieldsArray = explode(",", $config['other']['userFieldsArray']);
 			foreach($fieldsArray as $key){
 				$searchField = '['.$key.']';
 				if(strpos($this->content, $searchField)) {

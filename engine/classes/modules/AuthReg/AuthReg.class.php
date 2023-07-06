@@ -82,6 +82,7 @@
 				
 				case 'checkPass':
 					init::classUtil('PasswordStrength', "1.0.0");
+					$this->logger->WriteLine("Checking a password '".$request['password']."'");
 					die(json_encode(new PasswordStrength($request['password'])));
 				break;
 				

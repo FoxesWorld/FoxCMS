@@ -12,7 +12,7 @@ function foxEngine(login) {
     let replacedTimes = 0;
     let optNamesArr = new Array();
 
-    this.loadPage = function(page, block) {
+    this.loadPage = async function(page, block) {
         let delay, option, content, func;
         let parser = new DOMParser();
         if (page !== selectPage.thisPage && selectPage.thisPage !== undefined) {
@@ -21,7 +21,7 @@ function foxEngine(login) {
                 behavior: 'smooth'
             });
 
-            let optionContent = request.send_post({
+            let optionContent = await request.send_post({
                 "getOption": page
             });
 
@@ -56,10 +56,11 @@ function foxEngine(login) {
                 }
             }
         }
+		FoxesInput.formInit(100);
     };
 
-    this.getLastUser = function() {
-        let lastUserReq = request.send_post({
+    this.getLastUser = async function() {
+        let lastUserReq = await request.send_post({
             userAction: "lastUser"
         });
         lastUserReq.onreadystatechange = function() {
@@ -111,8 +112,8 @@ function foxEngine(login) {
 		return data.getElementsByTagName(tag)[0];
 	}
 
-    this.userAction = function() {
-        let answer = request.send_post({
+    this.userAction = async function() {
+        let answer = await request.send_post({
             user_doaction: "greeting"
         });
         answer.onreadystatechange = function() {
@@ -165,9 +166,10 @@ function foxEngine(login) {
     };
     /* USER OPTIONS*/
 
-    this.parseUsrOptionsMenu = function() {
-        if (optNamesArr.length <= optionAmount) FoxEngine.debugSend('Using FoxesWorld UserOptions', 'background: #39312fc7; color: yellow; font-size: 14pt');
-        let usrOptions = request.send_post({
+    this.parseUsrOptionsMenu = async function() {
+        if (optNamesArr.length <= optionAmount) 
+			FoxEngine.debugSend('Using FoxesWorld UserOptions', 'background: #39312fc7; color: yellow; font-size: 14pt');
+        let usrOptions = await request.send_post({
             "getUserOptionsMenu": replaceData.login
         });
         if (replaceData.isLogged) {
@@ -215,8 +217,8 @@ function foxEngine(login) {
         }
     }
 
-    this.showUserProfile = function(userDisplay) {
-        let userProfile = request.send_post({
+    this.showUserProfile = async function(userDisplay) {
+        let userProfile = await request.send_post({
             "userDisplay": userDisplay,
             "user_doaction": "ViewProfile"
         });
@@ -229,8 +231,8 @@ function foxEngine(login) {
 		location.hash = 'user/' + userDisplay;
     };
 
-    this.showProfilePopup = function(user) {
-        let userProfilePopup = request.send_post({
+    this.showProfilePopup = async function(user) {
+        let userProfilePopup = await request.send_post({
             "userDisplay": user,
             "user_doaction": "ViewProfile"
         });
@@ -250,8 +252,8 @@ function foxEngine(login) {
     };
 	
 	/*Badges*/
-	this.parseBadges = function(user){
-		let badgesInstance = request.send_post(
+	this.parseBadges = async function(user){
+		let badgesInstance = await request.send_post(
 		{
 			user_doaction: 'GetBadges',
 			userDisplay: user

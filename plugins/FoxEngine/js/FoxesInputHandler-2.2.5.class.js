@@ -103,13 +103,24 @@ function inputHandler() {
 					break;
 					
 					case "error":
+						captchaReset();
 						//$.growl.error({ title: "Информация", message: response.message});
+					break;
+					
+					case "warn":
+						captchaReset();
 					break;
 				}
 
 			}
 		};
 	};
+	
+	captchaReset = function(){
+		if(grecaptcha.getResponse().length > 0) {
+			grecaptcha.reset();
+		}
+	}
 	
 	userDelay = function(userGroup){
 		let delay = 0;

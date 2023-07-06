@@ -25,7 +25,7 @@ if (!defined('FOXXEY')) {
 			$this->smarty 					= $tpl;
 			$this->smarty->debugging 		= false;
 			$this->smarty->cache_lifetime 	= 120;
-			$this->smarty->template_dir 	= ROOT_DIR.'/templates/'.$config['siteTpl'];
+			$this->smarty->template_dir 	= ROOT_DIR.'/templates/'.$config['siteSettings']['siteTpl'];
 			$this->smarty->compile_dir 		= ENGINE_DIR.'/cache/compile/';
 			$this->smarty->cache_dir 		= ENGINE_DIR.'/cache/cache/';
 			$this->smartyAssign();
@@ -39,8 +39,8 @@ if (!defined('FOXXEY')) {
 			
 			//@Deprecated
 			$this->smarty->assign("year", date("Y"));
-			$this->smarty->assign("tplDir", "/templates/".$config['siteTpl']);
-			$this->smarty->assign("webserviceName", $config['webserviceName']);
+			$this->smarty->assign("tplDir", "/templates/".$config['siteSettings']['siteTpl']);
+			$this->smarty->assign("webserviceName", $config['other']['webserviceName']);
 			$this->smarty->assign("isLogged",   init::$usrArray['isLogged']);
 			$this->smarty->assign("builtInJS", $smartyUtils->assignJs());
 			$this->smarty->assign("systemHeaders", $PluginsScanner->outString);
@@ -55,7 +55,7 @@ if (!defined('FOXXEY')) {
 			global $config;
 			$readArray = array("siteTitle", "siteStatus", "siteDesc", "keywords", "contactEmail", "contactPhone", "ServiceVersion");
 			foreach($readArray as $val){
-				$this->smarty->assign($val, $config[$val]);
+				$this->smarty->assign($val, $config['siteSettings'][$val]);
 			}
 		}	
 	}
