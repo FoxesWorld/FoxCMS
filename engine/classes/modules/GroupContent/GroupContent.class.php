@@ -29,6 +29,8 @@ class UserOptions extends init {
 		"page" => array('wrapper', "closer", "class"),
 		"pageContent" => array()
 	);
+	
+	private $userOptionsDir = "userOptions";
     
     protected static array $allOptionsArray = array("optionObjects" => array(), "optionNames" => array());
 
@@ -37,10 +39,9 @@ class UserOptions extends init {
     protected static $builtMenu;
 
     function __construct($db, $logger) {
-        global $config;
         init::requireNestedClasses(basename(__FILE__), __DIR__);
 		init::classUtil('CheckUserAccess', "1.0.0");
-        $this->allOptionsFilling(TEMPLATE_DIR.$config['other']['userOptions']);
+        $this->allOptionsFilling(TEMPLATE_DIR.$this->userOptionsDir);
         $this->userOptionsArrayFilling();
         $this->userMenuBuild();
         $GetMenu = new GetMenu(init::$usrArray['login']);

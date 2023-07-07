@@ -20,12 +20,16 @@
 			$cfgValArr = array();
 			$counter = 0;
 			$activeShow = 'active show';
-			$form = '
+			$form = $this->buildNav();
+			$form .= '
 			<form method="POST" action="/" id="CMSconfig">';
 			$form .= '<div class="panel panel-default">';
-			$form .= $this->buildNav();
+			
 			foreach($config as $tabName => $unitArr){
 				$cfgValArr[] = '<div class="tab-pane fade '.$activeShow.'" id="'.$tabName.'" role="tabpanel" aria-labelledby="'.$tabName.'-tab">
+				<div class="panel-body">
+					'.@$lang[$tabName.'-desc'].'
+				  </div>
 				<table class="table table-striped">';
 				$activeShow = "";
 			foreach($unitArr as $key => $val){
@@ -137,21 +141,22 @@
 		}
 		
 		private function buildNav(){
-			global $config, $lang;
-			$tabList = '<ul class="nav nav-tabs nav-tabs-solid" role="tablist">';
+			global $lang;
+			$tabList = '<div class="navbar navbar-default navbar-component" style="margin-bottom:20px;">
+			<ul class="nav nav-tabs nav-tabs-solid" role="tablist">';
 			$thisTab = '';
 			$active = "active";
-			foreach($config as $key => $val){
+			foreach(self::getUnits() as $key){
 				if($thisTab !== $key) {
 					$thisTab = $key;
 					$tabList .= '
-						<li class="nav-item" role="presentation">
+						<li class="nav-item tip-over" id="'.$thisTab.'-selector" role="presentation" title="'.@$lang[$thisTab.'-desc'].'">
 							<button class="nav-link '.$active.'" id="'.$thisTab.'-tab" data-bs-toggle="tab" data-bs-target="#'.$thisTab.'" type="button" role="tab" aria-controls="home" aria-selected="true">'.@$lang[$thisTab.'Tab'].'</button>
-						</li>';
+						</li><script>$("#'.$thisTab.'-selector").tooltip({placement: "bottom", trigger: "hover"});</script>';
 						$active = "";
 					}
 			}
-			$tabList .= '</ul>';
+			$tabList .= '</ul></div>';
 			return $tabList;
 		}
 		
@@ -168,7 +173,7 @@
 
 
 /*
-			echo "<pre>";
-			var_dump($readyUnits);
-			echo "</pre>";
-			die(); */
+	echo "<pre>";
+	var_dump($readyUnits);
+	echo "</pre>";
+	die(); */

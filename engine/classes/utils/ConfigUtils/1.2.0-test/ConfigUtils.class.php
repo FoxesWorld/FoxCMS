@@ -18,27 +18,23 @@
 		protected function buildConfigPage() {
 			global $config, $lang;
 			$cfgValArr = array();
-			$tabAdd = "";
 			$counter = 0;
+			$activeShow = 'active show';
 			$form = '
-			<form method="POST" action="/" id="CMSconfig">
-			<div class="panel panel-default">';
+			<form method="POST" action="/" id="CMSconfig">';
+			$form .= '<div class="panel panel-default">';
 			$form .= $this->buildNav();
-			foreach($config as $key => $val){
-				if(functions::isJson($val)) {
-					$json = json_decode($val);
-					$val = $json->value;
-					$tab = $json->tab;
-				}
-				$form .= '<div class="tab-content">';
-				if($tabAdd != $tab) {
-					$form .= '<div class="tab-pane fade show" id="'.$tab.'" role="tabpanel" aria-labelledby="'.$tab.'-tab">';
-				}
-				$form .= '<table class="table table-striped">';
-				if(is_bool($val)){
+			foreach($config as $tabName => $unitArr){
+				$cfgValArr[] = '<div class="tab-pane fade '.$activeShow.'" id="'.$tabName.'" role="tabpanel" aria-labelledby="'.$tabName.'-tab">
+				<table class="table table-striped">';
+				$activeShow = "";
+			foreach($unitArr as $key => $val){
+
+			if(is_bool($val)){
 				$check = "";
 				if($val) $check = 'checked';
-				$cfgValArr[] = '<tr>
+				$cfgValArr[] = '
+				<tr>
 						<td class="col-xs-6 col-sm-6 col-md-7">
 							<h6 class="media-heading text-semibold">'.@$lang[$key.'-title'].'</h6>
 							<span class="text-muted text-size-small hidden-xs">'.@$lang[$key.'-desc'].'</span>
@@ -47,8 +43,8 @@
 							<input type="checkbox" name="'.$key.'" class="switch-'.$counter.'" '.$check.' />
 						</td>
 						<script>new Switchery(document.querySelector(".switch-'.$counter.'"))</script>
-        </tr> ';
-				} else {
+				</tr> ';
+			} else {
 				$cfgValArr[] = '<tr>
 					<td class="col-xs-6 col-sm-6 col-md-7">
 						<h6 class="media-heading text-semibold">
@@ -65,21 +61,20 @@
 				if(stripos($val, ',')){
 					echo "<script>new Tagify(document.querySelector('input[name=".$key."]'))</script>";
 				}
-				if($tabAdd != $tab) {
-					$form .= '</div>';
-					$tabAdd = $tab;
-				}
+			}
+				$cfgValArr[] = '</table>
+				</div>';
 			}
 			$form .= implode('', $cfgValArr).'<input name="admPanel" class="input" type="hidden" value="setConfig" />
-				</table>
-				</div>
+				
 				<input name="refreshPage" type="hidden" value="false" />
 				<input name="playSound" type="hidden" value="false" />
+				</div>
 				<button type="submit" class="btn bg-teal btn-sm btn-raised position-left legitRipple">
 					<i class="fa fa-floppy-o position-left"></i>Сохранить
 				</button>
-				</div>
 				</form>
+				
 				';
 			return $form;
 		}
@@ -88,13 +83,20 @@
 			global $config, $lang;
 			$date = '['.date::getCurrentDate("day").'.'.date::getCurrentDate("month").'.'.date::getCurrentDate("year").']';
 			$cfgString = '';
-			$cfgValues = array();
+			$cfgValues = "";
 			$itemsNum = count($updatedCfg);
 			$i = 0;
+			$unitCount = 0;
+			$units = self::getUnits();
+			foreach($units as $unitVal){	
+				$cfgValues = '	"'.$units[$unitCount].'" => array(';
+				$thisUnit = array();
 			foreach($updatedCfg as $key => $val){
 				$sym = '';
-				if($i !== $itemsNum -1) {$sym = ',';}
-				if(isset($config[$key])) {
+				if($i !== $itemsNum -1) {
+					$sym = ',';
+				}
+				if(isset($config[$units[$unitCount]][$key])) {
 					$overrideVal = "";
 					switch($val){
 						case "true":
@@ -117,23 +119,17 @@
 							$overrideVal = '"'.$val.'"';
 						break;
 					}
-					$tabName = self::getTabName($key) ?? "";
-					switch($tabName){
-						case false:
-						case "":
-						case null:
-							$keyVal = "	'{$key}' => ". $overrideVal;
-						break;
-						
-						default:
-							$keyVal = "	'{$key}' => "."'".'{"tab": "'.$tabName.'", "value": '.$overrideVal.'}'."'";
-						break;
+					if($key !== null) {
+					$thisUnit[] = '		"'.$key.'" => '.$overrideVal;
 					}
-					$cfgValues[] = $keyVal;
 				}
 				$i++;
 			}
-			$cfgString =  '<?php '.PHP_EOL.'    /* '.$date.' */'.PHP_EOL.'$config = array('.PHP_EOL.implode(",".PHP_EOL.PHP_EOL, $cfgValues).");\n\n?>";
+			$cfgValues .= PHP_EOL.implode(",".PHP_EOL,$thisUnit).PHP_EOL.')';
+			$readyUnits[] = $cfgValues;
+			$unitCount++;
+		}
+			$cfgString =  '<?php '.PHP_EOL.'    /* '.$date.' */'.PHP_EOL.'$config = array('.PHP_EOL.implode(",".PHP_EOL.PHP_EOL, $readyUnits).");\n\n?>";
 			$status = file::efile(ENGINE_DIR.'data/config.php', false, $cfgString);
 			if($status){
 				functions::jsonAnswer($lang['configChanged'], false);
@@ -141,32 +137,44 @@
 		}
 		
 		private function buildNav(){
-			global $config;
-			$tabList = '<ul class="nav nav-tabs nav-tabs-solid" role="tablist">';
+			global $lang;
+			$tabList = '<div class="navbar navbar-default navbar-expand-lg bg-light">
+				<div class="container-fluid">
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+				  <span class="navbar-toggler-icon"></span>
+				</button>
+			<ul class="nav nav-tabs nav-tabs-solid" role="tablist">
+			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">';
 			$thisTab = '';
-			$active = false;
-			foreach($config as $key => $val){
-				if(functions::isJson($val)) {
-					$json = json_decode($val);
-					$val = $json->value;
-					$tab = $json->tab;
-					if($thisTab !== $tab) {
-					$thisTab = $tab;
+			$active = "active";
+			foreach(self::getUnits() as $key){
+				if($thisTab !== $key) {
+					$thisTab = $key;
 					$tabList .= '
 						<li class="nav-item" role="presentation">
-							<button class="nav-link" id="'.$tab.'-tab" data-bs-toggle="tab" data-bs-target="#'.$tab.'" type="button" role="tab" aria-controls="home" aria-selected="true">'.$tab.'</button>
+							<button class="nav-link '.$active.'" id="'.$thisTab.'-tab" data-bs-toggle="tab" data-bs-target="#'.$thisTab.'" type="button" role="tab" aria-controls="home" aria-selected="true">'.@$lang[$thisTab.'Tab'].'</button>
 						</li>';
+						$active = "";
 					}
-				}
 			}
-			$tabList .= '</ul>';
+			$tabList .= '</ul></div></div></div>';
 			return $tabList;
 		}
 		
-		private static function getTabName($key){
+		private static function getUnits(){
 			global $config;
-			return json_decode($config[$key])->tab ?? false;
+			$units = array();
+			foreach($config as $key => $val){
+				$units[] = $key;
+			}
+			return $units;
 		}
+
 	}
 
 
+/*
+	echo "<pre>";
+	var_dump($readyUnits);
+	echo "</pre>";
+	die(); */

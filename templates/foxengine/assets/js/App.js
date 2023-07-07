@@ -16,7 +16,6 @@ const App = new Vue({
     created: function() {
         FoxEngine.debugSend('Foxengine started!');
 		FoxEngine.getLastUser();
-		FoxesInput.formInit(100);
 		$("#dialog").dialog({
 			autoOpen: false,
 			show: 'fade',
@@ -50,6 +49,7 @@ const App = new Vue({
 				let replaceValue = location.hash.split('#'+linkTypes[k].keyWord+'/')[1];
 				let runFunc = linkTypes[k].action.replace('[arg]', '"'+replaceValue+'"');
 				eval(runFunc);
+				//FoxesInput.formInit(100);
 			}
 		}
 	}

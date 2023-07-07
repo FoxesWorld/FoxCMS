@@ -2,6 +2,10 @@ useroption {
 	display: none;
 }
 
+.tooltip-inner {
+	font-family: 'FSElliotPro-Bold';
+}
+
 	/*INPUT TEXT*/
 .input_block {
 	position: relative;

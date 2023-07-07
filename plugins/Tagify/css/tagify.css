@@ -348,7 +348,8 @@
     position: relative;
     white-space: pre-wrap;
     color: var(--input-color);
-    box-sizing: inherit
+    box-sizing: inherit;
+	top:15px;
 }
 
 .tagify__input:empty::before {

@@ -27,6 +27,7 @@ function foxEngine(login) {
 
             optionContent.onreadystatechange = function() {
                 if (optionContent.readyState === 4) {
+					FoxesInput.initialised = false;
                     let response = parser.parseFromString(this.responseText, 'text/html');
                     option = getData(response, 'useroption');
                     content = getData(response, 'pageContent');
@@ -45,7 +46,7 @@ function foxEngine(login) {
 							
                             setTimeout(() => {
                                eval(func);
-							   console.log(func);
+							   //console.log(func);
                             }, 500);
                         }
 						
@@ -56,7 +57,6 @@ function foxEngine(login) {
                 }
             }
         }
-		FoxesInput.formInit(100);
     };
 
     this.getLastUser = async function() {
@@ -265,11 +265,12 @@ function foxEngine(login) {
 					for (var k = 0; k < parsedJson.length; k++) {
 						let obj = parsedJson[k];
 						let BadgeHtml = `<li>
-							<a class="tip-over" aria-label="`+obj.BadgeDesc+`" href="#`+obj.BadgeName+`" rel="noreferrer noopener">
+							<a data-toggle="tooltip" title="`+obj.BadgeDesc+`" href="#`+obj.BadgeName+`" rel="noreferrer noopener">
 								<img aria-hidden="true" src="`+obj.BadgeImg+`" class="profileBadge22-3GAYRy profileBadge-12r2Nm desaturate-_Twf3u">
 							</a>
 						</li>`;
-						$("#userBadges").append(BadgeHtml); 
+						$("#userBadges").append(BadgeHtml);
+						$('[data-toggle="tooltip"]').tooltip({placement: 'bottom', trigger: "hover"});
 					}
 				} else {
 					$("#userBadges").remove();
@@ -287,7 +288,7 @@ function foxEngine(login) {
         setTimeout(() => {
             $(block).html(data);
             $(block).fadeIn(500);
-            FoxesInput.formInit(100);
+            FoxesInput.formInit(500);
         }, 500);
     }
 

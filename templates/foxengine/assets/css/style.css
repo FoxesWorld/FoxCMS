@@ -149,15 +149,15 @@ nav .nav-item > a {
 # Page tmplate
 --------------------------------------------------------------*/
 .pageRoot {
-    background: #f6efed;
     border-radius: 5px;
-    display: grid;
+    display: block;
 }
 
 .pageRoot .page-content {
 	height: fit-content;
 	font-size: 1.5rem;
-	margin: 5px;
+	border-radius: 5px;
+	/* margin: 5px; */
 }
 
 .page-content .formContent h1 {
@@ -189,7 +189,7 @@ nav .nav-item > a {
 # Top Bar
 --------------------------------------------------------------*/
 .bar {
-    background: linear-gradient(156deg, #08162f, #3c91a4) !important;
+    background: linear-gradient(300deg, #08162f, #3c91a4) !important;
     font-size: 14px;
     padding: 0;
     color: rgba(255, 255, 255, 0.8);
@@ -303,7 +303,7 @@ section {
 }
 
 .userProfile .loginBox b {
-	font-size: 2rem;
+	font-size: 1.5rem;
 }
 
 .userProfile table tr td .loginInner {

@@ -1,5 +1,5 @@
 <?php 
-    /* [06.07.2023] */
+    /* [07.07.2023] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -13,10 +13,10 @@ $config = array(
 		"siteTitle" => "FoxesCraft",
 		"siteStatus" => "PostAlpha",
 		"siteDesc" => "A website engine",
-		"keywords" => "null",
+		"keywords" => "FoxEngine,Website,Engine,CMS,Foxesworld,Гымми,Foxesworld Entertainment,Fox,FoxesCraft",
 		"contactEmail" => "no-reply@foxesworld.ru",
-		"contactPhone" => "null",
-		"ServiceVersion" => "2.2.5"
+		"contactPhone" => "8 800 555 35 35",
+		"ServiceVersion" => "2.3.7"
 ),
 
 	"securitySetings" => array(
@@ -28,13 +28,15 @@ $config = array(
 		"keyCheck" => true
 ),
 
+	"permissions" => array(
+		"profileEdit" => "4,1"
+),
+
 	"other" => array(
 		"timezone" => "Europe/Moscow",
 		"webserviceName" => "FoxEngine",
-		"userOptions" => "userOptions",
-		"OptionReplaceValues" => "{TPL}->228Year,{YEAR}->2023,{TES}->8800,{siteKey}->cfgVal(securitySetings|reCaptchaWebsite)",
-		"userFieldsArray" => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,colorScheme,groupName",
-		"canEditGroup" => "1,4"
+		"OptionReplaceValues" => "{TES}->8800,{siteKey}->cfgVal(securitySetings|reCaptchaWebsite)",
+		"userFieldsArray" => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,groupName,colorScheme"
 ));
 
 ?>

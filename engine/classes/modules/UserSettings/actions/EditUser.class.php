@@ -57,7 +57,7 @@ if(!defined('profile')) {
 												//if(@$request['user_group'] !== init::$usrArray['user_group'] && init::$usrArray['groupTag'] === "admin"){
 												$this->inputGroup = $request['user_group'];
 												if($this->inputGroup === $this->getUserfield("user_group") || init::$usrArray['groupTag'] === "admin") {
-													$profileEditGroups = explode(',', $config['other']['canEditGroup']);
+													$profileEditGroups = explode(',', $config['permissions']['profileEdit']);
 													if(in_array(init::$usrArray['user_group'], $profileEditGroups)) {
 													//ALL CHECKS PASSED
 														$this->profileChanges();

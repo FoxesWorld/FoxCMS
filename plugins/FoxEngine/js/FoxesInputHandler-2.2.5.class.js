@@ -5,26 +5,31 @@
 
 function inputHandler() {
 
+	this.initialised = false;
 	this.forms = new Array();
 	
 	this.formInit = function (awaitms) {
-		setTimeout(() => {
-			this.forms = document.querySelectorAll("form");
-			if (this.forms.length >= 1) {
-				FoxEngine.debugSend("Forms found: " + this.forms.length, "");
-				this.forms.forEach(form => {
-					form.onsubmit = function(event) {
-						event.preventDefault();
-						submitButton = event.submitter;
-						data = collectFormData(form);
-						data["formId"] = form.id;
-						submitForm(data, $(this), submitButton);
-					}
-				});
-			} else {
-				FoxEngine.debugSend("No forms were found!", "color: orange");
-			}
-		}, awaitms);
+		if(!this.initialised) {
+			this.initialised = true;
+			setTimeout(() => {
+				this.forms = document.querySelectorAll("form");
+				if (this.forms.length >= 1) {
+					FoxEngine.debugSend("Forms found: " + this.forms.length, "");
+					this.forms.forEach(form => {
+						console.log('	- '+form.id);
+						form.onsubmit = function(event) {
+							event.preventDefault();
+							submitButton = event.submitter;
+							data = collectFormData(form);
+							data["formId"] = form.id;	
+							submitForm(data, $(this), submitButton);
+						}
+					});
+				} else {
+					FoxEngine.debugSend("No forms were found!", "color: orange");
+				}
+			}, awaitms);
+		}
 	};
 		
 	collectFormData = function(form) {
