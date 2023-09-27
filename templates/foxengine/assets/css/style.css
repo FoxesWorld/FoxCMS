@@ -353,9 +353,7 @@ section {
 }
 
 .avatar .profilePhoto {
-    width: 215px;
-    height: 215px;
-    border-radius: 50%;
+
 } 
 
 .profilePhoto:hover {

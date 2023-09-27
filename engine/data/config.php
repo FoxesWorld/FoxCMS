@@ -1,11 +1,11 @@
 <?php 
-    /* [07.07.2023] */
+    /* [27.09.2023] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
-		"dbUser" => "aidenfox",
-		"dbPass" => "fNt5DL9dNcA347XG",
-		"dbName" => "aidenfox"
+		"dbUser" => "foxesworld",
+		"dbPass" => "Er!vJ43CdxqzjWNB",
+		"dbName" => "foxesworld_foxcms"
 ),
 
 	"siteSettings" => array(
@@ -13,10 +13,10 @@ $config = array(
 		"siteTitle" => "FoxesCraft",
 		"siteStatus" => "PostAlpha",
 		"siteDesc" => "A website engine",
-		"keywords" => "FoxEngine,Website,Engine,CMS,Foxesworld,Гымми,Foxesworld Entertainment,Fox,FoxesCraft",
+		"keywords" => "null",
 		"contactEmail" => "no-reply@foxesworld.ru",
-		"contactPhone" => "8 800 555 35 35",
-		"ServiceVersion" => "2.3.7"
+		"contactPhone" => "null",
+		"ServiceVersion" => "2.2.5"
 ),
 
 	"securitySetings" => array(
@@ -28,15 +28,13 @@ $config = array(
 		"keyCheck" => true
 ),
 
-	"permissions" => array(
-		"profileEdit" => "4,1"
-),
-
 	"other" => array(
 		"timezone" => "Europe/Moscow",
 		"webserviceName" => "FoxEngine",
-		"OptionReplaceValues" => "{TES}->8800,{siteKey}->cfgVal(securitySetings|reCaptchaWebsite)",
-		"userFieldsArray" => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,groupName,colorScheme"
+		"userOptions" => "userOptions",
+		"OptionReplaceValues" => "{TPL}->228Year,{YEAR}->2023,{TES}->8800,{siteKey}->cfgVal(securitySetings|reCaptchaWebsite)",
+		"userFieldsArray" => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,colorScheme,groupName",
+		"canEditGroup" => "1,4"
 ));
 
 ?>

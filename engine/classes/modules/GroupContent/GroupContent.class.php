@@ -11,7 +11,7 @@ if (!defined('FOXXEY')) {
 if(@functions::userExists(self::$usrArray['login'], $this->db)) {
 	$UserOptions = new UserOptions($this->db, $this->logger);
 } else {
-	//functions::jsonAnswer("User ".self::$usrArray['login']." not found!", true);
+	functions::jsonAnswer("User ".self::$usrArray['login']." not found!", true);
 }
 
 class UserOptions extends init {
