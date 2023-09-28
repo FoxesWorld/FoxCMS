@@ -90,10 +90,10 @@
 		"canEditGroup-desc" => "",
 		
 		/*Tabs*/
-		"databaseTab" => "База данных",
-		"siteSettingsTab" => "Настройки сайта",
-		"securitySetingsTab" => "Безопасность",
-		"otherTab" => "Другое",
+		"databaseTab" => '<i class="fa fa-database"></i> База данных',
+		"siteSettingsTab" => '<i class="fa fa-cogs"></i> Настройки сайта',
+		"securitySetingsTab" => '<i class="fa fa-shield"></i> Безопасность',
+		"otherTab" => '<i class="fa fa-archive"></i> Другое',
 		
 		"configChanged" => "Конфигурация изменена"
 	);

@@ -217,7 +217,7 @@ function foxEngine(login) {
         }
     }
 
-    this.showUserProfile = async function(userDisplay) {
+    this.showUserProfile = async function(userDisplay) {	
         let userProfile = await request.send_post({
             "userDisplay": userDisplay,
             "user_doaction": "ViewProfile"
@@ -229,6 +229,8 @@ function foxEngine(login) {
             }
         }
 		location.hash = 'user/' + userDisplay;
+		FoxesInput.initialised = false;
+		FoxesInput.formInit(1000);
     };
 
     this.showProfilePopup = async function(user) {
@@ -265,7 +267,7 @@ function foxEngine(login) {
 					for (var k = 0; k < parsedJson.length; k++) {
 						let obj = parsedJson[k];
 						let BadgeHtml = `<li>
-							<a data-toggle="tooltip" title="`+obj.BadgeDesc+`" href="#`+obj.BadgeName+`" rel="noreferrer noopener">
+							<a data-toggle="tooltip" class="badge" title="`+obj.BadgeDesc+`" href="#`+obj.BadgeName+`" rel="noreferrer noopener">
 								<img aria-hidden="true" src="`+obj.BadgeImg+`" class="profileBadge22-3GAYRy profileBadge-12r2Nm desaturate-_Twf3u">
 							</a>
 						</li>`;
