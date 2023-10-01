@@ -1,5 +1,5 @@
 <?php 
-    /* [27.09.2023] */
+    /* [01.10.2023] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -13,7 +13,7 @@ $config = array(
 		"siteTitle" => "FoxesCraft",
 		"siteStatus" => "PostAlpha",
 		"siteDesc" => "A website engine",
-		"keywords" => "null",
+		"keywords" => "FoxEngine, FoxCMS, FoxesWorld, AidenFox",
 		"contactEmail" => "no-reply@foxesworld.ru",
 		"contactPhone" => "null",
 		"ServiceVersion" => "2.2.5"

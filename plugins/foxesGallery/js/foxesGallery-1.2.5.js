@@ -31,7 +31,7 @@ function Gallery(content) {
     }
 	setTimeout(() => {
 		$('.foxesGallery').photor();
-	}, 500);
+	}, 200);
   };
 
 	async function getImageSize(img, width, height) {
