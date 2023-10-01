@@ -14,6 +14,7 @@
 			
 			function __construct($db) {
 				init::classUtil('inDirScanner', "1.1.2");
+				init::classUtil('ImageResize', "1.0.0");
 				$this->db = $db;
 			}
 			
@@ -41,10 +42,46 @@
 							die(var_dump(init::$deviceType->isMobile()));
 						break;
 						
+						case  "scanUploads":
+							$inDirScanner = new inDirScanner(ROOT_DIR.UPLOADS_DIR, @RequestHandler::$REQUEST['path'], @RequestHandler::$REQUEST['mask']);
+							die($inDirScanner->getFiles());
+						break;
+						
+						case "getImg":
+							$fullPath = ROOT_DIR.RequestHandler::$REQUEST['path'];
+							$parentDir = explode('/',$fullPath)[6];
+							$fileData = pathinfo($fullPath);
+							$cachePath = ENGINE_DIR.'cache/tmp/'.$parentDir.DIRECTORY_SEPARATOR;
+							if(!is_dir($cachePath)){
+								mkdir($cachePath);
+							}
+							$width = @RequestHandler::$REQUEST['width'] ?? 60;
+							$height = @RequestHandler::$REQUEST['height'] ?? 60;
+							$resizedName = $fileData['filename'].'-'.$width.'-'.$height.'.'.$fileData['extension'];
+							if(!file_exists($cachePath.$resizedName)) {
+								$this->resizeImage($fullPath, $cachePath, $width, $height);
+							}
+							$path = str_replace(ROOT_DIR, "", $cachePath);
+							die($path.$resizedName);
+						break;
+						
 						default:
 							die('{"message": "Unknown sysRequest option!"}');
 						break;
 					}
 				}
-			} 	
+			}
+			
+			private function resizeImage($imgPath, $savePath, $width, $height){
+				$extensionsArr = array('png', 'jpg', 'jpeg');
+				$fileData = pathinfo($imgPath);
+					if(in_array($fileData['extension'], $extensionsArr)) {
+						$resizeObj = new resize($imgPath);
+						$resizeObj -> resizeImage($width, $height, 'exact');
+						$resizedName = $fileData['filename'].'-'.$width.'-'.$height.'.'.$fileData['extension'];
+						$resizeObj -> saveImage($savePath.$resizedName, 100);
+						return true;
+					}
+					return false;
+			}
 		}

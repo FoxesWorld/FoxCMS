@@ -70,11 +70,6 @@ useroption {
 	text-transform: uppercase;
 }
 
-[type=button], [type=reset], [type=submit], button {
-	font-family: 'FSElliotPro-Bold';
-	min-width: 110px;
-}
-
 button.login {
 	display: block;
 	border: 0;
@@ -370,11 +365,12 @@ a:not(.selectedPage, .tip-over, .badge):before {
 }
 
 .leftAction a:not(.selectedPage):hover {
-    color: #97701f;
+    color: #ff9309;
     background: #9a8b868a;
+    text-decoration: none;
     transition-duration: 0.5s;
     cursor: pointer;
-    display: block;
+    /* display: block; */
 }
 
 a:not(.selectedPage):hover {

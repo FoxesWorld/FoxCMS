@@ -69,10 +69,10 @@
 				
 				<input name="refreshPage" type="hidden" value="false" />
 				<input name="playSound" type="hidden" value="false" />
-				</div>
 				<button type="submit" class="btn bg-teal btn-sm btn-raised position-left legitRipple">
 					<i class="fa fa-floppy-o position-left"></i>Сохранить
 				</button>
+				</div>
 				</form>
 				
 				';

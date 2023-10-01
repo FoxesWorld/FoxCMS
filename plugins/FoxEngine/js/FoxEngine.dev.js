@@ -50,7 +50,7 @@ function foxEngine(login) {
                             }, 500);
                         }
 						
-					loadData(replaceText(this.responseText, page), block);
+					FoxEngine.loadData(replaceText(this.responseText, page), block);
 					setPage(page);
 					location.hash = '#page/' + page;
                     }
@@ -189,7 +189,7 @@ function foxEngine(login) {
                             switch (obj[optionName]["type"]) {
                                 case "page":
                                     optionTpl = `
-										  <li class="nav-item">
+										  <li class="`+obj[optionName]["optionClass"]+`">
 											<a  class="pageLink-` + optionName + `" onclick="FoxEngine.loadPage('` + optionName + `', replaceData.contentBlock); return false; ">
 												<div class="rightIcon">
 													` + obj[optionName]["optionPreText"] + `
@@ -225,7 +225,7 @@ function foxEngine(login) {
 
         userProfile.onreadystatechange = function() {
             if (userProfile.readyState === 4) {
-                loadData(userProfile.responseText, '#content');
+                FoxEngine.loadData(userProfile.responseText, '#content');
             }
         }
 		location.hash = 'user/' + userDisplay;
@@ -244,7 +244,7 @@ function foxEngine(login) {
             if (userProfilePopup.readyState === 4) {
 				let parser = new DOMParser();
                 let response = parser.parseFromString(userProfilePopup.responseText, 'text/html');
-                loadData(response.getElementById('view'), '#dialogContent');		
+                FoxEngine.loadData(response.getElementById('view'), '#dialogContent');		
             }
         }
         $("#dialog").dialog('open');
@@ -285,9 +285,16 @@ function foxEngine(login) {
         console.log("%c" + message, style);
     };
 	
-	loadData = function(data, block) {
+	this.loadData = function(data, block) {
+		let Galleryinstance;
         $(block).fadeOut(500);
         setTimeout(() => {
+			if(data !== undefined) {
+				if(data.indexOf('<section class="gallery"') > 0){
+					Galleryinstance = new Gallery(data);
+					Galleryinstance.loadGallery();
+				}
+			}
             $(block).html(data);
             $(block).fadeIn(500);
             FoxesInput.formInit(500);

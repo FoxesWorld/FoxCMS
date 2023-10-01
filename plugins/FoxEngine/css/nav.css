@@ -2,6 +2,10 @@
     outline: 0
 }
 
+nav .dropdown-menu.show{
+	width: fit-content;
+}
+
 .nav > li.disabled > a > .badge,.nav > li.disabled > a > .label,.nav > li.disabled > a > .status-mark,.nav > li.disabled > a > img {
     opacity: 0.75;
     filter: alpha(opacity=75)
@@ -348,7 +352,6 @@
 
 @media (max-width: 768px) {
     .nav-tabs {
-        margin:-10px -20px 15px -20px;
         border-bottom: 0;
         position: relative;
         background-color: #fff;
@@ -1285,7 +1288,9 @@
 
 .navbar-nav > li > a {
     padding-top: 15px;
-    padding-bottom: 15px
+    padding-bottom: 15px;
+    margin: 10px;
+    padding: 10px;
 }
 
 .navbar-nav > li > a:after {

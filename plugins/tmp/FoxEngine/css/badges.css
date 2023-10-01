@@ -1,0 +1,65 @@
+.profileBadges {
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+	list-style: none;
+	margin: 5px 30px;
+}
+
+.profileBadges {
+    position: relative;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    -ms-flex-item-align: end;
+    align-self: flex-end;
+    background-color: #53434373;
+    border-radius: 8px;
+    max-width: 190px;
+	padding: 4px;
+}
+
+.profileBadges li {
+	padding: 5;
+}
+
+.container-1gYwHN {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: space-evenly;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 2px;
+    min-height: 22px;
+    float: right;
+    flex-direction: row-reverse;
+}
+
+img[alt] {
+    text-indent: -9999px;
+}
+
+.profileBadge22-3GAYRy {
+    width: 22px;
+    height: 22px;
+}
+
+.profileBadge-12r2Nm {
+    display: block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 50%;
+    overflow: hidden;
+    pointer-events: none;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+a img {
+    border: none;
+}

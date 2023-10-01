@@ -7,6 +7,7 @@ function request(path, args, timeDelay) {
 	this.timeDelay_maxCount = 3;
 	this.timeDelay_count = 0;
 	
+	//@Deprecated
 	this.send_post = function(params, after, antitimeDelay) {
 		let response = "notSent";
 		
@@ -35,6 +36,54 @@ function request(path, args, timeDelay) {
 		xmlhttp.send(p.slice(0,-1));
 		return xmlhttp;
 	};
+	
+	this.sendPost = async function(params, after, antiTimeDelay) {
+    let response = "notSent";
+
+    if (this.timeDelay !== false && antiTimeDelay === true /*&& this.timeDelayCount++ === this.timeDelayMaxCount*/) {
+      let time = new Date().getTime();
+      let timeDiff = time - this.timeDelayTime;
+
+      if (timeDiff < this.timeDelay) {
+        return after({
+          status: "error",
+          message: "Please wait for " + ((this.timeDelay - timeDiff) / 1000 + 1).toFixed(0) + " seconds..."
+        });
+      } else {
+        this.timeDelayTime = time;
+        this.timeDelayCount = 0;
+      }
+    }
+
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    };
+
+    const paramsList = [];
+    for (let key in params) {
+      paramsList.push(key + '=' + params[key]);
+    }
+    for (let key in this.args) {
+      paramsList.push(key + '=' + this.args[key]);
+    }
+
+    const requestBody = paramsList.join('&');
+
+    try {
+      const response = await fetch(this.path, {
+        method: 'POST',
+        headers,
+        body: requestBody
+      });
+
+      return response;
+    } catch (error) {
+      return after({
+        status: "error",
+        message: "An error occurred: " + error.message
+      });
+    }
+  }
 	
 	this.sendGet = function httpGet(theUrl) {
 		var xhr = new XMLHttpRequest();

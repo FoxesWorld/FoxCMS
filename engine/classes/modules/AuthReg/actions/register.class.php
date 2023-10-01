@@ -62,7 +62,7 @@ if(!defined('auth')) {
 				functions::checkSA($this->regData);
 				$this->logger->WriteLine("Trying to register user '".$this->regData['login']."'");
 				$password = password_hash($this->regData['password1'], PASSWORD_DEFAULT);
-				$photo = '/templates/'.$config['siteTpl'].'/assets/img/no-photo.jpg';
+				$photo = '/templates/'.$config['siteSettings']['siteTpl'].'/assets/img/no-photo.jpg';
 				$query = "INSERT INTO `users`(`login`, `password`, `email`, `user_group`, `realname`, `hash`, `reg_date`, `reg_ip`, `logged_ip`, `last_date`, `profilePhoto`) 
 				VALUES ('".$this->regData['login']."', '".$password."', '".$this->regData['email']."', '".$this->baseUserGroup."', '".randTexts::getRandText('noName')."', '".authorize::generateLoginHash()."', '".CURRENT_TIME."', '".REMOTE_IP."', '".REMOTE_IP."', '".CURRENT_TIME."', '".$photo."')";
 				$userReg = $this->db->run($query);
