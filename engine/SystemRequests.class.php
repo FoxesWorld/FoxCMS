@@ -38,8 +38,9 @@
 							$startUpSound->generateAudio();
 						break;
 						
-						case "detectTest":
-							die(var_dump(init::$deviceType->isMobile()));
+						case "selectUsers":
+							$SelectUsers = new SelectUsers($this->db, "users");
+							die($SelectUsers->selectUsersBy(@RequestHandler::$REQUEST['selectKey'], "'".@RequestHandler::$REQUEST['selectValue']."'"));
 						break;
 						
 						case  "scanUploads":
@@ -72,6 +73,7 @@
 				}
 			}
 			
+			//WIP
 			private function resizeImage($imgPath, $savePath, $width, $height){
 				$extensionsArr = array('png', 'jpg', 'jpeg');
 				$fileData = pathinfo($imgPath);

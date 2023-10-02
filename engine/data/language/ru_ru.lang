@@ -97,7 +97,7 @@
 		
 		/*Tabs*/
 		"databaseTab" => '<i class="fa fa-database"></i> База данных',
-		"frontendSettingsTab" => 'Настройки JS',
+		"frontendSettingsTab" => '<i class="fa fa-code"></i> Настройки JS',
 		"siteSettingsTab" => '<i class="fa fa-cogs"></i> Настройки сайта',
 		"securitySetingsTab" => '<i class="fa fa-shield"></i> Безопасность',
 		"otherTab" => '<i class="fa fa-archive"></i> Другое',

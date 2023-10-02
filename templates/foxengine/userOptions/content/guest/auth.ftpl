@@ -37,7 +37,7 @@
 				
 				<label for="rememberMe" class="checkbox_container">
 					Запомнить меня
-					<input type="checkbox" style="display: none;" id="rememberMe">
+					<input type="checkbox" style="display: none;" name="rememberMe" id="rememberMe">
 					<span class="checkmark"></span>
 				</label>
 				

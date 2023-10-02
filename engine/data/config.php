@@ -1,5 +1,5 @@
 <?php 
-    /* [01.10.2023] */
+    /* [02.10.2023] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -16,7 +16,7 @@ $config = array(
 		"keywords" => "FoxEngine,FoxCMS,FoxesWorld,AidenFox",
 		"contactEmail" => "no-reply@foxesworld.ru",
 		"contactPhone" => "null",
-		"ServiceVersion" => "2.3.6"
+		"ServiceVersion" => "2.3.7"
 ),
 
 	"securitySetings" => array(
@@ -32,7 +32,7 @@ $config = array(
 		"contentBlock" => "#content",
 		"secureKey" => "ghYyufghVH",
 		"assets" => "/templates/foxengine/assets/",
-		"debug" => true
+		"debug" => "on"
 ),
 
 	"other" => array(

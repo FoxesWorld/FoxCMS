@@ -45,7 +45,6 @@
 											'</div>'+
 										'</label>';
 				$("#profileColors").append(colorBlock);
-				console.log(entry + " " + count);
 				count++;
 			});
 		}());

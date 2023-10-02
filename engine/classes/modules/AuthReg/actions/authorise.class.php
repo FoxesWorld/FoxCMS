@@ -80,6 +80,7 @@ if(!defined('auth')) {
 			$token = authorize::generateLoginHash($login);
 			switch($checkbox) {
 				case 1:
+				case true:
 					$query = "UPDATE `users` SET token='".$token."' WHERE login = '".$login."'";
 					setcookie(AuthManager::$userToken, $token, time() + (1000 * 60 * 60 * 24 * 30));
 				break;
