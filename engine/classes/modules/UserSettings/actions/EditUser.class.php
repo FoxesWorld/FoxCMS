@@ -138,9 +138,16 @@ if(!defined('profile')) {
 					$this->userQuery .= '`'.$key."` = '".$value."'".$symbol;	
 				}
 				$query = "UPDATE `users` SET ".$this->userQuery." WHERE login = '".$this->inputLogin."'";
-				//die($query);
 				$this->db->run($query);
 			}
+		}
+		
+		private function testColors($color){
+			echo '|'.$color.'|';
+			foreach($this->allColors() as $colors){
+				echo $colors.' ';
+			}
+			die();
 		}
 		
 		private function passCheck($newPass, $repeatPass){
@@ -165,9 +172,10 @@ if(!defined('profile')) {
 		}
 		
 		private function canSetColor($color){
-			global $jsCfg; 
+			global $config; 
+			$allColorsofUser = $this->allColors();
 			if($color != $this->baseColor){
-					if(@in_array($color, $jsCfg['javascript']['allowedColors'][init::$usrArray['groupTag']])){
+					if(@in_array($color, $allColorsofUser)){
 							return true;
 					} else {
 						if(in_array(init::$usrArray['colorScheme'], $this->allColors())){
@@ -181,12 +189,10 @@ if(!defined('profile')) {
 		}
 		
 		private function allColors(){
-			global $jsCfg;
+			global $config;
 			$allColors = array();
-			foreach($jsCfg['javascript']['allowedColors'] as $colorGroup => $groupColors){
-				foreach($groupColors as $color){
-					$allColors[] = $color;
-				}
+			foreach(init::$dynamicConfig['allowedColors'] as $color){
+				$allColors[] = $color;
 			}
 			return $allColors;
 		}

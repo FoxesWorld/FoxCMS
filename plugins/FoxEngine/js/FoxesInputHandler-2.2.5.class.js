@@ -116,7 +116,6 @@ function inputHandler() {
 						captchaReset();
 					break;
 				}
-
 			}
 		};
 	};

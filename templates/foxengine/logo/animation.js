@@ -23,20 +23,20 @@ function logoAnimation() {
         targets: '.logo .letterStatus',
         opacity: [0, 1],
         easing: "easeInOutExpo",
-        duration: 1100,
-        delay: (el,i)=> 100 + 30 * i
+        duration: 100,
+        delay: (el,i)=> 10 * i
     }).add({
         targets: '.logo .status',
         opacity: [0, 1],
 		translateX: [-200, 0],
 		easing: "easeInOutExpo",
 		rotate: '10turn',
-        duration: 1000
+        duration: 1500
     }).add({
         targets: '.logo .line',
         scaleX: [0, 1],
         //opacity: [0, 1],
         easing: "easeInOutExpo",
-        duration: 800
+        duration: 1000
     });
 }

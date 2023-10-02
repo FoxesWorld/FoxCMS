@@ -1,0 +1,68 @@
+    this.loadPage = async function(page, block) {
+        let delay, option, content, func;
+        let parser = new DOMParser();
+        if (page !== selectPage.thisPage && selectPage.thisPage !== undefined) {
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				});
+				FoxEngine.getOptionContent(page).then((content) => {
+				//optionContent.onreadystatechange = function() {
+					//if (optionContent.readyState === 4) {
+						FoxesInput.initialised = false;
+						let response = parser.parseFromString(content, 'text/html');
+						console.log(response);
+						option = getData(response, 'useroption');
+						content = getData(response, 'pageContent');
+						if (option !== undefined) {
+								let jsonOption = JSON.parse(option.textContent);
+								if (jsonOption.onLoad) {
+									switch(jsonOption.onLoadArgs){
+										case undefined:
+											func = jsonOption.onLoad+"()";
+										break;
+										
+										default:
+											func = jsonOption.onLoad + "(" + jsonOption.onLoadArgs + ")";
+										break;
+									}
+									
+									setTimeout(() => {
+									   eval(func);
+									   //console.log(func);
+									}, 500);
+								}
+								
+							FoxEngine.loadData(replaceText(content, page), block);
+							setPage(page);
+							location.hash = '#page/' + page;
+						}
+			}).catch((error) => {
+				FoxEngine.debugSend('Произошла ошибка: ' + error.message, "");
+			});
+		}        
+    };
+	
+	this.getOptionContent = async function(page) {
+	  return new Promise(async (resolve, reject) => {
+		try {
+            let optionContent = await request.sendPost({
+                "getOption": page
+            }, (result) => {
+			  console.log(result);
+			},
+			false);
+
+		  if (optionContent.status === 200) {
+			const responseData = await optionContent.text();
+			resolve(responseData);
+		  } else {
+			console.error('HTTP error:', optionContent.status);
+			reject(new Error(`HTTP Error: ${optionContent.status}`));
+		  }
+		} catch (error) {
+		  console.error('An error occured:', error.message);
+		  reject(error);
+		}
+	  });
+	};

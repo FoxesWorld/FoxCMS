@@ -10,14 +10,16 @@ if (!defined('FOXXEY')) {
 	die ('{"message": "Not in FOXXEY thread"}');
 } else {
 	$this->tpl = new Smarty;
-	$smartyInit = new smartyInit($this->tpl);
+	$smartyInit = new smartyInit($this->tpl, $this->db);
 }
 	class smartyInit extends init {
 		
 		protected $smarty;
+		protected $db;
 		
-		function __construct($tpl) {
+		function __construct($tpl, $db) {
 			global $config;
+			$this->db = $db;
 			init::requireNestedClasses(basename(__FILE__), __DIR__);
 			init::classUtil('CheckUserAccess', "1.0.0");
 			init::classUtil('PluginScanner', "1.2.7-exp");
@@ -34,7 +36,7 @@ if (!defined('FOXXEY')) {
 		
 		protected function smartyAssign(){
 			global $config;
-			$smartyUtils = new smartyUtils;
+			$smartyUtils = new smartyUtils($this->db);
 			$PluginsScanner = new PluginsScanner(PLUGINS_DIR);
 			
 			//@Deprecated

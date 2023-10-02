@@ -13,10 +13,10 @@ $config = array(
 		"siteTitle" => "FoxesCraft",
 		"siteStatus" => "PostAlpha",
 		"siteDesc" => "A website engine",
-		"keywords" => "FoxEngine, FoxCMS, FoxesWorld, AidenFox",
+		"keywords" => "FoxEngine,FoxCMS,FoxesWorld,AidenFox",
 		"contactEmail" => "no-reply@foxesworld.ru",
 		"contactPhone" => "null",
-		"ServiceVersion" => "2.2.5"
+		"ServiceVersion" => "2.3.6"
 ),
 
 	"securitySetings" => array(
@@ -26,6 +26,13 @@ $config = array(
 		"maxLoginAttempts" => "1",
 		"reCaptchaCheck" => true,
 		"keyCheck" => true
+),
+
+	"frontendSettings" => array(
+		"contentBlock" => "#content",
+		"secureKey" => "ghYyufghVH",
+		"assets" => "/templates/foxengine/assets/",
+		"debug" => true
 ),
 
 	"other" => array(

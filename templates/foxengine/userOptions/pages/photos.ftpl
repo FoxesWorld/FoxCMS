@@ -9,11 +9,8 @@
 </useroption>
 
 <pageContent>
-Привет, %realname%! Здесь можно увидеть работу нашей последней разработки для публикации
-фото о проделанной работе!
-	
-	<hr>
-	
+Привет, %realname%! Здесь можно увидеть работу последней разработки для публикации
+скриншотов нашей игры!
 
 <section class="gallery" dir="Images/photos" mask="*">
 	<div class="foxesGallery">

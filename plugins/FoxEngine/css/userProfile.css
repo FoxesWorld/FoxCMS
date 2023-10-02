@@ -1,11 +1,11 @@
 	/* Full Profile */
 	
 	.profile-title {
-		color: #e6d0cf;
-		text-shadow: 0 0 16px rgb(227 205 204);
+		/* color: #e6d0cf; */
+		/* text-shadow: 0 0 16px rgb(227 205 204); */
 		font-family: 'FSElliotPro-Heavy';
-		display: inline-block;
-		border-radius: 5px;
+		/* display: inline-block; */
+		/* border-radius: 5px; */
 		padding: 3px;
 	}
 
@@ -180,6 +180,7 @@
 		font-weight: 300;
 		text-shadow: -1px 0 1px #c6bb9f, 0 1px 1px #c6bb9f, 5px 5px 10px rgba(0, 0, 0, 0.4), -5px -5px 10px rgba(0, 0, 0, 0.4);
 	}
+	
 	h1.groupStatus-1 {
 		font-family: 'FSElliotPro-Heavy';
 		color: #8b0000d4;
@@ -189,4 +190,8 @@
 		color: #7fff00c4;
 		font-family: 'Minecraft';
 		border-bottom: 1px solid tan;
+	}
+	
+	h1.groupStatus-5 {
+		text-transform: capitalize;
 	}

@@ -27,18 +27,14 @@
       }
 	  
 	  $(function (){
+		let colors = replaceData.allowedColors;
 		let count = 0;
 		let checked;
 		let selectedColor = $("#colourVal").val();
-		let colors = replaceData.allowedColors;
 
 		if(!colors.includes(selectedColor)) {colors.push(selectedColor);}
 			colors.forEach(function(entry) {
-				if(entry == selectedColor) {
-					checked = 'checked';
-				} else {
-					checked = '';
-				}
+				if(entry === selectedColor) checked = 'checked'; else checked = '';
 				let colorBlock = '<label for="ColorInput'+entry+'">'+
 										'<div class="colorBlock '+checked+'" id="Color'+ count +'" style="background-color: '+ entry +';">' +
 											'<input type="radio" id="ColorInput'+entry+'" name="colorPicker" style="display: none;" value="'+entry+'" '+checked+'>' +
@@ -49,6 +45,7 @@
 											'</div>'+
 										'</label>';
 				$("#profileColors").append(colorBlock);
+				console.log(entry + " " + count);
 				count++;
 			});
 		}());

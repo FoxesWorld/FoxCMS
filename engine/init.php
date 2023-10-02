@@ -3,7 +3,6 @@
 define('FOXXEY', true);
 require ('data/const.php');
 require ('data/config.php');
-require ('data/jsCfg.php');
 session_start();
 
 	class init {
@@ -15,7 +14,7 @@ session_start();
 		
 		private $initHelper, $ModulesLoader, $initLevels;
 		protected $debug, $logger, $db, $tpl;
-		protected static $deviceType, $usrArray = array(
+		protected static $deviceType, $permissions, $dynamicConfig, $usrArray = array(
 			'isLogged' => false,
 			'user_id' => 0,
 			'email' => "admin@foxesworld.ru",
@@ -61,7 +60,8 @@ session_start();
 			init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "preInit");
 			$SystemRequests = new SystemRequests($this->db, $this->logger);
 			self::$deviceType = new \Detection\MobileDetect;
-			$SystemRequests->requestListener();		
+			$SystemRequests->requestListener();
+
 		}
 		
 		/* After init we have all modules
@@ -71,6 +71,9 @@ session_start();
 			global $config;
 			if($this->initLevels["init"] === true) {
 				init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "primary");
+				$PermissionsLoader = new PermissionsLoader($this->db);
+				self::$permissions = $PermissionsLoader->loadPermissions();
+				self::$dynamicConfig = $PermissionsLoader->permArray;
 			}
 		}
 		

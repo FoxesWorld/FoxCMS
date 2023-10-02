@@ -88,9 +88,16 @@
 		"userFieldsArray-desc" => "Поля пользователя, которые мы достаём из БД при успешной авторизации",
 		"canEditGroup-title" => "Группы, которым разрешено редактировать профиль",
 		"canEditGroup-desc" => "",
+		"contentBlock-title" => "Блок контента",
+		"contentBlock-desc" => "HTML блок для загрузки в него контента",
+		"secureKey-title" => "Ключ безопасности",
+		"secureKey-desc" => "Код, проверяемый при обмене информацией между бэкендом и фронтендом",
+		"debug-title" => "Дебаг решим",
+		"debug-desc" => "Отображает в консоли дебаг информацию JavaScript",
 		
 		/*Tabs*/
 		"databaseTab" => '<i class="fa fa-database"></i> База данных',
+		"frontendSettingsTab" => 'Настройки JS',
 		"siteSettingsTab" => '<i class="fa fa-cogs"></i> Настройки сайта',
 		"securitySetingsTab" => '<i class="fa fa-shield"></i> Безопасность',
 		"otherTab" => '<i class="fa fa-archive"></i> Другое',

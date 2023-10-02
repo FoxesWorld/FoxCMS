@@ -2,8 +2,10 @@
 
 	class smartyUtils extends smartyInit {
 		
-		function __construct() {
-			
+		protected $db;
+		
+		function __construct($db) {
+			$this->db = $db;
 		}
 		
 		protected function assignUserFields($smarty) {
@@ -15,28 +17,21 @@
 		}
 		
 		protected function assignJs(){
-			global $jsCfg;
+			global $jsCfg, $config;
+			$userPermissions = init::$permissions;
 			$builtInJS = '<script>';
-				$replaceArray = array_merge($jsCfg['javascript'], init::$usrArray);
+				$replaceArray = array_merge($config['frontendSettings'], init::$usrArray);
 				foreach($replaceArray as $key => $value){
 					$replaceFields[] = '"'.$key.'"';
-					$thisArr = array();
-					if(!is_array($value)) {
-						$jsData[] = '"'.$key.'": "'.$value.'"';
-					} else {
-						foreach($value as $colorGroup => $groupColors){
-							if($colorGroup === init::$usrArray['groupTag']) {
-								foreach($groupColors as $color){
-									$thisArr[] = '"'.$color.'"';
-								}
-							}
-						}
-						$jsData[] = '"'.$key.'"'.':['.implode(",", $thisArr).']';
-					}
+					$jsData[] = '"'.$key.'": "'.$value.'"';	
 				}
-				$builtInJS .= 'const replaceData = {'.implode(",", $jsData).'};'."\n";
-				$builtInJS .= 'const userFields = ['.implode(",", $replaceFields).'];'."\n";
-				$builtInJS .= 'request = new request("/", {key:"'.$jsCfg['javascript']['secureKey'].'", user:"'.init::$usrArray['login'].'"}, true);';
+				for($i=0; $i<count($userPermissions); $i++){
+					$jsData[] = $userPermissions[$i];
+				}
+
+				$builtInJS .= "const replaceData = {\n".implode(",\n", $jsData).'};'."\n";
+				$builtInJS .= "const userFields = [".implode(",\n", $replaceFields).'];'."\n";
+				$builtInJS .= 'request = new request("/", {key:"'.$config['frontendSettings']['secureKey'].'", user:"'.init::$usrArray['login'].'"}, true);';
 			$builtInJS .= '</script>';
 			return $builtInJS;
 		}
