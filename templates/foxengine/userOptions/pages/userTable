@@ -1,0 +1,36 @@
+                  <table style="width: 100%">
+                     <tr>
+                        <td class="pageItemTitle">Полное имя</td>
+                        <td class="pageItemValue">
+                           <span style="color: #f1864e;">[realname]</span>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="pageItemTitle">Группа</td>
+                        <td class="pageItemValue">
+                           <span style="color: #c25f73 !important;">[groupName]</span>
+                        </td>
+                     </div>
+                     <tr>
+                        <td class="pageItemTitle">Был в сети</td>
+                        <td class="pageItemValue">
+                           <span style="color: #f1864e;">[last_date]</span>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="pageItemTitle">Время на проекте</td>
+                        <td class="pageItemValue">
+                           <span style="color: #f1864e;">[reg_date]</span>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="pageItemTitle">Место жительства</td>
+                        <td class="pageItemValue">[land]</td>
+                     </tr>
+                     [hasPriviligies]
+                     <tr>
+                        <td class="pageItemTitle">E-Mail</td>
+                        <td class="pageItemValue">[email]</td>
+                     </tr>
+                     [/hasPriviligies]
+                  </table>

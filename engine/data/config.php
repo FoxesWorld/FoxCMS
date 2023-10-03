@@ -1,5 +1,5 @@
 <?php 
-    /* [02.10.2023] */
+    /* [03.10.2023] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -24,8 +24,8 @@ $config = array(
 		"reCaptchaWebsite" => "6LcKeBoiAAAAAGnhfzZnLyzUApLmgnOpP4OfFOB7",
 		"bantime" => "240",
 		"maxLoginAttempts" => "1",
-		"reCaptchaCheck" => true,
-		"keyCheck" => true
+		"reCaptchaCheck" => "on",
+		"keyCheck" => "on"
 ),
 
 	"frontendSettings" => array(
@@ -40,7 +40,7 @@ $config = array(
 		"webserviceName" => "FoxEngine",
 		"userOptions" => "userOptions",
 		"OptionReplaceValues" => "{TPL}->228Year,{YEAR}->2023,{TES}->8800,{siteKey}->cfgVal(securitySetings|reCaptchaWebsite)",
-		"userFieldsArray" => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,colorScheme,groupName",
+		"userFieldsArray" => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,colorScheme,groupName,units",
 		"canEditGroup" => "1,4"
 ));
 

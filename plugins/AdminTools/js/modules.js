@@ -1,7 +1,7 @@
-	function parseModulesInfo(block) {
+	function modules() {
 	  let answer = request.send_post({admPanel: "showModules"});
 	  answer.onreadystatechange = function() {
-		  $(block).html("");
+		  $("#adminContent").html("");
 		  if (answer.readyState === 4) {  
 				try {
 					  let json = JSON.parse(this.responseText);
@@ -19,7 +19,7 @@
 											<b class="moduleName">`
 												+obj["moduleName"]+`
 											</b>
-											<img class="modulePriority" alt="`+obj["modulePriority"]+`" src="/templates/`+replaceData.siteTpl+`/assets/img/admin/modules/`+obj["modulePriority"]+`.png" />
+											<img class="modulePriority" alt="`+obj["modulePriority"]+`" src="`+replaceData.assets+`img/admin/modules/`+obj["modulePriority"]+`.png" />
 											
 											<ul class="moduleContents">
 												<table>
@@ -39,12 +39,12 @@
 										</div>`;
 					 
 					  }
-					  $(block).append(moduleOut);
+					  $("#adminContent").append(moduleOut);
 					  addModulesListener(obj);
 					}
 					
 				} catch (error) {
-					$(block).html(error);
+					$("#adminContent").html(error);
 				}
 		  }
 	  };

@@ -4,6 +4,7 @@
 	"optionBlock": ".leftAction",
 	"optionPreText": "<i class=\"fa fa-question-circle\"></i>",
 	"optionGroup": [1,4,5],
+	"optionClass": "nav-item",
 	"type": "page"
 }
 </useroption>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2023-10-01 22:38:19
+/* Smarty version 4.0.4, created on 2023-10-02 21:12:07
   from '/var/www/FoxCMS/templates/foxengine/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6519caabea1fa4_02106997',
+  'unifunc' => 'content_651b07f7d7ce45_13575823',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '94c059e90a79d314b767b6eb1b9c63fd84cefe81' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine/main.tpl',
-      1 => 1696188878,
+      1 => 1696270222,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:notify.tpl' => 1,
   ),
 ),false)) {
-function content_6519caabea1fa4_02106997 (Smarty_Internal_Template $_smarty_tpl) {
+function content_651b07f7d7ce45_13575823 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />

@@ -202,44 +202,46 @@
 		</tr>
 		</table>
             <div class="basecont" style="opacity: 0.8;">
-               <div class="dpad">
-                  <div class="userinfo" style="width: 100%">
-                     <div class="statsTabbleItem">
-                        <div class="pageItemTitle">Полное имя</div>
-                        <div class="pageItemValue">
+                  <table class="userinfo" style="width: 100%">
+                     <tr class="statsTabbleItem">
+                        <td class="pageItemTitle">Полное имя</td>
+                        <td class="pageItemValue">
                            <span style="color: #f1864e;">[realname]</span>
-                        </div>
-                     </div>
-                     <div class="statsTabbleItem">
-                        <div class="pageItemTitle">Группа</div>
-                        <div class="pageItemValue">
+                        </td>
+                     </tr>
+                     <tr class="statsTabbleItem">
+                        <td class="pageItemTitle">Группа</td>
+                        <td class="pageItemValue">
                            <span style="color: #c25f73 !important;">[groupName]</span>
-                        </div>
+                        </td>
                      </div>
-                     <div class="statsTabbleItem">
-                        <div class="pageItemTitle">Был в сети</div>
-                        <div class="pageItemValue">
+                     <tr class="statsTabbleItem">
+                        <td class="pageItemTitle">Был в сети</td>
+                        <td class="pageItemValue">
                            <span style="color: #f1864e;">[last_date]</span>
-                        </div>
-                     </div>
-                     <div class="statsTabbleItem">
-                        <div class="pageItemTitle">Время на проекте</div>
-                        <div class="pageItemValue">
+                        </td>
+                     </tr>
+                     <tr class="statsTabbleItem">
+                        <td class="pageItemTitle">Время на проекте</td>
+                        <td class="pageItemValue">
                            <span style="color: #f1864e;">[reg_date]</span>
-                        </div>
-                     </div>
-                     <div class="statsTabbleItem">
-                        <div class="pageItemTitle">Место жительства</div>
-                        <div class="pageItemValue">[land]</div>
-                     </div>
+                        </td>
+                     </tr>
+                     <tr class="statsTabbleItem">
+                        <td class="pageItemTitle">Место жительства</td>
+                        <td class="pageItemValue">[land]</td>
+                     </tr>
                      [hasPriviligies]
-                     <div class="statsTabbleItem">
-                        <div class="pageItemTitle">E-Mail</div>
-                        <div class="pageItemValue">[email]</div>
-                     </div>
+                     <tr class="statsTabbleItem">
+                        <td class="pageItemTitle">E-Mail</td>
+                        <td class="pageItemValue">[email]</td>
+                     </tr>
+                     <tr class="statsTabbleItem">
+                        <td class="pageItemTitle">Юниты</td>
+                        <td class="pageItemValue">[units]</td>
+                     </tr>
                      [/hasPriviligies]
-                  </div>
-               </div>
+                  </table>
             </div>
          </div>
       </div>

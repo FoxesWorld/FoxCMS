@@ -7,7 +7,7 @@
 /* Layout helpers
 ----------------------------------*/
 .ui-helper-hidden {
-	display: none;
+	display: block;
 }
 .ui-helper-hidden-accessible {
 	border: 0;
@@ -594,7 +594,7 @@ button.ui-button::-moz-focus-inner {
 }
 .ui-resizable-disabled .ui-resizable-handle,
 .ui-resizable-autohide .ui-resizable-handle {
-	display: none;
+	display: block;
 }
 .ui-resizable-n {
 	cursor: n-resize;
@@ -685,7 +685,7 @@ button.ui-button::-moz-focus-inner {
 	position: absolute;
 	top: 0;
 	left: 0;
-	display: none;
+	display: block;
 }
 .ui-selectmenu-menu .ui-menu {
 	overflow: auto;
@@ -898,7 +898,10 @@ body .ui-tooltip {
 	font-size: 1em;
 }
 .ui-widget.ui-widget-content {
-	/* border: 1px solid #c5c5c5; */
+	border: 1px solid #c5c5c5;
+	background: aliceblue;
+	padding: 5px;
+	border-radius: 10px;
 }
 .ui-widget-content {
 	/* border: 1px solid #dddddd; */
@@ -1282,7 +1285,7 @@ a.ui-button:active,
 .ui-corner-top,
 .ui-corner-left,
 .ui-corner-tl {
-	/* border-top-left-radius: 3px; */
+	border-top-left-radius: 3px;
 }
 .ui-corner-all,
 .ui-corner-top,
@@ -1294,13 +1297,13 @@ a.ui-button:active,
 .ui-corner-bottom,
 .ui-corner-left,
 .ui-corner-bl {
-	/* border-bottom-left-radius: 3px; */
+	border-bottom-left-radius: 3px;
 }
 .ui-corner-all,
 .ui-corner-bottom,
 .ui-corner-right,
 .ui-corner-br {
-	/* border-bottom-right-radius: 3px; */
+	border-bottom-right-radius: 3px;
 }
 
 /* Overlays */

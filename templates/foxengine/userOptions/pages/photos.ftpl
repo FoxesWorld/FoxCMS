@@ -2,8 +2,9 @@
 {
 	"optionTitle": "Фото",
 	"optionBlock": ".leftAction",
-	"optionPreText": "<i class=\"fa fa-question-circle\"></i>",
+	"optionPreText": "<i class=\"fa fa-picture-o\"></i>",
 	"optionGroup": [1,4,5],
+	"optionClass": "nav-item",
 	"type": "page"
 }
 </useroption>

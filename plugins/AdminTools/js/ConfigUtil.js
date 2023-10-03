@@ -1,5 +1,5 @@
 
-	function configParse() {
+	function settings() {
 
 	
     let cfgHTML;
@@ -8,7 +8,7 @@
     });
     answer.onreadystatechange = function() {
         if (answer.readyState === 4) {
-			$(".adminPanel").html(this.responseText);
+			$("#adminContent").html(this.responseText);
         }
     }
 }

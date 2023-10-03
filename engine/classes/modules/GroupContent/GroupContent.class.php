@@ -22,6 +22,7 @@ class UserOptions extends init {
         "optionPreText",
         "optionName",
         "optionBlock",
+		"optionClass",
         "type"
     );
 	
@@ -171,5 +172,23 @@ class UserOptions extends init {
 	protected static function getOptionData($option){
 		return self::$allOptionsArray["options"][$option]["optSettings"];
 	}
+
+    /* REPEATING CODE FROM PluginScanner!!! */
+    private function checkUserAccess($usergroup, $optionAccessGroup): bool {
+        switch (is_array($optionAccessGroup)) {
+            case true:
+                if (in_array($usergroup, $optionAccessGroup)) {
+                    return true;
+                }
+                break;
+
+            case false:
+                if ($usergroup == $optionAccessGroup) {
+                    return true;
+                }
+                break;
+        }
+        return false;
+    }
 }
 ?>

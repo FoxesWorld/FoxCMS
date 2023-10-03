@@ -233,7 +233,7 @@ function foxEngine(login) {
 		FoxesInput.formInit(1000);
     };
 
-    this.showProfilePopup = async function(user) {
+    this.showProfilePopup = async function(user,dialogOptions) {
         let userProfilePopup = await request.send_post({
             "userDisplay": user,
             "user_doaction": "ViewProfile"
@@ -247,6 +247,7 @@ function foxEngine(login) {
                 FoxEngine.loadData(response.getElementById('view'), '#dialogContent');		
             }
         }
+		$("#dialog").dialog(dialogOptions);
         $("#dialog").dialog('open');
 		setTimeout(() => {
 			this.parseBadges(user);
@@ -290,7 +291,7 @@ function foxEngine(login) {
         $(block).fadeOut(500);
         setTimeout(() => {
 			if(data !== undefined) {
-				if(data.indexOf('<section class="gallery"') > 0){
+				if(String(data).indexOf('<section class="gallery"') > 0){
 					Galleryinstance = new Gallery(data);
 					Galleryinstance.loadGallery();
 				}

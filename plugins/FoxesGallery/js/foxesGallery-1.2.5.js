@@ -63,5 +63,69 @@ function Gallery(content) {
 		}
 	  });
 	}
-
 }
+
+/*
+export class Gallery {
+  constructor(content) {
+    this.galleryHTML = '';
+    this.galleryBlock = $(content).find("section").get(0).outerHTML;
+  }
+
+  async loadGallery() {
+    try {
+      const scanObj = await request.send_post({
+        "sysRequest": "scanUploads",
+        "path": $(this.galleryBlock).attr('dir'),
+        "mask": $(this.galleryBlock).attr('mask')
+      });
+
+      if (scanObj.readyState === 4) {
+        const jsonAnswer = JSON.parse(scanObj.responseText);
+        FoxEngine.debugSend(`Forming a gallery with ${jsonAnswer.fileNum} photos`, "");
+
+        for (let j = 0; j < jsonAnswer.files.length; j++) {
+          const imageSize = await getImageSize(jsonAnswer.filesHomeDir + jsonAnswer.files.at(j), 120, 100);
+          FoxEngine.debugSend('Thumb image: ' + imageSize, "");
+          this.galleryHTML = `<img src="${jsonAnswer.filesHomeDir}${jsonAnswer.files.at(j)}" data-thumb="${imageSize}" />`;
+          $("#images").append(this.galleryHTML);
+        }
+      }
+
+      setTimeout(() => {
+        $('.foxesGallery').photor();
+      }, 400);
+    } catch (error) {
+      FoxEngine.debugSend(`Произошла ошибка: ${error.message}`, "");
+    }
+  }
+}
+
+async function getImageSize(img, width, height) {
+  try {
+    const response = await request.sendPost(
+      {
+        sysRequest: "getImg",
+        path: img,
+        width: width,
+        height: height
+      },
+      (result) => {
+        console.log(result);
+      },
+      false
+    );
+
+    if (response.status === 200) {
+      const responseData = await response.text();
+      return responseData;
+    } else {
+      console.error('HTTP error:', response.status);
+      throw new Error(`HTTP Error: ${response.status}`);
+    }
+  } catch (error) {
+    console.error('An error occured:', error.message);
+    throw error;
+  }
+}
+*/

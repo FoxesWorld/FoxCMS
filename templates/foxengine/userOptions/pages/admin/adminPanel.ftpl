@@ -3,44 +3,49 @@
 	"optionTitle": "Админ панель",
 	"optionBlock": "#usrMenu",
 	"optionPreText": "<i class=\"fa fa-bolt\"></i>",
-	"onLoad": "configParse",
 	"optionGroup": 1,
 	"type": "page"
 }
 </useroption>
 
 <pageContent>
-
-
-
-    <div class="adminPanel">
-			<div class="tabs">
-				<!-- TO BE UPDATED -->
-				<input id="tab1" type="radio" loadPage="stats" name="tabs" checked /> 
-				<label for="tab1" class="pageLink-stats">Статистика</label> 
-
-				<input id="tab2" type="radio" loadPage="modules" name="tabs" /> 
-				<label for="tab2" class="pageLink-modules">Модули</label> 
-
-				<input id="tab3" type="radio" loadPage="usersList" name="tabs" /> 
-				<label for="tab3" class="pageLink-usersList">Пользователи</label> 
-
-				<input id="tab4" type="radio" loadPage="groupAssoc" name="tabs" /> 
-				<label for="tab4" class="pageLink-groupAssoc">Группы</label> 
-			  
-				<section id="contentAdm"> 
-
-				</section>  
- 
-			</div> 
-	</div>
-	
-	<script>
-	$('input[type="radio"]').on("click",function(){
-		
-		let page = $(this).attr('loadPage');
-		let block = $(this).attr('loadBlock');
-		FoxEngine.loadPage(page, "#contentAdm");
-	})
+<script>
+	const adminPanel = new AdminPanel("%login%");
 </script>
+<div class="adminPanel">
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item admOpt-settings">
+            <a class="nav-link" onclick="loadAdmOpt('settings')">
+              <i class="ti-shield menu-icon"></i>
+              <span class="menu-title"><i class="fa fa-cogs"></i> Settings</span>
+            </a>
+          </li>
+          <li class="nav-item admOpt-parseUsers">
+            <a class="nav-link" onclick="loadAdmOpt('parseUsers')">
+              <i class="ti-palette menu-icon"></i>
+              <span class="menu-title"><i class="fa fa-users"></i> Users</span>
+            </a>
+          </li>
+
+          <li class="nav-item admOpt-modules">
+            <a class="nav-link" onclick="loadAdmOpt('modules')">
+              <i class="ti-palette menu-icon"></i>
+              <span class="menu-title"><i class="fa fa-users"></i> Modules</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+	  <div class="main-panel">
+		<div class="content-wrapper">
+			<div class="row">
+				<div class="col-md-12 grid-margin" id="adminContent">
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 </pageContent>
