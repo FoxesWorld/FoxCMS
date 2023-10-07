@@ -1,13 +1,14 @@
-let groupBlock = "#groupAssoc";
+let groupBlock = "#adminContent";
 let j;
 
-function parseGroups() {
+function groupAssoc() {
     let answer = request.send_post({
         admPanel: "groupAssoc"
     });
     let groupTable;
     answer.onreadystatechange = function() {
         if (answer.readyState === 4) {
+			addContent();
             try {
                 let groupArray = JSON.parse(this.responseText);
                 if (groupArray.length > 0) {
@@ -86,7 +87,7 @@ function appendRow(rowData, index, visIndex){
 						<td><div class="input_block"><input class="input" type="text" id="` + index + `" name="groupType" value="` + rowData["groupType"] + `"  /><label class="label">Намсенование группы</label></div></td>
 						<td><div class="input_block"><input class="input" type="text" id="` + index + `" name="groupName" value="` + rowData["groupName"] + `" /><label class="label">Локализация группы</label></div></td>
 						<td><a class="text-danger adminButtonCoverRed" onclick="deleteRow(` + index + `)"><i class="fa fa-minus" aria-hidden="true"></i></a></td>
-				 </tr>`).appendTo(groupBlock).fadeIn(1000);
+				 </tr>`).appendTo("#groupAssoc").fadeIn(1000);
 }
 
 function deleteRow(id) {
@@ -107,6 +108,27 @@ function deleteRow(id) {
 			}
 		}
 	}
-
-
 }
+
+	function addContent(){
+		if(!$("#adminContent > #groupAssoc").length) {
+			$("#adminContent").html(`<table class="table table-hover table-striped" id="groupAssoc">
+			
+			  <thead>
+				<tr>
+				  <th scope="col">#</th>
+				  <th scope="col">Логин</th>
+				  <th scope="col">Почта</th>
+				  <th scope="col">Дата посещения</th>
+				  <th scope="col">
+					<input type="text" onKeyUp="users($(this).val());" class="input" placeholder="Поиск пользователя" required />
+				</th>
+				  
+				</tr>
+			  </thead>
+			  <tbody id="usersList">
+
+			  </tbody>
+			</table>`);
+		}
+	}

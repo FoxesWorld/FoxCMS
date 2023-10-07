@@ -63,6 +63,7 @@
 }
 
 .adminPanel .sidebar .nav .nav-item {
+   height: 50px;
   -webkit-transition-duration: 0.25s;
   -moz-transition-duration: 0.25s;
   -o-transition-duration: 0.25s;
@@ -180,21 +181,9 @@
   content: "\e64b";
 }
 
-.adminPanel .sidebar .nav:not(.sub-menu) {
-  margin-top: 1.45rem;
-  margin-left: 0.375rem;
-  margin-right: 0.375rem;
-}
-
-.adminPanel .sidebar .nav:not(.sub-menu) > .nav-item {
-  margin-top: .2rem;
-  border-radius: 5px;
-}
-
 .adminPanel .sidebar .nav:not(.sub-menu) > .nav-item:hover > .nav-link, .adminPanel .sidebar .nav:not(.sub-menu) > .nav-item:hover[aria-expanded="true"] {
   background: #e8e7ec;
   color: #56595a;
-  border-radius: 0.437rem;
 }
 
 .adminPanel .sidebar .nav:not(.sub-menu) > .nav-item > .nav-link {
@@ -208,7 +197,6 @@
 
 .adminPanel .sidebar .nav:not(.sub-menu) > .nav-item.active {
   background: #e8e7ec;
-  border-radius: 0.437rem;
 }
 
 .adminPanel .sidebar .nav.sub-menu {

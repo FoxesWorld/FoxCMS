@@ -1,4 +1,6 @@
-	function modules() {
+	function Modules() {
+		
+	this.parseModules = function(){
 	  let answer = request.send_post({admPanel: "showModules"});
 	  answer.onreadystatechange = function() {
 		  $("#adminContent").html("");
@@ -48,8 +50,8 @@
 				}
 		  }
 	  };
-	}
-	
+	};
+
 	function addModulesListener(module) {
 		setTimeout(() => {
 		$('span.moduleSettings.module-'+module["moduleName"]).on('click', function(e) {
@@ -63,3 +65,6 @@
 		FoxEngine.loadData(module["description"], '#dialogContent');
 		$("#dialog").dialog('open');
 	}
+	
+	}
+	

@@ -134,13 +134,13 @@ img {
     padding: 0;
 }
 
-nav .nav-item {
+nav.navbar .nav-item {
 	margin: 0px 5px;
 	background: #c1d1d7;
 	display: block;
 }
 
-nav .nav-item > a {
+nav.navbar .nav-item > a {
 	padding: 12;
     display: block;
 }

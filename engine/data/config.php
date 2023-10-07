@@ -16,7 +16,7 @@ $config = array(
 		"keywords" => "FoxEngine,FoxCMS,FoxesWorld,AidenFox",
 		"contactEmail" => "no-reply@foxesworld.ru",
 		"contactPhone" => "null",
-		"ServiceVersion" => "2.3.7"
+		"ServiceVersion" => "2.3.8"
 ),
 
 	"securitySetings" => array(

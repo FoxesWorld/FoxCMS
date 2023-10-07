@@ -268,7 +268,7 @@ function foxEngine(login) {
 					for (var k = 0; k < parsedJson.length; k++) {
 						let obj = parsedJson[k];
 						let BadgeHtml = `<li>
-							<a data-toggle="tooltip" class="badge" title="`+obj.BadgeDesc+`" href="#`+obj.BadgeName+`" rel="noreferrer noopener">
+							<a data-toggle="tooltip" class="badge" title="`+obj.BadgeDesc+` Since `+convertUnixTime(obj.AcquiredDate)+`" href="#`+obj.BadgeName+`" rel="noreferrer noopener">
 								<img aria-hidden="true" src="`+obj.BadgeImg+`" class="profileBadge22-3GAYRy profileBadge-12r2Nm desaturate-_Twf3u">
 							</a>
 						</li>`;

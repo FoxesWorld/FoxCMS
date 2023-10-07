@@ -10,17 +10,20 @@
 			$userBadges = UserActions::getUserBadges($db, $request['userDisplay']);
 			if($userBadges){
 				$badgesArray = json_decode($userBadges, false);
-				foreach($badgesArray as $badgeName){
-					 $this->badgesList[] = $this->getBadgeInfo($badgeName);
+				
+				foreach($badgesArray as $badge){
+					 $this->badgesList[] = $this->getBadgeInfo($badge);
 				}
 			}
 		}
 		
-		private function getBadgeInfo($badgeName){
-			$query = "SELECT * FROM `badgesList` WHERE badgeName = '".$badgeName."'";
+		private function getBadgeInfo($badge){
+			
+			$query = "SELECT * FROM `badgesList` WHERE badgeName = '".$badge->badgeName."'";
 			$badgeRow=$this->db->getRow($query);
 			if($badgeRow){
 				$badgeArr =  array(
+					"AcquiredDate" => $badge->acquiredDate,
 					"BadgeName" => $badgeRow['badgeName'],
 					"BadgeDesc" => $badgeRow['description'],
 					"BadgeImg" => $badgeRow['img']

@@ -1,4 +1,6 @@
-function AdminPanel(login) {
+//WIP
+
+//function AdminPanel(login) {
 	
 	let selectoption = {
         thisAdmoption: "",
@@ -6,7 +8,7 @@ function AdminPanel(login) {
     };
 	
 	
-	setAdmOption = function(option) {
+	function setAdmOption(option) {
 		FoxesInput.initialised = false;
         $(".admOpt-" + option).addClass("active");
         if (option != selectoption.thisAdmoption) {
@@ -17,8 +19,14 @@ function AdminPanel(login) {
 		FoxesInput.formInit(500);
     };
 	
-	loadAdmOpt = function(option){
-		eval(option+'()');
+	function loadAdmOpt(option){
+		eval("let "+option + " = new "+capitalizeFirstLetter(option)+"();"
+		+option+'.'+"parse"+capitalizeFirstLetter(option)+"();");
+		//eval(option+'()');
 		setAdmOption(option);
 	};
-}
+	
+	function capitalizeFirstLetter(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+//}
