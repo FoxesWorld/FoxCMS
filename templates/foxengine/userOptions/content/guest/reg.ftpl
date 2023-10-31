@@ -14,6 +14,12 @@
                   <input name="login" class="input" type="text" autocomplete="off" required />
                   <label class="label">Логин</label>
                </div>
+			   <!--
+               <div class="input_block">
+                  <input name="realname" class="input" type="text" autocomplete="off" required />
+                  <label class="label">Имя</label>
+               </div> 
+			   -->
                <div class="input_block">
                   <input name="email" class="input" type="email" autocomplete="off" required />
                   <label class="label">Почта</label>
@@ -28,6 +34,13 @@
                </div>
 			   
 			   <span>Надежность пароля: <b id="passStrength"></b></span>
+			   
+			   <!--			   
+			   <div class="input_block">
+                  <input name="regCode" class="input" type="text" autocomplete="off" />
+                  <label class="label">Код регистрации</label>
+               </div>
+			   -->
 			   
                <div class="c-captcha">
                   <div class="g-recaptcha" data-sitekey="{siteKey}" data-theme="Light"></div>

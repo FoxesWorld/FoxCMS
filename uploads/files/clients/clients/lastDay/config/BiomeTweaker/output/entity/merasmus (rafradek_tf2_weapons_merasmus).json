@@ -1,0 +1,6 @@
+
+{
+  "Name": "merasmus",
+  "Registry ID": "rafradek_tf2_weapons:merasmus",
+  "Class": "rafradek.TF2weapons.entity.boss.EntityMerasmus"
+}

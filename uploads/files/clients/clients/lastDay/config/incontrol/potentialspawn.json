@@ -1,0 +1,46 @@
+[
+  {
+     "dimension": 0,
+     "block": "biomesoplenty:dried_sand",
+     "mobs": [
+	{
+     		"mob": "mod_lavacow:avaton",
+        	"weight": 5,
+		"random": 0.1,
+     		"maxlight": 7,
+     		"maxcount": 4,
+     		"minspawndist": 25
+  		},
+ 	{
+     		"mob": "mod_lavacow:vespa",
+        	"weight": 5,
+		"random": 0.05,
+    		 "maxlight": 4,
+     		 "maxcount": 2,
+    		 "minspawndist": 25
+ 		 },
+  	{
+     		 "mob": "mod_lavacow:foglet",
+        	 "weight": 7,
+		 "random": 0.05,
+    		 "maxcount": 7,
+    		 "maxlight": 7,
+     		 "minspawndist": 25
+ 	 },
+ 	 {
+     		  "mob": "mod_lavacow:undeadswine",
+        	  "weight": 3,
+		  "random": 0.1,
+    		  "maxcount": 1,
+			  "minspawndist": 15
+  		},
+ 	 {
+   		  "mob": "mod_lavacow:boneworm",
+        	  "weight": 3,
+    		  "maxlight": 7,
+    		  "maxcount": 1,
+   		  "minspawndist": 20
+  		}
+	]
+   }
+]   

@@ -1,0 +1,19 @@
+{
+	disable_toast: true,
+	x: 1.5d,
+	y: -2.5d,
+	tasks: [{
+		uid: "23ce5159",
+		type: "item",
+		items: [{
+			item: "buildcraftlib:guide"
+		}]
+	}],
+	rewards: [{
+		uid: "0cfaac18",
+		type: "gamestage",
+		team_reward: false,
+		auto: "no_toast",
+		stage: "build_stage1"
+	}]
+}

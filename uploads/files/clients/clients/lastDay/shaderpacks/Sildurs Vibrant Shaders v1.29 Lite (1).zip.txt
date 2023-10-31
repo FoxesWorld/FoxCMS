@@ -1,0 +1,12 @@
+#Wed Jun 23 02:48:08 IRKT 2021
+Brightness=0.7
+Contrast=2.7
+Lens_Flares=true
+metallicRefl=true
+polishedRefl=true
+RainReflections=true
+Refraction=true
+shadowDistance=60.0
+shadowMapResolution=1024
+Volumetric_Lighting=true
+waterRefl=true

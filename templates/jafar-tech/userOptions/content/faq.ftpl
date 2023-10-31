@@ -1,0 +1,15 @@
+<useroption>
+{
+	"optionTitle": "А что случилось?",
+	"optionBlock": ".leftAction",
+	"optionClass": "nav-item",
+	"optionPreText": "<i class=\"fa fa-question-circle\"></i>",
+	"optionGroup": [1,4,5],
+	"type": "page"
+}
+</useroption>
+
+<pageContent>
+На данном веб ресурсе вы можете заказать работы по строительству домов, заливке фундаментов и благоустройству территории.
+Оставьте заявку на обратный звонок и мы с вами свяжемся!
+</pageContent>

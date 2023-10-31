@@ -1,0 +1,108 @@
+{
+  "wiki": "//looking to customize your own invasions? see http://coros.us/wiki/index.php?title=Hostile_Worlds_-_Invasions_-_Customizing for helpfull info",
+  "format": "mob_spawns",
+  "templates": [
+    {
+      "name": "invasion_stage_1",
+      "conditions": [
+        {
+          "condition": "game_stages",
+          "game_stages": ["below50th"],
+          "match_mode": "all_of"
+        }
+      ],
+      "spawns": [
+        {
+          "entities": [
+            "mutantbeasts:mutant_zombie"
+          ],
+          "count": 1,
+          "count_max": 5,
+          "count_difficulty_multiplier": 2,
+          "spawn_type": "ground",
+        }
+      ]
+    },
+    {
+      "name": "invasion_stage_2",
+      "conditions": [
+        {
+          "condition": "game_stages",
+          "game_stages": ["above50th"],
+          "match_mode": "all_of"
+        }
+      ],
+      "spawns": [
+        {
+          "entities": [
+            "mutantbeasts:mutant_zombie"
+          ],
+          "count": 3,
+          "count_max": 8,
+          "count_difficulty_multiplier": 2,
+        },
+        {
+          "entities": [
+            "mod_lavacow:undeadswine", "mod_lavacow:zombiefrozen", "mod_lavacow:foglet"
+          ],
+          "count": 10,
+          "count_max": 25,
+          "count_difficulty_multiplier": 2,
+          "cmods": [
+            {
+              "cmod": "template",
+              "template": "invader_soldier"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "invasion_stage_3",
+      "wave_message": "§cNearby parasites have evolved. The alpha parasites are coming for you.",
+      "conditions": [
+        {
+          "condition": "game_stages",
+          "game_stages": ["100th"],
+          "match_mode": "all_of"
+        }
+      ],
+      "spawns": [
+      ]
+	},
+    {
+      "name": "invasion_stage_4",
+      "conditions": [
+        {
+          "condition": "game_stages",
+          "game_stages": ["post100th"],
+          "match_mode": "all_of"
+        }
+      ],
+      "spawns": [
+        {
+          "entities": [
+            "mutantbeasts:mutant_zombie"
+          ],
+          "count": 7,
+          "count_max": 13,
+          "count_difficulty_multiplier": 2,
+        },
+        {
+          "entities": [
+            "mod_lavacow:undeadswine", "mod_lavacow:zombiefrozen", "mod_lavacow:foglet"
+          ],
+          "count": 25,
+          "count_max": 40,
+          "count_difficulty_multiplier": 2,
+          "cmods": [
+            {
+              "cmod": "template",
+              "template": "invader_soldier"
+            }
+          ]
+        }
+      ]
+	}
+	]
+}

@@ -1,0 +1,6 @@
+
+{
+  "Name": "sentry",
+  "Registry ID": "rafradek_tf2_weapons:sentry",
+  "Class": "rafradek.TF2weapons.entity.building.EntitySentry"
+}

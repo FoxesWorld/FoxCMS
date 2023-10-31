@@ -1,0 +1,6 @@
+
+{
+  "Name": "soldier",
+  "Registry ID": "rafradek_tf2_weapons:soldier",
+  "Class": "rafradek.TF2weapons.entity.mercenary.EntitySoldier"
+}

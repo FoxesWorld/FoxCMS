@@ -1,0 +1,28 @@
+//Текущий игрок, который имеет контроль над деревнями; При загрузке однопользовательского мира (в том числе открытого в локальной сети), один игрок должен использовать текущий профиль Millénaire и контролировать все деревни, контролируемые миром.
+auto_convert_profiles=false
+
+//Generate villages with hamlets; Whether to generate villages with hamlets around them. Takes a lot of space!
+generate_hamlets=false
+
+//config.generate_travel_book_export.label; config.generate_travel_book_export.desc:
+generate_travel_book_export=false
+
+//Изучение книги путешествий; Будут ли "изучаться" сельские жители, здания и т. д.Описания в путевой книге путешествий раскрываются только после встречи с рассматриваемым пунктом.
+travel_book_learning=true
+
+//Создание справочных данных; Генерирует различные данные (colour лист, список товаров, информация об общих целях), полезные для создателей контента
+generate_help_data=false
+
+//config.ignore_resource_cost.label; config.ignore_resource_cost.desc:
+ignore_resource_cost=false
+
+//Unique random identifier to count unique players if statistics are enabled
+random_uid=7704115260384181248
+
+//Advancement completed for anonymous statistics
+advancements_creative=
+
+//Advancement completed for anonymous statistics
+advancements_survival=firstcontact,explorer
+
+validation=346190916

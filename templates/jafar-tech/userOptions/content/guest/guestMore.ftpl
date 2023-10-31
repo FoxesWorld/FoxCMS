@@ -1,0 +1,27 @@
+<useroption>
+   {
+   "optionGroup": 5,
+   "type": "pageContent"
+   }
+</useroption>
+
+<pageContent>
+<div class="pageRoot">
+   <div class="page-content">
+      <h4> Привет, %realname%! Это новая разработка динамической подгрузки контента! </h4>
+      <hr>
+      <div class="statusBlock info">
+         <ul>
+            <li>
+               <img class="info"/>
+            </li>
+            <li>
+               <div class="blockText">
+                  Данная разработка находится на стадии Бета теста,возможны баги, но уже не так много как раньше!
+               </div>
+            </li>
+         </ul>
+      </div>
+   </div>
+</div>
+</pageContent>

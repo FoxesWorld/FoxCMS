@@ -1,0 +1,54 @@
+[
+  {
+    "user": {
+      "type": "player",
+      "name": "InteJason",
+      "uniqueId": "41a42a8c-3fe5-4563-9f0b-4f7d8fa19c7f"
+    },
+    "time": 1635375527102,
+    "type": "Profiler",
+    "data": {
+      "type": "url",
+      "value": "https://spark.lucko.me/8rdFuFhk56"
+    }
+  },
+  {
+    "user": {
+      "type": "player",
+      "name": "InteJason",
+      "uniqueId": "41a42a8c-3fe5-4563-9f0b-4f7d8fa19c7f"
+    },
+    "time": 1635374052633,
+    "type": "Profiler",
+    "data": {
+      "type": "url",
+      "value": "https://spark.lucko.me/nyUO9BWuyQ"
+    }
+  },
+  {
+    "user": {
+      "type": "player",
+      "name": "InteJason",
+      "uniqueId": "41a42a8c-3fe5-4563-9f0b-4f7d8fa19c7f"
+    },
+    "time": 1635367607817,
+    "type": "Profiler",
+    "data": {
+      "type": "url",
+      "value": "https://spark.lucko.me/gG6j3G2996"
+    }
+  },
+  {
+    "user": {
+      "type": "player",
+      "name": "InteJason",
+      "uniqueId": "41a42a8c-3fe5-4563-9f0b-4f7d8fa19c7f"
+    },
+    "time": 1635367506598,
+    "type": "Profiler",
+    "data": {
+      "type": "url",
+      "value": "https://spark.lucko.me/Ov7wnqoAV1"
+    }
+  }
+]

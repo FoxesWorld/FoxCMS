@@ -43,6 +43,25 @@
 							die($SelectUsers->selectUsersBy(@RequestHandler::$REQUEST['selectKey'], "'".@RequestHandler::$REQUEST['selectValue']."'"));
 						break;
 						
+						case "telegramSend":
+							init::classUtil('TelegramSend', "1.0.0");
+							$telegramSend = new TelegramSend();
+							die($telegramSend->sendMessage(@RequestHandler::$REQUEST));
+						break;
+						
+						case "parseServers":
+						init::classUtil('ServerParser', "1.0.0");
+							$serverParser = new ServerParser($this->db, @RequestHandler::$REQUEST['login']);
+							die($serverParser->parseServers());
+						break;
+						
+						case "loadFiles":
+						init::classUtil('GameScanner', "1.0.0");
+							$gameScanner = new GameScanner(@RequestHandler::$REQUEST['client'], @RequestHandler::$REQUEST['version']);
+							//die($gameScanner->dirsToCheck());
+							die($gameScanner->checkfiles());
+						break;
+						
 						case  "scanUploads":
 							$inDirScanner = new inDirScanner(ROOT_DIR.UPLOADS_DIR, @RequestHandler::$REQUEST['path'], @RequestHandler::$REQUEST['mask']);
 							die($inDirScanner->getFiles());

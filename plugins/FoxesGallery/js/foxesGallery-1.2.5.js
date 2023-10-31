@@ -19,7 +19,7 @@ function Gallery(content) {
 
 		getImageSize(jsonAnswer.filesHomeDir + jsonAnswer.files.at(j), 120, 100)
 		  .then((imageSize) => {
-			FoxEngine.debugSend('Thumb image: '+ imageSize, "");
+			//FoxEngine.debugSend('Thumb image: '+ imageSize, "");
 			galleryHTML = ` <img src = "`+jsonAnswer.filesHomeDir+jsonAnswer.files.at(j)+`"data-thumb="`+imageSize+`" />`;
           $("#images").append(galleryHTML);
 		  })

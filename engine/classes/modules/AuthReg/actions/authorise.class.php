@@ -24,7 +24,6 @@ if(!defined('auth')) {
 				if(!init::$usrArray['isLogged']) {
 					if(is_array($input)) {
 						$this->authData = functions::collectData($input, true);
-							
 						$this->inputPassword = $this->authData['password'];
 						$this->inputLogin = $this->authData['login'];
 						@$this->rememberMe = $this->authData["rememberMe"];

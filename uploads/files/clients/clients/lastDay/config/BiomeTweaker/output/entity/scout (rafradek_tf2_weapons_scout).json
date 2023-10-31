@@ -1,0 +1,6 @@
+
+{
+  "Name": "scout",
+  "Registry ID": "rafradek_tf2_weapons:scout",
+  "Class": "rafradek.TF2weapons.entity.mercenary.EntityScout"
+}

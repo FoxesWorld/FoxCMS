@@ -1,0 +1,6 @@
+
+{
+  "Name": "hundreddayz.TFZombie",
+  "Registry ID": "hundreddayz:tf_zombie",
+  "Class": "net.smileycorp.ldoh.common.entity.EntityTF2Zombie"
+}

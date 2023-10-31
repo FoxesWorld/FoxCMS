@@ -1,0 +1,51 @@
+<useroption>
+{
+	"optionTitle": "Админ панель",
+	"optionBlock": "#usrMenu",
+	"optionPreText": "<i class=\"fa fa-bolt\"></i>",
+	"optionGroup": 1,
+	"type": "page"
+}
+</useroption>
+
+<pageContent>
+<script>
+	const adminPanel = new AdminPanel("%login%");
+</script>
+<div class="adminPanel">
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item admOpt-settings">
+            <a class="nav-link" onclick="loadAdmOpt('settings')">
+              <i class="ti-shield menu-icon"></i>
+              <span class="menu-title"><i class="fa fa-cogs"></i> Settings</span>
+            </a>
+          </li>
+          <li class="nav-item admOpt-parseUsers">
+            <a class="nav-link" onclick="loadAdmOpt('parseUsers')">
+              <i class="ti-palette menu-icon"></i>
+              <span class="menu-title"><i class="fa fa-users"></i> Users</span>
+            </a>
+          </li>
+
+          <li class="nav-item admOpt-modules">
+            <a class="nav-link" onclick="loadAdmOpt('modules')">
+              <i class="ti-palette menu-icon"></i>
+              <span class="menu-title"><i class="fa fa-users"></i> Modules</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+	  <div class="main-panel">
+		<div class="content-wrapper">
+			<div class="row">
+				<div class="col-md-12 grid-margin" id="adminContent">
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</pageContent>

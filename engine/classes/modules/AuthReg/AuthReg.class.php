@@ -65,7 +65,8 @@
 					switch($authorisationStatus) {
 						case true:
 							init::$usrArray['isLogged'] = true;
-							functions::jsonAnswer($lang['authSuccess'], false);
+							die('{"type": "success","message": "'.$lang['authSuccess'].'","units":'.init::$usrArray['units'].'
+							}');
 						break;
 						
 						case false:

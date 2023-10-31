@@ -1,0 +1,6 @@
+
+{
+  "Name": "hundreddayz.NurseZombie",
+  "Registry ID": "hundreddayz:nurse_zombie",
+  "Class": "net.smileycorp.ldoh.common.entity.EntityZombieNurse"
+}

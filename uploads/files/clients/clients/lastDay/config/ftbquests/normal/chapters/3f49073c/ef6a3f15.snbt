@@ -1,0 +1,18 @@
+{
+	disable_toast: true,
+	x: 3.5d,
+	y: -2.5d,
+	tasks: [{
+		uid: "339feed9",
+		type: "item",
+		items: [{
+			item: "car:car_workshop"
+		}]
+	}],
+	rewards: [{
+		uid: "e924c7b1",
+		type: "gamestage",
+		auto: "no_toast",
+		stage: "car_stage1"
+	}]
+}

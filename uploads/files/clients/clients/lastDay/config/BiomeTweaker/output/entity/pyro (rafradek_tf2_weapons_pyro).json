@@ -1,0 +1,6 @@
+
+{
+  "Name": "pyro",
+  "Registry ID": "rafradek_tf2_weapons:pyro",
+  "Class": "rafradek.TF2weapons.entity.mercenary.EntityPyro"
+}

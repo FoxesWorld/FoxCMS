@@ -1,5 +1,5 @@
 <?php 
-    /* [03.10.2023] */
+    /* [31.10.2023] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -10,12 +10,13 @@ $config = array(
 
 	"siteSettings" => array(
 		"siteTpl" => "foxengine",
-		"siteTitle" => "FoxesCraft",
-		"siteStatus" => "PostAlpha",
+		"siteTitle" => "Foxescraft",
+		"siteStatus" => "Pre-Alpha",
 		"siteDesc" => "A website engine",
 		"keywords" => "FoxEngine,FoxCMS,FoxesWorld,AidenFox",
 		"contactEmail" => "no-reply@foxesworld.ru",
 		"contactPhone" => "null",
+		"gameFiles" => "files/clients/",
 		"ServiceVersion" => "2.3.8"
 ),
 
@@ -24,8 +25,8 @@ $config = array(
 		"reCaptchaWebsite" => "6LcKeBoiAAAAAGnhfzZnLyzUApLmgnOpP4OfFOB7",
 		"bantime" => "240",
 		"maxLoginAttempts" => "1",
-		"reCaptchaCheck" => "on",
-		"keyCheck" => "on"
+		"reCaptchaCheck" => true,
+		"keyCheck" => false
 ),
 
 	"frontendSettings" => array(
@@ -36,6 +37,8 @@ $config = array(
 ),
 
 	"other" => array(
+		"telegramBotToken" => "6928663865:AAENkXFZATZNwEBJUwgexNDMex_SEXCz63Q",
+		"telegramChatId" => "835906419,-4059092561",
 		"timezone" => "Europe/Moscow",
 		"webserviceName" => "FoxEngine",
 		"userOptions" => "userOptions",

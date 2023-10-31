@@ -1,0 +1,6 @@
+
+{
+  "Name": "monoculus",
+  "Registry ID": "rafradek_tf2_weapons:monoculus",
+  "Class": "rafradek.TF2weapons.entity.boss.EntityMonoculus"
+}

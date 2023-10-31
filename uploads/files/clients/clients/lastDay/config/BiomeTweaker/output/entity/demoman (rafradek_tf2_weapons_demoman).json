@@ -1,0 +1,6 @@
+
+{
+  "Name": "demoman",
+  "Registry ID": "rafradek_tf2_weapons:demoman",
+  "Class": "rafradek.TF2weapons.entity.mercenary.EntityDemoman"
+}

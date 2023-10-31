@@ -1,0 +1,6 @@
+
+{
+  "Name": "villager.architect",
+  "Registry ID": "hundreddayz:architect",
+  "Class": "net.smileycorp.ldoh.common.entity.EntityLDOHArchitect"
+}

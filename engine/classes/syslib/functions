@@ -102,11 +102,13 @@ if (!defined('FOXXEY')) {
 		return $status;
 	}
 		
-	public static function checkSA($array){
+	public static function checkSA($array, $SAtoCheck){
 		global $lang;
 		foreach($array as $key => $value){
-			if(preg_match("/[А-Яа-я]/", $value)) {
-				self::jsonAnswer($lang['badSyms'].$key, true);
+			if(in_array($key, $SAtoCheck)) {
+				if(preg_match("/[А-Яа-я]/", $value)) {
+					self::jsonAnswer($lang['badSyms'].$key, true);
+				}
 			}
 		}
 	}

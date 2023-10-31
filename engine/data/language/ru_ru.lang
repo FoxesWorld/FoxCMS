@@ -39,6 +39,11 @@
 		'enterCaptcha' => "Капча не завершена!",
 		'acceptCheckbox' => "Необходимо принять соглашение!",
 		
+		/* TelegramSend */
+		'newOrder' => "Поступил новый заказ!",
+		'mobilePhoneNumber' => "Телефон",
+		'fullName' => "Имя",
+		
 		/*Settings*/
 		'dbHost-title' => "Хост базы данных",
 		'dbHost-desc' => "Хост на котором работает ваша база данных, чаще всего localhost",
@@ -94,6 +99,11 @@
 		"secureKey-desc" => "Код, проверяемый при обмене информацией между бэкендом и фронтендом",
 		"debug-title" => "Дебаг решим",
 		"debug-desc" => "Отображает в консоли дебаг информацию JavaScript",
+		"telegramBotToken-title" => "Токен Телеграм Бота",
+		"telegramBotToken-desc" => "",
+		"telegramChatId-title" => "ID чата для отправки сообщений ботом",
+		"telegramChatId-desc" => "",
+		
 		
 		/*Tabs*/
 		"databaseTab" => '<i class="fa fa-database"></i> База данных',

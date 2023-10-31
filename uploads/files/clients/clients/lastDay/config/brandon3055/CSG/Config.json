@@ -1,0 +1,6 @@
+{
+  "inventory": {
+    "0:1": "cgm:basic_ammo,30",
+    "0:0": "cgm:handgun,1,0,{AmmoCount:15}"
+  }
+}

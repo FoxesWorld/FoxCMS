@@ -1,0 +1,11 @@
+<useroption>
+{
+	"optionGroup": 1,
+	"type": "pageContent",
+	"parentPage": "adminPanel"
+}
+</useroption>
+
+<pageContent>
+Статистика
+</pageContent>

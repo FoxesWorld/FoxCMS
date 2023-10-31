@@ -1,0 +1,854 @@
+8.1.2-beta.2 12-02-2022 20:39:19 Starting new session. Mods: examplemod 
+8.1.2-beta.2 12-02-2022 20:39:30 ERROR: null: agriculture_small_seljuks: Error when reading value 'g?lgealti' for parameter secondary: Unknown building: g?lgealti
+8.1.2-beta.2 12-02-2022 20:39:30 ERROR: null: agriculture_village_seljuks: Error when reading value 'g?lgealti' for parameter secondary: Unknown building: g?lgealti
+8.1.2-beta.2 12-02-2022 20:39:30 ERROR: null: artisans_small_seljuks: Error when reading value 'g?lgealti' for parameter never: Unknown building: g?lgealti
+8.1.2-beta.2 12-02-2022 20:39:30 ERROR: null: controlled_fort_seljuks: Error when reading value 'g?lgealti' for parameter core: Unknown building: g?lgealti
+8.1.2-beta.2 12-02-2022 20:39:30 ERROR: null: controlled_small_village_seljuks: Error when reading value 'g?lgealti' for parameter core: Unknown building: g?lgealti
+8.1.2-beta.2 12-02-2022 20:39:30 ERROR: null: military_village_seljuks: Error when reading value 'g?lgealti' for parameter secondary: Unknown building: g?lgealti
+8.1.2-beta.2 12-02-2022 20:39:30 ERROR: null: religious_village_seljuks: Error when reading value 'g?lgealti' for parameter secondary: Unknown building: g?lgealti
+8.1.2-beta.2 12-02-2022 20:39:30 ERROR: null: trading_village_seljuks: Error when reading value 'g?lgealti' for parameter secondary: Unknown building: g?lgealti
+8.1.2-beta.2 12-02-2022 20:39:31 MAJOR: null: Loading language: ru_ru
+8.1.2-beta.2 12-02-2022 20:39:31 MAJOR: null: LanguageData loaded: ru_ru. Wand invitem name: Жезл Создания
+8.1.2-beta.2 12-02-2022 20:42:18 Error in ClientReceiver.onPacketData:
+8.1.2-beta.2 12-02-2022 20:42:18 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73866_w_(GuiText.java:880)
+	at net.minecraft.client.gui.GuiScreen.func_146280_a(GuiScreen.java:478)
+	at net.minecraft.client.Minecraft.func_147108_a(Minecraft.java:1018)
+	at org.millenaire.client.gui.DisplayActions.displayVillageChiefGUI(DisplayActions.java:122)
+	at org.millenaire.client.network.ClientReceiver.readGUIPacket(ClientReceiver.java:250)
+	at org.millenaire.client.network.ClientReceiver.processPacket(ClientReceiver.java:116)
+	at org.millenaire.client.network.ClientReceiver.access$000(ClientReceiver.java:39)
+	at org.millenaire.client.network.ClientReceiver$1.run(ClientReceiver.java:71)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at net.minecraft.util.Util.func_181617_a(Util.java:47)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1088)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:42:18 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4
+8.1.2-beta.2 12-02-2022 20:42:18 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73863_a(GuiText.java:578)
+	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:396)
+	at sun.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.optifine.reflect.Reflector.callVoid(Reflector.java:660)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1457)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:42:18 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4
+8.1.2-beta.2 12-02-2022 20:42:18 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73863_a(GuiText.java:578)
+	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:396)
+	at sun.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.optifine.reflect.Reflector.callVoid(Reflector.java:660)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1457)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:42:18 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4
+8.1.2-beta.2 12-02-2022 20:42:18 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73863_a(GuiText.java:578)
+	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:396)
+	at sun.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.optifine.reflect.Reflector.callVoid(Reflector.java:660)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1457)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:42:18 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4
+8.1.2-beta.2 12-02-2022 20:42:18 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73863_a(GuiText.java:578)
+	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:396)
+	at sun.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.optifine.reflect.Reflector.callVoid(Reflector.java:660)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1457)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:42:18 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4
+8.1.2-beta.2 12-02-2022 20:42:18 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73863_a(GuiText.java:578)
+	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:396)
+	at sun.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.optifine.reflect.Reflector.callVoid(Reflector.java:660)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1457)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:42:18 Repeat exception x6: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:18 Repeat exception x7: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:18 Repeat exception x8: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:18 Repeat exception x9: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:18 Repeat exception x10: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:18 Repeat exception x11: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:18 Repeat exception x12: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:18 Repeat exception x13: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:18 Repeat exception x14: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:18 Repeat exception x15: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:18 Repeat exception x16: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:18 Repeat exception x17: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:18 Repeat exception x18: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:18 Repeat exception x19: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:18 Repeat exception x20: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@19ca05b4 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241). This error will no longer be logged in this session.
+8.1.2-beta.2 12-02-2022 20:42:22 Error in ClientReceiver.onPacketData:
+8.1.2-beta.2 12-02-2022 20:42:22 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73866_w_(GuiText.java:880)
+	at net.minecraft.client.gui.GuiScreen.func_146280_a(GuiScreen.java:478)
+	at net.minecraft.client.Minecraft.func_147108_a(Minecraft.java:1018)
+	at org.millenaire.client.gui.DisplayActions.displayVillageChiefGUI(DisplayActions.java:122)
+	at org.millenaire.client.network.ClientReceiver.readGUIPacket(ClientReceiver.java:250)
+	at org.millenaire.client.network.ClientReceiver.processPacket(ClientReceiver.java:116)
+	at org.millenaire.client.network.ClientReceiver.access$000(ClientReceiver.java:39)
+	at org.millenaire.client.network.ClientReceiver$1.run(ClientReceiver.java:71)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at net.minecraft.util.Util.func_181617_a(Util.java:47)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1088)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:42:22 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f
+8.1.2-beta.2 12-02-2022 20:42:22 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73863_a(GuiText.java:578)
+	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:396)
+	at sun.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.optifine.reflect.Reflector.callVoid(Reflector.java:660)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1457)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:42:22 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f
+8.1.2-beta.2 12-02-2022 20:42:22 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73863_a(GuiText.java:578)
+	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:396)
+	at sun.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.optifine.reflect.Reflector.callVoid(Reflector.java:660)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1457)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:42:22 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f
+8.1.2-beta.2 12-02-2022 20:42:22 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73863_a(GuiText.java:578)
+	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:396)
+	at sun.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.optifine.reflect.Reflector.callVoid(Reflector.java:660)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1457)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:42:22 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f
+8.1.2-beta.2 12-02-2022 20:42:22 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73863_a(GuiText.java:578)
+	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:396)
+	at sun.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.optifine.reflect.Reflector.callVoid(Reflector.java:660)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1457)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:42:22 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f
+8.1.2-beta.2 12-02-2022 20:42:22 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73863_a(GuiText.java:578)
+	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:396)
+	at sun.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.optifine.reflect.Reflector.callVoid(Reflector.java:660)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1457)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:42:22 Repeat exception x6: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:22 Repeat exception x7: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:22 Repeat exception x8: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:22 Repeat exception x9: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:22 Repeat exception x10: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:22 Repeat exception x11: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:22 Repeat exception x12: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:22 Repeat exception x13: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:22 Repeat exception x14: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:22 Repeat exception x15: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:22 Repeat exception x16: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:22 Repeat exception x17: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:22 Repeat exception x18: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:22 Repeat exception x19: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:42:22 Repeat exception x20: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@f497b1f @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241). This error will no longer be logged in this session.
+8.1.2-beta.2 12-02-2022 20:54:33 Error in ClientReceiver.onPacketData:
+8.1.2-beta.2 12-02-2022 20:54:33 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73866_w_(GuiText.java:880)
+	at net.minecraft.client.gui.GuiScreen.func_146280_a(GuiScreen.java:478)
+	at net.minecraft.client.Minecraft.func_147108_a(Minecraft.java:1018)
+	at org.millenaire.client.gui.DisplayActions.displayVillageChiefGUI(DisplayActions.java:122)
+	at org.millenaire.client.network.ClientReceiver.readGUIPacket(ClientReceiver.java:250)
+	at org.millenaire.client.network.ClientReceiver.processPacket(ClientReceiver.java:116)
+	at org.millenaire.client.network.ClientReceiver.access$000(ClientReceiver.java:39)
+	at org.millenaire.client.network.ClientReceiver$1.run(ClientReceiver.java:71)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at net.minecraft.util.Util.func_181617_a(Util.java:47)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1088)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:54:33 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354
+8.1.2-beta.2 12-02-2022 20:54:33 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73863_a(GuiText.java:578)
+	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:396)
+	at sun.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.optifine.reflect.Reflector.callVoid(Reflector.java:660)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1457)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:54:33 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354
+8.1.2-beta.2 12-02-2022 20:54:33 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73863_a(GuiText.java:578)
+	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:396)
+	at sun.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.optifine.reflect.Reflector.callVoid(Reflector.java:660)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1457)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:54:33 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354
+8.1.2-beta.2 12-02-2022 20:54:33 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73863_a(GuiText.java:578)
+	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:396)
+	at sun.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.optifine.reflect.Reflector.callVoid(Reflector.java:660)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1457)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:54:33 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354
+8.1.2-beta.2 12-02-2022 20:54:33 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73863_a(GuiText.java:578)
+	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:396)
+	at sun.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.optifine.reflect.Reflector.callVoid(Reflector.java:660)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1457)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:54:33 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354
+8.1.2-beta.2 12-02-2022 20:54:33 java.lang.NullPointerException
+	at org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+	at org.millenaire.client.gui.text.GuiVillageHead.initData(GuiVillageHead.java:425)
+	at org.millenaire.client.gui.text.GuiText.func_73863_a(GuiText.java:578)
+	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:396)
+	at sun.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.optifine.reflect.Reflector.callVoid(Reflector.java:660)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1457)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:398)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:133)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:21)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.foxesworld.components.Game$4.run(Game.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x6: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x7: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x8: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x9: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x10: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x11: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x12: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x13: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x14: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x15: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x16: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x17: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x18: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x19: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241)
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x20: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ org.millenaire.client.gui.text.GuiVillageHead.getData(GuiVillageHead.java:241). This error will no longer be logged in this session.
+8.1.2-beta.2 12-02-2022 20:54:33 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354
+8.1.2-beta.2 12-02-2022 20:54:33 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 20:54:33 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354
+8.1.2-beta.2 12-02-2022 20:54:33 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 20:54:33 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354
+8.1.2-beta.2 12-02-2022 20:54:33 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 20:54:33 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354
+8.1.2-beta.2 12-02-2022 20:54:33 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 20:54:33 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354
+8.1.2-beta.2 12-02-2022 20:54:33 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x6: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ 
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x7: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ 
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x8: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ 
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x9: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ 
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x10: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ 
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x11: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ 
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x12: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ 
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x13: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ 
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x14: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ 
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x15: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ 
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x16: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ 
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x17: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ 
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x18: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ 
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x19: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ 
+8.1.2-beta.2 12-02-2022 20:54:33 Repeat exception x20: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@44433354 @ . This error will no longer be logged in this session.
+8.1.2-beta.2 12-02-2022 20:54:36 Error in ClientReceiver.onPacketData:
+8.1.2-beta.2 12-02-2022 20:54:36 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 20:54:36 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071
+8.1.2-beta.2 12-02-2022 20:54:36 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 20:54:36 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071
+8.1.2-beta.2 12-02-2022 20:54:36 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 20:54:36 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071
+8.1.2-beta.2 12-02-2022 20:54:36 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 20:54:36 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071
+8.1.2-beta.2 12-02-2022 20:54:36 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 20:54:36 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071
+8.1.2-beta.2 12-02-2022 20:54:36 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 20:54:36 Repeat exception x6: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071 @ 
+8.1.2-beta.2 12-02-2022 20:54:36 Repeat exception x7: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071 @ 
+8.1.2-beta.2 12-02-2022 20:54:36 Repeat exception x8: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071 @ 
+8.1.2-beta.2 12-02-2022 20:54:36 Repeat exception x9: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071 @ 
+8.1.2-beta.2 12-02-2022 20:54:36 Repeat exception x10: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071 @ 
+8.1.2-beta.2 12-02-2022 20:54:36 Repeat exception x11: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071 @ 
+8.1.2-beta.2 12-02-2022 20:54:36 Repeat exception x12: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071 @ 
+8.1.2-beta.2 12-02-2022 20:54:36 Repeat exception x13: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071 @ 
+8.1.2-beta.2 12-02-2022 20:54:36 Repeat exception x14: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071 @ 
+8.1.2-beta.2 12-02-2022 20:54:36 Repeat exception x15: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071 @ 
+8.1.2-beta.2 12-02-2022 20:54:36 Repeat exception x16: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071 @ 
+8.1.2-beta.2 12-02-2022 20:54:36 Repeat exception x17: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071 @ 
+8.1.2-beta.2 12-02-2022 20:54:36 Repeat exception x18: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071 @ 
+8.1.2-beta.2 12-02-2022 20:54:36 Repeat exception x19: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071 @ 
+8.1.2-beta.2 12-02-2022 20:54:36 Repeat exception x20: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@598dc071 @ . This error will no longer be logged in this session.
+8.1.2-beta.2 12-02-2022 21:02:00 Error in ClientReceiver.onPacketData:
+8.1.2-beta.2 12-02-2022 21:02:00 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:00 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd
+8.1.2-beta.2 12-02-2022 21:02:00 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:00 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd
+8.1.2-beta.2 12-02-2022 21:02:00 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:00 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd
+8.1.2-beta.2 12-02-2022 21:02:00 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:00 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd
+8.1.2-beta.2 12-02-2022 21:02:00 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:00 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd
+8.1.2-beta.2 12-02-2022 21:02:00 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:00 Repeat exception x6: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd @ 
+8.1.2-beta.2 12-02-2022 21:02:00 Repeat exception x7: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd @ 
+8.1.2-beta.2 12-02-2022 21:02:00 Repeat exception x8: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd @ 
+8.1.2-beta.2 12-02-2022 21:02:00 Repeat exception x9: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd @ 
+8.1.2-beta.2 12-02-2022 21:02:00 Repeat exception x10: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd @ 
+8.1.2-beta.2 12-02-2022 21:02:00 Repeat exception x11: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd @ 
+8.1.2-beta.2 12-02-2022 21:02:00 Repeat exception x12: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd @ 
+8.1.2-beta.2 12-02-2022 21:02:00 Repeat exception x13: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd @ 
+8.1.2-beta.2 12-02-2022 21:02:00 Repeat exception x14: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd @ 
+8.1.2-beta.2 12-02-2022 21:02:00 Repeat exception x15: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd @ 
+8.1.2-beta.2 12-02-2022 21:02:00 Repeat exception x16: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd @ 
+8.1.2-beta.2 12-02-2022 21:02:00 Repeat exception x17: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd @ 
+8.1.2-beta.2 12-02-2022 21:02:00 Repeat exception x18: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd @ 
+8.1.2-beta.2 12-02-2022 21:02:00 Repeat exception x19: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd @ 
+8.1.2-beta.2 12-02-2022 21:02:00 Repeat exception x20: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@357585cd @ . This error will no longer be logged in this session.
+8.1.2-beta.2 12-02-2022 21:02:05 Error in ClientReceiver.onPacketData:
+8.1.2-beta.2 12-02-2022 21:02:05 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:05 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6
+8.1.2-beta.2 12-02-2022 21:02:05 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:05 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6
+8.1.2-beta.2 12-02-2022 21:02:05 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:05 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6
+8.1.2-beta.2 12-02-2022 21:02:05 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:05 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6
+8.1.2-beta.2 12-02-2022 21:02:05 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:05 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6
+8.1.2-beta.2 12-02-2022 21:02:05 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:05 Repeat exception x6: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6 @ 
+8.1.2-beta.2 12-02-2022 21:02:05 Repeat exception x7: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6 @ 
+8.1.2-beta.2 12-02-2022 21:02:05 Repeat exception x8: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6 @ 
+8.1.2-beta.2 12-02-2022 21:02:05 Repeat exception x9: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6 @ 
+8.1.2-beta.2 12-02-2022 21:02:05 Repeat exception x10: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6 @ 
+8.1.2-beta.2 12-02-2022 21:02:05 Repeat exception x11: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6 @ 
+8.1.2-beta.2 12-02-2022 21:02:05 Repeat exception x12: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6 @ 
+8.1.2-beta.2 12-02-2022 21:02:05 Repeat exception x13: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6 @ 
+8.1.2-beta.2 12-02-2022 21:02:05 Repeat exception x14: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6 @ 
+8.1.2-beta.2 12-02-2022 21:02:05 Repeat exception x15: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6 @ 
+8.1.2-beta.2 12-02-2022 21:02:05 Repeat exception x16: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6 @ 
+8.1.2-beta.2 12-02-2022 21:02:05 Repeat exception x17: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6 @ 
+8.1.2-beta.2 12-02-2022 21:02:05 Repeat exception x18: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6 @ 
+8.1.2-beta.2 12-02-2022 21:02:05 Repeat exception x19: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6 @ 
+8.1.2-beta.2 12-02-2022 21:02:05 Repeat exception x20: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@474c95f6 @ . This error will no longer be logged in this session.
+8.1.2-beta.2 12-02-2022 21:02:08 Error in ClientReceiver.onPacketData:
+8.1.2-beta.2 12-02-2022 21:02:08 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:08 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7
+8.1.2-beta.2 12-02-2022 21:02:08 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:08 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7
+8.1.2-beta.2 12-02-2022 21:02:08 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:08 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7
+8.1.2-beta.2 12-02-2022 21:02:08 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:08 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7
+8.1.2-beta.2 12-02-2022 21:02:08 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:08 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7
+8.1.2-beta.2 12-02-2022 21:02:08 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:08 Repeat exception x6: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7 @ 
+8.1.2-beta.2 12-02-2022 21:02:08 Repeat exception x7: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7 @ 
+8.1.2-beta.2 12-02-2022 21:02:08 Repeat exception x8: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7 @ 
+8.1.2-beta.2 12-02-2022 21:02:08 Repeat exception x9: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7 @ 
+8.1.2-beta.2 12-02-2022 21:02:08 Repeat exception x10: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7 @ 
+8.1.2-beta.2 12-02-2022 21:02:08 Repeat exception x11: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7 @ 
+8.1.2-beta.2 12-02-2022 21:02:08 Repeat exception x12: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7 @ 
+8.1.2-beta.2 12-02-2022 21:02:08 Repeat exception x13: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7 @ 
+8.1.2-beta.2 12-02-2022 21:02:08 Repeat exception x14: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7 @ 
+8.1.2-beta.2 12-02-2022 21:02:08 Repeat exception x15: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7 @ 
+8.1.2-beta.2 12-02-2022 21:02:08 Repeat exception x16: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7 @ 
+8.1.2-beta.2 12-02-2022 21:02:08 Repeat exception x17: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7 @ 
+8.1.2-beta.2 12-02-2022 21:02:08 Repeat exception x18: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7 @ 
+8.1.2-beta.2 12-02-2022 21:02:08 Repeat exception x19: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7 @ 
+8.1.2-beta.2 12-02-2022 21:02:08 Repeat exception x20: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@20234ee7 @ . This error will no longer be logged in this session.
+8.1.2-beta.2 12-02-2022 21:02:10 Error in ClientReceiver.onPacketData:
+8.1.2-beta.2 12-02-2022 21:02:10 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:10 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55
+8.1.2-beta.2 12-02-2022 21:02:10 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:10 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55
+8.1.2-beta.2 12-02-2022 21:02:10 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:10 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55
+8.1.2-beta.2 12-02-2022 21:02:10 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:10 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55
+8.1.2-beta.2 12-02-2022 21:02:10 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:10 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55
+8.1.2-beta.2 12-02-2022 21:02:10 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:10 Repeat exception x6: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55 @ 
+8.1.2-beta.2 12-02-2022 21:02:10 Repeat exception x7: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55 @ 
+8.1.2-beta.2 12-02-2022 21:02:10 Repeat exception x8: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55 @ 
+8.1.2-beta.2 12-02-2022 21:02:10 Repeat exception x9: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55 @ 
+8.1.2-beta.2 12-02-2022 21:02:10 Repeat exception x10: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55 @ 
+8.1.2-beta.2 12-02-2022 21:02:10 Repeat exception x11: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55 @ 
+8.1.2-beta.2 12-02-2022 21:02:10 Repeat exception x12: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55 @ 
+8.1.2-beta.2 12-02-2022 21:02:10 Repeat exception x13: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55 @ 
+8.1.2-beta.2 12-02-2022 21:02:10 Repeat exception x14: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55 @ 
+8.1.2-beta.2 12-02-2022 21:02:10 Repeat exception x15: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55 @ 
+8.1.2-beta.2 12-02-2022 21:02:10 Repeat exception x16: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55 @ 
+8.1.2-beta.2 12-02-2022 21:02:10 Repeat exception x17: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55 @ 
+8.1.2-beta.2 12-02-2022 21:02:10 Repeat exception x18: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55 @ 
+8.1.2-beta.2 12-02-2022 21:02:10 Repeat exception x19: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55 @ 
+8.1.2-beta.2 12-02-2022 21:02:10 Repeat exception x20: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6aae4e55 @ . This error will no longer be logged in this session.
+8.1.2-beta.2 12-02-2022 21:02:26 Repeat exception x6: Error in ClientReceiver.onPacketData: @ 
+8.1.2-beta.2 12-02-2022 21:02:26 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6
+8.1.2-beta.2 12-02-2022 21:02:26 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:26 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6
+8.1.2-beta.2 12-02-2022 21:02:26 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:26 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6
+8.1.2-beta.2 12-02-2022 21:02:26 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:26 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6
+8.1.2-beta.2 12-02-2022 21:02:26 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:26 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6
+8.1.2-beta.2 12-02-2022 21:02:26 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:26 Repeat exception x6: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6 @ 
+8.1.2-beta.2 12-02-2022 21:02:26 Repeat exception x7: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6 @ 
+8.1.2-beta.2 12-02-2022 21:02:26 Repeat exception x8: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6 @ 
+8.1.2-beta.2 12-02-2022 21:02:26 Repeat exception x9: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6 @ 
+8.1.2-beta.2 12-02-2022 21:02:26 Repeat exception x10: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6 @ 
+8.1.2-beta.2 12-02-2022 21:02:26 Repeat exception x11: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6 @ 
+8.1.2-beta.2 12-02-2022 21:02:26 Repeat exception x12: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6 @ 
+8.1.2-beta.2 12-02-2022 21:02:26 Repeat exception x13: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6 @ 
+8.1.2-beta.2 12-02-2022 21:02:26 Repeat exception x14: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6 @ 
+8.1.2-beta.2 12-02-2022 21:02:26 Repeat exception x15: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6 @ 
+8.1.2-beta.2 12-02-2022 21:02:26 Repeat exception x16: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6 @ 
+8.1.2-beta.2 12-02-2022 21:02:26 Repeat exception x17: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6 @ 
+8.1.2-beta.2 12-02-2022 21:02:26 Repeat exception x18: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6 @ 
+8.1.2-beta.2 12-02-2022 21:02:26 Repeat exception x19: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6 @ 
+8.1.2-beta.2 12-02-2022 21:02:26 Repeat exception x20: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@4b67a8e6 @ . This error will no longer be logged in this session.
+8.1.2-beta.2 12-02-2022 21:02:50 Repeat exception x7: Error in ClientReceiver.onPacketData: @ 
+8.1.2-beta.2 12-02-2022 21:02:50 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7
+8.1.2-beta.2 12-02-2022 21:02:50 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:50 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7
+8.1.2-beta.2 12-02-2022 21:02:50 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:50 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7
+8.1.2-beta.2 12-02-2022 21:02:50 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:50 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7
+8.1.2-beta.2 12-02-2022 21:02:50 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:50 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7
+8.1.2-beta.2 12-02-2022 21:02:50 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:02:50 Repeat exception x6: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7 @ 
+8.1.2-beta.2 12-02-2022 21:02:50 Repeat exception x7: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7 @ 
+8.1.2-beta.2 12-02-2022 21:02:50 Repeat exception x8: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7 @ 
+8.1.2-beta.2 12-02-2022 21:02:50 Repeat exception x9: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7 @ 
+8.1.2-beta.2 12-02-2022 21:02:50 Repeat exception x10: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7 @ 
+8.1.2-beta.2 12-02-2022 21:02:50 Repeat exception x11: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7 @ 
+8.1.2-beta.2 12-02-2022 21:02:50 Repeat exception x12: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7 @ 
+8.1.2-beta.2 12-02-2022 21:02:50 Repeat exception x13: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7 @ 
+8.1.2-beta.2 12-02-2022 21:02:50 Repeat exception x14: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7 @ 
+8.1.2-beta.2 12-02-2022 21:02:50 Repeat exception x15: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7 @ 
+8.1.2-beta.2 12-02-2022 21:02:50 Repeat exception x16: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7 @ 
+8.1.2-beta.2 12-02-2022 21:02:50 Repeat exception x17: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7 @ 
+8.1.2-beta.2 12-02-2022 21:02:50 Repeat exception x18: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7 @ 
+8.1.2-beta.2 12-02-2022 21:02:50 Repeat exception x19: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7 @ 
+8.1.2-beta.2 12-02-2022 21:02:50 Repeat exception x20: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@2c812ff7 @ . This error will no longer be logged in this session.
+8.1.2-beta.2 12-02-2022 21:04:18 Repeat exception x8: Error in ClientReceiver.onPacketData: @ 
+8.1.2-beta.2 12-02-2022 21:04:18 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640
+8.1.2-beta.2 12-02-2022 21:04:18 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:04:18 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640
+8.1.2-beta.2 12-02-2022 21:04:18 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:04:18 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640
+8.1.2-beta.2 12-02-2022 21:04:18 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:04:18 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640
+8.1.2-beta.2 12-02-2022 21:04:18 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:04:18 Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640
+8.1.2-beta.2 12-02-2022 21:04:18 java.lang.NullPointerException
+
+8.1.2-beta.2 12-02-2022 21:04:18 Repeat exception x6: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640 @ 
+8.1.2-beta.2 12-02-2022 21:04:18 Repeat exception x7: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640 @ 
+8.1.2-beta.2 12-02-2022 21:04:18 Repeat exception x8: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640 @ 
+8.1.2-beta.2 12-02-2022 21:04:18 Repeat exception x9: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640 @ 
+8.1.2-beta.2 12-02-2022 21:04:18 Repeat exception x10: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640 @ 
+8.1.2-beta.2 12-02-2022 21:04:18 Repeat exception x11: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640 @ 
+8.1.2-beta.2 12-02-2022 21:04:18 Repeat exception x12: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640 @ 
+8.1.2-beta.2 12-02-2022 21:04:18 Repeat exception x13: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640 @ 
+8.1.2-beta.2 12-02-2022 21:04:18 Repeat exception x14: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640 @ 
+8.1.2-beta.2 12-02-2022 21:04:18 Repeat exception x15: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640 @ 
+8.1.2-beta.2 12-02-2022 21:04:18 Repeat exception x16: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640 @ 
+8.1.2-beta.2 12-02-2022 21:04:18 Repeat exception x17: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640 @ 
+8.1.2-beta.2 12-02-2022 21:04:18 Repeat exception x18: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640 @ 
+8.1.2-beta.2 12-02-2022 21:04:18 Repeat exception x19: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640 @ 
+8.1.2-beta.2 12-02-2022 21:04:18 Repeat exception x20: Exception in drawScreen of GUI: org.millenaire.client.gui.text.GuiVillageHead@6f306640 @ . This error will no longer be logged in this session.
+8.1.2-beta.2 12-02-2022 21:06:38 ERROR: org.millenaire.client.network.ClientReceiver@390b32bd: Received a packet despite null clientWorld.
+8.1.2-beta.2 12-02-2022 21:06:38 ERROR: org.millenaire.client.network.ClientReceiver@390b32bd: Received a packet despite null clientWorld.
+8.1.2-beta.2 12-02-2022 21:06:39 ERROR: org.millenaire.client.network.ClientReceiver@390b32bd: Received a packet despite null clientWorld.
+8.1.2-beta.2 12-02-2022 21:06:39 ERROR: org.millenaire.client.network.ClientReceiver@390b32bd: Received a packet despite null clientWorld.
+8.1.2-beta.2 12-02-2022 21:06:39 ERROR: org.millenaire.client.network.ClientReceiver@390b32bd: Received a packet despite null clientWorld.
+8.1.2-beta.2 12-02-2022 21:06:39 ERROR: org.millenaire.client.network.ClientReceiver@390b32bd: Received a packet despite null clientWorld.
+8.1.2-beta.2 12-02-2022 21:06:39 ERROR: org.millenaire.client.network.ClientReceiver@390b32bd: Received a packet despite null clientWorld.
+8.1.2-beta.2 12-02-2022 21:06:39 ERROR: org.millenaire.client.network.ClientReceiver@390b32bd: Received a packet despite null clientWorld.
+8.1.2-beta.2 12-02-2022 21:06:39 ERROR: org.millenaire.client.network.ClientReceiver@390b32bd: Received a packet despite null clientWorld.
+8.1.2-beta.2 12-02-2022 21:06:39 ERROR: org.millenaire.client.network.ClientReceiver@390b32bd: Received a packet despite null clientWorld.
+8.1.2-beta.2 12-02-2022 21:06:39 ERROR: org.millenaire.client.network.ClientReceiver@390b32bd: Received a packet despite null clientWorld.
+8.1.2-beta.2 12-02-2022 21:06:39 ERROR: org.millenaire.client.network.ClientReceiver@390b32bd: Received a packet despite null clientWorld.

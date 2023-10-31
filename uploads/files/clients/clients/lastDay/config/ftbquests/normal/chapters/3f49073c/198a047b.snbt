@@ -1,0 +1,16 @@
+{
+	x: 2.0d,
+	y: 0.0d,
+	tasks: [{
+		uid: "033e4bdf",
+		type: "stat",
+		title: "Welcome",
+		stat: "stat.playOneMinute",
+		value: 1
+	}],
+	rewards: [{
+		uid: "f2bad93d",
+		type: "command",
+		command: "/gamerule sendCommandFeedback false"
+	}]
+}
