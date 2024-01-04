@@ -64,12 +64,14 @@
 
 .adminPanel .sidebar .nav .nav-item {
    height: 50px;
-  -webkit-transition-duration: 0.25s;
-  -moz-transition-duration: 0.25s;
-  -o-transition-duration: 0.25s;
-  transition-duration: 0.25s;
-  transition-property: background;
-  -webkit-transition-property: background;
+   width: 100%;
+   margin: 0;
+   -webkit-transition-duration: 0.25s;
+   -moz-transition-duration: 0.25s;
+   -o-transition-duration: 0.25s;
+   transition-duration: 0.25s;
+   transition-property: background;
+   -webkit-transition-property: background;
 }
 
 .adminPanel .sidebar .nav .nav-item .collapse {

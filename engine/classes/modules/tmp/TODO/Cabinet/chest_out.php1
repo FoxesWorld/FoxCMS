@@ -1,0 +1,82 @@
+<?php
+	if(!defined('DATALIFEENGINE')) die("Hacking attempt!");
+	if($member_id['name']) {
+		$select = $db->query("SELECT * FROM chest_list WHERE to_uuid='{$member_id['uuid']}' ORDER BY type DESC");
+		if($db->num_rows($select)) {
+			$totalForceOpen = 0;
+			$totalNotOpened = 0;
+			$num = 0;
+			$typenum[1] = 0;
+			$typenum[2] = 0;
+			$typenum[3] = 0;
+			$typenum[4] = 0;
+			$typenum[5] = 0;
+			while($get = $db->get_row($select)) {
+				if($get['type'] > 5) $get['type'] = 5;
+				$typenum[$get['type']]++;
+			}
+			$content .= "
+				<table class='uk-width-1-1'>
+					<tr>
+						<td valign='top' width='230px'>
+							<div class='i_have_chest'><img src='$DURL/uploads/chests/chest_1.png' width='20px'> Деревянный сундук <div class='chest_how_much'>{$typenum[1]}</div></div>
+							<div class='i_have_chest'><img src='$DURL/uploads/chests/chest_2.png' width='20px'> Золотой сундук <div class='chest_how_much'>{$typenum[2]}</div></div>
+							<div class='i_have_chest'><img src='$DURL/uploads/chests/chest_3.png' width='20px'> Алмазный сундук <div class='chest_how_much'>{$typenum[3]}</div></div>
+							<div class='i_have_chest'><img src='$DURL/uploads/chests/chest_4.png' width='20px'> Славный сундук <div class='chest_how_much'>{$typenum[4]}</div></div>
+							<div class='i_have_chest'><img src='$DURL/uploads/chests/chest_5.png' width='20px'> Гигантский Славный сундук <div class='chest_how_much'>{$typenum[5]}</div></div>
+						</td>
+						<td valign='top'>
+			";
+			$select = $db->query("SELECT * FROM chest_list WHERE to_uuid='{$member_id['uuid']}' ORDER BY type DESC");
+			while($get = $db->get_row($select)) {
+				$untiltime = 0;
+				$opened_class = "";
+				$opened_class2 = "";
+				$check = $db->super_query("SELECT * FROM chest_types WHERE id='{$get['type']}'");
+				$forceopen = $check['open_cost'];
+				$textTime = "";
+				$server = "";
+				if($get['from_shop']) $unlock_time = $check['hours_shop'];
+				else $unlock_time = $check['hours'];
+				if(!$get['unlock_time'] && $unlock_time) {
+					$opened_class2 = "chest_ready_to_open_not_opened";
+					$text = "Нажмите, чтобы разблокировать сундук";
+					$totalForceOpen += 1;
+					$totalNotOpened++;
+					$textTime = "Закрыто";
+					$server = "Ждать {$unlock_time}ч.";
+				}
+				else if($get['unlock_time'] > time()) {
+					$opened_class2 = "chest_ready_to_open_during";
+					$text = "Сундук еще закрыт, мы подбираем ключ..<br/><br/>Взломать его прямо сейчас за <b>$forceopen</b> <img style='width: 20px; height: 20px; margin-top: -2px;' src='http://paradisecloud.ru/uploads/diamond.png' class='diamond_icon'>";
+					$untiltime = $get['unlock_time'] - time();
+					$server = "<span>Открыть сейчас</span>{$check['open_cost']} <img style='width: 20px; height: 20px; margin-top: -2px;' src='http://paradisecloud.ru/uploads/diamond.png' class='diamond_icon'>";
+				}
+				else {
+					$opened_class = "chest_ready_to_open";
+					$opened_class2 = "chest_ready_to_open_lay";
+					$text = "Готово! Нажмите, чтобы посмотреть, что в сундуке";
+					$textTime = "Открыть";
+					$server = "Сейчас";
+				}
+				/*if($check['server']) {
+					$ch = $db->super_query("SELECT * FROM shop_list WHERE id='{$check['server']}'");
+					$server = $ch['shopname'];
+					$check['inside'] = str_replace('{servername}', $server, $check['inside']);
+					$server = "<span style='color: #2000FF'>Для <b>$server</b></span>";
+				}*/
+				$content .= "
+					<div class='my_chest_all $opened_class2' data-type='{$get['type']}' data-id='{$get['id']}' data-uk-tooltip title=\"$text\">
+						<div class='my_chest_image uk-animation-slide-top $opened_class' style='background-image: url($DURL/uploads/chests/chest_{$check['typeid']}.png);'></div>
+						<div class='timercount_chest' data-id='{$get['id']}' data-time='$untiltime'>$textTime</div><div class='for_chest_server'>$server</div>
+					</div>
+				";
+			}
+			if($totalNotOpened > 1) {
+				$word = get_count($totalNotOpened, 'сундук', 'сундука', 'сундуков');
+				$content .= "<div data-uk-tooltip title='Одновременно вы можете начать открывать только один сундук.<br/>Однако с помощью этой кнопки вы сможете начать открывать сразу $totalNotOpened $word.' class='chest_open_all'>Начать открывать все закрытые сундуки за $totalForceOpen <img style='width: 20px; height: 20px; margin-top: -2px;' src='http://paradisecloud.ru/uploads/diamond.png' class='diamond_icon'></div>";
+			}
+			$content .= "</td></tr></table>";
+		}
+		else $content .= "<div style='text-align: center;opacity: 0.7;'>У вас сейчас нет ни одного таинственного сундука</div>";
+	}

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2023-10-31 17:07:05
+/* Smarty version 4.0.4, created on 2024-01-04 21:56:27
   from '/var/www/FoxCMS/templates/foxengine/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_65410a09ecb145_71616458',
+  'unifunc' => 'content_6596ff5b2f9101_91200679',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '94c059e90a79d314b767b6eb1b9c63fd84cefe81' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine/main.tpl',
-      1 => 1696270222,
+      1 => 1704394378,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:notify.tpl' => 1,
   ),
 ),false)) {
-function content_65410a09ecb145_71616458 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6596ff5b2f9101_91200679 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -48,24 +48,36 @@ function content_65410a09ecb145_71616458 (Smarty_Internal_Template $_smarty_tpl)
 	  <meta property="og:url" content="https://foxescraft.ru" />
 	  <meta property="og:image" content="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /img/assets/logo.png" />
-	  <?php echo '<script'; ?>
+	  <!-- <?php echo '<script'; ?>
  src="//code.jivo.ru/widget/X47ofXrus3" async><?php echo '</script'; ?>
->
+> -->
 	  <?php echo '<script'; ?>
- src="https://www.google.com/recaptcha/api.js?hl=<?php echo $_smarty_tpl->tpl_vars['lang']->value['wysiwyg_language'];?>
-" async defer><?php echo '</script'; ?>
+ src="https://www.google.com/recaptcha/api.js?hl=ru_RU" async defer><?php echo '</script'; ?>
 >
       <link href="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/css/style.css" rel="stylesheet">
 	  <link rel="shortcut icon" href="/favicon.ico">
       <?php echo $_smarty_tpl->tpl_vars['builtInJS']->value;?>
 
+	  
+	  <style>
+		.LetItSnow {
+			height: 100vh;
+			width: 98vw;
+			--webkit-filter: blur(2px);
+			-filter: blur(2px);
+			position: absolute;
+			pointer-events: none;
+			z-index: 999999999;
+			top: 0;
+		}
+	</style>
 	  <?php echo '<script'; ?>
 >
 		  const FoxesInput = new inputHandler();
 		  const FoxEngine = new foxEngine("<?php echo $_smarty_tpl->tpl_vars['login']->value;?>
 ");
-	  <?php echo '</script'; ?>
+     <?php echo '</script'; ?>
 >
 	  <?php echo '<script'; ?>
  type="module" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
@@ -75,7 +87,14 @@ function content_65410a09ecb145_71616458 (Smarty_Internal_Template $_smarty_tpl)
  type="module" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/js/metrics.js"><?php echo '</script'; ?>
 >
-		
+	  <?php echo '<script'; ?>
+ type="module" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
+/assets/js/snow.js"><?php echo '</script'; ?>
+>
+	  <?php echo '<script'; ?>
+ type="module" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
+/assets/js/cookie.js"><?php echo '</script'; ?>
+>
    </head>
    <body>
       <?php $_smarty_tpl->_subTemplateRender('file:header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
@@ -87,19 +106,31 @@ function content_65410a09ecb145_71616458 (Smarty_Internal_Template $_smarty_tpl)
          <div class="row siteContent">
             <div class="<?php if (!$_smarty_tpl->tpl_vars['isMobile']->value) {?>col-8<?php } else { ?>container<?php }?>">
                <div id="content" class="mainBlock">
-			   <?php if ($_smarty_tpl->tpl_vars['user_group']->value == 5) {?>
-				   <span id="test" style="height: 512px;width: auto;display: block; border: 2px solid #998f98ad; border-radius: 10px;"></span>
-				   <button class="login" onclick="loadPage('guestMore', '#test');">LoadContent</button>
-			   <?php } else { ?>
 				<?php echo '<%'; ?>
 contentData<?php echo '%>'; ?>
 
-			   <?php }?>
                </div>
             </div>
                <?php $_smarty_tpl->_subTemplateRender("file:right-block.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
          </div>
+		 <div class="moderator-button optionButt" onclick="switchSnow();">
+			<i class="fa fa-snowflake-o"></i>
+		</div>
+      </div>
+	  <div id="cookie-popup" style="display: none">
+        <div class="text-center" id="cookie-header">
+          <img src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
+/assets/icons/cookie.png" draggable="false" />
+        </div>
+        <div id="cookie-body">
+          <p>Наш сайт использует печеньки (и не только потому, что у нас есть Печеньки-Монстр). 
+		  Они необходимы для создания невероятного опыта в использовании сайта – будь то путешествие по страницам или открытие сундука с новыми идеями.</p>
+          <a onclick="FoxEngine.loadPage('cookies', replaceData.contentBlock); return false;" href="https://www.cookieconsent.com/what-are-cookies/">Хочу знать больше...</a>
+          <div class="cookie-buttons">
+            <button id="btn-cookie" type="submit">Соглашаюсь</button>
+          </div>
+        </div>
       </div>
       <?php $_smarty_tpl->_subTemplateRender('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>

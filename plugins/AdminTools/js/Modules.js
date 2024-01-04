@@ -4,7 +4,7 @@
 	  let answer = request.send_post({admPanel: "showModules"});
 	  answer.onreadystatechange = function() {
 		  $("#adminContent").html("");
-		  if (answer.readyState === 4) {  
+		  if (answer.readyState === 4) {
 				try {
 					  let json = JSON.parse(this.responseText);
 					  let modulesAmmount = json.modulesammount;
@@ -65,6 +65,4 @@
 		FoxEngine.loadData(module["description"], '#dialogContent');
 		$("#dialog").dialog('open');
 	}
-	
-	}
-	
+}

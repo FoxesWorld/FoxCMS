@@ -8,8 +8,6 @@
    }
 </useroption>
 <pageContent>
-
-
    <div class="tabs">
       [hasPriviligies]
 	  <script>
@@ -60,7 +58,7 @@
       <div id="edit" style="display: none;">
          <ul class="tab_caption">
             <li class="active" value="profile">Настройки профиля</li>
-            <li>Персонализация</li>
+            <li class="personalisation">Персонализация</li>
             <li>Безопасность</li>
          </ul>
          <form method="POST" action="/" id="viewUserProfile">
@@ -104,8 +102,15 @@
                <span id="modalDesc">Посмотрим [realname], что ты тут можешь сделать...</span>
                <table>
                   <td>
+					<h3 class="settingsTitle">Загрузка фото профиля:</h3>
                      <input type="file" id="profilePhoto" name="image" accept=".jpeg" data-file-metadata-imagetype="profilePhoto" /> 
                   </td>
+				  
+				  <tr>
+				  	<div id="skinViewer3D-[login]" style="width: initial;float: right;border: 1px solid;padding: 5px; border-radius: 5px;">
+						<canvas id="canvas" style="display: none"></canvas>
+					</div>
+		</tr>
                </table>
                <script>
                   FilePond.registerPlugin(
@@ -266,6 +271,37 @@
 					}
 				}
 			});
+			
+		 $('li[class*="personalisation"]').click(function () {
+			let answer = request.send_post({
+			  sysRequest: "skinPath",
+			  login: '[login]'
+			});
+			answer.onreadystatechange = function() {
+			  if (answer.readyState === 4) {
+				try {
+				  answer = JSON.parse(this.responseText);
+				  skin3D = new skin3D(answer.skin, document.getElementById('skinViewer3D-[login]'));
+				  skin3D.init();
+				  skin3D.createBlock('/templates/{TPL}/assets/img/block.png');
+				  skin3D.loadFail = function(errorCode) {
+					var blockSkin2D = document.getElementById('skinViewer2D');
+					if (blockSkin2D != null) {
+					  blockSkin2D.style.display = 'block';
+					  document.getElementById('skinViewer3D').style.display = 'none';
+					} else {
+					  document.getElementById('skinViewer3D').innerHTML = 'Просмотр 3D скинов в вашем браузере не доступен.';
+					}
+					skin3D = null;
+				  };
+				  if(answer.cape !== null){
+					skin3D.createCloak(answer.cape);
+				  }
+
+				} catch(error) {}
+			  }
+			};
+		  });
       </script>
    </div>
 </pageContent>

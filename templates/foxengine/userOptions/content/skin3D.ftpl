@@ -1,0 +1,47 @@
+<useroption>
+   {
+   "optionGroup": [1,4,5],
+   "type": "pageContent"
+   }
+</useroption>
+
+<pageContent>
+<script src="%assets%js/skin3D.js"></script>
+		<div id="skinViewer3D">
+			<canvas id="canvas" style="display: none"></canvas>
+		</div>
+		
+<script type="text/javascript">
+  (async function () {
+    let answer = await request.send_post({
+      sysRequest: "skinPath",
+      login: replaceData.login
+    });
+    answer.onreadystatechange = function() {
+      if (answer.readyState === 4) {
+        try {
+          answer = JSON.parse(this.responseText);
+          skin3D = new skin3D(answer.skin, document.getElementById('skinViewer3D'));
+          skin3D.init();
+          skin3D.createBlock('%assets%img/block.png');
+          skin3D.loadFail = function(errorCode) {
+            var blockSkin2D = document.getElementById('skinViewer2D');
+            if (blockSkin2D != null) {
+              blockSkin2D.style.display = 'block';
+              document.getElementById('skinViewer3D').style.display = 'none';
+            } else {
+              document.getElementById('skinViewer3D').innerHTML = 'Просмотр 3D скинов в вашем браузере не доступен.';
+            }
+            skin3D = null;
+          };
+		  if(answer.cape !== null){
+			skin3D.createCloak(answer.cape);
+		  }
+
+        } catch(error) {}
+      }
+    };
+  }());
+</script>
+
+</pageContent>

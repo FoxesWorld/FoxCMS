@@ -32,7 +32,7 @@
 
 <script>
 	let template;
-	const admOptions = ["settings","users", "modules", "groupAssoc"];
+	const admOptions = ["settings","users", "modules", "groupAssoc", "servers"];
 	admOptions.forEach((option) => {
 		template = `<li class="nav-item admOpt-`+option+`">
             <a class="nav-link" onclick="loadAdmOpt('`+option+`')">

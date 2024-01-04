@@ -1,7 +1,4 @@
 <?php
-
-
-
 	class SelectUsers extends init {
 		
 		private $fieldsToSelect = array(
@@ -38,4 +35,8 @@
 			}
 		}
 		
+		
+		public function setFieldsToSelect($array){
+			$this->fieldsToSelect = $array;	
+		}
 	}

@@ -98,7 +98,7 @@ if (!defined('FOXXEY')) {
 
 		private function banIp(){
 			global $config;
-			$banTime = CURRENT_TIME + $config['bantime'];
+			$banTime = CURRENT_TIME + $config['securitySetings']['bantime'];
 			if(class_exists('Logger')) {
 				$Logger = new Logger('AuthLog');
 				if($this->debug === true) {

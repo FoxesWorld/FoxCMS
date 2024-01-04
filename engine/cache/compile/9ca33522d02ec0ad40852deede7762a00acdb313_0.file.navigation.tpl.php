@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2023-10-31 17:07:05
+/* Smarty version 4.0.4, created on 2024-01-02 19:33:22
   from '/var/www/FoxCMS/templates/foxengine/navigation.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_65410a09ed7222_40250034',
+  'unifunc' => 'content_65943ad2161843_83013111',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9ca33522d02ec0ad40852deede7762a00acdb313' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine/navigation.tpl',
-      1 => 1695850760,
+      1 => 1704126797,
       2 => 'file',
     ),
   ),
@@ -20,9 +20,9 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_65410a09ed7222_40250034 (Smarty_Internal_Template $_smarty_tpl) {
+function content_65943ad2161843_83013111 (Smarty_Internal_Template $_smarty_tpl) {
 ?><nav class="navbar navbar-expand-lg bar">
-	<ul class="inline p-3">
+	<ul class="inline foxesNav">
 		<li>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
 				<span class="navbar-toggler-icon"></span>
@@ -43,14 +43,13 @@ function content_65410a09ed7222_40250034 (Smarty_Internal_Template $_smarty_tpl)
 							</a>
 						</li>
 					<?php }?>
+				<ul id="usrMenu">
+				</ul>
 			<?php }?></ul>
 			</div>
 		</li>
-		
-		<li>
-			<div class="rightAction d-none d-md-flex" id="actionBlock"></div>
-		</li>
 	</ul>
+	<div class="rightAction d-none d-md-flex" id="actionBlock"></div>
 	
 </nav>
 <?php }

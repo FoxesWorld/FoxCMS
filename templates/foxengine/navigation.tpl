@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg bar">
-	<ul class="inline p-3">
+	<ul class="inline foxesNav">
 		<li>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
 				<span class="navbar-toggler-icon"></span>
@@ -20,13 +20,12 @@
 							</a>
 						</li>
 					{/if}
+				<ul id="usrMenu">
+				</ul>
 			{/if}</ul>
 			</div>
 		</li>
-		
-		<li>
-			<div class="rightAction d-none d-md-flex" id="actionBlock"></div>
-		</li>
 	</ul>
+	<div class="rightAction d-none d-md-flex" id="actionBlock"></div>
 	
 </nav>

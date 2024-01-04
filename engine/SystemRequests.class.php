@@ -43,28 +43,106 @@
 							die($SelectUsers->selectUsersBy(@RequestHandler::$REQUEST['selectKey'], "'".@RequestHandler::$REQUEST['selectValue']."'"));
 						break;
 						
-						case "telegramSend":
-							init::classUtil('TelegramSend', "1.0.0");
-							$telegramSend = new TelegramSend();
-							die($telegramSend->sendMessage(@RequestHandler::$REQUEST));
+						case "parseServers":
+						//if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
+							init::classUtil('ServerParser', "1.0.0");
+								$serverParser = new ServerParser($this->db, @RequestHandler::$REQUEST['login']);
+								die($serverParser->parseServers(@RequestHandler::$REQUEST['server']));
+						//}
 						break;
 						
-						case "parseServers":
-						init::classUtil('ServerParser', "1.0.0");
-							$serverParser = new ServerParser($this->db, @RequestHandler::$REQUEST['login']);
-							die($serverParser->parseServers());
+						case "parseMonitor":
+							init::classUtil('ServerParser', "1.0.0");
+							init::classUtil('Monitor', "1.0.0");
+							$serverParser = new ServerParser($this->db, "AidenFox");
+							$Monitor = new foxesMon($serverParser->parseServers());
+							die($Monitor->foxMonOut());
 						break;
+						
+						case 'skin':
+							if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
+								init::classUtil('SkinViewer', "1.0.0");
+								header("Content-type: text/plain");
+								$show = @RequestHandler::$REQUEST['show'] ?? null;
+								$file_name = @RequestHandler::$REQUEST['login'] ?? null;
+								$name = empty($file_name) ? 'default' : $file_name;
+								$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR . 'skin.png';
+								$cloak = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR . 'cape.png';
+
+								if (!skinViewer2D::isValidSkin($skin)) {
+									$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER  . DIRECTORY_SEPARATOR . 'skin.png';
+								}
+
+								if ($show !== 'head') {
+									$side = isset($_GET['side']) ? $_GET['side'] : false;
+									$img = skinViewer2D::createPreview($skin, $cloak, $side);
+								} else {
+									$img = skinViewer2D::createHead($skin, 64);
+								}
+
+								ob_start();
+								imagepng($img);
+								$image_data = ob_get_contents();
+								ob_end_clean();
+
+								$base64_image = base64_encode($image_data);
+
+								die($base64_image);
+							}
+							break;
+							
+							case "skinPath":
+							init::classUtil('SkinViewer', "1.0.0");
+								$file_name = @RequestHandler::$REQUEST['login'] ?? null;
+								$name = empty($file_name) ? 'default' : $file_name;
+								$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR . 'skin.png';
+								$cloak = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR . 'cape.png';
+								if (!skinViewer2D::isValidSkin($skin)) {
+									$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . DIRECTORY_SEPARATOR . 'skin.png';
+								}
+								
+								if(!file_exists($cloak)){
+									$cloak = "";
+								}
+								die('{"skin": "'.str_replace(ROOT_DIR, "", $skin).'", "cape": "'.str_replace(ROOT_DIR, "", $cloak).'"}');
+							break;
 						
 						case "loadFiles":
+						if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
 						init::classUtil('GameScanner', "1.0.0");
-							$gameScanner = new GameScanner(@RequestHandler::$REQUEST['client'], @RequestHandler::$REQUEST['version']);
-							//die($gameScanner->dirsToCheck());
+							$gameScanner = new GameScanner(@RequestHandler::$REQUEST['client'], @RequestHandler::$REQUEST['version'], @RequestHandler::$REQUEST['platform']);
 							die($gameScanner->checkfiles());
+						}
+						break;
+						
+						case "Cabinet":
+							$cabinet = new Cabinet();
+						break;
+						
+						case "getJre":
+							init::classUtil('GetJre', "1.0.0");
+							$getJre = new GetJre(@RequestHandler::$REQUEST['jreVersion']);
+							$getJre->getRuntime();
 						break;
 						
 						case  "scanUploads":
 							$inDirScanner = new inDirScanner(ROOT_DIR.UPLOADS_DIR, @RequestHandler::$REQUEST['path'], @RequestHandler::$REQUEST['mask']);
 							die($inDirScanner->getFiles());
+						break;
+						
+						case "downloadLatest":
+							init::classUtil("SelectLatestVersion", "1.0.0"); // <-- To remove
+							//$downloadScanner = new inDirScanner(ROOT_DIR.UPLOADS_DIR."launcher", @RequestHandler::$REQUEST['platform'], ".jar"); // <-- to implement
+							$selectLatestVersion = new SelectLatestVersion(ROOT_DIR.UPLOADS_DIR."launcher");
+							die($selectLatestVersion->getFile());
+						break;
+
+						case "downloadUpdater":
+							$path = ROOT_DIR.UPLOADS_DIR."updater";
+							$subDir = "/".@RequestHandler::$REQUEST['type'];
+							$downloadScanner = new inDirScanner($path, $subDir, "*");
+							$file = $this->selectLatest($downloadScanner->filesArray);
+							die('{"filename": "'.$file.'", "fileHash": "'.md5_file($path.$subDir.DIRECTORY_SEPARATOR.$file).'"}');
 						break;
 						
 						case "getImg":
@@ -105,4 +183,14 @@
 					}
 					return false;
 			}
+			
+			
+			  private function selectLatest($files) {
+				usort($files, function($a, $b) {
+					return version_compare($b, $a);
+				});
+
+				return reset($files);
+			} 
 		}
+?>

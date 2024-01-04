@@ -54,23 +54,27 @@
 			global $lang;
 				
 			if(!RequestHandler::$usrArray['isLogged']) {
+
 				$auth = new authorise($request, $this->db, $this->logger);
-				
 			} else {
 				RequestHandler::ipCheck();
 			}
 			switch(@$request[$this->requestListener]) {	
 				case 'auth':
+
 					@$authorisationStatus = $auth->auth();
 					switch($authorisationStatus) {
 						case true:
+							$uuid = /*$this->uuidFromString */md5(init::$usrArray['login']);
 							init::$usrArray['isLogged'] = true;
-							die('{"type": "success","message": "'.$lang['authSuccess'].'","units":'.init::$usrArray['units'].'
-							}');
+							$AuthLib = new AuthLib($this->db, init::$usrArray['login'], init::$usrArray['password'], init::$usrArray['hash'], $uuid);
+							die('{"type": "success","message": "'.$lang['authSuccess'].'", "units":'.init::$usrArray['units'].', "token": "'.init::$usrArray['hash'].'", "group": "'.init::$usrArray['user_group'].'", "uuid": "'.str_replace('-', '', $uuid).'", "colorScheme": "'.init::$usrArray['colorScheme'].'"}');
 						break;
 						
 						case false:
 							functions::jsonAnswer($lang['authWrong']);
+							$antiBrute = new antiBrute(REMOTE_IP, $this->db);
+							$antiBrute->failedAuth(REMOTE_IP);
 						break;
 					}
 					
@@ -95,6 +99,33 @@
 					self::logout($lang['loggedOut']);
 				break;
 			}
+		}
+		
+		private function uuidFromString($string) {
+			$val = md5($string, true);
+			$byte = array_values(unpack('C16', $val));
+			 
+			$tLo = ($byte[0] << 24) | ($byte[1] << 16) | ($byte[2] << 8) | $byte[3];
+			$tMi = ($byte[4] << 8) | $byte[5];
+			$tHi = ($byte[6] << 8) | $byte[7];
+			$csLo = $byte[9];
+			$csHi = $byte[8] & 0x3f | (1 << 7);
+			 
+			if (pack('L', 0x6162797A) == pack('N', 0x6162797A)) {
+				$tLo = (($tLo & 0x000000ff) << 24) | (($tLo & 0x0000ff00) << 8) | (($tLo & 0x00ff0000) >> 8) | (($tLo & 0xff000000) >> 24);
+				$tMi = (($tMi & 0x00ff) << 8) | (($tMi & 0xff00) >> 8);
+				$tHi = (($tHi & 0x00ff) << 8) | (($tHi & 0xff00) >> 8);
+			}
+			 
+			$tHi &= 0x0fff;
+			$tHi |= (3 << 12);
+			   
+			$uuid = sprintf(
+				'%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x',
+				$tLo, $tMi, $tHi, $csHi, $csLo,
+				$byte[10], $byte[11], $byte[12], $byte[13], $byte[14], $byte[15]
+			);
+			return $uuid;
 		}
 		
 		public static function updateSession($db) {
@@ -124,4 +155,68 @@
 				functions::jsonAnswer("Cant logOut!", true);
 			}
 		}
+	}
+	
+	class AuthLib {
+		
+		private $db;
+		private $login;
+		private $passMd5;
+		private $accessToken;
+		private $userMd5;
+		
+		function __construct($db, $login, $password, $accessToken, $UUID){
+			$this->db = $db;
+			$this->login = $login;
+			$this->accessToken = $accessToken;
+			$this->userMd5 = str_replace('-', '', $UUID);
+			$this->passMd5 = md5($password);
+			$this->setSession();
+		}
+		
+		private function setSession() {
+
+			if($this->checkUserSession()) {
+					$stmt =$this->db->prepare("UPDATE usersession SET accessToken = :accessToken WHERE user = :login AND passMd5 = :passMd5 AND userMd5 = :userMd5");
+					$stmt->bindValue(':accessToken', $this->accessToken);
+					$stmt->bindValue(':login', $this->login);
+					$stmt->bindValue(':passMd5', $this->passMd5);
+					$stmt->bindValue(':userMd5', $this->userMd5);
+					$stmt->execute();
+			
+			//If userRow is not present
+			} else {
+					$stmt = $this->db->prepare("INSERT INTO usersession (user, userMd5, passMd5, accessToken) VALUES (:login, :userMd5, :passMd5, :accessToken)");
+					$stmt->bindValue(':login', $this->login);
+					$stmt->bindValue(':userMd5', $this->userMd5);
+					$stmt->bindValue(':passMd5', $this->passMd5);
+					$stmt->bindValue(':accessToken', $this->accessToken);
+					$stmt->execute();
+			}
+		}
+		
+		
+		private function checkUserSession(){
+				$userSession = '';
+				$stmt = $this->db->prepare("SELECT * FROM usersession WHERE user = '".$this->login."'");
+				$stmt->execute();
+				$userSession = $stmt->fetch(PDO::FETCH_ASSOC);
+
+					if(empty($userSession) || $userSession == null){
+						return null;
+					} else {
+						return $userSession;
+					}
+		}
+		
+		private function token() {
+			$chars="0123456789abcdef";
+			$max=64;
+			$size=StrLen($chars)-1;
+			$password=null;
+			while($max--)
+			$password.=$chars[rand(0,$size)];
+		return $password;
+		}
+		
 	}

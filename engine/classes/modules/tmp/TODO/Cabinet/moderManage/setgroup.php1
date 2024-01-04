@@ -1,0 +1,109 @@
+<?php
+if (!defined('DATALIFEENGINE')) die("Hacking attempt!");
+$username = $member_id['name'];
+$group = getGroup($member_id['uuid']);
+if ($username) {
+	if (isCan($member_id['uuid'], 'admin') || isCan($member_id['uuid'], 'mladmin')) {
+		include($_SERVER['DOCUMENT_ROOT'] . "/engine/data/mineconf.php");
+		$header = "Управление группами игроков";
+		if ($_POST['return']) {
+			$uname = $db->safesql($_POST['uname']);
+			$until = $db->safesql($_POST['until']);
+			$group = $db->safesql($_POST['group']);
+			$serverid = $db->safesql($_POST['serverid']);
+			$until = getUnixTime($until);
+			if ($uname && $until && $group && $serverid) {
+				$select = $db->query("SELECT * FROM dle_users WHERE name='$uname'");
+				if ($db->num_rows($select)) {
+					foreach ($_servers as $serv) {
+						if ($serv['id'] == $serverid) {
+							$pex_prefix = $serv['pex_prefix'];
+							$svername = $serv['name'];
+						}
+					}
+					$sel = $db->super_query("SELECT * FROM dle_users WHERE name='$uname'");
+					$db->query("DELETE FROM `{$pex_prefix}permissions` WHERE name='{$sel['uuid']}' AND type='1'");
+					$db->query("DELETE FROM `{$pex_prefix}permissions_inheritance` WHERE child='{$sel['uuid']}' AND type='1'");
+					$db->query("INSERT INTO `{$pex_prefix}permissions` ( `name`, `type`, `permission`, `value`, `world`) VALUES('{$sel['uuid']}', '1', 'group-$group-until', '$until', '')");
+					$db->query("INSERT INTO `{$pex_prefix}permissions_inheritance` VALUES(null, '{$sel['uuid']}', '$group', '1', null)");
+					$db->query("INSERT INTO `donate_group` ( `uuid`, `serverid`, `group_name`, `buy_date`, `end_date`) values ( '{$sel['uuid']}', '$serverid', '$group', '".time()."', '$until')");
+					$einfo = returnNotifer("Игроку <b>$uname</b> выдана группа <b>$group</b> на сервер <b>$svername</b> до <b>" . date("d.m.Y H:i", $until) . "</b>", "check", "true");
+					addLog($sel['uuid'], 0, "[$svername] Админ <b>$username</b> выдал группу <b>$group</b> до <b>" . date("d.m.Y H:i", $until) . "</b>", 14);
+				} else $einfo = returnNotifer("Игрок <b>$uname</b> не найден.", "bug", "false");
+			}
+		}
+
+		if ($_POST['delgroup']) {
+			$nickname = $db->safesql($_POST['nickname']);
+			$serverid = $db->safesql($_POST['serverid']);
+			$select = $db->query("SELECT * FROM dle_users WHERE name='$nickname'");
+			if ($db->num_rows($select)) {
+				foreach ($_servers as $serv) {
+					if ($serv['id'] == $serverid) {
+						$pex_prefix = $serv['pex_prefix'];
+						$svername = $serv['name'];
+					}
+				}
+				$sel = $db->super_query("SELECT * FROM dle_users WHERE name='$nickname'");
+				$db->query("DELETE FROM `{$pex_prefix}permissions` WHERE name='{$sel['uuid']}' AND type='1'");
+				$db->query("DELETE FROM `{$pex_prefix}permissions_inheritance` WHERE child='{$sel['uuid']}' AND type='1'");
+				$db->query("DELETE FROM `donate_group` WHERE uuid='{$sel['uuid']}' AND serverid='$serverid'");
+				addLog($sel['uuid'], 0, "[$svername] Админ <b>$username</b> преждевременно снял группу с игрока.", 14);
+				$einfo = returnNotifer("С игрока <b>$nickname</b> на сервер <b>$svername</b> успешно снята группа.", "check", "true");
+			}
+		}
+
+		foreach ($_servers as $serv) {
+			$servers .= "<option value='{$serv['id']}'>{$serv['name']}</option>";
+		}
+
+		$line[0] .= "
+		$einfo
+			<form class='uk-form' action method='post'>
+				<div style='margin-bottom: 10px;'>Заполните данные ниже, чтобы выдать тому или иному игроку группу</div>
+				<table class='uk-table uk-table-striped'>
+					<tr>
+						<td>Ник игрока</td>
+						<td><input type='text' name='uname' value='$nickname' class='uk-width-1-1' placeholder='Example'></td>
+					</tr>
+					<tr>
+						<td>Группа</td>
+						<td>
+							<select name='group' class='uk-width-1-1'>
+								<option value='iron'>IRON</option>
+								<option value='gold'>GOLD</option>
+								<option value='diamond'>DIAMOND</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>Длительность группы</td>
+						<td><input type='datetime-local' name='until' class='uk-width-1-1' placeholder='Example'></td>
+					</tr>
+					<tr>
+						<td>Сервер</td>
+						<td>
+							<select name='serverid' class='uk-width-1-1'>
+								$servers
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>Если у выбранного игрока уже есть группа, она будет аннулирована.</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td><input type='submit' style='color: #EFD0A0;' name='return' value='Продолжить' class='uk-button uk-width-1-1'></td>
+					</tr>
+				</table>
+			</form>
+		";
+
+		$tpl->load_template('modules.tpl');
+		$tpl->set('{header}', $header);
+		$tpl->set('{content}', $line[0]);
+		$tpl->compile('content');
+		$tpl->clear();
+	}
+}

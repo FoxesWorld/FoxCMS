@@ -7,7 +7,7 @@
 		
 		function __construct($db, $request) {
 			$this->db = $db;
-			$userBadges = UserActions::getUserBadges($db, $request['userDisplay']);
+			$userBadges = initHelper::getUserBadges($db, $request['userDisplay']);
 			if($userBadges){
 				$badgesArray = json_decode($userBadges, false);
 				
@@ -18,14 +18,14 @@
 		}
 		
 		private function getBadgeInfo($badge){
-			
 			$query = "SELECT * FROM `badgesList` WHERE badgeName = '".$badge->badgeName."'";
 			$badgeRow=$this->db->getRow($query);
 			if($badgeRow){
+				$description = isset($badge->description) ? $badge->description : $badgeRow['description'];
 				$badgeArr =  array(
 					"AcquiredDate" => $badge->acquiredDate,
 					"BadgeName" => $badgeRow['badgeName'],
-					"BadgeDesc" => $badgeRow['description'],
+					"BadgeDesc" =>  $description,
 					"BadgeImg" => $badgeRow['img']
 				);
 				return $badgeArr;	

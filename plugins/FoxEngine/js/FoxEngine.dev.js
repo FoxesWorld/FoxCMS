@@ -11,6 +11,7 @@ function foxEngine(login) {
     let updatedText;
     let replacedTimes = 0;
     let optNamesArr = new Array();
+    let elementsDir = replaceData.assets + "elements/";
 
     this.loadPage = async function(page, block) {
         let delay, option, content, func;
@@ -24,109 +25,155 @@ function foxEngine(login) {
             let optionContent = await request.send_post({
                 "getOption": page
             });
+			
+			//let test = await sendPostAndGetAnswer({
+            //    "getOption": page
+            //}, "HTML");
+			//console.log(test);
 
             optionContent.onreadystatechange = function() {
                 if (optionContent.readyState === 4) {
-					FoxesInput.initialised = false;
+                    FoxesInput.initialised = false;
                     let response = parser.parseFromString(this.responseText, 'text/html');
                     option = getData(response, 'useroption');
                     content = getData(response, 'pageContent');
                     if (option !== undefined) {
                         let jsonOption = JSON.parse(option.textContent);
                         if (jsonOption.onLoad) {
-							switch(jsonOption.onLoadArgs){
-								case undefined:
-									func = jsonOption.onLoad+"()";
-								break;
-								
-								default:
-									func = jsonOption.onLoad + "(" + jsonOption.onLoadArgs + ")";
-								break;
-							}
-							
+                            switch (jsonOption.onLoadArgs) {
+                                case undefined:
+                                    func = jsonOption.onLoad + "()";
+                                    break;
+
+                                default:
+                                    func = jsonOption.onLoad + "(" + jsonOption.onLoadArgs + ")";
+                                    break;
+                            }
+
                             setTimeout(() => {
-                               eval(func);
-							   //console.log(func);
+                                eval(func);
+                                //console.log(func);
                             }, 500);
                         }
-						
-					FoxEngine.loadData(replaceText(this.responseText, page), block);
-					setPage(page);
-					location.hash = '#page/' + page;
+
+                        loadData(replaceText(this.responseText, page), block);
+                        setPage(page);
+                        location.hash = '#page/' + page;
                     }
+					$(response).find('useroption').remove();
                 }
             }
         }
     };
 
     this.getLastUser = async function() {
-        let lastUserReq = await request.send_post({
-            userAction: "lastUser"
-        });
-        lastUserReq.onreadystatechange = function() {
-            if (lastUserReq.readyState === 4) {
-                let lastUser = JSON.parse(this.responseText);
-                let userView = `
-				<div id="profileContents" style="background: linear-gradient(45deg, #c5c5e19c, ` + lastUser.colorScheme + `);">
-				<table>
-				<tr>
-					<td>
-
-					   <img class="profilePhoto" src="` + lastUser.profilePhoto + `" style="width: 64px;" alt="` + lastUser.login + `">
-					
-					</td>
-					
-					<td>
-					<div class="profile-title">
-						<ul>
-					   <li><h1><a href="#" onclick="FoxEngine.showUserProfile('` + lastUser.login + `'); return false;">` + lastUser.login + `</a></h1></li>
-					   <li><span>` + lastUser.realname + `</span></li>
-					   <li><span class="groupStatus-4">` + convertUnixTime(lastUser.reg_date) + `</span></li>
-					   </ul>
-					</div>
-					</td>
-				</div>
-				</tr>
-				</table>`;
-                $("#lastUser").html(userView);
-            }
+        try {
+            let lastUser = await sendPostAndGetAnswer({
+                userAction: "lastUser"
+            }, "JSON");
+            let userView = await loadAndReplaceHtml(elementsDir + 'lastUser.tpl', {
+                colorScheme: lastUser.colorScheme,
+                profilePhoto: lastUser.profilePhoto,
+                login: lastUser.login,
+                realname: lastUser.realname,
+                regDate: convertUnixTime(lastUser.reg_date)
+            });
+            $("#lastUser").html(userView);
+        } catch (error) {
+            console.error(error.message);
         }
     };
 
-    function textAnimate() {
+    function textAnimate(target) {
         let animation = anime.timeline({
             loop: false
         }).add({
-            targets: '.container #actionBlock',
+            targets: target,
             scale: [14, 1],
             rotateZ: [180, 0],
             opacity: [0, 1],
             easing: "easeOutExpo",
             duration: 1000,
-            delay: 300
+            delay: 500
         });
         return true;
     };
-	
-	function getData(data, tag) {
-		return data.getElementsByTagName(tag)[0];
+
+	async function sendPostAndGetAnswer(requestBody, answerType) {
+		try {
+			// Assuming request is a class or object that handles HTTP requests
+			let response = await request.send_post(requestBody);
+
+			// Wait for the response to be ready
+			await this.waitForResponse(response);
+
+			// Parse the response based on the specified answerType
+			switch (answerType) {
+				case "JSON":
+					return this.parseResponseJSON(response.responseText);
+					
+				case "HTML":
+					return this.parseResponseHTML(response.responseText);
+					
+				default:
+					throw new Error("Invalid answerType specified");
+			}
+
+		} catch (error) {
+			console.error(error.message);
+			throw error;
+		}
 	}
 
-    this.userAction = async function() {
-        let answer = await request.send_post({
-            user_doaction: "greeting"
-        });
-        answer.onreadystatechange = function() {
-            if (answer.readyState === 4) {
-                try {
-                    answer = JSON.parse(this.responseText);
-                    $("#actionBlock").html(answer.text + ' ' + replaceData.realname + '!');
-                } catch (error) {}
-                textAnimate();
-            }
-        };
-    };
+	// Helper function to wait for the response to be ready
+	waitForResponse = function (response) {
+		return new Promise(resolve => {
+			response.addEventListener("load", () => {
+				resolve();
+			});
+		});
+	}
 
+	// Helper function to parse the response and return JSON
+	parseResponseJSON = function (responseText) {
+		try {
+			return JSON.parse(responseText);
+		} catch (error) {
+			console.error(error.message);
+			throw error;
+		}
+	}
+
+	// Helper function to parse the response and return HTML document
+	parseResponseHTML = function (responseText) {
+		try {
+			return new DOMParser().parseFromString(responseText, 'text/html');
+		} catch (error) {
+			console.error(error.message);
+			throw error;
+		}
+	}
+
+
+    function getData(data, tag) {
+        return data.getElementsByTagName(tag)[0];
+    }
+
+    this.userAction = async function(action) {
+        try {
+            let answer = await sendPostAndGetAnswer({
+                user_doaction: action
+            }, "JSON");
+            $("#actionBlock").html(answer.text + ' ' + replaceData.realname + '!');
+        } catch (error) {}
+        textAnimate("#actionBlock");
+    };
+	
+	    /**
+     * Splits and wraps letters in a query selector with a specified class.
+     * @param {string} query - The query selector for the element to split and wrap.
+     * @param {string} letterClass - The class to apply to each letter.
+     */
     this.splitWrapLetters = function(query, letterClass) {
         let textWrapper = document.querySelector(query);
         textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='" + letterClass + "'>$&</span>");
@@ -164,32 +211,29 @@ function foxEngine(login) {
             }
         }
     };
+	
     /* USER OPTIONS*/
-
     this.parseUsrOptionsMenu = async function() {
-        if (optNamesArr.length <= optionAmount) 
-			FoxEngine.debugSend('Using FoxesWorld UserOptions', 'background: #39312fc7; color: yellow; font-size: 14pt');
-        let usrOptions = await request.send_post({
-            "getUserOptionsMenu": replaceData.login
-        });
+        if (optNamesArr.length <= optionAmount)
+            FoxEngine.debugSend('Using FoxesWorld UserOptions', 'background: #39312fc7; color: yellow; font-size: 14pt');
         if (replaceData.isLogged) {
             FoxEngine.debugSend("User " + replaceData.login + " is logged", '');
         }
-        usrOptions.onreadystatechange = function() {
-            if (usrOptions.readyState === 4) {
-                try {
-                    let json = JSON.parse(this.responseText);
-                    optionAmount = json.optionAmount;
-                    optionArray = json.optionArray;
-                    if (optNamesArr.length <= optionAmount) FoxEngine.debugSend("UserOptions available: " + optionAmount, "");
-                    for (var i = 0; i < optionAmount; i++) {
-                        var obj = optionArray[i];
-                        for (var optionName in obj) {
-                            let appendBlock = obj[optionName]["optionBlock"];
-                            switch (obj[optionName]["type"]) {
-                                case "page":
-                                    optionTpl = `
-										  <li class="`+obj[optionName]["optionClass"]+`">
+        try {
+            let json = await sendPostAndGetAnswer({
+                "getUserOptionsMenu": replaceData.login
+            }, "JSON");
+            optionAmount = json.optionAmount;
+            optionArray = json.optionArray;
+            if (optNamesArr.length <= optionAmount) FoxEngine.debugSend("UserOptions available: " + optionAmount, "");
+            for (var i = 0; i < optionAmount; i++) {
+                var obj = optionArray[i];
+                for (var optionName in obj) {
+                    let appendBlock = obj[optionName]["optionBlock"];
+                    switch (obj[optionName]["type"]) {
+                        case "page":
+                            optionTpl = `
+										  <li class="` + obj[optionName]["optionClass"] + `">
 											<a  class="pageLink-` + optionName + `" onclick="FoxEngine.loadPage('` + optionName + `', replaceData.contentBlock); return false; ">
 												<div class="rightIcon">
 													` + obj[optionName]["optionPreText"] + `
@@ -197,27 +241,25 @@ function foxEngine(login) {
 											` + obj[optionName]["optionTitle"] + `
 											</a>
 											</li>`;
-                                    break;
+                            break;
 
-                                case "pageContent":
-                                    break;
+                        case "pageContent":
+                            break;
 
-                                case "plainText":
-                                    optionTpl = obj[optionName]["optionTitle"];
-                                    break;
-                            }
-                            if (appendBlock !== undefined) {
-                                $(appendBlock).append(optionTpl);
-                            }
-                            optNamesArr.push(optionName);
-                        }
+                        case "plainText":
+                            optionTpl = obj[optionName]["optionTitle"];
+                            break;
                     }
-                } catch (error) {}
+                    if (appendBlock !== undefined) {
+                        $(appendBlock).append(optionTpl);
+                    }
+                    optNamesArr.push(optionName);
+                }
             }
-        }
+        } catch (error) {}
     }
-
-    this.showUserProfile = async function(userDisplay) {	
+	
+    this.showUserProfile = async function(userDisplay) {
         let userProfile = await request.send_post({
             "userDisplay": userDisplay,
             "user_doaction": "ViewProfile"
@@ -225,77 +267,262 @@ function foxEngine(login) {
 
         userProfile.onreadystatechange = function() {
             if (userProfile.readyState === 4) {
-                FoxEngine.loadData(userProfile.responseText, '#content');
+                loadData(userProfile.responseText, replaceData.contentBlock);
             }
         }
-		location.hash = 'user/' + userDisplay;
-		FoxesInput.initialised = false;
-		FoxesInput.formInit(1000);
+        location.hash = 'user/' + userDisplay;
+        FoxesInput.initialised = false;
+        FoxesInput.formInit(1000);
     };
 
-    this.showProfilePopup = async function(user,dialogOptions) {
-        let userProfilePopup = await request.send_post({
-            "userDisplay": user,
-            "user_doaction": "ViewProfile"
-        });
+    this.showProfilePopup = async function(user, dialogOptions) {
         //$("#dialog").dialog("option", "title", user);
+		
+			let response = await sendPostAndGetAnswer({
+				"userDisplay": user,
+				"user_doaction": "ViewProfile"
+            }, "HTML");
 
-        userProfilePopup.onreadystatechange = function() {
-            if (userProfilePopup.readyState === 4) {
-				let parser = new DOMParser();
-                let response = parser.parseFromString(userProfilePopup.responseText, 'text/html');
-                FoxEngine.loadData(response.getElementById('view'), '#dialogContent');		
+        loadData(response.getElementById('view'), '#dialogContent');
+        $("#dialog").dialog(dialogOptions);
+        $("#dialog").dialog('open');
+        setTimeout(() => {
+            this.parseBadges(user);
+        }, 600);
+    };
+
+/* Badges */
+// Function to parse badges
+this.parseBadges = async function (user) {
+	const badgeTemplate = await loadAndReplaceHtml(elementsDir + 'badge.tpl', {});
+    try {
+        let parsedJson = await sendPostAndGetAnswer({
+            user_doaction: 'GetBadges',
+            userDisplay: user
+        }, "JSON");
+
+        if (parsedJson.length > 0) {
+            for (let k = 0; k < parsedJson.length; k++) {
+                let obj = parsedJson[k];
+
+                // Replace text in the badge template for each badge
+                let badgeHtml = await replaceTextInTemplate(badgeTemplate, {
+                    BadgeDesc: obj.BadgeDesc,
+                    AcquiredDateFormatted: convertUnixTime(obj.AcquiredDate),
+                    BadgeName: obj.BadgeName,
+                    BadgeImg: obj.BadgeImg
+                });
+
+                // Append the badge HTML to the userBadges container
+                $("#userBadges").append(badgeHtml);
+
+                // Initialize tooltips for the badges
+                $('[data-toggle="tooltip"]').tooltip({
+                    placement: 'bottom',
+                    trigger: "hover"
+                });
+            }
+        } else {
+            // If there are no badges, remove the userBadges container
+            $("#userBadges").remove();
+        }
+    } catch (error) {
+        console.error('Error parsing badges:', error);
+    }
+};
+
+
+
+/* Servers parser */
+this.parseOnline = async function () {
+    try {
+        // Load the template only once
+        const entryTemplate = await loadAndReplaceHtml(elementsDir + 'monitor/serverEntry.tpl', {});
+
+        let parsedJson = await sendPostAndGetAnswer({
+            sysRequest: 'parseMonitor'
+        }, "JSON");
+
+        if (parsedJson.servers.length > 0) {
+            let serversHtmlPromises = [];
+
+            for (const obj of parsedJson.servers) {
+                let isOnline = obj.status === "online";
+                let progressbarClass = isOnline ? 'progressbar-online' : 'progressbar-offline';
+                let playersOnline = isOnline ? obj.playersOnline : 0;
+                let playersMax = isOnline ? obj.playersMax : 0;
+
+                // Push the promise to the array
+                serversHtmlPromises.push(replaceTextInTemplate(entryTemplate, {
+                    version: obj.version,
+                    srvName: obj.serverName,
+                    serverName: obj.serverName,
+                    playersOnline: playersOnline,
+                    playersMax: playersMax,
+                    percent: obj.percent,
+                    statusClass: isOnline ? 'online' : 'offline',
+                    version: obj.version,
+                    progressbarClass: progressbarClass
+                }));
+            }
+
+            // Wait for all promises to be resolved
+            let serversHtmlResults = await Promise.all(serversHtmlPromises);
+
+            // Combine the results into a single string
+            let serversHtml = serversHtmlResults.join('');
+
+            // Replace text in the total online template
+            const totalOnlineHtml = await loadAndReplaceHtml(elementsDir + 'monitor/totalOnline.tpl', {
+                totalPlayersOnline: parsedJson.totalPlayersOnline,
+                totalPlayersMax: parsedJson.totalPlayersMax,
+                percent: parsedJson.percent,
+                todaysRecord: parsedJson.todaysRecord
+            });
+
+            // Update the content
+            $("#servers").html(serversHtml + totalOnlineHtml);
+        } else {
+            $("#servers").empty();
+        }
+    } catch (error) {
+        console.error('Error parsing online servers:', error);
+    }
+};
+
+
+
+replaceTextInTemplate = async function(template, replacements) {
+    try {
+        let replacedTemplate = template;
+
+        // Replace placeholders in the template
+        for (let key in replacements) {
+            if (replacements.hasOwnProperty(key)) {
+                const regex = new RegExp('{' + key + '}', 'g');
+                replacedTemplate = replacedTemplate.replace(regex, replacements[key]);
             }
         }
-		$("#dialog").dialog(dialogOptions);
-        $("#dialog").dialog('open');
-		setTimeout(() => {
-			this.parseBadges(user);
-		}, 600);
-    };
-	
-	/*Badges*/
-	this.parseBadges = async function(user){
-		let badgesInstance = await request.send_post(
-		{
-			user_doaction: 'GetBadges',
-			userDisplay: user
-		});
-	    badgesInstance.onreadystatechange = function() {
-            if (badgesInstance.readyState === 4) {
-				let parsedJson = JSON.parse(this.responseText);
-				if(parsedJson.length > 0) {
-					for (var k = 0; k < parsedJson.length; k++) {
-						let obj = parsedJson[k];
-						let BadgeHtml = `<li>
-							<a data-toggle="tooltip" class="badge" title="`+obj.BadgeDesc+` Since `+convertUnixTime(obj.AcquiredDate)+`" href="#`+obj.BadgeName+`" rel="noreferrer noopener">
-								<img aria-hidden="true" src="`+obj.BadgeImg+`" class="profileBadge22-3GAYRy profileBadge-12r2Nm desaturate-_Twf3u">
-							</a>
-						</li>`;
-						$("#userBadges").append(BadgeHtml);
-						$('[data-toggle="tooltip"]').tooltip({placement: 'bottom', trigger: "hover"});
-					}
-				} else {
-					$("#userBadges").remove();
-				}
-			}
-		}
-	};
-	
-	this.debugSend = function(message, style) {
+
+        return replacedTemplate;
+    } catch (error) {
+        console.error(error.message);
+        return ''; // Return an empty string or handle the error accordingly
+    }
+}
+
+// Load server page content
+this.loadServerPage = async function(serverName) {
+    try {
+        // Fetch server information
+        let server = await sendPostAndGetAnswer({
+            sysRequest: "parseServers",
+            server: "serverName = '" + serverName + "'"
+        }, "JSON");
+
+        if (server && server.length > 0) {
+            let serverDetails = server[0];
+
+            // Fetch modsInfo
+            let modsInfo = [];
+            if (serverDetails.modsInfo) {
+                modsInfo = JSON.parse(serverDetails.modsInfo);
+            }
+
+            // Load the server page template
+            const template = await loadAndReplaceHtml(elementsDir + 'serverPage/serverPage.tpl', {
+				serverImage: serverDetails.serverImage,
+				serverDescription: serverDetails.serverDescription,
+                serverName: serverDetails.serverName,
+                serverVersion: serverDetails.serverVersion,
+                mods: await loadMods(modsInfo)
+            });
+
+            // Append the server page HTML to the container
+            loadData(template, replaceData.contentBlock);
+        } else {
+            console.error('Error: Unable to fetch server details.');
+        }
+    } catch (error) {
+        console.error('Error while loading server page:', error);
+    }
+}
+
+// Function to load mods based on modsInfo
+loadMods = async function(modsInfo) {
+    try {
+        if (modsInfo && modsInfo.length > 0) {
+            // Load the template only once
+            const template = await loadAndReplaceHtml(elementsDir + 'serverPage/serverMods.tpl', {});
+
+            // Use Promise.all to execute promises concurrently
+            const promises = modsInfo.map(async mod => {
+                // Replace text in the template for each mod
+                return replaceTextInTemplate(template, {
+                    modName: mod.modName,
+                    modPicture: mod.modPicture,
+                    modDesc: mod.modDesc
+                });
+            });
+
+            // Wait for all promises to resolve
+            const modsHtmlArray = await Promise.all(promises);
+
+            // Concatenate the results
+            return modsHtmlArray.join('');
+        } else {
+            console.error("Couldn't extract server modInfo.");
+            return ''; // or handle accordingly
+        }
+    } catch (error) {
+        console.error('Error while loading mods:', error);
+        return ''; // or handle accordingly
+    }
+}
+
+
+
+
+
+    this.debugSend = function(message, style) {
         console.log("%c" + message, style);
     };
-	
-	this.loadData = function(data, block) {
-		let Galleryinstance;
+
+    async function loadAndReplaceHtml(filePath, replacements) {
+        try {
+            let response = await fetch(filePath);
+
+            if (!response.ok) {
+                throw new Error('Failed to load HTML content');
+            }
+
+            let htmlContent = await response.text();
+
+            // Replace placeholders in the HTML content
+            for (let key in replacements) {
+                if (replacements.hasOwnProperty(key)) {
+                    const regex = new RegExp('{' + key + '}', 'g');
+                    htmlContent = htmlContent.replace(regex, replacements[key]);
+                }
+            }
+
+            return htmlContent;
+        } catch (error) {
+            console.error(error.message);
+            return ''; // Return an empty string or handle the error accordingly
+        }
+    }
+
+    loadData = function(data, block) {
+        let Galleryinstance;
         $(block).fadeOut(500);
         setTimeout(() => {
-			if(data !== undefined) {
-				if(String(data).indexOf('<section class="gallery"') > 0){
-					Galleryinstance = new Gallery(data);
-					Galleryinstance.loadGallery();
-				}
-			}
+            if (data !== undefined) {
+                if (String(data).indexOf('<section class="gallery"') > 0) {
+                    Galleryinstance = new Gallery(data);
+                    Galleryinstance.loadGallery();
+                }
+            }
             $(block).html(data);
             $(block).fadeIn(500);
             FoxesInput.formInit(500);
@@ -328,8 +555,8 @@ function foxEngine(login) {
         const r = Math.random() * (max - min) + min + 1
         return Math.floor(r)
     };
-	
-	/*ENTRY REPLACER*/
+
+    /*ENTRY REPLACER*/
     replaceText = function(text, page) {
         updatedText = text;
         for (let j = 0; j < userFields.length; j++) {
@@ -357,40 +584,41 @@ function foxEngine(login) {
         replacedTimes = 0
         return updatedText;
     }
-	
-	
-	/*
-	this.parseEmojis = function(){
-		let emojiSectionHTML, emojiHTML;
-		let emojiInstance = request.send_post(
-		{
-			sysRequest: 'parseEmojis'
-		});
-		emojiInstance.onreadystatechange = function() {
-			if (emojiInstance.readyState === 4) {
-				let code, name;
-				emojiHTML = `<div class="emoji_box">`;
-				for(let m = 0; m < this.responseText; m++) {
-					let emojiSection = this.response.at(m);
-					emojiSectionHTML = ``;
-					JSON.parse(emojiSection, function (key, value) {
-						
-						switch(key){
-							case 'emojiCode':
-								code = value;
-							break;
-							
-							case 'emojiName':
-								name = value;
-							break;
-						}
-						emojiSectionHTML += `<div class="emoji_symbol" data-emoji="`+code+`"></div>`;
-					});
-					emojiHTML += emojiSectionHTML;
-				}
-				emojiHTML += `</div>`;
-			}
-		}
-		return emojiHTML;
-	} */
+
+
+this.parseEmojis = async function () {
+    try {
+        let emojiHTML = `<div class="emoji_box">`;
+
+        // Assuming request is a class or object that handles HTTP requests
+        let emojiData = await request.send_post({
+            sysRequest: 'parseEmojis'
+        });
+
+        if (emojiData && emojiData.emoji && Array.isArray(emojiData.emoji)) {
+            let emojiArray = emojiData.emoji;
+
+            for (let emoji of emojiArray) {
+                if (emoji && emoji.code && emoji.name) {
+                    let code = emoji.code;
+                    let name = emoji.name;
+
+                    emojiHTML += `<div class="emoji_symbol" data-emoji="${code}" title="${name}"></div>`;
+                } else {
+                    console.error('Invalid emoji structure:', emoji);
+                }
+            }
+
+            emojiHTML += `</div>`;
+        } else {
+            console.error('Invalid emoji data:', emojiData);
+            // Handle the error or return an appropriate value
+        }
+
+        return emojiHTML;
+    } catch (error) {
+        console.error('Error parsing emojis:', error);
+        throw error;
+    }
+}
 }

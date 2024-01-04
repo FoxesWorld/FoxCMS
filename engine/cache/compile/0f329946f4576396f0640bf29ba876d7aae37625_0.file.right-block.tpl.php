@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2023-10-31 17:07:05
+/* Smarty version 4.0.4, created on 2024-01-02 19:33:22
   from '/var/www/FoxCMS/templates/foxengine/right-block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_65410a09ede0e9_09447241',
+  'unifunc' => 'content_65943ad2168ad4_18295094',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0f329946f4576396f0640bf29ba876d7aae37625' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine/right-block.tpl',
-      1 => 1696321128,
+      1 => 1704182456,
       2 => 'file',
     ),
   ),
@@ -20,65 +20,63 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_65410a09ede0e9_09447241 (Smarty_Internal_Template $_smarty_tpl) {
+function content_65943ad2168ad4_18295094 (Smarty_Internal_Template $_smarty_tpl) {
 if (!$_smarty_tpl->tpl_vars['isMobile']->value) {?>
-<div class="col-4">
+<div class="col-4 d-none d-md-block">
 <div class="row rightBlock">
-   <div class="card">
-      <div id="userBlock">
-         <div class="userProfile">
-            <ul>
-               <li class="profilePhoto">
-                  <img src="<?php echo $_smarty_tpl->tpl_vars['profilePhoto']->value;?>
-">
-               </li>
-               <div class="userdata">
-                  <li>
-				  <div class="loginBox">
-				  <table>
-				  <tr>
-					<td>
-						<b><?php echo $_smarty_tpl->tpl_vars['login']->value;?>
+<div class="card">
+    <div id="userBlock">
+        <div class="userProfile">
+            <div class="profilePhoto">
+                <img src="<?php echo $_smarty_tpl->tpl_vars['profilePhoto']->value;?>
+" alt="Profile Photo">
+            </div>
+            <div class="list-group userActions">
+                <div class="list-group-item">
+                    <table>
+                        <tr>
+                            <td class="align-middle text-center">
+                                <b><?php echo $_smarty_tpl->tpl_vars['login']->value;?>
 </b>
-					</td>
-					<?php if ($_smarty_tpl->tpl_vars['user_group']->value != 5) {?>
-					<td class="logout">
-						<form method="POST" id="logout" action="/">
-							<button type="submit" class="logout"><i class="fa fa-sign-out"></i> </button>
-							<input name="userAction" class="input" type="hidden" value="logout" />
-						</form>
-					</td>
-					<?php }?>
-					</tr>
-				  </table>
-					
-				  </div>
-				  </li>
-                  <li><b><i class="fa fa-address-card-o"></i>Почта</b>: <?php echo $_smarty_tpl->tpl_vars['email']->value;?>
+                            </td>
+                            <?php if ($_smarty_tpl->tpl_vars['user_group']->value != 5) {?>
+                            <td class="align-middle logout text-center">
+                                <form method="POST" id="logout" action="/">
+                                    <button type="submit" class="logout btn btn-danger">
+										<i class="fa fa-sign-out"></i>
+									</button>
+                                    <input name="userAction" class="input" type="hidden" value="logout" />
+                                </form>
+                            </td>
+                            <?php }?>
+                        </tr>
+                    </table>
+                </div>
+                <li class="list-group-item"><b><i class="fa fa-address-card-o"></i> Почта</b>: <?php echo $_smarty_tpl->tpl_vars['email']->value;?>
 </li>
-                  <li><b><i class="fa fa-users"></i>Группа</b>: <?php echo $_smarty_tpl->tpl_vars['groupName']->value;?>
+                <li class="list-group-item"><b><i class="fa fa-users"></i> Группа</b>: <?php echo $_smarty_tpl->tpl_vars['groupName']->value;?>
 </li>
-                  <li><b><i class="fa fa-diamond"></i>Полное имя</b>: <?php echo $_smarty_tpl->tpl_vars['realname']->value;?>
+                <li class="list-group-item"><b><i class="fa fa-diamond"></i> Полное имя</b>: <?php echo $_smarty_tpl->tpl_vars['realname']->value;?>
 </li>
-				  <?php if ($_smarty_tpl->tpl_vars['user_group']->value != 5) {?><li title="Валюта проекта" data-toggle="tooltip"><b><i class="fa fa-krw"></i>Юниты</b>: <?php echo $_smarty_tpl->tpl_vars['units']->value;?>
-</li><?php }?>
-               </div>
-            </ul>
-			<?php if ($_smarty_tpl->tpl_vars['user_group']->value == 5) {?>
-            <ul class="userActions">
-               <li>                  
-                  <a href="#" onclick="FoxEngine.loadPage('auth', replaceData.contentBlock); return false;">
-					  <button type="submit" class="login">
-						Авторизация <i class="fa fa-sign-in"></i>
-					  </button>
-                  </a>
-				  				  
-               </li>
-            </ul>
-			<?php }?>
-         </div>
-      </div>
-   </div>
+                <?php if ($_smarty_tpl->tpl_vars['user_group']->value != 5) {?>
+                <li class="list-group-item" title="Валюта проекта" data-toggle="tooltip">
+				<b>
+					<i class="fa fa-krw"></i> Юниты
+				</b>: <?php echo $_smarty_tpl->tpl_vars['units']->value;?>
+</li>
+                <?php }?>
+            </div>
+            <?php if ($_smarty_tpl->tpl_vars['user_group']->value == 5) {?>
+            <div class="userActions text-center mt-3">
+                <a href="#" onclick="FoxEngine.loadPage('auth', replaceData.contentBlock); return false;">
+                    <button type="submit" class="login"><i class="fa fa-sign-in"></i> Авторизация</button>
+                </a>
+            </div>
+            <?php }?>
+        </div>
+    </div>
+</div>
+
    
     <?php if ($_smarty_tpl->tpl_vars['user_group']->value != 5) {?>
       <div class="card">				
@@ -94,7 +92,15 @@ if (!$_smarty_tpl->tpl_vars['isMobile']->value) {?>
       </div>
 	  <?php }?>
    
-      <div class="card d-none d-sm-block">		
+     <div class="card">		
+      	<div class="card text-white  mb-3" style="max-width: 18rem;">
+      	  <div class="card-header">Servers</div>
+			<div id="servers">
+			</div>
+      	</div>
+      </div>
+   
+      <div class="card">		
       	<div class="card text-white  mb-3" style="max-width: 18rem;">
       	  <div class="card-header">Последняя регистрация</div>
 			<div id="lastUser">

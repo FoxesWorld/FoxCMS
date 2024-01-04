@@ -19,6 +19,7 @@
 					for($i = 0; $i < count($replaceValuesArray); $i++) {
 						$replaceInstance = explode('->', $replaceValuesArray[$i]);
 						$ValuesReplacement = new ValuesReplacement($replaceInstance[0], $replaceInstance[1], $this->content);
+						$this->content = $ValuesReplacement->getContent();
 					}
 					
 					die($ValuesReplacement->getContent());

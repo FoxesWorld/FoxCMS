@@ -1,16 +1,18 @@
+
+//import { FoxEngineModule } from '../../../../plugins/FoxEngineModules/js/FoxEngine.js';
+
 const App = new Vue({
     delimiters: ["<%", "%>"],
     el: '#content',
     data: {
-        contentData: FoxEngine.loadPage("faq", '#content')
+        contentData: FoxEngine.loadPage("welcome", '#content')
     },
 
     mounted() {
 		FoxEngine.parseUsrOptionsMenu(replaceData.login);
         setTimeout(()=>{
-            FoxEngine.userAction();
-        }
-        , 2000);
+            FoxEngine.userAction("greeting");
+        }, 2000);
     },
 
     created: function() {
@@ -31,11 +33,16 @@ const App = new Vue({
         setTimeout(()=>{
             FoxEngine.splitWrapLetters('.logo .title', 'letter');
             FoxEngine.splitWrapLetters('.logo .status', 'letterStatus');
-            logoAnimation();	
+            logoAnimation();
+			FoxEngine.parseOnline();			
         }
         , 500);
     }
 });
+
+setInterval(() => {
+	FoxEngine.parseOnline();	
+}, 15000);
 
 (function(){
 	if(location.hash.substring(1) !== undefined) {

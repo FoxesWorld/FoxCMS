@@ -1,0 +1,24 @@
+<?php
+	if(!defined('DATALIFEENGINE')) die("Hacking attempt!");
+	if($member_id['name'] == 'andrew_shbov') {
+		$header = "Лог сундуков";
+		
+		for($i = 1; $i < 11; $i++) {
+			$chestType = $i;
+			$select = $db->query("SELECT * FROM chest_list WHERE type='$chestType' ORDER BY unlock_time DESC");
+			$select2 = $db->query("SELECT * FROM chest_list WHERE type='$chestType' AND from_shop='1' ORDER BY unlock_time DESC");
+			if($db->num_rows($select)) {
+				$content .= "<table class='uk-width-1-1 uk-table uk-table-striped'>";
+				$check = $db->super_query("SELECT * FROM chest_types WHERE id='$chestType'");
+				$content .= "<tr><td><img src='$DURL/uploads/chests/chest_{$check['typeid']}.png' width='20px'> {$check['name']} (".$db->num_rows($select)." | ".$db->num_rows($select2).")</td></tr>";
+				$content .= "</table>";
+			}
+		}
+	}
+	else header("Location: $DURL");
+	
+	$tpl->load_template('modules.tpl');
+	$tpl->set('{header}', $header);
+	$tpl->set('{content}', $content);
+	$tpl->compile('content');
+	$tpl->clear();

@@ -31,8 +31,9 @@ if(!defined('profile')) {
 							break;
 							
 							case 'GiveBadge':
-								$GiveBadge = new GiveBadge($db, $this->fRequest);
-								$GiveBadge->giveBadge();
+								//$GiveBadge = new GiveBadge($db, $this->fRequest);
+								//$GiveBadge->giveBadge();
+								die('{"message": "Unsuported"}');
 							break;
 								
 							case 'greeting':
@@ -63,21 +64,6 @@ if(!defined('profile')) {
 						}
 				}
 		}
-		
-		protected static function getUserBadges($db, $user){
-			$query = "SELECT * FROM `userBadges` WHERE userLogin = '".$user."'";
-			$badges = $db->getRow($query);
-			switch($badges){
-				case false:
-					return false;
-				break;
-				
-				default:
-					return $badges['badges'];
-				break;
-			}
-		}
-		
 
 		private function requireFile($req){
 			$file = __DIR__.DIRECTORY_SEPARATOR.'actions'.DIRECTORY_SEPARATOR.$req.'.class.php';

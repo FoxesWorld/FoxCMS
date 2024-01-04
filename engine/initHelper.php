@@ -29,6 +29,30 @@
 				self::$usrArray['groupTag'] = self::$groupAssociacion->userGroupTag();
 				self::$usrArray['user_group'] = self::$groupAssociacion->userGroupNum();
 			}
+			
+			public static function getUserBadges($db, $user){
+				$query = "SELECT * FROM `userBadges` WHERE userLogin = '".$user."'";
+				$badges = $db->getRow($query);
+				switch($badges){
+					case false:
+						$db->run("INSERT INTO `userBadges`(`userLogin`, `badges`) VALUES ('".$user."', '')");
+					break;
+					
+					default:
+						return $badges['badges'];
+					break;
+				}
+			}
+		
+			//@deprecated
+			public static function getBadgesNames($db, $user){
+				$namesArray = array();
+				$badgesArray = json_decode(self::getUserBadges($db, $user), true);
+				foreach($badgesArray as $badgeVal){
+					$namesArray[] = $badgeVal['badgeName'];
+				}
+				return $namesArray;
+			}
 		}
 		
 
@@ -62,5 +86,5 @@
 			protected function userGroupNum() {
 				return $this->dbRequest()["groupNum"] ?? 3;
 			}
-
 		}
+?>

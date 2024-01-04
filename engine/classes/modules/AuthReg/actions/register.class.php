@@ -76,10 +76,13 @@ if(!defined('auth')) {
 				$password = password_hash($this->regData['password1'], PASSWORD_DEFAULT);
 				$photo = '/templates/'.$config['siteSettings']['siteTpl'].'/assets/img/no-photo.jpg';
 				$realname = $this->regData['realname'] ?? randTexts::getRandText('noName');
-				$query = "INSERT INTO `users`(`login`, `password`, `email`, `user_group`, `realname`, `hash`, `reg_date`, `reg_ip`, `logged_ip`, `last_date`, `profilePhoto`) 
-				VALUES ('".$this->regData['login']."', '".$password."', '".$this->regData['email']."', '".$this->regGroup($this->regData['regCode'])."', '".$realname."', '".authorize::generateLoginHash()."', '".CURRENT_TIME."', '".REMOTE_IP."', '".REMOTE_IP."', '".CURRENT_TIME."', '".$photo."')";
+				$query = "INSERT INTO `users`(`login`, `uuid`, `password`, `email`, `user_group`, `realname`, `hash`, `reg_date`, `reg_ip`, `logged_ip`, `last_date`, `profilePhoto`) 
+				VALUES ('".$this->regData['login']."', '".md5($this->regData['login'])."', '".$password."', '".$this->regData['email']."', '".$this->regGroup(@$this->regData['regCode'])."', '".$realname."', '".authorize::generateLoginHash()."', '".CURRENT_TIME."', '".REMOTE_IP."', '".REMOTE_IP."', '".CURRENT_TIME."', '".$photo."')";
 				$userReg = $this->db->run($query);
 				if($userReg) {
+					init::classUtil('GiveBadge', "1.0.0");
+					$GiveBadge = new GiveBadge($this->db, $this->regData['login']);
+					$GiveBadge->giveBadge("earlyUser");
 					$loadUserInfo = new loadUserInfo($this->regData['login'], $this->db);
 					$userData = $loadUserInfo->userInfoArray();
 					$this->logger->WriteLine("User has completed registration '".$this->regData['login']."'");

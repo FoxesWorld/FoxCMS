@@ -1,0 +1,283 @@
+<?php
+if (!defined('DATALIFEENGINE')) die("Hacking attempt!");
+if ($member_id['name']) {
+	if ($_GET['free'] == 'chest') {
+		$select = $db->query("SELECT * FROM chest_list WHERE type='4' AND to_uuid='{$member_id['uuid']}'");
+		if ($db->num_rows($select) <= 3) {
+			$check = $db->query("SELECT * FROM dle_users WHERE free_chest_ip='" . get_ip() . "' AND name!='{$member_id['name']}'");
+			if (!$db->num_rows($check) || $member_id['mult_chest_can']) {
+				if (strcmp(date("dmY", $member_id['last_free_chest']), date("dmY")) != 0) {
+					$db->query("INSERT INTO `chest_list` (`id`, `type`, `to_uuid`, `addtime`, `unlock_time`, `from_shop`) VALUES (NULL, '4', '{$member_id['uuid']}', '" . time() . "', '0', 0)");
+					$db->query("INSERT INTO `shop_history` (`id`, `itemid`, `time`, `uuid`, `summa`, `shop`, `enchant`, `count`) VALUES (NULL, '4', '" . time() . "', '{$member_id['uuid']}', '0.00', 'Славный сундук', '', '99999')");
+					$db->query("UPDATE dle_users SET last_free_chest='" . time() . "', free_chest_ip='" . get_ip() . "' WHERE name='{$member_id['name']}'");
+				}
+				header("Location: $DURL/chests");
+				exit();
+			} else $content .= "<div class='uk-alert uk-alert-danger'>Вы не можете получить Славный сундук, так как ваш IP найден на других аккаунтах.</div>";
+		} else $content .= "<div class='uk-alert uk-alert-danger'>Вы можете одновременно хранить максимум 4 Славных сундука.</div>";
+	}
+	$header = "Мои таинственные сундуки<a href='#slavny' data-uk-modal style='float: right'><img src='$DURL/uploads/chests/chest_4.png' style='width: 20px;margin-top: -4px;margin-right: 3px;'>Что такое Славный сундук?</a>";
+	if ($member_id['name']) {
+		if ($member_id['name']) {
+			if (strcmp(date("d.m.Y"), $member_id['free_last_date']) == 0) {
+				if ($member_id['free_day_times'] <= 4) $cost = 1;
+				else if ($member_id['free_day_times'] <= 10) $cost = 2;
+				else if ($member_id['free_day_times'] <= 15) $cost = 3;
+				else if ($member_id['free_day_times'] <= 20) $cost = 4;
+				else if ($member_id['free_day_times'] <= 25) $cost = 5;
+				else $cost = 6;
+			} else {
+				$db->query("UPDATE dle_users SET free_last_date='" . date("d.m.Y") . "', free_day_times='0' WHERE name='{$member_id['name']}'");
+				$cost = 1;
+			}
+
+			$select = $db->query("SELECT * FROM fast_chest_log WHERE username='{$member_id['name']}' ORDER BY id DESC LIMIT 7");
+			if ($db->num_rows($select)) {
+				while ($get = $db->get_row($select)) {
+					$dop = array('icon' => $get['icon'], 'count' => $get['count']);
+					$lastPrev .= "<div class='prev_item' style='background-image: url({$get['icon']})'><div class='prev_count'>{$get['count']}</div></div>";
+				}
+			} else $hidden_prev = "style='display: none'";
+
+			$content .= "
+					<div class='shop_sets chest_types_info' data-uk-modal=\"{'target': '#fast_chest', 'center': true}\" style='margin-bottom: 30px'>
+						<table class='uk-width-1-1'>
+							<tr>
+								<td width='90px'><img src='$DURL/uploads/chests/chest_6.png' width='70px'></td>
+								<td>
+									<div style='font-size: 14pt;font-weight: bold;'>Быстрый сундук - Сверхвыгодный и сверхдешевый</div>
+									<div style='font-size: 12px; margin-top: 6px;'>Вы сможете выиграть одну <b><u>выгодную</u></b> вещь из онлайн-магазина на <b><u>выбранный</u></b> сервер</div>
+									<!--div class='fast_chest_cost'>1<img src='http://paradisecloud.ru/uploads/diamond.png' class='diamond_icon'></div--->
+								</td>
+							</tr>
+						</table>
+					</div>
+					
+					<div id='fast_chest' class='uk-modal'>
+					    <div class='uk-modal-dialog' style='width: 700px'>
+					        <div class='open_chest_title'>Быстрый сундук</div>
+							<div class='fast_chest_cerver_chose'>
+								<div class='fast_title'>Выберите сервер, на который мы отправим выигранную вещь</div>
+								<div class='fast_server' data-selected='0' data-server='1'>Simple</div>
+								<div class='fast_server' data-selected='0' data-server='2'>HiTech</div>
+								<div class='fast_server' data-selected='0' data-server='3'>Magic</div>
+								<div class='fast_server' data-selected='0' data-server='4'>Technomagic</div>
+								<div class='fast_server' data-selected='0' data-server='5'>SkyTech</div>
+							</div>
+							
+							<div id='raysDemoHolder'>
+								<a onclick='return false;'id='raysLogo' style='background-image: url(http://paradisecloud.ru/uploads/chests/chest_6.png);'></a>
+								<div id='outImage_fast_chesr' style='display: none'>
+									<!--div class='fast_item_name'>Название этого классного штука</div-->
+									<div class='fast_item_image' style='background-image: url(http://paradisecloud.ru/uploads/shopimg/van/87.png);'></div>
+									<div class='fast_item_count'>128</div>
+								</div>
+								<div id='rays'></div>
+								<div class='fasr_chest_cost_update' style='display: none'>Повышена стоимость открытия быстрого сундука.<br/><b>Внимание! Завтра стоимость для вас опять будет 1 алмаз!</b></div>
+							</div>
+							
+							<div style='font-size: 15px;margin-bottom: 10px;text-transform: uppercase;text-align: center;margin-bottom: -10px;margin-top: 20px;' id='fast_output_error'>Выбрали сервер? Открывайте сундук!</div>
+							<center><button data-free='0' style='margin-top: 20px;' type='button' id='start_fast_chest' class='my_spec_button' disabled>Открыть быстрый сундук прямо сейчас за <span id='fast_chest_cost'>$cost</span><img style='width: 20px; height: 20px; margin-top: -2px;' src='http://paradisecloud.ru/uploads/diamond.png' class='diamond_icon'></button><a id='try_free_fast_chest' data-uk-tooltip title='Хотите посмотреть как работает этот сундук? Нажмите и попробуйте бесплатно.<br/><b>Внимание! Выпавшая вещь не достанется вам!</b>' style='cursor: pointer;display: block;margin-top: 15px;margin-bottom: -10px;' data-free='1'>Попробовать бесплатно</a></center>
+							<div class='previous_items_list' $hidden_prev>
+								<div class='prev_header'>Последние ваши находки в Быстром сундуке</div>
+								<div class='prev_out'>$lastPrev</div>
+							</div>
+					    </div>
+					</div>
+				";
+		}
+
+		$select = $db->query("SELECT * FROM chest_list WHERE to_uuid='{$member_id['uuid']}' ORDER BY type DESC");
+		if ($db->num_rows($select)) {
+			$totalForceOpen = 0;
+			$totalNotOpened = 0;
+			$num = 0;
+			$content .= "<div id='chest_out'>";
+			$typenum[1] = 0;
+			$typenum[2] = 0;
+			$typenum[3] = 0;
+			$typenum[4] = 0;
+			$typenum[5] = 0;
+			while ($get = $db->get_row($select)) {
+				if ($get['type'] > 5) $get['type'] = 5;
+				$typenum[$get['type']]++;
+			}
+			$content .= "
+					<table class='uk-width-1-1'>
+						<tr>
+							<td valign='top' width='230px'>
+								<div class='i_have_chest'><img src='$DURL/uploads/chests/chest_1.png' width='20px'> Деревянный сундук <div class='chest_how_much'>{$typenum[1]}</div></div>
+								<div class='i_have_chest'><img src='$DURL/uploads/chests/chest_2.png' width='20px'> Золотой сундук <div class='chest_how_much'>{$typenum[2]}</div></div>
+								<div class='i_have_chest'><img src='$DURL/uploads/chests/chest_3.png' width='20px'> Алмазный сундук <div class='chest_how_much'>{$typenum[3]}</div></div>
+								<div class='i_have_chest'><img src='$DURL/uploads/chests/chest_4.png' width='20px'> Славный сундук <div class='chest_how_much'>{$typenum[4]}</div></div>
+								<div class='i_have_chest'><img src='$DURL/uploads/chests/chest_5.png' width='20px'> Гигантский Славный сундук <div class='chest_how_much'>{$typenum[5]}</div></div>
+							</td>
+							<td valign='top'>
+				";
+			$select = $db->query("SELECT * FROM chest_list WHERE to_uuid='{$member_id['uuid']}' ORDER BY type DESC");
+			while ($get = $db->get_row($select)) {
+				$untiltime = 0;
+				$opened_class = "";
+				$opened_class2 = "";
+				$check = $db->super_query("SELECT * FROM chest_types WHERE id='{$get['type']}'");
+				$forceopen = $check['open_cost'];
+				$textTime = "";
+				$server = "";
+				if ($get['from_shop']) $unlock_time = $check['hours_shop'];
+				else $unlock_time = $check['hours'];
+				if (!$get['unlock_time'] && $unlock_time) {
+					$opened_class2 = "chest_ready_to_open_not_opened";
+					$text = "Нажмите, чтобы разблокировать сундук";
+					$totalForceOpen += 1;
+					$totalNotOpened++;
+					$textTime = "Закрыто";
+					$server = "Ждать {$unlock_time}ч.";
+				} else if ($get['unlock_time'] > time()) {
+					$opened_class2 = "chest_ready_to_open_during";
+					$text = "Сундук еще закрыт, мы подбираем ключ..<br/><br/>Взломать его прямо сейчас за <b>$forceopen</b> <img style='width: 20px; height: 20px; margin-top: -2px;' src='http://paradisecloud.ru/uploads/diamond.png' class='diamond_icon'>";
+					$untiltime = $get['unlock_time'] - time();
+					$server = "<span>Открыть сейчас</span>{$check['open_cost']} <img style='width: 20px; height: 20px; margin-top: -2px;' src='http://paradisecloud.ru/uploads/diamond.png' class='diamond_icon'>";
+				} else {
+					$opened_class = "chest_ready_to_open";
+					$opened_class2 = "chest_ready_to_open_lay";
+					$text = "Готово! Нажмите, чтобы посмотреть, что в сундуке";
+					$textTime = "Открыть";
+					$server = "Сейчас";
+				}
+				/*if($check['server']) {
+						$ch = $db->super_query("SELECT * FROM shop_list WHERE id='{$check['server']}'");
+						$server = $ch['shopname'];
+						$check['inside'] = str_replace('{servername}', $server, $check['inside']);
+						$server = "<span style='color: #2000FF'>Для <b>$server</b></span>";
+					}*/
+				$content .= "
+						<div class='my_chest_all $opened_class2' data-type='{$get['type']}' data-id='{$get['id']}' data-uk-tooltip title=\"$text\">
+							<div class='my_chest_image uk-animation-slide-top $opened_class' style='background-image: url($DURL/uploads/chests/chest_{$check['typeid']}.png);'></div>
+							<div class='timercount_chest' data-id='{$get['id']}' data-time='$untiltime'>$textTime</div><div class='for_chest_server'>$server</div>
+						</div>
+					";
+			}
+			if ($totalNotOpened > 1) {
+				$word = get_count($totalNotOpened, 'сундук', 'сундука', 'сундуков');
+				$content .= "<div data-uk-tooltip title='Одновременно вы можете начать открывать только один сундук.<br/>Однако с помощью этой кнопки вы сможете начать открывать сразу $totalNotOpened $word.' class='chest_open_all'>Начать открывать все закрытые сундуки за $totalForceOpen <img style='width: 20px; height: 20px; margin-top: -2px;' src='http://paradisecloud.ru/uploads/diamond.png' class='diamond_icon'></div>";
+			}
+			$content .= "</td></tr></table></div><div id='chest_out_open'></div>";
+		} else $content .= "<div style='text-align: center;opacity: 0.7;'>У вас сейчас нет ни одного таинственного сундука</div>";
+	} else $content .= "<div style='text-align: center;opacity: 0.7;'>Проводятся технические работы. <br/>Примерное время работ: до 6 часов вечера по МСК.</div>";
+	$content .= "
+			<div class='shop_sets' onclick=\"location.href='$DURL/shop?act=chests'\" style='margin-top: 25px;'>
+				<table class='uk-width-1-1'>
+					<tr>
+						<td width='90px'><img src='$DURL/uploads/chests/chest_3.png' width='70px'></td>
+						<td>
+							<div style='font-size: 14pt;font-weight: bold;'>Перейти в магазин таинственных сундуков</div>
+							<div style='font-size: 12px; margin-top: 6px;'>Хотите сорвать куш и получить до 30 алмазов? Перейдите для подробностей</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			<div id='slavny' class='uk-modal'>
+			    <div class='uk-modal-dialog' style='width: 700px'>
+			        <div class='open_chest_title'>Что такое Славный сундук?</div>
+					<table class='uk-width-1-1'>
+						<tr>
+							<td width='130px' valign='top' align='center'><img src='$DURL/uploads/chests/chest_4.png' width='120px'></td>
+							<td valign='center'>
+								<b>Славный сундук</b> выдается всем игрокам раз в сутки совершенно бесплатно!<br/>Что же он из себя представляет?<br><br/>
+								В этом сундуке вы можете найти абсолютно любые 5 типов товара из нашего магазина на абсолютно любую ветку, например:<br/><br/>
+								- 2 Алмазных меча на Simple сервера<br/>
+								- 10 Золотых яблок на HiTech сервера<br/>
+								- 5 Квантовых солнечных панелей на HiTech сервера<br/>
+								- 128 Травы на RPG сервера<br/>
+								- 2 Яйца дракона на Magic сервера<br/><br/>
+								
+								После того, как сундук будет открыт - вы сможете забрать все вещи в игре!<br/><br/>
+								<img src='$DURL/uploads/chests/slavny_ex_1.jpg' style='width: 500px;'>
+							</td>
+						</tr>
+					</table>
+			    </div>
+			</div>
+			<script src='$DURL/loadscript/chests'></script>
+		";
+} else {
+	if ($member_id['name']) {
+		if (strcmp(date("d.m.Y"), $member_id['free_last_date']) == 0) {
+			if ($member_id['free_day_times'] <= 4) $cost = 1;
+			else if ($member_id['free_day_times'] <= 10) $cost = 2;
+			else if ($member_id['free_day_times'] <= 15) $cost = 3;
+			else if ($member_id['free_day_times'] <= 20) $cost = 4;
+			else if ($member_id['free_day_times'] <= 25) $cost = 5;
+			else $cost = 6;
+		} else {
+			$db->query("UPDATE dle_users SET free_last_date='" . date("d.m.Y") . "', free_day_times='0' WHERE name='{$member_id['name']}'");
+			$cost = 1;
+		}
+
+		$select = $db->query("SELECT * FROM fast_chest_log WHERE username='{$member_id['name']}' ORDER BY id DESC LIMIT 7");
+		if ($db->num_rows($select)) {
+			while ($get = $db->get_row($select)) {
+				$dop = array('icon' => $get['icon'], 'count' => $get['count']);
+				$lastPrev .= "<div class='prev_item' style='background-image: url({$get['icon']})'><div class='prev_count'>{$get['count']}</div></div>";
+			}
+		} else $hidden_prev = "style='display: none'";
+		$header = "Мои таинственные сундуки (Технические работы)";
+		$content .= "
+				<div class='shop_sets chest_types_info' data-uk-modal=\"{'target': '#fast_chest', 'center': true}\" style='margin-bottom: 30px'>
+					<table class='uk-width-1-1'>
+						<tr>
+							<td width='90px'><img src='$DURL/uploads/chests/chest_6.png' width='70px'></td>
+							<td>
+								<div style='font-size: 14pt;font-weight: bold;'>Быстрый сундук - Сверхвыгодный и сверхдешевый</div>
+								<div style='font-size: 12px; margin-top: 6px;'>Вы сможете выиграть одну <b><u>выгодную</u></b> вещь из онлайн-магазина на <b><u>выбранный</u></b> сервер</div>
+								<!--div class='fast_chest_cost'>1<img src='http://paradisecloud.ru/uploads/diamond.png' class='diamond_icon'></div--->
+							</td>
+						</tr>
+					</table>
+				</div>
+				
+				<div id='fast_chest' class='uk-modal'>
+				    <div class='uk-modal-dialog' style='width: 700px'>
+				        <div class='open_chest_title'>Быстрый сундук</div>
+						<div class='fast_chest_cerver_chose'>
+							<div class='fast_title'>Выберите сервер, на который мы отправим выигранную вещь</div>
+							<div class='fast_server' data-selected='0' data-server='1'>Simple</div>
+							<div class='fast_server' data-selected='0' data-server='2'>HiTech</div>
+							<div class='fast_server' data-selected='0' data-server='3'>Magic</div>
+							<div class='fast_server' data-selected='0' data-server='4'>Technomagic</div>
+							<div class='fast_server' data-selected='0' data-server='5'>SkyTech</div>
+						</div>
+						
+						<div id='raysDemoHolder'>
+							<a onclick='return false;'id='raysLogo' style='background-image: url(http://paradisecloud.ru/uploads/chests/chest_6.png);'></a>
+							<div id='outImage_fast_chesr' style='display: none'>
+								<!--div class='fast_item_name'>Название этого классного штука</div-->
+								<div class='fast_item_image' style='background-image: url(http://paradisecloud.ru/uploads/shopimg/van/87.png);'></div>
+								<div class='fast_item_count'>128</div>
+							</div>
+							<div id='rays'></div>
+							<div class='fasr_chest_cost_update' style='display: none'>Повышена стоимость открытия быстрого сундука.<br/><b>Внимание! Завтра стоимость для вас опять будет 1 алмаз!</b></div>
+						</div>
+						
+						<div style='font-size: 15px;margin-bottom: 10px;text-transform: uppercase;text-align: center;margin-bottom: -10px;margin-top: 20px;' id='fast_output_error'>Выбрали сервер? Открывайте сундук!</div>
+						<center><button data-free='0' style='margin-top: 20px;' type='button' id='start_fast_chest' class='my_spec_button' disabled>Открыть быстрый сундук прямо сейчас за <span id='fast_chest_cost'>$cost</span><img style='width: 20px; height: 20px; margin-top: -2px;' src='http://paradisecloud.ru/uploads/diamond.png' class='diamond_icon'></button><a id='try_free_fast_chest' data-uk-tooltip title='Хотите посмотреть как работает этот сундук? Нажмите и попробуйте бесплатно.<br/><b>Внимание! Выпавшая вещь не достанется вам!</b>' style='cursor: pointer;display: block;margin-top: 15px;margin-bottom: -10px;' data-free='1'>Попробовать бесплатно</a></center>
+						<div class='previous_items_list' $hidden_prev>
+							<div class='prev_header'>Последние ваши находки в Быстром сундуке</div>
+							<div class='prev_out'>$lastPrev</div>
+						</div>
+				    </div>
+				</div>
+	
+				<script src='$DURL/loadscript/chests'></script>
+				
+				<div><center>Другие таинственные сундуки временно не доступны по техническим причинам.</center></div>
+			";
+	}
+}
+
+$tpl->load_template('modules.tpl');
+$tpl->set('{header}', $header);
+$tpl->set('{content}', $content);
+$tpl->compile('content');
+$tpl->clear();

@@ -14,18 +14,32 @@
 	  <meta property="og:site_name" content="{$siteTitle}" />
 	  <meta property="og:url" content="https://foxescraft.ru" />
 	  <meta property="og:image" content="{$tplDir}/img/assets/logo.png" />
-	  <script src="//code.jivo.ru/widget/X47ofXrus3" async></script>
-	  <script src="https://www.google.com/recaptcha/api.js?hl={$lang['wysiwyg_language']}" async defer></script>
+	  <!-- <script src="//code.jivo.ru/widget/X47ofXrus3" async></script> -->
+	  <script src="https://www.google.com/recaptcha/api.js?hl=ru_RU" async defer></script>
       <link href="{$tplDir}/assets/css/style.css" rel="stylesheet">
 	  <link rel="shortcut icon" href="/favicon.ico">
       {$builtInJS}
+	  
+	  <style>
+		.LetItSnow {
+			height: 100vh;
+			width: 98vw;
+			--webkit-filter: blur(2px);
+			-filter: blur(2px);
+			position: absolute;
+			pointer-events: none;
+			z-index: 999999999;
+			top: 0;
+		}
+	</style>
 	  <script>
 		  const FoxesInput = new inputHandler();
 		  const FoxEngine = new foxEngine("{$login}");
-	  </script>
+     </script>
 	  <script type="module" src="{$tplDir}/assets/js/App.js"></script>
 	  <script type="module" src="{$tplDir}/assets/js/metrics.js"></script>
-		
+	  <script type="module" src="{$tplDir}/assets/js/snow.js"></script>
+	  <script type="module" src="{$tplDir}/assets/js/cookie.js"></script>
    </head>
    <body>
       {include file='header.tpl'}
@@ -35,16 +49,27 @@
          <div class="row siteContent">
             <div class="{if !$isMobile}col-8{else}container{/if}">
                <div id="content" class="mainBlock">
-			   {if $user_group == 5}
-				   <span id="test" style="height: 512px;width: auto;display: block; border: 2px solid #998f98ad; border-radius: 10px;"></span>
-				   <button class="login" onclick="loadPage('guestMore', '#test');">LoadContent</button>
-			   {else}
 				<%contentData%>
-			   {/if}
                </div>
             </div>
                {include file="right-block.tpl"}
          </div>
+		 <div class="moderator-button optionButt" onclick="switchSnow();">
+			<i class="fa fa-snowflake-o"></i>
+		</div>
+      </div>
+	  <div id="cookie-popup" style="display: none">
+        <div class="text-center" id="cookie-header">
+          <img src="{$tplDir}/assets/icons/cookie.png" draggable="false" />
+        </div>
+        <div id="cookie-body">
+          <p>Наш сайт использует печеньки (и не только потому, что у нас есть Печеньки-Монстр). 
+		  Они необходимы для создания невероятного опыта в использовании сайта – будь то путешествие по страницам или открытие сундука с новыми идеями.</p>
+          <a onclick="FoxEngine.loadPage('cookies', replaceData.contentBlock); return false;" href="https://www.cookieconsent.com/what-are-cookies/">Хочу знать больше...</a>
+          <div class="cookie-buttons">
+            <button id="btn-cookie" type="submit">Соглашаюсь</button>
+          </div>
+        </div>
       </div>
       {include file='footer.tpl'}
 	  {include file='notify.tpl'}

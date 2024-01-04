@@ -1,5 +1,5 @@
 <?php
-//die(var_dump($_POST));
+
 if(!file_exists('install.php') && file_exists('engine/data/config.php')) {
 	$initArray = array("init" => true, "postInit" => true, "GFX" => true);
 	Error_Reporting(E_ALL);

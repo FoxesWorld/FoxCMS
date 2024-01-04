@@ -1,5 +1,5 @@
 <?php 
-    /* [31.10.2023] */
+    /* [04.01.2024] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -10,39 +10,40 @@ $config = array(
 
 	"siteSettings" => array(
 		"siteTpl" => "foxengine",
-		"siteTitle" => "Foxescraft",
-		"siteStatus" => "Pre-Alpha",
-		"siteDesc" => "A website engine",
-		"keywords" => "FoxEngine,FoxCMS,FoxesWorld,AidenFox",
+		"siteTitle" => "Лисий Мир",
+		"siteStatus" => "Альфа",
+		"siteDesc" => "Независимая игровая студия",
+		"keywords" => "FoxEngine,FoxCMS,FoxesWorld,AidenFox,Лисий Мир,Независимая студия,Независимая игровая студия",
 		"contactEmail" => "no-reply@foxesworld.ru",
 		"contactPhone" => "null",
 		"gameFiles" => "files/clients/",
-		"ServiceVersion" => "2.3.8"
+		"jreDir" => "files/runtime/",
+		"ServiceVersion" => "2.3.10"
 ),
 
 	"securitySetings" => array(
 		"reCaptchaSecret" => "6LcKeBoiAAAAAK-dFGsiDyqZvO_1u7MKWscdEJqJ",
 		"reCaptchaWebsite" => "6LcKeBoiAAAAAGnhfzZnLyzUApLmgnOpP4OfFOB7",
 		"bantime" => "240",
-		"maxLoginAttempts" => "1",
-		"reCaptchaCheck" => true,
-		"keyCheck" => false
+		"maxLoginAttempts" => "2",
+		"reCaptchaCheck" => true
 ),
 
 	"frontendSettings" => array(
 		"contentBlock" => "#content",
 		"secureKey" => "ghYyufghVH",
-		"assets" => "/templates/foxengine/assets/",
-		"debug" => "on"
+		"assets" => "/templates/foxengine/assets/"
 ),
 
 	"other" => array(
-		"telegramBotToken" => "6928663865:AAENkXFZATZNwEBJUwgexNDMex_SEXCz63Q",
-		"telegramChatId" => "835906419,-4059092561",
+		"appId" => "712667904956432456",
+		"accessToken" => "ccdd6e40ccdd6e40ccdd6e40ecccaf012ecccddccdd6e4092074eb9f3eea48edf8a6e39",
+		"discordLink" => "https://discord.gg/96pZFx3cFh",
+		"vkLink" => "https://vk.com/foxesworlds",
 		"timezone" => "Europe/Moscow",
 		"webserviceName" => "FoxEngine",
 		"userOptions" => "userOptions",
-		"OptionReplaceValues" => "{TPL}->228Year,{YEAR}->2023,{TES}->8800,{siteKey}->cfgVal(securitySetings|reCaptchaWebsite)",
+		"OptionReplaceValues" => "{siteKey}->cfgVal(securitySetings|reCaptchaWebsite),{discordLink}->cfgVal(other|discordLink),{vkLink}->cfgVal(other|vkLink),{TPL}->cfgVal(siteSettings|siteTpl)",
 		"userFieldsArray" => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,colorScheme,groupName,units",
 		"canEditGroup" => "1,4"
 ));

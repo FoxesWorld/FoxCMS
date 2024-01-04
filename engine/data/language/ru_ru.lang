@@ -2,6 +2,9 @@
 
 	$lang = array(
 	
+		/*Bugs*/
+		'bugs' => "<div class=\"alert alert-danger\" role=\"alert\">Возможны баги!</div>",
+	
 		/*ProfilEdit*/
 		'noLoginSent' => "Не передан логин!",
 		'noHashSent' => "Не передан хеш!",
@@ -88,7 +91,7 @@
 		"userOptions-title" => "Директория опций пользователя",
 		"userOptions-desc" => "Директория шаблона в которой находятся опции и страницы для различных групп пользователей",
 		"OptionReplaceValues-title" => "Заменяемые фрагменты текста",
-		"OptionReplaceValues-desc" => "Замена полей в файлах динамически, подгружаемого шаблона на произвольные значения. <b>cfgVal()</b> - поле из конфигурации. <div class=\"alert alert-danger\" role=\"alert\">Возможны баги!</div>",
+		"OptionReplaceValues-desc" => "Замена полей в файлах <b>userOptions</b> динамически, подгружаемого шаблона на произвольные значения. <b>cfgVal()</b> - поле из конфигурации.",
 		"userFieldsArray-title" => "Строка полей пользователя",
 		"userFieldsArray-desc" => "Поля пользователя, которые мы достаём из БД при успешной авторизации",
 		"canEditGroup-title" => "Группы, которым разрешено редактировать профиль",
@@ -100,6 +103,10 @@
 		"debug-title" => "Дебаг решим",
 		"debug-desc" => "Отображает в консоли дебаг информацию JavaScript",
 		"telegramBotToken-title" => "Токен Телеграм Бота",
+		"appId-title" => "DiscordRPC key",
+		"appId-desc" => "Ключ для работы Discord RPC",
+		"accessToken-title" => "VK accessToken",
+		"accessToken-desc" => "Токен для доступа к новостям ВК",
 		"telegramBotToken-desc" => "",
 		"telegramChatId-title" => "ID чата для отправки сообщений ботом",
 		"telegramChatId-desc" => "",

@@ -47,7 +47,7 @@
 .logo .status {
     font-family: 'Minecraft';
     font-size: 12pt;
-    margin: -5px 0px;
+    margin: -10px 5px;
     float: right;
     color: #a54e39;
     text-transform: uppercase;

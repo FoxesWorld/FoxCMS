@@ -87,7 +87,7 @@
 			
 			switch(self::$serialize){
 				case true:
-					$fcont = unserialize($fileContents);
+					$fcont = @unserialize($fileContents);
 				break;
 				
 				case false:
