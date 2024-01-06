@@ -24,8 +24,11 @@ if (!defined('FOXXEY')) {
 			init::classUtil('CheckUserAccess', "1.0.0");
 			init::classUtil('PluginScanner', "1.2.7-exp");
 			define('UserUploadDir', UPLOADS_DIR.USR_SUBFOLDER.init::$usrArray['login'].'/');
+
 			$this->smarty 					= $tpl;
 			$this->smarty->debugging 		= false;
+			$this->smarty->caching = false;
+			$this->smarty->force_compile = true;
 			$this->smarty->cache_lifetime 	= 120;
 			$this->smarty->template_dir 	= ROOT_DIR.'/templates/'.$config['siteSettings']['siteTpl'];
 			$this->smarty->compile_dir 		= ENGINE_DIR.'/cache/compile/';

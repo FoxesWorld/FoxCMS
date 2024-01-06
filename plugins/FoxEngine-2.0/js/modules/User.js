@@ -1,0 +1,135 @@
+class User {
+    constructor(foxEngine) {
+		this.foxEngine = foxEngine;
+		this.optNamesArr = [];
+        this.optionAmount;
+		this.optionArray;
+		this.optionTpl;
+	}
+	
+	async parseUsrOptionsMenu() {
+
+        if (this.optNamesArr.length <= this.optionAmount)
+            foxEngine.debugSend('Using FoxesWorld UserOptions', 'background: #39312fc7; color: yellow; font-size: 14pt');
+        if (foxEngine.replaceData.isLogged) {
+            foxEngine.debugSend("User " + foxEngine.replaceData.login + " is logged", '');
+        }
+        try {
+            let json = await foxEngine.sendPostAndGetAnswer({
+                "getUserOptionsMenu": foxEngine.replaceData.login
+            }, "JSON");
+            this.optionAmount = json.optionAmount;
+            this.optionArray = json.optionArray;
+            if (this.optNamesArr.length <= this.optionAmount) foxEngine.debugSend("UserOptions available: " + this.optionAmount, "");
+            for (var i = 0; i < this.optionAmount; i++) {
+                var obj = this.optionArray[i];
+                for (var optionName in obj) {
+                    let appendBlock = obj[optionName]["optionBlock"];
+					
+                    switch (obj[optionName]["type"]) {
+                        case "page":
+                            this.optionTpl = `
+										  <li class="` + obj[optionName]["optionClass"] + `">
+											<a  class="pageLink-` + optionName + `" onclick="foxEngine.loadPage('` + optionName + `', replaceData.contentBlock); return false; ">
+												<div class="rightIcon">
+													` + obj[optionName]["optionPreText"] + `
+												</div>
+											` + obj[optionName]["optionTitle"] + `
+											</a>
+											</li>`;
+                            break;
+
+                        case "pageContent":
+                            break;
+
+                        case "plainText":
+                            this.optionTpl = obj[optionName]["optionTitle"];
+                            break;
+                    }
+                    if (appendBlock !== undefined) {
+                        $(appendBlock).append(this.optionTpl);
+                    }
+                    this.optNamesArr.push(optionName);
+                }
+            }
+        } catch (error) {}
+    }
+	
+	async userAction(action) {
+        try {
+            let answer = await foxEngine.sendPostAndGetAnswer({
+                user_doaction: action
+            }, "JSON");
+            $("#actionBlock").html(answer.text + ' ' + foxEngine.replaceData.realname + '!');
+        } catch (error) {}
+        foxEngine.textAnimate("#actionBlock");
+    };
+	
+	async parseBadges(user) {
+        const badgeTemplate = await foxEngine.loadAndReplaceHtml(foxEngine.elementsDir + 'badge.tpl', {});
+        try {
+            let parsedJson = await foxEngine.sendPostAndGetAnswer({
+                user_doaction: 'GetBadges',
+                userDisplay: user
+            }, "JSON");
+
+            if (parsedJson.length > 0) {
+                for (let k = 0; k < parsedJson.length; k++) {
+                    let obj = parsedJson[k];
+
+                    // Replace text in the badge template for each badge
+                    let badgeHtml = await foxEngine.replaceTextInTemplate(badgeTemplate, {
+                        BadgeDesc: obj.BadgeDesc,
+                        AcquiredDateFormatted: foxEngine.convertUnixTime(obj.AcquiredDate),
+                        BadgeName: obj.BadgeName,
+                        BadgeImg: obj.BadgeImg
+                    });
+
+                    // Append the badge HTML to the userBadges container
+                    $("#userBadges").append(badgeHtml);
+
+                    // Initialize tooltips for the badges
+                    $('[data-toggle="tooltip"]').tooltip({
+                        placement: 'bottom',
+                        trigger: "hover"
+                    });
+                }
+            } else {
+                // If there are no badges, remove the userBadges container
+                $("#userBadges").remove();
+            }
+        } catch (error) {
+            console.error('Error parsing badges:', error);
+        }
+    };
+
+	async showUserProfile(userDisplay) {
+
+        let userProfile = await foxEngine.sendPostAndGetAnswer({
+            "userDisplay": userDisplay,
+            "user_doaction": "ViewProfile"
+        }, "TEXT");
+
+        foxEngine.loadData(userProfile, foxEngine.replaceData.contentBlock);
+        location.hash = 'user/' + userDisplay;
+        //this.foxesInputHandler.initialised = false;
+        foxEngine.foxesInputHandler.formInit(1000);
+    };
+
+    async showProfilePopup(user, dialogOptions) {
+        //$("#dialog").dialog("option", "title", user);
+
+        let response = await foxEngine.sendPostAndGetAnswer({
+            "userDisplay": user,
+            "user_doaction": "ViewProfile"
+        }, "HTML");
+
+        foxEngine.loadData(response.getElementById('view'), '#dialogContent');
+        $("#dialog").dialog(dialogOptions);
+        $("#dialog").dialog('open');
+        setTimeout(() => {
+            this.parseBadges(user);
+        }, 600);
+    };
+}
+export { User };

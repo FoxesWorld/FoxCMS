@@ -1,5 +1,5 @@
 
-//import { FoxEngineModule } from '../../../../plugins/FoxEngineModules/js/FoxEngine.js';
+//import { FoxEngine } from '/plugins/FoxEngineModules/js/FoxEngine.js';
 
 const App = new Vue({
     delimiters: ["<%", "%>"],

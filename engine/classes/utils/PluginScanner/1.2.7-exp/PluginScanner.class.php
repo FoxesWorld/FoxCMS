@@ -5,11 +5,13 @@
 		protected string $outString = '';
 		private string $pluginsDir = "";
 		private string $incOptFile = "incOption.json";
+		private array $pluginsToIncludeArray = array();
 		protected static array $pluginsArray = array();
 		protected static array $pluginFiles = array();
 		
 		function __construct($pluginsDir) {
 			$this->pluginsDir = $pluginsDir;
+			$this->pluginsToIncludeArray = json_decode(file::efile(TEMPLATE_DIR.'PLUGINS.json')['content']);
 			self::$pluginsArray = $this->getUserPluginDirectories($pluginsDir);
 			self::$pluginFiles = $this->getPluginFiles(self::$pluginsArray, $pluginsDir);
 			$this->includeFiles(self::$pluginFiles);
@@ -33,14 +35,17 @@
 				}
 				$pluginPath = $scanDir.$dirName;
 				if(is_dir($pluginPath)) {
-					$optionFile = $pluginPath.DIRECTORY_SEPARATOR.$this->incOptFile;
-					if(file_exists($optionFile)) {
-						$groupPermissions = $this->readOptionFile($optionFile, "pluginGroup");
-						if(CheckUserAccess::checkAccess(init::$usrArray['user_group'], $groupPermissions) === true){
+					
+					if(in_array($dirName, $this->pluginsToIncludeArray)) {
+						$optionFile = $pluginPath.DIRECTORY_SEPARATOR.$this->incOptFile;
+						if(file_exists($optionFile)) {
+							$groupPermissions = $this->readOptionFile($optionFile, "pluginGroup");
+							if(CheckUserAccess::checkAccess(init::$usrArray['user_group'], $groupPermissions) === true){
+								$pluginsArray[] = $dirName;
+							}
+						} else {
 							$pluginsArray[] = $dirName;
 						}
-					} else {
-						$pluginsArray[] = $dirName;
 					}
 				}
 			}

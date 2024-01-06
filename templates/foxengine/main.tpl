@@ -33,8 +33,11 @@
 		}
 	</style>
 	  <script>
+	  {literal}
+			request = new request("/", {key:replaceData.secureKey, user:replaceData.login}, true);
 		  const FoxesInput = new inputHandler();
-		  const FoxEngine = new foxEngine("{$login}");
+		  const FoxEngine = new foxEngine(replaceData.login);
+		{/literal}
      </script>
 	  <script type="module" src="{$tplDir}/assets/js/App.js"></script>
 	  <script type="module" src="{$tplDir}/assets/js/metrics.js"></script>

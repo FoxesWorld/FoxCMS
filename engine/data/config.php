@@ -1,5 +1,5 @@
 <?php 
-    /* [04.01.2024] */
+    /* [06.01.2024] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -9,7 +9,7 @@ $config = array(
 ),
 
 	"siteSettings" => array(
-		"siteTpl" => "foxengine",
+		"siteTpl" => "foxengine2",
 		"siteTitle" => "Лисий Мир",
 		"siteStatus" => "Альфа",
 		"siteDesc" => "Независимая игровая студия",
@@ -32,7 +32,7 @@ $config = array(
 	"frontendSettings" => array(
 		"contentBlock" => "#content",
 		"secureKey" => "ghYyufghVH",
-		"assets" => "/templates/foxengine/assets/"
+		"assets" => "/templates/foxengine2/assets/"
 ),
 
 	"other" => array(

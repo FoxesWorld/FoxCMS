@@ -1,0 +1,58 @@
+<useroption>
+{
+	"optionTitle": "Надвигающиеся обновления",
+	"optionBlock": ".leftAction",
+	"optionPreText": "<img src='/templates/foxengine/assets/icons/menu/icon_lc.png' />",
+	"optionGroup": [1,4,5],
+	"optionClass": "nav-item",
+	"type": "page"
+}
+</useroption>
+
+<pageContent>
+      <div class="server_information">
+         <div>
+            <div class="icon">
+               <img src="%assets%img/rubin2.jpg">
+            </div>
+            <div class="label">
+               <div class="title">
+                  <h1>Обновления FoxesCraft</h1>
+               </div>
+               <div class="description">
+                  Здесь можно увидеть список запланированных обновлений
+               </div>
+            </div>
+         </div>
+      </div>
+	  
+	<div class="server_details">
+         <div class="information_block">
+		 <div style="float: left;  margin: 5px;">
+				<span>Клиентская часть</span>
+			  <ul>
+				<li><i class="fa fa-clock-o" aria-hidden="true"></i> Динамическая постройка описания сервера</li>
+				<li><i class="fa fa-clock-o" aria-hidden="true"></i> Оптимизация и улучшение мониторинга серверов</li>
+				<li><i class="fa fa-clock-o" aria-hidden="true"></i> Модулизация FoxEngine</li>
+			  </ul>
+		  </div>
+		  
+		  <div style="display: inline-block; margin: 5px;">
+			  <span>Серверная часть</span>
+			  <ul>
+				<li><i class="fa fa-clock-o" aria-hidden="true"></i> Внедрение улучшенного личного кабинета</li>
+			  </ul>
+		  </div>
+         </div>
+      </div>
+	  
+	  <style>
+	  .information_block ul li {
+	      margin: 5px;
+		  }
+		  
+		 .information_block ul li i.fa-clock-o {
+		 color: yellow;}
+		  </style>
+	
+</pageContent>

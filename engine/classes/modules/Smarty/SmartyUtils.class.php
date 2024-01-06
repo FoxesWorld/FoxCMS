@@ -31,31 +31,7 @@
 
 				$builtInJS .= "const replaceData = {\n".implode(",\n", $jsData).'};'."\n";
 				$builtInJS .= "const userFields = [".implode(",\n", $replaceFields).'];'."\n";
-				$builtInJS .= 'request = new request("/", {key:"'.$config['frontendSettings']['secureKey'].'", user:"'.init::$usrArray['login'].'"}, true);';
 			$builtInJS .= '</script>';
 			return $builtInJS;
 		}
-		
-		/*
-		protected function assignJs(){
-			global $jsCfg, $config;
-			$userPermissions = init::$permissions;
-			$builtInJS = '<script type="module">
-			import { FoxEngine } from '.str_replace(ROOT_DIR, "", PLUGINS_DIR).'"/FoxEngineModules/FoxEngine.js";';
-				$replaceArray = array_merge($config['frontendSettings'], init::$usrArray);
-				foreach($replaceArray as $key => $value){
-					$replaceFields[] = '"'.$key.'"';
-					$jsData[] = '"'.$key.'": "'.$value.'"';	
-				}
-				for($i=0; $i<count($userPermissions); $i++){
-					$jsData[] = $userPermissions[$i];
-				}
-
-				$builtInJS .= "const replaceData = {\n".implode(",\n", $jsData).'};'."\n";
-				$builtInJS .= "const userFields = [".implode(",\n", $replaceFields).'];'."\n";
-				$builtInJS .= 'request = new FoxEngine.FoxesRequest("/", {key:"'.$config['frontendSettings']['secureKey'].'", user:"'.init::$usrArray['login'].'"}, true);';
-			$builtInJS .= '</script>';
-			return $builtInJS;
-		}
-		*/
 	}

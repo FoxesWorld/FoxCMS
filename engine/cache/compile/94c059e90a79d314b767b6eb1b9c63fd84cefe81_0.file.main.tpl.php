@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-01-04 21:56:27
+/* Smarty version 4.0.4, created on 2024-01-06 11:07:08
   from '/var/www/FoxCMS/templates/foxengine/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6596ff5b2f9101_91200679',
+  'unifunc' => 'content_65990a2c6231e5_82681151',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '94c059e90a79d314b767b6eb1b9c63fd84cefe81' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine/main.tpl',
-      1 => 1704394378,
+      1 => 1704440171,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:notify.tpl' => 1,
   ),
 ),false)) {
-function content_6596ff5b2f9101_91200679 (Smarty_Internal_Template $_smarty_tpl) {
+function content_65990a2c6231e5_82681151 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -74,9 +74,11 @@ function content_6596ff5b2f9101_91200679 (Smarty_Internal_Template $_smarty_tpl)
 	</style>
 	  <?php echo '<script'; ?>
 >
+	  
+			request = new request("/", {key:replaceData.secureKey, user:replaceData.login}, true);
 		  const FoxesInput = new inputHandler();
-		  const FoxEngine = new foxEngine("<?php echo $_smarty_tpl->tpl_vars['login']->value;?>
-");
+		  const FoxEngine = new foxEngine(replaceData.login);
+		
      <?php echo '</script'; ?>
 >
 	  <?php echo '<script'; ?>

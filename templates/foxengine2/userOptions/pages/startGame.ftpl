@@ -1,0 +1,99 @@
+<useroption>
+   {
+	"optionTitle": "Начать игру",
+	"optionBlock": ".leftAction",
+	"optionPreText": "<img src='/templates/foxengine/assets/icons/menu/icon_start.png' />",
+	"optionGroup": [1,4,5],
+	"optionClass": "nav-item",
+	"type": "page"
+   }
+</useroption>
+
+<pageContent>
+<div class="contentInner">
+    <ol class="steps" style="--length: 5" role="list">
+
+        [group=5]
+            <li style="--i: 1">
+                <h3>Путь воина</h3>
+                <p>Привет, будущий защитник! Ты уже почти участник команды тестеров. Но для того чтобы мы могли тебя так называть, нам нужно узнать о тебе. В этом первом испытании докажи свою решимость и заполни форму, нажав кнопку "Регистрация".</p>
+				<button class="login" onclick="foxEngine.loadPage('reg', replaceData.contentBlock); return false;">Регистрация</button>
+            </li>
+        [/group]
+
+        [not-group=5]
+            <li style="--i: 1">
+                <h3>Создание аккаунта</h3>
+                <p>С возвращением, великий <b>[login]</b>! Твой след в мире FoxesWorld остался, и ты уже прошел первый шаг с регистрацией. Теперь дерзаймы, переходим ко второму этапу!</p>
+            </li>
+        [/not-group]
+
+        <li style="--i: 2">
+            <h3>Испытание силы</h3>
+            <p>Теперь, когда ты принял вызов регистрации, тебе предстоит проверить свою силу. Убедись, что у тебя есть Java 8 - ключ к миру приключений. Не волнуйся, великие наставники обещают, что все произойдет автоматически. Если у тебя еще нет Java 8, ты можешь загрузить ее</p>
+            <div class="wrapper-buttons">
+                <button style="width: inherit;" onclick="window.open('https://adoptium.net/temurin/releases/?variant=openjdk17&jvmVariant=hotspot%2525252527&os=windows&arch=x64&package=jre&version=8', 'Java 8', 'popup');" class="green-nitro-button">
+                    <img style="width:32px; height:32px;" src="%assets%icons/svg/java.svg" />Java 8
+                </button>
+            </div>
+        </li>
+    
+        <li style="--i: 3">
+            <h3>Зов приключений</h3>
+            <p>Теперь, когда ты укрепил свою силу Java 8, настало время загрузить лаунчер - ключ к вратам самых увлекательных приключений. Выбери свое направление и смело двигайся вперед.</p>
+            <div class="wrapper-buttons">
+                <button data-type="exe" class="download white-button">
+                    <img style="width:32px; height:32px;" src="%assets%icons/svg/windows.svg" />Windows
+                </button>
+                <button style="width: inherit;" data-type="jar" class="download green-nitro-button">
+                    <img style="width:32px; height:32px;" src="%assets%icons/svg/linux.svg" />Linux
+                </button>
+            </div>
+        </li>
+        
+        <li style="--i: 4">
+            <h3>Путеводные звезды</h3>
+            <p>Путник, чтобы быть в курсе всех событий и обновлений, присоединяйся к нашим сообществам в VK и Discord. Там ты будешь первым, кто узнает о новых главах и событиях в мире FoxesWorld.</p>
+            <div class="wrapper-buttons">
+                <button onclick="window.open('{vkLink}', 'FoxesWorld VK', 'popup');" class="white-button">
+                    <img style="width:32px; height:32px;" src="%assets%icons/svg/vk.svg" />VK
+                </button>
+                <button onclick="window.open('{discordLink}', 'FoxesWorld Discord', 'popup');" class="blue-button">
+                    <img style="width:32px; height:32px;" src="%assets%icons/svg/discord.svg" />Discord
+                </button>
+            </div>
+        </li>
+        
+        <li style="--i: 5">
+            <h3>Good Luck Have Fun</h3>
+            <p>Слава тебе, исследователь! Ты успешно преодолел все преграды. Поздравляем! Теперь ты готов отправиться в экспедицию в пустошь FoxesWorld. Пусть удача и веселье сопровождают тебя в этом увлекательном путешествии!</p>
+        </li>
+    </ol>
+</div>
+
+	
+<script>
+let thisPath = "/uploads/updater/";
+$('.download').on('click', function(){
+    let type = $(this).data('type');
+    let fileContent = foxEngine.request.send_post({"sysRequest": "downloadUpdater", "type": type});
+
+    fileContent.onreadystatechange = function() {
+        if (fileContent.readyState === 4) {
+            let response = JSON.parse(fileContent.responseText);
+            let file = response.filename;
+
+            if (fileContent.status === 200) {
+                var link = document.createElement('a');
+                link.setAttribute('href', thisPath + type + '/' + file);
+                link.setAttribute('download', "FoxesWorld."+type);
+                link.click();
+                return false;
+            }
+        }
+    };
+});
+</script>
+
+
+</pageContent>
