@@ -1,0 +1,125 @@
+[
+  {
+    "mob": "minecraft:zombie",
+    "block": ["minecraft:dirt","minecraft:gravel","biomesoplenty:dried_sand"],
+    "seesky": true,
+    "maxcount": 25,
+    "minlight": 7,
+    "random": 0.05,
+    "minspawndist": 64,
+    "result": "allow"
+  },
+  {
+    "mob": "minecraft:zombie",
+    "block": ["minecraft:dirt","minecraft:gravel","biomesoplenty:dried_sand"],
+    "seesky": true,
+    "maxcount": 20,
+    "maxlight": 7,
+    "random": 0.05,
+    "minspawndist": 64,
+    "result": "allow"
+  },
+  {
+    "mob": "minecraft:zombie",
+    "seesky": true,
+    "maxcount": 25,
+    "block": "minecraft:sand",
+    "minspawndist": 35,
+    "random": 0.05,
+    "result": "allow"
+  },
+  {
+     "mob": "minecraft:zombie",
+     "result": "deny"
+  },
+  {
+     "mod": "mod_lavacow",
+     "biome": ["minecraft:ocean","minecraft:deep_ocean"],
+     "result": "deny"
+  },
+  {
+     "mob": "mod_lavacow:ptera",
+     "block": "biomesoplenty:dried_sand",
+     "maxlight": 7,
+     "maxcount": 1,
+     "minspawndist": 30,
+     "result": "allow"
+  },
+  {
+     "mob": "mod_lavacow:ptera",
+     "result": "deny"
+  },
+  {
+     "mob": "mod_lavacow:banshee",
+     "block": "biomesoplenty:dried_sand",
+     "maxcount": 1,
+     "minlight": 7,
+     "minspawndist": 30,
+     "result": "allow"
+  },
+  {
+     "mob": "mod_lavacow:banshee",
+     "result": "deny"
+  },
+  {
+     "mob": "mod_lavacow:boneworm",
+     "block": "biomesoplenty:dried_sand",
+     "maxlight": 7,
+     "maxcount": 1,
+     "minspawndist": 25,
+     "result": "allow"
+  },
+  {
+     "mob": "mod_lavacow:boneworm",
+     "result": "deny"
+  },
+  {
+     "mob": "mod_lavacow:foglet",
+     "block": "biomesoplenty:dried_sand",
+     "maxcount": 8,
+     "minlight": 7,
+     "minspawndist": 25,
+     "result": "allow"
+  },
+  {
+     "mob": "mod_lavacow:foglet",
+     "result": "deny"
+  },
+  {
+     "mob": "mod_lavacow:undeadswine",
+     "block": "biomesoplenty:dried_sand",
+     "maxcount": 2,
+     "minlight": 7,
+     "minspawndist": 25,
+     "result": "allow"
+  },
+  {
+     "mob": "mod_lavacow:undeadswine",
+     "result": "deny"
+  },
+  {
+     "mob": "mod_lavacow:avaton",
+     "block": "biomesoplenty:dried_sand",
+     "maxlight": 7,
+     "maxcount": 2,
+     "minspawndist": 25,
+     "result": "allow"
+  },
+  {
+     "mob": "mod_lavacow:avaton",
+     "result": "deny"
+  },
+  {
+     "mob": "mod_lavacow:vespa",
+     "block": "biomesoplenty:dried_sand",
+     "minlight": 7,
+     "maxcount": 1,
+     "minspawndist": 25,
+     "result": "allow"
+  },
+  {
+     "mob": "mod_lavacow:vespa",
+     "result": "deny"
+  }
+]
+

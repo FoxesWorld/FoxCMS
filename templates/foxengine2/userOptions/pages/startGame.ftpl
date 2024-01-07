@@ -2,7 +2,7 @@
    {
 	"optionTitle": "Начать игру",
 	"optionBlock": ".leftAction",
-	"optionPreText": "<img src='/templates/foxengine/assets/icons/menu/icon_start.png' />",
+	"optionPreText": "<img src='/templates/foxengine2/assets/icons/menu/icon_start.png' />",
 	"optionGroup": [1,4,5],
 	"optionClass": "nav-item",
 	"type": "page"

@@ -1,0 +1,6 @@
+
+{
+  "Name": "dispenser",
+  "Registry ID": "rafradek_tf2_weapons:dispenser",
+  "Class": "rafradek.TF2weapons.entity.building.EntityDispenser"
+}

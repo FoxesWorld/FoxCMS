@@ -1,0 +1,6 @@
+
+{
+  "Name": "hundreddayz.ZombieNoBreakOrPlace",
+  "Registry ID": "hundreddayz:zombie_no_place_or_break",
+  "Class": "net.smileycorp.ldoh.common.entity.EntityDummyZombie2"
+}

@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-01-06 20:51:31
+/* Smarty version 4.0.4, created on 2024-01-07 12:45:57
   from '/var/www/FoxCMS/templates/foxengine2/logo/logo.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_659993232379c5_75699913',
+  'unifunc' => 'content_659a72d5b04fa5_10424837',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_659993232379c5_75699913 (Smarty_Internal_Template $_smarty_tpl) {
+function content_659a72d5b04fa5_10424837 (Smarty_Internal_Template $_smarty_tpl) {
 ?>		  <link type="text/css" rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /logo/logo.css">
   

@@ -6,6 +6,10 @@
                 "code": "1F600",
                 "name": "grinning"
             },
+			{
+                "code": "f09fa4a0",
+                "name": "adventure"
+            },
             {
                 "code": "1F601",
                 "name": "grin"
@@ -1745,7 +1749,7 @@
             },
             {
                 "code": "1F98A",
-                "name": "fox_face"
+                "name": "fox"
             },
             {
                 "code": "1F99D",

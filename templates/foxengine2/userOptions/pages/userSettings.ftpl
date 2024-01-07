@@ -272,16 +272,13 @@
 				}
 			});
 			
-		 $('li[class*="personalisation"]').click(function () {
-			let answer = request.send_post({
+		 $('li[class*="personalisation"]').click(async function () {
+			let response = await foxEngine.sendPostAndGetAnswer({
 			  sysRequest: "skinPath",
 			  login: '[login]'
-			});
-			answer.onreadystatechange = function() {
-			  if (answer.readyState === 4) {
+			}, "JSON");
 				try {
-				  answer = JSON.parse(this.responseText);
-				  skin3D = new skin3D(answer.skin, document.getElementById('skinViewer3D-[login]'));
+				  skin3D = new skin3D(response.skin, document.getElementById('skinViewer3D-[login]'));
 				  skin3D.init();
 				  skin3D.createBlock('/templates/{TPL}/assets/img/block.png');
 				  skin3D.loadFail = function(errorCode) {
@@ -294,13 +291,11 @@
 					}
 					skin3D = null;
 				  };
-				  if(answer.cape !== null){
-					skin3D.createCloak(answer.cape);
+				  if(response.cape !== null){
+					skin3D.createCloak(response.cape);
 				  }
 
 				} catch(error) {}
-			  }
-			};
 		  });
       </script>
    </div>

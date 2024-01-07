@@ -1,42 +1,56 @@
 class Emojis {
     constructor(foxEngine) {
 		this.foxEngine = foxEngine;
+		this.emojis = [];
 	}
 	
-	async parseEmojis() {
-        try {
-            let emojiHTML = `<div class="emoji_box">`;
+async parseEmojis() {
+    try {
+        let emojiData = await this.foxEngine.sendPostAndGetAnswer({
+            sysRequest: 'parseEmojis'
+        }, "JSON");
 
-            // Assuming request is a class or object that handles HTTP requests
-            let emojiData = await foxEngine.request.send_post({
-                sysRequest: 'parseEmojis'
-            });
+        //console.log('Received emoji data:', emojiData);
 
-            if (emojiData && emojiData.emoji && Array.isArray(emojiData.emoji)) {
-                let emojiArray = emojiData.emoji;
+        if (emojiData && typeof emojiData === 'object') {
+            for (let category in emojiData) {
+                if (emojiData.hasOwnProperty(category) && Array.isArray(emojiData[category])) {
+                    let emojiArray = emojiData[category];
+                    //console.log(`Processing category: ${category}`);
 
-                for (let emoji of emojiArray) {
-                    if (emoji && emoji.code && emoji.name) {
-                        let code = emoji.code;
-                        let name = emoji.name;
+                    for (let j = 0; j < emojiArray.length; j++) {
+                        let emojiCatArr = emojiArray[j];
+                        //console.log(`  - Processing sub-category ${j + 1}`);
 
-                        emojiHTML += `<div class="emoji_symbol" data-emoji="${code}" title="${name}"></div>`;
-                    } else {
-                        console.error('Invalid emoji structure:', emoji);
+                        for(let k = 0; k < emojiCatArr.length; k++) {
+                            let name = emojiCatArr[k].emojiName;
+                            let code = emojiCatArr[k].emojiCode;
+                            let imagePath = `/engine/data/emoticons/${name}.png`;
+
+                            this.emojis.push({
+                                name: name,
+                                code: code,
+                                imagePath: imagePath
+                            });
+                        }
                     }
+                } else {
+                    console.error('Invalid category structure:', emojiData[category]);
                 }
-
-                emojiHTML += `</div>`;
-            } else {
-                console.error('Invalid emoji data:', emojiData);
-                // Handle the error or return an appropriate value
             }
-
-            return emojiHTML;
-        } catch (error) {
-            console.error('Error parsing emojis:', error);
-            throw error;
+        } else {
+            console.error('Invalid emoji data:', emojiData);
         }
+
+        // Return the array of objects directly
+        return this.emojis;
+    } catch (error) {
+        console.error('Error parsing emojis:', error);
+        throw error;
     }
+}
+
+
+
 }
 export { Emojis };

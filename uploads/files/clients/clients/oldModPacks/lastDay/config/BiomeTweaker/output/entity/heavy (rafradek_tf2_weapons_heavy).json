@@ -1,0 +1,6 @@
+
+{
+  "Name": "heavy",
+  "Registry ID": "rafradek_tf2_weapons:heavy",
+  "Class": "rafradek.TF2weapons.entity.mercenary.EntityHeavy"
+}

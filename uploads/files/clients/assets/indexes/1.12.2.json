@@ -4141,8 +4141,8 @@
       "size": 15839
     },
     "minecraft/sounds/records/13.ogg": {
-        "hash": "05b4febad52a1b4132d065e968304e53843c1a72",
-        "size": 752083
+      "hash": "9cbed0e40296f68c61090c9b81816061e068a0ec",
+      "size": 1071028
     },
     "minecraft/sounds/mob/wolf/hurt1.ogg": {
       "hash": "71b5fc7aa050892f8c9a9ed2713cc1ad8874742a",
@@ -5001,8 +5001,8 @@
       "size": 12664
     },
     "minecraft/sounds/records/cat.ogg": {
-        "hash": "59fcb08ac3ec9f6993e0da33a439395c80ecc7cf",
-        "size": 10858478
+      "hash": "d1eb3d2e39bf1f6289cfcbca44e1c9bb508b20f0",
+      "size": 1286636
     },
     "minecraft/sounds/dig/gravel4.ogg": {
       "hash": "7bf3553a4fe41a0078f4988a13d6e1ed8663ef4c",

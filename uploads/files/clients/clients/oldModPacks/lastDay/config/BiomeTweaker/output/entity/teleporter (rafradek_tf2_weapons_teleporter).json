@@ -1,0 +1,6 @@
+
+{
+  "Name": "teleporter",
+  "Registry ID": "rafradek_tf2_weapons:teleporter",
+  "Class": "rafradek.TF2weapons.entity.building.EntityTeleporter"
+}

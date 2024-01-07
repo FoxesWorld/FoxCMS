@@ -1,0 +1,6 @@
+
+{
+  "Name": "sniper",
+  "Registry ID": "rafradek_tf2_weapons:sniper",
+  "Class": "rafradek.TF2weapons.entity.mercenary.EntitySniper"
+}

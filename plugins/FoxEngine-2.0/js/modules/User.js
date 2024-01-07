@@ -62,7 +62,7 @@ class User {
             }, "JSON");
             $("#actionBlock").html(answer.text + ' ' + foxEngine.replaceData.realname + '!');
         } catch (error) {}
-        foxEngine.textAnimate("#actionBlock");
+        foxEngine.utils.textAnimate("#actionBlock");
     };
 	
 	async parseBadges(user) {
@@ -80,7 +80,7 @@ class User {
                     // Replace text in the badge template for each badge
                     let badgeHtml = await foxEngine.replaceTextInTemplate(badgeTemplate, {
                         BadgeDesc: obj.BadgeDesc,
-                        AcquiredDateFormatted: foxEngine.convertUnixTime(obj.AcquiredDate),
+                        AcquiredDateFormatted: foxEngine.utils.convertUnixTime(obj.AcquiredDate),
                         BadgeName: obj.BadgeName,
                         BadgeImg: obj.BadgeImg
                     });
@@ -112,7 +112,6 @@ class User {
 
         foxEngine.loadData(userProfile, foxEngine.replaceData.contentBlock);
         location.hash = 'user/' + userDisplay;
-        //this.foxesInputHandler.initialised = false;
         foxEngine.foxesInputHandler.formInit(1000);
     };
 
@@ -130,6 +129,24 @@ class User {
         setTimeout(() => {
             this.parseBadges(user);
         }, 600);
+    };
+	
+	async getLastUser() {
+        try {
+            let lastUser = await foxEngine.sendPostAndGetAnswer({
+                userAction: "lastUser"
+            }, "JSON");
+            let userView = await foxEngine.loadAndReplaceHtml(foxEngine.elementsDir + 'lastUser.tpl', {
+                colorScheme: lastUser.colorScheme,
+                profilePhoto: lastUser.profilePhoto,
+                login: lastUser.login,
+                realname: lastUser.realname,
+                regDate: foxEngine.utils.convertUnixTime(lastUser.reg_date)
+            });
+            $("#lastUser").html(userView);
+        } catch (error) {
+            console.error(error.message);
+        }
     };
 }
 export { User };

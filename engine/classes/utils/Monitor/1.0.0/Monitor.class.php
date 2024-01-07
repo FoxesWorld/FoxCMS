@@ -119,7 +119,7 @@ class foxesMon {
     }
 
     private function updateDailyRecord() {
-        if (date("H") == 23) {
+       if (date("H") == 23 && date("i") == 0 && date("s") == 0) {
             if (time() - $this->time['record_day'] > filemtime($this->monCfg['tempFilePath'])) {
                 if (filemtime($this->monCfg['tempFilePath'])) {
                     file::efile($this->monCfg['tempFilePath'], time());

@@ -1,0 +1,22 @@
+[
+	{
+		"mob": "srparasites:sim_human",
+    		"item": "minecraft:iron_nugget",
+    		"itemcount": "0-4/3-4/4-6"
+	},
+	{
+		"mob": "minecraft:zombie",
+    		"item": "minecraft:iron_nugget",
+    		"itemcount": "0-1"
+	},
+	{
+		"mob": "srparasites:sim_human",
+    		"item": "minecraft:string",
+    		"itemcount": "0-3"
+	},
+	{
+		"mob": "srparasites:rupter",
+    		"item": "minecraft:fermented_spider_eye",
+    		"itemcount": "0-1"
+	}
+]

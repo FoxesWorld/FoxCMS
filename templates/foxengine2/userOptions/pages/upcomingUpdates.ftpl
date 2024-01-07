@@ -2,7 +2,7 @@
 {
 	"optionTitle": "Надвигающиеся обновления",
 	"optionBlock": ".leftAction",
-	"optionPreText": "<img src='/templates/foxengine/assets/icons/menu/icon_lc.png' />",
+	"optionPreText": "<img src='/templates/foxengine2/assets/icons/menu/icon_lc.png' />",
 	"optionGroup": [1,4,5],
 	"optionClass": "nav-item",
 	"type": "page"
@@ -31,9 +31,9 @@
 		 <div style="float: left;  margin: 5px;">
 				<span>Клиентская часть</span>
 			  <ul>
-				<li><i class="fa fa-clock-o" aria-hidden="true"></i> Динамическая постройка описания сервера</li>
-				<li><i class="fa fa-clock-o" aria-hidden="true"></i> Оптимизация и улучшение мониторинга серверов</li>
-				<li><i class="fa fa-clock-o" aria-hidden="true"></i> Модулизация FoxEngine</li>
+				<li><i class="fa fa-check" aria-hidden="true"></i> Динамическая постройка описания сервера</li>
+				<li><i class="fa fa-check" aria-hidden="true"></i> Модулизация FoxEngine</li>
+				<li><i class="fa fa-check" aria-hidden="true"></i> Оптимизация и улучшение мониторинга серверов</li>
 			  </ul>
 		  </div>
 		  
@@ -48,11 +48,16 @@
 	  
 	  <style>
 	  .information_block ul li {
-	      margin: 5px;
-		  }
+			margin: 5px;
+	  }
 		  
-		 .information_block ul li i.fa-clock-o {
-		 color: yellow;}
-		  </style>
+	 .information_block ul li i.fa-clock-o {
+		color: yellow;
+	 }
+		 
+	 .information_block ul i.a-check{
+		color: green;
+	 }
+	 </style>
 	
 </pageContent>

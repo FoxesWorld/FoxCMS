@@ -2,7 +2,7 @@
 {
 	"optionTitle": "Куда я попал?",
 	"optionBlock": ".leftAction",
-	"optionPreText": "<img src='/templates/foxengine/assets/icons/menu/icon_forum.png' />",
+	"optionPreText": "<img src='/templates/foxengine2/assets/icons/menu/icon_forum.png' />",
 	"optionGroup": [1,4,5],
 	"optionClass": "nav-item",
 	"type": "page"
@@ -21,7 +21,7 @@
 		
 	<hr>
 		
-	Все готовы к приключениям?
+	Все готовы к приключениям?:smile:
 	<button class="login" onclick="foxEngine.loadPage('startGame', replaceData.contentBlock); return false;">Я готов!</button>
 
 </div>

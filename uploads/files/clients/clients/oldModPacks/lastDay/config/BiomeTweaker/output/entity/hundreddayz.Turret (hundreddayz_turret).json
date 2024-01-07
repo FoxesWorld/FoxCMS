@@ -1,0 +1,6 @@
+
+{
+  "Name": "hundreddayz.Turret",
+  "Registry ID": "hundreddayz:turret",
+  "Class": "net.smileycorp.ldoh.common.entity.EntityTurret"
+}

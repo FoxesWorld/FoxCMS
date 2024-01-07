@@ -1,0 +1,8 @@
+type = panorama
+
+panorama-meta {
+  name = yeet
+  speed = 1.0
+  fov = 70
+  angle = -10
+}

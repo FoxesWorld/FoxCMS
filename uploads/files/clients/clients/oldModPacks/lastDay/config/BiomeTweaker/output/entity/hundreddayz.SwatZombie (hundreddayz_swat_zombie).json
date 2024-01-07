@@ -1,0 +1,6 @@
+
+{
+  "Name": "hundreddayz.SwatZombie",
+  "Registry ID": "hundreddayz:swat_zombie",
+  "Class": "net.smileycorp.ldoh.common.entity.EntitySwatZombie"
+}

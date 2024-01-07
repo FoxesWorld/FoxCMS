@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-01-06 20:51:31
+/* Smarty version 4.0.4, created on 2024-01-07 12:45:57
   from '/var/www/FoxCMS/templates/foxengine2/navigation.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6599932323c347_36135673',
+  'unifunc' => 'content_659a72d5b07f20_93890964',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6599932323c347_36135673 (Smarty_Internal_Template $_smarty_tpl) {
+function content_659a72d5b07f20_93890964 (Smarty_Internal_Template $_smarty_tpl) {
 ?><nav class="navbar navbar-expand-lg bar">
 	<ul class="inline foxesNav">
 		<li>

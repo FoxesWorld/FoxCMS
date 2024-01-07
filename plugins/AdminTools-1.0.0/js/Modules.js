@@ -59,7 +59,7 @@
 
 	    function showModuleSettings(module) {
 	        $("#dialog").dialog("option", "title", module["moduleName"]);
-	        FoxEngine.loadData(module["description"], '#dialogContent');
+	        foxEngine.loadData(module["description"], '#dialogContent');
 	        $("#dialog").dialog('open');
 	    }
 	}

@@ -1,0 +1,6 @@
+
+{
+  "Name": "hale",
+  "Registry ID": "rafradek_tf2_weapons:hale",
+  "Class": "rafradek.TF2weapons.entity.mercenary.EntitySaxtonHale"
+}

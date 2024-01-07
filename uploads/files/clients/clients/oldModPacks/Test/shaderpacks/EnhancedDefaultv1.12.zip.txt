@@ -1,0 +1,12 @@
+#Thu Jun 24 21:05:12 IRKT 2021
+Colorboost=true
+Dof_Distance_View=512
+DoF_Strength=60
+gamma=2.0
+Godrays=true
+grays_quality=2
+Refractions=true
+shadowMapResolution=2048
+skyReflection=true
+TAA=true
+Tonemap=true

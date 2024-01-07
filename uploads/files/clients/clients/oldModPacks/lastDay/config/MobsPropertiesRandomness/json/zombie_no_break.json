@@ -1,0 +1,21 @@
+{
+	"mob_id": "hundreddayz:zombie_no_break",
+	"attributes": [
+		{
+			"id": "generic.movementSpeed",
+			"modifier": {
+				"min": -40,
+				"max": -30
+			},
+			"is_flat": false,
+			"affected_by_difficulty": false
+		},
+		{
+			"id": "generic.maxHealth",
+			"modifier": {
+				"min": -20,
+				"max": 30
+			}
+		}
+	]
+}

@@ -1,0 +1,218 @@
+type = menu
+
+customization-meta {
+  identifier = net.minecraft.client.gui.GuiMainMenu
+  randomgroup = 1
+  renderorder = foreground
+  randommode = false
+  randomonlyfirsttime = false
+}
+
+customization {
+  name = identifier_228e977476db4489
+  action = animatebackground
+}
+
+customization {
+  keepaspectratio = false
+  action = backgroundoptions
+}
+
+customization {
+  identifier = %id=400322%
+  orientation = mid-centered
+  x = -115
+  action = movebutton
+  y = -37
+}
+
+customization {
+  identifier = %id=400322%
+  width = 229
+  action = resizebutton
+  height = 42
+}
+
+customization {
+  identifier = %id=400322%
+  action = setbuttonlabel
+  value = 
+}
+
+customization {
+  identifier = %id=400322%
+  loopbackgroundanimations = true
+  restartbackgroundanimations = true
+  action = setbuttontexture
+  backgroundhovered = config\fancymenu\assets\last\mp2.png
+  backgroundnormal = config\fancymenu\assets\last\mp.png
+}
+
+customization {
+  identifier = %id=400322%
+  action = vanilla_button_visibility_requirements
+}
+
+customization {
+  identifier = %id=400382%
+  orientation = mid-centered
+  x = -116
+  action = movebutton
+  y = 10
+}
+
+customization {
+  identifier = %id=400382%
+  width = 229
+  action = resizebutton
+  height = 42
+}
+
+customization {
+  identifier = %id=400382%
+  action = setbuttonlabel
+  value = 
+}
+
+customization {
+  identifier = %id=400382%
+  loopbackgroundanimations = true
+  restartbackgroundanimations = true
+  action = setbuttontexture
+  backgroundhovered = config\fancymenu\assets\last\st2.png
+  backgroundnormal = config\fancymenu\assets\last\st.png
+}
+
+customization {
+  identifier = %id=400382%
+  action = vanilla_button_visibility_requirements
+}
+
+customization {
+  identifier = %id=502382%
+  orientation = mid-centered
+  x = -117
+  action = movebutton
+  y = 59
+}
+
+customization {
+  identifier = %id=502382%
+  width = 229
+  action = resizebutton
+  height = 42
+}
+
+customization {
+  identifier = %id=502382%
+  action = setbuttonlabel
+  value = 
+}
+
+customization {
+  identifier = %id=502382%
+  loopbackgroundanimations = true
+  restartbackgroundanimations = true
+  action = setbuttontexture
+  backgroundhovered = config\fancymenu\assets\last\q2.png
+  backgroundnormal = config\fancymenu\assets\last\q.png
+}
+
+customization {
+  identifier = %id=502382%
+  action = vanilla_button_visibility_requirements
+}
+
+customization {
+  identifier = %id=376382%
+  action = hidebutton
+}
+
+customization {
+  identifier = %id=376382%
+  action = vanilla_button_visibility_requirements
+}
+
+customization {
+  identifier = %id=400298%
+  orientation = mid-centered
+  x = -115
+  action = movebutton
+  y = -85
+}
+
+customization {
+  identifier = %id=400298%
+  width = 230
+  action = resizebutton
+  height = 42
+}
+
+customization {
+  identifier = %id=400298%
+  action = setbuttonlabel
+  value = 
+}
+
+customization {
+  identifier = %id=400298%
+  loopbackgroundanimations = true
+  restartbackgroundanimations = true
+  action = setbuttontexture
+  backgroundhovered = config\fancymenu\assets\last\s2.png
+  backgroundnormal = config\fancymenu\assets\last\s.png
+}
+
+customization {
+  identifier = %id=400298%
+  action = vanilla_button_visibility_requirements
+}
+
+customization {
+  identifier = %id=400346%
+  action = hidebutton
+}
+
+customization {
+  identifier = %id=400346%
+  action = vanilla_button_visibility_requirements
+}
+
+customization {
+  identifier = %id=502346%
+  action = hidebutton
+}
+
+customization {
+  identifier = %id=502346%
+  action = vanilla_button_visibility_requirements
+}
+
+customization {
+  path = config/fancymenu/assets/last/as.png
+  orientation = mid-centered
+  x = -151
+  width = 298
+  actionid = c62bf1c8-40a0-4981-b5b9-9ac34ae117551636381179010
+  action = addtexture
+  y = -222
+  height = 126
+}
+
+customization {
+  orientation = bottom-left
+  restartbackgroundanimations = true
+  buttonaction = openlink
+  backgroundhovered = config\fancymenu\assets\last\bh2.png
+  label = 
+  loopbackgroundanimations = true
+  x = 7
+  width = 100
+  actionid = 00e4c63c-6ebd-4f50-8e11-997f5f94d42d1636381608828
+  action = addbutton
+  y = -26
+  backgroundnormal = config\fancymenu\assets\last\bh.png
+  value = https://Bisecthosting.com/bystilia
+  height = 20
+}
+

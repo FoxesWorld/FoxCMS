@@ -32,6 +32,7 @@ class JoinServer {
 	
 	function __construct($json){
 		global $config;
+		
 		try {
 		if(isset($json)) {
 			$this->db = new db($config['db_user'],$config['db_pass'],$config['db_database']);
@@ -43,6 +44,7 @@ class JoinServer {
 				}
 			}
 		}
+		
 			$stmt = $this->db->prepare("SELECT userMd5,user FROM usersession WHERE userMd5 = :userMd5 AND accessToken = :accessToken");
 			$stmt->bindValue(':userMd5', $this->sessData['selectedProfile']);
 			$stmt->bindValue(':accessToken', $this->sessData['accessToken']);
@@ -52,14 +54,13 @@ class JoinServer {
 			$realmd5  = $row['userMd5'];
 			$realUser = $row['user'];
 			
-			if($realmd5 == $this->sessData['selectedProfile'] && $stmt->rowCount() == 1) {
+			if($realmd5 === $this->sessData['selectedProfile']){// && $stmt->rowCount() == 1) {
 				$stmt = $this->db->prepare("UPDATE usersession SET serverId = :serverid WHERE userMd5 = :userMd5 AND accessToken = :accessToken");
 				$stmt->bindValue(':userMd5', $this->sessData['selectedProfile']);
 				$stmt->bindValue(':accessToken', $this->sessData['accessToken']);
 				$stmt->bindValue(':serverid', $this->sessData['serverId']);
 				$stmt->execute();
-						
-					if($stmt->rowCount() == 1) {
+					if($stmt->rowCount() === 1) {
 						die(json_encode(array('id' => $realmd5, 'name' => $realUser)));
 					} else {
 						exit(json_encode($this->bad));

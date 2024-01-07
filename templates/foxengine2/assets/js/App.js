@@ -21,7 +21,7 @@ const App = new Vue({
     },
 
     created() {
-        foxEngine.getLastUser();
+        foxEngine.user.getLastUser();
         $("#dialog").dialog({
             autoOpen: false,
             show: 'fade',
@@ -35,17 +35,17 @@ const App = new Vue({
             }
         });
         setTimeout(() => {
-            foxEngine.splitWrapLetters('.logo .title', 'letter');
-            foxEngine.splitWrapLetters('.logo .status', 'letterStatus');
+            foxEngine.utils.splitWrapLetters('.logo .title', 'letter');
+            foxEngine.utils.splitWrapLetters('.logo .status', 'letterStatus');
 			logoAnimation();
-            foxEngine.parseOnline();
+            foxEngine.servers.parseOnline();
         }, 500);
     }
 });
 
 // Set interval for foxEngine methods
 setInterval(() => {
-    foxEngine.parseOnline();
+    foxEngine.servers.parseOnline();
 }, 15000);
 
 // Handle hash change
