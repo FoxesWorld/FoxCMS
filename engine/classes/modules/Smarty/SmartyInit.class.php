@@ -27,8 +27,8 @@ if (!defined('FOXXEY')) {
 
 			$this->smarty 					= $tpl;
 			$this->smarty->debugging 		= false;
-			$this->smarty->caching = false;
-			$this->smarty->force_compile = true;
+			//$this->smarty->caching = false;
+			//$this->smarty->force_compile = true;
 			$this->smarty->cache_lifetime 	= 120;
 			$this->smarty->template_dir 	= ROOT_DIR.'/templates/'.$config['siteSettings']['siteTpl'];
 			$this->smarty->compile_dir 		= ENGINE_DIR.'/cache/compile/';

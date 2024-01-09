@@ -2,7 +2,7 @@
 
 class EmojiParser implements JsonSerializable {
 	
-	private $emojiFile = ROOT_DIR."/engine/data/emoticons/emoji.json";
+	private $emojiFile = TEMPLATE_DIR."assets/emoticons/emoji.json";
 	private $catNum = 0;
 	private $emojiList = array();
 	

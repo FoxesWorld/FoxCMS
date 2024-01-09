@@ -2,22 +2,25 @@
 
 include_once("../database.php");
 include_once("../config.php");
-@$user = json_decode($HTTP_RAW_POST_DATA);
-if(isset($user)) {
-	try {
-		$db = new db($config['db_user'],$config['db_pass'],$config['db_database']);
-		$stmt = $db->prepare("SELECT user FROM usersession WHERE userMd5= :user");
-		$stmt->bindValue(':user', $user[0]);
-		$stmt->execute();
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		$realUser = $row['user'];
-		if($realUser==null) {
-			exit;
-		}
-		die('[{"id":"'.str_replace('-', '', @uuidConvert($realUser)).'","name":"'.$realUser.'"}]');
-	} catch(PDOException $pe) {
-	}
 
+@$user = json_decode(file_get_contents('php://input'));
+if (isset($user[0])) {
+    try {
+        $db = new db($config['db_user'], $config['db_pass'], $config['db_database']);
+        $stmt = $db->prepare("SELECT user FROM usersession WHERE userMd5= :user");
+        $stmt->bindValue(':user', $user[0]);
+        $stmt->execute();
+        $realUser = $stmt->fetchColumn();
+
+        if ($realUser === false) {
+            exit;
+        }
+
+        $uuid = str_replace('-', '', uuidConvert($realUser));
+        $result = json_encode([['id' => $uuid, 'name' => $realUser]]);
+        die($result);
+    } catch (PDOException $pe) {}
+}
 	function uuidFromString($string) {
 		$val = md5($string, true);
 		$byte = array_values(unpack('C16', $val));

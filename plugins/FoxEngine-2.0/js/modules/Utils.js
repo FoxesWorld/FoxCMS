@@ -1,12 +1,13 @@
 class Utils {
     constructor(foxEngine) {
 		this.foxEngine = foxEngine;
+		this.monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 	}
 	
 	convertUnixTime(unix) {
         let a = new Date(unix * 1000),
             year = a.getFullYear(),
-            month = foxEngine.monthNames[a.getMonth()],
+            month = this.monthNames[a.getMonth()],
             date = a.getDate(),
             hour = a.getHours(),
             min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes(),

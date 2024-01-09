@@ -1,113 +1,63 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-01-07 12:45:57
+/* Smarty version 4.0.4, created on 2024-01-09 16:47:15
   from '/var/www/FoxCMS/templates/foxengine2/right-block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_659a72d5b0cd98_48046852',
+  'unifunc' => 'content_659d4e63091191_90597508',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fcab26d935e2534f9800ae26427af3a877f4d0b4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/right-block.tpl',
-      1 => 1704487647,
+      1 => 1704807810,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
+    'file:profileBlock.tpl' => 1,
   ),
 ),false)) {
-function content_659a72d5b0cd98_48046852 (Smarty_Internal_Template $_smarty_tpl) {
+function content_659d4e63091191_90597508 (Smarty_Internal_Template $_smarty_tpl) {
 if (!$_smarty_tpl->tpl_vars['isMobile']->value) {?>
 <div class="col-4 d-none d-md-block">
 <div class="row rightBlock">
 <div class="card">
     <div id="userBlock">
-        <div class="userProfile">
-            <div class="profilePhoto">
-                <img src="<?php echo $_smarty_tpl->tpl_vars['profilePhoto']->value;?>
-" alt="Profile Photo">
-            </div>
-            <div class="list-group userActions">
-                <div class="list-group-item">
-                    <table>
-                        <tr>
-                            <td class="align-middle text-center">
-                                <b><?php echo $_smarty_tpl->tpl_vars['login']->value;?>
-</b>
-                            </td>
-                            <?php if ($_smarty_tpl->tpl_vars['user_group']->value != 5) {?>
-                            <td class="align-middle logout text-center">
-                                <form method="POST" id="logout" action="/">
-                                    <button type="submit" class="logout btn btn-danger">
-										<i class="fa fa-sign-out"></i>
-									</button>
-                                    <input name="userAction" class="input" type="hidden" value="logout" />
-                                </form>
-                            </td>
-                            <?php }?>
-                        </tr>
-                    </table>
-                </div>
-                <li class="list-group-item"><b><i class="fa fa-address-card-o"></i> Почта</b>: <?php echo $_smarty_tpl->tpl_vars['email']->value;?>
-</li>
-                <li class="list-group-item"><b><i class="fa fa-users"></i> Группа</b>: <?php echo $_smarty_tpl->tpl_vars['groupName']->value;?>
-</li>
-                <li class="list-group-item"><b><i class="fa fa-diamond"></i> Полное имя</b>: <?php echo $_smarty_tpl->tpl_vars['realname']->value;?>
-</li>
-                <?php if ($_smarty_tpl->tpl_vars['user_group']->value != 5) {?>
-                <li class="list-group-item" title="Валюта проекта" data-toggle="tooltip">
-				<b>
-					<i class="fa fa-krw"></i> Юниты
-				</b>: <?php echo $_smarty_tpl->tpl_vars['units']->value;?>
-</li>
-                <?php }?>
-            </div>
-            <?php if ($_smarty_tpl->tpl_vars['user_group']->value == 5) {?>
-            <div class="userActions text-center mt-3">
-                <a href="#" onclick="foxEngine.loadPage('auth', replaceData.contentBlock); return false;">
-                    <button type="submit" class="login"><i class="fa fa-sign-in"></i> Авторизация</button>
-                </a>
-            </div>
-            <?php }?>
-        </div>
+		<?php $_smarty_tpl->_subTemplateRender('file:profileBlock.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
     </div>
-</div>
 
-   
-    <?php if ($_smarty_tpl->tpl_vars['user_group']->value != 5) {?>
-      <div class="card">				
-			<div class="card text-white  mb-3" style="max-width: 18rem;">
-			  <div class="card-header">Меню пользователя</div>
-				  <div class="card-body">
-					  <div class="right-profile-menu">
-						<ul id="usrMenu">
-						</ul>
-					  </div>
-				  </div>
-			</div>
-      </div>
-	  <?php }?>
-   
-     <div class="card">		
-      	<div class="card text-white  mb-3" style="max-width: 18rem;">
-      	  <div class="card-header">Servers</div>
+  	
+      	<div class="card text-white  mb-3">
+      	  <div class="cardTitle">Мониторинг</div>
 			<div id="servers">
 			</div>
       	</div>
-      </div>
-   
-      <div class="card">		
-      	<div class="card text-white  mb-3" style="max-width: 18rem;">
-      	  <div class="card-header">Последняя регистрация</div>
+   		
+      	<div class="card text-white  mb-3">
+      	  <div class="cardTitle">Последняя регистрация</div>
 			<div id="lastUser">
 			
 			</div>
       	</div>
-      </div>
+		<!--
+			<div class="widgets">
+
+				<a href="https://discord.com/invite/mxV4uYq" title="Перейти на сервер Discord">
+					<div class="social-widget discord-widget">
+						<img src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
+/assets/icons/svg/discord.svg" alt="Discord">
+						<div class="social-status" title="Текущий онлайн сервера">
+							<i class="fa fa-circle" aria-hidden="true"></i> 2217            </div>
+					</div>
+				</a>
+			</div>
+		-->
+</div>
 </div>
 </div>
 <?php }

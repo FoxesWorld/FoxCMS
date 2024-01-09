@@ -1,6 +1,7 @@
 class Servers {
     constructor(foxEngine) {
 		this.foxEngine = foxEngine;
+		foxEngine.debugSend("Servers init", "background: #c89f27; padding: 5px;");
 	}
 	
 	    /* Servers parser */
@@ -24,14 +25,12 @@ class Servers {
 
                     // Push the promise to the array
                     serversHtmlPromises.push(foxEngine.replaceTextInTemplate(entryTemplate, {
-                        version: obj.version,
-                        srvName: obj.serverName,
+                        version: obj.version ? obj.version : "Offline",
                         serverName: obj.serverName,
                         playersOnline: playersOnline,
                         playersMax: playersMax,
                         percent: obj.percent,
                         statusClass: isOnline ? 'online' : 'offline',
-                        version: obj.version,
                         progressbarClass: progressbarClass
                     }));
                 }
@@ -88,14 +87,29 @@ class Servers {
                 });
 
                 // Append the server page HTML to the container
-                foxEngine.loadData(template, replaceData.contentBlock);
+                foxEngine.page.loadData(template, replaceData.contentBlock);
             } else {
                 console.error('Error: Unable to fetch server details.');
             }
         } catch (error) {
             console.error('Error while loading server page:', error);
         }
+		location.hash = 'server/' + serverName;
     }
+	
+	async getServerDetails(serverName) {
+		try {
+            // Fetch server information
+            let server = await foxEngine.sendPostAndGetAnswer({
+                sysRequest: "parseServers",
+                server: "serverName = '" + serverName + "'"
+            }, "JSON");
+
+           return server[0];
+        } catch (error) {
+            console.error('Error while loading server page:', error);
+        }
+	}
 
     // Function to load mods based on modsInfo
     async loadMods(modsInfo) {

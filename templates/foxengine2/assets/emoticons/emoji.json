@@ -1,0 +1,127 @@
+[
+    {
+        "category": "smileys_people",
+        "emoji": [
+            {
+                "code": "1F600",
+                "name": "smile"
+            },
+            {
+                "code": "1F601",
+                "name": "sad"
+            },
+			{
+                "code": "f09fa4a0",
+                "name": "adventure"
+            },
+            {
+                "code": "1F601",
+                "name": "grin"
+            },
+            {
+                "code": "1F602",
+                "name": "joy"
+            }
+        ]
+    },
+    {
+        "category": "animals_nature",
+        "emoji": [
+            {
+                "code": "1F98A",
+                "name": "fox"
+            }
+        ]
+    },
+    {
+        "category": "food_drink",
+        "emoji": [
+        ]
+    },
+    {
+        "category": "activities",
+        "emoji": [
+           
+        ]
+    },
+    {
+        "category": "travel_places",
+        "emoji": [
+          
+        ]
+    },
+    {
+        "category": "objects",
+        "emoji": [
+            {
+                "code": "1F507",
+                "name": "coffee"
+            },
+            {
+                "code": "1F508",
+                "name": "sparkles"
+            },
+
+            {
+                "code": "1F509",
+                "name": "comet"
+            },
+            {
+                "code": "1F510",
+                "name": "pencil"
+            },
+            {
+                "code": "1F510",
+                "name": "hotsprings"
+            },
+            {
+                "code": "1F511",
+                "name": "swords"
+            },
+            {
+                "code": "1F512",
+                "name": "sword"
+            },
+            {
+                "code": "1F513",
+                "name": "form"
+            },
+            {
+                "code": "1F515",
+                "name": "lamp"
+            },
+            {
+                "code": "1F516",
+                "name": "explosion"
+            },
+            {
+                "code": "1F517",
+                "name": "steam"
+            },
+            {
+                "code": "1F518",
+                "name": "drip"
+            },
+            {
+                "code": "1F519",
+                "name": "cluster"
+            },
+            {
+                "code": "1F514",
+                "name": "pray"
+            }
+        ]
+    },
+    {
+        "category": "symbols",
+        "emoji": [
+          
+        ]
+    },
+    {
+        "category": "flags",
+        "emoji": [
+        
+        ]
+    }
+]

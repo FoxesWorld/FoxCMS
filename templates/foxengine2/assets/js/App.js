@@ -10,7 +10,7 @@ const App = new Vue({
     delimiters: ["<%", "%>"],
     el: '#content',
     data: {
-        contentData: foxEngine.loadPage("welcome", '#content')
+        contentData: foxEngine.initialPage()
     },
 
     mounted() {
@@ -41,6 +41,7 @@ const App = new Vue({
             foxEngine.servers.parseOnline();
         }, 500);
     }
+
 });
 
 // Set interval for foxEngine methods
@@ -52,19 +53,23 @@ setInterval(() => {
 (function () {
     if (location.hash.substring(1) !== undefined) {
         let linkTypes = [
-            { "keyWord": "user", "action": "showUserProfile" },
-            { "keyWord": "page", "action": "loadPage" }
+            { "keyWord": "user", "action": "showUserProfile", "module": "user." },
+			{"keyWord": "server", "action": "loadServerPage", "module": "servers."},
+            { "keyWord": "page", "action": "loadPage", "module":"page."}
         ];
         for (let k = 0; k < linkTypes.length; k++) {
             console.log("Adding listener to " + linkTypes[k].keyWord);
             if ((location.hash + '').indexOf(linkTypes[k].keyWord, (0)) > 0) {
                 let replaceValue = location.hash.split('#' + linkTypes[k].keyWord + '/')[1];
                 let runFunc = linkTypes[k].action;
-                eval(`foxEngine.${runFunc}("${replaceValue}", "${replaceData.contentBlock}")`);
+                eval(`foxEngine.${linkTypes[k].module}${runFunc}("${replaceValue}", "${replaceData.contentBlock}")`);
             }
         }
     }
 }());
+
+
+
 
 // Export Vue App
 export { App, foxEngine };

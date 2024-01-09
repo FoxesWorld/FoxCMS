@@ -2,6 +2,7 @@ class FoxesInputHandler {
     constructor(foxEngine) {
 		this.foxEngine = foxEngine;
         this.forms = [];
+		foxEngine.debugSend("FoxesInputHandler init", "background: #c89f27; padding: 5px;");
     }
 
     formInit(awaitms) {

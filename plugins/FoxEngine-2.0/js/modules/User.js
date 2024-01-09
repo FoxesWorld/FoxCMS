@@ -5,6 +5,11 @@ class User {
         this.optionAmount;
 		this.optionArray;
 		this.optionTpl;
+		var userLogin = foxEngine.replaceData.login;
+		var debugMessage = "Loading data for %c" + userLogin + "%c...";
+		var loginStyle = "color: #ff0000;";
+		var textStyles = "color: #000000;";
+		console.log(debugMessage, loginStyle, textStyles);
 	}
 	
 	async parseUsrOptionsMenu() {
@@ -12,7 +17,7 @@ class User {
         if (this.optNamesArr.length <= this.optionAmount)
             foxEngine.debugSend('Using FoxesWorld UserOptions', 'background: #39312fc7; color: yellow; font-size: 14pt');
         if (foxEngine.replaceData.isLogged) {
-            foxEngine.debugSend("User " + foxEngine.replaceData.login + " is logged", '');
+            //foxEngine.debugSend("User " + foxEngine.replaceData.login + " is logged", '');
         }
         try {
             let json = await foxEngine.sendPostAndGetAnswer({
@@ -30,7 +35,7 @@ class User {
                         case "page":
                             this.optionTpl = `
 										  <li class="` + obj[optionName]["optionClass"] + `">
-											<a  class="pageLink-` + optionName + `" onclick="foxEngine.loadPage('` + optionName + `', replaceData.contentBlock); return false; ">
+											<a  class="pageLink-` + optionName + `" onclick="foxEngine.page.loadPage('` + optionName + `', replaceData.contentBlock); return false; ">
 												<div class="rightIcon">
 													` + obj[optionName]["optionPreText"] + `
 												</div>
@@ -110,7 +115,7 @@ class User {
             "user_doaction": "ViewProfile"
         }, "TEXT");
 
-        foxEngine.loadData(userProfile, foxEngine.replaceData.contentBlock);
+        foxEngine.page.loadData(userProfile, foxEngine.replaceData.contentBlock);
         location.hash = 'user/' + userDisplay;
         foxEngine.foxesInputHandler.formInit(1000);
     };
@@ -123,7 +128,7 @@ class User {
             "user_doaction": "ViewProfile"
         }, "HTML");
 
-        foxEngine.loadData(response.getElementById('view'), '#dialogContent');
+        foxEngine.page.loadData(response.getElementById('view'), '#dialogContent');
         $("#dialog").dialog(dialogOptions);
         $("#dialog").dialog('open');
         setTimeout(() => {

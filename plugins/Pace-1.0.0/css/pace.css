@@ -26,7 +26,7 @@
   right: 0px;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px #b76335db, 0 0 5px #b76335db;
+  box-shadow: 0 0 10px #d0c6c0db, 0 0 5px #423b37db;
   opacity: 1.0;
   -webkit-transform: rotate(3deg) translate(0px, -4px);
   -moz-transform: rotate(3deg) translate(0px, -4px);
@@ -82,7 +82,7 @@
     position: fixed;
 	left: 0;
     top: 0;
-    background-color: #e97a05ad;
+    background-color: #6d6b68db;
 	transition: 1s;
 	/* background: url('../img/diagmonds.png'); */
 }

@@ -2,6 +2,7 @@ class Emojis {
     constructor(foxEngine) {
 		this.foxEngine = foxEngine;
 		this.emojis = [];
+		foxEngine.debugSend("Emoji init", "background: #c89f27; padding: 5px;");
 	}
 	
 async parseEmojis() {
@@ -20,12 +21,10 @@ async parseEmojis() {
 
                     for (let j = 0; j < emojiArray.length; j++) {
                         let emojiCatArr = emojiArray[j];
-                        //console.log(`  - Processing sub-category ${j + 1}`);
-
                         for(let k = 0; k < emojiCatArr.length; k++) {
                             let name = emojiCatArr[k].emojiName;
                             let code = emojiCatArr[k].emojiCode;
-                            let imagePath = `/engine/data/emoticons/${name}.png`;
+                            let imagePath = this.foxEngine.replaceData.assets+`emoticons/${category}/${name}.png`;
 
                             this.emojis.push({
                                 name: name,

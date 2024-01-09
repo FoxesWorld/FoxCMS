@@ -1,114 +1,131 @@
 <?php
 /*
 =====================================================
- Skins - you look nice today !| AuthLib
+Skins - you look nice today! | AuthLib
 -----------------------------------------------------
- https://arcjetsystems.ru/
+https://arcjetsystems.ru/
 -----------------------------------------------------
- Copyright (c) 2016-2021  FoxesWorld
+Copyright (c) 2016-2021 FoxesWorld
 -----------------------------------------------------
- This code is reserved
+This code is reserved
 -----------------------------------------------------
- File: skins.class.php
+File: skins.class.php
 -----------------------------------------------------
- version: 0.1.8 WIP
+version: 0.1.9 Alpha
 -----------------------------------------------------
- Usage: Parses skins&Cloaks
+Usage: Parses skins & Cloaks
 =====================================================
 */
 
-	header('Content-Type: text/html; charset=utf-8');
-	define('INCLUDE_CHECK',true);
-	define('CONFIG', true);
-	require ('../config.php');
-	include("../database.php");
+header('Content-Type: application/json; charset=utf-8');
 
-	if(isset($_GET['user'])){
-		$skin = new skin($_GET['user']);
-	} else {
-		die ("No request!");
-	}
+// Constants
+define('INCLUDE_CHECK', true);
+define('CONFIG', true);
 
-	class skin {
+// Include necessary files
+require('../config.php');
+include('../database.php');
 
-		private $md5User;
-		private $skinUrl;
-		private $cloakUrl;
-		private $skinStatus;
-		private $cloakStatus;
-		private $realUser;
-		private $skin;
-		private $cloak;
-		private $spl;
+// Check if 'user' parameter is provided in the request
+if (isset($_GET['user'])) {
+    $skin = new Skin($_GET['user']);
+} else {
+    die('{"message": "No request!"}');
+}
 
-		function __construct($md5) {
-			global $config, $LOGGER;
-			$LOGGER->WriteLine("SkinLib===");
-		try {
-				$LOGGER->WriteLine("SkinLib is being created with ".$md5 ." UUID");
-				$this->md5User = $this->pregMatch($md5);
-				$this->getRealUser();
-				$userDir = $config['skinUrl'].$this->realUser;
-				$LOGGER->WriteLine("Getting profileData for ".$this->realUser);
-				$this->skinUrl 	   = $userDir.'/skin.png';
-				$this->cloakUrl    = $userDir.'/cape.png';
-				$this->skinStatus  = file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/users/'.$this->realUser.'/skin.png');
-				$this->cloakStatus = file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/users/'.$this->realUser.'/cape.png');
-				
-				$this->JSONoutput();
-			} catch(PDOException $pe) {
-				die($pe);
-			}
-		}
+class Skin {
+    // Class properties
+    private $md5User;
+    private $realUser;
+    private $skinUrl;
+    private $cloakUrl;
+    private $skinStatus;
+    private $cloakStatus;
+    private $skin;
+    private $cloak;
+    private $spl;
 
-		private function getRealUser(){
-			global $config;
-			$db = new db($config['db_user'],$config['db_pass'],$config['db_database']);
-			$stmt = $db->prepare("SELECT user FROM usersession WHERE userMd5= :md5");
-			$stmt->bindValue(':md5', $this->md5User);
-			$stmt->execute();
-			$row = $stmt->fetch(PDO::FETCH_ASSOC);
-			
-			if(@count($row) > 0 && @$row['user'] !== null){
-				$this->realUser = $row['user'];
-			} else {
-				$this->realUser = "undefined";
-			}
-		}
+    // Class constructor
+    public function __construct($md5)
+    {
+        if (strlen($md5) === 32) {
+            global $config, $LOGGER;
 
-		private function JSONoutput(){
-			global $config, $LOGGER;
-				if ($this->cloakStatus) {
-					$LOGGER->WriteLine("Loading CLOAK ".$this->cloakUrl);
-					$this->cloak = '"CAPE":{"url":"'.$this->cloakUrl.'"}';
-				} else {
-					$this->cloak = '';
-				}
+            // Logging
+            $LOGGER->WriteLine("SkinLib===");
 
-				if ($this->skinStatus) {
-					$LOGGER->WriteLine("Loading SKIN ".$this->skinUrl);
-					$this->skin ='"SKIN":{"url":"'.$this->skinUrl.'"}';
-				} else {
-					$this->skin ='"SKIN":{"url":"'.$config['skinUrl'].'undefined/skin.png"}';
-				}
+            try {
+                $LOGGER->WriteLine("SkinLib is being created with " . $md5 . " UUID");
 
-				if ($this->skinStatus && $this->cloakStatus) {
-					$this->spl = ',';
-				} else {
-					$this->spl = '';
-				}
-				
+                // Sanitize input
+                $this->md5User = $this->sanitizeInput($md5);
 
-				$base64 ='{"timestamp":"'.CURRENT_TIME.'","profileId":"'.$this->md5User.'","profileName":"'.$this->realUser.'","textures":{'.$this->skin.$this->spl.$this->cloak.'}}';
-				echo '{"id":"'.$this->md5User.'","name":"'.$this->realUser.'","properties":[{"name":"textures","value":"'.base64_encode($base64).'","signature":"'.$config['letterHeadLine'].'"}]}';
-		}
+                // Get real user from the database
+                $this->getRealUser();
 
-		private function pregMatch($String){
-			if (!preg_match("/^[a-zA-Z0-9_-]+$/", $String)){
-				exit;
-			} else {
-				return $String;
-			}
-		}
-		
-	}
+                // Set skin and cloak URLs
+                $userDir = $config['skinUrl'] . $this->realUser;
+                $this->skinUrl = $userDir . '/skin.png';
+                $this->cloakUrl = $userDir . '/cape.png';
+
+                // Check status of skin and cloak files
+                $this->skinStatus = file_exists($_SERVER['DOCUMENT_ROOT'] . '/uploads/users/' . $this->realUser . '/skin.png');
+                $this->cloakStatus = file_exists($_SERVER['DOCUMENT_ROOT'] . '/uploads/users/' . $this->realUser . '/cape.png');
+
+                // Output JSON
+                $this->JSONoutput();
+            } catch (PDOException $pe) {
+                die($pe);
+            }
+        } else {
+            $LOGGER->WriteLine("Length is not 32 " . $md5);
+        }
+    }
+
+    // Get real user from the database
+    private function getRealUser()
+    {
+        global $config;
+        $db = new db($config['db_user'], $config['db_pass'], $config['db_database']);
+        $stmt = $db->prepare("SELECT user FROM usersession WHERE userMd5 = :md5");
+        $stmt->bindValue(':md5', $this->md5User);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Set real user or default to "undefined"
+        $this->realUser = ($row && isset($row['user'])) ? $row['user'] : "undefined";
+    }
+
+    // Output JSON response
+    private function JSONoutput()
+    {
+        global $config, $LOGGER;
+
+        // Set cloak information
+        $this->cloak = $this->cloakStatus ? '"CAPE":{"url":"' . $this->cloakUrl . '"}' : '';
+
+        // Set skin information
+        $this->skin = $this->skinStatus ? '"SKIN":{"url":"' . $this->skinUrl . '"}' :
+            '"SKIN":{"url":"' . $config['skinUrl'] . 'undefined/skin.png"}';
+
+        // Determine if there is a need for a comma separator
+        $this->spl = ($this->skinStatus && $this->cloakStatus) ? ',' : '';
+
+        // Create base64-encoded JSON
+        $base64 = '{"timestamp":"' . CURRENT_TIME . '","profileId":"' . $this->md5User . '","profileName":"' . $this->realUser . '","textures":{' . $this->skin . $this->spl . $this->cloak . '}}';
+
+        // Output JSON response
+        echo '{"id":"' . $this->md5User . '","name":"' . $this->realUser . '","properties":[{"name":"textures","value":"' . base64_encode($base64) . '","signature":""}]}';
+    }
+
+    // Sanitize input to prevent potential security issues
+    private function sanitizeInput($string)
+    {
+        if (!preg_match("/^[a-zA-Z0-9_-]+$/", $string)) {
+            exit;
+        } else {
+            return $string;
+        }
+    }
+}

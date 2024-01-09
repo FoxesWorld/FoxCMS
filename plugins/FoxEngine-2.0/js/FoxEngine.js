@@ -2,6 +2,7 @@ import { Request } from './modules/Request.js';
 import { FoxesInputHandler } from './modules/FoxesInputHandler.js';
 import { User } from './modules/User.js';
 import { Servers } from './modules/Servers.js';
+import { Page } from './modules/Page.js';
 import { Emojis } from './modules/Emojis.js';
 import { Utils } from './modules/Utils.js';
 import './modules/Notify.js';
@@ -12,84 +13,39 @@ class FoxEngine {
     constructor(replaceData, userFields) {
         this.replaceData = replaceData;
         this.userFields = userFields;
-		
-		/*Modules Instancies*/
-			this.request = new Request("/", { key: replaceData.secureKey, user: replaceData.login}, true);
-			this.foxesInputHandler = new FoxesInputHandler(this);
-			this.user = new User(this);
-			this.servers = new Servers(this);
-			this.emojis = new Emojis(this);
-			this.utils = new Utils(this);
-			
-        this.e = ["\n %c %c %c FoxEngine 2.0 - 🦊 WebUI 🦊  %c  %c  https://foxesworld.ru/  %c %c ⋆🐾°%c🌲%c🍂 \n\n", "background: #c89f27; padding:5px 0;", "background: #c89f27; padding:5px 0;", "color: #c89f27; background: #030307; padding:5px 0;", "background: #c89f27; padding:5px 0;", "background: #bea8a8; padding:5px 0;", "background: #c89f27; padding:5px 0;", "color: #ff2424; background: #fff; padding:5px 0;", "color: #ff2424; background: #fff; padding:5px 0;", "color: #ff2424; background: #fff; padding:5px 0;"];
-
-        this.selectPage = {
-            thisPage: "",
-            thatPage: ""
-        };
-		
-		this.monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
         
-        this.type;
-        this.updatedText;
+		/* TEXT REPLACER*/
+		this.updatedText;
         this.replacedTimes = 0;
         this.elementsDir = replaceData.assets + "elements/";
+        this.e = ["\n %c %c %c FoxEngine 2.0 - 🦊 WebUI 🦊  %c  %c  https://foxesworld.ru/  %c %c ⋆🐾°%c🌲%c🍂 \n\n", "background: #c89f27; padding:5px 0;", "background: #c89f27; padding:5px 0;", "color: #c89f27; background: #030307; padding:5px 0;", "background: #c89f27; padding:5px 0;", "background: #bea8a8; padding:5px 0;", "background: #c89f27; padding:5px 0;", "color: #ff2424; background: #fff; padding:5px 0;", "color: #ff2424; background: #fff; padding:5px 0;", "color: #ff2424; background: #fff; padding:5px 0;"];
+		window.console.log.apply(console, this.e);
+
 		this.initialize();
-        window.console.log.apply(console, this.e);
+        
     }
 	
 	async initialize() {
         try {
+			this.request = new Request("/", { key: replaceData.secureKey, user: replaceData.login}, true);
+			this.foxesInputHandler = new FoxesInputHandler(this);
+			this.utils = new Utils(this);
+			this.user = new User(this);
+			this.servers = new Servers(this);
+			this.page = new Page(this);
+			this.emojis = new Emojis(this);
             this.emojiArr = await this.emojis.parseEmojis();
+			
         } catch (error) {
             console.error('Error during initialization:', error);
             throw error;
         }
     }
-
-
-	async loadPage(page, block) {
-		let option, content, func;
-		if (page !== this.selectPage.thisPage && this.selectPage.thisPage !== undefined) {
-			window.scrollTo({
-				top: 0,
-				behavior: 'smooth'
-			});
-
-			let response = await this.sendPostAndGetAnswer({
-				"getOption": page
-			}, "HTML");
-
-			option = this.utils.getData(response, 'useroption');
-			content = this.utils.getData(response, 'pageContent');
-
-			if (option !== undefined) {
-				let jsonOption = JSON.parse(option.textContent);
-				if (jsonOption.onLoad) {
-					switch (jsonOption.onLoadArgs) {
-						case undefined:
-							func = jsonOption.onLoad + "()";
-							break;
-
-						default:
-							func = jsonOption.onLoad + "(" + jsonOption.onLoadArgs + ")";
-							break;
-					}
-
-					setTimeout(() => {
-						eval(func);
-					}, 500);
-				}
-
-				if (page !== this.selectPage.thisPage) {
-					await this.loadData(this.replaceText(response.body.innerHTML, page), block);
-					this.setPage(page);
-					location.hash = '#page/' + page;
-				}
-			}
-			$(response).find('useroption').remove();
-		}
-	};
+	
+	initialPage(){
+		if(location.hash == '')
+			this.page.loadPage("welcome", '#content')
+	}
 
     async sendPostAndGetAnswer(requestBody, answerType) {
         try {
@@ -236,31 +192,6 @@ class FoxEngine {
         }
     }
 
-    loadData(data, block) {
-        let Galleryinstance;
-        $(block).fadeOut(500);
-        setTimeout(() => {
-            if (data !== undefined) {
-                if (String(data).indexOf('<section class="gallery"') > 0) {
-                    Galleryinstance = new Gallery(data);
-                    Galleryinstance.loadGallery();
-                }
-            }
-            $(block).html(data);
-            $(block).fadeIn(500);
-            this.foxesInputHandler.formInit(500);
-        }, 500);
-    }
-
-    setPage(page) {
-        $(".pageLink-" + page).addClass("selectedPage");
-        if (page != this.selectPage.thisPage) {
-            this.selectPage.thatPage = this.selectPage.thisPage;
-            $(".pageLink-" + this.selectPage.thatPage).removeClass("selectedPage");
-        }
-        this.selectPage.thisPage = page;
-    }
-
     replaceText(text, page) {
         this.updatedText = text || "";
         for (let j = 0; j < this.userFields.length; j++) {
@@ -300,13 +231,11 @@ class FoxEngine {
 
             // Use a regular expression to replace all occurrences of the emoji code with an image tag
             let regex = new RegExp(emojiCode, 'g');
-            text = text.replace(regex, `<img src="${imagePath}" class="emoji" alt="${emojiCode}" title="${emojiCode}" />`);
+            text = text.replace(regex, `<img src="${imagePath}" class="emoji">`);
         }
 
         return text;
     }
 }
 
-export {
-    FoxEngine
-};
+export { FoxEngine };
