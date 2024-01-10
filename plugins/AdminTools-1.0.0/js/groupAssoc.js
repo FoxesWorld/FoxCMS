@@ -7,7 +7,7 @@ function GroupAssoc() {
     };
 
     this.groupAssoc = () => {
-        let answer = request.send_post({
+        let answer = foxEngine.request.send_post({
             admPanel: "groupAssoc"
         });
 

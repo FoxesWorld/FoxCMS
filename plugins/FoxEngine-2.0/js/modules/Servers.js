@@ -8,7 +8,7 @@ class Servers {
     async parseOnline() {
         try {
             // Load the template only once
-            const entryTemplate = await foxEngine.loadAndReplaceHtml(foxEngine.elementsDir + 'monitor/serverEntry.tpl', {});
+            const entryTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/serverEntry.tpl');
 
             let parsedJson = await foxEngine.sendPostAndGetAnswer({
                 sysRequest: 'parseMonitor'
@@ -42,12 +42,14 @@ class Servers {
                 let serversHtml = serversHtmlResults.join('');
 
                 // Replace text in the total online template
-                const totalOnlineHtml = await foxEngine.loadAndReplaceHtml(foxEngine.elementsDir + 'monitor/totalOnline.tpl', {
+                const totalOnlineTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/totalOnline.tpl');
+				let totalOnlineHtml = await foxEngine.replaceTextInTemplate(totalOnlineTpl, {
                     totalPlayersOnline: parsedJson.totalPlayersOnline,
                     totalPlayersMax: parsedJson.totalPlayersMax,
                     percent: parsedJson.percent,
                     todaysRecord: parsedJson.todaysRecord
                 });
+				
 
                 // Update the content
                 $("#servers").html(serversHtml + totalOnlineHtml);
@@ -61,6 +63,7 @@ class Servers {
 	
     // Load server page content
     async loadServerPage(serverName) {
+		 const pageTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'serverPage/serverPage.tpl');
         try {
             // Fetch server information
             let server = await foxEngine.sendPostAndGetAnswer({
@@ -77,8 +80,7 @@ class Servers {
                     modsInfo = JSON.parse(serverDetails.modsInfo);
                 }
 
-                // Load the server page template
-                const template = await foxEngine.loadAndReplaceHtml(foxEngine.elementsDir + 'serverPage/serverPage.tpl', {
+				let page = await foxEngine.replaceTextInTemplate(pageTemplate, {
                     serverImage: serverDetails.serverImage,
                     serverDescription: serverDetails.serverDescription,
                     serverName: serverDetails.serverName,
@@ -87,7 +89,7 @@ class Servers {
                 });
 
                 // Append the server page HTML to the container
-                foxEngine.page.loadData(template, replaceData.contentBlock);
+                foxEngine.page.loadData(page, replaceData.contentBlock);
             } else {
                 console.error('Error: Unable to fetch server details.');
             }
@@ -116,7 +118,7 @@ class Servers {
         try {
             if (modsInfo && modsInfo.length > 0) {
                 // Load the template only once
-                const template = await foxEngine.loadAndReplaceHtml(foxEngine.elementsDir + 'serverPage/serverMods.tpl', {});
+                const template = await foxEngine.loadTemplate(foxEngine.elementsDir + 'serverPage/serverMods.tpl');
 
                 // Use Promise.all to execute promises concurrently
                 const promises = modsInfo.map(async mod => {

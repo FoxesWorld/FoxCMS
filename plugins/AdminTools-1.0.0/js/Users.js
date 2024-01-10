@@ -12,13 +12,14 @@ class Users {
 
             if (usersArray.length > 0) {
                 $("#usersList").html("");
+				let userTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/users/userRow.tpl');
                 for (let j = 0; j < usersArray.length; j++) {
                     let singleUser = usersArray.at(j);
                     let login = singleUser[j].login;
                     let email = singleUser[j].email;
                     let lastdate = singleUser[j].last_date;
 
-                    let userHtml = await foxEngine.loadAndReplaceHtml(replaceData.assets + '/elements/admin/users/userRow.tpl', {
+                    let userHtml = await foxEngine.replaceTextInTemplate(userTpl, {
                         index: j,
                         login,
                         email,
@@ -79,7 +80,7 @@ class Users {
 
     async addContent() {
         if (!$("#adminContent > table").length) {
-            const contentHtml = await foxEngine.loadAndReplaceHtml(replaceData.assets + '/elements/admin/users/userTable.tpl', {});
+            const contentHtml = await foxEngine.loadTemplate(foxEngine.elementsDir + 'admin/users/userTable.tpl');
             $("#adminContent").html(contentHtml);
         }
     }

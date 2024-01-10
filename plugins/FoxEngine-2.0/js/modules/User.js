@@ -71,7 +71,7 @@ class User {
     };
 	
 	async parseBadges(user) {
-        const badgeTemplate = await foxEngine.loadAndReplaceHtml(foxEngine.elementsDir + 'badge.tpl', {});
+        const badgeTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'badge.tpl');
         try {
             let parsedJson = await foxEngine.sendPostAndGetAnswer({
                 user_doaction: 'GetBadges',
@@ -141,7 +141,8 @@ class User {
             let lastUser = await foxEngine.sendPostAndGetAnswer({
                 userAction: "lastUser"
             }, "JSON");
-            let userView = await foxEngine.loadAndReplaceHtml(foxEngine.elementsDir + 'lastUser.tpl', {
+            let userView = await foxEngine.replaceTextInTemplate(await foxEngine.loadTemplate(foxEngine.elementsDir + 'lastUser.tpl'),
+			 {
                 colorScheme: lastUser.colorScheme,
                 profilePhoto: lastUser.profilePhoto,
                 login: lastUser.login,

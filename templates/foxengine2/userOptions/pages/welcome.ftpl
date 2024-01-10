@@ -22,7 +22,7 @@
 	<hr>
 		
 	Все готовы к приключениям? :smile:
-	<button class="login" onclick="foxEngine.loadPage('startGame', replaceData.contentBlock); return false;">Я готов!</button>
+	<button class="login" onclick="foxEngine.page.loadPage('startGame', replaceData.contentBlock); return false;">Я готов!</button>
 
 </div>
 </pageContent>

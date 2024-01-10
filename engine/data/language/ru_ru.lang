@@ -88,6 +88,10 @@
 		"keyCheck-title" => "Проверка ключа при отправке JavaScript",
 		"keyCheck-desc" => "",
 		"webserviceName-desc" => "",
+		"gameFiles-title" => "Игровые файлы",
+		"gameFiles-desc" =>"<div class=\"alert alert-warning\" role=\"alert\">Используется лаунчером!</div>",
+		"jreDir-title" =>  "Путь к архивам Jre",
+		"jreDir-desc" => "<div class=\"alert alert-warning\" role=\"alert\">Используется лаунчером!</div>",
 		"userOptions-title" => "Директория опций пользователя",
 		"userOptions-desc" => "Директория шаблона в которой находятся опции и страницы для различных групп пользователей",
 		"OptionReplaceValues-title" => "Заменяемые фрагменты текста",
@@ -110,6 +114,10 @@
 		"telegramBotToken-desc" => "",
 		"telegramChatId-title" => "ID чата для отправки сообщений ботом",
 		"telegramChatId-desc" => "",
+		"discordLink-title" => "Ссылка на сервер Дискорд",
+		"discordLink-desc" =>"Приглашение для пользователей на наш сервер",
+		"vkLink-title" => "Ссылка на группу ВК",
+		"vkLink-desc" => "Приглашение пользователей в нашу группу",
 		
 		
 		/*Tabs*/

@@ -3,6 +3,7 @@ import { FoxesInputHandler } from './modules/FoxesInputHandler.js';
 import { User } from './modules/User.js';
 import { Servers } from './modules/Servers.js';
 import { Page } from './modules/Page.js';
+import { ModalApp } from './modules/ModalApp.js';
 import { Emojis } from './modules/Emojis.js';
 import { Utils } from './modules/Utils.js';
 import './modules/Notify.js';
@@ -33,6 +34,7 @@ class FoxEngine {
 			this.user = new User(this);
 			this.servers = new Servers(this);
 			this.page = new Page(this);
+			this.modalApp = new ModalApp(this);
 			this.emojis = new Emojis(this);
             this.emojiArr = await this.emojis.parseEmojis();
 			
@@ -167,7 +169,7 @@ class FoxEngine {
         console.log("%c" + message, style);
     };
 
-    async loadAndReplaceHtml(filePath, replacements) {
+    async loadTemplate(filePath) {
         try {
             let response = await fetch(filePath);
 
@@ -176,14 +178,6 @@ class FoxEngine {
             }
 
             let htmlContent = await response.text();
-
-            // Replace placeholders in the HTML content
-            for (let key in replacements) {
-                if (replacements.hasOwnProperty(key)) {
-                    const regex = new RegExp('{' + key + '}', 'g');
-                    htmlContent = htmlContent.replace(regex, replacements[key]);
-                }
-            }
 
             return htmlContent;
         } catch (error) {

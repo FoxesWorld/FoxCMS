@@ -11,6 +11,7 @@
 	--theme-color-secondary: rgb(66 50 57);
 	--theme-content-pane: rgb(225 223 221 / 64%);
 	--theme-span-primary: rgb(125 113 119);
+	--theme-iconPrimary: rgb(113 80 8);
 	
 }
 
@@ -32,6 +33,10 @@ body {
 
 #usrMenu {
 	display: table-cell;
+}
+
+#usrMenu i {
+    color: var(--theme-iconPrimary);
 }
 
 table {
@@ -84,10 +89,6 @@ img {
 .contentInner {
 	margin: 5px;
     padding: 10px;
-}
-
-#usrMenu i {
-    color: var(--secondary-color);
 }
 
 .container {
@@ -718,7 +719,7 @@ ul > li {
 
 .server_details {
     border-top: 3px solid var(--border-color);
-    padding: 34px;
+    padding: 10px;
     background: var(--theme-color-primary);
     line-height: 15px;
     display: inline-block;

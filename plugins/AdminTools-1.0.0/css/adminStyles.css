@@ -8,7 +8,7 @@
 }
 
 .adminPanel table {
-	display: inline-grid;
+	/* display: inline-grid; */
 }
 
 .adminPanel .main-panel {

@@ -41,6 +41,7 @@
    <body>
       {include file='header.tpl'}
 	  {include file='navigation.tpl'}
+	  {include file='modalApp.tpl'}
       
       <div class="container">
          <div class="row siteContent">

@@ -29,18 +29,26 @@
         <div class="user_panel_balance_type">
             <span id="user_panel_balance_type">ЮНИТОВ</span>
         </div>
-        <button class="login" onclick="showPayments(); return false;">ПОПОЛНИТЬ</button>
+        <button class="login" onclick="addFunds(); return false;">ПОПОЛНИТЬ</button>
     </div>
 				
 	<div class="right-profile-menu">
 		<ul id="usrMenu">
 		</ul>
   </div>
+  <script>
+	async function addFunds(){
+		const template = await foxEngine.loadTemplate(foxEngine.elementsDir+'payment.tpl');
+		let data = foxEngine.replaceText(template, "");
+		foxEngine.modalApp.showModalApp(900, data);
+		//
+	}
+  </script>
   {/if}
 
  {if $user_group == 5}
     <div class="userActions text-center mt-3">
-        <a href="#" onclick="foxEngine.loadPage('auth', replaceData.contentBlock); return false;">
+        <a href="#" onclick="foxEngine.page.loadPage('auth', replaceData.contentBlock); return false;">
            <button type="submit" class="login"><i class="fa fa-sign-in"></i> Авторизация</button>
         </a>
     </div>

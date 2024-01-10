@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-01-09 16:47:15
+/* Smarty version 4.0.4, created on 2024-01-10 13:39:33
   from '/var/www/FoxCMS/templates/foxengine2/right-block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_659d4e63091191_90597508',
+  'unifunc' => 'content_659e73e5b03234_58133936',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:profileBlock.tpl' => 1,
   ),
 ),false)) {
-function content_659d4e63091191_90597508 (Smarty_Internal_Template $_smarty_tpl) {
+function content_659e73e5b03234_58133936 (Smarty_Internal_Template $_smarty_tpl) {
 if (!$_smarty_tpl->tpl_vars['isMobile']->value) {?>
 <div class="col-4 d-none d-md-block">
 <div class="row rightBlock">

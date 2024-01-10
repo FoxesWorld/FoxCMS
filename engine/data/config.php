@@ -1,5 +1,5 @@
 <?php 
-    /* [06.01.2024] */
+    /* [10.01.2024] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -18,7 +18,7 @@ $config = array(
 		"contactPhone" => "null",
 		"gameFiles" => "files/clients/",
 		"jreDir" => "files/runtime/",
-		"ServiceVersion" => "2.3.10"
+		"ServiceVersion" => "2.3.12"
 ),
 
 	"securitySetings" => array(
