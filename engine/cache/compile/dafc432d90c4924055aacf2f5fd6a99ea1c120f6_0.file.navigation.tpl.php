@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-01-10 13:39:33
+/* Smarty version 4.0.4, created on 2024-01-10 16:03:03
   from '/var/www/FoxCMS/templates/foxengine2/navigation.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_659e73e5afb0a1_18371135',
+  'unifunc' => 'content_659e9587497113_61761031',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'dafc432d90c4924055aacf2f5fd6a99ea1c120f6' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/navigation.tpl',
-      1 => 1704126797,
+      1 => 1704891558,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_659e73e5afb0a1_18371135 (Smarty_Internal_Template $_smarty_tpl) {
+function content_659e9587497113_61761031 (Smarty_Internal_Template $_smarty_tpl) {
 ?><nav class="navbar navbar-expand-lg bar">
 	<ul class="inline foxesNav">
 		<li>
@@ -43,8 +43,6 @@ function content_659e73e5afb0a1_18371135 (Smarty_Internal_Template $_smarty_tpl)
 							</a>
 						</li>
 					<?php }?>
-				<ul id="usrMenu">
-				</ul>
 			<?php }?></ul>
 			</div>
 		</li>

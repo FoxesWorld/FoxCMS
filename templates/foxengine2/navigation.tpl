@@ -20,8 +20,6 @@
 							</a>
 						</li>
 					{/if}
-				<ul id="usrMenu">
-				</ul>
 			{/if}</ul>
 			</div>
 		</li>

@@ -2,6 +2,7 @@ class Emojis {
     constructor(foxEngine) {
 		this.foxEngine = foxEngine;
 		this.emojis = [];
+		this.emojiCount = 0;
 		foxEngine.debugSend("Emoji init", "background: #c89f27; padding: 5px;");
 	}
 	
@@ -31,12 +32,15 @@ async parseEmojis() {
                                 code: code,
                                 imagePath: imagePath
                             });
+							this.emojiCount++;
                         }
+						
                     }
                 } else {
                     console.error('Invalid category structure:', emojiData[category]);
                 }
             }
+			foxEngine.debugSend("Emojis loaded "+this.emojiCount);
         } else {
             console.error('Invalid emoji data:', emojiData);
         }

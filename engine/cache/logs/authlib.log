@@ -666,3 +666,24 @@
 [10.01.2024] (12:22:15) SkinLib is being created with 8e8a4ed744a83b36a3ca12f5e05c75af UUID
 [10.01.2024] (12:40:36) SkinLib===
 [10.01.2024] (12:40:36) SkinLib is being created with dc12967efe1af7e817f62da01e6acbf0 UUID
+[10.01.2024] (14:46:35) 
+				{
+					"timestamp":"1704887195","profileId":"a298ae809269c24b5734490a75fb35f6","profileName":"Fixys","textures":
+					{
+						"SKIN": {
+							"url":"https://foxescraft.ru/uploads/users/Fixys/skin.png"
+						}
+					}
+				}
+[10.01.2024] (14:52:47) 
+				{
+					"timestamp":"1704887567","profileId":"436246fdf1d0f84b5b2ca7e0646aecc9","profileName":"AidenFox","textures":
+					{
+						"SKIN": {
+							"url":"https://foxescraft.ru/uploads/users/AidenFox/skin.png"
+						},
+						"CAPE": {
+							"url":"https://foxescraft.ru/uploads/users/AidenFox/cape.png"
+						}
+					}
+				}

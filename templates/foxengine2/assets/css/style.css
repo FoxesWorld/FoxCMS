@@ -395,13 +395,12 @@ section {
 }
 
 .userProfile {
-    width: 276px;
     background: var(--theme-content-pane);
     -webkit-box-shadow: 0 14px 43px rgba(79, 45, 31, .2);
     -moz-box-shadow: 0 14px 43px rgba(79, 45, 31, .2);
     box-shadow: 0 14px 43px rgba(79, 45, 31, .2);
-    border-bottom: 3px solid #ddd4bc;
-	padding: 5px;
+    border: 3px solid #ddd4bc;
+    padding: 5px;
 }
 
 .userProfile > .profileTop {

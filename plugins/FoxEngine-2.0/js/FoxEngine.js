@@ -6,6 +6,7 @@ import { Page } from './modules/Page.js';
 import { ModalApp } from './modules/ModalApp.js';
 import { Emojis } from './modules/Emojis.js';
 import { Utils } from './modules/Utils.js';
+import { Snow } from './modules/Snow.js';
 import './modules/Notify.js';
 import './modules/howler.core.js';
 
@@ -36,6 +37,8 @@ class FoxEngine {
 			this.page = new Page(this);
 			this.modalApp = new ModalApp(this);
 			this.emojis = new Emojis(this);
+			this.snow = new Snow(this);
+			this.snow.loadSnow();
             this.emojiArr = await this.emojis.parseEmojis();
 			
         } catch (error) {
@@ -44,6 +47,7 @@ class FoxEngine {
         }
     }
 	
+	//@Deprecated
 	initialPage(){
 		if(location.hash == '')
 			this.page.loadPage("welcome", '#content')
@@ -120,7 +124,7 @@ class FoxEngine {
 
     buttonFreeze(button, delay) {
         let oldValue = button.innerHTML;
-        let spinner = '<ul class="list-inline"> <li>Ожидайте</li> <li class="wait"><div class="spinner-border" role="status"> <span class="visually-hidden">Loading...</span></div></li>';
+        let spinner = '<div class="spinner-border" role="status"> <span class="visually-hidden">Loading...</span></div>';
         button.setAttribute('disabled', true);
         button.innerHTML = spinner;
 

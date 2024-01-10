@@ -35,8 +35,9 @@
 
 	  <script type="module" src="{$tplDir}/assets/js/App.js"></script>
 	  <script type="module" src="{$tplDir}/assets/js/metrics.js"></script>
-	  <script type="module" src="{$tplDir}/assets/js/snow.js"></script>
 	  <script type="module" src="{$tplDir}/assets/js/cookie.js"></script>
+	  
+
    </head>
    <body>
       {include file='header.tpl'}
@@ -52,7 +53,7 @@
             </div>
                {include file="right-block.tpl"}
          </div>
-		 <div class="moderator-button optionButt" onclick="switchSnow();">
+		 <div class="moderator-button optionButt" onclick="foxEngine.snow.switchSnow();">
 			<i class="fa fa-snowflake-o"></i>
 		</div>
       </div>

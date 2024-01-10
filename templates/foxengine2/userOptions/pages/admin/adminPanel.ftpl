@@ -10,7 +10,7 @@
 
 <pageContent>
 
-<script></script>
+<script type="module" src="/plugins/AdminTools-1.0.0/js/AdminPanel.js"></script>
 
 <div class="adminPanel">
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -35,7 +35,7 @@
 	const admOptions = ["settings","users", "modules", "groupAssoc", "servers"];
 	admOptions.forEach((option) => {
 		template = `<li class="nav-item admOpt-`+option+`">
-            <a class="nav-link" onclick="loadAdmOpt('`+option+`')">
+            <a class="nav-link" onclick="adminPanel.loadAdmOpt('`+option+`')">
               <i class="ti-palette menu-icon"></i>
               <span class="menu-title"><i class="fa fa-`+option+`"></i> `+option+`</span>
             </a>

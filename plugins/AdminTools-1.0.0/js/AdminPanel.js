@@ -1,32 +1,43 @@
-//WIP
 
-//function AdminPanel(login) {
+	import { Settings } from "./modules/Settings.js";
+	import { Users } from "./modules/Users.js";
+	import { Modules } from "./modules/Modules.js";
+	import { Servers } from "./modules/Servers.js";
+	import { GroupAssoc } from "./modules/GroupAssoc.js";
+
+class AdminPanel {	
+
+	constructor(){
+		this.selectoption = {thisAdmoption: "",thatAdmoption: ""}
+		this.settings = new Settings();
+		this.users = new Users();
+		this.modules = new Modules();
+		this.servers = new Servers();
+		this.groupAssoc = new GroupAssoc();
+	}
 	
-	let selectoption = {
-        thisAdmoption: "",
-        thatAdmoption: ""
-    };
 	
-	
-	function setAdmOption(option) {
+	setAdmOption(option) {
 		//FoxesInput.initialised = false;
         $(".admOpt-" + option).addClass("active");
-        if (option != selectoption.thisAdmoption) {
-            selectoption.thatAdmoption = selectoption.thisAdmoption;
-            $(".admOpt-" + selectoption.thatAdmoption).removeClass("active");
+        if (option != this.selectoption.thisAdmoption) {
+           this.selectoption.thatAdmoption = this.selectoption.thisAdmoption;
+            $(".admOpt-" +this.selectoption.thatAdmoption).removeClass("active");
         }
-        selectoption.thisAdmoption = option;
-		foxEngine.foxesInputHandler.formInit(500);
+       this.selectoption.thisAdmoption = option;
+		window.foxEngine.foxesInputHandler.formInit(500);
     };
 	
-	function loadAdmOpt(option){
-		eval("let "+option + " = new "+capitalizeFirstLetter(option)+"();"
-		+option+'.'+"parse"+capitalizeFirstLetter(option)+"();");
-		//eval(option+'()');
-		setAdmOption(option);
+	loadAdmOpt(option){
+		//eval("let "+option + " = new "+this.capitalizeFirstLetter(option)+"();"
+		eval("this."+option+".parse"+this.capitalizeFirstLetter(option)+"();");
+		this.setAdmOption(option);
 	};
 	
-	function capitalizeFirstLetter(string) {
+	capitalizeFirstLetter(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
-//}
+}
+
+	const adminPanel = new AdminPanel();
+	window.adminPanel = adminPanel;
