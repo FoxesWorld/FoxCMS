@@ -80,7 +80,7 @@ class FoxesInputHandler {
 		}
 		form.notify(answer.message, answer.type);
 
-				if(data.sound === true || data.sound === undefined){
+				if(data.playSound === true || data.playSound === undefined){
 					foxEngine.soundOnClick(answer.type);
 					foxEngine.buttonFreeze(submitButton, delay + 1000);
 				}
@@ -88,7 +88,7 @@ class FoxesInputHandler {
 				switch(answer.type){
 					case "success":
 						//$.growl.notice({ title: "Информация", message: response.message});
-						if(data.refresh === true || data.refresh === undefined){
+						if(data.refreshPage === true || data.refreshPage === undefined){
 							setTimeout(() => {
 								this.refreshPage();
 							}, delay);

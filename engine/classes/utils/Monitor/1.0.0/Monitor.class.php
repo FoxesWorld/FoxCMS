@@ -38,8 +38,8 @@ class foxesMon {
     public function foxMonOut() {
         $responseData = array(
             'servers' => $this->getServersData(),
-            'totalPlayersOnline' => $this->all['totalPlayersOnline'],
-            'totalPlayersMax' => $this->all['totalPlayersMax'],
+            'totalPlayersOnline' => @$this->all['totalPlayersOnline'],
+            'totalPlayersMax' => @$this->all['totalPlayersMax'],
             'percent' => $this->all['percent'],
             'absoluteRecord' => trim($this->record['all']), // Trim the value to remove extra spaces
             'todaysRecord' => $this->record['day']
@@ -100,7 +100,7 @@ class foxesMon {
     }
 
     private function dailyRecord() {
-        if ($this->all['totalPlayersOnline'] > $this->file['record_day']) {
+        if (@$this->all['totalPlayersOnline'] > $this->file['record_day']) {
             file_put_contents($this->monCfg['dayRecordPath'], $this->all['totalPlayersOnline']);
             $this->record['day'] = $this->all['totalPlayersOnline'];
         } else {
@@ -110,7 +110,7 @@ class foxesMon {
     }
 
     private function absoluteRecord() {
-        if ($this->all['totalPlayersOnline'] > $this->file['record']) {
+        if (@$this->all['totalPlayersOnline'] > $this->file['record']) {
             file::efile($this->monCfg['absoluteRecordPath'], $this->all['totalPlayersOnline']);
             $this->record['all'] = $this->all['totalPlayersOnline'];
         } else {

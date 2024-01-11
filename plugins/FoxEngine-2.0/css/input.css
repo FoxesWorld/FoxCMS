@@ -64,10 +64,10 @@ useroption {
 	font-family: montserrat, sans-serif;
 	font-weight: 600;
 	color: #2b2e38;
-	left: 18px;
-	top: 24px;
+	left: 15px;
+	top: 10px;
 	font-size: 13px;
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 }
 
 button.login {

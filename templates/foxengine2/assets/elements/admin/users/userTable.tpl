@@ -6,7 +6,7 @@
             <th scope="col">Почта</th>
             <!-- <th scope="col">Дата посещения</th> -->
             <th scope="col">
-                <input type="text" onKeyUp="users.parseUsers($(this).val());" class="input" placeholder="Поиск пользователя" required />
+                <input type="text" onKeyUp="adminPanel.users.parseUsers($(this).val());" class="input" placeholder="Поиск пользователя" required />
             </th>
         </tr>
     </thead>
