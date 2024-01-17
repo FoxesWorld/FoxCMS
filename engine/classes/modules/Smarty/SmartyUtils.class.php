@@ -23,7 +23,13 @@
 				$replaceArray = array_merge($config['frontendSettings'], init::$usrArray);
 				foreach($replaceArray as $key => $value){
 					$replaceFields[] = '"'.$key.'"';
-					$jsData[] = '"'.$key.'": "'.$value.'"';	
+					$data;
+					if(is_array(json_decode($value))){
+						$data = $value;
+					} else {
+						$data = '"'.$value.'"';
+					}
+					$jsData[] = '"'.$key.'":' .$data;	
 				}
 				for($i=0; $i<count($userPermissions); $i++){
 					$jsData[] = $userPermissions[$i];

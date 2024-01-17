@@ -73,10 +73,7 @@ class User {
 	async parseBadges(user) {
         const badgeTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'badge.tpl');
         try {
-            let parsedJson = await foxEngine.sendPostAndGetAnswer({
-                user_doaction: 'GetBadges',
-                userDisplay: user
-            }, "JSON");
+            let parsedJson = await this.getBadgesArray(user);
 
             if (parsedJson.length > 0) {
                 for (let k = 0; k < parsedJson.length; k++) {
@@ -107,6 +104,15 @@ class User {
             console.error('Error parsing badges:', error);
         }
     };
+	
+	async getBadgesArray(user){
+		let badgesArray = await foxEngine.sendPostAndGetAnswer({
+			user_doaction: 'GetBadges',
+            userDisplay: user
+        }, "JSON");
+		
+		return badgesArray;
+	}
 
 	async showUserProfile(userDisplay) {
 

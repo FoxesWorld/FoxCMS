@@ -28,7 +28,7 @@ class Page {
             }
 
             if (page !== this.selectPage.thisPage) {
-                await this.loadData(foxEngine.replaceText(response.body.innerHTML, page), block);
+                await this.loadData(foxEngine.entryReplacer.replaceText(response.body.innerHTML, page), block);
                 this.setPage(page);
                 location.hash = '#page/' + page;
             }

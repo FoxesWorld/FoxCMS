@@ -31,7 +31,7 @@
 			}
 			
 			public static function getUserBadges($db, $user){
-				$query = "SELECT * FROM `userBadges` WHERE userLogin = '".$user."'";
+				$query = "SELECT * FROM `users` WHERE login = '".$user."'";
 				$badges = $db->getRow($query);
 				switch($badges){
 					case false:

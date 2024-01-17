@@ -73,6 +73,7 @@ useroption {
 button.login {
 	width:100%;
 	color: white;
+	margin: 5px 0px;
     text-decoration: none;
     background: var(--button-primary);
     border: 2px solid var(--border-color);

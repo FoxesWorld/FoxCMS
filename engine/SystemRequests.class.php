@@ -38,6 +38,12 @@
 							$startUpSound->generateAudio();
 						break;
 						
+						case "test":
+								init::classUtil('GiveBadge', "1.0.0");
+								$GiveBadge = new GiveBadge($this->db, "AidenFox");
+								$GiveBadge->giveBadge("earlyUser");
+						break;
+						
 						case "selectUsers":
 							$SelectUsers = new SelectUsers($this->db, "users");
 							die($SelectUsers->selectUsersBy(@RequestHandler::$REQUEST['selectKey'], "'".@RequestHandler::$REQUEST['selectValue']."'"));

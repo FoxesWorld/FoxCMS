@@ -1,5 +1,5 @@
 <?php 
-    /* [11.01.2024] */
+    /* [17.01.2024] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -18,7 +18,7 @@ $config = array(
 		"contactPhone" => "null",
 		"gameFiles" => "files/clients/",
 		"jreDir" => "files/runtime/",
-		"ServiceVersion" => "2.3.12"
+		"ServiceVersion" => "2.4.12"
 ),
 
 	"securitySetings" => array(
@@ -44,7 +44,7 @@ $config = array(
 		"webserviceName" => "FoxEngine",
 		"userOptions" => "userOptions",
 		"OptionReplaceValues" => "{siteKey}->cfgVal(securitySetings|reCaptchaWebsite),{discordLink}->cfgVal(other|discordLink),{vkLink}->cfgVal(other|vkLink),{TPL}->cfgVal(siteSettings|siteTpl)",
-		"userFieldsArray" => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,colorScheme,groupName,units",
+		"userFieldsArray" => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,colorScheme,groupName,units,badges",
 		"canEditGroup" => "1,4"
 ));
 

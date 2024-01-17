@@ -674,12 +674,13 @@ ul > li {
 
 .server_information .icon {
     margin-left: 42px;
-    margin-right: 15px;
-    margin-top: -17px;
+    margin: 0px 20px;
+    margin-top: -25px;
     padding: 4px;
-    float: left;
-    border-radius: 120px;
-    display: block !important;
+    /* float: left; */
+    position: absolute;
+    border-radius: 70px;
+    display: block;
     border: 3px solid var(--theme-color-secondary);
     -webkit-box-shadow: 0 6px 21px var(--link-color-primary);
     -moz-box-shadow: 0 6px 21px var(--link-color-primary);
@@ -712,8 +713,10 @@ ul > li {
 }
 
 .server_information .description {
-    display: inline-block;
-    width: 504px;
+    /* display: table-cell; */
+    width: 100%;
+    display: flow;
+    float: left;
 }
 
 .server_details {
@@ -810,7 +813,7 @@ ul > li {
     width: 64px;
     height: 64px;
     float: left;
-    margin: 20px;
+    margin: 5px 10px;
     display: flex;
     align-items: center;
     border-radius: .5rem;
@@ -827,7 +830,7 @@ ul > li {
 }
 
 .mods .mod .mod_details {
-    display: contents;
+    display: flex;
 }
 
 .mods .mod .mod_description {

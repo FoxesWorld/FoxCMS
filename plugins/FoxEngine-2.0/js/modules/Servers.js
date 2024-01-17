@@ -97,6 +97,7 @@ class Servers {
             console.error('Error while loading server page:', error);
         }
 		location.hash = 'server/' + serverName;
+		foxEngine.page.setPage(serverName);
     }
 	
 	async getServerDetails(serverName) {

@@ -1,5 +1,10 @@
+import { JsonArrConfig } from './JsonArrConfig.js';
+
 class Users {
-    constructor() {}
+    constructor() {
+		this.jsonArrConfig = new JsonArrConfig();
+		this.userArr = [];
+	}
 
     async parseUsers(input = '*') {
         try {
@@ -18,12 +23,20 @@ class Users {
                     let login = singleUser[j].login;
                     let email = singleUser[j].email;
                     let lastdate = singleUser[j].last_date;
+					let badges = singleUser[j].badges;
+					
+					this.userArr[login] = {
+                        email,
+                        lastdate,
+                        badges
+                    };
 
                     let userHtml = await foxEngine.replaceTextInTemplate(userTpl, {
                         index: j,
                         login,
                         email,
-                        lastdate
+                        lastdate,
+						badges
                     });
                     $("#usersList").append(userHtml);
 
@@ -64,6 +77,12 @@ class Users {
                             $("#dialog").dialog("close");
                         }
                     });
+					console.log(this.userArr[login]);
+					        setTimeout(() => {
+							$('#loadUserBadges').click(() => {
+									this.loadBadgesConfig(badges, login);
+								});
+							}, 1000);
                 }
             } else {
                 const userHtml = `<div class="noUsers"><h1>No Users like <span>${input}</span></h1></div>`;
@@ -77,6 +96,18 @@ class Users {
     userTemplate(template, data) {
         return template.replace(/\${(.*?)}/g, (match, p1) => data[p1.trim()]);
     }
+	
+	getUserData(login){
+		return this.userArr[login];
+	}
+	
+	async loadBadgesConfig(button, data, user) {
+		if(data !== "") {
+			this.jsonArrConfig.openModsInfoWindow(data, user);
+		} else {
+			button.notify(user + ' has no badges!', "warn");
+		}
+	}
 
     async addContent() {
         if (!$("#adminContent > table").length) {

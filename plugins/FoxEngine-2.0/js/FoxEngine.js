@@ -6,6 +6,7 @@ import { Page } from './modules/Page.js';
 import { ModalApp } from './modules/ModalApp.js';
 import { Emojis } from './modules/Emojis.js';
 import { Utils } from './modules/Utils.js';
+import { EntryReplacer } from './modules/EntryReplacer.js';
 import { Snow } from './modules/Snow.js';
 import './modules/Notify.js';
 import './modules/howler.core.js';
@@ -40,6 +41,7 @@ class FoxEngine {
 			this.snow = new Snow(this);
 			this.snow.loadSnow();
             this.emojiArr = await this.emojis.parseEmojis();
+			this.entryReplacer = new EntryReplacer(this);
 			
         } catch (error) {
             console.error('Error during initialization:', error);

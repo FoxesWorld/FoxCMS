@@ -10,7 +10,7 @@
 		function __construct($db, $user){
 			$this->db = $db;
 			$this->user = $user;
-			$this->checkUser($user);
+			//$this->checkUser($user);
 			$this->userBadges = json_decode(initHelper::getUserBadges($db, $this->user), true);
 			$this->badgesNames = $this->getBadgesNames($this->userBadges);
 		}
@@ -21,7 +21,7 @@
 				$badgeArray = array(array("acquiredDate" => time(), "badgeName" => $badge));
 				if(!in_array($badge, $this->badgesNames)) {
 					$badgesArray = @array_merge($this->userBadges, $badgeArray) ?? $badgeArray;
-					$this->db->run("UPDATE `userBadges` SET `badges`='".$this->buildUserBadges($badgesArray)."' WHERE userLogin = '".$this->user."'");
+					$this->db->run("UPDATE `users` SET `badges`='".$this->buildUserBadges($badgesArray)."' WHERE login = '".$this->user."'");
 				}
 			}
 		}

@@ -1,6 +1,9 @@
+import { JsonArrConfig } from './JsonArrConfig.js';
+
 class Servers {
     constructor() {
         this.servers = [];
+		this.jsonArrConfig = new JsonArrConfig({admPanel: "editServer"});
         this.dialogOptions = {
             autoOpen: false,
             position: {
@@ -10,46 +13,45 @@ class Servers {
             },
             modal: true,
             height: 'auto',
-            width: 600,
+            width: '900',
             resizable: false,
-            open: function(event, ui) {
+            open: (event, ui) => {
                 // $(".ui-widget-overlay").remove();
                 // $(".ui-dialog-titlebar").remove();
             }
         };
-		 this.editFields = [
-		 'serverVersion',
-		 'mainClass',
-		 'forgeVersion',
-		 'client',
-		 'host',
-		 'port',
-		 'jreVersion',
-		 'mcpVersion',
-		 'forgeGroup',
-		 'ignoreDirs',
-		 'modsInfo',
-		 'serverImage',
-		 'serverDescription'];
+        this.editFields = [
+            'serverVersion',
+            'mainClass',
+            'forgeVersion',
+            'client',
+            'host',
+            'port',
+            'jreVersion',
+            'mcpVersion',
+            'forgeGroup',
+            'ignoreDirs',
+            'serverImage',
+            'serverDescription'
+        ];
     }
 
-	async getServerData(server) {
-		let query = {
-			sysRequest: "parseServers"
-		};
+    async getServerData(server) {
+        const query = {
+            sysRequest: "parseServers"
+        };
 
-		if (server && server.trim() !== "") {
-			query.server = "serverName = '" + server + "'";
-		}
+        if (server && server.trim() !== "") {
+            query.server = `serverName = '${server}'`;
+        }
 
-		return await foxEngine.sendPostAndGetAnswer(query, "JSON");
-	}
-
+        return await foxEngine.sendPostAndGetAnswer(query, "JSON");
+    }
 
     async parseServers() {
         try {
             await this.addContent();
-            let servers = await this.getServerData("");
+            const servers = await this.getServerData("");
 
             if (servers.length > 0) {
                 await this.displayServers(servers);
@@ -65,11 +67,11 @@ class Servers {
     async displayServers(servers) {
         const serversList = $("#serversList");
         serversList.html("");
-        let serverRowTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/servers/serverRow.tpl');
+        const serverRowTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/servers/serverRow.tpl');
 
         for (let index = 0; index < servers.length; index++) {
             const server = servers[index];
-            let serverHtml = await foxEngine.replaceTextInTemplate(serverRowTpl, {
+            const serverHtml = await foxEngine.replaceTextInTemplate(serverRowTpl, {
                 index: index + 1,
                 serverName: server.serverName,
                 serverVersion: server.serverVersion,
@@ -85,7 +87,7 @@ class Servers {
         adminContent.html(" ");
 
         if (!adminContent.find("> table").length) {
-            let tableHeader = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/servers/serversTable.tpl');
+            const tableHeader = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/servers/serversTable.tpl');
             adminContent.html(tableHeader);
         }
     }
@@ -95,7 +97,7 @@ async loadServerOptions(serverName) {
         const responses = await this.getServerData(serverName);
         this.createDialogIfNeeded();
 
-        let formHtml = '<form id="serverOptionsForm" method="POST" action="/" autocomplete="false"><h3>Настройки ' + serverName + '</h3>';
+        let formHtml = `<form id="serverOptionsForm" method="POST" action="/" autocomplete="false"><h3>Настройки ${serverName}</h3>`;
 
         for (const response of responses) {
             for (const key in response) {
@@ -110,14 +112,20 @@ async loadServerOptions(serverName) {
             <input type="hidden" name="admPanel" value="editServer" />
             <input name="refreshPage" type="hidden" value="false" />
             <input name="playSound" type="hidden" value="false" />
+            <button type="button" id="viewModsInfoBtn" class="login">View Mods Info</button>
         </form>`;
 
-        this.loadFormIntoDialog(formHtml);
+        this.jsonArrConfig.loadFormIntoDialog(formHtml);
+        setTimeout(() => {
+            $('#viewModsInfoBtn').click(() => {
+                this.jsonArrConfig.openModsInfoWindow(responses[0].modsInfo, responses[0].serverName);
+            });
+        }, 1000);
+
     } catch (error) {
         console.error('An error occurred:', error.message);
     }
 }
-
 
     createDialogIfNeeded() {
         if (!$("#dialog").length) {
@@ -125,7 +133,7 @@ async loadServerOptions(serverName) {
         }
     }
 
-    async createInputBlock(key, value) {
+    createInputBlock(key, value) {
         const isTextarea = value.length > 60;
         const inputBlockStyle = isTextarea ? `style="height: ${this.calculateTextareaHeight(value)}px;"` : '';
 
@@ -146,11 +154,6 @@ async loadServerOptions(serverName) {
         return '<button type="submit" class="login">Apply</button>';
     }
 
-    loadFormIntoDialog(formHtml) {
-        foxEngine.page.loadData(formHtml, '#dialogContent');
-        $("#dialog").dialog(this.dialogOptions);
-        $("#dialog").dialog('open');
-    }
 }
 
 export { Servers };
