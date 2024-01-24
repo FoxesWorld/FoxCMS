@@ -1,5 +1,6 @@
 .logoWrapper {
     display: table;
+	margin: 1vh 1vw;
 }
 
 .logoWrapper .logo {
@@ -11,7 +12,7 @@
 }
 
 .logoWrapper .logo h1 {
-    font-size: 28px;
+    font-size: 2.5vh;
     margin: 0;
     font-weight: 700;
     font-family: 'FSElliotPro-Heavy';
@@ -22,7 +23,8 @@
     opacity: 0;
     padding: 0;
     margin: 0;
-    max-height: 64px;
+    height: 85px;
+    max-height: 5vh;
 }
 
 .logoWrapper .titleWrapper {
@@ -46,9 +48,7 @@
 
 .logo .status {
     font-family: 'Minecraft';
-    font-size: 12pt;
-    margin: -10px 5px;
-    float: right;
+    font-size: 0.9vh;
     color: #a54e39;
     text-transform: uppercase;
     position: absolute;

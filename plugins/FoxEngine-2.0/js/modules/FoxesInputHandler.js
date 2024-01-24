@@ -1,8 +1,8 @@
-class FoxesInputHandler {
+export class FoxesInputHandler {
     constructor(foxEngine) {
-		this.foxEngine = foxEngine;
+        this.foxEngine = foxEngine;
         this.forms = [];
-		foxEngine.debugSend("FoxesInputHandler init", "background: #c89f27; padding: 5px;");
+        //foxEngine.debugSend("FoxesInputHandler init", "background: #c89f27; padding: 5px;");
     }
 
     formInit(awaitms) {
@@ -65,42 +65,42 @@ class FoxesInputHandler {
         return inputObjArr;
     }
 
-	async submitForm(data, form, submitButton) {
-		let answer = 'notSent';
-		let delay = this.userDelay(foxEngine.replaceData.user_group);
-		
-		switch(form.context.method) {
-			case 'post':
-				answer = await this.foxEngine.sendPostAndGetAnswer(data, "JSON");
-				break;
+    async submitForm(data, form, submitButton) {
+        let answer = 'notSent';
+        let delay = this.userDelay(foxEngine.replaceData.user_group);
 
-			case 'get':
-				//answer = this.foxEngine.request.sendGet(data); WIP
-				break;
-		}
-		form.notify(answer.message, answer.type);
+        switch (form.context.method) {
+            case 'post':
+                answer = await this.foxEngine.sendPostAndGetAnswer(data, "JSON");
+                break;
 
-				if(data.playSound === true || data.playSound === undefined){
-					foxEngine.soundOnClick(answer.type);
-					foxEngine.buttonFreeze(submitButton, delay + 1000);
-				}
+            case 'get':
+                //answer = this.foxEngine.request.sendGet(data); WIP
+                break;
+        }
+        form.notify(answer.message, answer.type);
 
-				switch(answer.type){
-					case "success":
-						//$.growl.notice({ title: "Информация", message: response.message});
-						if(data.refreshPage === true || data.refreshPage === undefined){
-							setTimeout(() => {
-								this.refreshPage();
-							}, delay);
-						}
-						
-					break;
-					
-					case "error":
-						//$.growl.error({ title: "Информация", message: response.message});
-					break;
-				}
-	};
+        if (data.playSound === true || data.playSound === undefined) {
+            foxEngine.soundOnClick(answer.type);
+            foxEngine.buttonFreeze(submitButton, delay + 1000);
+        }
+
+        switch (answer.type) {
+            case "success":
+                //$.growl.notice({ title: "Информация", message: response.message});
+                if (data.refreshPage === true || data.refreshPage === undefined) {
+                    setTimeout(() => {
+                        this.refreshPage();
+                    }, delay);
+                }
+
+                break;
+
+            case "error":
+                //$.growl.error({ title: "Информация", message: response.message});
+                break;
+        }
+    };
 
     userDelay(userGroup) {
         let delay = 0;
@@ -122,7 +122,7 @@ class FoxesInputHandler {
     }
 
     refreshPage() {
-		console.log("Updatig");
+        console.log("Updatig");
         let scrollV, scrollH, loc = window.location;
         if ("pushState" in history)
             history.pushState("", document.title, loc.pathname + loc.search);
@@ -135,5 +135,3 @@ class FoxesInputHandler {
         location.reload();
     }
 }
-
-export { FoxesInputHandler };

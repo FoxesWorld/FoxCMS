@@ -1,26 +1,24 @@
 <div class="server_information">
-         <div>
-            <div class="icon">
-               <img src="{serverImage}" atl="{serverImage}">
-            </div>
-            <div class="label">
-               <div class="title">
-                  <h1>Сервер {serverName} {serverVersion}</h1>
-				  <!-- 
-                  <a href="/about">
-                  <i class="fa fa-arrow-left"></i><b>
-				  Выбрать сервер</b>
-                  </a> -->
-               </div>
-               <div class="description">
-                  {serverDescription}
-               </div>
-            </div>
-         </div>
-      </div>
-
+	<div class="flex-container">
+		<div class="card">
+			<div class="card-body">
+				<h1 class="card-title">
+					<img src="{serverImage}" alt="{serverImage}" class="server-image" />
+					Сервер {serverName} {serverVersion}
+				</h1>
+				<p class="card-text">
+					{serverDescription}
+				</p>
+				<!--
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a>
+				  -->
+			</div>
+		</div>
+	</div>
+</div>
 
 <div class="mods">
-<h3>Список основных модификаций сервера:</h3>
+	<h3>Список основных модификаций сервера:</h3>
 	{mods}
 </div>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-01-10 14:28:47
+/* Smarty version 4.0.4, created on 2024-01-24 19:04:38
   from '/var/www/FoxCMS/templates/foxengine2/footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_659e7f6fe23b54_24790498',
+  'unifunc' => 'content_65b135169f3118_38471245',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '21164cd38f4b1e20c2b131e7201342b1d7510eaf' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/footer.tpl',
-      1 => 1695850760,
+      1 => 1705991857,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_659e7f6fe23b54_24790498 (Smarty_Internal_Template $_smarty_tpl) {
+function content_65b135169f3118_38471245 (Smarty_Internal_Template $_smarty_tpl) {
 ?><footer class="bar">
    <div class="container footer--flex">
       <div class="footer-copyright">
@@ -30,7 +30,7 @@ function content_659e7f6fe23b54_24790498 (Smarty_Internal_Template $_smarty_tpl)
 </b>
 		 <span>Powered by <?php echo $_smarty_tpl->tpl_vars['webserviceName']->value;?>
  v.<?php echo $_smarty_tpl->tpl_vars['ServiceVersion']->value;?>
-<img /></span>
+<img class="img-fluid" uk-img /></span>
       </div>
 
       <ul class="footer-end">

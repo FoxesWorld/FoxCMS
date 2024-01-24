@@ -29,6 +29,7 @@ function skin3D(path, elem) {
 	this.camera;
 	this.scene;
 	this.rendered;
+	this.loader = new THREE.TextureLoader();
  
 	//Init
 	this.init = function() {
@@ -994,7 +995,7 @@ function skin3D(path, elem) {
  
 	//createBlock
 	this.createBlock = function(pathToBlockTexture) {
-		this.blockTexture = new THREE.ImageUtils.loadTexture(pathToBlockTexture);
+		this.blockTexture = loader.load(pathToBlockTexture);
 		this.blockTexture.magFilter = THREE.NearestFilter;
 		this.blockTexture.minFilter = THREE.NearestMipMapNearestFilter;
  
@@ -1039,7 +1040,7 @@ function skin3D(path, elem) {
  
 	//createCloak
 	this.createCloak  = function(cloakPath) {
-		this.cloakTexture = new THREE.ImageUtils.loadTexture(cloakPath);
+		this.cloakTexture = loader.load(cloakPath);
 		this.cloakTexture.magFilter = THREE.NearestFilter;
 		this.cloakTexture.minFilter = THREE.NearestMipMapNearestFilter;
 		var cloak = new THREE.BoxGeometry(10, 16, 1, 0, 0, 0);

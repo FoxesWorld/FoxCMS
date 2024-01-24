@@ -1,10 +1,10 @@
-class Utils {
+export class Utils {
     constructor(foxEngine) {
-		this.foxEngine = foxEngine;
-		this.monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-	}
-	
-	convertUnixTime(unix) {
+        this.foxEngine = foxEngine;
+        this.monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+    }
+
+    convertUnixTime(unix) {
         let a = new Date(unix * 1000),
             year = a.getFullYear(),
             month = this.monthNames[a.getMonth()],
@@ -15,8 +15,8 @@ class Utils {
 
         return `${month} ${date}, ${year}, ${hour}:${min}:${sec}`;
     }
-	
-	textAnimate(target) {
+
+    textAnimate(target) {
         let animation = anime.timeline({
             loop: false
         }).add({
@@ -30,19 +30,18 @@ class Utils {
         });
         return true;
     }
-	
-	randomNumber(min, max) {
-		const r = Math.random() * (max - min) + min + 1
-		return Math.floor(r)
-	}
-	
-	getData(data, tag) {
+
+    randomNumber(min, max) {
+        const r = Math.random() * (max - min) + min + 1
+        return Math.floor(r)
+    }
+
+    getData(data, tag) {
         return data.getElementsByTagName(tag)[0];
     }
-	
-	splitWrapLetters(query, letterClass) {
+
+    splitWrapLetters(query, letterClass) {
         let textWrapper = document.querySelector(query);
         textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='" + letterClass + "'>$&</span>");
     }
 }
-	export { Utils };

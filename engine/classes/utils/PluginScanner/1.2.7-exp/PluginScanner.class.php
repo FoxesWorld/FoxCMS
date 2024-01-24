@@ -11,7 +11,7 @@
 		
 		function __construct($pluginsDir) {
 			$this->pluginsDir = $pluginsDir;
-			$this->pluginsToIncludeArray = json_decode(file::efile(TEMPLATE_DIR.'PLUGINS.json')['content']);
+			$this->pluginsToIncludeArray = json_decode(file::efile(CURRENT_TEMPLATE.'PLUGINS.json')['content']);
 			self::$pluginsArray = $this->getUserPluginDirectories($pluginsDir);
 			self::$pluginFiles = $this->getPluginFiles(self::$pluginsArray, $pluginsDir);
 			$this->includeFiles(self::$pluginFiles);

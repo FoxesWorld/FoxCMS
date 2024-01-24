@@ -16,8 +16,8 @@
 		</div>
     </div>
 
-		<div class="button pageLink-{serverName}" onclick="foxEngine.servers.loadServerPage('{serverName}')" title="Перейти на страницу с описанием серверов {serverName}">
-			 <i class="fa fa-info-circle" aria-hidden="true"></i>
-		</div>
+		<a class="button pageLink-{serverName}" onclick="foxEngine.servers.loadServerPage('{serverName}')" title="Перейти на страницу с описанием серверов {serverName}">
+			 <i class="fa fa-info-circle"></i>
+		</a>
 	
 </div>

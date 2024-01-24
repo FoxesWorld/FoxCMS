@@ -48,8 +48,8 @@ session_start();
 			global $config;
 			$this->debug = $debug;
 			init::classUtil('MobileDetect', "1.0.0");
-			define('TEMPLATE_DIR',ROOT_DIR.'/templates/'.$config['siteSettings']['siteTpl'].'/');
-			define('RT_DIR', TEMPLATE_DIR.'randTexts/');
+			define('CURRENT_TEMPLATE',ROOT_DIR.'/templates/'.$config['siteSettings']['siteTpl'].'/');
+			define('RT_DIR', CURRENT_TEMPLATE.'randTexts/');
 			self::libFilesInclude(SYSLIB_DIR, $this->debug); //Require classes/Syslib
 			self::requireNestedClasses(basename(__FILE__), __DIR__); //Requiring nested classes from self directory
 			$this->db = new db($config['database']['dbUser'], $config['database']['dbPass'], $config['database']['dbName'], $config['database']['dbHost']);

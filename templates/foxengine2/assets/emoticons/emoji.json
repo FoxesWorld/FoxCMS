@@ -109,6 +109,10 @@
             {
                 "code": "1F514",
                 "name": "pray"
+            },
+            {
+                "code": "1F515",
+                "name": "serum"
             }
         ]
     },

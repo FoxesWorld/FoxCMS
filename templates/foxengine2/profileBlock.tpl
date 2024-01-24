@@ -1,7 +1,7 @@
         <div class="userProfile">
 <ul class="profileTop">
     <li class="profilePhoto">
-        <img src="{$profilePhoto}" alt="Profile Photo">
+        <img src="{$profilePhoto}" />
     </li>
     
     <li class="user_panel_nickname">
@@ -9,16 +9,7 @@
         <a id="sidepanel_nickname" onclick="foxEngine.user.showProfilePopup('{$login}')" class="shortened">{$login}</a>
     </li>
     
-    {if $user_group != 5}
-    <li class="logout">
-        <form method="POST" id="logout" action="/">
-            <button type="submit" class="logout btn btn-danger">
-                <i class="fa fa-sign-out"></i>
-            </button>
-            <input name="userAction" class="input" type="hidden" value="logout" />
-        </form>
-    </li>
-    {/if}
+
 </ul>
 
 {if $user_group != 5}
@@ -39,18 +30,10 @@
   <script>
 	async function addFunds(){
 		const template = await foxEngine.loadTemplate(foxEngine.elementsDir+'payment.tpl');
-		let data = foxEngine.replaceText(template, "");
+		let data = foxEngine.entryReplacer.replaceText(template, "");
 		foxEngine.modalApp.showModalApp(900, data);
 		//
 	}
   </script>
-  {/if}
-
- {if $user_group == 5}
-    <div class="userActions text-center mt-3">
-        <a href="#" onclick="foxEngine.page.loadPage('auth', replaceData.contentBlock); return false;">
-           <button type="submit" class="login"><i class="fa fa-sign-in"></i> Авторизация</button>
-        </a>
-    </div>
   {/if}
  </div>

@@ -1,7 +1,10 @@
-class Page {
+export class Page {
     constructor(foxEngine) {
         this.foxEngine = foxEngine;
-        this.selectPage = { thisPage: "", thatPage: "" };
+        this.selectPage = {
+            thisPage: "",
+            thatPage: ""
+        };
     }
 
     async loadPage(page, block) {
@@ -9,9 +12,14 @@ class Page {
             return;
         }
 
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
 
-        const response = await this.foxEngine.sendPostAndGetAnswer({ "getOption": page }, "HTML");
+        const response = await this.foxEngine.sendPostAndGetAnswer({
+            "getOption": page
+        }, "HTML");
 
         const option = this.foxEngine.utils.getData(response, 'useroption');
         const content = this.foxEngine.utils.getData(response, 'pageContent');
@@ -27,15 +35,19 @@ class Page {
                 }, 500);
             }
 
-            if (page !== this.selectPage.thisPage) {
-                await this.loadData(foxEngine.entryReplacer.replaceText(response.body.innerHTML, page), block);
+            // Check if foxEngine.entryReplacer is defined
+            if (this.foxEngine.entryReplacer) {
+                await this.loadData(this.foxEngine.entryReplacer.replaceText(response.body.innerHTML), block);
                 this.setPage(page);
                 location.hash = '#page/' + page;
+            } else {
+                console.error("Invalid or undefined foxEngine.entryReplacer.replaceText");
             }
         }
 
         $(response).find('useroption').remove();
     }
+
 
     async loadData(data, block) {
         $(block).fadeOut(500);
@@ -62,5 +74,3 @@ class Page {
         this.selectPage.thisPage = page;
     }
 }
-
-export { Page };

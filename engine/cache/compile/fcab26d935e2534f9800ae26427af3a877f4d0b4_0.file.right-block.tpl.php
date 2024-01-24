@@ -1,50 +1,52 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-01-10 14:28:47
+/* Smarty version 4.0.4, created on 2024-01-24 19:04:38
   from '/var/www/FoxCMS/templates/foxengine2/right-block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_659e7f6fe19f48_17686228',
+  'unifunc' => 'content_65b135169ef261_58367742',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fcab26d935e2534f9800ae26427af3a877f4d0b4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/right-block.tpl',
-      1 => 1704807810,
+      1 => 1706022018,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
-    'file:profileBlock.tpl' => 1,
   ),
 ),false)) {
-function content_659e7f6fe19f48_17686228 (Smarty_Internal_Template $_smarty_tpl) {
+function content_65b135169ef261_58367742 (Smarty_Internal_Template $_smarty_tpl) {
 if (!$_smarty_tpl->tpl_vars['isMobile']->value) {?>
-<div class="col-4 d-none d-md-block">
-<div class="row rightBlock">
-<div class="card">
-    <div id="userBlock">
-		<?php $_smarty_tpl->_subTemplateRender('file:profileBlock.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-?>
-    </div>
+<div class="col-4 d-none d-lg-block d-sm-none">
+	<div class="row rightBlock">
+		<div class="card">
+			<div id="userBlock">
 
-  	
-      	<div class="card text-white  mb-3">
-      	  <div class="cardTitle">Мониторинг</div>
-			<div id="servers">
 			</div>
-      	</div>
-   		
-      	<div class="card text-white  mb-3">
-      	  <div class="cardTitle">Последняя регистрация</div>
-			<div id="lastUser">
-			
+
+			<div class="card text-white mb-3">
+				<div class="cardTitle">
+					<img class="img-fluid" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
+/assets/icons/monitor.png" uk-img />
+					Мониторинг
+				</div>
+				<div id="servers"></div>
 			</div>
-      	</div>
-		<!--
+
+			<div class="card text-white mb-3">
+				 <div class="cardTitle">
+					<img class="img-fluid" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
+/assets/icons/lastuser.png" uk-img />
+					Последняя регистрация
+				</div>
+				<div id="lastUser"></div>
+			</div>
+			<!--
 			<div class="widgets">
 
 				<a href="https://discord.com/invite/mxV4uYq" title="Перейти на сервер Discord">
@@ -52,13 +54,13 @@ if (!$_smarty_tpl->tpl_vars['isMobile']->value) {?>
 						<img src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/icons/svg/discord.svg" alt="Discord">
 						<div class="social-status" title="Текущий онлайн сервера">
-							<i class="fa fa-circle" aria-hidden="true"></i> 2217            </div>
+							<i class="fa fa-circle"></i> 2217</div>
 					</div>
 				</a>
 			</div>
 		-->
-</div>
-</div>
+		</div>
+	</div>
 </div>
 <?php }
 }

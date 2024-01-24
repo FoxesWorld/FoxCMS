@@ -7,7 +7,7 @@
             <td>
                 <div class="profile-title">
                     <ul>
-                        <li><h1><a href="#" onclick="foxEngine.user.showUserProfile('{login}'); return false;">{login}</a></h1></li>
+                        <li><h1><a href="#" class="pageLink-{login}" onclick="foxEngine.user.showUserProfile('{login}'); return false;">{login}</a></h1></li>
                         <li><span>{realname}</span></li>
                         <li><span class="groupStatus-4">{regDate}</span></li>
                     </ul>

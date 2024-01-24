@@ -24,7 +24,7 @@
 					switch(RequestHandler::$REQUEST[$this->requestHeader]) {
 						
 						case "tplScan":
-							$inDirScanner = new inDirScanner(TEMPLATE_DIR, @RequestHandler::$REQUEST['path'], "*");
+							$inDirScanner = new inDirScanner(CURRENT_TEMPLATE, @RequestHandler::$REQUEST['path'], "*");
 							die($inDirScanner->getFiles());
 						break;
 

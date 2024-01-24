@@ -1,6 +1,4 @@
-// request.js
-
-class Request {
+export class Request {
     constructor(path, args, timeDelay) {
         this.path = path;
         this.args = args; 
@@ -94,5 +92,3 @@ class Request {
         return xmlhttp;
     }
 }
-
-export { Request };

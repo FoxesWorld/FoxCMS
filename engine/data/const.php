@@ -3,6 +3,7 @@
 	define('ROOT_DIR', 	$_SERVER['DOCUMENT_ROOT']);
 	define('ENGINE_DIR',ROOT_DIR.'/engine/');
 	define('CACHE_DIR',ROOT_DIR.'/engine/cache/');
+	define('TEMPLATE_DIR',ROOT_DIR.'/templates/');
 	define('PLUGINS_DIR',ROOT_DIR.'/plugins/');
 	define('MODULES_DIR', ENGINE_DIR.'classes/modules/');
 	define('UTILS_DIR', ENGINE_DIR.'classes/utils/');

@@ -1,5 +1,5 @@
 <?php 
-    /* [17.01.2024] */
+    /* [23.01.2024] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -11,9 +11,9 @@ $config = array(
 	"siteSettings" => array(
 		"siteTpl" => "foxengine2",
 		"siteTitle" => "Лисий Мир",
-		"siteStatus" => "Альфа",
+		"siteStatus" => "Экспериментальный",
 		"siteDesc" => "Независимая игровая студия",
-		"keywords" => "FoxEngine,FoxCMS,FoxesWorld,AidenFox,Лисий Мир,Независимая студия,Независимая игровая студия",
+		"keywords" => "FoxEngine,FoxCMS,FoxesWorld,AidenFox,Лисий Мир,Независимая студия,Независимая игровая студия,Over Fox,мистер лис craft,fox craft browser game,foxcraft дэйз,фокс крафт айли,foxes craft,fox craft,foxcraft,Indie,GameDev Indie,Game,GameDev",
 		"contactEmail" => "no-reply@foxesworld.ru",
 		"contactPhone" => "null",
 		"gameFiles" => "files/clients/",

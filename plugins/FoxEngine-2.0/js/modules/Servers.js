@@ -1,10 +1,10 @@
-class Servers {
+export class Servers {
     constructor(foxEngine) {
-		this.foxEngine = foxEngine;
-		foxEngine.debugSend("Servers init", "background: #c89f27; padding: 5px;");
-	}
-	
-	    /* Servers parser */
+        this.foxEngine = foxEngine;
+        //foxEngine.debugSend("Servers init", "background: #c89f27; padding: 5px;");
+    }
+
+    /* Servers parser */
     async parseOnline() {
         try {
             // Load the template only once
@@ -43,13 +43,13 @@ class Servers {
 
                 // Replace text in the total online template
                 const totalOnlineTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/totalOnline.tpl');
-				let totalOnlineHtml = await foxEngine.replaceTextInTemplate(totalOnlineTpl, {
+                let totalOnlineHtml = await foxEngine.replaceTextInTemplate(totalOnlineTpl, {
                     totalPlayersOnline: parsedJson.totalPlayersOnline,
                     totalPlayersMax: parsedJson.totalPlayersMax,
                     percent: parsedJson.percent,
                     todaysRecord: parsedJson.todaysRecord
                 });
-				
+
 
                 // Update the content
                 $("#servers").html(serversHtml + totalOnlineHtml);
@@ -60,10 +60,13 @@ class Servers {
             console.error('Error parsing online servers:', error);
         }
     };
-	
+
     // Load server page content
     async loadServerPage(serverName) {
-		 const pageTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'serverPage/serverPage.tpl');
+		if (serverName === foxEngine.page.selectPage.thisPage || foxEngine.page.selectPage.thisPage === undefined) {
+            return;
+        }
+        const pageTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'serverPage/serverPage.tpl');
         try {
             // Fetch server information
             let server = await foxEngine.sendPostAndGetAnswer({
@@ -80,7 +83,7 @@ class Servers {
                     modsInfo = JSON.parse(serverDetails.modsInfo);
                 }
 
-				let page = await foxEngine.replaceTextInTemplate(pageTemplate, {
+                let page = await foxEngine.replaceTextInTemplate(pageTemplate, {
                     serverImage: serverDetails.serverImage,
                     serverDescription: serverDetails.serverDescription,
                     serverName: serverDetails.serverName,
@@ -96,23 +99,23 @@ class Servers {
         } catch (error) {
             console.error('Error while loading server page:', error);
         }
-		location.hash = 'server/' + serverName;
-		foxEngine.page.setPage(serverName);
+        location.hash = 'server/' + serverName;
+        foxEngine.page.setPage(serverName);
     }
-	
-	async getServerDetails(serverName) {
-		try {
+
+    async getServerDetails(serverName) {
+        try {
             // Fetch server information
             let server = await foxEngine.sendPostAndGetAnswer({
                 sysRequest: "parseServers",
                 server: "serverName = '" + serverName + "'"
             }, "JSON");
 
-           return server[0];
+            return server[0];
         } catch (error) {
             console.error('Error while loading server page:', error);
         }
-	}
+    }
 
     // Function to load mods based on modsInfo
     async loadMods(modsInfo) {
@@ -146,4 +149,3 @@ class Servers {
         }
     }
 }
-	export { Servers };

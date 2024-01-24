@@ -1,32 +1,31 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-01-10 14:28:47
+/* Smarty version 4.0.4, created on 2024-01-24 19:04:38
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_659e7f6fe075d2_90928856',
+  'unifunc' => 'content_65b135169dd652_97858115',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1704885902,
+      1 => 1706031766,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
     'file:header.tpl' => 1,
-    'file:navigation.tpl' => 1,
-    'file:modalApp.tpl' => 1,
+    'file:../modalApp.tpl' => 1,
     'file:right-block.tpl' => 1,
     'file:footer.tpl' => 1,
-    'file:notify.tpl' => 1,
+    'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_659e7f6fe075d2_90928856 (Smarty_Internal_Template $_smarty_tpl) {
+function content_65b135169dd652_97858115 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -86,15 +85,11 @@ function content_659e7f6fe075d2_90928856 (Smarty_Internal_Template $_smarty_tpl)
  type="module" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/js/cookie.js"><?php echo '</script'; ?>
 >
-	  
-
    </head>
    <body>
       <?php $_smarty_tpl->_subTemplateRender('file:header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
-	  <?php $_smarty_tpl->_subTemplateRender('file:navigation.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-?>
-	  <?php $_smarty_tpl->_subTemplateRender('file:modalApp.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+	  <?php $_smarty_tpl->_subTemplateRender('file:../modalApp.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
       
       <div class="container">
@@ -121,7 +116,7 @@ contentData<?php echo '%>'; ?>
         <div id="cookie-body">
           <p>Наш сайт использует печеньки (и не только потому, что у нас есть Печеньки-Монстр). 
 		  Они необходимы для создания невероятного опыта в использовании сайта – будь то путешествие по страницам или открытие сундука с новыми идеями.</p>
-          <a onclick="FoxEngine.loadPage('cookies', replaceData.contentBlock); return false;" href="https://www.cookieconsent.com/what-are-cookies/">Хочу знать больше...</a>
+          <a onclick="foxEngine.page.loadPage('cookies', replaceData.contentBlock); return false;" href="#">Хочу знать больше...</a>
           <div class="cookie-buttons">
             <button id="btn-cookie" type="submit">Соглашаюсь</button>
           </div>
@@ -129,7 +124,7 @@ contentData<?php echo '%>'; ?>
       </div>
       <?php $_smarty_tpl->_subTemplateRender('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
-	  <?php $_smarty_tpl->_subTemplateRender('file:notify.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+	  <?php $_smarty_tpl->_subTemplateRender('file:../notify.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
    </body>
 </html><?php }

@@ -1,4 +1,4 @@
-class Snow {
+export class Snow {
 		constructor(foxEngine) {
 		this.foxEngine = foxEngine;
 	}
@@ -31,7 +31,7 @@ class Snow {
 	}
 
 	loadSnow() {
-	if (screen.width > 480 && (this.getCookie('snow') === '' || this.getCookie('snow') === '1')) {
+	if (this.getCookie('snow') === '' || this.getCookie('snow') === '1') {
 		var body = document.body,
 			html = document.documentElement;
 
@@ -127,5 +127,3 @@ class Snow {
 	}
 	}
 }
-
-export { Snow };

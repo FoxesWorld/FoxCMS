@@ -1,18 +1,18 @@
-class User {
+export class User {
     constructor(foxEngine) {
-		this.foxEngine = foxEngine;
-		this.optNamesArr = [];
+        this.foxEngine = foxEngine;
+        this.optNamesArr = [];
         this.optionAmount;
-		this.optionArray;
-		this.optionTpl;
-		var userLogin = foxEngine.replaceData.login;
-		var debugMessage = "Loading data for %c" + userLogin + "%c...";
-		var loginStyle = "color: #ff0000;";
-		var textStyles = "color: #000000;";
-		console.log(debugMessage, loginStyle, textStyles);
-	}
-	
-	async parseUsrOptionsMenu() {
+        this.optionArray;
+        this.optionTpl;
+        var userLogin = foxEngine.replaceData.login;
+        var debugMessage = "Loading data for %c" + userLogin + "%c...";
+        var loginStyle = "color: #ff0000;";
+        var textStyles = "color: #000000;";
+        //console.log(debugMessage, loginStyle, textStyles);
+    }
+
+    async parseUsrOptionsMenu() {
 
         if (this.optNamesArr.length <= this.optionAmount)
             foxEngine.debugSend('Using FoxesWorld UserOptions', 'background: #39312fc7; color: yellow; font-size: 14pt');
@@ -30,7 +30,7 @@ class User {
                 var obj = this.optionArray[i];
                 for (var optionName in obj) {
                     let appendBlock = obj[optionName]["optionBlock"];
-					
+
                     switch (obj[optionName]["type"]) {
                         case "page":
                             this.optionTpl = `
@@ -59,8 +59,8 @@ class User {
             }
         } catch (error) {}
     }
-	
-	async userAction(action) {
+
+    async userAction(action) {
         try {
             let answer = await foxEngine.sendPostAndGetAnswer({
                 user_doaction: action
@@ -69,8 +69,8 @@ class User {
         } catch (error) {}
         foxEngine.utils.textAnimate("#actionBlock");
     };
-	
-	async parseBadges(user) {
+
+    async parseBadges(user) {
         const badgeTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'badge.tpl');
         try {
             let parsedJson = await this.getBadgesArray(user);
@@ -104,17 +104,17 @@ class User {
             console.error('Error parsing badges:', error);
         }
     };
-	
-	async getBadgesArray(user){
-		let badgesArray = await foxEngine.sendPostAndGetAnswer({
-			user_doaction: 'GetBadges',
+
+    async getBadgesArray(user) {
+        let badgesArray = await foxEngine.sendPostAndGetAnswer({
+            user_doaction: 'GetBadges',
             userDisplay: user
         }, "JSON");
-		
-		return badgesArray;
-	}
 
-	async showUserProfile(userDisplay) {
+        return badgesArray;
+    }
+
+    async showUserProfile(userDisplay) {
 
         let userProfile = await foxEngine.sendPostAndGetAnswer({
             "userDisplay": userDisplay,
@@ -141,14 +141,13 @@ class User {
             this.parseBadges(user);
         }, 600);
     };
-	
-	async getLastUser() {
+
+    async getLastUser() {
         try {
             let lastUser = await foxEngine.sendPostAndGetAnswer({
                 userAction: "lastUser"
             }, "JSON");
-            let userView = await foxEngine.replaceTextInTemplate(await foxEngine.loadTemplate(foxEngine.elementsDir + 'lastUser.tpl'),
-			 {
+            let userView = await foxEngine.replaceTextInTemplate(await foxEngine.loadTemplate(foxEngine.elementsDir + 'lastUser.tpl'), {
                 colorScheme: lastUser.colorScheme,
                 profilePhoto: lastUser.profilePhoto,
                 login: lastUser.login,
@@ -160,5 +159,20 @@ class User {
             console.error(error.message);
         }
     };
+	
+	async logout(button) {
+		try {
+            let request = await foxEngine.sendPostAndGetAnswer({
+                userAction: "logout"
+            }, "JSON");
+			button.notify(request.message, request.type);
+			foxEngine.soundOnClick(request.type);
+			setTimeout(() => {
+				foxEngine.foxesInputHandler.refreshPage();
+            }, 1500);
+			
+        } catch (error) {
+            console.error(error.message);
+        }
+	}
 }
-export { User };

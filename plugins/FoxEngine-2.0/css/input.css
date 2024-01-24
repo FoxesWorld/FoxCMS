@@ -64,8 +64,9 @@ useroption {
 	font-family: montserrat, sans-serif;
 	font-weight: 600;
 	color: #2b2e38;
-	left: 15px;
-	top: 10px;
+	/* left: 15px; */
+	/* top: 10px; */
+	margin: 5px;
 	font-size: 13px;
 	/* text-transform: uppercase; */
 }
@@ -73,7 +74,7 @@ useroption {
 button.login {
 	width:100%;
 	color: white;
-	margin: 5px 0px;
+	margin: 0px;
     text-decoration: none;
     background: var(--button-primary);
     border: 2px solid var(--border-color);
@@ -84,6 +85,17 @@ button.login {
     font-weight: bold;
     font-size: 1.2rem;
     text-transform: uppercase;
+}
+
+button.login.selectedpage {
+	width:100%;
+	color: whitesmoke;
+	margin: 0px;
+	color: #161313;
+	background: #b16c2794;
+	box-shadow: 0px 5px 0px #5a3b1c;
+	cursor: not-allowed;
+	padding: 10px;
 }
 
 button.logout {
@@ -117,7 +129,7 @@ button.logout:disabled {
 	cursor: wait;
 }
 
-button:hover.login:not(:disabled)  {
+button:hover.login:not(:disabled, .selectedpage)  {
     box-shadow: none;
     transform: translateY(5px);
 }
@@ -127,13 +139,19 @@ button:hover.logout:not(:disabled)  {
     transform: translateY(5px);
 }
 
+button img {
+	margin: 0px 15px;
+	width: 32px;
+	height: 32px;
+}
+
 .input_block > button.logout {
 	-webkit-box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
     -moz-box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
     box-shadow: 0 5px 20px 0 rgba(166, 183, 91, .5);
 	background-color: #d77c2e;
     padding: 10px;
-    margin: 5px 0px;
+    margin: 0px;
 	cursor: pointer;
     border: 0;
 	font-size: inherit;
@@ -297,14 +315,14 @@ button:hover.logout:not(:disabled)  {
 	/*CHECKBOX*/
 .checkbox_container {
 	position: relative;
-	padding-left: 36px;
 	float: left;
-	margin-bottom: 12px;
 	cursor: pointer;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	margin: 5px 0px;
+	padding: 0 36px;
 }
 
 .checkbox_container .checkmark {
@@ -370,11 +388,12 @@ a {
 	padding: 10px;
 }
 
-a:not(.selectedPage, .badge) {
+a:not(.selectedPage, .badge, .nav-link) {
 	color: #8f600a;
+	float: left;
 }
 
-a:not(.selectedPage, .tip-over, .badge):before {
+a:not(.selectedPage, .tip-over, .badge, .nav-link):before {
   content: "";
   width: 0;
   height: 0.1em;
@@ -398,6 +417,10 @@ a:not(.selectedPage):hover {
     color: #ff7e54;
     transition-duration: 0.5s;
 	cursor: pointer;
+}
+
+.dropdown-item > a:not(.selectedPage):hover {
+	background: #cac2b5;
 }
 
 li > a:not(.tip-over):hover:before {

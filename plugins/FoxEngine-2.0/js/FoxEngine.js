@@ -10,6 +10,7 @@ import { EntryReplacer } from './modules/EntryReplacer.js';
 import { Snow } from './modules/Snow.js';
 import './modules/Notify.js';
 import './modules/howler.core.js';
+//import '../../Anime-1.0.0/js/anime.js';
 
 class FoxEngine {
 
@@ -25,7 +26,6 @@ class FoxEngine {
 		window.console.log.apply(console, this.e);
 
 		this.initialize();
-        
     }
 	
 	async initialize() {
@@ -35,13 +35,14 @@ class FoxEngine {
 			this.utils = new Utils(this);
 			this.user = new User(this);
 			this.servers = new Servers(this);
+			this.entryReplacer = new EntryReplacer(this);
 			this.page = new Page(this);
 			this.modalApp = new ModalApp(this);
 			this.emojis = new Emojis(this);
 			this.snow = new Snow(this);
 			this.snow.loadSnow();
             this.emojiArr = await this.emojis.parseEmojis();
-			this.entryReplacer = new EntryReplacer(this);
+			
 			
         } catch (error) {
             console.error('Error during initialization:', error);
@@ -190,51 +191,6 @@ class FoxEngine {
             console.error(error.message);
             return ''; // Return an empty string or handle the error accordingly
         }
-    }
-
-    replaceText(text, page) {
-        this.updatedText = text || "";
-        for (let j = 0; j < this.userFields.length; j++) {
-            let value = this.userFields[j];
-            let mask = "%" + value + "%";
-            while (this.updatedText.includes(mask)) {
-                this.debugSend(" - Replacing " + value + " mask...", 'color: green');
-                this.updatedText = this.updatedText.replace(mask, this.replaceData[value]);
-                this.replacedTimes++;
-            }
-        }
-		this.updatedText = this.replaceEmojisWithImages(this.updatedText);
-        switch (this.replacedTimes) {
-            case 0:
-                this.debugSend("No text for replacing was found", 'color: red');
-                break;
-
-            case 1:
-                this.debugSend("Replaced " + this.replacedTimes + " occurrence", 'color: green');
-                break;
-
-            default:
-                this.debugSend("Replaced " + this.replacedTimes + " occurrences", 'color: green');
-                break;
-        }
-        this.replacedTimes = 0;
-        return this.updatedText;
-    }
-	
-	replaceEmojisWithImages(text) {
-        // Assuming parseEmojis returns an array of objects with properties: name, code, and imagePath
-
-        for (let i = 0; i < this.emojiArr.length; i++) {
-            let emoji = this.emojiArr[i];
-            let emojiCode = ":"+ emoji.name + ":";
-            let imagePath = emoji.imagePath;
-
-            // Use a regular expression to replace all occurrences of the emoji code with an image tag
-            let regex = new RegExp(emojiCode, 'g');
-            text = text.replace(regex, `<img src="${imagePath}" class="emoji">`);
-        }
-
-        return text;
     }
 }
 

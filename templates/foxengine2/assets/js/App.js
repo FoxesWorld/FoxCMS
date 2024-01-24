@@ -53,23 +53,29 @@ setInterval(() => {
 (function () {
     if (location.hash.substring(1) !== undefined) {
         let linkTypes = [
-            { "keyWord": "user", "action": "showUserProfile", "module": "user." },
+            {"keyWord": "user", "action": "showUserProfile", "module": "user." },
 			{"keyWord": "server", "action": "loadServerPage", "module": "servers."},
-            { "keyWord": "page", "action": "loadPage", "module":"page."}
+            {"keyWord": "page", "action": "loadPage", "module":"page."}
         ];
         for (let k = 0; k < linkTypes.length; k++) {
             console.log("Adding listener to " + linkTypes[k].keyWord);
-            if ((location.hash + '').indexOf(linkTypes[k].keyWord, (0)) > 0) {
-                let replaceValue = location.hash.split('#' + linkTypes[k].keyWord + '/')[1];
-                let runFunc = linkTypes[k].action;
-                eval(`foxEngine.${linkTypes[k].module}${runFunc}("${replaceValue}", "${replaceData.contentBlock}")`);
-            }
+			if(location.hash !== "") {
+				if ((location.hash + '').indexOf(linkTypes[k].keyWord, (0)) > 0) {
+					let replaceValue = location.hash.split('#' + linkTypes[k].keyWord + '/')[1];
+					let runFunc = linkTypes[k].action;
+					eval(`foxEngine.${linkTypes[k].module}${runFunc}("${replaceValue}", "${replaceData.contentBlock}")`);
+				}
+			} else {
+				unhash();
+			}
         }
     }
 }());
 
-
-
+function unhash() {
+    let currentURLWithoutHash = window.location.href.split('#')[0];
+    window.history.replaceState({}, document.title, currentURLWithoutHash);
+}
 
 // Export Vue App
 export { App, foxEngine };

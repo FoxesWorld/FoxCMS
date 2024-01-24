@@ -1,0 +1,68 @@
+<useroption>
+   {
+	"optionTitle": "Three.js",
+	"optionBlock": ".leftAction",
+	"optionPreText": "<img src='/templates/foxengine2/assets/icons/svg/threejs.svg' />",
+	"optionGroup": 15,
+	"optionClass": "nav-item",
+	"type": "page"
+   }
+</useroption>
+
+<pageContent>
+   <canvas id="gameCanvas"></canvas>
+
+    <script>
+		async function loadModule() {
+			await import("/templates/foxengine2/assets/game/game.js");
+		}
+		
+		loadModule();
+        // Получаем ссылку на canvas
+        const canvas = document.getElementById("gameCanvas");
+
+        // Создаем сцену
+        const scene = new THREE.Scene();
+		const loader = new THREE.TextureLoader();
+		const texture = loader.load('%assets%img/logo.png' );
+		const bgTexture = loader.load('%assets%img/background/path.png');
+		scene.background = bgTexture;
+		texture.colorSpace = THREE.SRGBColorSpace;
+
+        // Создаем камеру
+        const camera = new THREE.PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000);
+        camera.position.z = 5;
+
+        // Создаем рендерер
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas });
+        renderer.setSize(839, 600);
+
+        // Создаем геометрию (например, куб)
+        const geometry = new THREE.BoxGeometry();
+        
+        // Создаем материал (например, красный цвет)
+        const material = new THREE.MeshBasicMaterial({ color: 0xFF8844, map: texture});
+
+        // Создаем меш
+        const cube = new THREE.Mesh(geometry, material);
+		 cube.scale.set(2, 2, 2);
+        // Добавляем меш в сцену
+        scene.add(cube);
+
+        // Основной цикл анимации
+        const animate = function () {
+            requestAnimationFrame(animate);
+
+            // Вращение куба
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+
+            // Рендеринг сцены
+            renderer.render(scene, camera);
+        };
+
+        // Вызываем основной цикл анимации
+        animate();
+    </script>
+		<style> #gameCanvas {    width: 100%;}</style>
+</pageContent>

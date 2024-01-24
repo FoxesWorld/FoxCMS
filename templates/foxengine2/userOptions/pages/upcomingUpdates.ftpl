@@ -10,21 +10,22 @@
 </useroption>
 
 <pageContent>
-      <div class="server_information">
-         <div>
-            <div class="icon">
-               <img src="%assets%img/rubin2.jpg">
-            </div>
-            <div class="label">
-               <div class="title">
-                  <h1>Обновления FoxesCraft</h1>
-               </div>
-               <div class="description">
-                  Здесь можно увидеть список запланированных обновлений
-               </div>
-            </div>
-         </div>
-      </div>
+	  
+<div class="server_information">
+	<div class="flex-container">
+		<div class="card">
+			<div class="card-body">
+				<h1 class="card-title">
+					<img src="%assets%img/rubin2.jpg">
+					Обновления FoxesCraft
+				</h1>
+				<p class="card-text">
+					Здесь можно увидеть список запланированных обновлений
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
 	  
 	<div class="server_details">
          <div class="information_block">
@@ -56,8 +57,8 @@
 		color: yellow;
 	 }
 		 
-	 .information_block ul i.a-check{
-		color: green;
+	 .information_block ul i.fa-check{
+		color: greenyellow;
 	 }
 	 </style>
 	

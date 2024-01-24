@@ -36,13 +36,10 @@
 	  <script type="module" src="{$tplDir}/assets/js/App.js"></script>
 	  <script type="module" src="{$tplDir}/assets/js/metrics.js"></script>
 	  <script type="module" src="{$tplDir}/assets/js/cookie.js"></script>
-	  
-
    </head>
    <body>
       {include file='header.tpl'}
-	  {include file='navigation.tpl'}
-	  {include file='modalApp.tpl'}
+	  {include file='../modalApp.tpl'}
       
       <div class="container">
          <div class="row siteContent">
@@ -64,13 +61,13 @@
         <div id="cookie-body">
           <p>Наш сайт использует печеньки (и не только потому, что у нас есть Печеньки-Монстр). 
 		  Они необходимы для создания невероятного опыта в использовании сайта – будь то путешествие по страницам или открытие сундука с новыми идеями.</p>
-          <a onclick="FoxEngine.loadPage('cookies', replaceData.contentBlock); return false;" href="https://www.cookieconsent.com/what-are-cookies/">Хочу знать больше...</a>
+          <a onclick="foxEngine.page.loadPage('cookies', replaceData.contentBlock); return false;" href="#">Хочу знать больше...</a>
           <div class="cookie-buttons">
             <button id="btn-cookie" type="submit">Соглашаюсь</button>
           </div>
         </div>
       </div>
       {include file='footer.tpl'}
-	  {include file='notify.tpl'}
+	  {include file='../notify.tpl'}
    </body>
 </html>
