@@ -16,13 +16,14 @@ class Users {
             }, "JSON");
 
             if (usersArray.length > 0) {
-                $("#usersList").html("");
+                //$("#usersList").html("");
 				let userTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/users/userRow.tpl');
                 for (let j = 0; j < usersArray.length; j++) {
                     let singleUser = usersArray.at(j);
                     let login = singleUser[j].login;
                     let email = singleUser[j].email;
                     let lastdate = singleUser[j].last_date;
+					let avatar = singleUser[j].profilePhoto;
 					let badges = singleUser[j].badges;
 					
 					this.userArr[login] = {
@@ -34,6 +35,7 @@ class Users {
                     let userHtml = await foxEngine.replaceTextInTemplate(userTpl, {
                         index: j,
                         login,
+						avatar,
                         email,
                         lastdate,
 						badges
@@ -77,7 +79,7 @@ class Users {
                             $("#dialog").dialog("close");
                         }
                     });
-					console.log(this.userArr[login]);
+					//console.log(this.userArr[login]);
 					        setTimeout(() => {
 							$('#loadUserBadges').click(() => {
 									this.loadBadgesConfig(badges, login);
@@ -86,7 +88,7 @@ class Users {
                 }
             } else {
                 const userHtml = `<div class="noUsers"><h1>No Users like <span>${input}</span></h1></div>`;
-                foxEngine.loadData(userHtml, "#adminContent");
+                foxEngine.loadData(userHtml, "#usersList");
             }
         } catch (error) {
             console.error('An error occurred:', error.message);

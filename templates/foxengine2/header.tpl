@@ -1,4 +1,4 @@
-<header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg w-100">
+<header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg">
 	<div class="container-fluid d-flex align-items-center justify-content-between">
 		<!-- Logo -->
 		<div class="logo-block">
@@ -26,11 +26,13 @@
 			</a>
 		</div>
 		<!-- Nav -->
-		<div class="navbar-center flex-grow-1">
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav leftAction me-auto mb-2 mb-lg-0"></ul>
-			</div>
-		</div>
+<div class="navbar-center flex-grow-1">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav leftAction me-auto mb-2 mb-lg-0 dropup"></ul>
+    </div>
+</div>
+
+
 		<!-- Userfields -->
 		<div class="navbar-right userBlock">
 			<li class="nav-item dropdown">
@@ -108,18 +110,14 @@
 				}
 			</style>
 
-			<button
-				class="navbar-toggler"
-				onclick="toggleAbsolutePosition()"
-				type="button"
-				data-bs-toggle="collapse"
-				data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent"
-				aria-expanded="false"
-				aria-label="Toggle navigation"
-			>
-				<span class="navbar-toggler-icon"></span>
-			</button>
+			<!--  -->
+			<button class="navbar-toggler" onclick="toggleAbsolutePosition()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon">
+                <span class="navbar-toggler-bar bar1 mt-2"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </span>    
+          </button>
 		</div>
 	</div>
 </header>
@@ -128,11 +126,14 @@
 	 function toggleAbsolutePosition() {
 	     var navbarCollapse = document.getElementById("navbarSupportedContent");
 	     if (getComputedStyle(navbarCollapse).position === "absolute") {
-	         navbarCollapse.style.position = "";
+			setTimeout(function() {
+					navbarCollapse.style.position = "";
+			}, 350);
+	         
 	     } else {
 	         navbarCollapse.style.position = "absolute";
 	         navbarCollapse.style.right = "0";
-	         navbarCollapse.style.top = "80px";
+	         navbarCollapse.style.top = "100px";
 	     }
 	 }
 

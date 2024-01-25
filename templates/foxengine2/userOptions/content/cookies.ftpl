@@ -21,7 +21,6 @@
             margin-bottom: 30px;
         }
         .cookie-adventurer {
-            height: 400px;
             margin: 20px auto;
         }
     </style>

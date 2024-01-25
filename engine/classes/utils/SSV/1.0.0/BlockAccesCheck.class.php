@@ -23,8 +23,20 @@
 			
 			if (stripos($this->content, "[group=") !== false OR stripos($this->content, "[not-group=") !== false) {
 				$this->content = $this->check_group($this->content);
+				
 			}
 			
+			if (stripos($this->content, "[not-login=") !== false) {
+				$this->content = preg_replace_callback ( '#\\[not-login=(.+?)\\](.*?)\\[/not-login\\]#is',
+					function ($matches) {
+						$groups = $matches[1];
+						$block = $matches[2];
+						$groups = explode( ',', $groups );
+						if(in_array(init::$usrArray['login'], $groups)) return "";
+						return $block;
+					},		
+				$this->content);
+			}
 			return $this->content;
 		}
 		

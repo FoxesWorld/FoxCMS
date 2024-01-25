@@ -64,7 +64,7 @@ useroption {
 	font-family: montserrat, sans-serif;
 	font-weight: 600;
 	color: #2b2e38;
-	/* left: 15px; */
+	left: 5px;
 	/* top: 10px; */
 	margin: 5px;
 	font-size: 13px;
@@ -388,12 +388,12 @@ a {
 	padding: 10px;
 }
 
-a:not(.selectedPage, .badge, .nav-link) {
+a:not(.selectedPage, .badge) {
 	color: #8f600a;
 	float: left;
 }
 
-a:not(.selectedPage, .tip-over, .badge, .nav-link):before {
+a:not(.selectedPage, .tip-over, .badge):before {
   content: "";
   width: 0;
   height: 0.1em;

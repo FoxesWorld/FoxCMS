@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-01-24 19:04:38
+/* Smarty version 4.0.4, created on 2024-01-25 21:09:10
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_65b135169dd652_97858115',
+  'unifunc' => 'content_65b2a3c6ea4ed4_54181573',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1706031766,
+      1 => 1706181763,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_65b135169dd652_97858115 (Smarty_Internal_Template $_smarty_tpl) {
+function content_65b2a3c6ea4ed4_54181573 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -94,7 +94,7 @@ function content_65b135169dd652_97858115 (Smarty_Internal_Template $_smarty_tpl)
       
       <div class="container">
          <div class="row siteContent">
-            <div class="<?php if (!$_smarty_tpl->tpl_vars['isMobile']->value) {?>col-8<?php } else { ?>container<?php }?>">
+            <div class="<?php if (!$_smarty_tpl->tpl_vars['isMobile']->value) {?>col-8<?php } else { ?>container<?php }?>"> <!-- -->
                <div id="content" class="mainBlock">
 				<?php echo '<%'; ?>
 contentData<?php echo '%>'; ?>

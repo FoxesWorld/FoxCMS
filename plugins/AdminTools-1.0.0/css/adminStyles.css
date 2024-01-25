@@ -11,6 +11,15 @@
 	/* display: inline-grid; */
 }
 
+.sidebar-offcanvas.active {
+	-webkit-transform: translateX(-260px);
+    -moz-transform: translateX(-260px);
+    -ms-transform: translateX(-260px);
+    -o-transform: translateX(-260px);
+    transform: translateX(-260px);
+	display: none;
+}
+
 #serverOptionsForm {
 	width: 70%;
 	margin: 10px;

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-01-24 19:04:38
+/* Smarty version 4.0.4, created on 2024-01-25 21:09:10
   from '/var/www/FoxCMS/templates/foxengine2/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_65b135169e76e1_30650046',
+  'unifunc' => 'content_65b2a3c6eaa877_73962663',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5f8a501b6f61e60c7c184f8a525252b253c4233d' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/header.tpl',
-      1 => 1706111998,
+      1 => 1706180571,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,8 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_65b135169e76e1_30650046 (Smarty_Internal_Template $_smarty_tpl) {
-?><header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg w-100">
+function content_65b2a3c6eaa877_73962663 (Smarty_Internal_Template $_smarty_tpl) {
+?><header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg">
 	<div class="container-fluid d-flex align-items-center justify-content-between">
 		<!-- Logo -->
 		<div class="logo-block">
@@ -55,11 +55,13 @@ function content_65b135169e76e1_30650046 (Smarty_Internal_Template $_smarty_tpl)
 			</a>
 		</div>
 		<!-- Nav -->
-		<div class="navbar-center flex-grow-1">
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav leftAction me-auto mb-2 mb-lg-0"></ul>
-			</div>
-		</div>
+<div class="navbar-center flex-grow-1">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav leftAction me-auto mb-2 mb-lg-0 dropup"></ul>
+    </div>
+</div>
+
+
 		<!-- Userfields -->
 		<div class="navbar-right userBlock">
 			<li class="nav-item dropdown">
@@ -143,18 +145,14 @@ function content_65b135169e76e1_30650046 (Smarty_Internal_Template $_smarty_tpl)
 				}
 			</style>
 
-			<button
-				class="navbar-toggler"
-				onclick="toggleAbsolutePosition()"
-				type="button"
-				data-bs-toggle="collapse"
-				data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent"
-				aria-expanded="false"
-				aria-label="Toggle navigation"
-			>
-				<span class="navbar-toggler-icon"></span>
-			</button>
+			<!--  -->
+			<button class="navbar-toggler" onclick="toggleAbsolutePosition()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon">
+                <span class="navbar-toggler-bar bar1 mt-2"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </span>    
+          </button>
 		</div>
 	</div>
 </header>
@@ -164,11 +162,14 @@ function content_65b135169e76e1_30650046 (Smarty_Internal_Template $_smarty_tpl)
 	 function toggleAbsolutePosition() {
 	     var navbarCollapse = document.getElementById("navbarSupportedContent");
 	     if (getComputedStyle(navbarCollapse).position === "absolute") {
-	         navbarCollapse.style.position = "";
+			setTimeout(function() {
+					navbarCollapse.style.position = "";
+			}, 350);
+	         
 	     } else {
 	         navbarCollapse.style.position = "absolute";
 	         navbarCollapse.style.right = "0";
-	         navbarCollapse.style.top = "80px";
+	         navbarCollapse.style.top = "100px";
 	     }
 	 }
 

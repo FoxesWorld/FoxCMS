@@ -1,3 +1,62 @@
+.navbar-toggler .navbar-toggler-icon {
+    background-image: none
+}
+
+.navbar-toggler:focus {
+	box-shadow: none;
+}
+
+.navbar-toggler .navbar-toggler-icon .navbar-toggler-bar {
+    display: block;
+    position: relative;
+    width: 22px;
+    height: 1px;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+    background: var(--theme-span-primary);
+    -webkit-transition: all 400ms ease;
+    -o-transition: all 400ms ease;
+    transition: all 400ms ease;
+    margin: 0 auto
+}
+
+.navbar-toggler .navbar-toggler-icon .navbar-toggler-bar.bar2 {
+    margin-top: 7px
+}
+
+.navbar-toggler .navbar-toggler-icon .navbar-toggler-bar.bar3 {
+    margin-top: 7px
+}
+
+.navbar-toggler[aria-expanded=true] .navbar-toggler-bar.bar1 {
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transform-origin: 10% 10%;
+    -ms-transform-origin: 10% 10%;
+    transform-origin: 10% 10%;
+    margin-top: 4px
+}
+
+.navbar-toggler[aria-expanded=true] .navbar-toggler-bar.bar2 {
+    opacity: 0
+}
+
+.navbar-toggler[aria-expanded=true] .navbar-toggler-bar.bar3 {
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-transform-origin: 10% 90%;
+    -ms-transform-origin: 10% 90%;
+    transform-origin: 10% 90%;
+    margin-top: 3px
+}
+
+#header .userBlock img {
+	margin: 0 10px;
+}
+
+
 .nav > li > a:focus {
     outline: 0
 }

@@ -43,7 +43,7 @@
       
       <div class="container">
          <div class="row siteContent">
-            <div class="{if !$isMobile}col-8{else}container{/if}">
+            <div class="{if !$isMobile}col-8{else}container{/if}"> <!-- -->
                <div id="content" class="mainBlock">
 				<%contentData%>
                </div>

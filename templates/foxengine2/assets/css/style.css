@@ -258,7 +258,7 @@ img {
 
 .navbar-nav .nav-item > a {
 	padding: 12;
-    display: block;
+    display: flex;
 }
 
 /*--------------------------------------------------------------
@@ -363,23 +363,15 @@ img {
 	opacity: .75;
 }
 
-#header .navbar-toggler {
-    border: 0;
-	vertical-align: top;
-}
-
 #header .userBlock {
 	padding: 0px 5px;
 	display: inline-flex;
 	border-left: 1px solid gainsboro;
 }
 
-#header .userBlock img {
-	margin: 0 1rem;
-}
-
-#header .userBlock .profilePic {
+.profilePic {
 	width: 42px;
+	height: 42px;
 	border-radius: 50%;
 	object-fit: cover;
 	margin-left: 10px;
@@ -537,7 +529,9 @@ section {
 }
 
 .rightIcon {
-    display: contents;
+    display: block;
+    font-size: 18pt;
+    float: left;
 }
 
 .profilePhoto:before {
