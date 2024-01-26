@@ -12,38 +12,37 @@
    <div class="tabs">
       [hasPriviligies]
 	  <script>
-function viewEdit() {
-    let view = document.getElementById('view');
-    let edit = document.getElementById('edit');
+		function viewEdit() {
+			let view = document.getElementById('view');
+			let edit = document.getElementById('edit');
 
-    // Переключение видимости блоков
-    view.style.display = (view.style.display === 'none') ? 'block' : 'none';
-    edit.style.display = (edit.style.display === 'none') ? 'block' : 'none';
-}
+			view.style.display = (view.style.display === 'none') ? 'block' : 'none';
+			edit.style.display = (edit.style.display === 'none') ? 'block' : 'none';
+		}
 
-	  
-	  $(function (){
-		let colors = replaceData.allowedColors;
-		let count = 0;
-		let checked;
-		let selectedColor = $("#colourVal").val();
+			  
+			  $(function (){
+				let colors = replaceData.allowedColors;
+				let count = 0;
+				let checked;
+				let selectedColor = $("#colourVal").val();
 
-		if(!colors.includes(selectedColor)) {colors.push(selectedColor);}
-			colors.forEach(function(entry) {
-				if(entry === selectedColor) checked = 'checked'; else checked = '';
-				let colorBlock = '<label for="ColorInput'+entry+'">'+
-										'<div class="colorBlock '+checked+'" id="Color'+ count +'" style="background-color: '+ entry +';">' +
-											'<input type="radio" id="ColorInput'+entry+'" name="colorPicker" style="display: none;" value="'+entry+'" '+checked+'>' +
-											'<div class="innerDiv">' +
-												'<i class="fa fa-check"></i>' +
-											'</div>' +
-											'<span class="innerSpan"></span>' +
-											'</div>'+
-										'</label>';
-				$("#profileColors").append(colorBlock);
-				count++;
-			});
-		}());
+				if(!colors.includes(selectedColor)) {colors.push(selectedColor);}
+					colors.forEach(function(entry) {
+						if(entry === selectedColor) checked = 'checked'; else checked = '';
+						let colorBlock = '<label for="ColorInput'+entry+'">'+
+												'<div class="colorBlock '+checked+'" id="Color'+ count +'" style="background-color: '+ entry +';">' +
+													'<input type="radio" id="ColorInput'+entry+'" name="colorPicker" style="display: none;" value="'+entry+'" '+checked+'>' +
+													'<div class="innerDiv">' +
+														'<i class="fa fa-check"></i>' +
+													'</div>' +
+													'<span class="innerSpan"></span>' +
+													'</div>'+
+												'</label>';
+						$("#profileColors").append(colorBlock);
+						count++;
+					});
+				}());
    </script>
 
       <div id="edit" style="display: none;">
@@ -125,13 +124,7 @@ function viewEdit() {
                   				return formData;
                   			}
                   		}
-                  	} 
-                  
-                  	   /*
-                  	   fileRenameFunction: (file) =>
-                  			new Promise((resolve) => {
-                  			resolve(window.prompt('Enter new filename', file.name));
-                  		}) */
+                  	}
                   });
                   											
                   const inputElement = document.querySelector('input[type="file"]');
@@ -170,6 +163,7 @@ function viewEdit() {
             <input name="user_doaction" class="input" type="hidden" value="EditUser" />
             <input name="login" class="input" type="hidden" value="[login]" />
 			<input name="refreshPage" type="hidden" value="false" />
+			<input name="onSubmit" type="hidden" value="foxEngine.page.loadPage('userSettings', replaceData.contentBlock);" />
             [not-group=1]<input name="user_group" class="input" type="hidden" value="[user_group]" />[/not-group]
             <input name="foxesHash" class="input" type="hidden" value="[hash]" />
             <button type="submit" class="login">Изменить<div class="fa fa-cog fa-spin"></div>
@@ -179,14 +173,16 @@ function viewEdit() {
       [/hasPriviligies]
       <div id="view" style="display: block;">
          <div id="profileContents" style="background: linear-gradient(45deg, #c5c5e19c, [colorScheme]);">
-		 [hasPriviligies]
-			<button class="login editProfile" style="float: right;" onclick="viewEdit()">Редактировать</button>
-		 [/hasPriviligies]
-		 [group=1]
-			[not-login=[login]]
-				<button class="logout ban" style="float: right;" onclick="">Забанить</button>
-			[/not-login]
-		 [/group]
+		 <div>
+			 [hasPriviligies]
+				<button class="login editProfile" style="float: right;" onclick="viewEdit()">Редактировать</button>
+			 [/hasPriviligies]
+			 [group=1]
+				[not-login=[login]]
+					<button class="logout ban" style="float: right;" onclick="">Забанить</button>
+				[/not-login]
+			 [/group]
+		 </div>
 		 <table>
 		<tr>
 			<td>
@@ -272,7 +268,7 @@ function viewEdit() {
 					}
 				}
 			});
-			
+			/*
 		 $('li[class*="personalisation"]').click(async function () {
 			let response = await foxEngine.sendPostAndGetAnswer({
 			  sysRequest: "skinPath",
@@ -297,7 +293,7 @@ function viewEdit() {
 				  }
 
 				} catch(error) {}
-		  });
+		  }); */
       </script>
    </div>
 </pageContent>

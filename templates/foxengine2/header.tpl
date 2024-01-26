@@ -49,13 +49,13 @@
 						<span class="dropdown-item">
 							<div class="d-flex align-items-center">
 								<div class="flex-grow-1">
-									<div class="d-flex align-items-center">
-										<div class="flex-shrink-0 me-3">
+									<div class="d-flex">
+										<div class="flex-shrink-0">
 											<div class="avatar">
 												<img class="w-40 h-auto rounded-circle profilePic uk-animation-fade" src="{$profilePhoto}" alt="Profile Photo" uk-img />
 											</div>
 										</div>
-										<div>
+										<div class="me-3">
 											<span class="fw-medium d-block">{$login}</span>
 											<small class="text-muted">{$groupName}</small>
 										</div>
@@ -75,7 +75,7 @@
 					{else}
 
 					<ul id="usrMenu">
-						<!-- Здесь можно добавить дополнительные пункты меню -->
+						<!-- User options go here -->
 					</ul>
 
 					<li><hr class="dropdown-divider" /></li>

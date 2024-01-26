@@ -29,12 +29,9 @@ body {
 	height: fit-content;
 }
 
-#usrMenu {
-	display: table-cell;
-}
-
 #usrMenu i {
     color: var(--theme-iconPrimary);
+	margin: -2px 3px;
 }
 
 table {

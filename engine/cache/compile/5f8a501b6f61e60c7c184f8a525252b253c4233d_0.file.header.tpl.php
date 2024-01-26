@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-01-25 21:09:10
+/* Smarty version 4.0.4, created on 2024-01-26 13:14:01
   from '/var/www/FoxCMS/templates/foxengine2/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_65b2a3c6eaa877_73962663',
+  'unifunc' => 'content_65b385e9ae8f63_87671762',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5f8a501b6f61e60c7c184f8a525252b253c4233d' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/header.tpl',
-      1 => 1706180571,
+      1 => 1706251380,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_65b2a3c6eaa877_73962663 (Smarty_Internal_Template $_smarty_tpl) {
+function content_65b385e9ae8f63_87671762 (Smarty_Internal_Template $_smarty_tpl) {
 ?><header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg">
 	<div class="container-fluid d-flex align-items-center justify-content-between">
 		<!-- Logo -->
@@ -81,14 +81,14 @@ function content_65b2a3c6eaa877_73962663 (Smarty_Internal_Template $_smarty_tpl)
 						<span class="dropdown-item">
 							<div class="d-flex align-items-center">
 								<div class="flex-grow-1">
-									<div class="d-flex align-items-center">
-										<div class="flex-shrink-0 me-3">
+									<div class="d-flex">
+										<div class="flex-shrink-0">
 											<div class="avatar">
 												<img class="w-40 h-auto rounded-circle profilePic uk-animation-fade" src="<?php echo $_smarty_tpl->tpl_vars['profilePhoto']->value;?>
 " alt="Profile Photo" uk-img />
 											</div>
 										</div>
-										<div>
+										<div class="me-3">
 											<span class="fw-medium d-block"><?php echo $_smarty_tpl->tpl_vars['login']->value;?>
 </span>
 											<small class="text-muted"><?php echo $_smarty_tpl->tpl_vars['groupName']->value;?>
@@ -110,7 +110,7 @@ function content_65b2a3c6eaa877_73962663 (Smarty_Internal_Template $_smarty_tpl)
 					<?php } else { ?>
 
 					<ul id="usrMenu">
-						<!-- Здесь можно добавить дополнительные пункты меню -->
+						<!-- User options go here -->
 					</ul>
 
 					<li><hr class="dropdown-divider" /></li>
