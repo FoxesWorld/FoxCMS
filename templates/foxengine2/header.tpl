@@ -26,11 +26,11 @@
 			</a>
 		</div>
 		<!-- Nav -->
-<div class="navbar-center flex-grow-1">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav leftAction me-auto mb-2 mb-lg-0 dropup"></ul>
-    </div>
-</div>
+	<div class="navbar-center">
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav leftAction me-auto mb-2 mb-lg-0 dropup"></ul>
+		</div>
+	</div>
 
 
 		<!-- Userfields -->
@@ -43,7 +43,7 @@
 					<span id="realmoney-info-login" class="ms-2">{$units}</span>
 					{/if}
 				</a>
-				<ul class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdownMenuLink" data-bs-popper="static">
+				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" data-bs-popper="static">
 				
 					<li>
 						<span class="dropdown-item">
@@ -75,10 +75,9 @@
 					{else}
 
 					<ul id="usrMenu">
+						<li><hr class="dropdown-divider" /></li>
 						<!-- User options go here -->
 					</ul>
-
-					<li><hr class="dropdown-divider" /></li>
 
 					<li class="dropdown-item">
 						<a href="#" class="pageLink-logout" onclick="foxEngine.user.logout($(this)); return false;"> <i style="color: red" class="fa fa-sign-out me-2"></i> Выйти </a>
@@ -105,9 +104,6 @@
 					width: 100%;
 				}
 
-				.dropdown-item > a > i {
-				    margin: 2px 5px;
-				}
 			</style>
 
 			<!--  -->

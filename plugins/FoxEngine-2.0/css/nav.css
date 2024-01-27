@@ -6,6 +6,10 @@
 	box-shadow: none;
 }
 
+.navbar-toggler {
+	margin: 0 10px;
+}
+
 .navbar-toggler .navbar-toggler-icon .navbar-toggler-bar {
     display: block;
     position: relative;
@@ -913,17 +917,6 @@ nav .dropdown-menu.show{
     box-shadow: none
 }
 
-.navbar-component > .navbar:first-child,.navbar-component > .navbar-collapse:first-child > .navbar:first-child {
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px
-}
-
-.navbar-component > .navbar:last-child,.navbar-component > .navbar-collapse:last-child > .navbar:last-child {
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px
-}
-
-
 .page-header .navbar-component {
     margin-left: 20px;
     margin-right: 20px
@@ -1136,34 +1129,8 @@ nav .dropdown-menu.show{
     border-bottom-color: #ddd
 }
 
-.navbar-component > .navbar:first-child,.navbar-component > .navbar-collapse:first-child > .navbar:first-child {
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px
-}
-
-.navbar-component > .navbar:last-child,.navbar-component > .navbar-collapse:last-child > .navbar:last-child {
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px
-}
-
-.affix.navbar,.affix.navbar-collapse {
-    z-index: 1030;
-    top: 0;
-    width: 100%
-}
-
-@media (max-width: 768px) {
-    .affix.navbar,.affix.navbar-collapse {
-        position:static
-    }
-}
-
 .navbar-header {
     min-width: 260px
-}
-
-.navbar-collapse > .navbar-header {
-    margin-left: 0
 }
 
 .navbar-header .navbar-nav {
@@ -1180,41 +1147,9 @@ nav .dropdown-menu.show{
     padding-right: 15px
 }
 
-@media (max-width: 768px) {
-    .navbar-header .navbar-nav > li + li {
-        margin-top:0
-    }
-
-    .navbar-collapse > .navbar-header {
-        margin-left: 0
-    }
-}
-
 @media (min-width: 769px) {
     .navbar-header {
         margin-left:-20px
-    }
-}
-
-.navbar-collapse {
-    text-align: center;
-    padding-left: 0;
-    padding-right: 0
-}
-
-.navbar-collapse.collapsing {
-    -webkit-transition-duration: 0.00000001s;
-    transition-duration: 0.00000001s
-}
-
-.navbar + .navbar-collapse {
-    border-top: 0
-}
-
-@media (min-width: 769px) {
-    .navbar-collapse {
-        text-align:left;
-        margin-left: -20px
     }
 }
 

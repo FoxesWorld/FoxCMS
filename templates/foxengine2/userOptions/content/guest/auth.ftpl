@@ -14,10 +14,7 @@
 			<table>
 				<tr>
 					<td colspan="2">
-					<div class="input_block animate__animated animate__fadeInRight">
-						<input name="login" class="input" focusable="false" autocomplete="off" required >
-						<label class="label">Логин</label>
-					</div>
+						[input type="text" name="login" placeholder="Логин"]
 					</td>
 				</tr>
 				
@@ -26,10 +23,7 @@
 						<button type="submit" class="login">Войти <i class="fa fa-sign-in" aria-hidden="true"></i></button>
 					</td>
 					<td>
-						<div class="input_block animate__animated animate__fadeInLeft">
-							<input name="password" class="input" type="password" focusable="false" autocomplete="off" required >
-							<label class="label">Пароль</label>
-						</div>
+						[input type="password" name="password" placeholder="Пароль"]
 					</td>
 				
 				</tr>

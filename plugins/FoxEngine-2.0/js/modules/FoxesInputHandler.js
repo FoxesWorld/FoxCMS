@@ -84,11 +84,6 @@ export class FoxesInputHandler {
             foxEngine.soundOnClick(answer.type);
             foxEngine.buttonFreeze(submitButton, delay + 1000);
         }
-		
-		if(data.onSubmit !== undefined) {
-			this.foxEngine.page.selectPage.thisPage = "";
-				eval(data.onSubmit);
-		}
 
         switch (answer.type) {
             case "success":
@@ -98,11 +93,19 @@ export class FoxesInputHandler {
                         this.refreshPage();
                     }, delay);
                 }
+				
+				if(data.onSubmit !== undefined) {
+					this.foxEngine.page.selectPage.thisPage = "";
+						eval(data.onSubmit);
+				}
 
                 break;
 
             case "error":
                 //$.growl.error({ title: "Информация", message: response.message});
+				if(grecaptcha !== undefined) {
+					grecaptcha.reset();
+				}
                 break;
         }
     };

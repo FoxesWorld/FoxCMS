@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-01-26 13:14:01
+/* Smarty version 4.0.4, created on 2024-01-27 11:11:47
   from '/var/www/FoxCMS/templates/foxengine2/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_65b385e9ae8f63_87671762',
+  'unifunc' => 'content_65b4bac3416377_73150351',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5f8a501b6f61e60c7c184f8a525252b253c4233d' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/header.tpl',
-      1 => 1706251380,
+      1 => 1706293293,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_65b385e9ae8f63_87671762 (Smarty_Internal_Template $_smarty_tpl) {
+function content_65b4bac3416377_73150351 (Smarty_Internal_Template $_smarty_tpl) {
 ?><header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg">
 	<div class="container-fluid d-flex align-items-center justify-content-between">
 		<!-- Logo -->
@@ -55,11 +55,11 @@ function content_65b385e9ae8f63_87671762 (Smarty_Internal_Template $_smarty_tpl)
 			</a>
 		</div>
 		<!-- Nav -->
-<div class="navbar-center flex-grow-1">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav leftAction me-auto mb-2 mb-lg-0 dropup"></ul>
-    </div>
-</div>
+	<div class="navbar-center">
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav leftAction me-auto mb-2 mb-lg-0 dropup"></ul>
+		</div>
+	</div>
 
 
 		<!-- Userfields -->
@@ -75,7 +75,7 @@ function content_65b385e9ae8f63_87671762 (Smarty_Internal_Template $_smarty_tpl)
 </span>
 					<?php }?>
 				</a>
-				<ul class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdownMenuLink" data-bs-popper="static">
+				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" data-bs-popper="static">
 				
 					<li>
 						<span class="dropdown-item">
@@ -110,10 +110,9 @@ function content_65b385e9ae8f63_87671762 (Smarty_Internal_Template $_smarty_tpl)
 					<?php } else { ?>
 
 					<ul id="usrMenu">
+						<li><hr class="dropdown-divider" /></li>
 						<!-- User options go here -->
 					</ul>
-
-					<li><hr class="dropdown-divider" /></li>
 
 					<li class="dropdown-item">
 						<a href="#" class="pageLink-logout" onclick="foxEngine.user.logout($(this)); return false;"> <i style="color: red" class="fa fa-sign-out me-2"></i> Выйти </a>
@@ -140,9 +139,6 @@ function content_65b385e9ae8f63_87671762 (Smarty_Internal_Template $_smarty_tpl)
 					width: 100%;
 				}
 
-				.dropdown-item > a > i {
-				    margin: 2px 5px;
-				}
 			</style>
 
 			<!--  -->

@@ -4,7 +4,7 @@
 	"optionBlock": ".leftAction",
 	"optionPreText": "<img src='/templates/foxengine2/assets/icons/menu/icon_donate.png' />",
 	"optionGroup": [1,4,5],
-	"optionClass": "nav-item",
+	"optionClass": "nav-item uk-animation-fade",
 	"type": "page"
 }
 </useroption>

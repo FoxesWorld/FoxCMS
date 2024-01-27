@@ -23,6 +23,7 @@ export class EntryReplacer {
         }
 
         this.updatedText = this.replaceEmojisWithImages(this.updatedText);
+		this.updatedText = this.replaceInputTags(this.updatedText);
 
         switch (this.replacedTimes) {
             case 0:
@@ -56,5 +57,34 @@ export class EntryReplacer {
 
 		return text;
 	}
+	
+	replaceInputTags(html) {
+        var modifiedHtml = html.replace(/\[input[^\]]*\]/g, function (match) {
+            var attributes = match.match(/(\S+)=["'](.*?)["']/g);
+
+            var attributeMap = {};
+
+            for (var i = 0; i < attributes.length; i++) {
+                var parts = attributes[i].split('=');
+                var attributeName = parts[0];
+                var attributeValue = parts[1].replace(/["']/g, '');
+                attributeMap[attributeName] = attributeValue;
+            }
+			
+
+            return '<div class="form-floating mb-3 input_block">' +
+                '<input type="' + (attributeMap['type'] || 'text') + '" ' +
+                'name="' + (attributeMap['name'] || '') + '" ' +
+                'class="form-control input" ' +
+                'id="' + (attributeMap['name'] || '') + '" ' +
+				'value="' + (attributeMap['value'] || '') + '"' +
+				'onKeyUp="' + (attributeMap['onKeyUp'] || '') + '"' +
+                'placeholder="' + (attributeMap['placeholder'] || '') + '" />' +
+                '<label for="' + (attributeMap['name'] || '') + '">' + (attributeMap['placeholder'] || '') + '</label>' +
+                '</div>';
+        });
+
+        return modifiedHtml;
+    }
 
 }

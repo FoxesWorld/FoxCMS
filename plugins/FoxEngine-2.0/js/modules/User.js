@@ -121,7 +121,7 @@ export class User {
             "user_doaction": "ViewProfile"
         }, "TEXT");
 
-        foxEngine.page.loadData(userProfile, foxEngine.replaceData.contentBlock);
+        foxEngine.page.loadData(this.foxEngine.entryReplacer.replaceText(userProfile), foxEngine.replaceData.contentBlock);
         location.hash = 'user/' + userDisplay;
         foxEngine.foxesInputHandler.formInit(1000);
     };

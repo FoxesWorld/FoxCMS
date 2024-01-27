@@ -5,7 +5,7 @@
         </div>
         <div class="information">
             <b class="today_record">{todaysRecord}</b>
-            <span>РЕКОРД ЗА СЕГОДНЯ</span>
+            <span>РЕКОРД ВСЁ ВРЕМЯ</span>
         </div>
         <div class="information">
             <b class="total_online">{totalPlayersOnline}</b>

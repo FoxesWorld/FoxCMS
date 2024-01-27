@@ -57,34 +57,17 @@
                <h2 id="modalTitle">Давай меняй!</h2>
                <span id="modalDesc">Посмотрим [realname], что ты тут можешь поменять...</span>
                <section>
-                  <div class="input_block">
-                     <input name="realname" class="input" type="text" required value="[realname]">
-                     <label class="label">Полное имя</label>
-                  </div>
-                  <div class="input_block">
-                     <input name="userStatus" class="input" type="text" required value="[userStatus]">
-                     <label class="label">Статус</label>
-                  </div>
-                  <div class="input_block">
-                     <input name="land" class="input" type="text" required value="[land]">
-                     <label class="label">Место обитания</label>
-                  </div>
-                  <div class="input_block">
-                     <input name="email" class="input" type="text" required value="[email]">
-                     <label class="label">E-mail</label>
-                  </div>
+			   [input type="text" name="realname" placeholder="Полное имя" value="[realname]"]
+			   [input type="text" name="userStatus" placeholder="Статус" value="[userStatus]"]
+			   [input type="text" name="land" placeholder="Место обитания" value="[land]"]
+			   [input type="text" name="email" placeholder="E-mail" value="[email]"]
+
 				  [group=4]
-                  <div class="input_block">
-                     <input name="password" class="input" type="password" autoComplete='off'>
-                     <label class="label">Текущий пароль</label>
-                  </div>
+					[input type="password" name="password" placeholder="Текущий пароль"]
 				  [/group]
 				  
 				  [group=1]
-				  <div class="input_block">
-                     <input name="user_group" class="input" type="number" autoComplete='off' value="[user_group]">
-                     <label class="label">Группа</label>
-                  </div>
+					[input type="number" name="user_group" placeholder="Группа пользователя" value="[user_group]"]
 				  [/group]
                </section>
             </div>
@@ -150,14 +133,8 @@
                <h2 id="modalTitle">Давай портить!</h2>
                <span id="modalDesc">Настройки безопасности, [realname], изменить может тут</span>
                <section>
-                  <div class="input_block">
-                     <input name="newPass" class="input" type="text" autoComplete='off'>
-                     <label class="label">Новый пароль</label>
-                  </div>
-                  <div class="input_block">
-                     <input name="repeatPass" class="input" type="text" autoComplete='off'>
-                     <label class="label">Повтор пароля</label>
-                  </div>
+					[input type="password" name="newPass" placeholder="Новый пароль"]
+					[input type="password" name="repeatPass" placeholder="Повтор пароля"]
                </section>
             </div>
             <input name="user_doaction" class="input" type="hidden" value="EditUser" />
@@ -183,7 +160,7 @@
 				[/not-login]
 			 [/group]
 		 </div>
-		 <table>
+		 <table style="margin: 15px;">
 		<tr>
 			<td>
 				<ul class="inline">
