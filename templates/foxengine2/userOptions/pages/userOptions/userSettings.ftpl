@@ -48,9 +48,9 @@
       <div id="edit" style="display: none;">
 			<h3>Профиль пользователя [login]</h3>
          <ul class="tab_caption">
-            <li class="active" value="profile">Настройки профиля</li>
+            <li class="profileSettings active" value="profile">Настройки профиля</li>
             <li class="personalisation">Персонализация</li>
-            <li>Безопасность</li>
+            <li class="security">Безопасность</li>
          </ul>
          <form method="POST" action="/" id="viewUserProfile">
             <div class="tab_content active">
@@ -150,7 +150,7 @@
       [/hasPriviligies]
       <div id="view" style="display: block;">
          <div id="profileContents" style="background: linear-gradient(45deg, #c5c5e19c, [colorScheme]);">
-		 <div>
+		 <div class="profileActions">
 			 [hasPriviligies]
 				<button class="login editProfile" style="float: right;" onclick="viewEdit()">Редактировать</button>
 			 [/hasPriviligies]

@@ -345,20 +345,22 @@ if (!defined('FOXXEY')) {
 		}
 			
 		public static function jsonAnswer($answer, $status = true){
-			$type = 'error';
-			$response = '';
-			switch($status){
-				case true:
-					$type = 'error';
-				break;
-				
-				case false:
-					$type = 'success';
-				break;
+			if($answer !== "") {
+				$type = 'error';
+				$response = '';
+				switch($status){
+					case true:
+						$type = 'error';
+					break;
+					
+					case false:
+						$type = 'success';
+					break;
 
+				}
+				$response = '{"message": "'.$answer.'", "type": "'.$type.'"}';			
+				die($response);
 			}
-			$response = '{"message": "'.$answer.'", "type": "'.$type.'"}';			
-			die($response);
 		}
 		
 		public static function userExists($user, $db){

@@ -18,6 +18,15 @@ if(!defined("ADMIN")){
 						die(json_encode(init::$modulesArray));
 					break;
 					
+					case "scanTemplates":
+						init::classUtil('inDirScanner', "1.1.2");
+						$inDirScanner = new inDirScanner(ROOT_DIR.'/templates/', @RequestHandler::$REQUEST['path'], "*");
+						//echo "<pre>";
+						//var_dump($inDirScanner->buildTree());
+						//echo "</pre>";
+						die(json_encode($inDirScanner->buildTree()));
+					break;
+					
 					case "usersList":
 						die(json_encode(new UsersList($db, $REQUEST)));
 					break;

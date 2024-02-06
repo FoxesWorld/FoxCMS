@@ -46,6 +46,7 @@
             <div class="{if !$isMobile}col-8{else}container{/if}"> <!-- -->
                <div id="content" class="mainBlock">
 				<%contentData%>
+	
                </div>
             </div>
                {include file="right-block.tpl"}

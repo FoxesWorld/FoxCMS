@@ -61,7 +61,7 @@
 							init::classUtil('ServerParser', "1.0.0");
 							init::classUtil('Monitor', "1.0.0");
 							$serverParser = new ServerParser($this->db, "AidenFox");
-							$Monitor = new foxesMon($serverParser->parseServers());
+							$Monitor = new foxesMon($serverParser->parseServers(), array('out'=> 2, 'record_day' => 86400));
 							die($Monitor->foxMonOut());
 						break;
 						

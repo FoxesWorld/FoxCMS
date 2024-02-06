@@ -91,6 +91,16 @@
 		background-color: #8d7c4b;
 	}
 	
+	.profileActions {
+	    display: flex;
+		float: right;
+		margin: 5px;
+	}
+	
+	.profileActions > button {
+		    margin: 5px;
+	}
+	
 	#dialogContent .option_select {
 		float: left;
 	}

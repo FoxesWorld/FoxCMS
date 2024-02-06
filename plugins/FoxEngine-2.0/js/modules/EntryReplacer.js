@@ -6,7 +6,7 @@ export class EntryReplacer {
     replaceText(text) {
 		this.replacedTimes = 0;
         this.updatedText = text || "";
-
+		
         if (this.foxEngine.userFields && Array.isArray(this.foxEngine.userFields)) {
             for (let j = 0; j < this.foxEngine.userFields.length; j++) {
                 let value = this.foxEngine.userFields[j];
@@ -58,33 +58,57 @@ export class EntryReplacer {
 		return text;
 	}
 	
-	replaceInputTags(html) {
-        var modifiedHtml = html.replace(/\[input[^\]]*\]/g, function (match) {
-            var attributes = match.match(/(\S+)=["'](.*?)["']/g);
+replaceInputTags = (html) => {
+    let modifiedHtml = html;
+    let match;
 
-            var attributeMap = {};
+    while ((match = modifiedHtml.match(/\[input[^\]]*\]/))) {
+        var attributes = match[0].match(/(\S+)=["'](.*?)["']/g);
+        var attributeMap = {};
 
-            for (var i = 0; i < attributes.length; i++) {
-                var parts = attributes[i].split('=');
-                var attributeName = parts[0];
-                var attributeValue = parts[1].replace(/["']/g, '');
-                attributeMap[attributeName] = attributeValue;
-            }
-			
-
-            return '<div class="form-floating mb-3 input_block">' +
-                '<input type="' + (attributeMap['type'] || 'text') + '" ' +
-                'name="' + (attributeMap['name'] || '') + '" ' +
-                'class="form-control input" ' +
-                'id="' + (attributeMap['name'] || '') + '" ' +
-				'value="' + (attributeMap['value'] || '') + '"' +
-				'onKeyUp="' + (attributeMap['onKeyUp'] || '') + '"' +
-                'placeholder="' + (attributeMap['placeholder'] || '') + '" />' +
-                '<label for="' + (attributeMap['name'] || '') + '">' + (attributeMap['placeholder'] || '') + '</label>' +
-                '</div>';
-        });
-
-        return modifiedHtml;
+        for (var i = 0; i < attributes.length; i++) {
+            var parts = attributes[i].split('=');
+            var attributeName = parts[0];
+            var attributeValue = parts[1].replace(/["']/g, '');
+            attributeMap[attributeName] = attributeValue;
+        }
+        this.foxEngine.debugSend(" - Building " + attributeMap['type'] + " field...", 'color: green');
+        switch (attributeMap['type']) {
+            case 'checkbox':
+                modifiedHtml = modifiedHtml.replace(match[0], '<label for="' + (attributeMap['name'] || '') + '" class="checkbox_container">' +
+                    (attributeMap['placeholder'] || '') +
+                    '<input type="checkbox" style="display: none;" ' +
+                    'name="' + (attributeMap['name'] || '') + '" ' +
+                    'id="' + (attributeMap['name'] || '') + '" ' +
+                    (attributeMap['value'] ? 'checked' : '') +
+                    ' />' +
+                    '<span class="checkmark"></span>' +
+                    '</label>');
+                break;
+            case 'captcha':
+                modifiedHtml = modifiedHtml.replace(match[0], '<div class="c-captcha">' +
+                    '<div class="g-recaptcha" data-callback="fillResponse" data-sitekey="'+attributeMap['siteKey']+'" data-theme="Light"></div>' +
+                    '<script src="https://www.google.com/recaptcha/api.js?hl='+attributeMap['lang']+'" async defer></script>' +
+                    '</div>');
+                break;
+            default:
+                modifiedHtml = modifiedHtml.replace(match[0], '<div class="form-floating mb-3 input_block">' +
+                    '<input type="' + (attributeMap['type'] || 'text') + '" ' +
+                    'name="' + (attributeMap['name'] || '') + '" ' +
+                    'class="form-control input" ' +
+                    'id="' + (attributeMap['name'] || '') + '" ' +
+                    'value="' + (attributeMap['value'] || '') + '"' +
+                    'onKeyUp="' + (attributeMap['onKeyUp'] || '') + '"' +
+                    'placeholder="' + (attributeMap['placeholder'] || '') + '" />' +
+                    '<label for="' + (attributeMap['name'] || '') + '">' + (attributeMap['placeholder'] || '') + '</label>' +
+                    '</div>');
+                break;
+        }
     }
+    return modifiedHtml;
+}
+
+
+
 
 }

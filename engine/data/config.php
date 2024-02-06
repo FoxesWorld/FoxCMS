@@ -1,5 +1,5 @@
 <?php 
-    /* [23.01.2024] */
+    /* [27.01.2024] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -9,6 +9,7 @@ $config = array(
 ),
 
 	"siteSettings" => array(
+		"lang" => "ru",
 		"siteTpl" => "foxengine2",
 		"siteTitle" => "Лисий Мир",
 		"siteStatus" => "Экспериментальный",
@@ -18,7 +19,7 @@ $config = array(
 		"contactPhone" => "null",
 		"gameFiles" => "files/clients/",
 		"jreDir" => "files/runtime/",
-		"ServiceVersion" => "2.4.12"
+		"ServiceVersion" => "2.4.13"
 ),
 
 	"securitySetings" => array(
@@ -34,6 +35,11 @@ $config = array(
 		"secureKey" => "ghYyufghVH",
 		"assets" => "/templates/foxengine2/assets/"
 ),
+	"monitor" => array(
+		'dayRecordPath' 	 => CACHE_DIR.'tmp/record_day.log',
+		'absoluteRecordPath' => CACHE_DIR.'tmp/record.log',
+		'tempFilePath' 		 => CACHE_DIR.'tmp/timefile.log'
+		),
 
 	"other" => array(
 		"appId" => "712667904956432456",
@@ -43,7 +49,7 @@ $config = array(
 		"timezone" => "Europe/Moscow",
 		"webserviceName" => "FoxEngine",
 		"userOptions" => "userOptions",
-		"OptionReplaceValues" => "{siteKey}->cfgVal(securitySetings|reCaptchaWebsite),{discordLink}->cfgVal(other|discordLink),{vkLink}->cfgVal(other|vkLink),{TPL}->cfgVal(siteSettings|siteTpl)",
+		"OptionReplaceValues" => "{siteKey}->cfgVal(securitySetings|reCaptchaWebsite),{discordLink}->cfgVal(other|discordLink),{vkLink}->cfgVal(other|vkLink),{TPL}->cfgVal(siteSettings|siteTpl),{lang}->cfgVal(siteSettings|lang)",
 		"userFieldsArray" => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,colorScheme,groupName,units,badges",
 		"canEditGroup" => "1,4"
 ));

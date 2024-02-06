@@ -2,42 +2,67 @@
 
 	class inDirScanner {
 		
-		private $scanDir;
-		private $rootDir;
-		private $subDir;
-		private $mask;
-		public array $filesArray = array();
-		private int $filesNum = 0;
-		
-		function __construct($rootDir, $subDir, $mask) {
-			$this->rootDir = $rootDir;
-			$this->subDir = $subDir;
-			$this->mask = $mask;
-			$this->scanDir = $rootDir.$subDir;
-			$this->scanThisDir();
-		}
-		
-		private function scanThisDir() {
-			$dirArray = array();
-			$invalidArray = array('..', '.');
-			if(!in_array(basename($this->scanDir), $invalidArray)) {
-				if(is_dir($this->scanDir)) {
-					$dirArray = filesInDir::filesInDirArray($this->scanDir, $this->mask);
-					foreach($dirArray as $file){
-						$this->filesNum++;
-						$this->filesArray[] = $file;
-					}	
-				}
-			} else {
-				die('{"message": "Invalid directory!"}');
-			}
-		}
-		
-		public function getFiles() {
-			$filesArr = array();
-			foreach($this->filesArray as $val){
-				$filesArr[] = '"'.$val.'"';
-			}
-			return '{"files": ['.implode(',', $filesArr).'],"fileNum": '.$this->filesNum.',"filesHomeDir": "/uploads/'.$this->subDir.'/"}';
-		}
-	}
+    private $rootDir;
+    private $subDir;
+    private $mask;
+    private $filesArray = [];
+    private $filesNum = 0;
+
+    public function __construct($rootDir, $subDir, $mask) {
+        $this->rootDir = rtrim($rootDir, '/') . '/';
+        $this->subDir = trim($subDir, '/') . '/';
+        $this->mask = $mask;
+        $this->scanDir = $this->rootDir . $this->subDir;
+        $this->scanThisDir();
+    }
+
+private function scanThisDir() {
+    $dirArray = [];
+    $invalidArray = ['..', '.'];
+
+    if (is_dir($this->scanDir)) {
+        $dirArray = $this->filesInDirArray($this->scanDir, $this->mask);
+
+        foreach ($dirArray as $file) {
+            $this->filesNum++;
+            $fullPath = $this->scanDir . $file;
+            $isDirectory = is_dir($file);
+            $this->filesArray[] = [
+                'name' => str_replace($this->rootDir, "", $file),
+                'isDirectory' => $isDirectory
+                //'children' => $isDirectory ? $this->scanSubDir($fullPath . '/') : []
+            ];
+        }
+    } else {
+        die(json_encode(["message" => "Invalid directory!"]));
+    }
+}
+
+    private function scanSubDir($subDir) {
+        $subScanner = new RecursiveDirectoryScanner($this->rootDir, str_replace($this->rootDir, '', $subDir), $this->mask);
+        return $subScanner->getFilesArray();
+    }
+
+    public function getFiles() {
+        $response = [
+            "files" => $this->filesArray,
+            "fileNum" => $this->filesNum,
+            "filesHomeDir" => "/uploads/" . $this->subDir
+        ];
+
+        return json_encode($response);
+    }
+
+    public function getFilesArray() {
+        return $this->filesArray;
+    }
+
+    private function filesInDirArray($dir, $mask) {
+        $files = glob($dir . '*' . $mask, GLOB_NOSORT);
+        return $files ? $files : [];
+    }
+
+    public function buildTree() {
+        return $this->filesArray;
+    }
+}

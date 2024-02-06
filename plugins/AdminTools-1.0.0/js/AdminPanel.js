@@ -4,6 +4,7 @@
 	import { Modules } from "./modules/Modules.js";
 	import { Servers } from "./modules/Servers.js";
 	import { GroupAssoc } from "./modules/GroupAssoc.js";
+	import { TemplateEditor } from "./modules/TemplateEditor.js";
 
 class AdminPanel {	
 
@@ -14,6 +15,7 @@ class AdminPanel {
 		this.modules = new Modules();
 		this.servers = new Servers();
 		this.groupAssoc = new GroupAssoc();
+		this.templateEditor = new TemplateEditor();
 	}
 	
 	

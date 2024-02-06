@@ -28,20 +28,8 @@
 				
 				</tr>
 				</table>
-				
-				<label for="rememberMe" class="checkbox_container">
-					Запомнить меня
-					<input type="checkbox" style="display: none;" name="rememberMe" id="rememberMe">
-					<span class="checkmark"></span>
-				</label>
-				
-
-				
-				<div class="c-captcha">
-					<div class="g-recaptcha" data-callback="fillResponse" data-sitekey="{siteKey}" data-theme="Light"></div>
-					<script src="https://www.google.com/recaptcha/api.js?hl={$lang['wysiwyg_language']}" async defer></script>
-				</div>
-
+				[input type="checkbox" name="rememberMe" placeholder="Запомнить меня"]
+				[input type="captcha" siteKey="{siteKey}" lang="{lang}"]
 				<script>
 					function fillResponse(){
 						$("#g-recaptcha-response").attr('value', grecaptcha.getResponse());

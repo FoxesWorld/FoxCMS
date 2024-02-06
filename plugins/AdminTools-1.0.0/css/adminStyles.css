@@ -11,6 +11,11 @@
 	/* display: inline-grid; */
 }
 
+.menu-toggle-btn {
+    width: 30%;
+    margin: 5px;
+}
+
 .sidebar-offcanvas.active {
 	-webkit-transform: translateX(-260px);
     -moz-transform: translateX(-260px);
@@ -207,7 +212,8 @@
 }
 
 .adminPanel .sidebar .nav:not(.sub-menu) > .nav-item > .nav-link {
-  margin: 0;
+	margin: 0;
+    width: 100%;
 }
 
 .adminPanel .sidebar .nav:not(.sub-menu) > .nav-item > .nav-link[aria-expanded="true"] {

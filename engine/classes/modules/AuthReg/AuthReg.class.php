@@ -146,7 +146,7 @@
 			}
 		}
 		
-		public static function logout($message){
+		public static function logout($message = ""){
 			if(init::$usrArray["isLogged"] === true) {
 				session_destroy();
 				setcookie(self::$userToken, "", time() - 3600);

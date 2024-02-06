@@ -23,8 +23,8 @@
 		<div class="main-panel">
 			<div class="content-wrapper">
 				<div class="row">
-					<div class="menu-toggle-btn mr-15">
-						<button id="menu-toggle" class="main-btn primary-btn btn-hover">
+					<div class="menu-toggle-btn">
+						<button id="menu-toggle" class="main-btn primary-btn btn-hover login">
 						<i class="lni me-2 lni-chevron-left"></i> Menu</button>
 					</div>
 					<div class="col-md-12 grid-margin" id="adminContent"></div>
@@ -60,7 +60,7 @@
   })
 	
 		let template;
-		const admOptions = ["settings","users", "modules", "groupAssoc", "servers"];
+		const admOptions = ["settings","users", "modules", "groupAssoc", "servers","templateEditor"];
 		admOptions.forEach((option) => {
 			template = `<li class="nav-item admOpt-`+option+`">
 		           <a class="nav-link" onclick="adminPanel.loadAdmOpt('`+option+`')">

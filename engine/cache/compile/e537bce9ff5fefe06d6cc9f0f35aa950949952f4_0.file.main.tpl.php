@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-01-27 11:11:47
+/* Smarty version 4.0.4, created on 2024-02-06 15:07:24
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_65b4bac3410c34_56731519',
+  'unifunc' => 'content_65c220fca1fc66_12618439',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1706181763,
+      1 => 1706350360,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_65b4bac3410c34_56731519 (Smarty_Internal_Template $_smarty_tpl) {
+function content_65c220fca1fc66_12618439 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -99,6 +99,7 @@ function content_65b4bac3410c34_56731519 (Smarty_Internal_Template $_smarty_tpl)
 				<?php echo '<%'; ?>
 contentData<?php echo '%>'; ?>
 
+	
                </div>
             </div>
                <?php $_smarty_tpl->_subTemplateRender("file:right-block.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
