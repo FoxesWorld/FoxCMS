@@ -91,6 +91,27 @@ replaceInputTags = (html) => {
                     '<script src="https://www.google.com/recaptcha/api.js?hl='+attributeMap['lang']+'" async defer></script>' +
                     '</div>');
                 break;
+				
+			case 'gallery':
+				modifiedHtml = modifiedHtml.replace(match[0],`<section class="gallery" dir="`+attributeMap['dir']+`" mask="`+attributeMap['mask']+`">
+					<div class="foxesGallery photor">
+					
+						 <div class="photor__viewport">
+							<div class="photor__viewportLayer" id="images">
+							</div>
+						 
+							<div class="photor__viewportControl">
+								<div class="photor__viewportControlPrev"></div>
+								<div class="photor__viewportControlNext"></div>
+							</div>
+						 </div>
+						 
+						<div class="photor__thumbs">
+							<div class="photor__thumbsWrap"></div>
+						</div>
+					</div>
+				</section>`);
+			break;
             default:
                 modifiedHtml = modifiedHtml.replace(match[0], '<div class="form-floating mb-3 input_block">' +
                     '<input type="' + (attributeMap['type'] || 'text') + '" ' +

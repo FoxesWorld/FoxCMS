@@ -146,11 +146,10 @@
 	
 	/* PROFILE COLORSCHEMES */
 .colorBlock {
-	width: 120px;
 	cursor: pointer;
 	height: 60px;
 	position: relative;
-	text-align: center;	
+	text-align: center;
 }
 					
 .innerDiv {
@@ -171,8 +170,8 @@
 }
 	
 .checked {
-	border: 3px dotted #9d6818;
-    background-color: #ccc42754;
+	border: 3px dotted #101010;
+	background-color: #ccc42754;
 }
 
 /* Group Display */

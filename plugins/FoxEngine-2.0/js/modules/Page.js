@@ -1,3 +1,5 @@
+import { Gallery } from './Gallery/Gallery.js';
+
 export class Page {
     constructor(foxEngine) {
         this.foxEngine = foxEngine;
@@ -54,7 +56,7 @@ export class Page {
 
         setTimeout(() => {
             if (data && String(data).indexOf('<section class="gallery"') > 0) {
-                const galleryInstance = new Gallery(data);
+                const galleryInstance = new Gallery(this.foxEngine, data);
                 galleryInstance.loadGallery();
             }
 

@@ -1,3 +1,4 @@
+import { FileTree } from './Filetree.js';
 export class TemplateEditor {
     constructor() {
         this.currentLevel = 0;
@@ -7,87 +8,47 @@ export class TemplateEditor {
 
     async parseTemplateEditor(path = "/") {
         let fileTree = await foxEngine.sendPostAndGetAnswer({ "admPanel": "scanTemplates", "path": path }, "JSON");
-        this.buildTree("#adminContent", fileTree);
+        $("#adminContent").html(await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/templateEditor/templateEditor.tpl'));
+        this.buildFileTree(fileTree, "#filetree");
     }
 
-    buildTree(parent, data) {
-        this.dirNum++;
-        if (data && data.length > 0) {
-            var ul = document.createElement('ul');
-            ul.style.marginLeft = 10 * this.dirNum;
-            document.querySelector(parent).appendChild(ul);
+    formatFileTreeData(data) {
+        var formattedData = [];
+        data.forEach(function(item) {
+            var formattedItem = {
+                name: item.name,
+                type: item.type
+            };
 
-            data.forEach((item) => {
-                var li = document.createElement('li');
-                var icon = document.createElement('i');
-                var checkbox = document.createElement('input');
+            if (item.type === 'directory' && item.children) {
+                formattedItem.children = this.formatFileTreeData(item.children);
+            }
 
-                checkbox.type = 'checkbox';
-                checkbox.style.display = 'none';
-                checkbox.checked = this.openedDirs.has(this.toSafeCSSClass(item.name));
+            formattedData.push(formattedItem);
+        });
 
-                icon.appendChild(checkbox);
-
-                if (item.isDirectory) {
-                    icon.classList.add('fa', 'fa-folder');
-                    li.addEventListener('click', (event) => {
-                        event.stopPropagation(); // Остановим всплытие события, чтобы не вызывать событие у родительских элементов
-                        const safeName = this.toSafeCSSClass(item.name);
-
-                        if (checkbox.checked) {
-                            this.openedDirs.delete(safeName);
-                        } else {
-                            this.openedDirs.add(safeName);
-                        }
-
-                        checkbox.checked = !checkbox.checked;
-                        this.parseTemplateEditor("/" + item.name);
-                    });
-                } else {
-                    icon.classList.add('fa', 'fa-file');
-                }
-
-                li.appendChild(icon);
-                var text = document.createTextNode(item.name);
-                li.appendChild(text);
-
-                if (item.isDirectory) {
-                    li.classList.add('directory');
-                    this.currentLevel++;
-                    this.buildTree(li, item.children);
-                    li.style.paddingLeft = `${this.currentLevel * 30}px`;
-                    this.currentLevel--;
-
-                    // Если директория была ранее открыта, то отмечаем её как открытую
-                    const safeName = this.toSafeCSSClass(item.name);
-                    if (this.openedDirs.has(safeName)) {
-                        checkbox.checked = true;
-                        this.toggleDirectory(li, item, true);
-                    }
-                } else {
-                    li.classList.add('file');
-                    li.style.paddingLeft = `${this.currentLevel * 10}px`;
-                }
-
-                ul.appendChild(li);
-            });
-        }
+        return formattedData;
     }
 
-    toggleDirectory(li, item, isOpened) {
-        const ul = li.querySelector('ul');
-        if (ul) {
-            // Если ul существует, значит, директория открыта, и мы удаляем его
-            li.removeChild(ul);
-        } else if (isOpened) {
-            // Если ul не существует, значит, директория закрыта, и мы создаем его
-            const newUl = document.createElement('ul');
-            this.buildTree(newUl, item.children);
-            li.appendChild(newUl);
-        }
-    }
+    buildFileTree(data, containerId) {
+        $(containerId).empty();
+		
+		const options = {
+			data: data,
+			root: '/foxengine2',
+			container: containerId,
+			folderEvent: 'click',
+            expandSpeed: 750,
+            collapseSpeed: 750,
+            multiFolder: false
+		};
 
-    toSafeCSSClass(name) {
-        return name.replace(/[^a-zA-Z0-9_-]/g, '_');
+		const file = (rel) => {
+			// Handle file selection
+		};
+		
+		const myFileTree = new FileTree(options, file);
+		myFileTree.build();
+		//myFileTree.onChangeCheckbox();
     }
 }

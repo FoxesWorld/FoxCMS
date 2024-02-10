@@ -1,0 +1,15 @@
+<useroption>
+{
+	"optionTitle": "Галлерея",
+	"optionBlock": "#usrMenu",
+	"optionPreText": "<i style='color: #d8e815' class='fa fa-book'></i>",
+	"optionGroup": [1,4,5],
+	"optionClass": "dropdown-item",
+	"type": "page"
+}
+</useroption>
+
+<pageContent>
+<h3>Изображения Лиса Эйдена :fox:</h3>
+[input type="gallery" mask="png" dir="foxes"]
+</pageContent>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-02-06 15:07:24
+/* Smarty version 4.0.4, created on 2024-02-10 16:42:03
   from '/var/www/FoxCMS/templates/foxengine2/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_65c220fca292b6_55914146',
+  'unifunc' => 'content_65c77d2bb70cf2_83956866',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5f8a501b6f61e60c7c184f8a525252b253c4233d' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/header.tpl',
-      1 => 1706293293,
+      1 => 1707469543,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_65c220fca292b6_55914146 (Smarty_Internal_Template $_smarty_tpl) {
+function content_65c77d2bb70cf2_83956866 (Smarty_Internal_Template $_smarty_tpl) {
 ?><header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg">
 	<div class="container-fluid d-flex align-items-center justify-content-between">
 		<!-- Logo -->
@@ -108,9 +108,27 @@ function content_65c220fca292b6_55914146 (Smarty_Internal_Template $_smarty_tpl)
 						<a href="#" class="pageLink-reg" onclick="foxEngine.page.loadPage('reg', replaceData.contentBlock); return false;"> <i class="fa fa-user-plus me-2"></i> Зарегистрироваться </a>
 					</li>
 					<?php } else { ?>
-
+						  <?php echo '<script'; ?>
+>
+							async function addFunds(){
+								const template = await foxEngine.loadTemplate(foxEngine.elementsDir+'payment.tpl');
+								let data = foxEngine.entryReplacer.replaceText(template, "");
+								foxEngine.modalApp.showModalApp(900, data);
+								//
+							}
+						  <?php echo '</script'; ?>
+>
 					<ul id="usrMenu">
 						<li><hr class="dropdown-divider" /></li>
+						<?php if ($_smarty_tpl->tpl_vars['user_group']->value == 4) {?>
+						<li class="dropdown-item">
+							<a class="pageLink-addFunds" onclick="addFunds(); return false; ">
+								<div class="rightIcon">
+									<i style="color: #d8e815" class="fa fa-money"></i>
+								</div>Пополнить счёт
+							</a>
+						</li>
+						<?php }?>
 						<!-- User options go here -->
 					</ul>
 
@@ -141,7 +159,6 @@ function content_65c220fca292b6_55914146 (Smarty_Internal_Template $_smarty_tpl)
 
 			</style>
 
-			<!--  -->
 			<button class="navbar-toggler" onclick="toggleAbsolutePosition()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
              <span class="navbar-toggler-icon">
                 <span class="navbar-toggler-bar bar1 mt-2"></span>

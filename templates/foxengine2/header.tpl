@@ -73,9 +73,25 @@
 						<a href="#" class="pageLink-reg" onclick="foxEngine.page.loadPage('reg', replaceData.contentBlock); return false;"> <i class="fa fa-user-plus me-2"></i> Зарегистрироваться </a>
 					</li>
 					{else}
-
+						  <script>
+							async function addFunds(){
+								const template = await foxEngine.loadTemplate(foxEngine.elementsDir+'payment.tpl');
+								let data = foxEngine.entryReplacer.replaceText(template, "");
+								foxEngine.modalApp.showModalApp(900, data);
+								//
+							}
+						  </script>
 					<ul id="usrMenu">
 						<li><hr class="dropdown-divider" /></li>
+						{if $user_group == 4}
+						<li class="dropdown-item">
+							<a class="pageLink-addFunds" onclick="addFunds(); return false; ">
+								<div class="rightIcon">
+									<i style="color: #d8e815" class="fa fa-money"></i>
+								</div>Пополнить счёт
+							</a>
+						</li>
+						{/if}
 						<!-- User options go here -->
 					</ul>
 
@@ -106,7 +122,6 @@
 
 			</style>
 
-			<!--  -->
 			<button class="navbar-toggler" onclick="toggleAbsolutePosition()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
              <span class="navbar-toggler-icon">
                 <span class="navbar-toggler-bar bar1 mt-2"></span>

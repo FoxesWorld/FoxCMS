@@ -13,7 +13,7 @@
 			protected $db;
 			
 			function __construct($db) {
-				init::classUtil('inDirScanner', "1.1.2");
+				init::classUtil('inDirScanner', "1.1.3");
 				init::classUtil('ImageResize', "1.0.0");
 				$this->db = $db;
 			}
@@ -36,12 +36,6 @@
 						case "startUpSound":
 							$startUpSound = new startUpSound;
 							$startUpSound->generateAudio();
-						break;
-						
-						case "test":
-								init::classUtil('GiveBadge', "1.0.0");
-								$GiveBadge = new GiveBadge($this->db, "AidenFox");
-								$GiveBadge->giveBadge("earlyUser");
 						break;
 						
 						case "selectUsers":
@@ -119,10 +113,6 @@
 							$gameScanner = new GameScanner(@RequestHandler::$REQUEST['client'], @RequestHandler::$REQUEST['version'], @RequestHandler::$REQUEST['platform']);
 							die($gameScanner->checkfiles());
 						}
-						break;
-						
-						case "Cabinet":
-							$cabinet = new Cabinet();
 						break;
 						
 						case "getJre":

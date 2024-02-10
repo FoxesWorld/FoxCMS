@@ -2,6 +2,23 @@
 # Admin Panel
 --------------------------------------------------------------*/
 
+#admOptions {
+	margin: 15px;
+}
+
+#admOptions > .option {
+	
+}
+
+#admOptions > .option:hover {
+	transition: 0.3s;
+	transform: translateY(5px);
+}
+
+#admOptions .optionTitle {
+	display: inline-block;
+}
+
 .adminPanel {
 	min-height: 100%;
 	display: flex;
@@ -14,6 +31,12 @@
 .menu-toggle-btn {
     width: 30%;
     margin: 5px;
+}
+
+.files {
+	margin: 5px;
+    border-right: 1px solid black;
+    overflow: hidden;
 }
 
 .sidebar-offcanvas.active {

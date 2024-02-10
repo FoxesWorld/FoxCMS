@@ -1,5 +1,5 @@
 <?php 
-    /* [27.01.2024] */
+    /* [08.02.2024] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -19,7 +19,7 @@ $config = array(
 		"contactPhone" => "null",
 		"gameFiles" => "files/clients/",
 		"jreDir" => "files/runtime/",
-		"ServiceVersion" => "2.4.13"
+		"ServiceVersion" => "2.4.15"
 ),
 
 	"securitySetings" => array(
@@ -35,11 +35,12 @@ $config = array(
 		"secureKey" => "ghYyufghVH",
 		"assets" => "/templates/foxengine2/assets/"
 ),
+
 	"monitor" => array(
-		'dayRecordPath' 	 => CACHE_DIR.'tmp/record_day.log',
-		'absoluteRecordPath' => CACHE_DIR.'tmp/record.log',
-		'tempFilePath' 		 => CACHE_DIR.'tmp/timefile.log'
-		),
+		"dayRecordPath" => "/var/www/FoxCMS/engine/cache/tmp/record_day.log",
+		"absoluteRecordPath" => "/var/www/FoxCMS/engine/cache/tmp/record.log",
+		"tempFilePath" => "/var/www/FoxCMS/engine/cache/tmp/timefile.log"
+),
 
 	"other" => array(
 		"appId" => "712667904956432456",

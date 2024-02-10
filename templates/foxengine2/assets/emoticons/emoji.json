@@ -21,6 +21,10 @@
             {
                 "code": "1F602",
                 "name": "joy"
+            },
+            {
+                "code": "1F603",
+                "name": "relieved"
             }
         ]
     },
@@ -113,6 +117,22 @@
             {
                 "code": "1F515",
                 "name": "serum"
+            },
+            {
+                "code": "1F515",
+                "name": "wizard"
+            },
+            {
+                "code": "1F516",
+                "name": "parcell"
+            },
+            {
+                "code": "1F517",
+                "name": "target"
+            },
+            {
+                "code": "1F518",
+                "name": "guitar"
             }
         ]
     },

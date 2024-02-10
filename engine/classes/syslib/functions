@@ -6,17 +6,14 @@ if (!defined('FOXXEY')) {
 		
 	private static $filterSymbols = array ("\x22", "\x60", "\t", '\n', '\r', "\n", "\r", '\\', ",", "¬", ";", "~", "[", "]", "{", "}", ")", "(", "*", "^", "%", "$", "<", ">", "?", "!", '"', "'", "&", '"' );
 		
-	public static function collectData($data, $captchaCheck = false, $acceptCheckbox = false){
+	public static function collectData($data, $captchaCheck = false){
 	init::classUtil('ReCaptcha', "1.0.0");
 	global $lang, $config;
 	$collectedData = array();
-	if($acceptCheckbox) {
-		if(!isset($data['checkboxAccept']) || $data['checkboxAccept'] === 'false') {
-			self::jsonAnswer($lang["acceptCheckbox"], true);
-		}
-	}
+
 	if(is_array($data)){
 			foreach($data as $key => $value){
+
 				switch($key){
 
 					case "g-recaptcha-response":
@@ -28,9 +25,15 @@ if (!defined('FOXXEY')) {
 							}
 						}
 					break;
-					
 
 				}
+				if(strpos($key, "mustValidate")) {
+					$split = explode('-', $key);
+					if($data[$key] === 'false') {
+						self::jsonAnswer($lang[$split[0]], true);
+					}
+				}
+				
 				$collectedData[$key] = self::filterString($value);
 			}
 		}

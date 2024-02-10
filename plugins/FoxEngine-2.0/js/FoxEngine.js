@@ -9,7 +9,7 @@ import { Utils } from './modules/Utils.js';
 import { EntryReplacer } from './modules/EntryReplacer.js';
 import { Snow } from './modules/Snow.js';
 import './modules/Notify.js';
-import './modules/howler.core.js';
+import './modules/Howler/howler.core.js';
 //import '../../Anime-1.0.0/js/anime.js';
 
 class FoxEngine {
@@ -24,7 +24,9 @@ class FoxEngine {
         this.elementsDir = replaceData.assets + "elements/";
         this.e = ["\n %c %c %c FoxEngine 2.0 - 🦊 WebUI 🦊  %c  %c  https://foxesworld.ru/  %c %c ⋆🐾°%c🌲%c🍂 \n\n", "background: #c89f27; padding:5px 0;", "background: #c89f27; padding:5px 0;", "color: #c89f27; background: #030307; padding:5px 0;", "background: #c89f27; padding:5px 0;", "background: #bea8a8; padding:5px 0;", "background: #c89f27; padding:5px 0;", "color: #ff2424; background: #fff; padding:5px 0;", "color: #ff2424; background: #fff; padding:5px 0;", "color: #ff2424; background: #fff; padding:5px 0;"];
 		window.console.log.apply(console, this.e);
-
+		if(replaceData.user_group !== '1') {
+			this.preventSelection(window.document);
+		}
 		this.initialize();
     }
 	
@@ -185,13 +187,67 @@ class FoxEngine {
             }
 
             let htmlContent = await response.text();
+			
 
-            return htmlContent;
+            return this.entryReplacer.replaceText(htmlContent);
         } catch (error) {
             console.error(error.message);
             return ''; // Return an empty string or handle the error accordingly
         }
     }
+	
+	preventSelection(element) {
+		let preventSelection = false;
+
+		function addHandler(element, event, handler) {
+			element.addEventListener(event, handler);
+		}
+
+		function removeSelection() {
+			if (window.getSelection) {
+				window.getSelection().removeAllRanges();
+			} else if (document.selection && document.selection.clear) {
+				document.selection.clear();
+			}
+		}
+
+		addHandler(element, 'mousemove', function () {
+			if (preventSelection) {
+				removeSelection();
+			}
+		});
+
+		// Mouse Events
+		addHandler(element, 'mousedown', function (event) {
+			event = event || window.event;
+			const sender = event.target || event.srcElement;
+			preventSelection = !(sender.tagName.match(/INPUT|TEXTAREA/i));
+		});
+
+		// Keyboard
+		function killCtrlA(event) {
+			event = event || window.event;
+			const sender = event.target || event.srcElement;
+
+			if (sender.tagName.match(/INPUT|TEXTAREA/i)) return;
+
+			const key = event.keyCode || event.which;
+			const ctrlKey = event.ctrlKey || event.metaKey; // Mac
+
+			if (ctrlKey && (key === 65 || key === 85 || key === 83)) { // Ctrl + A, Ctrl + U, Ctrl + S
+				removeSelection();
+				event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+			}
+		}
+
+		addHandler(element, 'keydown', killCtrlA);
+		addHandler(element, 'keyup', killCtrlA);
+
+		// Context menu
+		document.oncontextmenu = function () {
+			return false;
+		};
+	}
 }
 
 export { FoxEngine };

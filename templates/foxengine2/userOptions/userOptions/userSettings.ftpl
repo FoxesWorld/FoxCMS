@@ -1,0 +1,238 @@
+ <useroption> { "optionTitle": "Профиль", "optionBlock": "#usrMenu", "optionClass": "dropdown-item", "optionPreText": "<i style='color: #736d5f' class='fa fa-user-circle-o'></i>", "optionGroup": [1,3,4,5], "type": "page" } </useroption>
+ <pageContent>
+     <div class="tabs"> [hasPriviligies] <script>
+             function viewEdit() {
+             				let view = $('#view');
+             				let edit = $('#edit');
+             
+             				if (view.is(':visible')) {
+             				  view.fadeOut('slow', function() {
+             					edit.fadeIn('slow');
+             				  });
+             				} else {
+             				  edit.fadeOut('slow', function() {
+             					view.fadeIn('slow');
+             				  });
+             				}
+             }		  
+             $(function (){
+             				let colors = replaceData.allowedColors;
+             				let count = 0;
+             				let checked;
+             				let selectedColor = $("#colourVal").val();
+             
+             				if(!colors.includes(selectedColor)) {colors.push(selectedColor);}
+             					colors.forEach(function(entry) {
+             						if(entry === selectedColor) checked = 'checked'; else checked = '';
+             						let colorBlock = '<label for="ColorInput' + entry + '">' 
+             												'<div class="colorBlock ' + checked + '" id="Color' + count + '" style="background-color: ' + entry + ';">'  
+             													'<input type="radio" id="ColorInput' + entry + '" name="colorPicker" style="display: none;" value="' + entry + '" ' + checked + '>'  
+             													'<div class="innerDiv">'  
+             														'<i class="fa fa-check"></i>'  
+             													'</div>'  
+             													'<span class="innerSpan"></span>'  
+             													'</div>' 
+             												'</label>';
+             						$("#profileColors").append(colorBlock);
+             						count  ;
+             					});
+             				}());
+         </script>
+         <div id="edit" style="display: none;">
+             <div class="d-inline-flex">
+                 <h3>Профиль пользователя [login]</h3>
+                 <button class="login editProfile" style="float: right;" onclick="viewEdit()">Верни меня назад</button>
+             </div>
+             <ul class="tab_caption">
+                 <li class="profileSettings active" value="profile">Настройки профиля</li>
+                 <li class="personalisation">Персонализация</li>
+                 <li class="security">Безопасность</li>
+             </ul>
+             <form method="POST" action="/" id="viewUserProfile">
+                 <div class="tab_content active">
+                     <h2 id="modalTitle">Давай меняй!</h2>
+                     <span id="modalDesc">Посмотрим [realname], что ты тут можешь поменять...</span>
+                     <section> [input type="text" name="realname" placeholder="Полное имя" value="[realname]"] [input type="text" name="userStatus" placeholder="Статус" value="[userStatus]"] [input type="text" name="land" placeholder="Место обитания" value="[land]"] [input type="text" name="email" placeholder="E-mail" value="[email]"] [group=4] [input type="password" name="password" placeholder="Текущий пароль"] [/group] [group=1] [input type="number" name="user_group" placeholder="Группа пользователя" value="[user_group]"] [/group] </section>
+                 </div>
+                 <div class="tab_content">
+                     <h2 id="modalTitle">Давай украшать!</h2>
+                     <span id="modalDesc">Посмотрим [realname], что ты тут можешь сделать...</span>
+                     <table>
+                         <td>
+                             <h3 class="settingsTitle">Загрузка фото профиля:</h3>
+                             <input type="file" id="profilePhoto" name="image" accept=".jpeg" data-file-metadata-imagetype="profilePhoto" />
+                         </td>
+                         <!--
+				  <tr>
+				  	<div id="skinViewer3D-[login]" style="width: initial;float: right;border: 1px solid;padding: 5px; border-radius: 5px;">
+						<canvas id="canvas" style="display: none"></canvas>
+					</div>
+				</tr> -->
+                     </table>
+                     <script>
+                         FilePond.registerPlugin(
+                         	FilePondPluginImageCrop,
+                         	FilePondPluginMediaPreview,
+                         	FilePondPluginImagePreview,
+                         	FilePondPluginFileMetadata,
+                         	FilePondPluginFileRename
+                         );
+                         FilePond.setOptions({
+                         	maxFileSize: '15MB',
+                         	imageCropAspectRatio: '3:5',
+                         	server: {
+                         		process: {
+                         			url: '/',
+                         			method: 'POST',
+                         			ondata: (formData) => {
+                         				formData.append('key', replaceData.secureKey);
+                         				return formData;
+                         			}
+                         		}
+                         	}
+                         });
+                         											
+                         const inputElement = document.querySelector('input[type="file"]');
+                         const pond = FilePond.create(
+                         	inputElement, {
+                         			allowMultiple: false,
+                         			allowReorder: false
+                         	}
+                         );
+                         
+                         window.pond = pond;
+                     </script>
+                     <div class="fields_item">
+                         <h3 class="settingsTitle">Цветовая схема профиля:</h3>
+                         <div class="container">
+                             <div class="row row-cols-2 row-cols-md-4 g-4" id="profileColors">
+                                 <!-- Colors go here -->
+                                 <input type="hidden" id="colourVal" name="colorScheme" value="[colorScheme]" />
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="tab_content">
+                     <h2 id="modalTitle">Давай портить!</h2>
+                     <span id="modalDesc">Настройки безопасности, [realname], изменить может тут</span>
+                     <section> [input type="password" name="newPass" placeholder="Новый пароль"] [input type="password" name="repeatPass" placeholder="Повтор пароля"] </section>
+                 </div>
+                 <input name="user_doaction" class="input" type="hidden" value="EditUser" />
+                 <input name="login" class="input" type="hidden" value="[login]" />
+                 <input name="refreshPage" type="hidden" value="false" />
+                 <input name="onSubmit" type="hidden" value="foxEngine.user.showUserProfile('[login]');" /> [not-group=1] <input name="user_group" class="input" type="hidden" value="[user_group]" /> [/not-group] <input name="foxesHash" class="input" type="hidden" value="[hash]" />
+                 <button type="submit" class="login">Изменить<div class="fa fa-cog fa-spin"></div>
+                 </button>
+             </form>
+         </div> [/hasPriviligies] <div id="view" style="display: block;">
+             <div id="profileContents" style="background: linear-gradient(45deg, #c5c5e19c, [colorScheme]);">
+                 <div class="profileActions"> [hasPriviligies] <button class="login editProfile" style="float: right;" onclick="viewEdit()">Редактировать</button> [/hasPriviligies] [group=1] [not-login=[login]] <button class="logout ban" style="float: right;" onclick="">Забанить</button> [/not-login] [/group] </div>
+                 <table style="margin: 15px;">
+                     <tr>
+                         <td>
+                             <ul class="inline">
+                                 <li class="avatar">
+                                     <img class="profilePhoto" src="[profilePhoto]" alt="[login]" />
+                                 </li>
+                                 <li class="profile-title" style="position: absolute;margin: 75px 0px;">
+                                     <h1 class="groupStatus-[user_group]">[login]</h1>
+                                     <span class="groupStatus-[user_group]">[userStatus]</span>
+                                 </li>
+                             </ul>
+                         </td>
+                         <td style="vertical-align: bottom;">
+                             <ul class="profileBadges container-1gYwHN" id="userBadges">
+                             </ul>
+                         </td>
+                     </tr>
+                 </table>
+                 <div class="basecont" style="opacity: 0.8;">
+                     <table class="userinfo" style="width: 100%">
+                         <tr class="statsTabbleItem">
+                             <td class="pageItemTitle">Полное имя</td>
+                             <td class="pageItemValue">
+                                 <span style="color: #f1864e;">[realname]</span>
+                             </td>
+                         </tr>
+                         <tr class="statsTabbleItem">
+                             <td class="pageItemTitle">Группа</td>
+                             <td class="pageItemValue">
+                                 <span style="color: #c25f73 !important;">[groupName]</span>
+                             </td>
+                 </div>
+                 <tr class="statsTabbleItem">
+                     <td class="pageItemTitle">Был в сети</td>
+                     <td class="pageItemValue">
+                         <span style="color: #f1864e;">[last_date]</span>
+                     </td>
+                 </tr>
+                 <tr class="statsTabbleItem">
+                     <td class="pageItemTitle">Время на проекте</td>
+                     <td class="pageItemValue">
+                         <span style="color: #f1864e;">[reg_date]</span>
+                     </td>
+                 </tr>
+                 <tr class="statsTabbleItem">
+                     <td class="pageItemTitle">Место жительства</td>
+                     <td class="pageItemValue">[land]</td>
+                 </tr> [hasPriviligies] <tr class="statsTabbleItem">
+                     <td class="pageItemTitle">E-Mail</td>
+                     <td class="pageItemValue">[email]</td>
+                 </tr>
+                 <tr class="statsTabbleItem">
+                     <td class="pageItemTitle">Юниты</td>
+                     <td class="pageItemValue">[units]</td>
+                 </tr> [/hasPriviligies] </table>
+             </div>
+         </div>
+     </div>
+     <script>
+         $(function() {
+         		 foxEngine.user.parseBadges('[login]');
+         	$('ul.tab_caption').on('click', 'li:not(.active)', function() {
+         		$(this)
+         			.addClass('active').siblings().removeClass('active')
+         			.closest('div.tabs').find('div.tab_content').removeClass('active').eq($(this).index()).addClass('active');
+         			let tab = $(this);
+         	});
+         });
+         		 
+         		 $('input[name*="colorPicker"]').click(function () {
+         			let rad=document.getElementsByName('colorPicker');
+         				for (let i=0;i<rad.length; i++) {
+         					$('#Color' + i).removeClass('checked');
+         					if (rad[i].checked === true) {
+         						$('#Color' + i).addClass('checked');
+         						$("#colourVal").val(rad[i].value);
+         					}
+         				}
+         			});
+         			/*
+         		 $('li[class*="personalisation"]').click(async function () {
+         			let response = await foxEngine.sendPostAndGetAnswer({
+         			  sysRequest: "skinPath",
+         			  login: '[login]'
+         			}, "JSON");
+         				try {
+         				  skin3D = new skin3D(response.skin, document.getElementById('skinViewer3D-[login]'));
+         				  skin3D.init();
+         				  skin3D.createBlock('/templates/{TPL}/assets/img/block.png');
+         				  skin3D.loadFail = function(errorCode) {
+         					var blockSkin2D = document.getElementById('skinViewer2D');
+         					if (blockSkin2D != null) {
+         					  blockSkin2D.style.display = 'block';
+         					  document.getElementById('skinViewer3D').style.display = 'none';
+         					} else {
+         					  document.getElementById('skinViewer3D').innerHTML = 'Просмотр 3D скинов в вашем браузере не доступен.';
+         					}
+         					skin3D = null;
+         				  };
+         				  if(response.cape !== null){
+         					skin3D.createCloak(response.cape);
+         				  }
+         
+         				} catch(error) {}
+         		  }); */
+     </script>
+     </div>
+ </pageContent>

@@ -19,12 +19,22 @@ if(!defined("ADMIN")){
 					break;
 					
 					case "scanTemplates":
-						init::classUtil('inDirScanner', "1.1.2");
 						$inDirScanner = new inDirScanner(ROOT_DIR.'/templates/', @RequestHandler::$REQUEST['path'], "*");
-						//echo "<pre>";
-						//var_dump($inDirScanner->buildTree());
-						//echo "</pre>";
-						die(json_encode($inDirScanner->buildTree()));
+						die(json_encode($inDirScanner->scanDirectory()));
+					break;
+					
+					case "readFile":
+						die(file::efile(ROOT_DIR.@RequestHandler::$REQUEST['path'])['content']);
+					break;
+					
+					case "updateFile":
+						$updater = file::efile(ROOT_DIR.@RequestHandler::$REQUEST['filePath'], false, @RequestHandler::$REQUEST['fileContents']);
+						if($updater['status'] === "true") {
+							$status ="success";
+						} else {
+							$status = "warn";
+						}
+						die('{"message": "'.$updater['message'].'", "status": "'.$status.'"}');
 					break;
 					
 					case "usersList":

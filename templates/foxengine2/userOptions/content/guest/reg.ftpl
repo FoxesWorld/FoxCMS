@@ -1,80 +1,64 @@
-<useroption>
-	{ "optionGroup": 5,
-	"type": "pageContent" 
-	}
-</useroption>
-
-<pageContent>
-	<div class="pageRoot">
-		<div class="page-content">
-			<div class="formContent">
-				<h1>Регистрация</h1>
-				<form method="POST" action="/" autocomplete="false" id="reg">
-					[input type="text" name="login" placeholder="Логин"]
-					<!--
+ <useroption> { "optionGroup": 5, "type": "pageContent" } </useroption>
+ <pageContent>
+     <div class="pageRoot">
+         <div class="page-content">
+             <div class="formContent">
+                 <h1>Регистрация</h1>
+                 <form method="POST" action="/" autocomplete="false" id="reg"> [input type="text" name="login" placeholder="Логин"]
+                     <!--
                <div class="input_block">
                   <input name="realname" class="input" type="text" autocomplete="off" required />
                   <label class="label">Имя</label>
                </div> 
-			   -->
-
-					[input type="email" name="email" placeholder="Почта"]
-					[input type="password" name="password1"  onKeyUp="CheckPassStrength($(this).val())" placeholder="Пароль"]
-					[input type="password" name="password2"  placeholder="Повтор пароля"]
-					<span style="background: #ffffff;padding: 5px;border-radius: 10px;">Надежность пароля: <b id="passStrength"></b></span>
-
-					<!--			   
+			   --> [input type="email" name="email" placeholder="Почта"] [input type="password" name="password1" onKeyUp="CheckPassStrength($(this).val())" placeholder="Пароль"] [input type="password" name="password2" placeholder="Повтор пароля"] <span style="background: #ffffff;padding: 5px;border-radius: 10px;">Надежность пароля: <b id="passStrength"></b></span>
+                     <!--			   
 			   <div class="input_block">
                   <input name="regCode" class="input" type="text" autocomplete="off" />
                   <label class="label">Код регистрации</label>
                </div>
-			   -->
-					[input type="captcha" siteKey="{siteKey}" lang="{lang}"]
-					[input type="checkbox" name="checkboxAccept" placeholder="Даю согласие на обработку персональных данных"]
-					<input name="userAction" class="input" type="hidden" value="register" />
-					<button type="submit" class="login">Зарегистрироваться <i class="fa fa-user-plus" aria-hidden="true"></i></button>
-				</form>
-			</div>
-		</div>
-	</div>
-
-	<script>
-		function CheckPassStrength(pass) {
-			let color, text;
-			let req = foxEngine.request.send_post({userAction: 'checkPass', password: pass});
-			    req.onreadystatechange = function() {
-					if (req.readyState === 4) {
-						let json = JSON.parse(this.responseText);
-
-						switch(json.PassStrength){
-							case 1:
-								color = '#911414';
-								text = 'Очень слабый';
-							break;
-
-							case 2:
-							color = '#cf6e11';
-								text = 'Слабый';
-							break;
-
-							case 3:
-								color = '#cfc211';
-								text = 'Простой';
-							break;
-
-							case 4:
-								color = '#81cf11';
-								text = 'Надежный';
-							break;
-
-							case 5:
-								color = '#13d788';
-								text = 'Очень надежный!';
-							break;
-						}
-						$("#passStrength").html('<small style="color: '+color+'">'+text+'</small>');
-					}
-				}
-		}
-	</script>
-</pageContent>
+			   --> [input type="captcha" siteKey="{siteKey}" lang="{lang}"] [input type="checkbox" name="dataProcessing-mustValidate" placeholder="Даю согласие на обработку персональных данных"] [input type="checkbox" name="acceptRules-mustValidate" placeholder="Я соглашаюсь с правилами проекта"] <input name="userAction" class="input" type="hidden" value="register" />
+                     <button type="submit" class="login">Зарегистрироваться <i class="fa fa-user-plus" aria-hidden="true"></i></button>
+                 </form>
+             </div>
+         </div>
+     </div>
+     <script>
+         function CheckPassStrength(pass) {
+         	let color, text;
+         	let req = foxEngine.request.send_post({userAction: 'checkPass', password: pass});
+         	    req.onreadystatechange = function() {
+         			if (req.readyState === 4) {
+         				let json = JSON.parse(this.responseText);
+         
+         				switch(json.PassStrength){
+         					case 1:
+         						color = '#911414';
+         						text = 'Очень слабый';
+         					break;
+         
+         					case 2:
+         					color = '#cf6e11';
+         						text = 'Слабый';
+         					break;
+         
+         					case 3:
+         						color = '#cfc211';
+         						text = 'Простой';
+         					break;
+         
+         					case 4:
+         						color = '#81cf11';
+         						text = 'Надежный';
+         					break;
+         
+         					case 5:
+         						color = '#13d788';
+         						text = 'Очень надежный!';
+         					break;
+         				}
+         				$("#passStrength").html('<small style="color: ' color '">' text '</small>');
+         			}
+         		}
+         }
+     </script>
+ </pageContent>

@@ -1,4 +1,4 @@
-<div id="profileContents" style="background: linear-gradient(45deg, #c5c5e19c, {colorScheme});">
+ <div id="profileContents" style="background: linear-gradient(45deg, #c5c5e19c, {colorScheme});">
     <table>
         <tr>
             <td>

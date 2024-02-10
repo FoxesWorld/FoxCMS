@@ -16,7 +16,7 @@ if(!defined('auth')) {
 			if(@$input["userAction"] === "register") {
 				$this->logger = $logger;
 				$this->db = $db;
-				$this->regData = functions::collectData($input, true, true);
+				$this->regData = functions::collectData($input, true);
 			}
 		}
 		
