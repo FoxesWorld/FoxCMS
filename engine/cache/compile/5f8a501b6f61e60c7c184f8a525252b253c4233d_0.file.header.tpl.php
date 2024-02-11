@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-02-10 16:42:03
+/* Smarty version 4.0.4, created on 2024-02-11 14:11:24
   from '/var/www/FoxCMS/templates/foxengine2/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_65c77d2bb70cf2_83956866',
+  'unifunc' => 'content_65c8ab5ccbeeb0_72085286',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5f8a501b6f61e60c7c184f8a525252b253c4233d' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/header.tpl',
-      1 => 1707469543,
+      1 => 1707581696,
       2 => 'file',
     ),
   ),
@@ -20,14 +20,12 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_65c77d2bb70cf2_83956866 (Smarty_Internal_Template $_smarty_tpl) {
+function content_65c8ab5ccbeeb0_72085286 (Smarty_Internal_Template $_smarty_tpl) {
 ?><header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg">
 	<div class="container-fluid d-flex align-items-center justify-content-between">
 		<!-- Logo -->
 		<div class="logo-block">
 			<a href="/" class="navbar-brand">
-				<link type="text/css" rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
-/logo/logo.css" />
 				<div class="logoWrapper">
 					<div class="logo uk-animation-slide-left">
 						<ul class="list-inline">
@@ -48,10 +46,6 @@ function content_65c77d2bb70cf2_83956866 (Smarty_Internal_Template $_smarty_tpl)
 						<span class="line uk-animation-expand"></span>
 					</div>
 				</div>
-				<?php echo '<script'; ?>
- src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
-/logo/animation.js"><?php echo '</script'; ?>
->
 			</a>
 		</div>
 		<!-- Nav -->

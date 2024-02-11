@@ -6,11 +6,11 @@ import { Page } from './modules/Page.js';
 import { ModalApp } from './modules/ModalApp.js';
 import { Emojis } from './modules/Emojis.js';
 import { Utils } from './modules/Utils.js';
+import { Logo } from './modules/Logo.js';
 import { EntryReplacer } from './modules/EntryReplacer.js';
 import { Snow } from './modules/Snow.js';
 import './modules/Notify.js';
 import './modules/Howler/howler.core.js';
-//import '../../Anime-1.0.0/js/anime.js';
 
 class FoxEngine {
 
@@ -22,6 +22,67 @@ class FoxEngine {
 		this.updatedText;
         this.replacedTimes = 0;
         this.elementsDir = replaceData.assets + "elements/";
+		//TO REPLACE
+		this.logoCfg = {
+			timeline: [
+					{
+						targets: '.logoWrapper .logo ul',
+						opacity: [0, 1]
+					}, 
+					{
+						targets: '.logo img',
+						translateY: [-100, 0],
+						opacity: [0, 1],
+						elasticity: 600,
+						duration: 1000
+					},
+					{
+						targets: '.logo .letter',
+						opacity: [0, 1],
+						translateY: [60, 0],
+						duration: 1000,
+						delay: (el, i) => 100 * i
+					},
+					{
+						targets: '.status .letterStatus',
+						opacity: [0, 1],
+						easing: "easeInOutExpo",
+						duration: 100,
+						delay:  (el, i) => 10 * i
+					},
+					/*
+					{
+						targets: '.logo .status',
+						opacity: [0, 1],
+						translateY: [-60, 0],
+						scaleX: 1,
+						elasticity: 500,
+						duration: 1000,
+						delay: (el, i) => 2 * i
+					}, 
+					*/
+					{
+						targets: '.logo .line',
+						scaleX: [0.4, 1],
+						//opacity: [0, 1],
+						//rotate: '1turn',
+						easing: "easeInOutExpo",
+						duration: 2000
+					},
+					{
+						targets: '.logo',
+						translateY: [0, -50],
+						opacity: [1, 0],
+						easing: "easeInOutQuad",
+						duration: 1000,
+						delay: 1000
+					}
+				], 
+				 construct: {
+					 loop: false,
+					 autoplay: true
+				}
+		};
         this.e = ["\n %c %c %c FoxEngine 2.0 - 🦊 WebUI 🦊  %c  %c  https://foxesworld.ru/  %c %c ⋆🐾°%c🌲%c🍂 \n\n", "background: #c89f27; padding:5px 0;", "background: #c89f27; padding:5px 0;", "color: #c89f27; background: #030307; padding:5px 0;", "background: #c89f27; padding:5px 0;", "background: #bea8a8; padding:5px 0;", "background: #c89f27; padding:5px 0;", "color: #ff2424; background: #fff; padding:5px 0;", "color: #ff2424; background: #fff; padding:5px 0;", "color: #ff2424; background: #fff; padding:5px 0;"];
 		window.console.log.apply(console, this.e);
 		if(replaceData.user_group !== '1') {
@@ -35,6 +96,7 @@ class FoxEngine {
 			this.request = new Request("/", { key: replaceData.secureKey, user: replaceData.login}, true);
 			this.foxesInputHandler = new FoxesInputHandler(this);
 			this.utils = new Utils(this);
+			this.logo = new Logo(this, this.logoCfg);
 			this.user = new User(this);
 			this.servers = new Servers(this);
 			this.entryReplacer = new EntryReplacer(this);
@@ -44,8 +106,7 @@ class FoxEngine {
 			this.snow = new Snow(this);
 			this.snow.loadSnow();
             this.emojiArr = await this.emojis.parseEmojis();
-			
-			
+				
         } catch (error) {
             console.error('Error during initialization:', error);
             throw error;
@@ -55,7 +116,7 @@ class FoxEngine {
 	//@Deprecated
 	initialPage(){
 		if(location.hash == '')
-			this.page.loadPage("welcome", '#content')
+			this.page.loadPage("welcome", '#content');
 	}
 
     async sendPostAndGetAnswer(requestBody, answerType) {
@@ -66,12 +127,15 @@ class FoxEngine {
             switch (answerType) {
                 case "JSON":
                     return this.parseResponseJSON(response.responseText);
+				break;
 
                 case "HTML":
                     return this.parseResponseHTML(response.responseText);
+				break;
 
                 case "TEXT":
                     return response.responseText;
+				break;
 
                 default:
                     throw new Error("Invalid answerType specified");
@@ -123,7 +187,7 @@ class FoxEngine {
             return replacedTemplate;
         } catch (error) {
             console.error(error.message);
-            return ''; // Return an empty string or handle the error accordingly
+            return '';
         }
     }
 

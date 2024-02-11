@@ -35,9 +35,8 @@ const App = new Vue({
             }
         });
         setTimeout(() => {
-            foxEngine.utils.splitWrapLetters('.logo .title', 'letter');
-            foxEngine.utils.splitWrapLetters('.logo .status', 'letterStatus');
-			logoAnimation();
+            
+			foxEngine.logo.logoAnimation();
             foxEngine.servers.parseOnline();
         }, 500);
     }

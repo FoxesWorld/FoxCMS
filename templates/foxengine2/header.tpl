@@ -3,7 +3,6 @@
 		<!-- Logo -->
 		<div class="logo-block">
 			<a href="/" class="navbar-brand">
-				<link type="text/css" rel="stylesheet" href="{$tplDir}/logo/logo.css" />
 				<div class="logoWrapper">
 					<div class="logo uk-animation-slide-left">
 						<ul class="list-inline">
@@ -22,7 +21,6 @@
 						<span class="line uk-animation-expand"></span>
 					</div>
 				</div>
-				<script src="{$tplDir}/logo/animation.js"></script>
 			</a>
 		</div>
 		<!-- Nav -->

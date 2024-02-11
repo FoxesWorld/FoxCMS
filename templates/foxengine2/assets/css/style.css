@@ -1,4 +1,4 @@
- :root {
+  :root {
      --secondary-color: rgb(210,147,90);
      --button-primary: rgb(94, 136, 73);
      --button-primary-shadow: rgb(58, 88, 44);
@@ -255,6 +255,93 @@ margin: 5px;
     color: #a4ca31;
         font-size: 14px
 }
+
+/*--------------------------------------------------------------
+# Logo
+--------------------------------------------------------------*/
+
+.logoWrapper {
+    display: table;
+	margin: 1vh 1vw;
+}
+
+.logoWrapper .logo {
+    width: fit-content;
+}
+
+.logoWrapper .logo ul {
+    opacity: 0;
+}
+
+.logoWrapper .logo h1 {
+    font-size: 2vh;
+    margin: 0;
+    font-weight: 700;
+    font-family: 'FSElliotPro-Heavy';
+    color: #ac6343;
+}
+
+.logoWrapper .logo img {
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    max-height: 5vh;
+    min-height: 64px;
+    min-width: 64px;
+}
+
+.logoWrapper .titleWrapper {
+    display: inline-flex;
+    margin: 15px 0px;
+}
+
+.logoWrapper .logo .title .letter {
+    opacity: 0;
+    display: inline-block;
+    line-height: 1em;
+}
+
+.logoWrapper .logo .status .letterStatus {
+    opacity: 0;
+}
+
+.logo img {
+    content: url('../img/logo.png');
+}
+
+.logo .status {
+    font-family: 'Minecraft';
+    font-size: 0.9vh;
+    color: #a54e39;
+    text-transform: uppercase;
+    position: absolute;
+}
+
+.logo .additionalStatus {
+    display: inline-block;
+    transform-origin: 0 0;
+    opacity: 0;
+}
+
+.logo .line {
+    opacity: 0;
+    display: block;
+    height: 3px;
+    background-color: #a54e39;
+    transform-origin: 100% 100%;
+}
+
+ul.list-inline {
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+}
+
+.list-inline li {
+    display: inline;
+}
+
 
 /*--------------------------------------------------------------
 # Navigation
