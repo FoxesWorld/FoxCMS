@@ -3,16 +3,16 @@ export class EntryReplacer {
         this.foxEngine = foxEngine; 
     }
 
-    replaceText(text) {
-		this.replacedTimes = 0;
+    async replaceText(text) {
+        this.replacedTimes = 0;
         this.updatedText = text || "";
-		
+        
         if (this.foxEngine.userFields && Array.isArray(this.foxEngine.userFields)) {
             for (let j = 0; j < this.foxEngine.userFields.length; j++) {
                 let value = this.foxEngine.userFields[j];
                 let mask = "%" + value + "%";
                 while (this.updatedText.includes(mask)) {
-                    this.foxEngine.debugSend(" - Replacing " + value + " mask...", 'color: green');
+                    //this.foxEngine.debugSend(" - Replacing " + value + " mask...", 'color: green');
                     this.updatedText = this.updatedText.replace(mask, this.foxEngine.replaceData[value]);
                     this.replacedTimes++;
                 }
@@ -23,8 +23,9 @@ export class EntryReplacer {
         }
 
         this.updatedText = this.replaceEmojisWithImages(this.updatedText);
-		this.updatedText = this.replaceInputTags(this.updatedText);
-
+        this.updatedText = this.replaceInputTags(this.updatedText);
+        this.updatedText = await this.replaceLangTags(this.updatedText);
+		/*
         switch (this.replacedTimes) {
             case 0:
                 this.foxEngine.debugSend("No text for replacing was found", 'color: orange');
@@ -37,7 +38,7 @@ export class EntryReplacer {
             default:
                 this.foxEngine.debugSend("Replaced " + this.replacedTimes + " occurrences", 'color: green');
                 break;
-        }
+        } */
         return this.updatedText;
     }
 
@@ -128,8 +129,20 @@ replaceInputTags = (html) => {
     }
     return modifiedHtml;
 }
+    async replaceLangTags(html) {
+        let modifiedHtml = html;
+        let match;
+        while (match = modifiedHtml.match(/%lang\|([^\%]*)%/)) {
+            const langKey = match[1];
+            const langText = await this.replaceText(this.foxEngine.page.langPack[langKey]);
 
-
-
-
+            if (langText) {
+                modifiedHtml = modifiedHtml.replace(match[0], langText);
+				this.foxEngine.debugSend(" - replacing " + match[0], 'color: orange');
+            } else {
+                modifiedHtml = modifiedHtml.replace(match[0], "");
+            }
+        }
+        return modifiedHtml;
+    }
 }

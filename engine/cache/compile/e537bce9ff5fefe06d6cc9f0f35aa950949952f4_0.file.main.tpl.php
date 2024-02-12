@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-02-11 14:11:24
+/* Smarty version 4.0.4, created on 2024-02-12 21:33:32
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_65c8ab5ccb51c6_56193234',
+  'unifunc' => 'content_65ca647c329d34_13771714',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1707572115,
+      1 => 1707723501,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_65c8ab5ccb51c6_56193234 (Smarty_Internal_Template $_smarty_tpl) {
+function content_65ca647c329d34_13771714 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -38,6 +38,8 @@ function content_65c8ab5ccb51c6_56193234 (Smarty_Internal_Template $_smarty_tpl)
 	  <meta name="author" content="FoxesWorld" />
 	  <meta name="description" content="<?php echo $_smarty_tpl->tpl_vars['siteDesc']->value;?>
 " />
+	  <meta name="keywords" content="<?php echo $_smarty_tpl->tpl_vars['keywords']->value;?>
+">
       <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -73,6 +75,7 @@ function content_65c8ab5ccb51c6_56193234 (Smarty_Internal_Template $_smarty_tpl)
 		}
 	</style>
 
+	  
 	  <?php echo '<script'; ?>
  type="module" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/js/App.js"><?php echo '</script'; ?>

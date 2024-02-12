@@ -5,7 +5,7 @@
     private $rootDir;
     private $subDir;
     private $mask;
-    private $filesArray = [];
+    public $filesArray = [];
     private $filesNum = 0;
 
     public function __construct($rootDir, $subDir, $mask) {

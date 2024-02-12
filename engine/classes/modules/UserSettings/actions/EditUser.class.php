@@ -39,7 +39,7 @@ if(!defined('profile')) {
 			$this->db = $db;
 			$this->logger = $logger;
 			$this->requestArray = $request;
-			$this->statusInfo = $lang['profileUpdated'];
+			$this->statusInfo = $lang['profileEdit']['profileUpdated'];
 			if(@$request['login'] !== "null" && @$request['login']) {
 				$this->inputLogin = $request['login'];
 				if(init::$usrArray['login'] !== "anonymous") {
@@ -71,11 +71,11 @@ if(!defined('profile')) {
 														AuthManager::updateSession($db);
 													} else {
 														$this->status = "warn";
-														$this->statusInfo = $lang['restrictduser_group'];
+														$this->statusInfo = $lang['profileEdit']['restrictduser_group'];
 													}
 												} else {
 													$this->status = "warn";
-													$this->statusInfo = $lang['invaliduser_group'];
+													$this->statusInfo = $lang['profileEdit']['invaliduser_group'];
 												}
 											//} else {
 											//	$this->status = "error";
@@ -83,7 +83,7 @@ if(!defined('profile')) {
 											//}
 											} else {
 												$this->status = "error";
-												$this->statusInfo = $lang['nouser_group'];
+												$this->statusInfo = $lang['profileEdit']['nouser_group'];
 											}
 										} else {
 										$this->status = "warn";
@@ -91,35 +91,35 @@ if(!defined('profile')) {
 										}
 									} else {
 										$this->status = "warn";
-										$this->statusInfo = $lang['invalidEmail'];
+										$this->statusInfo = $lang['profileEdit']['invalidEmail'];
 									}
 								} else {
 									$this->status = "error";
-									$this->statusInfo = $lang['noEmail'];
+									$this->statusInfo = $lang['profileEdit']['noEmail'];
 								}
 							} else {
 								$this->status = "warn";
-								$this->statusInfo = $lang['incorrectPassword'];
+								$this->statusInfo = $lang['profileEdit']['incorrectPassword'];
 							}
 						} else {
 							$this->status = "error";
-							$this->statusInfo = $lang['noPassword'];
+							$this->statusInfo = $lang['profileEdit']['noPassword'];
 						}
 					} else {
 						$this->status = "warn";
-						$this->statusInfo = str_replace('{user}', $this->inputLogin, $lang['hashMismatch']);
+						$this->statusInfo = str_replace('{user}', $this->inputLogin, $lang['profileEdit']['hashMismatch']);
 					}
 				} else {
 					$this->status = "error";
-					$this->statusInfo = $lang['noHashSent'];
+					$this->statusInfo = $lang['profileEdit']['noHashSent'];
 				}
 				} else {
 					$this->status = "warn";
-					$this->statusInfo = $lang['needAuthorise'];	
+					$this->statusInfo = $lang['profileEdit']['needAuthorise'];	
 				}
 			} else {
 				$this->status = "error";
-				$this->statusInfo = $lang['noLoginSent'];
+				$this->statusInfo = $lang['profileEdit']['noLoginSent'];
 			}
 			die('{"message": "'.$this->statusInfo.'", "type": "'.$this->status.'"}');
 		}

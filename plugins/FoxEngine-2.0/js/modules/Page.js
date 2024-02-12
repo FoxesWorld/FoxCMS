@@ -3,52 +3,75 @@ import { Gallery } from './Gallery/Gallery.js';
 export class Page {
     constructor(foxEngine) {
         this.foxEngine = foxEngine;
+		this.metaTags = ['description', 'keywords'];
+		this.langPack = [];
         this.selectPage = {
             thisPage: "",
             thatPage: ""
         };
     }
 
-    async loadPage(page, block) {
-        if (page === this.selectPage.thisPage || this.selectPage.thisPage === undefined) {
-            return;
-        }
+	async loadPage(page, block) {
+		if (page === this.selectPage.thisPage || this.selectPage.thisPage === undefined) {
+			return;
+		}
 
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
 
-        const response = await this.foxEngine.sendPostAndGetAnswer({
-            "getOption": page
-        }, "HTML");
+		const response = await this.foxEngine.sendPostAndGetAnswer({
+			"getOption": page
+		}, "HTML");
 
-        const option = this.foxEngine.utils.getData(response, 'useroption');
-        const content = this.foxEngine.utils.getData(response, 'pageContent');
+		const option = this.foxEngine.utils.getData(response, 'useroption');
+		const content = this.foxEngine.utils.getData(response, 'pageContent');
 
-        if (option !== undefined) {
-            const jsonOption = JSON.parse(option.textContent);
+		if (option !== undefined) {
+			const jsonOption = JSON.parse(option.textContent);
+			if(jsonOption.langPack !== undefined) {
+				this.langPack = await this.loadLangPack(jsonOption.langPack);
+			}
+			if (jsonOption.onLoad) {
+				const func = jsonOption.onLoad + (jsonOption.onLoadArgs ? `(${jsonOption.onLoadArgs})` : '');
 
-            if (jsonOption.onLoad) {
-                const func = jsonOption.onLoad + (jsonOption.onLoadArgs ? `(${jsonOption.onLoadArgs})` : '');
-
-                setTimeout(() => {
-                    eval(func);
-                }, 500);
-            }
-
-            // Check if foxEngine.entryReplacer is defined
-            if (this.foxEngine.entryReplacer) {
-                await this.loadData(this.foxEngine.entryReplacer.replaceText(response.body.innerHTML), block);
-                this.setPage(page);
-                location.hash = '#page/' + page;
-            } else {
-                console.error("Invalid or undefined foxEngine.entryReplacer.replaceText");
-            }
-        }
-
-        $(response).find('useroption').remove();
+				setTimeout(() => {
+					eval(func);
+				}, 500);
+			}
+			
+			if (this.foxEngine.entryReplacer) {
+				await this.loadData(await this.foxEngine.entryReplacer.replaceText(response.body.innerHTML), block);
+				this.setPage(page);
+				location.hash = '#page/' + page;
+			} else {
+				console.error("Invalid or undefined foxEngine.entryReplacer.replaceText");
+			}
+			let thisTag;
+			for(let j = 0; j < this.metaTags.length; j++){
+				thisTag = this.metaTags.at(j);
+				this.updateMetaTags(jsonOption[thisTag], thisTag);
+			}
+		}
+		$(response).find('useroption').remove();
+	}
+	
+	async loadLangPack(langPackKey) {
+		let langText = await this.foxEngine.sendPostAndGetAnswer({sysRequest: "getLangPack", langPackKey: langPackKey}, "JSON");
+        return langText || null;
     }
+
+	updateMetaTags(content, tagName) {
+		if (content && content.length > 0) {
+			const metaTag = $(`meta[name="${tagName}"]`);
+			if (metaTag.length > 0) {
+				metaTag.attr('content', content);
+			} else {
+				console.error(`Meta tag with name "${tagName}" not found.`);
+			}
+		}
+	}
 
 
     async loadData(data, block) {

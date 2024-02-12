@@ -7,6 +7,7 @@
       <meta name="format-detection" content="telephone=no" />
 	  <meta name="author" content="FoxesWorld" />
 	  <meta name="description" content="{$siteDesc}" />
+	  <meta name="keywords" content="{$keywords}">
       <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -33,6 +34,7 @@
 		}
 	</style>
 
+	  
 	  <script type="module" src="{$tplDir}/assets/js/App.js"></script>
 	  <script type="module" src="{$tplDir}/assets/js/metrics.js"></script>
 	  <script type="module" src="{$tplDir}/assets/js/cookie.js"></script>

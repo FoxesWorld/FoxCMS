@@ -1,10 +1,11 @@
 
-	import { Settings } from "./modules/Settings.js";
-	import { Users } from "./modules/Users.js";
-	import { Modules } from "./modules/Modules.js";
-	import { Servers } from "./modules/Servers.js";
-	import { GroupAssoc } from "./modules/GroupAssoc.js";
-	import { TemplateEditor } from "./modules/TemplateEditor.js";
+	import { Settings } from "./options/Settings.js";
+	import { Users } from "./options/Users.js";
+	import { Modules } from "./options/Modules.js";
+	import { Servers } from "./options/Servers.js";
+	import { GroupAssoc } from "./options/GroupAssoc.js";
+	import { TemplateEditor } from "./options/TemplateEditor.js";
+	import { Pages } from "./options/Pages.js";
 
 class AdminPanel {	
 
@@ -16,11 +17,11 @@ class AdminPanel {
 		this.servers = new Servers();
 		this.groupAssoc = new GroupAssoc();
 		this.templateEditor = new TemplateEditor();
+		this.pages = new Pages();
 	}
 	
 	
 	setAdmOption(option) {
-		//FoxesInput.initialised = false;
         $(".admOpt-" + option).addClass("active");
         if (option != this.selectoption.thisAdmoption) {
            this.selectoption.thatAdmoption = this.selectoption.thisAdmoption;
@@ -30,10 +31,11 @@ class AdminPanel {
 		window.foxEngine.foxesInputHandler.formInit(500);
     };
 	
-	loadAdmOpt(option){
-		//eval("let "+option + " = new "+this.capitalizeFirstLetter(option)+"();"
+	async loadAdmOpt(option){
 		eval("this."+option+".parse"+this.capitalizeFirstLetter(option)+"();");
+		eval("this."+option+".addContent();");
 		this.setAdmOption(option);
+		
 	};
 	
 	capitalizeFirstLetter(string) {

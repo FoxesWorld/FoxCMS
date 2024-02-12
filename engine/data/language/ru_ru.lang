@@ -3,21 +3,52 @@
 	$lang = array(
 	
 		/*Bugs*/
-		'bugs' => "<div class=\"alert alert-danger\" role=\"alert\">Возможны баги!</div>",
+		'bugs' => '<div class="alert alert-danger" role="alert">Возможны баги!</div>',
 	
 		/*ProfilEdit*/
-		'noLoginSent' => "Не передан логин!",
-		'noHashSent' => "Не передан хеш!",
-		'hashMismatch' => "Не подошёл хеш для {user}!",
-		'noPassword' => "Не введен пароль!",
-		'incorrectPassword' => "Неправильный пароль!",
-		'noEmail' => "Не введена почта!",
-		'invalidEmail' => "Не валидная почта!",
-		'noUsergroup' => "Не передана группа!",
-		'invalidUsergroup' => "Не твоя группа!",
-		'restrictdUsergroup' => "Вашей группе запрещено изменять профиль",
-		'profileUpdated' => "Профиль обновлен!",
-		'needAuthorise' => "Необходима авторизация!",
+		'profileEdit' => array(
+			'noLoginSent' => "Не передан логин!",
+			'noHashSent' => "Не передан хеш!",
+			'hashMismatch' => "Не подошёл хеш для {user}!",
+			'noPassword' => "Не введен пароль!",
+			'incorrectPassword' => "Неправильный пароль!",
+			'noEmail' => "Не введена почта!",
+			'invalidEmail' => "Не валидная почта!",
+			'noUsergroup' => "Не передана группа!",
+			'invalidUsergroup' => "Не твоя группа!",
+			'restrictdUsergroup' => "Вашей группе запрещено изменять профиль",
+			'profileUpdated' => "Профиль обновлен!",
+			'needAuthorise' => "Необходима авторизация!"
+		),
+		
+		
+		'userProfile' => array(
+			'profileTitle' => "Давай, меаняй! :serum:",
+			'profileDesc' => "Посмотрим %realname%, что ты тут можешь поменять...",
+			'personalisationTitle' => "Давай, украшай!",
+			'personalisationDesc' => "Посмотрим %realname%, что ты тут можешь сделать...",
+			'securityTitle' => "Давай, защищайся!",
+			'securityDesc' => "Настройки безопасности, %realname%, изменить может тут",
+			
+			'profileOf' =>"Профиль пользователя ",
+			'profileSettings' => "Настройки профиля",		
+			'takeMeBack' => "Верни меня назад",
+			'personalisation' => "Персонализация",
+			'security' => "Безопасность",
+			'edit' => "Редактировать",
+			'submit' => "Изменить",
+			
+			'fullName' => "Имя",
+			'status' => "Статус",
+			'land' => "Зона обитания",
+			'email' => "Электронная почта ",
+			'currentPass' => "Текущий пароль",
+			'userGroup' => "Группа пользователя",
+			'loadPhoto' => "Загрузка фото профиля:",
+			'colorScheme' => "Цветовая схема профиля:",
+			'units' => "Юниты",
+			'online' => "Последний вход: "
+		),
 		
 		/*LoadFile*/
 		'successLoad' => "Успешная загрузка",
@@ -42,11 +73,6 @@
 		'enterCaptcha' => "Капча не завершена!",
 		'dataProcessing' => "Необходимо принять соглашение об обработке персональных данных!",
 		'acceptRules' => "Нужно согласиться с правилами!",
-		
-		/* TelegramSend */
-		'newOrder' => "Поступил новый заказ!",
-		'mobilePhoneNumber' => "Телефон",
-		'fullName' => "Имя",
 		
 		/*Settings*/
 		'dbHost-title' => "Хост базы данных",
@@ -90,9 +116,9 @@
 		"keyCheck-desc" => "",
 		"webserviceName-desc" => "",
 		"gameFiles-title" => "Игровые файлы",
-		"gameFiles-desc" =>"<div class=\"alert alert-warning\" role=\"alert\">Используется лаунчером!</div>",
+		"gameFiles-desc" =>"В какой директории лежат файлы игры",
 		"jreDir-title" =>  "Путь к архивам Jre",
-		"jreDir-desc" => "<div class=\"alert alert-warning\" role=\"alert\">Используется лаунчером!</div>",
+		"jreDir-desc" => "В какой директории лежат JVM",
 		"userOptions-title" => "Директория опций пользователя",
 		"userOptions-desc" => "Директория шаблона в которой находятся опции и страницы для различных групп пользователей",
 		"OptionReplaceValues-title" => "Заменяемые фрагменты текста",
@@ -125,6 +151,7 @@
 		"databaseTab" => '<i class="fa fa-database"></i> База данных',
 		"frontendSettingsTab" => '<i class="fa fa-code"></i> JavaScript',
 		"siteSettingsTab" => '<i class="fa fa-cogs"></i> Настройки сайта',
+		"launcherSettingsTab" => '<i class="fa fa-cogs"></i> Настройки Лаунчера',
 		"securitySetingsTab" => '<i class="fa fa-shield"></i> Безопасность',
 		"otherTab" => '<i class="fa fa-archive"></i> Другое',
 		

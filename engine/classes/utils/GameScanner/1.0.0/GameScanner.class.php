@@ -22,7 +22,7 @@ if(!defined('FOXXEY')) {
 		function __construct($client, $version, $platform){
 			global $config;
 			$this->platform = $platform;
-			$this->clientDir = ROOT_DIR.UPLOADS_DIR.$config['siteSettings']['gameFiles'];
+			$this->clientDir = ROOT_DIR.UPLOADS_DIR.$config['launcherSettings']['gameFiles'];
 			$this->dirsToCheck = json_decode($this->dirsToCheck($client, $version), true);
 		}
 		

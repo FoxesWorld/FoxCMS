@@ -1,4 +1,12 @@
- <useroption> { "optionTitle": "Админ панель", "optionBlock": "#usrMenu", "optionPreText": "<i style='color: #d8e815' class='fa fa-bolt'></i>", "optionGroup": 1, "optionClass": "dropdown-item", "type": "page" } </useroption>
+ <useroption> { 
+	"optionTitle": "Админ панель",
+	"optionBlock": "#usrMenu",
+	"optionPreText": "<i style='color: #d8e815' class='fa fa-bolt'></i>",
+	"optionGroup": 1, 
+	"optionClass": "dropdown-item",
+	"type": "page" 
+	} 
+</useroption>
  <pageContent>
      <script type="module" src="/plugins/AdminTools-1.0.0/js/AdminPanel.js"></script>
      <div class="adminPanel">
@@ -14,7 +22,7 @@
      </div>
      <script>
 (async function() {
-    const admOptions = ["settings", "users", "modules", "groupAssoc", "servers", "templateEditor"];
+    const admOptions = ["settings", "users", "modules", "groupAssoc", "servers", "templateEditor", "pages"];
     const blockTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'admin/panel.tpl');
     admOptions.forEach(async (option, index) => {
         let panelBlock = await foxEngine.replaceTextInTemplate(blockTpl, {

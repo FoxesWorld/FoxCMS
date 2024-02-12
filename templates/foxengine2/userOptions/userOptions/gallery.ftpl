@@ -1,6 +1,7 @@
 <useroption>
 {
 	"optionTitle": "Галлерея",
+	"description": "Галлерея FoxesCraft",
 	"optionBlock": "#usrMenu",
 	"optionPreText": "<i style='color: #d8e815' class='fa fa-book'></i>",
 	"optionGroup": [1,4,5],

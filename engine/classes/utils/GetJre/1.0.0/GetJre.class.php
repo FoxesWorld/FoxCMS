@@ -7,7 +7,7 @@
 		
 		function __construct($version) {
 			global $config;
-			$this->jre = ROOT_DIR.UPLOADS_DIR.$config['siteSettings']['jreDir'].$version;
+			$this->jre = ROOT_DIR.UPLOADS_DIR.$config['launcherSettings']['jreDir'].$version;
 			$this->jreOutput = array(
 				'filename' => str_replace(ROOT_DIR, "", $this->jre).".zip",
 				'hash'     => md5_file($this->jre.".zip"),

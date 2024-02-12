@@ -1,5 +1,5 @@
 <?php 
-    /* [11.02.2024] */
+    /* [12.02.2024] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -17,10 +17,13 @@ $config = array(
 		"keywords" => "FoxEngine,FoxCMS,FoxesWorld,AidenFox,Лисий Мир,Независимая студия,Независимая игровая студия,Over Fox,OverFox,мистер лис craft,fox craft browser game,foxcraft дэйз,фокс крафт айли,foxes craft,fox craft,foxcraft,Indie,GameDev Indie,Game,GameDev",
 		"contactEmail" => "no-reply@foxesworld.ru",
 		"contactPhone" => "null",
+		"ServiceVersion" => "2.4.18"
+),
+
+	"launcherSettings" => array(
 		"gameFiles" => "files/clients/",
 		"jreDir" => "files/runtime/",
-		"ServiceVersion" => "2.4.17"
-),
+	),
 
 	"securitySetings" => array(
 		"reCaptchaSecret" => "6LcKeBoiAAAAAK-dFGsiDyqZvO_1u7MKWscdEJqJ",

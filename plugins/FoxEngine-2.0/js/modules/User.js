@@ -121,13 +121,13 @@ export class User {
             "user_doaction": "ViewProfile"
         }, "TEXT");
 
-        foxEngine.page.loadData(this.foxEngine.entryReplacer.replaceText(userProfile), foxEngine.replaceData.contentBlock);
+        foxEngine.page.loadData(await this.foxEngine.entryReplacer.replaceText(userProfile), foxEngine.replaceData.contentBlock);
         location.hash = 'user/' + userDisplay;
         foxEngine.foxesInputHandler.formInit(1000);
     };
 
     async showProfilePopup(user, dialogOptions) {
-        //$("#dialog").dialog("option", "title", user);
+        $("#dialog").dialog("option", "title", user);
 
         let response = await foxEngine.sendPostAndGetAnswer({
             "userDisplay": user,

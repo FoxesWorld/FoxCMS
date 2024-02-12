@@ -1,4 +1,4 @@
- <div class="modal_app_title">Пополнение счета:</div>
+   <div class="modal_app_title">Пополнение счета:</div>
  <div class="modal_app_close" onclick="foxEngine.modalApp.closeModalApp();"></div>
  <div class="modal_app_content">
      <style>

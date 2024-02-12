@@ -19,7 +19,7 @@
 			}
 			
 			public function requestListener(){
-				global $config;
+				global $config, $lang;
 				if(isset(RequestHandler::$REQUEST[$this->requestHeader])){
 					switch(RequestHandler::$REQUEST[$this->requestHeader]) {
 						
@@ -49,6 +49,12 @@
 								$serverParser = new ServerParser($this->db, @RequestHandler::$REQUEST['login']);
 								die($serverParser->parseServers(@RequestHandler::$REQUEST['server']));
 						//}
+						break;
+						
+						case "getLangPack":
+							if(isset($lang[@RequestHandler::$REQUEST['langPackKey']])) {
+								die(json_encode($lang[@RequestHandler::$REQUEST['langPackKey']], JSON_UNESCAPED_UNICODE));
+							}
 						break;
 						
 						case "parseMonitor":
@@ -112,6 +118,8 @@
 						init::classUtil('GameScanner', "1.0.0");
 							$gameScanner = new GameScanner(@RequestHandler::$REQUEST['client'], @RequestHandler::$REQUEST['version'], @RequestHandler::$REQUEST['platform']);
 							die($gameScanner->checkfiles());
+						} else {
+							die('{"message": "Invalid Agent!"}');
 						}
 						break;
 						
@@ -138,7 +146,7 @@
 							$subDir = "/".@RequestHandler::$REQUEST['type'];
 							$downloadScanner = new inDirScanner($path, $subDir, "*");
 							$file = $this->selectLatest($downloadScanner->filesArray);
-							die('{"filename": "'.$file.'", "fileHash": "'.md5_file($path.$subDir.DIRECTORY_SEPARATOR.$file).'"}');
+							die('{"filename": "'.$file['name'].'", "fileHash": "'.md5_file($path.$subDir.DIRECTORY_SEPARATOR.$file['name']).'"}');
 						break;
 						
 						case "getImg":
@@ -183,7 +191,7 @@
 			
 			  private function selectLatest($files) {
 				usort($files, function($a, $b) {
-					return version_compare($b, $a);
+					return version_compare($b['name'], $a['name']);
 				});
 
 				return reset($files);

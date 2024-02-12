@@ -1,4 +1,4 @@
-<div class="module">
+ <div class="module">
 	<span class="moduleSettings module-{moduleName}">
 		<i class="fa fa-cogs" aria-hidden="true"></i>
 	</span>
