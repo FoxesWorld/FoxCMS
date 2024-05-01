@@ -1,5 +1,5 @@
 <?php 
-    /* [12.02.2024] */
+    /* [01.05.2024] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -14,7 +14,7 @@ $config = array(
 		"siteTitle" => "Лисий Мир",
 		"siteStatus" => "Experimental",
 		"siteDesc" => "Независимая игровая студия",
-		"keywords" => "FoxEngine,FoxCMS,FoxesWorld,AidenFox,Лисий Мир,Независимая студия,Независимая игровая студия,Over Fox,OverFox,мистер лис craft,fox craft browser game,foxcraft дэйз,фокс крафт айли,foxes craft,fox craft,foxcraft,Indie,GameDev Indie,Game,GameDev",
+		"keywords" => "FoxEngine,FoxCMS,FoxesWorld,AidenFox,Лисий Мир,Независимая студия,Независимая игровая студия,Over Fox,OverFox,мистер лис craft,fox craft browser game,foxcraft дэйз,фокс крафт айли,foxes craft,fox craft,foxcraft,Indie,GameDev Indie,Game,GameDev,лисиный мир,leks craft,fox craft minecraf,лиса сафт,лисьи огни сайт",
 		"contactEmail" => "no-reply@foxesworld.ru",
 		"contactPhone" => "null",
 		"ServiceVersion" => "2.4.18"
@@ -22,8 +22,8 @@ $config = array(
 
 	"launcherSettings" => array(
 		"gameFiles" => "files/clients/",
-		"jreDir" => "files/runtime/",
-	),
+		"jreDir" => "files/runtime/"
+),
 
 	"securitySetings" => array(
 		"reCaptchaSecret" => "6LcKeBoiAAAAAK-dFGsiDyqZvO_1u7MKWscdEJqJ",

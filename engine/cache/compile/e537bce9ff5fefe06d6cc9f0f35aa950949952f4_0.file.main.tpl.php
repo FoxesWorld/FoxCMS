@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-02-12 21:33:32
+/* Smarty version 4.0.4, created on 2024-05-01 18:36:09
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_65ca647c329d34_13771714',
+  'unifunc' => 'content_6632616923b356_54967028',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1707723501,
+      1 => 1714574399,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_65ca647c329d34_13771714 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6632616923b356_54967028 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -73,9 +73,8 @@ function content_65ca647c329d34_13771714 (Smarty_Internal_Template $_smarty_tpl)
 			z-index: 999999999;
 			top: 0;
 		}
-	</style>
-
-	  
+		
+	</style>	  
 	  <?php echo '<script'; ?>
  type="module" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/js/App.js"><?php echo '</script'; ?>
@@ -87,6 +86,31 @@ function content_65ca647c329d34_13771714 (Smarty_Internal_Template $_smarty_tpl)
 	  <?php echo '<script'; ?>
  type="module" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/js/cookie.js"><?php echo '</script'; ?>
+>
+
+	  <?php echo '<script'; ?>
+>
+    // Function to set background image based on season
+    function setBackgroundBySeason() {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth() + 1;
+        const body = document.querySelector('body');
+
+        let backgroundImage = '';
+        if (currentMonth >= 3 && currentMonth <= 5) {
+            backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/spring.png)';
+        } else if (currentMonth >= 6 && currentMonth <= 8) {
+            backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/summer.png)';
+        } else if (currentMonth >= 9 && currentMonth <= 11) {
+            backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/autumn.png)';
+        } else {
+            backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/winter.png)';
+        }
+
+        body.style.backgroundImage = backgroundImage;
+    }
+    window.onload = setBackgroundBySeason;
+<?php echo '</script'; ?>
 >
    </head>
    <body>

@@ -27,6 +27,4 @@
 
 			return json_encode($serversArray);
 		}
-
-		
 	}

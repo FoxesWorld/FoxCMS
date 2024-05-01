@@ -96,7 +96,7 @@
 								die($base64_image);
 							}
 							break;
-							
+
 							case "skinPath":
 							init::classUtil('SkinViewer', "1.0.0");
 								$file_name = @RequestHandler::$REQUEST['login'] ?? null;

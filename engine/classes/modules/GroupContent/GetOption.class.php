@@ -24,7 +24,7 @@ class GetOption extends UserOptions {
 			*	SERVER SIDE VERIFICATION
 			*/
 			$SSV = new SSV($pageTemplate, $login, $userData, $db, $logger);
-        }
+			}
     }
 	
 	public static function getPageContent($pageObject, $filePath){

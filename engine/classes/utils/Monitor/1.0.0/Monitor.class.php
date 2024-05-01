@@ -48,7 +48,7 @@ class foxesMon {
     private function getServersData() {
         $serversData = array();
         foreach ($this->monSrv as $e) {
-            $get = $this->temp->getq($e[0], $this->time['out']);
+            $get = $this->temp->getp($e[0], $this->time['out']);
 
             $serverData = array(
                 'serverName' => $e[2],
@@ -74,7 +74,7 @@ class foxesMon {
 
     private function serverPinging() {
         foreach ($this->monSrv as $e) {
-            $get = $this->temp->getq($e[0], $this->time['out']);
+            $get = $this->temp->getp($e[0], $this->time['out']);
             @$this->all['totalPlayersOnline'] += isset($get['player_online']) ? $get['player_online'] : 0;
             @$this->all['totalPlayersMax'] += isset($get['player_max']) ? $get['player_max'] : 0;
         }

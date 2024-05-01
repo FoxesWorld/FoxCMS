@@ -66,9 +66,9 @@ class MinecraftServer {
 		stream_set_blocking($this->socket, true);
 		$Challenge = $this->GetChallenge();
 		$info = ['ping' => round((microtime(true)-$thetime)*1000)];
-		@$data = $this->writedata(self :: STATISTIC, $Challenge.Pack('c*', 0x00, 0x00, 0x00, 0x00));
+		@$data = $this->writedata(self::STATISTIC, $Challenge.Pack('c*', 0x00, 0x00, 0x00, 0x00));
 		if(!$data)
-			return $this->getp($address, $timeout);// Пробуем получить данные обычным способом
+			return $this->getp($address, $timeout);
 		fclose($this->socket);
 		$Last = '';
 		$data = @substr($data, 11);
