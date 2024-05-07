@@ -167,12 +167,12 @@ replaceInputTags = (html) => {
         let match;
         while (match = modifiedHtml.match(/%lang\|([^\%]*)%/)) {
             const langKey = match[1];
-            const langText = await this.replaceText(this.foxEngine.page.langPack[langKey]);
-
+            const langText = this.foxEngine.page.langPack[langKey];
+			console.log(langKey);
             if (langText) {
                 modifiedHtml = modifiedHtml.replace(match[0], langText);
             } else {
-                modifiedHtml = modifiedHtml.replace(match[0], "");
+                modifiedHtml = modifiedHtml.replace(match[0], langKey);
             }
         }
         return modifiedHtml;

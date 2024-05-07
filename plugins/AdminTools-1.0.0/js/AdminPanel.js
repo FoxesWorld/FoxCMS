@@ -7,7 +7,7 @@
 	import { TemplateEditor } from "./options/TemplateEditor.js";
 	import { Pages } from "./options/Pages.js";
 
-class AdminPanel {	
+class AdminPanel {
 
 	constructor(){
 		this.selectoption = {thisAdmoption: "",thatAdmoption: ""}

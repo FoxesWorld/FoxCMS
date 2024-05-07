@@ -23,8 +23,21 @@
 		
 		/*adminPanel*/
 		'adminPanel' => array(
+			'adminOptions' => "Опции Администратора",
 			'settings.title' => "Настройки",
 			'settings.desc' => "Настройка сайта",
+			'users.title' => "Пользователи",
+			'users.desc' => "Список пользователей проекта",
+			'modules.title' => "Модули",
+			'modules.desc' => "Модули FoxEngine",
+			'groupAssoc.title' => "Группы",
+			'groupAssoc.desc' => "Ассоциация групп",
+			'servers.title' => "Сервера",
+			'servers.desc' => "Конфигурация игровых серверов",
+			'templateEditor.title' => "Шаблоны",
+			'templateEditor.desc' => "Редактор шаблонов",
+			'pages.title' => "Страницы",
+			'pages.desc' => "Страницы сайта"
 		),
 		
 		

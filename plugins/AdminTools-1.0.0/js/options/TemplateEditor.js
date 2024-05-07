@@ -5,7 +5,7 @@ export class TemplateEditor {
 
     async parseTemplateEditor(path = "/") {
         let fileTree = await foxEngine.sendPostAndGetAnswer({ "admPanel": "scanTemplates", "path": path }, "JSON");
-        $("#adminContent").html(await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/templateEditor/templateEditor.tpl'));
+        $("#adminContent").html(await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/templateEditor/templateEditor.tpl', true));
         this.buildFileTree(fileTree, "#filetree");
     }
 

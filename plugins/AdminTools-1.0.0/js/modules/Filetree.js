@@ -96,7 +96,7 @@ export class FileTree {
             case 'js':
             case 'html':
             case undefined:
-                const editorTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'editor.tpl');
+                const editorTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'editor.tpl', true);
                 previewContent = await foxEngine.replaceTextInTemplate(editorTpl,
                     {
                         content: await this.readFile(prefixedFilePath),

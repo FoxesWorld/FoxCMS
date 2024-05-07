@@ -183,7 +183,7 @@ class FoxEngine {
         console.log("%c" + message, style);
     };
 
-    async loadTemplate(filePath) {
+    async loadTemplate(filePath, replaceTags) {
         try {
             let response = await fetch(filePath);
 
@@ -192,12 +192,16 @@ class FoxEngine {
             }
 
             let htmlContent = await response.text();
-			
+			if(replaceTags === true) {
+				return this.entryReplacer.replaceText(htmlContent);
+			} else {
+				return htmlContent;
+			}
 
-            return this.entryReplacer.replaceText(htmlContent);
+            
         } catch (error) {
             console.error(error.message);
-            return ''; // Return an empty string or handle the error accordingly
+            return '';
         }
     }
 	

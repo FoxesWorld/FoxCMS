@@ -8,7 +8,7 @@ export class Servers {
     async parseOnline() {
         try {
             // Load the template only once
-            const entryTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/serverEntry.tpl');
+            const entryTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/serverEntry.tpl', true);
 
             let parsedJson = await foxEngine.sendPostAndGetAnswer({
                 sysRequest: 'parseMonitor'
@@ -42,7 +42,7 @@ export class Servers {
                 let serversHtml = serversHtmlResults.join('');
 
                 // Replace text in the total online template
-                const totalOnlineTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/totalOnline.tpl');
+                const totalOnlineTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/totalOnline.tpl', true);
                 let totalOnlineHtml = await foxEngine.replaceTextInTemplate(totalOnlineTpl, {
                     totalPlayersOnline: parsedJson.totalPlayersOnline,
                     totalPlayersMax: parsedJson.totalPlayersMax,
@@ -66,7 +66,7 @@ export class Servers {
 		if (serverName === foxEngine.page.selectPage.thisPage || foxEngine.page.selectPage.thisPage === undefined) {
             return;
         }
-        const pageTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'serverPage/serverPage.tpl');
+        const pageTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'serverPage/serverPage.tpl', true);
         try {
             // Fetch server information
             let server = await foxEngine.sendPostAndGetAnswer({

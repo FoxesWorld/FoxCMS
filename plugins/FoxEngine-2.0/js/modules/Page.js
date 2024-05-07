@@ -111,8 +111,6 @@ export class Page {
 		}
 	}
 
-
-
     async loadData(data, block) {
         $(block).fadeOut(500);
 

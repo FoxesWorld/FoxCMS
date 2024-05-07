@@ -17,7 +17,7 @@ class Users {
 
             if (usersArray.length > 0) {
                 //$("#usersList").html("");
-				let userTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/users/userRow.tpl');
+				let userTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/users/userRow.tpl', true);
                 for (let j = 0; j < usersArray.length; j++) {
                     let singleUser = usersArray.at(j);
                     let login = singleUser[j].login;

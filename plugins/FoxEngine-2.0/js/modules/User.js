@@ -71,7 +71,7 @@ export class User {
     };
 
     async parseBadges(user) {
-        const badgeTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'badge.tpl');
+        const badgeTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'badge.tpl', true);
         try {
             let parsedJson = await this.getBadgesArray(user);
 
@@ -148,7 +148,7 @@ export class User {
             let lastUser = await foxEngine.sendPostAndGetAnswer({
                 userAction: "lastUser"
             }, "JSON");
-            let userView = await foxEngine.replaceTextInTemplate(await foxEngine.loadTemplate(foxEngine.elementsDir + 'lastUser.tpl'), {
+            let userView = await foxEngine.replaceTextInTemplate(await foxEngine.loadTemplate(foxEngine.elementsDir + 'lastUser.tpl', true), {
                 colorScheme: lastUser.colorScheme,
                 profilePhoto: lastUser.profilePhoto,
                 login: lastUser.login,

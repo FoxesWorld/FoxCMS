@@ -9,7 +9,7 @@ export class Modules {
         try {
             let modulesAmmount = json.modulesammount;
             let modulesArray = json.modulesArray;
-            let moduleTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/modules/moduleElement.tpl');
+            let moduleTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/modules/moduleElement.tpl', true);
 
             for (let i = 0; i < modulesAmmount; i++) {
                 let module = modulesArray[i];

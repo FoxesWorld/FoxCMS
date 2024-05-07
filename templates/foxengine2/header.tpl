@@ -83,7 +83,7 @@
                         {else}
                         <script>
                             async function addFunds(){
-                                const template = await foxEngine.loadTemplate(foxEngine.elementsDir+'payment.tpl');
+                                const template = await foxEngine.loadTemplate(foxEngine.elementsDir+'payment.tpl', true);
                                 let data = foxEngine.entryReplacer.replaceText(template, "");
                                 foxEngine.modalApp.showModalApp(900, data);
                                 //

@@ -62,7 +62,7 @@ export class Servers {
     async displayServers(servers) {
         const serversList = $("#serversList");
         serversList.html("");
-        const serverRowTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/servers/serverRow.tpl');
+        const serverRowTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/servers/serverRow.tpl', true);
 
         for (let index = 0; index < servers.length; index++) {
             const server = servers[index];

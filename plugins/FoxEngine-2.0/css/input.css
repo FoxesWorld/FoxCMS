@@ -392,8 +392,9 @@ a {
 }
 
 .selectedPage {
-	color: #161313;
-	background: #b16c2794;
+	color: #a76161;
+	background: #f7eee475;
+	border-radius: 5px;
 	cursor: not-allowed;
 	padding: 10px;
 }

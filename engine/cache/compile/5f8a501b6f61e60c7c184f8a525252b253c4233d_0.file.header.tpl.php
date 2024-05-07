@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-05-07 11:57:51
+/* Smarty version 4.0.4, created on 2024-05-07 13:26:46
   from '/var/www/FoxCMS/templates/foxengine2/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6639ed0f52d794_15497459',
+  'unifunc' => 'content_663a01e6a466d9_95363367',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5f8a501b6f61e60c7c184f8a525252b253c4233d' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/header.tpl',
-      1 => 1715063495,
+      1 => 1715076453,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6639ed0f52d794_15497459 (Smarty_Internal_Template $_smarty_tpl) {
+function content_663a01e6a466d9_95363367 (Smarty_Internal_Template $_smarty_tpl) {
 ?>       <header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg bar">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <!-- Logo -->
@@ -116,7 +116,7 @@ function content_6639ed0f52d794_15497459 (Smarty_Internal_Template $_smarty_tpl)
                         <?php echo '<script'; ?>
 >
                             async function addFunds(){
-                                const template = await foxEngine.loadTemplate(foxEngine.elementsDir+'payment.tpl');
+                                const template = await foxEngine.loadTemplate(foxEngine.elementsDir+'payment.tpl', true);
                                 let data = foxEngine.entryReplacer.replaceText(template, "");
                                 foxEngine.modalApp.showModalApp(900, data);
                                 //
