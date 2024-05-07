@@ -477,8 +477,13 @@ ul.list-inline {
 }
 
 #header .userBlock {
-	display: inline-flex;
-	width: max-content;
+	align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .profilePic {

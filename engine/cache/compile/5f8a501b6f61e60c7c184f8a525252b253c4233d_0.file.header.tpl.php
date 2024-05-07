@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-05-07 13:26:46
+/* Smarty version 4.0.4, created on 2024-05-07 13:55:53
   from '/var/www/FoxCMS/templates/foxengine2/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_663a01e6a466d9_95363367',
+  'unifunc' => 'content_663a08b9846021_71428723',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5f8a501b6f61e60c7c184f8a525252b253c4233d' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/header.tpl',
-      1 => 1715076453,
+      1 => 1715078970,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_663a01e6a466d9_95363367 (Smarty_Internal_Template $_smarty_tpl) {
+function content_663a08b9846021_71428723 (Smarty_Internal_Template $_smarty_tpl) {
 ?>       <header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg bar">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <!-- Logo -->
@@ -55,96 +55,92 @@ function content_663a01e6a466d9_95363367 (Smarty_Internal_Template $_smarty_tpl)
                 </div>
             </div>
 
-
             <!-- Userfields -->
-            <div class="navbar-right userBlock">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center userBlock" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="avatar">
+            <div class="navbar-right">
+				<ul class="userBlock">
+				   <!--  LOGGED USER -->
+				   <?php if ($_smarty_tpl->tpl_vars['user_group']->value != 5) {?>
+				   <li class="nav-item dropdown">
+					  <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center userBlock" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						 <div class="avatar">
 							<img class="profilePic uk-animation-fade" src="<?php echo $_smarty_tpl->tpl_vars['profilePhoto']->value;?>
 " alt="Profile Photo" />
-						</div>
-                        <?php if ($_smarty_tpl->tpl_vars['user_group']->value != 5) {?>
-						<div class="d-none d-sm-block">
+						 </div>
+						 <div class="d-none d-sm-block">
 							<img src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/icons/crystals.png" alt="Crystals Icon" uk-img />
 							<span id="realmoney-info-login" class="ms-2"><?php echo $_smarty_tpl->tpl_vars['units']->value;?>
 </span>
-						</div>
-                        <?php }?>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" data-bs-popper="static">
-
-                        <li>
-                            <span class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1">
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0">
-                                                <div class="avatar">
-                                                    <img class="h-auto rounded-circle profilePic uk-animation-fade" style="width: 42px;" src="<?php echo $_smarty_tpl->tpl_vars['profilePhoto']->value;?>
+						 </div>
+					  </a>
+					  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" data-bs-popper="static">
+						 <li>
+							<span class="dropdown-item">
+							   <div class="d-flex align-items-center">
+								  <div class="flex-grow-1">
+									 <div class="d-flex">
+										<div class="flex-shrink-0">
+										   <div class="avatar">
+											  <img class="h-auto rounded-circle profilePic uk-animation-fade" style="width: 42px;" src="<?php echo $_smarty_tpl->tpl_vars['profilePhoto']->value;?>
 " alt="Profile Photo" uk-img />
-                                                </div>
-                                            </div>
-                                            <ul class="me-3">
-												   <li class="fw-medium d-block"><?php echo $_smarty_tpl->tpl_vars['login']->value;?>
+										   </div>
+										</div>
+										<ul class="me-3">
+										   <li class="fw-medium d-block"><?php echo $_smarty_tpl->tpl_vars['login']->value;?>
 </li>
-												   <li class="text-muted"><?php echo $_smarty_tpl->tpl_vars['groupName']->value;?>
+										   <li class="text-muted"><?php echo $_smarty_tpl->tpl_vars['groupName']->value;?>
 </li>
-													<?php if ($_smarty_tpl->tpl_vars['user_group']->value != 5) {?>
-													<li class="d-xl-none d-md-none d-sm-none">
-														<img src="/templates/foxengine2/assets/icons/crystals.png" alt="Crystals Icon" style="height: 25px;">
-														<span id="realmoney-info-login" class="ms-2"><?php echo $_smarty_tpl->tpl_vars['units']->value;?>
+										   <li class="d-xl-none d-md-none d-sm-none">
+											  <img src="/templates/foxengine2/assets/icons/crystals.png" alt="Crystals Icon" style="height: 25px;">
+											  <span id="realmoney-info-login" class="ms-2"><?php echo $_smarty_tpl->tpl_vars['units']->value;?>
 </span>
-													</li>
-													<?php }?>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </span>
-                        </li>
-
-                        <?php if ($_smarty_tpl->tpl_vars['user_group']->value == 5) {?>
-                        <li class="dropdown-item">
-                            <a href="#" class="pageLink-auth" onclick="foxEngine.page.loadPage('auth', replaceData.contentBlock); return false;"> <i class="fa fa-sign-in me-2"></i> Войти </a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="#" class="pageLink-reg" onclick="foxEngine.page.loadPage('reg', replaceData.contentBlock); return false;"> <i class="fa fa-user-plus me-2"></i> Зарегистрироваться </a>
-                        </li>
-                        <?php } else { ?>
-                        <?php echo '<script'; ?>
+										   </li>
+										</ul>
+									 </div>
+								  </div>
+							   </div>
+							</span>
+						 </li>
+						 <?php echo '<script'; ?>
 >
-                            async function addFunds(){
-                                const template = await foxEngine.loadTemplate(foxEngine.elementsDir+'payment.tpl', true);
-                                let data = foxEngine.entryReplacer.replaceText(template, "");
-                                foxEngine.modalApp.showModalApp(900, data);
-                                //
-                            }
-                        <?php echo '</script'; ?>
+							async function addFunds(){
+								const template = await foxEngine.loadTemplate(foxEngine.elementsDir+'payment.tpl', true);
+								let data = foxEngine.entryReplacer.replaceText(template, "");
+								foxEngine.modalApp.showModalApp(900, data);
+								//
+							}
+						 <?php echo '</script'; ?>
 >
-                        <ul id="usrMenu">
-                            <li><hr class="dropdown-divider" /></li>
-                            <?php if ($_smarty_tpl->tpl_vars['user_group']->value == 4) {?>
-                            <li class="dropdown-item">
-                                <a class="pageLink-addFunds" onclick="addFunds(); return false; ">
-                                    <div class="rightIcon">
-                                        <i style="color: #d8e815" class="fa fa-money"></i>
-                                    </div>Пополнить счёт
-                                </a>
-                            </li>
-                            <?php }?>
-                            <!-- User options go here -->
-                        </ul>
-
-                        <li class="dropdown-item">
-                            <a href="#" class="pageLink-logout" onclick="foxEngine.user.logout($(this)); return false;"> <i style="color: red" class="fa fa-sign-out me-2"></i> Выйти </a>
-                        </li>
-
-                        <?php }?>
-                    </ul>
-                </li>
-
+						 <ul id="usrMenu">
+							<li>
+							   <hr class="dropdown-divider" />
+							</li>
+							<?php if ($_smarty_tpl->tpl_vars['user_group']->value == 4) {?>
+							<li class="dropdown-item">
+							   <a class="pageLink-addFunds" onclick="addFunds(); return false; ">
+								  <div class="rightIcon">
+									 <i style="color: #d8e815" class="fa fa-money"></i>
+								  </div>
+								  Пополнить счёт
+							   </a>
+							</li>
+							<?php }?>
+							<!-- User options go here -->
+						 </ul>
+						 <li class="dropdown-item">
+							<a href="#" class="pageLink-logout" onclick="foxEngine.user.logout($(this)); return false;"> <i style="color: red" class="fa fa-sign-out me-2"></i> Выйти </a>
+						 </li>
+					  </ul>
+				   </li>
+				   <?php } else { ?>
+				   <li class="d-flex align-items-center">
+					  <a href="#" class="pageLink-auth" onclick="foxEngine.page.loadPage('auth', replaceData.contentBlock); return false;"> <i class="fa fa-sign-in me-2"></i> Войти </a>
+				   </li>
+				   <li class="d-flex align-items-center">
+					  <a href="#" class="pageLink-reg" onclick="foxEngine.page.loadPage('reg', replaceData.contentBlock); return false;"> <i class="fa fa-user-plus me-2"></i> Создать аккаунт</a>
+				   </li>
+				   <?php }?>
+				</ul>
                 <style>
                     .dropdown-item {
                         display: contents;
