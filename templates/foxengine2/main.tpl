@@ -5,10 +5,11 @@
       <meta name="HandheldFriendly" content="true" />
       <title>{$siteTitle}</title>
       <meta name="format-detection" content="telephone=no" />
+	  <meta name="viewport" content="width=790, maximum-scale=1">
 	  <meta name="author" content="FoxesWorld" />
 	  <meta name="description" content="{$siteDesc}" />
 	  <meta name="keywords" content="{$keywords}">
-      <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height" />
+      <!-- <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height" /> -->
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 	  <meta property="og:title" content="{$siteTitle}" />

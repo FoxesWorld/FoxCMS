@@ -14,7 +14,7 @@
 			   [input type="email" name="email" placeholder="Почта"]
 			   [input type="password" name="password1" onKeyUp="CheckPassStrength($(this).val())" placeholder="Пароль"]
 			   [input type="password" name="password2" placeholder="Повтор пароля"]
-			   <span style="background: #ffffff;padding: 5px;border-radius: 10px;">Надежность пароля: <b id="passStrength"></b></span>
+			   <span style="background: #ffffff;padding: 5px;border-radius: 10px;">Надежность пароля: <b class="shadowText" id="passStrength"></b></span>
                      <!--			   
 			   <div class="input_block">
                   <input name="regCode" class="input" type="text" autocomplete="off" />
@@ -32,34 +32,34 @@
          	let req = foxEngine.request.send_post({userAction: 'checkPass', password: pass});
          	    req.onreadystatechange = function() {
          			if (req.readyState === 4) {
-         				let json = JSON.parse(this.responseText);
-         
-         				switch(json.PassStrength){
-         					case 1:
-         						color = '#911414';
-         						text = 'Очень слабый';
-         					break;
-         
-         					case 2:
-         					color = '#cf6e11';
-         						text = 'Слабый';
-         					break;
-         
-         					case 3:
-         						color = '#cfc211';
-         						text = 'Простой';
-         					break;
-         
-         					case 4:
-         						color = '#81cf11';
-         						text = 'Надежный';
-         					break;
-         
-         					case 5:
-         						color = '#13d788';
-         						text = 'Очень надежный!';
-         					break;
-         				}
+         				let json = JSON.parse(this.responseText);         
+						switch(json.PassStrength){
+							case 1:
+								color = '#B20A0A';
+								text = 'Очень слабый';
+								break;
+
+							case 2:
+								color = '#E67300';
+								text = 'Слабый';
+								break;
+
+							case 3:
+								color = '#E6D200';
+								text = 'Простой';
+								break;
+
+							case 4:
+								color = '#59B300';
+								text = 'Надежный';
+								break;
+
+							case 5:
+								color = '#00C853';
+								text = 'Очень надежный!';
+								break;
+						}
+
          				$("#passStrength").html(`<small style="color: ${color}">${text}</small>`);
          			}
          		}

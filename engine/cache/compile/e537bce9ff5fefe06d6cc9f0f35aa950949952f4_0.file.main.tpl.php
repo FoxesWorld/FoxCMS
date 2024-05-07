@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-05-07 13:55:53
+/* Smarty version 4.0.4, created on 2024-05-07 23:52:20
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_663a08b983c106_59379054',
+  'unifunc' => 'content_663a9484e4baf7_73502480',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1715065057,
+      1 => 1715106351,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_663a08b983c106_59379054 (Smarty_Internal_Template $_smarty_tpl) {
+function content_663a9484e4baf7_73502480 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -35,12 +35,13 @@ function content_663a08b983c106_59379054 (Smarty_Internal_Template $_smarty_tpl)
       <title><?php echo $_smarty_tpl->tpl_vars['siteTitle']->value;?>
 </title>
       <meta name="format-detection" content="telephone=no" />
+	  <meta name="viewport" content="width=790, maximum-scale=1">
 	  <meta name="author" content="FoxesWorld" />
 	  <meta name="description" content="<?php echo $_smarty_tpl->tpl_vars['siteDesc']->value;?>
 " />
 	  <meta name="keywords" content="<?php echo $_smarty_tpl->tpl_vars['keywords']->value;?>
 ">
-      <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height" />
+      <!-- <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height" /> -->
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 	  <meta property="og:title" content="<?php echo $_smarty_tpl->tpl_vars['siteTitle']->value;?>

@@ -6,6 +6,7 @@ if(!defined("ADMIN")){
 	class AdminOptions extends AdminPanel {
 		
 		function __construct($REQUEST, $db) {
+			global $config;
 			if(init::$usrArray['user_group'] == 1) {
 				switch($REQUEST["admPanel"]){
 					
@@ -22,6 +23,11 @@ if(!defined("ADMIN")){
 					init::classUtil('ServerParser', "1.0.0");
 						$serverParser = new ServerParser($db, @RequestHandler::$REQUEST['login'], true);
 						die($serverParser->parseServers(@RequestHandler::$REQUEST['server']));
+					break;
+					
+					case "getGameVersions":
+						$versions = filesInDir::filesInDirArray(ROOT_DIR . UPLOADS_DIR . $config['launcherSettings']['gameFiles'].'versions');
+						die(json_encode($versions));
 					break;
 					
 					case "scanTemplates":

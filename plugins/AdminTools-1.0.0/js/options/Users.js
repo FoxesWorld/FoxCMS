@@ -113,7 +113,7 @@ class Users {
 
     async addContent() {
         if (!$("#adminContent > table").length) {
-            const contentHtml = await foxEngine.loadTemplate(foxEngine.elementsDir + 'admin/users/userTable.tpl');
+            const contentHtml = await foxEngine.loadTemplate(foxEngine.elementsDir + 'admin/users/userTable.tpl', true);
             $("#adminContent").html(contentHtml);
         }
     }

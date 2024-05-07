@@ -106,7 +106,7 @@
 					  <a href="#" class="pageLink-reg" onclick="foxEngine.page.loadPage('reg', replaceData.contentBlock); return false;"> <i class="fa fa-user-plus me-2"></i> Создать аккаунт</a>
 				   </li>
 				   {/if}
-				</ul>
+				
                 <style>
                     .dropdown-item {
                         display: contents;
@@ -125,13 +125,14 @@
                     }
                 </style>
 
-                <button class="navbar-toggler" onclick="toggleAbsolutePosition()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" style="width: auto;" onclick="toggleAbsolutePosition()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">
                         <span class="navbar-toggler-bar bar1 mt-2"></span>
                         <span class="navbar-toggler-bar bar2"></span>
                         <span class="navbar-toggler-bar bar3"></span>
                     </span>
                 </button>
+				</ul>
             </div>
         </div>
     </header>

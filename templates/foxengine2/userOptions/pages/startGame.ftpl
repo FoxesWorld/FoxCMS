@@ -79,27 +79,26 @@
 	
 <script>
 let thisPath = "/uploads/updater/";
-$('.download').on('click', async function(){
+$('.download').off('click').on('click', async function(){
     let type = $(this).data('type');
-    let fileContent = foxEngine.request.send_post({"sysRequest": "downloadUpdater", "type": type});
 	
-	let parsedJson = await foxEngine.sendPostAndGetAnswer(
-          {"sysRequest": "downloadUpdater", "type": type}, "JSON");
-
-    fileContent.onreadystatechange = function() {
-        if (fileContent.readyState === 4) {
-            let response = JSON.parse(fileContent.responseText);
-            let file = response.filename;
-
-            if (fileContent.status === 200) {
-                var link = document.createElement('a');
-                link.setAttribute('href', thisPath + type + '/' + file);
-                link.setAttribute('download', "FoxesWorld."+type);
-                link.click();
-                return false;
-            }
+    if (!$(this).hasClass('loading')) {
+        $(this).addClass('loading');
+        
+        try {
+            let parsedJson = await foxEngine.sendPostAndGetAnswer({"sysRequest": "downloadUpdater", "type": type}, "JSON");
+            let file = parsedJson.filename;
+            
+            var link = document.createElement('a');
+            link.setAttribute('href', thisPath + type + '/' + file);
+            link.setAttribute('download', "FoxesWorld."+type);
+            link.click();
+        } catch (error) {
+            console.error('Ошибка загрузки файла:', error);
+        } finally {
+            $(this).removeClass('loading');
         }
-    };
+    }
 });
 </script>
 

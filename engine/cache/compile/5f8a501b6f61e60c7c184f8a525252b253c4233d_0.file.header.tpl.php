@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-05-07 13:55:53
+/* Smarty version 4.0.4, created on 2024-05-07 23:52:20
   from '/var/www/FoxCMS/templates/foxengine2/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_663a08b9846021_71428723',
+  'unifunc' => 'content_663a9484e558c2_94575540',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5f8a501b6f61e60c7c184f8a525252b253c4233d' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/header.tpl',
-      1 => 1715078970,
+      1 => 1715108514,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_663a08b9846021_71428723 (Smarty_Internal_Template $_smarty_tpl) {
+function content_663a9484e558c2_94575540 (Smarty_Internal_Template $_smarty_tpl) {
 ?>       <header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg bar">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <!-- Logo -->
@@ -140,7 +140,7 @@ function content_663a08b9846021_71428723 (Smarty_Internal_Template $_smarty_tpl)
 					  <a href="#" class="pageLink-reg" onclick="foxEngine.page.loadPage('reg', replaceData.contentBlock); return false;"> <i class="fa fa-user-plus me-2"></i> Создать аккаунт</a>
 				   </li>
 				   <?php }?>
-				</ul>
+				
                 <style>
                     .dropdown-item {
                         display: contents;
@@ -159,13 +159,14 @@ function content_663a08b9846021_71428723 (Smarty_Internal_Template $_smarty_tpl)
                     }
                 </style>
 
-                <button class="navbar-toggler" onclick="toggleAbsolutePosition()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" style="width: auto;" onclick="toggleAbsolutePosition()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">
                         <span class="navbar-toggler-bar bar1 mt-2"></span>
                         <span class="navbar-toggler-bar bar2"></span>
                         <span class="navbar-toggler-bar bar3"></span>
                     </span>
                 </button>
+				</ul>
             </div>
         </div>
     </header>

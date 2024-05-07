@@ -11,7 +11,26 @@ export class EntryReplacer {
             this.foxEngine.debugSend("Invalid or undefined userFields", 'color: red');
             return this.updatedText;
         }
+		this.updatedText = await this.replaceLangTags(this.updatedText);
+		this.replaceUserFields();
+        this.replaceEmojisWithImages();
+        this.updatedText = this.replaceInputTags(this.updatedText);
+        
+        return this.updatedText;
+    }
 
+    replaceEmojisWithImages() {
+        if (this.foxEngine && this.foxEngine.emojiArr) {
+            for (const emoji of this.foxEngine.emojiArr) {
+                let emojiCode = ":" + emoji.name + ":";
+                let imagePath = emoji.imagePath;
+                let regex = new RegExp(emojiCode, 'g');
+                this.updatedText = this.updatedText.replace(regex, `<img src="${imagePath}"  alt="${emoji.name}" class="emoji" />`);
+            }
+        }
+    }
+	
+	replaceUserFields() {
         for (const value of this.foxEngine.userFields) {
             let mask = "%" + value + "%";
             while (this.updatedText.includes(mask)) {
@@ -19,23 +38,6 @@ export class EntryReplacer {
                 this.replacedTimes++;
             }
         }
-
-        this.updatedText = this.replaceEmojisWithImages(this.updatedText);
-        this.updatedText = this.replaceInputTags(this.updatedText);
-        this.updatedText = await this.replaceLangTags(this.updatedText);
-        return this.updatedText;
-    }
-
-    replaceEmojisWithImages(text) {
-        if (this.foxEngine && this.foxEngine.emojiArr) {
-            for (const emoji of this.foxEngine.emojiArr) {
-                let emojiCode = ":" + emoji.name + ":";
-                let imagePath = emoji.imagePath;
-                let regex = new RegExp(emojiCode, 'g');
-                text = text.replace(regex, `<img src="${imagePath}"  alt="${emoji.name}" class="emoji" />`);
-            }
-        }
-        return text;
     }
 	
 replaceInputTags = (html) => {
@@ -168,8 +170,8 @@ replaceInputTags = (html) => {
         while (match = modifiedHtml.match(/%lang\|([^\%]*)%/)) {
             const langKey = match[1];
             const langText = this.foxEngine.page.langPack[langKey];
-			console.log(langKey);
-            if (langText) {
+
+			if(langKey !== null) {
                 modifiedHtml = modifiedHtml.replace(match[0], langText);
             } else {
                 modifiedHtml = modifiedHtml.replace(match[0], langKey);

@@ -43,7 +43,7 @@ const toastContainer = '<div aria-live="polite" aria-atomic="true" class="positi
                         data = {
                             class: 'text-bg-danger',
                             icon: '<i class="fa-solid fa-xmark-circle me-1"></i>',
-                            type: 'Ощибка'
+                            type: 'Ошибка'
                         }
                         return data
                         break;

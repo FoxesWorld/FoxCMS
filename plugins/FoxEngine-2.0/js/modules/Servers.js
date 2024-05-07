@@ -122,7 +122,7 @@ export class Servers {
         try {
             if (modsInfo && modsInfo.length > 0) {
                 // Load the template only once
-                const template = await foxEngine.loadTemplate(foxEngine.elementsDir + 'serverPage/serverMods.tpl');
+                const template = await foxEngine.loadTemplate(foxEngine.elementsDir + 'serverPage/serverMods.tpl', true);
 
                 // Use Promise.all to execute promises concurrently
                 const promises = modsInfo.map(async mod => {
@@ -139,9 +139,6 @@ export class Servers {
 
                 // Concatenate the results
                 return modsHtmlArray.join('');
-            } else {
-                console.error("Couldn't extract server modInfo.");
-                return ''; // or handle accordingly
             }
         } catch (error) {
             console.error('Error while loading mods:', error);

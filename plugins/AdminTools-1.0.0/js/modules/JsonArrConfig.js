@@ -80,8 +80,10 @@ generateModsInfoForm(modsInfoArray, serverName) {
                                 ${modsInfoArray.map((element, index) => this.generateModsInfoRow(index, element)).join('')}
                             </tbody>
                         </table>
+						<div class="buttonGroup">
                         <button type="button" id="submitModsInfoBtn" class="btn btn-primary">Сохранить</button>
                         <button type="button" id="addRowBtn" class="btn btn-success">Добавить строку</button>
+						</div>
                        </form>`;
     return modsInfoHtml;
 }
@@ -159,6 +161,7 @@ generateModsInfoForm(modsInfoArray, serverName) {
         // Assuming foxEngine.page.loadData and other relevant functions are correctly defined
         foxEngine.page.loadData(formHtml, '#dialogContent');
         $("#dialog").dialog(this.dialogOptions);
+		$("#dialog").dialog({ title: serverName});
         $("#dialog").dialog('open');
     }
 
