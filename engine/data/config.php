@@ -1,5 +1,5 @@
 <?php 
-    /* [01.05.2024] */
+    /* [02.05.2024] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -48,8 +48,8 @@ $config = array(
 	"other" => array(
 		"appId" => "712667904956432456",
 		"accessToken" => "ccdd6e40ccdd6e40ccdd6e40ecccaf012ecccddccdd6e4092074eb9f3eea48edf8a6e39",
-		"discordLink" => "https://discord.gg/96pZFx3cFh",
-		"vkLink" => "https://vk.com/foxesworlds",
+		"discordLink" => "https://discord.gg/mHhvevY4RF",
+		"vkLink" => "https://vk.com/foxesworlds1",
 		"timezone" => "Europe/Moscow",
 		"webserviceName" => "FoxEngine",
 		"userOptions" => "userOptions",

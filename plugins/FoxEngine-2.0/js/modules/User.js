@@ -120,8 +120,9 @@ export class User {
             "userDisplay": userDisplay,
             "user_doaction": "ViewProfile"
         }, "TEXT");
-
+		foxEngine.page.langPack = await foxEngine.page.loadLangPack('userProfile');
         foxEngine.page.loadData(await this.foxEngine.entryReplacer.replaceText(userProfile), foxEngine.replaceData.contentBlock);
+		//HARDCODED!!!
         location.hash = 'user/' + userDisplay;
         foxEngine.foxesInputHandler.formInit(1000);
     };

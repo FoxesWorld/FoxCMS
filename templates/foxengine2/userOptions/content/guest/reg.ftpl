@@ -10,7 +10,11 @@
                   <input name="realname" class="input" type="text" autocomplete="off" required />
                   <label class="label">Имя</label>
                </div> 
-			   --> [input type="email" name="email" placeholder="Почта"] [input type="password" name="password1" onKeyUp="CheckPassStrength($(this).val())" placeholder="Пароль"] [input type="password" name="password2" placeholder="Повтор пароля"] <span style="background: #ffffff;padding: 5px;border-radius: 10px;">Надежность пароля: <b id="passStrength"></b></span>
+			   --> 
+			   [input type="email" name="email" placeholder="Почта"]
+			   [input type="password" name="password1" onKeyUp="CheckPassStrength($(this).val())" placeholder="Пароль"]
+			   [input type="password" name="password2" placeholder="Повтор пароля"]
+			   <span style="background: #ffffff;padding: 5px;border-radius: 10px;">Надежность пароля: <b id="passStrength"></b></span>
                      <!--			   
 			   <div class="input_block">
                   <input name="regCode" class="input" type="text" autocomplete="off" />
@@ -56,7 +60,7 @@
          						text = 'Очень надежный!';
          					break;
          				}
-         				$("#passStrength").html('<small style="color: ' color '">' text '</small>');
+         				$("#passStrength").html(`<small style="color: ${color}">${text}</small>`);
          			}
          		}
          }

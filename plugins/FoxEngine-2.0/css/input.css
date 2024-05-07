@@ -6,6 +6,13 @@ useroption {
 	font-family: 'FSElliotPro-Bold';
 }
 
+a {
+	align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
 	/*INPUT TEXT*/
 .input_block {
 	position: relative;
@@ -71,23 +78,26 @@ useroption {
 	/* text-transform: uppercase; */
 }
 
-button.login {
-	width:100%;
-	color: white;
-	margin: 0px;
-    text-decoration: none;
-    background: var(--button-primary);
-    border: 2px solid var(--border-color);
-    box-shadow: 0px 5px 0px var(--button-primary-shadow);
-    border-radius: 1px;
-    padding: 0.5rem;
-    transition: all 0.1s;
-    font-weight: bold;
-    font-size: 1.2rem;
-    text-transform: uppercase;
+button {
+	width: -webkit-fill-available;
 }
 
-button.login.selectedpage {
+.login {
+	color: white;
+	margin: 0px 5px;
+	/* text-decoration: none; */
+	background: var(--button-primary);
+	border: 2px solid var(--border-color);
+	box-shadow: 0px 5px 0px var(--button-primary-shadow);
+	border-radius: 5px;
+	padding: 0.5rem;
+	transition: all 0.1s;
+	font-weight: bold;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+}
+
+.login.selectedpage {
 	width:100%;
 	color: whitesmoke;
 	margin: 0px;
@@ -98,7 +108,7 @@ button.login.selectedpage {
 	padding: 10px;
 }
 
-button.logout {
+.logout {
 	width:100%;
 	color: white;
     text-decoration: none;
@@ -388,12 +398,11 @@ a {
 	padding: 10px;
 }
 
-a:not(.selectedPage, .badge) {
-	color: #8f600a;
-	float: left;
+a:not(.selectedPage, .badge, .userBlock) {
+	color: #534e47;
 }
 
-a:not(.selectedPage, .tip-over, .badge):before {
+header a:not(.selectedPage, .tip-over, .badge, .userBlock):before {
   content: "";
   width: 0;
   height: 0.1em;
@@ -406,7 +415,7 @@ a:not(.selectedPage, .tip-over, .badge):before {
 
 .leftAction a:not(.selectedPage):hover {
     color: #ff9309;
-    background: #9a8b868a;
+    background: #b6d04761;
     text-decoration: none;
     transition-duration: 0.5s;
     cursor: pointer;

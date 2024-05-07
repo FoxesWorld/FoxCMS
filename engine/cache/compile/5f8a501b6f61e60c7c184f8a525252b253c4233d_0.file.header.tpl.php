@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-05-01 18:36:09
+/* Smarty version 4.0.4, created on 2024-05-07 10:19:28
   from '/var/www/FoxCMS/templates/foxengine2/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_66326169246618_54053943',
+  'unifunc' => 'content_6639d600b83f86_78632791',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5f8a501b6f61e60c7c184f8a525252b253c4233d' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/header.tpl',
-      1 => 1708851333,
+      1 => 1715063495,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,8 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_66326169246618_54053943 (Smarty_Internal_Template $_smarty_tpl) {
-?>       <header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg">
+function content_6639d600b83f86_78632791 (Smarty_Internal_Template $_smarty_tpl) {
+?>       <header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg bar">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <!-- Logo -->
             <div class="logo-block">
@@ -59,7 +59,7 @@ function content_66326169246618_54053943 (Smarty_Internal_Template $_smarty_tpl)
             <!-- Userfields -->
             <div class="navbar-right userBlock">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center userBlock" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="avatar">
 							<img class="profilePic uk-animation-fade" src="<?php echo $_smarty_tpl->tpl_vars['profilePhoto']->value;?>
 " alt="Profile Photo" />
@@ -149,7 +149,7 @@ function content_66326169246618_54053943 (Smarty_Internal_Template $_smarty_tpl)
                     .dropdown-item {
                         display: contents;
                     }
-
+					
                     .dropdown-item > a {
                         width: 100%;
                         display: flex;

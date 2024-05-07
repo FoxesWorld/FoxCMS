@@ -23,61 +23,69 @@ class JsonArrConfig {
         return Math.max(100, value.length / 2);
     }
 
-    async openModsInfoWindow(modsInfo, serverName) {
-        try {
-            let modsInfoArray;
+async openModsInfoWindow(modsInfo, serverName) {
+    try {
+        let modsInfoArray;
 
+        if (modsInfo) {
             if (typeof modsInfo === 'string') {
                 modsInfoArray = JSON.parse(modsInfo);
             } else {
                 modsInfoArray = modsInfo;
             }
-
-            const modsInfoHtml = this.generateModsInfoForm(modsInfoArray, serverName);
-
-            this.loadFormIntoDialog(modsInfoHtml, serverName);
-
-            setTimeout(() => {
-                $('#submitModsInfoBtn').click(async () => {
-                    const capturedServerName = serverName;
-                    let answer = await this.updateModsInfo(modsInfoArray, capturedServerName);
-                    $('#submitModsInfoBtn').notify(answer.message, answer.type);
-                });
-
-                $('.removeBtn').click((e) => {
-                    const index = $(e.currentTarget).data('index');
-                    this.removeRow(modsInfoArray, index, serverName);
-                    this.updateModsInfoTableIndexes();
-                });
-
-                $('#addRowBtn').click(() => {
-                    this.addRow(modsInfoArray, serverName);
-                    this.updateModsInfoTableIndexes();
-                });
-            }, 1000);
-        } catch (error) {
-            console.error('An error occurred:', error.message);
+        } else {
+            // No modsInfo provided, open an empty window/dialog
+            this.loadFormIntoDialog('', serverName); // Passing an empty string
+            return; // Exit the function
         }
-    }
 
-    generateModsInfoForm(modsInfoArray, serverName) {
-        const modsInfoHtml = `<form id="modsInfoForm"><table cellpadding="5" class="table table-bordered table-striped">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>#</th>
-                                        ${Object.keys(modsInfoArray[0]).map(key => `<th>${key}</th>`).join('')}
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${modsInfoArray.map((element, index) => this.generateModsInfoRow(index, element)).join('')}
-                                </tbody>
-                            </table>
-                            <button type="button" id="submitModsInfoBtn" class="btn btn-primary">Сохранить</button>
-                            <button type="button" id="addRowBtn" class="btn btn-success">Добавить строку</button>
-                           </form>`;
-        return modsInfoHtml;
+        const modsInfoHtml = this.generateModsInfoForm(modsInfoArray, serverName);
+
+        this.loadFormIntoDialog(modsInfoHtml, serverName);
+
+        setTimeout(() => {
+            $('#submitModsInfoBtn').click(async () => {
+                const capturedServerName = serverName;
+                let answer = await this.updateModsInfo(modsInfoArray, capturedServerName);
+                $('#submitModsInfoBtn').notify(answer.message, answer.type);
+            });
+
+            $('.removeBtn').click((e) => {
+                const index = $(e.currentTarget).data('index');
+                this.removeRow(modsInfoArray, index, serverName);
+                this.updateModsInfoTableIndexes();
+            });
+
+            $('#addRowBtn').click(() => {
+                this.addRow(modsInfoArray, serverName);
+                this.updateModsInfoTableIndexes();
+            });
+        }, 1000);
+    } catch (error) {
+        console.error('An error occurred:', error.message);
     }
+}
+
+
+generateModsInfoForm(modsInfoArray, serverName) {
+    const modsInfoHtml = `<form id="modsInfoForm"><table cellpadding="5" class="table table-bordered table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>#</th>
+                                    ${Object.keys(modsInfoArray && modsInfoArray[0] || {}).map(key => `<th>${key}</th>`).join('')}
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${modsInfoArray.map((element, index) => this.generateModsInfoRow(index, element)).join('')}
+                            </tbody>
+                        </table>
+                        <button type="button" id="submitModsInfoBtn" class="btn btn-primary">Сохранить</button>
+                        <button type="button" id="addRowBtn" class="btn btn-success">Добавить строку</button>
+                       </form>`;
+    return modsInfoHtml;
+}
+
 
     generateModsInfoRow(index, row) {
         const calculateTextareaHeight = this.calculateTextareaHeight.bind(this);

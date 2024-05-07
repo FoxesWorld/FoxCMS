@@ -1,3 +1,5 @@
+import './Notify.js';
+
 export class FoxesInputHandler {
     constructor(foxEngine) {
         this.foxEngine = foxEngine;
@@ -5,7 +7,7 @@ export class FoxesInputHandler {
         //foxEngine.debugSend("FoxesInputHandler init", "background: #c89f27; padding: 5px;");
     }
 
-    formInit(awaitms) {
+   formInit(awaitms) {
         setTimeout(() => {
             this.forms = document.querySelectorAll("form");
             if (this.forms.length >= 1) {
@@ -24,6 +26,39 @@ export class FoxesInputHandler {
             }
         }, awaitms);
     }
+	
+/* 	
+async formInit(awaitms, data) {
+    setTimeout(() => {
+        let forms;
+        if (data !== undefined) {
+            try {
+                forms = new DOMParser().parseFromString(data, 'text/html').querySelectorAll("form");
+                console.log(forms);
+            } catch (error) {
+                console.error("Error parsing forms from data:", error);
+                return;
+            }
+        } else {
+            forms = document.querySelectorAll("form");
+            console.log("Forms found in document: " + forms.length);
+        }
+
+        if (forms.length >= 1) {
+            forms.forEach(form => {
+                form.onsubmit = (event) => {
+                    event.preventDefault();
+                    const submitButton = event.submitter;
+                    const formData = this.collectFormData(form);
+                    formData["formId"] = form.id;
+                    this.submitForm(formData, $(form), submitButton);
+                };
+            });
+        } else {
+            console.log("No forms were found!");
+        }
+    }, awaitms);
+}*/
 
     collectFormData(form) {
         const inputFields = form.querySelectorAll("input, select, textarea");
@@ -78,7 +113,7 @@ export class FoxesInputHandler {
                 //answer = this.foxEngine.request.sendGet(data); WIP
                 break;
         }
-        form.notify(answer.message, answer.type);
+        fireNotif(answer.message, answer.type);
 
         if (data.playSound === true || data.playSound === undefined) {
             foxEngine.soundOnClick(answer.type);

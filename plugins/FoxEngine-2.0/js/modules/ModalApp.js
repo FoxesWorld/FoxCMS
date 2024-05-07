@@ -4,7 +4,7 @@ export class ModalApp {
         this.modalAppDisplayed = false;
     }
 
-    showModalApp(width, html) {
+    async showModalApp(width, html) {
         this.modalAppDisplayed = $(".modal_wrapper").css("display") === 'flex';
 
         if (this.modalAppDisplayed) {
@@ -13,7 +13,7 @@ export class ModalApp {
 
         $(".modal_app").css("width", width);
         $(".modal_app").empty();
-        $(".modal_app").html(foxEngine.entryReplacer.replaceText(html));
+        $(".modal_app").html(await foxEngine.entryReplacer.replaceText(html));
 
         $("body").addClass("modal_open_body");
         $(".modal_wrapper").css("display", "flex");
@@ -31,6 +31,7 @@ export class ModalApp {
 
             this.modalAppDisplayed = true;
         });
+		this.foxEngine.foxesInputHandler.formInit(500);
     }
 
     closeModalApp() {

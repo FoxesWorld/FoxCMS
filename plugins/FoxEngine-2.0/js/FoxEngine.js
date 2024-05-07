@@ -9,7 +9,6 @@ import { Utils } from './modules/Utils.js';
 import { Logo } from './modules/Logo.js';
 import { EntryReplacer } from './modules/EntryReplacer.js';
 import { Snow } from './modules/Snow.js';
-import './modules/Notify.js';
 import './modules/Howler/howler.core.js';
 
 class FoxEngine {
@@ -20,6 +19,7 @@ class FoxEngine {
         
 		/* TEXT REPLACER*/
 		this.updatedText;
+		this.currentDate = new Date();
         this.replacedTimes = 0;
         this.elementsDir = replaceData.assets + "elements/";
         this.e = ["\n %c %c %c FoxEngine 2.0 - 🦊 WebUI 🦊  %c  %c  https://foxesworld.ru/  %c %c ⋆🐾°%c🌲%c🍂 \n\n", "background: #c89f27; padding:5px 0;", "background: #c89f27; padding:5px 0;", "color: #c89f27; background: #030307; padding:5px 0;", "background: #c89f27; padding:5px 0;", "background: #bea8a8; padding:5px 0;", "background: #c89f27; padding:5px 0;", "color: #ff2424; background: #fff; padding:5px 0;", "color: #ff2424; background: #fff; padding:5px 0;", "color: #ff2424; background: #fff; padding:5px 0;"];
@@ -43,7 +43,9 @@ class FoxEngine {
 			this.modalApp = new ModalApp(this);
 			this.emojis = new Emojis(this);
 			this.snow = new Snow(this);
-			this.snow.loadSnow();
+			if(this.currentDate.getMonth() >= 11 || this.currentDate.getMonth() <= 1) {
+				this.snow.loadSnow();
+			}
             this.emojiArr = await this.emojis.parseEmojis();
 				
         } catch (error) {

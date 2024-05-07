@@ -1,6 +1,6 @@
 import { JsonArrConfig } from '../modules/JsonArrConfig.js';
 
-class Servers {
+export class Servers {
     constructor() {
         this.servers = [];
 		this.jsonArrConfig = new JsonArrConfig({admPanel: "editServer"});
@@ -22,14 +22,9 @@ class Servers {
         };
         this.editFields = [
             'serverVersion',
-            'mainClass',
-            'forgeVersion',
-            'client',
             'host',
             'port',
             'jreVersion',
-            'mcpVersion',
-            'forgeGroup',
             'ignoreDirs',
             'serverImage',
             'serverDescription'
@@ -109,6 +104,7 @@ async loadServerOptions(serverName) {
         formHtml += this.createSubmitButton();
         formHtml += `
             <input type="hidden" name="admPanel" value="editServer" />
+			<input type="hidden" name="serverName" value="`+serverName+`" />
             <input name="refreshPage" type="hidden" value="false" />
             <input name="playSound" type="hidden" value="false" />
             <button type="button" id="viewModsInfoBtn" class="login">View Mods Info</button>
@@ -152,7 +148,4 @@ async loadServerOptions(serverName) {
     createSubmitButton() {
         return '<button type="submit" class="login">Apply</button>';
     }
-
 }
-
-export { Servers };

@@ -32,12 +32,35 @@
 			z-index: 999999999;
 			top: 0;
 		}
-	</style>
-
-	  
+		
+	</style>	  
 	  <script type="module" src="{$tplDir}/assets/js/App.js"></script>
 	  <script type="module" src="{$tplDir}/assets/js/metrics.js"></script>
 	  <script type="module" src="{$tplDir}/assets/js/cookie.js"></script>
+
+	  <script>
+    // Function to set background image based on season
+    function setBackgroundBySeason() {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth() + 1;
+        const body = document.querySelector('body');
+
+        let backgroundImage = '';
+        if (currentMonth >= 3 && currentMonth <= 5) {
+            backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/spring.png)';
+        } else if (currentMonth >= 6 && currentMonth <= 8) {
+            backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/summer.png)';
+        } else if (currentMonth >= 9 && currentMonth <= 11) {
+            backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/autumn.png)';
+        } else {
+            backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/winter.png)';
+			$(".container").append('<div class="moderator-button optionButt" onclick="foxEngine.snow.switchSnow();"><i class="fa fa-snowflake-o"></i></div>');
+        }
+
+        body.style.backgroundImage = backgroundImage;
+    }
+    window.onload = setBackgroundBySeason;
+</script>
    </head>
    <body>
       {include file='header.tpl'}
@@ -46,16 +69,13 @@
       <div class="container">
          <div class="row siteContent">
             <div class="{if !$isMobile}col-8{else}container{/if}">
-               <div id="content" class="mainBlock">
-				<%contentData%>
-	
-               </div>
+               <main id="content" class="mainBlock">
+					<%contentData%>
+               </main>
             </div>
                {include file="right-block.tpl"}
          </div>
-		 <div class="moderator-button optionButt" onclick="foxEngine.snow.switchSnow();">
-			<i class="fa fa-snowflake-o"></i>
-		</div>
+		
       </div>
 	  <div id="cookie-popup" style="display: none">
         <div class="text-center" id="cookie-header">
@@ -72,5 +92,6 @@
       </div>
       {include file='footer.tpl'}
 	  {include file='../notify.tpl'}
+	  <div aria-live="polite" aria-atomic="true" class="position-relative"><div class="toast-container position-fixed top-0 end-0 p-2"></div></div>
    </body>
 </html>

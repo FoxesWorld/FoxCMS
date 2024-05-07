@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-05-01 18:36:09
+/* Smarty version 4.0.4, created on 2024-05-07 10:19:28
   from '/var/www/FoxCMS/templates/foxengine2/footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_66326169253ca9_99696316',
+  'unifunc' => 'content_6639d600b91db1_07695620',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '21164cd38f4b1e20c2b131e7201342b1d7510eaf' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/footer.tpl',
-      1 => 1705991857,
+      1 => 1715063209,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_66326169253ca9_99696316 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6639d600b91db1_07695620 (Smarty_Internal_Template $_smarty_tpl) {
 ?><footer class="bar">
    <div class="container footer--flex">
       <div class="footer-copyright">
@@ -34,9 +34,47 @@ function content_66326169253ca9_99696316 (Smarty_Internal_Template $_smarty_tpl)
       </div>
 
       <ul class="footer-end">
-		<!--<li><i class="fa fa-envelope-o"></i> Почта: <b><?php echo $_smarty_tpl->tpl_vars['contactEmail']->value;?>
+	  
+	  <div class="ms-auto">
+			<div class="social-icon-list py-1" id="socialLinksBlock">
+			
+			</div>
+			
+				<?php echo '<script'; ?>
+ type="module">
+				document.addEventListener('DOMContentLoaded', function () {
+					const block = document.getElementById('socialLinksBlock');
+					const links = {
+					  'vk': { title: 'ВКонтакте', slug: 'https://vk.com/foxesworlds1' },
+					  'discord': { title: 'Discord', slug: 'https://discord.gg/MkWUjBzt3Y' },
+					  'github': { title: 'GitHub', slug: 'https://github.com/FoxesWorld' },
+					};
+
+					for (const [key, social] of Object.entries(links)) {
+					  const a = document.createElement('a');
+					  a.classList.add('social-icon', 'tip', key);
+					  a.title = social.title;
+					  a.rel = 'nofollow noopener';
+					  a.target = '_blank';
+					  a.href = social.slug;
+					  a.innerHTML = `<i class="fa-brands fa-${key}"></i>`;
+					  block.appendChild(a);
+					}
+				}, { once: true });
+				<?php echo '</script'; ?>
+>
+			
+			<div class="mt-1 text-end user-select-none">
+				
+			</div>
+		</div>
+		<!-- <li><i class="fa fa-envelope-o"></i> Почта: <b><?php echo $_smarty_tpl->tpl_vars['contactEmail']->value;?>
 </b></li> -->
-		<li class="d-none d-md-flex"><a href="https://webmaster.yandex.ru/siteinfo/?site=foxescraft.ru"><img width="88" height="31" alt="" border="0" src="https://yandex.ru/cycounter?foxescraft.ru&theme=light&lang=ru"/></a></li>
+		<li class="d-none d-md-flex">
+			<a href="https://webmaster.yandex.ru/siteinfo/?site=foxescraft.ru">
+				<img width="88" height="31" alt="" border="0" src="https://yandex.ru/cycounter?foxescraft.ru&theme=light&lang=ru"/>
+			</a>
+		</li>
       </ul>
    </div>
 </footer><?php }

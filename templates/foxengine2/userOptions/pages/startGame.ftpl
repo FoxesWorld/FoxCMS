@@ -3,10 +3,10 @@
 	"optionTitle": "Начать игру",
 	"description": "Начать игру на ЛисьемМире",
 	"keywords": "Начать игру, Давай играть!, Играть с Лисами, Лисий мир играть давать, Быстро играть",
-	"optionBlock": ".leftAction",
+	"optionBlock": "#userBlock",
 	"optionPreText": "<img src='/templates/foxengine2/assets/icons/menu/icon_start.png' />",
 	"optionGroup": [1,4,5],
-	"optionClass": "nav-item uk-animation-fade",
+	"optionClass": "login uk-animation-fade",
 	"type": "page"
    }
 </useroption>

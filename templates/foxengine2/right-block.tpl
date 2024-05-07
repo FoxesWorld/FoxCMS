@@ -1,5 +1,5 @@
 {if !$isMobile}
-<div class="col-4 d-none d-lg-block d-sm-none">
+<aside class="col-4 d-none d-lg-block d-sm-none">
 	<div class="row rightBlock">
 		<div class="card">
 			<div id="userBlock">
@@ -35,5 +35,5 @@
 		-->
 		</div>
 	</div>
-</div>
+</aside>
 {/if}

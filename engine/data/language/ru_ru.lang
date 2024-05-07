@@ -5,7 +5,7 @@
 		/*Bugs*/
 		'bugs' => '<div class="alert alert-danger" role="alert">Возможны баги!</div>',
 	
-		/*ProfilEdit*/
+		/*ProfileEdit*/
 		'profileEdit' => array(
 			'noLoginSent' => "Не передан логин!",
 			'noHashSent' => "Не передан хеш!",
@@ -21,9 +21,15 @@
 			'needAuthorise' => "Необходима авторизация!"
 		),
 		
+		/*adminPanel*/
+		'adminPanel' => array(
+			'settings.title' => "Настройки",
+			'settings.desc' => "Настройка сайта",
+		),
+		
 		
 		'userProfile' => array(
-			'profileTitle' => "Давай, меаняй! :serum:",
+			'profileTitle' => "Давай, меняй! :fox:",
 			'profileDesc' => "Посмотрим %realname%, что ты тут можешь поменять...",
 			'personalisationTitle' => "Давай, украшай!",
 			'personalisationDesc' => "Посмотрим %realname%, что ты тут можешь сделать...",

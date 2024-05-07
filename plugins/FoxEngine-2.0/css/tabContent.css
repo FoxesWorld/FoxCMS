@@ -7,7 +7,7 @@
 
 }
 
-.tabs button {
+.tabs > button {
 	display: initial;
     width: max-content;
     margin: 5px;

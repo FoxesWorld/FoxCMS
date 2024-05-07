@@ -1,9 +1,11 @@
  <useroption> { 
 	"optionTitle": "Админ панель",
+	"description": "Панель управления FoxesCraft",
 	"optionBlock": "#usrMenu",
 	"optionPreText": "<i style='color: #d8e815' class='fa fa-bolt'></i>",
 	"optionGroup": 1, 
 	"optionClass": "dropdown-item",
+	"langPack": "adminPanel",
 	"type": "page" 
 	} 
 </useroption>
@@ -31,7 +33,7 @@
         $("#admOptions").append(panelBlock);
         
         if ((index + 1) % 2 === 0 || index === admOptions.length - 1) {
-            $("#admOptions").append('<div class="w-100"></div>');
+            //$("#admOptions").append('<div class="w-100"></div>');
         }
     });
 })();

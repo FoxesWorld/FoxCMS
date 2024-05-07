@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-05-01 18:36:09
+/* Smarty version 4.0.4, created on 2024-05-07 10:19:28
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6632616923b356_54967028',
+  'unifunc' => 'content_6639d600b78ad6_35819327',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1714574399,
+      1 => 1715065057,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_6632616923b356_54967028 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6639d600b78ad6_35819327 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -105,6 +105,7 @@ function content_6632616923b356_54967028 (Smarty_Internal_Template $_smarty_tpl)
             backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/autumn.png)';
         } else {
             backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/winter.png)';
+			$(".container").append('<div class="moderator-button optionButt" onclick="foxEngine.snow.switchSnow();"><i class="fa fa-snowflake-o"></i></div>');
         }
 
         body.style.backgroundImage = backgroundImage;
@@ -122,19 +123,16 @@ function content_6632616923b356_54967028 (Smarty_Internal_Template $_smarty_tpl)
       <div class="container">
          <div class="row siteContent">
             <div class="<?php if (!$_smarty_tpl->tpl_vars['isMobile']->value) {?>col-8<?php } else { ?>container<?php }?>">
-               <div id="content" class="mainBlock">
-				<?php echo '<%'; ?>
+               <main id="content" class="mainBlock">
+					<?php echo '<%'; ?>
 contentData<?php echo '%>'; ?>
 
-	
-               </div>
+               </main>
             </div>
                <?php $_smarty_tpl->_subTemplateRender("file:right-block.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
          </div>
-		 <div class="moderator-button optionButt" onclick="foxEngine.snow.switchSnow();">
-			<i class="fa fa-snowflake-o"></i>
-		</div>
+		
       </div>
 	  <div id="cookie-popup" style="display: none">
         <div class="text-center" id="cookie-header">
@@ -154,6 +152,7 @@ contentData<?php echo '%>'; ?>
 ?>
 	  <?php $_smarty_tpl->_subTemplateRender('file:../notify.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
+	  <div aria-live="polite" aria-atomic="true" class="position-relative"><div class="toast-container position-fixed top-0 end-0 p-2"></div></div>
    </body>
 </html><?php }
 }
