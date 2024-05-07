@@ -18,6 +18,12 @@ if(!defined("ADMIN")){
 						die(json_encode(init::$modulesArray));
 					break;
 					
+					case "parseServers":
+					init::classUtil('ServerParser', "1.0.0");
+						$serverParser = new ServerParser($db, @RequestHandler::$REQUEST['login'], true);
+						die($serverParser->parseServers(@RequestHandler::$REQUEST['server']));
+					break;
+					
 					case "scanTemplates":
 						$inDirScanner = new inDirScanner(ROOT_DIR.'/templates/', @RequestHandler::$REQUEST['path'], "*");
 						die(json_encode($inDirScanner->scanDirectory()));

@@ -27,13 +27,14 @@ export class Servers {
             'jreVersion',
             'ignoreDirs',
             'serverImage',
+			'enabled',
             'serverDescription'
         ];
     }
 
     async getServerData(server) {
         const query = {
-            sysRequest: "parseServers"
+            admPanel: "parseServers"
         };
 
         if (server && server.trim() !== "") {
@@ -65,11 +66,19 @@ export class Servers {
 
         for (let index = 0; index < servers.length; index++) {
             const server = servers[index];
+			let icon;
+			console.log(server.enabled);
+			if(server.enabled == "true") {
+				icon = `<i style="color: green" class="fa-thin fa-check"></i>`;
+			} else {
+				icon = `<i style="color: red" class="fa-regular fa-xmark-large fa-fw"></i>`;
+			}
             const serverHtml = await foxEngine.replaceTextInTemplate(serverRowTpl, {
                 index: index + 1,
                 serverName: server.serverName,
                 serverVersion: server.serverVersion,
-                serverDescription: server.serverDescription
+                serverDescription: server.serverDescription,
+				enabled: icon
             });
 
             serversList.append(serverHtml);
@@ -129,6 +138,7 @@ async loadServerOptions(serverName) {
     }
 
     createInputBlock(key, value) {
+		//new Switchery(document.querySelector(".switch-'.$counter.'"))
         const isTextarea = value.length > 60;
         const inputBlockStyle = isTextarea ? `style="height: ${this.calculateTextareaHeight(value)}px;"` : '';
 

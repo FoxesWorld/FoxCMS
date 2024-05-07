@@ -7,7 +7,7 @@
 }
 
 #admOptions > .option {
-	
+	display: flow;
 }
 
 #admOptions > .option:hover {
@@ -51,6 +51,11 @@
 #serverOptionsForm {
 	width: 70%;
 	margin: 10px;
+}
+
+#serverOptionsForm .serverStatus {
+    font-size: 23px;
+    font-weight: 900;
 }
 
 .adminPanel .main-panel {

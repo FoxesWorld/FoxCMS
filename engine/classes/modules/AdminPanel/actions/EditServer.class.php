@@ -7,6 +7,7 @@ class EditServer {
     // Array of allowed server columns
     private $allowedColumns = [
         'serverVersion',
+		'enabled',
         'host',
         'port',
         'jreVersion',

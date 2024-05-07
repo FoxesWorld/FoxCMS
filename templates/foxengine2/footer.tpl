@@ -24,12 +24,17 @@
 					for (const [key, social] of Object.entries(links)) {
 					  const a = document.createElement('a');
 					  a.classList.add('social-icon', 'tip', key);
+					  a.setAttribute('data-toggle', 'tooltip');
 					  a.title = social.title;
 					  a.rel = 'nofollow noopener';
 					  a.target = '_blank';
 					  a.href = social.slug;
 					  a.innerHTML = `<i class="fa-brands fa-${key}"></i>`;
 					  block.appendChild(a);
+					  $('[data-toggle="tooltip"]').tooltip({
+                        placement: 'bottom',
+                        trigger: "hover"
+                    });
 					}
 				}, { once: true });
 				</script>

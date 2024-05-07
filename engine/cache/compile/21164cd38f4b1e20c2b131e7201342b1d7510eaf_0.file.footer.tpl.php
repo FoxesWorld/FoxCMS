@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-05-07 10:19:28
+/* Smarty version 4.0.4, created on 2024-05-07 11:57:51
   from '/var/www/FoxCMS/templates/foxengine2/footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6639d600b91db1_07695620',
+  'unifunc' => 'content_6639ed0f53b5a0_15976176',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '21164cd38f4b1e20c2b131e7201342b1d7510eaf' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/footer.tpl',
-      1 => 1715063209,
+      1 => 1715067627,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6639d600b91db1_07695620 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6639ed0f53b5a0_15976176 (Smarty_Internal_Template $_smarty_tpl) {
 ?><footer class="bar">
    <div class="container footer--flex">
       <div class="footer-copyright">
@@ -53,12 +53,17 @@ function content_6639d600b91db1_07695620 (Smarty_Internal_Template $_smarty_tpl)
 					for (const [key, social] of Object.entries(links)) {
 					  const a = document.createElement('a');
 					  a.classList.add('social-icon', 'tip', key);
+					  a.setAttribute('data-toggle', 'tooltip');
 					  a.title = social.title;
 					  a.rel = 'nofollow noopener';
 					  a.target = '_blank';
 					  a.href = social.slug;
 					  a.innerHTML = `<i class="fa-brands fa-${key}"></i>`;
 					  block.appendChild(a);
+					  $('[data-toggle="tooltip"]').tooltip({
+                        placement: 'bottom',
+                        trigger: "hover"
+                    });
 					}
 				}, { once: true });
 				<?php echo '</script'; ?>

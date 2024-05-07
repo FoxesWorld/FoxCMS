@@ -4,10 +4,12 @@
 		
 		protected $db;
 		private $login;
+		private $parseAll;
 		
-		function __construct($db, $login) {
+		function __construct($db, $login, $parseAll = false) {
 			$this->db = $db;
 			$this->login = $login;
+			$this->parseAll = $parseAll;
 		}
 		
 		public function parseServers($where = "") {
@@ -22,7 +24,13 @@
 			$servers = $this->db->getRows($query . $queryWhere);
 
 			foreach ($servers as $key) {
-				$serversArray[] = $key;
+				if($key['enabled'] == "true") {
+					$serversArray[] = $key;
+				} else {
+					if($this->parseAll) {
+						$serversArray[] = $key;
+					}
+				}
 			}
 
 			return json_encode($serversArray);
