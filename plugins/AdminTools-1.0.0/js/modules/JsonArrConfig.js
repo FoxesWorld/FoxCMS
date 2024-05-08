@@ -1,4 +1,23 @@
-class JsonArrConfig {
+/**
+ * @fileoverview FoxesWorld for FoxesCraft
+ * 
+ * Этот файл содержит класс JsonArrConfig, который отвечает за обработку JSON-массивов и взаимодействие с ними.
+ * Он предоставляет методы для открытия окна с информацией о модах, генерации формы на основе модов и их характеристик,
+ * а также обновления информации о модах на сервере.
+ * 
+ * Authors: FoxesWorld
+ * Date: [08.05.24]
+ * Version: [1.0.0]
+ */
+
+/**
+ * Класс JsonArrConfig обрабатывает JSON-массивы и взаимодействует с ними.
+ */
+ export class JsonArrConfig {
+	/**
+     * Создает экземпляр JsonArrConfig.
+     * @param {Object} submitData - Данные для отправки.
+     */
     constructor(submitData) {
         this.submitData = submitData;
         this.dialogOptions = {
@@ -18,11 +37,21 @@ class JsonArrConfig {
             }
         };
     }
-
+	
+	/**
+     * Вычисляет высоту текстового поля.
+     * @param {string} value - Значение текстового поля.
+     * @returns {number} - Вычисленная высота текстового поля.
+     */
     calculateTextareaHeight(value) {
         return Math.max(100, value.length / 2);
     }
 
+    /**
+     * Асинхронно открывает окно с информацией о модах.
+     * @param {Object|string} modsInfo - Информация о модах.
+     * @param {string} serverName - Имя сервера.
+     */
 async openModsInfoWindow(modsInfo, serverName) {
     try {
         let modsInfoArray;
@@ -193,5 +222,3 @@ generateModsInfoForm(modsInfoArray, serverName) {
         return answer;
     }
 }
-
-export { JsonArrConfig };
