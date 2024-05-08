@@ -31,10 +31,10 @@
 					  a.href = social.slug;
 					  a.innerHTML = `<i class="fa-brands fa-${key}"></i>`;
 					  block.appendChild(a);
-					  $('[data-toggle="tooltip"]').tooltip({
-                        placement: 'bottom',
-                        trigger: "hover"
-                    });
+					  //$('[data-toggle="tooltip"]').tooltip({
+                      //  placement: 'bottom',
+                      //  trigger: "hover"
+                      //});
 					}
 				}, { once: true });
 				</script>

@@ -29,6 +29,25 @@ if(!defined("ADMIN")){
 						$versions = filesInDir::filesInDirArray(ROOT_DIR . UPLOADS_DIR . $config['launcherSettings']['gameFiles'].'versions');
 						die(json_encode($versions));
 					break;
+
+					case "getJavaVersions":
+						$java = filesInDir::filesInDirArray(ROOT_DIR . UPLOADS_DIR . $config['launcherSettings']['jreDir']);
+						$outputArr = array();
+						foreach($java as $jre){
+							$outputArr[] = str_replace(".zip", "" , $jre);
+						}
+						die(json_encode($outputArr));
+					break;
+
+					case "getServerPictures":
+					$imgDir = "/templates/".$config['siteSettings']['siteTpl']. DIRECTORY_SEPARATOR . $config['launcherSettings']['serverPictures'];
+						$imgs = filesInDir::filesInDirArray(ROOT_DIR . $imgDir);
+						$outputArr = array();
+						foreach($imgs as $img){
+							$outputArr[] = $imgDir.$img;
+						}
+						die(json_encode($outputArr));
+					break;
 					
 					case "scanTemplates":
 						$inDirScanner = new inDirScanner(ROOT_DIR.'/templates/', @RequestHandler::$REQUEST['path'], "*");

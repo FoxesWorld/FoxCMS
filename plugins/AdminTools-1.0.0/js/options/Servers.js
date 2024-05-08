@@ -6,7 +6,7 @@
  * 
  * Authors: FoxesWorld
  * Date: [08.05.24]
- * Version: [1.2.0]
+ * Version: [1.2.2]
  */
 import {
     JsonArrConfig
@@ -16,6 +16,7 @@ export class Servers {
     constructor() {
         this.servers = [];
         this.versions = [];
+		this.serverPictures = [];
         this.javaVersions = [];
         this.jsonArrConfig = new JsonArrConfig({
             admPanel: "editServer"
@@ -110,49 +111,54 @@ export class Servers {
         }
     }
 
-    async loadServerOptions(serverName) {
-        this.parseAvailableVersions();
-        this.parseAvailableJava();
-        try {
-            const responses = await this.getServerData(serverName);
-            this.createDialogIfNeeded();
+async loadServerOptions(serverName) {
+    await Promise.all([
+        this.parseAvailableVersions(),
+        this.parseAvailableJava(),
+        this.parseAvailablePictures()
+    ]);
 
-            let formHtml = `<form id="serverOptionsForm" method="POST" action="/" autocomplete="false">`;
+    try {
+        const responses = await this.getServerData(serverName);
+        this.createDialogIfNeeded();
 
-            for (const response of responses) {
-                for (const key in response) {
-                    if (response.hasOwnProperty(key) && this.editFields.includes(key)) {
-                        if (response[key] !== null) {
-                            formHtml += await this.createInputBlock(key, response[key], serverName);
-                        } else {
-                            formHtml += await this.createInputBlock(key, "", serverName);
-                        }
+        let formHtml = `<form id="serverOptionsForm" method="POST" action="/" autocomplete="false">`;
+
+        for (const response of responses) {
+            for (const key in response) {
+                if (response.hasOwnProperty(key) && this.editFields.includes(key)) {
+                    if (response[key] !== null) {
+                        formHtml += await this.createInputBlock(key, response[key], serverName);
+                    } else {
+                        formHtml += await this.createInputBlock(key, "", serverName);
                     }
                 }
             }
-
-            formHtml += `
-                <input type="hidden" name="admPanel" value="editServer" />
-                <input type="hidden" name="serverName" value="${serverName}" />
-                <input name="refreshPage" type="hidden" value="false" />
-                <input name="playSound" type="hidden" value="false" />
-                <div class="buttonGroup">
-                    <button type="button" id="viewModsInfoBtn" class="btn btn-primary">View Mods Info</button>
-                    <button type="submit" class="login">Apply</button>
-                </div>
-            </form>`;
-
-            this.jsonArrConfig.loadFormIntoDialog(formHtml, serverName);
-            setTimeout(() => {
-                $('#viewModsInfoBtn').click(() => {
-                    this.jsonArrConfig.openModsInfoWindow(responses[0].modsInfo, responses[0].serverName);
-                });
-            }, 1000);
-
-        } catch (error) {
-            console.error('An error occurred:', error.message);
         }
+
+        formHtml += `
+            <input type="hidden" name="admPanel" value="editServer" />
+            <input type="hidden" name="serverName" value="${serverName}" />
+            <input name="refreshPage" type="hidden" value="false" />
+            <input name="playSound" type="hidden" value="false" />
+            <div class="buttonGroup">
+                <button type="button" id="viewModsInfoBtn" class="btn btn-primary">View Mods Info</button>
+                <button type="submit" class="login">Apply</button>
+            </div>
+        </form>`;
+
+        this.jsonArrConfig.loadFormIntoDialog(formHtml, serverName);
+        setTimeout(() => {
+            $('#viewModsInfoBtn').click(() => {
+                this.jsonArrConfig.openModsInfoWindow(responses[0].modsInfo, responses[0].serverName);
+            });
+        }, 1000);
+
+    } catch (error) {
+        console.error('An error occurred:', error.message);
     }
+}
+
 
     createDialogIfNeeded() {
         if (!$("#dialog").length) {
@@ -172,12 +178,18 @@ export class Servers {
         }, "JSON");
     }
 
+    async parseAvailablePictures() {
+        this.serverPictures = await foxEngine.sendPostAndGetAnswer({
+            admPanel: "getServerPictures"
+        }, "JSON");
+    }
+
     createInputBlock(key, value, serverName) {
         const inputHandlers = {
             'host': () => this.createTextInput(key, value, 'text'),
             'port': () => this.createTextInput(key, value, 'number'),
             'ignoreDirs': () => this.createTextInput(key, value, 'text'),
-            'serverImage': () => this.createTextInput(key, value, 'text'),
+            'serverImage': () => this.createDropdown(key, value, this.serverPictures),
             'enabled': () => this.createCheckboxInput(key, value, serverName),
             'serverVersion': () => this.createDropdown(key, value, this.versions),
             'jreVersion': () => this.createDropdown(key, value, this.javaVersions),
@@ -228,37 +240,43 @@ export class Servers {
         setTimeout(() => {
             const textarea = document.getElementById(textareaId);
             const parent = textarea.parentNode;
-            const editor = CodeMirror(parent, {
-                value: value,
+            const editor = CodeMirror.fromTextArea(textarea, {
+				value: value,
                 mode: "htmlmixed",
                 lineNumbers: false,
                 theme: "default",
                 viewportMargin: Infinity,
                 lineWrapping: true
-            });
+			});
             editor.setSize("100%", "auto");
             window.addEventListener('resize', () => editor.setSize("100%", "auto"));
+			editor.refresh();
         }, 800);
 
         return inputBlock;
     }
 
 
-    createDropdown(key, value, optionsArray) {
-        let selectOptions = '';
-        optionsArray.forEach(option => {
-            const isSelected = option === value ? 'selected' : '';
-            selectOptions += `<option value="${option}" ${isSelected}>${option}</option>`;
-        });
+	createDropdown(key, value, optionsArray) {
+		let selectOptions = '';
+		optionsArray.forEach(option => {
+			let displayValue = option;
+			if (option.includes('/')) {
+				displayValue = option.split('/').pop(); // Get the last element after splitting by '/'
+			}
+			const isSelected = option === value ? 'selected' : '';
+			selectOptions += `<option value="${option}" ${isSelected}>${displayValue}</option>`;
+		});
 
-        return `
-            <div class="input_block">
-                <label class="label" for="${key}">${key}:</label>
-                <select name="${key}" id="${key}" class="input">
-                    ${selectOptions}
-                </select>
-            </div>`;
-    }
+		return `
+			<div class="input_block">
+				<label class="label" for="${key}">${key}:</label>
+				<select name="${key}" id="${key}" class="input">
+					${selectOptions}
+				</select>
+			</div>`;
+	}
+
 	
 	/*
 
@@ -297,10 +315,4 @@ export class Servers {
         return inputBlock;
     }
 	*/
-
-
-    calculateTextareaHeight(value) {
-        // You can adjust this formula based on your preferences
-        return Math.max(100, value.length / 2);
-    }
 }

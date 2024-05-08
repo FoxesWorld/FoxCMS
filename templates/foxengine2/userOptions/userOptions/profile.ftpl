@@ -11,6 +11,11 @@
    } 
 </useroption>
 <pageContent>
+<style>
+	button {
+	    width: fit-content;
+	}
+</style>
    <div class="tabs">
       [hasPriviligies] 
 	  <script>

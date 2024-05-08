@@ -423,6 +423,11 @@ ul.list-inline {
 	font-weight: 900;
 }
 
+.icon {
+	width: 7vh;
+	height: 7vh;
+}
+
 /*--------------------------------------------------------------
 # Top Bar
 --------------------------------------------------------------*/
@@ -895,10 +900,9 @@ ul>li {
 	font-size: 2vh;
 }
 
-.server_information .card-title>img {
-	width: 7vh;
-	height: 7vh;
-	border-radius: 20%;
+.server_information .card-title > img {
+	border-radius: 10px;
+	margin: 10px 0px 0px 0px;
 }
 
 .server_information b {

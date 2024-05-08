@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-05-07 23:52:20
+/* Smarty version 4.0.4, created on 2024-05-08 11:46:08
   from '/var/www/FoxCMS/templates/foxengine2/footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_663a9484e63466_96870592',
+  'unifunc' => 'content_663b3bd09685f4_25783194',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '21164cd38f4b1e20c2b131e7201342b1d7510eaf' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/footer.tpl',
-      1 => 1715067627,
+      1 => 1715154510,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_663a9484e63466_96870592 (Smarty_Internal_Template $_smarty_tpl) {
+function content_663b3bd09685f4_25783194 (Smarty_Internal_Template $_smarty_tpl) {
 ?><footer class="bar">
    <div class="container footer--flex">
       <div class="footer-copyright">
@@ -60,10 +60,10 @@ function content_663a9484e63466_96870592 (Smarty_Internal_Template $_smarty_tpl)
 					  a.href = social.slug;
 					  a.innerHTML = `<i class="fa-brands fa-${key}"></i>`;
 					  block.appendChild(a);
-					  $('[data-toggle="tooltip"]').tooltip({
-                        placement: 'bottom',
-                        trigger: "hover"
-                    });
+					  //$('[data-toggle="tooltip"]').tooltip({
+                      //  placement: 'bottom',
+                      //  trigger: "hover"
+                      //});
 					}
 				}, { once: true });
 				<?php echo '</script'; ?>
