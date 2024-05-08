@@ -17,9 +17,6 @@ a {
 .input_block {
 	position: relative;
 	margin: 0px 0px 5px 0px;
-	-webkit-box-shadow: 0 5px 35px rgba(206, 194, 171, .35);
-	-moz-box-shadow: 0 5px 35px rgba(206, 194, 171, .35);
-	box-shadow: 0 5px 35px rgba(206, 194, 171, .35);
 	transition: .2s ease;
 	box-sizing: border-box;
 	border-radius: 4px;

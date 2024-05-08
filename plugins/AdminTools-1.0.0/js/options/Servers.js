@@ -6,7 +6,7 @@
  * 
  * Authors: FoxesWorld
  * Date: [08.05.24]
- * Version: [1.2.2]
+ * Version: [1.4.5]
  */
 import {
     JsonArrConfig
@@ -14,6 +14,7 @@ import {
 
 export class Servers {
     constructor() {
+		this.initAwait = 600;
         this.servers = [];
         this.versions = [];
 		this.serverPictures = [];
@@ -32,21 +33,18 @@ export class Servers {
             height: 'auto',
             width: '900',
             resizable: false,
-            open: (event, ui) => {
-                // $(".ui-widget-overlay").remove();
-                // $(".ui-dialog-titlebar").remove();
-            }
+            open: (event, ui) => {}
         };
-        this.editFields = [
-            'serverVersion',
-            'host',
-            'port',
-            'jreVersion',
-            'ignoreDirs',
-            'serverImage',
-            'enabled',
-            'serverDescription'
-        ];
+		this.serverFields = [
+			{ "fieldName": 'host', 				"fieldType": 'text' },
+			{ "fieldName": 'port', 				"fieldType": 'number' },
+			{ "fieldName": 'ignoreDirs', 		"fieldType": 'tagify' },
+			{ "fieldName": 'enabled', 			"fieldType": 'checkbox' },
+			{ "fieldName": 'serverDescription', "fieldType": 'textarea' },
+			{ "fieldName": 'serverVersion', 	"fieldType": 'dropdown', "optionsArray": 'versions' },
+			{ "fieldName": 'jreVersion', 		"fieldType": 'dropdown', "optionsArray": 'javaVersions' },
+			{ "fieldName": 'serverImage', 		"fieldType": 'dropdown', "optionsArray": 'serverPictures' }
+		];
     }
 
     async getServerData(server) {
@@ -111,53 +109,63 @@ export class Servers {
         }
     }
 
-async loadServerOptions(serverName) {
-    await Promise.all([
-        this.parseAvailableVersions(),
-        this.parseAvailableJava(),
-        this.parseAvailablePictures()
-    ]);
+	async loadServerOptions(serverName) {
+		await Promise.all([
+			this.parseAvailableVersions(),
+			this.parseAvailableJava(),
+			this.parseAvailablePictures()
+		]);
 
-    try {
-        const responses = await this.getServerData(serverName);
-        this.createDialogIfNeeded();
+		try {
+			const responses = await this.getServerData(serverName);
+			this.createDialogIfNeeded();
 
-        let formHtml = `<form id="serverOptionsForm" method="POST" action="/" autocomplete="false">`;
+			let formHtml = `<form id="serverOptionsForm" method="POST" action="/" autocomplete="false">`;
 
-        for (const response of responses) {
-            for (const key in response) {
-                if (response.hasOwnProperty(key) && this.editFields.includes(key)) {
-                    if (response[key] !== null) {
-                        formHtml += await this.createInputBlock(key, response[key], serverName);
-                    } else {
-                        formHtml += await this.createInputBlock(key, "", serverName);
-                    }
-                }
-            }
-        }
+			for (const response of responses) {
+				for (const key in response) {
+					const fieldInfo = this.serverFields.find(field => field.fieldName === key);
+					if (response.hasOwnProperty(key) && fieldInfo) {
+						const { fieldName } = fieldInfo;
+						if (response[key] !== null) {
+							formHtml += await this.createInputBlock(fieldName, response[key], serverName);
+						} else {
+							formHtml += await this.createInputBlock(fieldName, "", serverName);
+						}
+					}
+				}
+			}
 
-        formHtml += `
-            <input type="hidden" name="admPanel" value="editServer" />
-            <input type="hidden" name="serverName" value="${serverName}" />
-            <input name="refreshPage" type="hidden" value="false" />
-            <input name="playSound" type="hidden" value="false" />
-            <div class="buttonGroup">
-                <button type="button" id="viewModsInfoBtn" class="btn btn-primary">View Mods Info</button>
-                <button type="submit" class="login">Apply</button>
-            </div>
-        </form>`;
 
-        this.jsonArrConfig.loadFormIntoDialog(formHtml, serverName);
-        setTimeout(() => {
-            $('#viewModsInfoBtn').click(() => {
-                this.jsonArrConfig.openModsInfoWindow(responses[0].modsInfo, responses[0].serverName);
-            });
-        }, 1000);
+			formHtml += `
+				<input type="hidden" name="admPanel" value="editServer" />
+				<input type="hidden" name="serverName" value="${serverName}" />
+				<input name="refreshPage" type="hidden" value="false" />
+				<input name="playSound" type="hidden" value="false" />
+				<div class="buttonGroup">
+					<button type="button" id="viewModsInfoBtn" class="btn btn-primary">View Mods Info</button>
+					<button type="submit" class="login">Apply</button>
+				</div>
+			</form>`;
 
-    } catch (error) {
-        console.error('An error occurred:', error.message);
-    }
-}
+			  this.jsonArrConfig.loadFormIntoDialog(formHtml, serverName);
+			setTimeout(() => {
+				$('#viewModsInfoBtn').click(() => {
+					this.jsonArrConfig.openModsInfoWindow(responses[0].modsInfo, responses[0].serverName);
+				});
+		   
+
+			const form = document.getElementById("serverOptionsForm");
+			form.addEventListener("submit", async (event) => {
+				$("#dialog").dialog('close');
+				this.parseServers();
+			});
+			}, 1000);
+
+		} catch (error) {
+			console.error('An error occurred:', error.message);
+		}
+	}
 
 
     createDialogIfNeeded() {
@@ -184,34 +192,55 @@ async loadServerOptions(serverName) {
         }, "JSON");
     }
 
-    createInputBlock(key, value, serverName) {
-        const inputHandlers = {
-            'host': () => this.createTextInput(key, value, 'text'),
-            'port': () => this.createTextInput(key, value, 'number'),
-            'ignoreDirs': () => this.createTextInput(key, value, 'text'),
-            'serverImage': () => this.createDropdown(key, value, this.serverPictures),
-            'enabled': () => this.createCheckboxInput(key, value, serverName),
-            'serverVersion': () => this.createDropdown(key, value, this.versions),
-            'jreVersion': () => this.createDropdown(key, value, this.javaVersions),
-            'serverDescription': () => this.createTextareaInput(key, value),
-        };
+createInputBlock(fieldName, value, serverName) {
+	const inputHandlers = {
+		'text': () => this.createTextInput(fieldName, value),
+		'number': () => this.createNumberInput(fieldName, value),
+		'dropdown': (buildArray) => this.createDropdown(fieldName, value, buildArray),
+		'checkbox': () => this.createCheckboxInput(fieldName, value, serverName),
+		'textarea': () => this.createTextareaInput(fieldName, value),
+		'tagify': () => this.createTagifyInput(fieldName, value)
+	};
 
-        const handler = inputHandlers[key];
+
+   const fieldInfo = this.serverFields.find(field => field.fieldName === fieldName);
+    if (fieldInfo) {
+        const { fieldType, optionsArray } = fieldInfo;
+        const handler = inputHandlers[fieldType];
         if (handler) {
-            return handler();
+            if (fieldType === 'dropdown') {
+                const options = this[optionsArray];
+                return handler(options);
+            } else {
+                return handler();
+            }
         } else {
-            console.error(`Unknown input type for key: ${key}`);
+            console.error(`Unknown input type for field: ${fieldName}`);
             return '';
         }
+    } else {
+        console.error(`Field not found in serverFields: ${fieldName}`);
+        return '';
     }
+}
 
-    createTextInput(key, value, type) {
+
+    createTextInput(key, value) {
         return `
             <div class="input_block">
                 <label class="label" for="${key}">${key}:</label>
-                <input type="${type}" id="${key}" name="${key}" class="input" value="${value}">
+                <input type="text" id="${key}" name="${key}" class="input" value="${value}">
             </div>`;
     }
+	
+	createNumberInput(key, value) {
+    return `
+        <div class="input_block">
+            <label class="label" for="${key}">${key}:</label>
+            <input type="number" id="${key}" name="${key}" class="input" value="${value}">
+        </div>`;
+}
+
 
     createCheckboxInput(key, value, serverName) {
         const isChecked = value === "true" ? 'checked' : '';
@@ -223,7 +252,7 @@ async loadServerOptions(serverName) {
 
         setTimeout(() => {
             new Switchery(document.querySelector("." + serverName + "-" + key));
-        }, 800);
+        }, this.initAwait);
 
         return inputBlock;
     }
@@ -251,7 +280,7 @@ async loadServerOptions(serverName) {
             editor.setSize("100%", "auto");
             window.addEventListener('resize', () => editor.setSize("100%", "auto"));
 			editor.refresh();
-        }, 800);
+        }, this.initAwait);
 
         return inputBlock;
     }
@@ -278,41 +307,28 @@ async loadServerOptions(serverName) {
 	}
 
 	
-	/*
+	createTagifyInput(key, value) {
+		const inputBlock = `
+			<div class="input_block">
+				<label class="label" for="${key}">${key}:</label>
+				<input type="text" id="${key}" name="${key}" class="input" value="${value}">
+			</div>`;
 
-    createTagifyInput(key, value, serverName) {
-        const inputBlock = `
-        <div class="input_block">
-            <label class="label" for="${key}">${key}:</label>
-            <input type="text" id="${key}" name="${key}" class="input ${serverName}-tagify" value="${value}">
-        </div>`;
+		setTimeout(() => {
+			const input = document.getElementById(key);
+			new Tagify(input, {
+				originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(','),
+				whitelist: [],
+				enforceWhitelist: false,
+				delimiters: ",",
+				callbacks: {
+					input: (e) => {
+						e.target.setCustomValidity('');
+					}
+				}
+			});
+		}, this.initAwait);
 
-        setTimeout(() => {
-            const input = document.querySelector('.' + serverName + '-tagify');
-            if (!input) {
-                console.error(`Input element with id "${key}" not found.`);
-                return;
-            }
-
-            const tagify = new Tagify(input, {
-                mode: 'mix',
-                delimiters: ',',
-                originalInputValueFormat: (valuesArr) => valuesArr.map(tag => tag.value).join(','), // Форматируем значения через запятую
-                callbacks: {
-                    input: (e) => {
-                        e.target.setCustomValidity('');
-                    },
-                    add: (e) => {
-                        input.value = e.detail.tagify.value.map(tag => tag.value).join(','); // Обновляем значение в input
-                    },
-                    remove: (e) => {
-                        input.value = e.detail.tagify.value.map(tag => tag.value).join(','); // Обновляем значение в input
-                    }
-                }
-            });
-        }, 800);
-
-        return inputBlock;
-    }
-	*/
+		return inputBlock;
+	}
 }
