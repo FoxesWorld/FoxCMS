@@ -5,6 +5,7 @@ export class User {
         this.optionAmount;
         this.optionArray;
         this.optionTpl;
+		this.lastBadgesPsrsed;
         var userLogin = foxEngine.replaceData.login;
         var debugMessage = "Loading data for %c" + userLogin + "%c...";
         var loginStyle = "color: #ff0000;";
@@ -71,6 +72,11 @@ export class User {
     };
 
     async parseBadges(user) {
+		if(this.lastBadgesPsrsed !== user) {
+			this.lastBadgesPsrsed = user;
+		} else {
+			return;
+		}
         const badgeTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'badge.tpl', true);
         try {
             let parsedJson = await this.getBadgesArray(user);
@@ -115,33 +121,25 @@ export class User {
     }
 
     async showUserProfile(userDisplay) {
-
-        let userProfile = await foxEngine.sendPostAndGetAnswer({
-            "userDisplay": userDisplay,
-            "user_doaction": "ViewProfile"
-        }, "TEXT");
-		foxEngine.page.langPack = await foxEngine.page.loadLangPack('userProfile');
+        let userProfile = this.getUserProfile(userDisplay);
+		//foxEngine.page.langPack = await foxEngine.page.loadLangPack('userProfile');
         foxEngine.page.loadData(await this.foxEngine.entryReplacer.replaceText(userProfile), foxEngine.replaceData.contentBlock);
 		//HARDCODED!!!
         location.hash = 'user/' + userDisplay;
         foxEngine.foxesInputHandler.formInit(1000);
-    };
+    }
 
     async showProfilePopup(user, dialogOptions) {
         $("#dialog").dialog("option", "title", user);
-
-        let response = await foxEngine.sendPostAndGetAnswer({
-            "userDisplay": user,
-            "user_doaction": "ViewProfile"
-        }, "HTML");
-
-        foxEngine.page.loadData(response.getElementById('view'), '#dialogContent');
+       let userProfile = await this.getUserProfile(user);
+	   //foxEngine.page.langPack = await foxEngine.page.loadLangPack('userProfile');
+		foxEngine.page.loadData(await this.foxEngine.entryReplacer.replaceText(userProfile), '#dialogContent');
         $("#dialog").dialog(dialogOptions);
         $("#dialog").dialog('open');
         setTimeout(() => {
             this.parseBadges(user);
         }, 600);
-    };
+    }
 
     async getLastUser() {
         try {
@@ -160,6 +158,16 @@ export class User {
             console.error(error.message);
         }
     };
+	
+	async getUserProfile(user) {
+		foxEngine.page.langPack = await foxEngine.page.loadLangPack('userProfile');
+		let userProfile = await foxEngine.sendPostAndGetAnswer({
+            "userDisplay": user,
+            "user_doaction": "ViewProfile"
+        }, "TEXT");
+		
+		return userProfile;
+	}
 	
 	async logout(button) {
 		try {
