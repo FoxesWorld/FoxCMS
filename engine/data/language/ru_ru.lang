@@ -85,6 +85,7 @@
 		/*Register*/
 		'loginUsed' => "Данный логин уже зарегистрирован!",
 		'emailUsed' => "Данная почта уже была зарегистрирована!",
+		'noEmail' => "Кто-то забыл почту ввести",
 		'badSyms' => "Недопустимые символы - ",
 		"passUnequals" => "Пароли не совпадают",
 		'passBadSyms' => "Плохие символы пароля!",
@@ -92,7 +93,7 @@
 		'regComplete' => "Регистрация завершена!",
 		'enterCaptcha' => "Капча не завершена!",
 		'dataProcessing' => "Необходимо принять соглашение об обработке персональных данных!",
-		'acceptRules' => "Нужно согласиться с правилами!",
+		'acceptRules' => "С правилами обычно соглашаются!",
 		
 		/*Settings*/
 		'dbHost-title' => "Хост базы данных",
@@ -173,9 +174,9 @@
 		
 		/*Tabs*/
 		"databaseTab" => '<i class="fa fa-database"></i> База данных',
-		"frontendSettingsTab" => '<i class="fa fa-code"></i> JavaScript',
+		"frontendSettingsTab" => '<i class="fa-solid fa-coffee-beans"></i> JavaScript',
 		"siteSettingsTab" => '<i class="fa fa-cogs"></i> Настройки сайта',
-		"launcherSettingsTab" => '<i class="fa fa-cogs"></i> Настройки Лаунчера',
+		"launcherSettingsTab" => '<i class="fa-thin fa-screwdriver-wrench"></i> Настройки Лаунчера',
 		"securitySetingsTab" => '<i class="fa fa-shield"></i> Безопасность',
 		"otherTab" => '<i class="fa fa-archive"></i> Другое',
 		

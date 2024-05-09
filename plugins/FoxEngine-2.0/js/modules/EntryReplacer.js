@@ -149,7 +149,7 @@ replaceInputTags = (html) => {
 				</section>`);
 			break;
             default:
-                modifiedHtml = modifiedHtml.replace(match[0], '<div class="form-floating mb-3 input_block">' +
+                modifiedHtml = modifiedHtml.replace(match[0], '<div class="form-floating mb-3 input_block" style="display: '+attributeMap['display']+'">' +
                     '<input type="' + (attributeMap['type'] || 'text') + '" ' +
                     'name="' + (attributeMap['name'] || '') + '" ' +
                     'class="form-control input" ' +

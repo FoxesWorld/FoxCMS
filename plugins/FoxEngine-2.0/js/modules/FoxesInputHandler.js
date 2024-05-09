@@ -113,7 +113,9 @@ async formInit(awaitms, data) {
                 //answer = this.foxEngine.request.sendGet(data); WIP
                 break;
         }
-        fireNotif(answer.message, answer.type);
+        //fireNotif(answer.message, answer.type);
+		form.notify(answer.message, answer.type);
+
 
         if (data.playSound === true || data.playSound === undefined) {
             foxEngine.soundOnClick(answer.type);

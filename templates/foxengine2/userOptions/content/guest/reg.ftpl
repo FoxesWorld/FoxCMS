@@ -12,7 +12,9 @@
                </div> 
 			   --> 
 			   [input type="email" name="email" placeholder="Почта"]
-			   [input type="password" name="password1" onKeyUp="CheckPassStrength($(this).val())" placeholder="Пароль"]
+			   [input type="text" name="password1" display="inline-flex" onKeyUp="CheckPassStrength($(this).val())" placeholder="Пароль"] <button style="width: auto" type="button" class="btn btn-secondary btn-icon tip" onclick="generatePassword($(this), $('#password1'), $('#password2'))" data-title="Генерировать">
+																															<i class="fa-regular fa-shuffle"></i>
+																														</button>
 			   [input type="password" name="password2" placeholder="Повтор пароля"]
 			   <span style="background: #ffffff;padding: 5px;border-radius: 10px;">Надежность пароля: <b class="shadowText" id="passStrength"></b></span>
                      <!--			   
@@ -20,20 +22,20 @@
                   <input name="regCode" class="input" type="text" autocomplete="off" />
                   <label class="label">Код регистрации</label>
                </div>
-			   --> [input type="captcha" siteKey="{siteKey}" lang="{lang}"] [input type="checkbox" name="dataProcessing-mustValidate" placeholder="Даю согласие на обработку персональных данных"] [input type="checkbox" name="acceptRules-mustValidate" placeholder="Я соглашаюсь с правилами проекта"] <input name="userAction" class="input" type="hidden" value="register" />
+			   -->  [input type="captcha" siteKey="{siteKey}" lang="{lang}"] 
+					[input type="checkbox" name="dataProcessing-mustValidate" placeholder="Даю согласие на обработку персональных данных"]
+					[input type="checkbox" name="acceptRules-mustValidate" placeholder="Я соглашаюсь с правилами проекта"] <input name="userAction" class="input" type="hidden" value="register" />
                      <button type="submit" class="login">Зарегистрироваться <i class="fa fa-user-plus" aria-hidden="true"></i></button>
                  </form>
              </div>
          </div>
      </div>
      <script>
-         function CheckPassStrength(pass) {
+         async function CheckPassStrength(pass) {
          	let color, text;
-         	let req = foxEngine.request.send_post({userAction: 'checkPass', password: pass});
-         	    req.onreadystatechange = function() {
-         			if (req.readyState === 4) {
-         				let json = JSON.parse(this.responseText);         
-						switch(json.PassStrength){
+			
+			let passStatus = await foxEngine.sendPostAndGetAnswer({userAction: 'checkPass', password: pass}, "JSON");
+						switch(passStatus.PassStrength){
 							case 1:
 								color = '#B20A0A';
 								text = 'Очень слабый';
@@ -61,8 +63,29 @@
 						}
 
          				$("#passStrength").html(`<small style="color: ${color}">${text}</small>`);
-         			}
-         		}
          }
+		 
+		    function generatePassword(button, pass1, pass2) {
+				let password = $(pass1);
+				let password_repeat = $(pass2);
+
+				let length = selfRandom(16, 28),
+					charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-",
+					retVal = "";
+
+				for (let i = 0, n = charset.length; i < length; ++i) {
+					retVal += charset.charAt(Math.floor(Math.random() * n));
+				}
+
+				password.val(retVal);
+				password_repeat.val(retVal);
+				button.notify('Пароль сгенерирован','success');
+				CheckPassStrength($("#password1").val());
+			}
+			
+			    function selfRandom(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
      </script>
  </pageContent>
