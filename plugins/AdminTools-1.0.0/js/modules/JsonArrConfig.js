@@ -6,21 +6,18 @@
  * and updating mod information on the server.
  * 
  * Authors: FoxesWorld
- * Date: [08.05.24]
- * Version: [1.2.0]
+ * Date: [09.05.24]
+ * Version: [1.5.3]
  */
 
 /**
  * The JsonArrConfig class handles JSON arrays and interacts with them.
  */
 export class JsonArrConfig {
-    /**
-     * Creates an instance of JsonArrConfig.
-     * @param {Object} submitRequest - Data for submission.
-     */
-    constructor(submitRequest, jsonAttributes) {
-        this.submitRequest = submitRequest;
+    constructor(jsonAttributes, submitHandler) {
+        this.postData;
         this.jsonAttributes = jsonAttributes;
+		this.submitHandler = submitHandler;
         this.dialogOptions = {
             autoOpen: false,
             position: {
@@ -36,61 +33,47 @@ export class JsonArrConfig {
         };
     }
     
-    /**
-     * Calculates the height of a textarea.
-     * @param {string} value - Value of the textarea.
-     * @returns {number} - Calculated height of the textarea.
-     */
-    calculateTextareaHeight(value) {
-        return Math.max(100, value.length / 2);
-    }
+	calculateTextareaHeight(value) {
+		const minHeight = 100;
+		const calculatedHeight = Math.max(minHeight, value.length / 2);
+		return calculatedHeight;
+	}
 
-    /**
-     * Asynchronously opens a window with mod information.
-     * @param {Object|string} modsInfo - Mod information.
-     * @param {string} serverName - Server name.
-     */
-    async openModsInfoWindow(modsInfo, serverName) {
+
+    async openFormWindow(configArray, serverName, postData) {
+		this.postData = postData;
         try {
             let modsInfoArray;
 
-            if (modsInfo) {
-                if (typeof modsInfo === 'string') {
-                    modsInfoArray = JSON.parse(modsInfo);
+            if (configArray) {
+                if (typeof configArray === 'string') {
+                    modsInfoArray = JSON.parse(configArray);
                 } else {
-                    modsInfoArray = modsInfo;
+                    modsInfoArray = configArray;
                 }
             } else {
-                // No modsInfo provided, open an empty window/dialog
-                this.loadFormIntoDialog('', serverName); // Passing an empty string
-                return; // Exit the function
+                this.loadFormIntoDialog('', serverName);
+                return;
             }
 
-            const modsInfoHtml = this.generateModsInfoForm(modsInfoArray, serverName);
+            const builtFormHtml = this.genJsonCfgForm(modsInfoArray);
 
-            this.loadFormIntoDialog(modsInfoHtml, serverName);
+            this.loadFormIntoDialog(builtFormHtml, serverName);
 
             setTimeout(() => {
-                
-                $('#submitModsInfoBtn').click(async () => {
-                    const capturedServerName = serverName;
-                    let answer = await this.updateModsInfo(modsInfoArray, capturedServerName);
-                    $('#submitModsInfoBtn').notify(answer.message, answer.type);
-                    if(answer.type === "success") {
-                        $("#dialog").dialog('close');
-                        foxEngine.servers.loadServerPage(serverName);
-                    }
+                $('#submitBtn').click(async () => {
+					await this.submitHandler($('#submitBtn'), modsInfoArray, serverName);
                 });
 
-                $('#modsInfoForm').on('click', '.removeBtn', (e) => {
+                $('#jsonConfigForm').on('click', '.removeBtn', (e) => {
                     const index = $(e.currentTarget).data('index');
-                    this.removeRow(modsInfoArray, index, serverName);
-                    this.updateModsInfoTableIndexes();
+                    this.removeRow(modsInfoArray, index);
+                    this.updateJsonConfigTableIndexes();
                 });
 
                 $('#addRowBtn').click(() => {
-                    this.addRow(serverName);
-                    this.updateModsInfoTableIndexes();
+                    this.addRow();
+                    this.updateJsonConfigTableIndexes();
                 });
             }, 1000);
         } catch (error) {
@@ -98,9 +81,8 @@ export class JsonArrConfig {
         }
     }
 
-
-    generateModsInfoForm(modsInfoArray, serverName) {
-        const modsInfoHtml = `<form id="modsInfoForm"><table cellpadding="5" class="table table-bordered table-striped">
+    genJsonCfgForm(modsInfoArray) {
+        const builtFormHtml = `<form id="jsonConfigForm"><table cellpadding="${this.jsonAttributes.length}" class="table table-bordered table-striped">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>#</th>
@@ -109,22 +91,22 @@ export class JsonArrConfig {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    ${modsInfoArray.map((element, index) => this.generateModsInfoRow(index, element)).join('')}
+                                    ${modsInfoArray.map((element, index) => this.genFormRow(index, element)).join('')}
                                 </tbody>
                             </table>
                             <div class="buttonGroup">
-                                <button type="button" id="submitModsInfoBtn" class="btn btn-primary">Save</button>
+                                <button type="button" id="submitBtn" class="btn btn-primary">Save</button>
                                 <button type="button" id="addRowBtn" class="btn btn-success">Add Row</button>
                             </div>
                            </form>`;
-        return modsInfoHtml;
+        return builtFormHtml;
     }
 
-    generateModsInfoRow(index, row) {
-        const calculateTextareaHeight = this.calculateTextareaHeight.bind(this);
+    genFormRow(index, row) {
+        //const calculateTextareaHeight = this.calculateTextareaHeight.bind(this);
         const rowHeight = this.calculateRowHeight(row);
 
-        return `<tr style="height: ${rowHeight * 1.1}px;">` +
+        return `<tr style="height: ${rowHeight}px;">` +
             `<td>${index + 1}</td>` +
             this.jsonAttributes.map(attribute => {
                 const inputValue = row[attribute] || '';
@@ -144,51 +126,49 @@ export class JsonArrConfig {
     }
 
     calculateRowHeight(row) {
-        const calculateTextareaHeight = this.calculateTextareaHeight.bind(this);
-        const heights = this.jsonAttributes.map(attribute => calculateTextareaHeight(row[attribute] || ''));
+        const heights = this.jsonAttributes.map(attribute => this.calculateTextareaHeight(row[attribute] || ''));
         return Math.max(...heights) * 2;
     }
 
-    addRow(serverName) {
+    addRow() {
         const newRow = {};
         this.jsonAttributes.forEach(attribute => {
             newRow[attribute] = '';
         });
 
-        const index = $('#modsInfoForm tbody tr').length;
-        const newHtml = this.generateModsInfoRow(index, newRow);
-        $('#modsInfoForm tbody').append(newHtml);
+        const index = $('#jsonConfigForm tbody tr').length;
+        const newHtml = this.genFormRow(index, newRow);
+        $('#jsonConfigForm tbody').append(newHtml);
 
-        $('#modsInfoForm tbody tr:eq(' + index + ')').on('click', '.removeBtn', () => {
-            this.removeRow(index);
-            this.updateModsInfoTableIndexes();
+        $('#jsonConfigForm tbody tr:eq(' + index + ')').on('click', '.removeBtn', () => {
+            this.removeRow(modsInfoArray, index);
+            this.updateJsonConfigTableIndexes();
         });
     }
 
     removeRow(modsInfoArray, index) {
         modsInfoArray.splice(index, 1);
-        $('#modsInfoForm tbody tr:eq(' + index + ')').remove();
-        this.updateModsInfoTableIndexes();
+        $('#jsonConfigForm tbody tr:eq(' + index + ')').remove();
+        this.updateJsonConfigTableIndexes();
     }
 
-    updateModsInfoTableIndexes() {
-        $('#modsInfoForm tbody tr').each((i, tr) => {
+    updateJsonConfigTableIndexes() {
+        $('#jsonConfigForm tbody tr').each((i, tr) => {
             $(tr).find('td:first').text(i + 1);
             $(tr).find('.removeBtn').attr('data-index', i);
         });
     }
 
-    
-    loadFormIntoDialog(formHtml, serverName) {
+    loadFormIntoDialog(formHtml, dialogTitle) {
         foxEngine.page.loadData(formHtml, '#dialogContent');
         $("#dialog").dialog(this.dialogOptions);
-        $("#dialog").dialog({ title: serverName + " mods"});
+        $("#dialog").dialog({ title: dialogTitle});
         $("#dialog").dialog('open');
     }
 
-    async updateModsInfo(modsInfoArray, serverName) {
+    async updateJsonConfig(modsInfoArray) {
         const formData = {};
-        $('#modsInfoForm input, #modsInfoForm textarea').each(function () {
+        $('#jsonConfigForm input, #jsonConfigForm textarea').each(function () {
             const key = $(this).data('key');
             const index = $(this).data('index');
             const value = $(this).val();
@@ -199,14 +179,11 @@ export class JsonArrConfig {
             
             formData[index][key] = value;
         });
-
-        const postData = {
-            ...this.submitRequest,
-            modsInfo: JSON.stringify(Object.values(formData)),
-            serverName: serverName
-        };
-
-        let answer = await foxEngine.sendPostAndGetAnswer(postData, "JSON");
+		let req = {
+			...this.postData,
+			modsInfo: JSON.stringify(Object.values(formData))
+		};
+        let answer = await foxEngine.sendPostAndGetAnswer(req, "JSON");
         return answer;
     }
 }

@@ -4,8 +4,14 @@ import {
 
 export class Users {
     constructor() {
-        this.jsonArrConfig = new JsonArrConfig();
+        
         this.userArr = [];
+		this.jsonArrConfig = new JsonArrConfig([ "badgeName", "acquiredDate", "description"]);
+		this.badgesFields = [
+			{ "fieldName": 'badgeName', "fieldType": 'text' },
+			{ "fieldName": 'acquiredDate', "fieldType": 'text' },
+			{"fieldName": 'description', "fieldType": 'text' }
+		];
         this.contentAdded = false;
         this.dialogOptions = {
             autoOpen: false,
@@ -74,10 +80,15 @@ export class Users {
                         console.log(login);
                         foxEngine.user.showProfilePopup(login);
                     });
+
+					$('.loadUserBadges').click(async (event) => {
+						const login = $(event.target).data('login');
+						const badgesArray = await foxEngine.user.getBadgesArray(login);
+						this.jsonArrConfig.openFormWindow(badgesArray, login, {admPanel: "editUser", userLogin: login});
+					});					
                 }, 1000);
             } else {
                 const userHtml = `<tr><td colspan="4"><div class="alert alert-warning" role="alert">No Users like <b>${input}</b></div></td></tr>`;
-                //fireNotif(userHtml, 'warning');
                 foxEngine.page.loadData(userHtml, "#usersList");
             }
         } catch (error) {
