@@ -19,9 +19,20 @@ export class Servers {
         this.versions = [];
 		this.serverPictures = [];
         this.javaVersions = [];
+		this.serverFields = [
+			{ "fieldName": 'host', 				"fieldType": 'text' },
+			{ "fieldName": 'port', 				"fieldType": 'number' },
+			{ "fieldName": 'ignoreDirs', 		"fieldType": 'tagify' },
+			{ "fieldName": 'enabled', 			"fieldType": 'checkbox' },
+			{ "fieldName": 'serverDescription', "fieldType": 'textarea' },
+			{ "fieldName": 'serverVersion', 	"fieldType": 'dropdown', "optionsArray": 'versions' },
+			{ "fieldName": 'jreVersion', 		"fieldType": 'dropdown', "optionsArray": 'javaVersions' },
+			{ "fieldName": 'serverImage', 		"fieldType": 'dropdown', "optionsArray": 'serverPictures' }
+		];
+		this.serverAttributes = ["modName", "modPicture", "modDesc"];
         this.jsonArrConfig = new JsonArrConfig({
             admPanel: "editServer"
-        });
+        }, this.serverAttributes);
         this.dialogOptions = {
             autoOpen: false,
             position: {
@@ -35,16 +46,7 @@ export class Servers {
             resizable: false,
             open: (event, ui) => {}
         };
-		this.serverFields = [
-			{ "fieldName": 'host', 				"fieldType": 'text' },
-			{ "fieldName": 'port', 				"fieldType": 'number' },
-			{ "fieldName": 'ignoreDirs', 		"fieldType": 'tagify' },
-			{ "fieldName": 'enabled', 			"fieldType": 'checkbox' },
-			{ "fieldName": 'serverDescription', "fieldType": 'textarea' },
-			{ "fieldName": 'serverVersion', 	"fieldType": 'dropdown', "optionsArray": 'versions' },
-			{ "fieldName": 'jreVersion', 		"fieldType": 'dropdown', "optionsArray": 'javaVersions' },
-			{ "fieldName": 'serverImage', 		"fieldType": 'dropdown', "optionsArray": 'serverPictures' }
-		];
+
     }
 
     async getServerData(server) {
@@ -135,7 +137,6 @@ export class Servers {
 					}
 				}
 			}
-
 
 			formHtml += `
 				<input type="hidden" name="admPanel" value="editServer" />

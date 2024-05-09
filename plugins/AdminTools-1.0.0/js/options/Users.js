@@ -1,32 +1,56 @@
-import { JsonArrConfig } from '../modules/JsonArrConfig.js';
+import {
+    JsonArrConfig
+} from '../modules/JsonArrConfig.js';
 
-class Users {
+export class Users {
     constructor() {
-		this.jsonArrConfig = new JsonArrConfig();
-		this.userArr = [];
-	}
+        this.jsonArrConfig = new JsonArrConfig();
+        this.userArr = [];
+        this.contentAdded = false;
+        this.dialogOptions = {
+            autoOpen: false,
+            position: {
+                my: 'center',
+                at: 'center',
+                of: window
+            },
+            modal: true,
+            height: 'auto',
+            width: 600,
+            resizable: false,
+            open: function(event, ui) {
+
+            }
+        };
+    }
 
     async parseUsers(input = '*') {
+        if (input === "") {
+            input = '*';
+        }
         try {
-            this.addContent();
+            if (!this.contentAdded) {
+                this.addContent();
+                this.contentAdded = true; // Set the flag to true after adding content
+            }
 
             let usersArray = await foxEngine.sendPostAndGetAnswer({
                 admPanel: "usersList",
                 userMask: input
             }, "JSON");
+            $("#usersList").html("");
 
-            if (usersArray.length > 0) {
-                //$("#usersList").html("");
-				let userTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/users/userRow.tpl', true);
+            if (usersArray !== null) {
+                let userTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/users/userRow.tpl', true);
                 for (let j = 0; j < usersArray.length; j++) {
                     let singleUser = usersArray.at(j);
                     let login = singleUser[j].login;
                     let email = singleUser[j].email;
                     let lastdate = singleUser[j].last_date;
-					let avatar = singleUser[j].profilePhoto;
-					let badges = singleUser[j].badges;
-					
-					this.userArr[login] = {
+                    let avatar = singleUser[j].profilePhoto;
+                    let badges = singleUser[j].badges;
+
+                    this.userArr[login] = {
                         email,
                         lastdate,
                         badges
@@ -35,60 +59,26 @@ class Users {
                     let userHtml = await foxEngine.replaceTextInTemplate(userTpl, {
                         index: j,
                         login,
-						avatar,
+                        avatar,
                         email,
                         lastdate,
-						badges
+                        badges
                     });
                     $("#usersList").append(userHtml);
-
-                    let openTimer;
-
-                    $(`#usersList > tr > td.${login}`).on({
-                        mouseenter: function() {
-                            clearTimeout(openTimer);
-
-                            const dialogOptions = {
-                                autoOpen: false,
-                                position: {
-                                    my: 'center',
-                                    at: 'center',
-                                    of: window
-                                },
-                                modal: true,
-                                height: 'auto',
-                                width: 600,
-                                resizable: false,
-                                open: function(event, ui) {
-                                    $(".ui-widget-overlay").remove();
-                                    $(".ui-dialog-titlebar").remove();
-                                }
-                            };
-
-                            openTimer = setTimeout(() => {
-                                foxEngine.user.showProfilePopup(`'${login}'`, dialogOptions);
-                            }, 1000);
-                        },
-                        mouseleave: function() {
-                            clearTimeout(openTimer);
-                        }
-                    });
-
-                    $(document).on('click', function(event) {
-                        if ($(event.target).closest('.ui-dialog').length === 0) {
-                            $("#dialog").dialog("close");
-                        }
-                    });
-					//console.log(this.userArr[login]);
-					        setTimeout(() => {
-							$('#loadUserBadges').click(() => {
-									this.loadBadgesConfig(badges, login);
-								});
-							}, 1000);
                 }
+				//Action listeners
+                setTimeout(() => {
+
+                    $('.showProfile').click((event) => {
+                        const login = $(event.target).data('login');
+                        console.log(login);
+                        foxEngine.user.showProfilePopup(login);
+                    });
+                }, 1000);
             } else {
-                const userHtml = `<div class="noUsers"><h1>No Users like <span>${input}</span></h1></div>`;
-                foxEngine.loadData(userHtml, "#usersList");
+                const userHtml = `<tr><td colspan="4"><div class="alert alert-warning" role="alert">No Users like <b>${input}</b></div></td></tr>`;
+                //fireNotif(userHtml, 'warning');
+                foxEngine.page.loadData(userHtml, "#usersList");
             }
         } catch (error) {
             console.error('An error occurred:', error.message);
@@ -98,18 +88,18 @@ class Users {
     userTemplate(template, data) {
         return template.replace(/\${(.*?)}/g, (match, p1) => data[p1.trim()]);
     }
-	
-	getUserData(login){
-		return this.userArr[login];
-	}
-	
-	async loadBadgesConfig(button, data, user) {
-		if(data !== "") {
-			this.jsonArrConfig.openModsInfoWindow(data, user);
-		} else {
-			button.notify(user + ' has no badges!', "warn");
-		}
-	}
+
+    getUserData(login) {
+        return this.userArr[login];
+    }
+
+    async loadBadgesConfig(button, data, user) {
+        if (data !== "") {
+            this.jsonArrConfig.openModsInfoWindow(data, user);
+        } else {
+            button.notify(user + ' has no badges!', "warn");
+        }
+    }
 
     async addContent() {
         if (!$("#adminContent > table").length) {
@@ -118,5 +108,3 @@ class Users {
         }
     }
 }
-
-export { Users };

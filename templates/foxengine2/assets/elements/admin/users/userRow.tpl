@@ -6,8 +6,8 @@
      <td>{convertUnixTime(lastdate)}</td> -->
     <td>
 		<div class="buttonGroup">
-			<button class="btn bg-teal btn-sm btn-raised position-left legitRipple" data-action="profile">Profile</button>
-			<button class="btn bg-teal btn-sm btn-raised position-left legitRipple" id="loadUserBadges" data-action="badges" data-login="{login}">Badges</button>
+			<button class="btn bg-teal btn-sm btn-raised position-left legitRipple showProfile" data-login="{login}" data-action="profile">Profile</button>
+			<button class="btn bg-teal btn-sm btn-raised position-left legitRipple loadUserBadges" data-action="badges" data-login="{login}">Badges</button>
 		</div>
     </td>
 </tr>

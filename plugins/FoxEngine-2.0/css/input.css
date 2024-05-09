@@ -445,7 +445,7 @@ li > a:not(.tip-over):hover:before {
 }
 
 .alert {
-	margin: 10px 0px;
+	margin: 15px 30px;
 }
 
 img.emoji {

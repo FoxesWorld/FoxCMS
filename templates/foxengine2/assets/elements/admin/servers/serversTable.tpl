@@ -11,3 +11,6 @@
           </thead>
           <tbody id="serversList"></tbody>
         </table>
+		<p class="buttonGroup">
+			<button id="addServerButton" class="btn btn-primary">Add New Server</button>
+		</p>

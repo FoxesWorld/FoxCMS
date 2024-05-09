@@ -1173,7 +1173,10 @@ footer .footer-copyright span img {
 	font-weight: 600;
 	padding-left: 14px;
 	line-height: 11px;
-	background: url(../img/monitor/server-user-small-icon.png) no-repeat;
+}
+
+.online_text > span {
+	margin: 5px;
 }
 
 .progressbar-online {

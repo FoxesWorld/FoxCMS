@@ -1,11 +1,11 @@
 
 	import { Settings } from "./options/Settings.js";
 	import { Users } from "./options/Users.js";
-	import { Modules } from "./options/Modules.js";
+	//import { Modules } from "./options/Modules.js";
 	import { Servers } from "./options/Servers.js";
-	import { GroupAssoc } from "./options/GroupAssoc.js";
-	import { TemplateEditor } from "./options/TemplateEditor.js";
-	import { Pages } from "./options/Pages.js";
+	//import { GroupAssoc } from "./options/GroupAssoc.js";
+	//import { TemplateEditor } from "./options/TemplateEditor.js";
+	//import { Pages } from "./options/Pages.js";
 
 class AdminPanel {
 
@@ -13,11 +13,11 @@ class AdminPanel {
 		this.selectoption = {thisAdmoption: "",thatAdmoption: ""}
 		this.settings = new Settings();
 		this.users = new Users();
-		this.modules = new Modules();
+		//this.modules = new Modules();
 		this.servers = new Servers();
-		this.groupAssoc = new GroupAssoc();
-		this.templateEditor = new TemplateEditor();
-		this.pages = new Pages();
+		//this.groupAssoc = new GroupAssoc();
+		//this.templateEditor = new TemplateEditor();
+		//this.pages = new Pages();
 	}
 	
 	

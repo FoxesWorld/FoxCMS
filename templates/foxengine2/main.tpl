@@ -2,10 +2,10 @@
    <head>
 	  <meta charset="utf-8" />
       {$systemHeaders}
-      <meta name="HandheldFriendly" content="true" />
       <title>{$siteTitle}</title>
-      <meta name="format-detection" content="telephone=no" />
-	  <meta name="viewport" content="width=790, maximum-scale=1">
+	  <meta name="HandheldFriendly" content="true" />
+      <meta name="format-detection" content="telephone=yes" />
+	  <meta name="viewport" content="width=700, height=device-height, user-scalable=no, maximum-scale=1">
 	  <meta name="author" content="FoxesWorld" />
 	  <meta name="description" content="{$siteDesc}" />
 	  <meta name="keywords" content="{$keywords}">
@@ -87,12 +87,14 @@
 		  Они необходимы для создания невероятного опыта в использовании сайта – будь то путешествие по страницам или открытие сундука с новыми идеями.</p>
           <a onclick="foxEngine.page.loadPage('cookies', replaceData.contentBlock); return false;" href="#">Хочу знать больше...</a>
           <div class="cookie-buttons">
-            <button id="btn-cookie" type="submit">Соглашаюсь</button>
+            <button id="btn-cookie" type="submit">Соглашусь</button>
           </div>
         </div>
       </div>
       {include file='footer.tpl'}
 	  {include file='../notify.tpl'}
-	  <div aria-live="polite" aria-atomic="true" class="position-relative"><div class="toast-container position-fixed top-0 end-0 p-2"></div></div>
+	  <div aria-live="polite" aria-atomic="true" class="position-relative">
+		<div class="toast-container position-fixed top-0 end-0 p-2"></div>
+	  </div>
    </body>
 </html>
