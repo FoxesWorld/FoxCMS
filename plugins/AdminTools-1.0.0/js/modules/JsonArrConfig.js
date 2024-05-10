@@ -7,17 +7,22 @@
  * 
  * Authors: FoxesWorld
  * Date: [10.05.24]
- * Version: [1.5.6]
+ * Version: [1.6.8]
  */
 
 /**
  * The JsonArrConfig class handles JSON arrays and interacts with them.
  */
 export class JsonArrConfig {
-    constructor(jsonAttributes, submitHandler) {
+    constructor(jsonAttributes, submitHandler, buildField) {
         this.postData;
         this.jsonAttributes = jsonAttributes;
 		this.submitHandler = submitHandler;
+		if(buildField) {
+			this.buildField = buildField;
+			console.log("Using buildField");
+		}
+
 		this.charactersToRemove = ['\n', '\t'];
         this.dialogOptions = {
             autoOpen: false,
@@ -56,7 +61,7 @@ export class JsonArrConfig {
                 this.loadFormIntoDialog('', serverName);
                 return;
             }
-            const builtFormHtml = this.genJsonCfgForm(JsonArray);
+            const builtFormHtml = await this.genJsonCfgForm(JsonArray);
 
             this.loadFormIntoDialog(builtFormHtml, serverName);
 
@@ -74,6 +79,7 @@ export class JsonArrConfig {
                 });
 
                 $('#addRowBtn').click(() => {
+					console.log('clkc');
                     this.addRow();
                     this.updateArrayIndexes();
                 });
@@ -83,62 +89,80 @@ export class JsonArrConfig {
         }
     }
 
-    genJsonCfgForm(JsonArray) {
-        const builtFormHtml = `<form id="jsonConfigForm"><table cellpadding="${this.jsonAttributes.length}" class="table table-bordered table-striped">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>#</th>
-                                        ${this.jsonAttributes.map(attribute => `<th>${attribute}</th>`).join('')}
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${JsonArray.map((element, index) => this.genFormRow(index, element)).join('')}
-                                </tbody>
-                            </table>
-                            <div class="buttonGroup">
-                                <button type="button" id="submitBtn" class="btn btn-primary">Save</button>
-                                <button type="button" id="addRowBtn" class="btn btn-success">Add Row</button>
-                            </div>
-                           </form>`;
-        return builtFormHtml;
+	genJsonCfgForm(JsonArray) {
+		return Promise.all(JsonArray.map((element, index) => this.genFormRow(index, element)))
+			.then(rows => {
+				const builtFormHtml = `<form id="jsonConfigForm"><table cellpadding="${this.jsonAttributes.length}" class="table table-bordered table-striped">
+										<thead class="thead-dark">
+											<tr>
+												<th>#</th>
+												${this.jsonAttributes.map(attribute => `<th>${attribute}</th>`).join('')}
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											${rows.join('')}
+										</tbody>
+									</table>
+									<div class="buttonGroup">
+										<button type="button" id="submitBtn" class="btn btn-primary">Save</button>
+										<button type="button" id="addRowBtn" class="btn btn-success">Add Row</button>
+									</div>
+									</form>`;
+				return builtFormHtml;
+			});
+	}
+
+async genFormRow(index, row) {
+    const rowHeight = this.calculateRowHeight(row);
+    let formHtml = `<tr style="height: ${rowHeight}px;">
+                        <td>${index + 1}</td>`;
+
+    if (this.buildField) {
+        for (let i = 0; i < this.buildField.inputFields.length; i++) {
+            const { fieldName, fieldType, optionsArray } = this.buildField.inputFields[i];
+            const inputValue = row[fieldName] || '';
+            const inputHtml = await this.buildField.createInputBlock(fieldName, inputValue, fieldType, optionsArray);
+            formHtml += `<td>${inputHtml}</td>`;
+        }
+    } else {
+        formHtml += this.jsonAttributes.map(attribute => {
+            const inputValue = row[attribute] || '';
+            const isTextarea = inputValue.length > 60;
+            const inputType = isTextarea ? 'textarea' : 'input';
+            const inputHeight = isTextarea ? rowHeight : this.calculateTextareaHeight(inputValue);
+
+            return `<td>
+                        <div class="input_block">
+                            <${inputType} class="input" id="${attribute}_input${index}" data-index="${index}" data-key="${attribute}" style="${isTextarea ? 'height: ' + inputHeight + 'px; width: 100%; box-sizing: border-box;' : 'height: ' + inputHeight / 2 + 'px;'}"
+                                ${inputType === 'input' ? `value="${inputValue}"` : ''}>
+                                ${inputType === 'textarea' ? `${this.removeCharacters(inputValue)}` : ''}
+                            </${inputType}>
+                        </div>
+                    </td>`;
+        }).join('');
     }
 
-    genFormRow(index, row) {
-        const rowHeight = this.calculateRowHeight(row);
+    formHtml += `<td><button type="button" class="btn btn-danger removeBtn" data-index="${index}">Remove</button></td></tr>`;
+    
+    return formHtml;
+}
 
-        return `<tr style="height: ${rowHeight}px;">` +
-            `<td>${index + 1}</td>` +
-            this.jsonAttributes.map(attribute => {
-                const inputValue = row[attribute] || '';
-                const isTextarea = inputValue.length > 60;
-                const inputType = isTextarea ? 'textarea' : 'input';
-                const inputHeight = isTextarea ? rowHeight : this.calculateTextareaHeight(inputValue);
-
-                return `<td>
-                            <div class="input_block">
-                                <${inputType} class="input" id="${attribute}_input${index}" data-index="${index}" data-key="${attribute}" style="${isTextarea ? 'height: ' + inputHeight + 'px; width: 100%; box-sizing: border-box;' : 'height: ' + inputHeight / 2 + 'px;'}"
-                                    ${inputType === 'input' ? `value="${inputValue}"` : ''}>
-                                    ${inputType === 'textarea' ? `${this.removeCharacters(inputValue)}` : ''}
-                                </${inputType}>
-                            </div>
-                        </td>`;
-            }).join('') + `<td><button type="button" class="btn btn-danger removeBtn" data-index="${index}">Remove</button></td></tr>`;
-    }
 
     calculateRowHeight(row) {
         const heights = this.jsonAttributes.map(attribute => this.calculateTextareaHeight(row[attribute] || ''));
         return Math.max(...heights) * 2;
     }
 
-    addRow() {
+
+    async addRow() {
         const newRow = {};
         this.jsonAttributes.forEach(attribute => {
             newRow[attribute] = '';
         });
 
         const index = $('#jsonConfigForm tbody tr').length;
-        const newHtml = this.genFormRow(index, newRow);
+        const newHtml = await this.genFormRow(index, newRow);
         $('#jsonConfigForm tbody').append(newHtml);
 
 		//Adding remove listener to new added row

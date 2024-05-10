@@ -6,21 +6,44 @@
  * 
  * Authors: AidenFox
  * Date: [10.05.24]
- * Version: 1.1.0 SNAPSHOT
+ * Version: 1.3.0 ALPHA
  */
 export class BuildField {
     constructor(classInstance) {
         this.classInstance = classInstance;
-        this.inputFields = classInstance.serverFields;
+        this.inputFields = classInstance.formFields;
         this.initAwait = 600;
     }
+	
+	async buildFormFields(values) {
+		let formHtml = '';
 
-    async createInputBlock(fieldName, value, serverName, optionsArray) {
+		for (let i = 0; i < values.length; i++) {
+			const rowData = values[i];
+			formHtml += '<tr>';
+
+			for (let j = 0; j < this.inputFields.length; j++) {
+				const { fieldName, fieldType, optionsArray } = this.inputFields[j];
+				const value = rowData[fieldName];
+				formHtml += "<td>";
+				formHtml += await this.createInputBlock(fieldName, value, fieldType, optionsArray);
+				formHtml += "</td>";
+			}
+
+			formHtml += '</tr>';
+		}
+
+		return formHtml;
+	}
+
+
+
+    async createInputBlock(fieldName, value, fieldType, optionsArray) {
         const inputHandlers = {
             'text': () => this.createTextInput(fieldName, value),
             'number': () => this.createNumberInput(fieldName, value),
             'dropdown': () => this.createDropdown(fieldName, value, optionsArray),
-            'checkbox': () => this.createCheckboxInput(fieldName, value, serverName),
+            'checkbox': () => this.createCheckboxInput(fieldName, value),
             'textarea': () => this.createTextareaInput(fieldName, value),
             'tagify': () => this.createTagifyInput(fieldName, value)
         };
@@ -28,7 +51,7 @@ export class BuildField {
         if (this.inputFields) {
             const fieldInfo = this.inputFields.find(field => field.fieldName === fieldName);
             if (fieldInfo) {
-                const { fieldType } = fieldInfo;
+                //const { fieldType } = fieldInfo;
                 const handler = inputHandlers[fieldType];
                 if (handler) {
                     return handler();
@@ -50,7 +73,7 @@ export class BuildField {
         return `
             <div class="input_block">
                 <label class="label" for="${key}">${key}:</label>
-                <input type="text" id="${key}" name="${key}" class="input" value="${value}">
+                <input type="text" name="${key}" class="input" value="${value}" />
             </div>`;
     }
 
@@ -58,20 +81,20 @@ export class BuildField {
         return `
             <div class="input_block">
                 <label class="label" for="${key}">${key}:</label>
-                <input type="number" id="${key}" name="${key}" class="input" value="${value}">
+                <input type="number" name="${key}" class="input" value="${value}" />
             </div>`;
     }
 
-    createCheckboxInput(key, value, serverName) {
+    createCheckboxInput(key, value) {
         const isChecked = value === "true" ? 'checked' : '';
         const inputBlock = `
             <div class="input_block">
-                <input type="checkbox" id="${key}" name="${key}" class="input ${serverName}-${key}" ${isChecked}>
+                <input type="checkbox" id="${key}" name="${key}" class="input ${key}-checkbox" ${isChecked} />
                 <label class="label" for="${key}">${key}:</label>
             </div>`;
 
         setTimeout(() => {
-            new Switchery(document.querySelector("." + serverName + "-" + key));
+            new Switchery(document.querySelector("." + key + "-checkbox"));
         }, this.initAwait);
 
         return inputBlock;

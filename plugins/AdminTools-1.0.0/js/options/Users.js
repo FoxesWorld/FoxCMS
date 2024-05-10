@@ -1,18 +1,21 @@
-import {
-    JsonArrConfig
-} from '../modules/JsonArrConfig.js';
+import {JsonArrConfig} from '../modules/JsonArrConfig.js';
+import { BuildField } from '../modules/BuildField.js';
 
 export class Users {
     constructor() {
         
         this.userArr = [];
-		this.jsonArrConfig = new JsonArrConfig([ "badgeName", "acquiredDate", "description"], this.submitHandler.bind(this));
-		this.badgesFields = [
-			{ "fieldName": 'badgeName', "fieldType": 'text' },
+		this.allBadges = [];
+		this.contentAdded = false;
+		this.formFields = [
+			{ "fieldName": 'badgeName', "fieldType": 'dropdown', "optionsArray":  this.allBadges },
 			{ "fieldName": 'acquiredDate', "fieldType": 'text' },
-			{"fieldName": 'description', "fieldType": 'text' }
+			{ "fieldName": 'description', "fieldType": 'text' }
 		];
-        this.contentAdded = false;
+        
+		this.buildField = new BuildField(this);
+		this.jsonArrConfig = new JsonArrConfig([ "badgeName", "acquiredDate", "description"], this.submitHandler.bind(this), this.buildField);
+		
         this.dialogOptions = {
             autoOpen: false,
             position: {
@@ -34,10 +37,16 @@ export class Users {
         if (input === "") {
             input = '*';
         }
+		
+		if(!this.allBadges.size) {
+			await this.getAllBadges();
+		}
+
+		setTimeout(async () => {
         try {
             if (!this.contentAdded) {
                 this.addContent();
-                this.contentAdded = true; // Set the flag to true after adding content
+                this.contentAdded = true;
             }
 
             let usersArray = await foxEngine.sendPostAndGetAnswer({
@@ -74,6 +83,16 @@ export class Users {
                 }
 				//Action listeners
                 setTimeout(() => {
+					
+				this.formFields.forEach(field => {
+                    switch (field.fieldName) {
+                        case 'badgeName':
+                            field.optionsArray = this.allBadges;
+                            break;
+                        default:
+                            break;
+                    }
+                });
 
                     $('.showProfile').click((event) => {
                         const login = $(event.target).data('login');
@@ -86,14 +105,17 @@ export class Users {
 						const badgesArray = await foxEngine.user.getBadgesArray(login);
 						this.jsonArrConfig.openFormWindow(badgesArray, login, {admPanel: "editUserBadges", userLogin: login});
 					});					
-                }, 1000);
+                }, 500);
+			
             } else {
                 const userHtml = `<tr><td colspan="4"><div class="alert alert-warning" role="alert">No Users like <b>${input}</b></div></td></tr>`;
                 foxEngine.page.loadData(userHtml, "#usersList");
             }
+			
         } catch (error) {
             console.error('An error occurred:', error.message);
         }
+		}, 1000);
     }
 
     userTemplate(template, data) {
@@ -124,5 +146,11 @@ export class Users {
 		$("#dialog").dialog('close');
 		foxEngine.user.showUserProfile(user);
         button.notify(answer.message);
+    }
+	
+	async getAllBadges() {
+        this.allBadges = await foxEngine.sendPostAndGetAnswer({
+            admPanel: "getAllBadges"
+        }, "JSON");
     }
 }

@@ -6,7 +6,7 @@
  * 
  * Authors: FoxesWorld
  * Date: [10.05.24]
- * Version: [1.6.8]
+ * Version: [1.7.8]
  */
 import { JsonArrConfig } from '../modules/JsonArrConfig.js';
 import { BuildField } from '../modules/BuildField.js';
@@ -19,7 +19,7 @@ export class Servers {
         this.serverPictures = [];
         this.javaVersions = [];
         
-        this.serverFields = [
+        this.formFields = [
             { "fieldName": 'host', "fieldType": 'text' },
             { "fieldName": 'port', "fieldType": 'number' },
             { "fieldName": 'ignoreDirs', "fieldType": 'tagify' },
@@ -123,7 +123,7 @@ async loadServerOptions(serverName) {
                 const responses = await this.getServerData(serverName);
                 this.createDialogIfNeeded();
 
-                this.serverFields.forEach(field => {
+                this.formFields.forEach(field => {
                     switch (field.fieldName) {
                         case 'serverVersion':
                             field.optionsArray = this.versions;
@@ -140,21 +140,7 @@ async loadServerOptions(serverName) {
                 });
 
                 let formHtml = `<form id="serverOptionsForm" method="POST" action="/" autocomplete="false">`;
-
-                for (const response of responses) {
-                    for (const key in response) {
-                        const fieldInfo = this.serverFields.find(field => field.fieldName === key);
-                        if (response.hasOwnProperty(key) && fieldInfo) {
-                            const { fieldName, optionsArray } = fieldInfo;
-                            if (response[key] !== null) {
-                                formHtml += await this.buildField.createInputBlock(fieldName, response[key], serverName, optionsArray);
-                            } else {
-                                formHtml += await this.buildField.createInputBlock(fieldName, "", serverName, optionsArray);
-                            }
-                        }
-                    }
-                }
-
+				formHtml += await this.buildField.buildFormFields(responses);
                 formHtml += `
                     <input type="hidden" name="admPanel" value="editServer" />
                     <input type="hidden" name="serverName" value="${serverName}" />
