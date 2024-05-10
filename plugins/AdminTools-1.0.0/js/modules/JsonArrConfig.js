@@ -2,12 +2,12 @@
  * @fileoverview FoxesWorld for FoxesCraft
  * 
  * This file contains the JsonArrConfig class, which handles JSON arrays and interacts with them.
- * It provides methods for opening a window with mod information, generating a form based on mods and their attributes,
+ * It provides methods for opening a window with fields of a JSON config,
  * and updating mod information on the server.
  * 
  * Authors: FoxesWorld
- * Date: [09.05.24]
- * Version: [1.5.4]
+ * Date: [10.05.24]
+ * Version: [1.5.6]
  */
 
 /**
@@ -44,19 +44,19 @@ export class JsonArrConfig {
     async openFormWindow(configArray, serverName, postData) {
 		this.postData = postData;
         try {
-            let modsInfoArray;
+            let JsonArray;
 
             if (configArray) {
                 if (typeof configArray === 'string') {
-                    modsInfoArray = JSON.parse(configArray);
+                    JsonArray = JSON.parse(configArray);
                 } else {
-                    modsInfoArray = configArray;
+                    JsonArray = configArray;
                 }
             } else {
                 this.loadFormIntoDialog('', serverName);
                 return;
             }
-            const builtFormHtml = this.genJsonCfgForm(modsInfoArray);
+            const builtFormHtml = this.genJsonCfgForm(JsonArray);
 
             this.loadFormIntoDialog(builtFormHtml, serverName);
 
@@ -66,15 +66,16 @@ export class JsonArrConfig {
 					await this.submitHandler($('#submitBtn'), serverName);
                 });
 
+				//Adding remove listener to existing rows
                 $('#jsonConfigForm').on('click', '.removeBtn', (e) => {
                     const index = $(e.currentTarget).data('index');
-                    this.removeRow(modsInfoArray, index);
-                    this.updateJsonConfigTableIndexes();
+					$('#jsonConfigForm tbody tr:eq(' + index + ')').remove();
+					this.updateArrayIndexes();
                 });
 
                 $('#addRowBtn').click(() => {
                     this.addRow();
-                    this.updateJsonConfigTableIndexes();
+                    this.updateArrayIndexes();
                 });
             }, 1000);
         } catch (error) {
@@ -104,7 +105,6 @@ export class JsonArrConfig {
     }
 
     genFormRow(index, row) {
-        //const calculateTextareaHeight = this.calculateTextareaHeight.bind(this);
         const rowHeight = this.calculateRowHeight(row);
 
         return `<tr style="height: ${rowHeight}px;">` +
@@ -123,7 +123,7 @@ export class JsonArrConfig {
                                 </${inputType}>
                             </div>
                         </td>`;
-            }).join('') +`<td><button type="button" class="btn btn-danger removeBtn" data-index="${index}">Remove</button></td></tr>`;
+            }).join('') + `<td><button type="button" class="btn btn-danger removeBtn" data-index="${index}">Remove</button></td></tr>`;
     }
 
     calculateRowHeight(row) {
@@ -141,19 +141,15 @@ export class JsonArrConfig {
         const newHtml = this.genFormRow(index, newRow);
         $('#jsonConfigForm tbody').append(newHtml);
 
+		//Adding remove listener to new added row
         $('#jsonConfigForm tbody tr:eq(' + index + ')').on('click', '.removeBtn', () => {
-            this.removeRow(modsInfoArray, index);
-            this.updateJsonConfigTableIndexes();
+            //this.removeRow(index);
+			$('#jsonConfigForm tbody tr:eq(' + index + ')').remove();
+            this.updateArrayIndexes();
         });
     }
 
-    removeRow(modsInfoArray, index) {
-        modsInfoArray.splice(index, 1);
-        $('#jsonConfigForm tbody tr:eq(' + index + ')').remove();
-        this.updateJsonConfigTableIndexes();
-    }
-
-    updateJsonConfigTableIndexes() {
+    updateArrayIndexes() {
         $('#jsonConfigForm tbody tr').each((i, tr) => {
             $(tr).find('td:first').text(i + 1);
             $(tr).find('.removeBtn').attr('data-index', i);
@@ -173,17 +169,17 @@ export class JsonArrConfig {
             const key = $(this).data('key');
             const index = $(this).data('index');
             const value = $(this).val();
-            
+
             if (!formData[index]) {
                 formData[index] = {};
             }
             formData[index][key] = value;
         });
-		
-		 let req = {
-			...this.postData,
-		};
-		req[sendKey] = JSON.stringify(Object.values(formData));
+
+        let req = {
+            ...this.postData,
+        };
+        req[sendKey] = JSON.stringify(Object.values(formData));
         let answer = await foxEngine.sendPostAndGetAnswer(req, "JSON");
         return answer;
     }

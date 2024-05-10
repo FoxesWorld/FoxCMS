@@ -84,7 +84,7 @@ export class Users {
 					$('.loadUserBadges').click(async (event) => {
 						const login = $(event.target).data('login');
 						const badgesArray = await foxEngine.user.getBadgesArray(login);
-						this.jsonArrConfig.openFormWindow(badgesArray, login, {admPanel: "editUser", userLogin: login});
+						this.jsonArrConfig.openFormWindow(badgesArray, login, {admPanel: "editUserBadges", userLogin: login});
 					});					
                 }, 1000);
             } else {
@@ -121,6 +121,8 @@ export class Users {
 	
 	async submitHandler(button, user) {
 		let answer = await this.jsonArrConfig.updateJsonConfig("badges");
-        button.notify(user);
+		$("#dialog").dialog('close');
+		foxEngine.user.showUserProfile(user);
+        button.notify(answer.message);
     }
 }

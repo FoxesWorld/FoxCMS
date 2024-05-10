@@ -1,5 +1,151 @@
+/**
+ * @fileoverview BuildField class for FoxesCraft
+ * 
+ * This file contains the BuildField class, which is responsible for creating input fields dynamically based on configuration data.
+ * It provides methods for creating various types of input fields such as text inputs, number inputs, dropdowns, checkboxes, textareas, and tag inputs.
+ * 
+ * Authors: AidenFox
+ * Date: [10.05.24]
+ * Version: 1.1.0 SNAPSHOT
+ */
 export class BuildField {
-	constructor (){
-		
-	}
+    constructor(classInstance) {
+        this.classInstance = classInstance;
+        this.inputFields = classInstance.serverFields;
+        this.initAwait = 600;
+    }
+
+    async createInputBlock(fieldName, value, serverName, optionsArray) {
+        const inputHandlers = {
+            'text': () => this.createTextInput(fieldName, value),
+            'number': () => this.createNumberInput(fieldName, value),
+            'dropdown': () => this.createDropdown(fieldName, value, optionsArray),
+            'checkbox': () => this.createCheckboxInput(fieldName, value, serverName),
+            'textarea': () => this.createTextareaInput(fieldName, value),
+            'tagify': () => this.createTagifyInput(fieldName, value)
+        };
+
+        if (this.inputFields) {
+            const fieldInfo = this.inputFields.find(field => field.fieldName === fieldName);
+            if (fieldInfo) {
+                const { fieldType } = fieldInfo;
+                const handler = inputHandlers[fieldType];
+                if (handler) {
+                    return handler();
+                } else {
+                    console.error(`Unknown input type for field: ${fieldName}`);
+                    return '';
+                }
+            } else {
+                console.error(`Field not found in inputFields: ${fieldName}`);
+                return '';
+            }
+        } else {
+            console.error('inputFields not defined');
+            return '';
+        }
+    }
+
+    createTextInput(key, value) {
+        return `
+            <div class="input_block">
+                <label class="label" for="${key}">${key}:</label>
+                <input type="text" id="${key}" name="${key}" class="input" value="${value}">
+            </div>`;
+    }
+
+    createNumberInput(key, value) {
+        return `
+            <div class="input_block">
+                <label class="label" for="${key}">${key}:</label>
+                <input type="number" id="${key}" name="${key}" class="input" value="${value}">
+            </div>`;
+    }
+
+    createCheckboxInput(key, value, serverName) {
+        const isChecked = value === "true" ? 'checked' : '';
+        const inputBlock = `
+            <div class="input_block">
+                <input type="checkbox" id="${key}" name="${key}" class="input ${serverName}-${key}" ${isChecked}>
+                <label class="label" for="${key}">${key}:</label>
+            </div>`;
+
+        setTimeout(() => {
+            new Switchery(document.querySelector("." + serverName + "-" + key));
+        }, this.initAwait);
+
+        return inputBlock;
+    }
+
+    createTextareaInput(key, value) {
+        const textareaId = `${key}_textarea`;
+        const inputBlock = `
+            <div class="input_block">
+                <label class="label d-none" for="${textareaId}">${key}:</label>
+                <textarea id="${textareaId}" name="${key}" class="input d-none">${value}</textarea>
+            </div>`;
+
+        setTimeout(() => {
+            const textarea = document.getElementById(textareaId);
+            const parent = textarea.parentNode;
+            const editor = CodeMirror.fromTextArea(textarea, {
+                value: value,
+                mode: "htmlmixed",
+                lineNumbers: false,
+                theme: "default",
+                viewportMargin: Infinity,
+                lineWrapping: true
+            });
+            editor.setSize("100%", "auto");
+            window.addEventListener('resize', () => editor.setSize("100%", "auto"));
+            editor.refresh();
+        }, this.initAwait);
+
+        return inputBlock;
+    }
+
+    createDropdown(key, value, optionsArray) {
+        let selectOptions = '';
+        optionsArray.forEach(option => {
+            let displayValue = option;
+            if (option.includes('/')) {
+                displayValue = option.split('/').pop();
+            }
+            const isSelected = option === value ? 'selected' : '';
+            selectOptions += `<option value="${option}" ${isSelected}>${displayValue}</option>`;
+        });
+
+        return `
+            <div class="input_block">
+                <label class="label" for="${key}">${key}:</label>
+                <select name="${key}" id="${key}" class="input">
+                    ${selectOptions}
+                </select>
+            </div>`;
+    }
+
+    createTagifyInput(key, value) {
+        const inputBlock = `
+            <div class="input_block">
+                <label class="label" for="${key}">${key}:</label>
+                <input type="text" id="${key}" name="${key}" class="input" value="${value}">
+            </div>`;
+
+        setTimeout(() => {
+            const input = document.getElementById(key);
+            new Tagify(input, {
+                originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(','),
+                whitelist: [],
+                enforceWhitelist: false,
+                delimiters: ",",
+                callbacks: {
+                    input: (e) => {
+                        e.target.setCustomValidity('');
+                    }
+                }
+            });
+        }, this.initAwait);
+
+        return inputBlock;
+    }
 }
