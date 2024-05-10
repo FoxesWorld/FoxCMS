@@ -23,10 +23,10 @@
 			if($badgeRow){
 				$description = isset($badge->description) ? $badge->description : $badgeRow['description'];
 				$badgeArr =  array(
-					"AcquiredDate" => $badge->acquiredDate,
-					"BadgeName" => $badgeRow['badgeName'],
-					"BadgeDesc" =>  $description,
-					"BadgeImg" => $badgeRow['img']
+					"acquiredDate" => $badge->acquiredDate,
+					"badgeName" => $badgeRow['badgeName'],
+					"description" =>  $description,
+					"badgeImg" => $badgeRow['img']
 				);
 				return $badgeArr;	
 			} 

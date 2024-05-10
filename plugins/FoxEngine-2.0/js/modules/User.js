@@ -87,10 +87,10 @@ export class User {
 
                     // Replace text in the badge template for each badge
                     let badgeHtml = await foxEngine.replaceTextInTemplate(badgeTemplate, {
-                        BadgeDesc: obj.BadgeDesc,
-                        AcquiredDateFormatted: foxEngine.utils.convertUnixTime(obj.AcquiredDate),
-                        BadgeName: obj.BadgeName,
-                        BadgeImg: obj.BadgeImg
+                        BadgeDesc: obj.description,
+                        AcquiredDateFormatted: foxEngine.utils.convertUnixTime(obj.acquiredDate),
+                        BadgeName: obj.badgeName,
+                        BadgeImg: obj.badgeImg
                     });
 
                     // Append the badge HTML to the userBadges container

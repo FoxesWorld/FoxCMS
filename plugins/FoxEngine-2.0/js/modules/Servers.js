@@ -16,7 +16,6 @@ export class Servers {
 
             if (parsedJson.servers.length > 0) {
                 let serversHtmlPromises = [];
-
                 for (const obj of parsedJson.servers) {
                     let isOnline = obj.status === "online";
                     let progressbarClass = isOnline ? 'progressbar-online' : 'progressbar-offline';

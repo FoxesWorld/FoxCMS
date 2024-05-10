@@ -164,8 +164,8 @@ export class Servers {
         }
     }
 
-    async submitHandler(button, modsInfoArray, serverName) {
-        let answer = await this.jsonArrConfig.updateJsonConfig(modsInfoArray);
+    async submitHandler(button, serverName) {
+        let answer = await this.jsonArrConfig.updateJsonConfig("modsInfo");
         button.notify(answer.message, answer.type);
         if (answer.type === "success") {
             setTimeout(() => {

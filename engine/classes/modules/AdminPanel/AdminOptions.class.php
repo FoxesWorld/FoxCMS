@@ -15,6 +15,10 @@ if(!defined("ADMIN")){
 						$editServer->updateServer(RequestHandler::$REQUEST);
 					break;
 					
+					case "editUser":
+						die(var_dump(RequestHandler::$REQUEST['badges']));
+					break;
+					
 					case "showModules":
 						die(json_encode(init::$modulesArray));
 					break;

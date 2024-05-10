@@ -6,7 +6,7 @@ export class Users {
     constructor() {
         
         this.userArr = [];
-		this.jsonArrConfig = new JsonArrConfig([ "badgeName", "acquiredDate", "description"]);
+		this.jsonArrConfig = new JsonArrConfig([ "badgeName", "acquiredDate", "description"], this.submitHandler.bind(this));
 		this.badgesFields = [
 			{ "fieldName": 'badgeName', "fieldType": 'text' },
 			{ "fieldName": 'acquiredDate', "fieldType": 'text' },
@@ -117,5 +117,10 @@ export class Users {
             const contentHtml = await foxEngine.loadTemplate(foxEngine.elementsDir + 'admin/users/userTable.tpl', true);
             $("#adminContent").html(contentHtml);
         }
+    }
+	
+	async submitHandler(button, user) {
+		let answer = await this.jsonArrConfig.updateJsonConfig("badges");
+        button.notify(user);
     }
 }

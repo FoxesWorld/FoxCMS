@@ -7,7 +7,7 @@
  * 
  * Authors: FoxesWorld
  * Date: [09.05.24]
- * Version: [1.5.3]
+ * Version: [1.5.4]
  */
 
 /**
@@ -18,6 +18,7 @@ export class JsonArrConfig {
         this.postData;
         this.jsonAttributes = jsonAttributes;
 		this.submitHandler = submitHandler;
+		this.charactersToRemove = ['\n', '\t'];
         this.dialogOptions = {
             autoOpen: false,
             position: {
@@ -55,14 +56,14 @@ export class JsonArrConfig {
                 this.loadFormIntoDialog('', serverName);
                 return;
             }
-
             const builtFormHtml = this.genJsonCfgForm(modsInfoArray);
 
             this.loadFormIntoDialog(builtFormHtml, serverName);
 
             setTimeout(() => {
+
                 $('#submitBtn').click(async () => {
-					await this.submitHandler($('#submitBtn'), modsInfoArray, serverName);
+					await this.submitHandler($('#submitBtn'), serverName);
                 });
 
                 $('#jsonConfigForm').on('click', '.removeBtn', (e) => {
@@ -81,7 +82,7 @@ export class JsonArrConfig {
         }
     }
 
-    genJsonCfgForm(modsInfoArray) {
+    genJsonCfgForm(JsonArray) {
         const builtFormHtml = `<form id="jsonConfigForm"><table cellpadding="${this.jsonAttributes.length}" class="table table-bordered table-striped">
                                 <thead class="thead-dark">
                                     <tr>
@@ -91,7 +92,7 @@ export class JsonArrConfig {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    ${modsInfoArray.map((element, index) => this.genFormRow(index, element)).join('')}
+                                    ${JsonArray.map((element, index) => this.genFormRow(index, element)).join('')}
                                 </tbody>
                             </table>
                             <div class="buttonGroup">
@@ -118,7 +119,7 @@ export class JsonArrConfig {
                             <div class="input_block">
                                 <${inputType} class="input" id="${attribute}_input${index}" data-index="${index}" data-key="${attribute}" style="${isTextarea ? 'height: ' + inputHeight + 'px; width: 100%; box-sizing: border-box;' : 'height: ' + inputHeight / 2 + 'px;'}"
                                     ${inputType === 'input' ? `value="${inputValue}"` : ''}>
-                                    ${inputType === 'textarea' ? `${inputValue}` : ''}
+                                    ${inputType === 'textarea' ? `${this.removeCharacters(inputValue)}` : ''}
                                 </${inputType}>
                             </div>
                         </td>`;
@@ -166,7 +167,7 @@ export class JsonArrConfig {
         $("#dialog").dialog('open');
     }
 
-    async updateJsonConfig(modsInfoArray) {
+    async updateJsonConfig(sendKey) {
         const formData = {};
         $('#jsonConfigForm input, #jsonConfigForm textarea').each(function () {
             const key = $(this).data('key');
@@ -176,14 +177,22 @@ export class JsonArrConfig {
             if (!formData[index]) {
                 formData[index] = {};
             }
-            
             formData[index][key] = value;
         });
-		let req = {
+		
+		 let req = {
 			...this.postData,
-			modsInfo: JSON.stringify(Object.values(formData))
 		};
+		req[sendKey] = JSON.stringify(Object.values(formData));
         let answer = await foxEngine.sendPostAndGetAnswer(req, "JSON");
         return answer;
+    }
+	
+	removeCharacters(value) {
+        let cleanedValue = value;
+        this.charactersToRemove.forEach(char => {
+            cleanedValue = cleanedValue.replace(new RegExp(char, 'g'), '');
+        });
+        return cleanedValue;
     }
 }
