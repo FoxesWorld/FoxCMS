@@ -143,9 +143,17 @@ export class Users {
 	
 	async submitHandler(button, user) {
 		let answer = await this.jsonArrConfig.updateJsonConfig("badges");
-		$("#dialog").dialog('close');
-		foxEngine.user.showUserProfile(user);
-        button.notify(answer.message);
+		button.notify(answer.message, answer.type);
+		setTimeout(async () => {
+			$("#dialog").dialog('close');
+			foxEngine.user.showUserProfile(user);
+			setTimeout(async () => {
+				foxEngine.user.parseBadges(user);
+			}, 500);
+		}, 500);
+		
+		
+        
     }
 	
 	async getAllBadges() {

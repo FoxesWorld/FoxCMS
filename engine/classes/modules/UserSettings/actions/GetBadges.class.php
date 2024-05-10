@@ -21,7 +21,7 @@
 			$query = "SELECT * FROM `badgesList` WHERE badgeName = '".$badge->badgeName."'";
 			$badgeRow=$this->db->getRow($query);
 			if($badgeRow){
-				$description = isset($badge->description) ? $badge->description : $badgeRow['description'];
+				$description = strlen($badge->description) > 0 ? $badge->description : $badgeRow['description'];
 				$badgeArr =  array(
 					"acquiredDate" => $badge->acquiredDate,
 					"badgeName" => $badgeRow['badgeName'],

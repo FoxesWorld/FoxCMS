@@ -1,5 +1,5 @@
 <?php 
-    /* [08.05.2024] */
+    /* [10.05.2024] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",

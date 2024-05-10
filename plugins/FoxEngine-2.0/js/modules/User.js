@@ -5,7 +5,6 @@ export class User {
         this.optionAmount;
         this.optionArray;
         this.optionTpl;
-		this.lastBadgesPsrsed;
         var userLogin = foxEngine.replaceData.login;
         var debugMessage = "Loading data for %c" + userLogin + "%c...";
         var loginStyle = "color: #ff0000;";
@@ -72,11 +71,6 @@ export class User {
     };
 
     async parseBadges(user) {
-		if(this.lastBadgesPsrsed !== user) {
-			this.lastBadgesPsrsed = user;
-		} else {
-			return;
-		}
         const badgeTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'badge.tpl', true);
         try {
             let parsedJson = await this.getBadgesArray(user);
@@ -123,6 +117,7 @@ export class User {
     async showUserProfile(userDisplay) {
         let userProfile = this.getUserProfile(userDisplay);
 		//foxEngine.page.langPack = await foxEngine.page.loadLangPack('userProfile');
+		foxEngine.page.setPage("");
         foxEngine.page.loadData(await this.foxEngine.entryReplacer.replaceText(userProfile), foxEngine.replaceData.contentBlock);
 		//HARDCODED!!!
         location.hash = 'user/' + userDisplay;

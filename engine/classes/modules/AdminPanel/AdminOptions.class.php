@@ -15,8 +15,16 @@ if(!defined("ADMIN")){
 						$editServer->updateServer(RequestHandler::$REQUEST);
 					break;
 					
-					case "editUser":
-						die(var_dump(RequestHandler::$REQUEST['badges']));
+					case "editUserBadges":
+					$login = RequestHandler::$REQUEST['userLogin'];
+					$badges = RequestHandler::$REQUEST['badges'];
+					$data = $db->getValue("UPDATE `users` SET `badges`='".$badges."' WHERE `login` = '".$login."'");
+					if($data) {
+							$status ="success";
+						} else {
+							$status = "warn";
+						}
+						die('{"message": "success", "type": "success"}');
 					break;
 					
 					case "showModules":
@@ -27,6 +35,16 @@ if(!defined("ADMIN")){
 					init::classUtil('ServerParser', "1.0.0");
 						$serverParser = new ServerParser($db, @RequestHandler::$REQUEST['login'], true);
 						die($serverParser->parseServers(@RequestHandler::$REQUEST['server']));
+					break;
+					
+					case "getAllBadges":
+						$query = 'SELECT `badgeName` FROM `badgesList`';
+						$badgesArr = array();
+						$data = $db->getRows($query);
+						foreach($data as $key){
+							$badgesArr[] = $key['badgeName'];
+						}
+						die(json_encode($badgesArr));
 					break;
 					
 					case "getGameVersions":

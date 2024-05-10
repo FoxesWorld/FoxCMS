@@ -187,26 +187,36 @@ async genFormRow(index, row) {
         $("#dialog").dialog('open');
     }
 
-    async updateJsonConfig(sendKey) {
-        const formData = {};
-        $('#jsonConfigForm input, #jsonConfigForm textarea').each(function () {
-            const key = $(this).data('key');
-            const index = $(this).data('index');
-            const value = $(this).val();
+async updateJsonConfig(sendKey) {
+    const formDataArray = [];
 
-            if (!formData[index]) {
-                formData[index] = {};
+    $('#jsonConfigForm tbody tr').each(function() {
+        const formData = {};
+
+        $(this).find('input, select, textarea').each(function() {
+            const fieldName = $(this).attr('name');
+            let fieldValue;
+
+            if ($(this).is(':checkbox')) {
+                fieldValue = $(this).prop('checked') ? true : false;
+            } else {
+                fieldValue = $(this).val();
             }
-            formData[index][key] = value;
+
+            formData[fieldName] = fieldValue;
         });
 
-        let req = {
-            ...this.postData,
-        };
-        req[sendKey] = JSON.stringify(Object.values(formData));
-        let answer = await foxEngine.sendPostAndGetAnswer(req, "JSON");
-        return answer;
-    }
+        formDataArray.push(formData);
+    });
+
+    let req = {
+        ...this.postData,
+    };
+    req[sendKey] = JSON.stringify(formDataArray);
+    let answer = await foxEngine.sendPostAndGetAnswer(req, "JSON");
+    return answer;
+}
+
 	
 	removeCharacters(value) {
         let cleanedValue = value;
