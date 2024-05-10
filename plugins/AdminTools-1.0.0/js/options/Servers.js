@@ -6,7 +6,7 @@
  * 
  * Authors: FoxesWorld
  * Date: [10.05.24]
- * Version: [1.6.7]
+ * Version: [1.6.8]
  */
 import { JsonArrConfig } from '../modules/JsonArrConfig.js';
 import { BuildField } from '../modules/BuildField.js';
@@ -29,8 +29,6 @@ export class Servers {
             { "fieldName": 'jreVersion', "fieldType": 'dropdown', "optionsArray": this.javaVersions },
             { "fieldName": 'serverImage', "fieldType": 'dropdown', "optionsArray": this.serverPictures }
         ];
-		
-		console.log(this.serverFields);
 
         this.serverAttributes = ["modName", "modPicture", "modDesc"];
         this.jsonArrConfig = new JsonArrConfig(this.serverAttributes, this.submitHandler.bind(this));
@@ -112,80 +110,86 @@ export class Servers {
         }
     }
 
-	async loadServerOptions(serverName) {
-		await Promise.all([
-			this.parseAvailableVersions(),
-			this.parseAvailableJava(),
-			this.parseAvailablePictures()
-		]);
+async loadServerOptions(serverName) {
+    try {
+        await Promise.all([
+            this.parseAvailableVersions(),
+            this.parseAvailableJava(),
+            this.parseAvailablePictures()
+        ]);
 
-		setTimeout(async () => {
-			try {
-				const responses = await this.getServerData(serverName);
-				this.createDialogIfNeeded();
+        setTimeout(async () => {
+            try {
+                const responses = await this.getServerData(serverName);
+                this.createDialogIfNeeded();
 
-				// Заполним массивы в объектах serverFields
-				this.serverFields.forEach(field => {
-					switch (field.fieldName) {
-						case 'serverVersion':
-							field.optionsArray = this.versions;
-							break;
-						case 'jreVersion':
-							field.optionsArray = this.javaVersions;
-							break;
-						case 'serverImage':
-							field.optionsArray = this.serverPictures;
-							break;
-						default:
-							break;
-					}
-				});
+                this.serverFields.forEach(field => {
+                    switch (field.fieldName) {
+                        case 'serverVersion':
+                            field.optionsArray = this.versions;
+                            break;
+                        case 'jreVersion':
+                            field.optionsArray = this.javaVersions;
+                            break;
+                        case 'serverImage':
+                            field.optionsArray = this.serverPictures;
+                            break;
+                        default:
+                            break;
+                    }
+                });
 
-				let formHtml = `<form id="serverOptionsForm" method="POST" action="/" autocomplete="false">`;
+                let formHtml = `<form id="serverOptionsForm" method="POST" action="/" autocomplete="false">`;
 
-				for (const response of responses) {
-					for (const key in response) {
-						const fieldInfo = this.serverFields.find(field => field.fieldName === key);
-						if (response.hasOwnProperty(key) && fieldInfo) {
-							const { fieldName, optionsArray } = fieldInfo;
-							if (response[key] !== null) {
-								formHtml += await this.buildField.createInputBlock(fieldName, response[key], serverName, optionsArray);
-							} else {
-								formHtml += await this.buildField.createInputBlock(fieldName, "", serverName, optionsArray);
-							}
-						}
-					}
-				}
+                for (const response of responses) {
+                    for (const key in response) {
+                        const fieldInfo = this.serverFields.find(field => field.fieldName === key);
+                        if (response.hasOwnProperty(key) && fieldInfo) {
+                            const { fieldName, optionsArray } = fieldInfo;
+                            if (response[key] !== null) {
+                                formHtml += await this.buildField.createInputBlock(fieldName, response[key], serverName, optionsArray);
+                            } else {
+                                formHtml += await this.buildField.createInputBlock(fieldName, "", serverName, optionsArray);
+                            }
+                        }
+                    }
+                }
 
-				formHtml += `
-					<input type="hidden" name="admPanel" value="editServer" />
-					<input type="hidden" name="serverName" value="${serverName}" />
-					<input name="refreshPage" type="hidden" value="false" />
-					<input name="playSound" type="hidden" value="false" />
-					<div class="buttonGroup">
-						<button type="button" id="viewModsInfoBtn" class="btn btn-primary">View Mods Info</button>
-						<button type="submit" class="login">Apply</button>
-					</div>
-				</form>`;
+                formHtml += `
+                    <input type="hidden" name="admPanel" value="editServer" />
+                    <input type="hidden" name="serverName" value="${serverName}" />
+                    <input name="refreshPage" type="hidden" value="false" />
+                    <input name="playSound" type="hidden" value="false" />
+                    <div class="buttonGroup">
+                        <button type="button" id="viewModsInfoBtn" class="btn btn-primary">View Mods Info</button>
+                        <button type="submit" class="login">Apply</button>
+                    </div>
+                </form>`;
 
-				this.jsonArrConfig.loadFormIntoDialog(formHtml, serverName);
-				setTimeout(() => {
+                this.jsonArrConfig.loadFormIntoDialog(formHtml, serverName);
+                setTimeout(async () => {
 					$('#viewModsInfoBtn').click(() => {
 						this.jsonArrConfig.openFormWindow(responses[0].modsInfo, responses[0].serverName, {admPanel: "editServer",serverName: serverName});
 					});
 
-					const form = document.getElementById("serverOptionsForm");
+				const form = document.getElementById("serverOptionsForm");
 					form.addEventListener("submit", async (event) => {
 						$("#dialog").dialog('close');
-						this.parseServers();
-					});
-				}, 1200);
+						setTimeout(async () => {
+							this.parseServers();
+							foxEngine.servers.parseOnline();
+						}, 500);
+					});				
+				}, 500);
 
-			} catch (error) {
-				console.error('An error occurred:', error.message);
-			}
-		}, 1000);
-	}
+            } catch (error) {
+                console.error('An error occurred:', error.message);
+            }
+        }, 300);
+    } catch (error) {
+        console.error('An error occurred:', error.message);
+    }
+}
 
 
     async submitHandler(button, serverName) {
@@ -193,7 +197,6 @@ export class Servers {
         button.notify(answer.message, answer.type);
         if (answer.type === "success") {
             setTimeout(() => {
-                foxEngine.servers.parseOnline();
                 $("#dialog").dialog('close');
                 foxEngine.servers.loadServerPage(serverName);
             }, 500)
