@@ -797,6 +797,16 @@ ul>li {
 	line-height: 1;
 }
 
+.filled-box {
+    background: #ecf0f1;
+    border-radius: 5px;
+}
+
+.filled-box > img {
+	width: 32px;
+    height: 32px;
+}
+
 /* Status Blocks*/
 .statusBlock {
 	margin: 5px 15px 10px 15px;

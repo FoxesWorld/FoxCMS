@@ -62,6 +62,8 @@ a {
 
 .buttonGroup {
 	float: left;
+    display: flex;
+
 }
 
 .buttonGroup > button {

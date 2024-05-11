@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-05-11 00:18:58
+/* Smarty version 4.0.4, created on 2024-05-11 23:32:29
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_663e8f42cde622_63238698',
+  'unifunc' => 'content_663fd5dd1266f3_09314736',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1715177217,
+      1 => 1715453743,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_663e8f42cde622_63238698 (Smarty_Internal_Template $_smarty_tpl) {
+function content_663fd5dd1266f3_09314736 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -35,7 +35,7 @@ function content_663e8f42cde622_63238698 (Smarty_Internal_Template $_smarty_tpl)
 </title>
 	  <meta name="HandheldFriendly" content="true" />
       <meta name="format-detection" content="telephone=yes" />
-	  <meta name="viewport" content="width=700, height=device-height, user-scalable=no, maximum-scale=1">
+	  <meta name="viewport" content="width=760, maximum-scale=1">
 	  <meta name="author" content="FoxesWorld" />
 	  <meta name="description" content="<?php echo $_smarty_tpl->tpl_vars['siteDesc']->value;?>
 " />

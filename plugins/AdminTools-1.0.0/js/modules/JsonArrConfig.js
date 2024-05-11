@@ -104,8 +104,8 @@ export class JsonArrConfig {
 										</tbody>
 									</table>
 									<div class="buttonGroup">
-										<button type="button" id="submitBtn" class="btn btn-primary">Save</button>
-										<button type="button" id="addRowBtn" class="btn btn-success">Add Row</button>
+										<button type="button" id="submitBtn" class="btn btn-success">Save</button>
+										<button type="button" id="addRowBtn" class="btn btn-primary">Add Row</button>
 									</div>
 									</form>`;
 				return builtFormHtml;

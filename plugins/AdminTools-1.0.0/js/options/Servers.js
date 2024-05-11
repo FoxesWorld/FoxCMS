@@ -24,6 +24,7 @@ export class Servers {
             { "fieldName": 'port', "fieldType": 'number' },
             { "fieldName": 'ignoreDirs', "fieldType": 'tagify' },
             { "fieldName": 'enabled', "fieldType": 'checkbox' },
+			{ "fieldName": 'serverGroups', "fieldType": 'tagify' },
             { "fieldName": 'serverDescription', "fieldType": 'textarea' },
             { "fieldName": 'serverVersion', "fieldType": 'dropdown', "optionsArray": this.versions },
             { "fieldName": 'jreVersion', "fieldType": 'dropdown', "optionsArray": this.javaVersions },
@@ -141,7 +142,6 @@ async loadServerOptions(serverName) {
 
                 let formHtml = `<form id="serverOptionsForm" method="POST" action="/" autocomplete="false">`;
 				formHtml += await this.buildField.buildFormFields(responses);
-				console.log(responses);
                 formHtml += `
                     <input type="hidden" name="admPanel" value="editServer" />
                     <input type="hidden" name="serverName" value="${serverName}" />

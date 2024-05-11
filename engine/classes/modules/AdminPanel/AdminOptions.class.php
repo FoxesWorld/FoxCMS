@@ -33,7 +33,7 @@ if(!defined("ADMIN")){
 					
 					case "parseServers":
 					init::classUtil('ServerParser', "1.0.0");
-						$serverParser = new ServerParser($db, @RequestHandler::$REQUEST['login'], true);
+						$serverParser = new ServerParser($db, init::$usrArray['login'], true);
 						die($serverParser->parseServers(@RequestHandler::$REQUEST['server']));
 					break;
 					

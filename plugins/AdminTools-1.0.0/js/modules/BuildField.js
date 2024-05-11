@@ -81,33 +81,36 @@ export class BuildField {
 createDatePickerInput(key, value) {
     const uniqueId = Math.random().toString(36).substring(7);
     let html = `<div class="input_block">
-                    <label for="${key}-${uniqueId}">Choose Date</label>
-                    <input type="hidden" name="${key}" id="${key}-${uniqueId}-unix" value="${value}" /> <!-- Значение в формате UNIX time -->
-                    <input type="text" id="${key}-${uniqueId}" readonly /> <!-- Отображаемая дата для пользователя -->
+                    <label class="label" for="${key}-${uniqueId}">Choose Date</label>
+                    <input type="hidden" name="${key}" id="${key}-${uniqueId}-unix" value="${value}" />
+                    <input type="text" class="input" id="${key}-${uniqueId}" readonly />
                 </div>`;
 
     setTimeout(() => {
         let dateValue = foxEngine.utils.convertUnixTime(value);
+
+        if (isNaN(dateValue.getTime())) {
+            dateValue = new Date();
+        }
+
         const datepickerElement = document.querySelector(`#${key}-${uniqueId}`);
 
-const datepicker = new Datepicker(datepickerElement, {
-    defaultDate: dateValue,
-    dateFormat: 'dd.mm.yyyy',
-    onChange: function(selectedDate) {
-        if (selectedDate instanceof Date) {
-            const unixValue = selectedDate.getTime();
-            $(`#${key}-${uniqueId}-unix`).val(unixValue);
-        }
-    }
-});
+        const datepicker = new Datepicker(datepickerElement, {
+            defaultDate: dateValue,
+            dateFormat: 'dd.mm.yyyy',
+            onChange: function(selectedDate) {
+                if (selectedDate instanceof Date) {
+                    const unixValue = selectedDate.getTime();
+                    $(`#${key}-${uniqueId}-unix`).val(unixValue);
+                }
+            }
+        });
 
         datepicker.setDate(dateValue);
     }, this.initAwait);
 
     return html;
 }
-
-
 
     createNumberInput(key, value) {
         return `
@@ -137,7 +140,7 @@ const datepicker = new Datepicker(datepickerElement, {
         const inputBlock = `
             <div class="input_block">
                 <label class="label d-none" for="${textareaId}">${key}:</label>
-                <textarea id="${textareaId}" name="${key}" class="input d-none">${value}</textarea>
+                <textarea id="${textareaId}" name="${key}" class="d-none">${value}</textarea>
             </div>`;
 
         setTimeout(() => {
@@ -194,9 +197,9 @@ const datepicker = new Datepicker(datepickerElement, {
                 enforceWhitelist: false,
                 delimiters: ",",
                 callbacks: {
-                    input: (e) => {
-                        e.target.setCustomValidity('');
-                    }
+                    //input: (e) => {
+                    //    e.target.setCustomValidity('');
+                    //}
                 }
             });
         }, this.initAwait);

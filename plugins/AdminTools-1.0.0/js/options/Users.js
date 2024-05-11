@@ -33,90 +33,96 @@ export class Users {
         };
     }
 
-    async parseUsers(input = '*') {
+async parseUsers(input = '*') {
+    try {
         if (input === "") {
             input = '*';
         }
-		
-		if(!this.allBadges.size) {
-			await this.getAllBadges();
-		}
 
-		setTimeout(async () => {
-        try {
-            if (!this.contentAdded) {
-                this.addContent();
-                this.contentAdded = true;
-            }
-
-            let usersArray = await foxEngine.sendPostAndGetAnswer({
-                admPanel: "usersList",
-                userMask: input
-            }, "JSON");
-            $("#usersList").html("");
-
-            if (usersArray !== null) {
-                let userTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/users/userRow.tpl', true);
-                for (let j = 0; j < usersArray.length; j++) {
-                    let singleUser = usersArray.at(j);
-                    let login = singleUser[j].login;
-                    let email = singleUser[j].email;
-                    let lastdate = singleUser[j].last_date;
-                    let avatar = singleUser[j].profilePhoto;
-                    let badges = singleUser[j].badges;
-
-                    this.userArr[login] = {
-                        email,
-                        lastdate,
-                        badges
-                    };
-
-                    let userHtml = await foxEngine.replaceTextInTemplate(userTpl, {
-                        index: j,
-                        login,
-                        avatar,
-                        email,
-                        lastdate,
-                        badges
-                    });
-                    $("#usersList").append(userHtml);
-                }
-				//Action listeners
-                setTimeout(() => {
-					
-				this.formFields.forEach(field => {
-                    switch (field.fieldName) {
-                        case 'badgeName':
-                            field.optionsArray = this.allBadges;
-                            break;
-                        default:
-                            break;
-                    }
-                });
-
-                    $('.showProfile').click((event) => {
-                        const login = $(event.target).data('login');
-                        console.log(login);
-                        foxEngine.user.showProfilePopup(login);
-                    });
-
-					$('.loadUserBadges').click(async (event) => {
-						const login = $(event.target).data('login');
-						const badgesArray = await foxEngine.user.getBadgesArray(login);
-						this.jsonArrConfig.openFormWindow(badgesArray, login, {admPanel: "editUserBadges", userLogin: login});
-					});					
-                }, 500);
-			
-            } else {
-                const userHtml = `<tr><td colspan="4"><div class="alert alert-warning" role="alert">No Users like <b>${input}</b></div></td></tr>`;
-                foxEngine.page.loadData(userHtml, "#usersList");
-            }
-			
-        } catch (error) {
-            console.error('An error occurred:', error.message);
+        if (!this.allBadges.size) {
+            await this.getAllBadges();
         }
-		}, 1000);
+
+        if (!this.contentAdded) {
+            this.addContent();
+            this.contentAdded = true;
+        }
+
+        let usersArray = await foxEngine.sendPostAndGetAnswer({
+            admPanel: "usersList",
+            userMask: input
+        }, "JSON");
+
+        $("#usersList").html("");
+
+        if (usersArray !== null) {
+            let userTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/users/userRow.tpl', true);
+
+            for (let j = 0; j < usersArray.length; j++) {
+                let singleUser = usersArray.at(j);
+                let login = singleUser[j].login;
+                let email = singleUser[j].email;
+                let lastdate = singleUser[j].last_date;
+                let avatar = singleUser[j].profilePhoto;
+                let badges = singleUser[j].badges;
+
+                this.userArr[login] = {
+                    email,
+                    lastdate,
+                    badges
+                };
+
+                let userHtml = await foxEngine.replaceTextInTemplate(userTpl, {
+                    index: j,
+                    login,
+                    avatar,
+                    email,
+                    lastdate,
+                    badges
+                });
+                $("#usersList").append(userHtml);
+            }
+
+            //Action listeners
+            this.formFields.forEach(field => {
+                switch (field.fieldName) {
+                    case 'badgeName':
+                        field.optionsArray = this.allBadges;
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+            $('.showProfile').click((event) => {
+                const login = $(event.target).data('login');
+				if (login) {
+                foxEngine.user.showProfilePopup(login);
+				} else {
+					console.error('Login is undefined');
+				}
+            });
+
+			$('#usersList').on('click', '.loadUserBadges', async (event) => {
+				const login = $(event.currentTarget).data('login');
+				if (login) {
+					const badgesArray = await foxEngine.user.getBadgesArray(login);
+					this.jsonArrConfig.openFormWindow(badgesArray, login, {admPanel: "editUserBadges", userLogin: login});
+				} else {
+					console.error('Login is undefined');
+				}
+			});
+
+
+        } else {
+            const userHtml = `<tr><td colspan="4"><div class="alert alert-warning" role="alert">No Users like <b>${input}</b></div></td></tr>`;
+            foxEngine.page.loadData(userHtml, "#usersList");
+        }
+    } catch (error) {
+        console.error('An error occurred:', error.message);
     }
+}
+
 
     userTemplate(template, data) {
         return template.replace(/\${(.*?)}/g, (match, p1) => data[p1.trim()]);
@@ -151,9 +157,6 @@ export class Users {
 				foxEngine.user.parseBadges(user);
 			}, 500);
 		}, 500);
-		
-		
-        
     }
 	
 	async getAllBadges() {
