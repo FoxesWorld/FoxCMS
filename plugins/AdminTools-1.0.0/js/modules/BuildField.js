@@ -6,7 +6,7 @@
  * 
  * Authors: AidenFox
  * Date: [10.05.24]
- * Version: 1.3.0 ALPHA
+ * Version: 1.4.0 ALPHA
  */
 export class BuildField {
     constructor(classInstance) {
@@ -45,7 +45,8 @@ export class BuildField {
             'dropdown': () => this.createDropdown(fieldName, value, optionsArray),
             'checkbox': () => this.createCheckboxInput(fieldName, value),
             'textarea': () => this.createTextareaInput(fieldName, value),
-            'tagify': () => this.createTagifyInput(fieldName, value)
+            'tagify': () => this.createTagifyInput(fieldName, value),
+			'date': () => this.createDatePickerInput(fieldName, value)
         };
 
         if (this.inputFields) {
@@ -76,6 +77,37 @@ export class BuildField {
                 <input type="text" name="${key}" class="input" value="${value}" />
             </div>`;
     }
+	
+createDatePickerInput(key, value) {
+    const uniqueId = Math.random().toString(36).substring(7);
+    let html = `<div class="input_block">
+                    <label for="${key}-${uniqueId}">Choose Date</label>
+                    <input type="hidden" name="${key}" id="${key}-${uniqueId}-unix" value="${value}" /> <!-- Значение в формате UNIX time -->
+                    <input type="text" id="${key}-${uniqueId}" readonly /> <!-- Отображаемая дата для пользователя -->
+                </div>`;
+
+    setTimeout(() => {
+        let dateValue = foxEngine.utils.convertUnixTime(value);
+        const datepickerElement = document.querySelector(`#${key}-${uniqueId}`);
+
+const datepicker = new Datepicker(datepickerElement, {
+    defaultDate: dateValue,
+    dateFormat: 'dd.mm.yyyy',
+    onChange: function(selectedDate) {
+        if (selectedDate instanceof Date) {
+            const unixValue = selectedDate.getTime();
+            $(`#${key}-${uniqueId}-unix`).val(unixValue);
+        }
+    }
+});
+
+        datepicker.setDate(dateValue);
+    }, this.initAwait);
+
+    return html;
+}
+
+
 
     createNumberInput(key, value) {
         return `

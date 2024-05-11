@@ -17,5 +17,6 @@
 	"Vue-2.6.14",
 	"Cropper-1.6.2",
 	"UiKit",
-	"Сodemirror"
+	"Сodemirror",
+	"DatePicker"
 ]

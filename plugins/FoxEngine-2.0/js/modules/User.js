@@ -78,26 +78,21 @@ export class User {
             if (parsedJson.length > 0) {
                 for (let k = 0; k < parsedJson.length; k++) {
                     let obj = parsedJson[k];
-
-                    // Replace text in the badge template for each badge
                     let badgeHtml = await foxEngine.replaceTextInTemplate(badgeTemplate, {
                         BadgeDesc: obj.description,
-                        AcquiredDateFormatted: foxEngine.utils.convertUnixTime(obj.acquiredDate),
+                        AcquiredDateFormatted: foxEngine.utils.getFormattedDate(obj.acquiredDate),
                         BadgeName: obj.badgeName,
                         BadgeImg: obj.badgeImg
                     });
 
                     // Append the badge HTML to the userBadges container
                     $("#userBadges").append(badgeHtml);
-
-                    // Initialize tooltips for the badges
                     $('[data-toggle="tooltip"]').tooltip({
                         placement: 'bottom',
                         trigger: "hover"
                     });
                 }
             } else {
-                // If there are no badges, remove the userBadges container
                 $("#userBadges").remove();
             }
         } catch (error) {
@@ -146,7 +141,7 @@ export class User {
                 profilePhoto: lastUser.profilePhoto,
                 login: lastUser.login,
                 realname: lastUser.realname,
-                regDate: foxEngine.utils.convertUnixTime(lastUser.reg_date)
+                regDate: foxEngine.utils.getFormattedDate(lastUser.reg_date)
             });
             $("#lastUser").html(userView);
         } catch (error) {

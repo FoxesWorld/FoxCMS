@@ -7,7 +7,7 @@
  * 
  * Authors: FoxesWorld
  * Date: [10.05.24]
- * Version: [1.6.8]
+ * Version: [1.6.9]
  */
 
 /**
@@ -20,7 +20,6 @@ export class JsonArrConfig {
 		this.submitHandler = submitHandler;
 		if(buildField) {
 			this.buildField = buildField;
-			console.log("Using buildField");
 		}
 
 		this.charactersToRemove = ['\n', '\t'];
@@ -61,6 +60,7 @@ export class JsonArrConfig {
                 this.loadFormIntoDialog('', serverName);
                 return;
             }
+			
             const builtFormHtml = await this.genJsonCfgForm(JsonArray);
 
             this.loadFormIntoDialog(builtFormHtml, serverName);
@@ -79,7 +79,6 @@ export class JsonArrConfig {
                 });
 
                 $('#addRowBtn').click(() => {
-					console.log('clkc');
                     this.addRow();
                     this.updateArrayIndexes();
                 });
@@ -89,7 +88,7 @@ export class JsonArrConfig {
         }
     }
 
-	genJsonCfgForm(JsonArray) {
+	async genJsonCfgForm(JsonArray) {
 		return Promise.all(JsonArray.map((element, index) => this.genFormRow(index, element)))
 			.then(rows => {
 				const builtFormHtml = `<form id="jsonConfigForm"><table cellpadding="${this.jsonAttributes.length}" class="table table-bordered table-striped">
@@ -134,7 +133,7 @@ async genFormRow(index, row) {
 
             return `<td>
                         <div class="input_block">
-                            <${inputType} class="input" id="${attribute}_input${index}" data-index="${index}" data-key="${attribute}" style="${isTextarea ? 'height: ' + inputHeight + 'px; width: 100%; box-sizing: border-box;' : 'height: ' + inputHeight / 2 + 'px;'}"
+                            <${inputType} class="input" id="${attribute}_input${index}" name="${attribute}" data-index="${index}" style="${isTextarea ? 'height: ' + inputHeight + 'px; width: 100%; box-sizing: border-box;' : 'height: ' + inputHeight / 2 + 'px;'}"
                                 ${inputType === 'input' ? `value="${inputValue}"` : ''}>
                                 ${inputType === 'textarea' ? `${this.removeCharacters(inputValue)}` : ''}
                             </${inputType}>
@@ -195,18 +194,22 @@ async updateJsonConfig(sendKey) {
 
         $(this).find('input, select, textarea').each(function() {
             const fieldName = $(this).attr('name');
-            let fieldValue;
+            if (fieldName) { // Проверка наличия атрибута name
+                let fieldValue;
 
-            if ($(this).is(':checkbox')) {
-                fieldValue = $(this).prop('checked') ? true : false;
-            } else {
-                fieldValue = $(this).val();
+                if ($(this).is(':checkbox')) {
+                    fieldValue = $(this).prop('checked') ? true : false;
+                } else {
+                    fieldValue = $(this).val();
+                }
+
+                formData[fieldName] = fieldValue;
             }
-
-            formData[fieldName] = fieldValue;
         });
 
-        formDataArray.push(formData);
+        if (Object.keys(formData).length > 0) {
+            formDataArray.push(formData);
+        }
     });
 
     let req = {
@@ -216,6 +219,7 @@ async updateJsonConfig(sendKey) {
     let answer = await foxEngine.sendPostAndGetAnswer(req, "JSON");
     return answer;
 }
+
 
 	
 	removeCharacters(value) {

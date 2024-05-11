@@ -4,17 +4,31 @@ export class Utils {
         this.monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
     }
 
-    convertUnixTime(unix) {
-        let a = new Date(unix * 1000),
-            year = a.getFullYear(),
-            month = this.monthNames[a.getMonth()],
-            date = a.getDate(),
-            hour = a.getHours(),
-            min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes(),
-            sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
+convertUnixTime(unix) {
+    unix = parseInt(unix);
 
-        return `${month} ${date}, ${year}, ${hour}:${min}:${sec}`;
+    const isMilliseconds = unix > 1000000000000;
+    const date = isMilliseconds ? new Date(unix) : new Date(unix * 1000);
+    return date;
+}
+
+getFormattedDate(unix) {
+    const date = this.convertUnixTime(unix);
+    if (isNaN(date.getTime())) {
+        return "Invalid Date";
     }
+    const year = date.getFullYear();
+    const month = this.monthNames[date.getMonth()];
+    const day = date.getDate();
+    const hour = date.getHours();
+    const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+    const seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+
+    return `${month} ${day}, ${year}, ${hour}:${minutes}:${seconds}`;
+}
+
+
+
 
     textAnimate(target) {
         let animation = anime.timeline({

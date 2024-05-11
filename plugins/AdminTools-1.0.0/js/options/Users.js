@@ -9,7 +9,7 @@ export class Users {
 		this.contentAdded = false;
 		this.formFields = [
 			{ "fieldName": 'badgeName', "fieldType": 'dropdown', "optionsArray":  this.allBadges },
-			{ "fieldName": 'acquiredDate', "fieldType": 'text' },
+			{ "fieldName": 'acquiredDate', "fieldType": 'date' },
 			{ "fieldName": 'description', "fieldType": 'text' }
 		];
         
