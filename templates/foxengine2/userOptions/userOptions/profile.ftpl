@@ -11,14 +11,14 @@
    } 
 </useroption>
 <pageContent>
-   <style>
-      button {
-      width: fit-content;
-      }
-   </style>
+<style>
+	button {
+	    width: fit-content;
+	}
+</style>
    <div class="tabs">
       [hasPriviligies] 
-      <script>
+	  <script>
          function viewEdit() {
          				let view = $('#view');
          				let edit = $('#edit');
@@ -71,22 +71,23 @@
                <h2 id="modalTitle">%lang|profileTitle%</h2>
                <span id="modalDesc">%lang|profileDesc%</span>
                <section> 
-                  [input type="text" name="realname" placeholder="%lang|fullName%" value="[realname]"]
+				  [input type="text" name="realname" placeholder="%lang|fullName%" value="[realname]"]
                   [input type="text" name="userStatus" placeholder="%lang|status%" value="[userStatus]"]
                   [input type="text" name="land" placeholder="%lang|land%" value="[land]"]
                   [input type="text" name="email" placeholder="%lang|email%" value="[email]"]
                   [group=4] 
-                  [input type="password" name="password" placeholder="%lang|currentPass%"]
+					[input type="password" name="password" placeholder="%lang|currentPass%"]
                   [/group] 
                   [group=1]
-                  [input type="number" name="user_group" placeholder="%lang|userGroup%" value="[user_group]"] 
+					[input type="number" name="user_group" placeholder="%lang|userGroup%" value="[user_group]"] 
                   [/group] 
                </section>
             </div>
             <div class="tab_content" id="personalisation">
                <h2 id="modalTitle">%lang|personalisationTitle%</h2>
                <span id="modalDesc">%lang|personalisationDesc%</span>
-               [input type="upload" id="profilePhoto" name="image" metadata="profilePhoto"]
+				[input type="upload" id="profilePhoto" name="image" metadata="profilePhoto"]
+
                <div class="fields_item">
                   <h3 class="settingsTitle">%lang|colorScheme%</h3>
                   <div class="container">
@@ -106,21 +107,23 @@
             <input name="login" class="input" type="hidden" value="[login]" />
             <input name="refreshPage" type="hidden" value="false" />
             <input name="onSubmit" type="hidden" value="foxEngine.user.showUserProfile('[login]');" /> 
-            [not-group=1]
-            <input name="user_group" class="input" type="hidden" value="[user_group]" />
-            [/not-group]
-            <input name="foxesHash" class="input" type="hidden" value="[hash]" />
+			[not-group=1]
+			<input name="user_group" class="input" type="hidden" value="[user_group]" />
+			[/not-group]
+			<input name="foxesHash" class="input" type="hidden" value="[hash]" />
             <button type="submit" class="m-2 login">
                %lang|submit%
                <div class="fa fa-cog fa-spin"></div>
             </button>
          </form>
-         <div class="d-none" id="photoModal">
-            <div class="modal_app_title">Загрузка фото [login]:</div>
-            <div class="modal_app_close" onclick="foxEngine.modalApp.closeModalApp();"></div>
-            <div class="modal_app_content">
-            </div>
-         </div>
+
+		 <div class="d-none" id="photoModal">
+				<div class="modal_app_title">Загрузка фото [login]:</div>
+				 <div class="modal_app_close" onclick="foxEngine.modalApp.closeModalApp();"></div>
+				 <div class="modal_app_content">
+
+				 </div>
+			</div>
       </div>
       [/hasPriviligies] 
       <div id="view" style="display: block;">
@@ -144,12 +147,12 @@
                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 13.4998C9.5 11.2907 11.2909 9.49985 13.5 9.49985C15.7091 9.49985 17.5 11.2907 17.5 13.4998C17.5 15.709 15.7091 17.4998 13.5 17.4998C11.2909 17.4998 9.5 15.709 9.5 13.4998ZM13.5 10.9998C13.9142 10.9998 14.25 11.3356 14.25 11.7498V12.7498H15.25C15.6642 12.7498 16 13.0856 16 13.4998C16 13.9141 15.6642 14.2498 15.25 14.2498H14.25V15.2498C14.25 15.6641 13.9142 15.9998 13.5 15.9998C13.0858 15.9998 12.75 15.6641 12.75 15.2498V14.2498H11.75C11.3358 14.2498 11 13.9141 11 13.4998C11 13.0856 11.3358 12.7498 11.75 12.7498H12.75V11.7498C12.75 11.3356 13.0858 10.9998 13.5 10.9998Z" fill="currentColor"></path>
                                     </svg>
                                  </div>
-                                 <script>
-                                    async function loadPhoto(){
-                                    	foxEngine.modalApp.showModalApp(700, $("#photoModal").html());
-                                    }
-                                 </script>
-                                 [/hasPriviligies]
+								<script>
+									async function loadPhoto(){
+										foxEngine.modalApp.showModalApp(700, $("#photoModal").html());
+									}
+								</script>
+                                [/hasPriviligies]
                               </button>
                            </div>
                         </li>
@@ -194,31 +197,14 @@
             <tr class="statsTabbleItem">
             <td class="pageItemTitle">%lang|land%</td>
             <td class="pageItemValue">[land]</td>
-            </tr> 
-            [hasPriviligies]
-            <script>
-               (function() {
-               	let balance = [balance];
-				console.log(balance);
-               	$("#profileContents > div.basecont > table > tbody > tr:nth-child(8) > td.pageItemValue").html(balance[1].units);
-               	$("#profileContents > div.basecont > table > tbody > tr:nth-child(9) > td.pageItemValue").html(balance[0].crystals);
-               })();
-               	
-            </script>
-            <tr class="statsTabbleItem">
+            </tr> [hasPriviligies] <tr class="statsTabbleItem">
             <td class="pageItemTitle">%lang|email%</td>
             <td class="pageItemValue">[email]</td>
             </tr>
             <tr class="statsTabbleItem">
             <td class="pageItemTitle">%lang|units%</td>
-            <td class="pageItemValue">100</td>
-            </tr> 
-            <tr class="statsTabbleItem">
-            <td class="pageItemTitle">%lang|crystals%</td>
-            <td class="pageItemValue">0</td>
-            </tr> 
-            [/hasPriviligies] 
-            </table>
+            <td class="pageItemValue">[units]</td>
+            </tr> [/hasPriviligies] </table>
          </div>
       </div>
    </div>

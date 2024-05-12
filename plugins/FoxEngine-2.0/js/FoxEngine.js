@@ -9,7 +9,6 @@ import { Utils } from './modules/Utils.js';
 import { Logo } from './modules/Logo.js';
 import { EntryReplacer } from './modules/EntryReplacer.js';
 import { Snow } from './modules/Snow.js';
-import '../../popper.min.js';
 import './modules/Howler/howler.core.js';
 
 class FoxEngine {

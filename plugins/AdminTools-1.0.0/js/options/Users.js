@@ -1,15 +1,21 @@
 import {JsonArrConfig} from '../modules/JsonArrConfig.js';
 import { BuildField } from '../modules/BuildField.js';
-import { EditBalance } from './userOptions/EditBalance.js';
-import { EditBadges }  from './userOptions/EditBadges.js';
 
 export class Users {
     constructor() {
+        
         this.userArr = [];
 		this.allBadges = [];
 		this.contentAdded = false;
-		this.editBadges = new EditBadges();
-		this.editBalance = new EditBalance();
+		this.formFields = [
+			{ "fieldName": 'badgeName', "fieldType": 'dropdown', "optionsArray":  this.allBadges },
+			{ "fieldName": 'acquiredDate', "fieldType": 'date' },
+			{ "fieldName": 'description', "fieldType": 'text' }
+		];
+        
+		this.buildField = new BuildField(this);
+		this.jsonArrConfig = new JsonArrConfig([ "badgeName", "acquiredDate", "description"], this.submitHandler.bind(this), this.buildField);
+		
         this.dialogOptions = {
             autoOpen: false,
             position: {
@@ -31,6 +37,10 @@ async parseUsers(input = '*') {
     try {
         if (input === "") {
             input = '*';
+        }
+
+        if (!this.allBadges.size) {
+            await this.getAllBadges();
         }
 
         if (!this.contentAdded) {
@@ -74,6 +84,16 @@ async parseUsers(input = '*') {
             }
 
             //Action listeners
+            this.formFields.forEach(field => {
+                switch (field.fieldName) {
+                    case 'badgeName':
+                        field.optionsArray = this.allBadges;
+                        break;
+                    default:
+                        break;
+                }
+            });
+
             $('.showProfile').click((event) => {
                 const login = $(event.target).data('login');
 				if (login) {
@@ -86,17 +106,8 @@ async parseUsers(input = '*') {
 			$('#usersList').on('click', '.loadUserBadges', async (event) => {
 				const login = $(event.currentTarget).data('login');
 				if (login) {
-					await adminPanel.users.editBadges.openEditWindow(login);
-				} else {
-					console.error('Login is undefined');
-				}
-			});
-			
-			
-			$('#usersList').on('click', '.editBalance', async (event) => {
-				const login = $(event.currentTarget).data('login');
-				if (login) {
-					await adminPanel.users.editBalance.openEditWindow(login);
+					const badgesArray = await foxEngine.user.getBadgesArray(login);
+					this.jsonArrConfig.openFormWindow(badgesArray, login, {admPanel: "editUserBadges", userLogin: login});
 				} else {
 					console.error('Login is undefined');
 				}
@@ -117,9 +128,16 @@ async parseUsers(input = '*') {
         return template.replace(/\${(.*?)}/g, (match, p1) => data[p1.trim()]);
     }
 
-	//@Deprecated
     getUserData(login) {
         return this.userArr[login];
+    }
+
+    async loadBadgesConfig(button, data, user) {
+        if (data !== "") {
+            this.jsonArrConfig.openModsInfoWindow(data, user);
+        } else {
+            button.notify(user + ' has no badges!', "warn");
+        }
     }
 
     async addContent() {
@@ -127,5 +145,23 @@ async parseUsers(input = '*') {
             const contentHtml = await foxEngine.loadTemplate(foxEngine.elementsDir + 'admin/users/userTable.tpl', true);
             $("#adminContent").html(contentHtml);
         }
+    }
+	
+	async submitHandler(button, user) {
+		let answer = await this.jsonArrConfig.updateJsonConfig("badges");
+		button.notify(answer.message, answer.type);
+		setTimeout(async () => {
+			$("#dialog").dialog('close');
+			foxEngine.user.showUserProfile(user);
+			setTimeout(async () => {
+				foxEngine.user.parseBadges(user);
+			}, 500);
+		}, 500);
+    }
+	
+	async getAllBadges() {
+        this.allBadges = await foxEngine.sendPostAndGetAnswer({
+            admPanel: "getAllBadges"
+        }, "JSON");
     }
 }
