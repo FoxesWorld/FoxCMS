@@ -76,9 +76,6 @@ border: 1px solid #e0e4e5;
 	transition: 0.6s;
 	background-color: #fff;
 	color: inherit;
-	margin-bottom: -1px;
-	padding-bottom: 10px;
-	transition: none;
 	z-index: 5;
 }
 

@@ -94,7 +94,8 @@ export class Servers {
                 serverName: server.serverName,
                 serverVersion: server.serverVersion,
                 serverDescription: server.serverDescription,
-                enabled: icon
+                enabled: icon,
+				serverGroups: server.serverGroups
             });
 
             serversList.append(serverHtml);
