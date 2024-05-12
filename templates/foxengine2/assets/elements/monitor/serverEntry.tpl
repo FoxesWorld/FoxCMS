@@ -8,7 +8,7 @@
     <div class="serverEntry-title">
         <span>{serverName} {version}</span>
 		<div class="online_text">
-			{playersOnline} из {playersMax}
+			<i class="fa-thin fa-user-vneck"></i> <span>{playersOnline} из {playersMax} </span>
 		</div>
 
 		<div class="serverEntry-line">

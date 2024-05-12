@@ -57,6 +57,43 @@ export class Page {
 		$(response).find('useroption').remove();
 	}
 	
+	   async getPage(page) {
+        const response = await this.foxEngine.sendPostAndGetAnswer({
+            "getOption": page
+        }, "HTML");
+
+        const option = this.foxEngine.utils.getData(response, 'useroption');
+        const content = this.foxEngine.utils.getData(response, 'pageContent');
+
+        if (option !== undefined) {
+            const jsonOption = JSON.parse(option.textContent);
+            if (jsonOption.langPack !== undefined) {
+                this.langPack = await this.loadLangPack(jsonOption.langPack);
+            }
+            if (jsonOption.onLoad) {
+                const func = jsonOption.onLoad + (jsonOption.onLoadArgs ? `(${jsonOption.onLoadArgs})` : '');
+
+                setTimeout(() => {
+                    eval(func);
+                }, 500);
+            }
+
+            let data = await this.foxEngine.entryReplacer.replaceText(response.body.innerHTML);
+
+            // Check if the page contains a gallery section
+            if (data && String(data).indexOf('<section class="gallery"') > 0) {
+                const galleryInstance = new Gallery(this.foxEngine, data);
+                galleryInstance.loadGallery();
+            }
+
+            return data;
+        } else {
+            console.error('Page option not found.');
+            return null;
+        }
+    }
+
+	
 	async loadLangPack(langPackKey) {
 		let langText = await this.foxEngine.sendPostAndGetAnswer({sysRequest: "getLangPack", langPackKey: langPackKey}, "JSON");
         return langText || null;
@@ -68,11 +105,11 @@ export class Page {
 			if (metaTag.length > 0) {
 				metaTag.attr('content', content);
 			} else {
-				console.error(`Meta tag with name "${tagName}" not found.`);
+				// If the meta tag doesn't exist, create it
+				$('head').append(`<meta name="${tagName}" content="${content}">`);
 			}
 		}
 	}
-
 
     async loadData(data, block) {
         $(block).fadeOut(500);
@@ -84,7 +121,7 @@ export class Page {
             }
 
             $(block).html(data).fadeIn(500);
-            this.foxEngine.foxesInputHandler.formInit(500);
+            this.foxEngine.foxesInputHandler.formInit(500, data);
         }, 500);
     }
 

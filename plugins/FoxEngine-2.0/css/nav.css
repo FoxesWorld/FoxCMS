@@ -56,13 +56,19 @@
     margin-top: 3px
 }
 
-#header .userBlock img {
+#header .userBlock .avatar img {
 	margin: 0 10px;
 }
 
 
 .nav > li > a:focus {
     outline: 0
+}
+
+.nav >li.nav-sep {
+    background: hsla(0, 0%, 100%, .3);
+    margin: 0 6px;
+    width: 1px;
 }
 
 nav .dropdown-menu.show{

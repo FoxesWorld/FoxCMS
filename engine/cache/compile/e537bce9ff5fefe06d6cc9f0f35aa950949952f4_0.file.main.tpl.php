@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-02-12 21:33:32
+/* Smarty version 4.0.4, created on 2024-05-13 00:46:34
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_65ca647c329d34_13771714',
+  'unifunc' => 'content_664138ba445592_19718925',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1707723501,
+      1 => 1715453743,
       2 => 'file',
     ),
   ),
@@ -25,22 +25,23 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_65ca647c329d34_13771714 (Smarty_Internal_Template $_smarty_tpl) {
+function content_664138ba445592_19718925 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
       <?php echo $_smarty_tpl->tpl_vars['systemHeaders']->value;?>
 
-      <meta name="HandheldFriendly" content="true" />
       <title><?php echo $_smarty_tpl->tpl_vars['siteTitle']->value;?>
 </title>
-      <meta name="format-detection" content="telephone=no" />
+	  <meta name="HandheldFriendly" content="true" />
+      <meta name="format-detection" content="telephone=yes" />
+	  <meta name="viewport" content="width=760, maximum-scale=1">
 	  <meta name="author" content="FoxesWorld" />
 	  <meta name="description" content="<?php echo $_smarty_tpl->tpl_vars['siteDesc']->value;?>
 " />
 	  <meta name="keywords" content="<?php echo $_smarty_tpl->tpl_vars['keywords']->value;?>
 ">
-      <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height" />
+      <!-- <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height" /> -->
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 	  <meta property="og:title" content="<?php echo $_smarty_tpl->tpl_vars['siteTitle']->value;?>
@@ -73,9 +74,8 @@ function content_65ca647c329d34_13771714 (Smarty_Internal_Template $_smarty_tpl)
 			z-index: 999999999;
 			top: 0;
 		}
-	</style>
-
-	  
+		
+	</style>	  
 	  <?php echo '<script'; ?>
  type="module" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/js/App.js"><?php echo '</script'; ?>
@@ -88,6 +88,32 @@ function content_65ca647c329d34_13771714 (Smarty_Internal_Template $_smarty_tpl)
  type="module" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/js/cookie.js"><?php echo '</script'; ?>
 >
+
+	  <?php echo '<script'; ?>
+>
+    // Function to set background image based on season
+    function setBackgroundBySeason() {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth() + 1;
+        const body = document.querySelector('body');
+
+        let backgroundImage = '';
+        if (currentMonth >= 3 && currentMonth <= 5) {
+            backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/spring.png)';
+        } else if (currentMonth >= 6 && currentMonth <= 8) {
+            backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/summer.png)';
+        } else if (currentMonth >= 9 && currentMonth <= 11) {
+            backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/autumn.png)';
+        } else {
+            backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/winter.png)';
+			$(".container").append('<div class="moderator-button optionButt" onclick="foxEngine.snow.switchSnow();"><i class="fa fa-snowflake-o"></i></div>');
+        }
+
+        body.style.backgroundImage = backgroundImage;
+    }
+    window.onload = setBackgroundBySeason;
+<?php echo '</script'; ?>
+>
    </head>
    <body>
       <?php $_smarty_tpl->_subTemplateRender('file:header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
@@ -98,19 +124,16 @@ function content_65ca647c329d34_13771714 (Smarty_Internal_Template $_smarty_tpl)
       <div class="container">
          <div class="row siteContent">
             <div class="<?php if (!$_smarty_tpl->tpl_vars['isMobile']->value) {?>col-8<?php } else { ?>container<?php }?>">
-               <div id="content" class="mainBlock">
-				<?php echo '<%'; ?>
+               <main id="content" class="mainBlock">
+					<?php echo '<%'; ?>
 contentData<?php echo '%>'; ?>
 
-	
-               </div>
+               </main>
             </div>
                <?php $_smarty_tpl->_subTemplateRender("file:right-block.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
          </div>
-		 <div class="moderator-button optionButt" onclick="foxEngine.snow.switchSnow();">
-			<i class="fa fa-snowflake-o"></i>
-		</div>
+		
       </div>
 	  <div id="cookie-popup" style="display: none">
         <div class="text-center" id="cookie-header">
@@ -122,7 +145,7 @@ contentData<?php echo '%>'; ?>
 		  Они необходимы для создания невероятного опыта в использовании сайта – будь то путешествие по страницам или открытие сундука с новыми идеями.</p>
           <a onclick="foxEngine.page.loadPage('cookies', replaceData.contentBlock); return false;" href="#">Хочу знать больше...</a>
           <div class="cookie-buttons">
-            <button id="btn-cookie" type="submit">Соглашаюсь</button>
+            <button id="btn-cookie" type="submit">Соглашусь</button>
           </div>
         </div>
       </div>
@@ -130,6 +153,9 @@ contentData<?php echo '%>'; ?>
 ?>
 	  <?php $_smarty_tpl->_subTemplateRender('file:../notify.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
+	  <div aria-live="polite" aria-atomic="true" class="position-relative">
+		<div class="toast-container position-fixed top-0 end-0 p-2"></div>
+	  </div>
    </body>
 </html><?php }
 }

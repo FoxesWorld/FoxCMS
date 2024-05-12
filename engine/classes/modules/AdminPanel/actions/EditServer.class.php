@@ -7,14 +7,11 @@ class EditServer {
     // Array of allowed server columns
     private $allowedColumns = [
         'serverVersion',
-        'mainClass',
-        'forgeVersion',
-        'client',
+		'enabled',
+		'serverGroups',
         'host',
         'port',
         'jreVersion',
-        'mcpVersion',
-        'forgeGroup',
         'ignoreDirs',
         'modsInfo',
         'serverImage',

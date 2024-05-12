@@ -35,7 +35,7 @@
 				$badges = $db->getRow($query);
 				switch($badges){
 					case false:
-						$db->run("INSERT INTO `userBadges`(`userLogin`, `badges`) VALUES ('".$user."', '')");
+						//$db->run("update`users` SET `badges` = '[]')");
 					break;
 					
 					default:

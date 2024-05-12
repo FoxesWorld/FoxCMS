@@ -1,122 +1,131 @@
-import { JsonArrConfig } from '../modules/JsonArrConfig.js';
+import {JsonArrConfig} from '../modules/JsonArrConfig.js';
+import { BuildField } from '../modules/BuildField.js';
+import { EditBalance } from './userOptions/EditBalance.js';
+import { EditBadges }  from './userOptions/EditBadges.js';
 
-class Users {
+export class Users {
     constructor() {
-		this.jsonArrConfig = new JsonArrConfig();
-		this.userArr = [];
-	}
+        this.userArr = [];
+		this.allBadges = [];
+		this.contentAdded = false;
+		this.editBadges = new EditBadges();
+		this.editBalance = new EditBalance();
+        this.dialogOptions = {
+            autoOpen: false,
+            position: {
+                my: 'center',
+                at: 'center',
+                of: window
+            },
+            modal: true,
+            height: 'auto',
+            width: 600,
+            resizable: false,
+            open: function(event, ui) {
 
-    async parseUsers(input = '*') {
-        try {
-            this.addContent();
-
-            let usersArray = await foxEngine.sendPostAndGetAnswer({
-                admPanel: "usersList",
-                userMask: input
-            }, "JSON");
-
-            if (usersArray.length > 0) {
-                //$("#usersList").html("");
-				let userTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/users/userRow.tpl');
-                for (let j = 0; j < usersArray.length; j++) {
-                    let singleUser = usersArray.at(j);
-                    let login = singleUser[j].login;
-                    let email = singleUser[j].email;
-                    let lastdate = singleUser[j].last_date;
-					let avatar = singleUser[j].profilePhoto;
-					let badges = singleUser[j].badges;
-					
-					this.userArr[login] = {
-                        email,
-                        lastdate,
-                        badges
-                    };
-
-                    let userHtml = await foxEngine.replaceTextInTemplate(userTpl, {
-                        index: j,
-                        login,
-						avatar,
-                        email,
-                        lastdate,
-						badges
-                    });
-                    $("#usersList").append(userHtml);
-
-                    let openTimer;
-
-                    $(`#usersList > tr > td.${login}`).on({
-                        mouseenter: function() {
-                            clearTimeout(openTimer);
-
-                            const dialogOptions = {
-                                autoOpen: false,
-                                position: {
-                                    my: 'center',
-                                    at: 'center',
-                                    of: window
-                                },
-                                modal: true,
-                                height: 'auto',
-                                width: 600,
-                                resizable: false,
-                                open: function(event, ui) {
-                                    $(".ui-widget-overlay").remove();
-                                    $(".ui-dialog-titlebar").remove();
-                                }
-                            };
-
-                            openTimer = setTimeout(() => {
-                                foxEngine.user.showProfilePopup(`'${login}'`, dialogOptions);
-                            }, 1000);
-                        },
-                        mouseleave: function() {
-                            clearTimeout(openTimer);
-                        }
-                    });
-
-                    $(document).on('click', function(event) {
-                        if ($(event.target).closest('.ui-dialog').length === 0) {
-                            $("#dialog").dialog("close");
-                        }
-                    });
-					//console.log(this.userArr[login]);
-					        setTimeout(() => {
-							$('#loadUserBadges').click(() => {
-									this.loadBadgesConfig(badges, login);
-								});
-							}, 1000);
-                }
-            } else {
-                const userHtml = `<div class="noUsers"><h1>No Users like <span>${input}</span></h1></div>`;
-                foxEngine.loadData(userHtml, "#usersList");
             }
-        } catch (error) {
-            console.error('An error occurred:', error.message);
-        }
+        };
     }
+
+async parseUsers(input = '*') {
+    try {
+        if (input === "") {
+            input = '*';
+        }
+
+        if (!this.contentAdded) {
+            this.addContent();
+            this.contentAdded = true;
+        }
+
+        let usersArray = await foxEngine.sendPostAndGetAnswer({
+            admPanel: "usersList",
+            userMask: input
+        }, "JSON");
+
+        $("#usersList").html("");
+
+        if (usersArray !== null) {
+            let userTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/users/userRow.tpl', true);
+
+            for (let j = 0; j < usersArray.length; j++) {
+                let singleUser = usersArray.at(j);
+                let login = singleUser[j].login;
+                let email = singleUser[j].email;
+                let lastdate = singleUser[j].last_date;
+                let avatar = singleUser[j].profilePhoto;
+                let badges = singleUser[j].badges;
+
+                this.userArr[login] = {
+                    email,
+                    lastdate,
+                    badges
+                };
+
+                let userHtml = await foxEngine.replaceTextInTemplate(userTpl, {
+                    index: j,
+                    login,
+                    avatar,
+                    email,
+                    lastdate,
+                    badges
+                });
+                $("#usersList").append(userHtml);
+            }
+
+            //Action listeners
+            $('.showProfile').click((event) => {
+                const login = $(event.target).data('login');
+				if (login) {
+                foxEngine.user.showProfilePopup(login);
+				} else {
+					console.error('Login is undefined');
+				}
+            });
+
+			$('#usersList').on('click', '.loadUserBadges', async (event) => {
+				const login = $(event.currentTarget).data('login');
+				if (login) {
+					await adminPanel.users.editBadges.openEditWindow(login);
+				} else {
+					console.error('Login is undefined');
+				}
+			});
+			
+			
+			$('#usersList').on('click', '.editBalance', async (event) => {
+				const login = $(event.currentTarget).data('login');
+				if (login) {
+					await adminPanel.users.editBalance.openEditWindow(login);
+				} else {
+					console.error('Login is undefined');
+				}
+			});
+
+
+        } else {
+            const userHtml = `<tr><td colspan="4"><div class="alert alert-warning" role="alert">No Users like <b>${input}</b></div></td></tr>`;
+            foxEngine.page.loadData(userHtml, "#usersList");
+        }
+    } catch (error) {
+        console.error('An error occurred:', error.message);
+    }
+}
+
 
     userTemplate(template, data) {
         return template.replace(/\${(.*?)}/g, (match, p1) => data[p1.trim()]);
     }
-	
-	getUserData(login){
-		return this.userArr[login];
-	}
-	
-	async loadBadgesConfig(button, data, user) {
-		if(data !== "") {
-			this.jsonArrConfig.openModsInfoWindow(data, user);
-		} else {
-			button.notify(user + ' has no badges!', "warn");
-		}
-	}
+
+	//@Deprecated
+    getUserData(login) {
+        return this.userArr[login];
+    }
 
     async addContent() {
         if (!$("#adminContent > table").length) {
-            const contentHtml = await foxEngine.loadTemplate(foxEngine.elementsDir + 'admin/users/userTable.tpl');
+            const contentHtml = await foxEngine.loadTemplate(foxEngine.elementsDir + 'admin/users/userTable.tpl', true);
             $("#adminContent").html(contentHtml);
         }
     }
 }
-
-export { Users };

@@ -16,7 +16,7 @@
 
 <div class="card-body px-0">
                <div class="table-responsive">
-                  <table id="user-list-table" class="table table-striped" role="grid" data-bs-toggle="data-table">
+                  <table id="user-list-table" class="table table-hover table-striped" data-bs-toggle="data-table">
                      <thead>
                         <tr class="ligth">
 						   <th>№</th>

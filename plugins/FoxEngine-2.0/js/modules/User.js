@@ -71,39 +71,122 @@ export class User {
     };
 
     async parseBadges(user) {
-        const badgeTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'badge.tpl');
+        const badgeTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'badge.tpl', true);
         try {
             let parsedJson = await this.getBadgesArray(user);
 
             if (parsedJson.length > 0) {
                 for (let k = 0; k < parsedJson.length; k++) {
                     let obj = parsedJson[k];
-
-                    // Replace text in the badge template for each badge
                     let badgeHtml = await foxEngine.replaceTextInTemplate(badgeTemplate, {
-                        BadgeDesc: obj.BadgeDesc,
-                        AcquiredDateFormatted: foxEngine.utils.convertUnixTime(obj.AcquiredDate),
-                        BadgeName: obj.BadgeName,
-                        BadgeImg: obj.BadgeImg
+                        BadgeDesc: obj.description,
+                        AcquiredDateFormatted: foxEngine.utils.getFormattedDate(obj.acquiredDate),
+                        BadgeName: obj.badgeName,
+                        BadgeImg: obj.badgeImg
                     });
 
                     // Append the badge HTML to the userBadges container
                     $("#userBadges").append(badgeHtml);
-
-                    // Initialize tooltips for the badges
                     $('[data-toggle="tooltip"]').tooltip({
                         placement: 'bottom',
                         trigger: "hover"
                     });
                 }
             } else {
-                // If there are no badges, remove the userBadges container
                 $("#userBadges").remove();
             }
         } catch (error) {
             console.error('Error parsing badges:', error);
         }
     };
+	
+async refreshBalance(currencies) {
+    async function animateValueChange(oldValue, newValue, elementSelector) {
+        if (oldValue !== newValue) {
+            $({ n: oldValue }).animate({ n: newValue }, {
+                duration: 2500,
+                step: function(a) {
+                    $(elementSelector).text(Math.round(a));
+                }
+            });
+        } else {
+            console.log("Value hasn't changed.");
+        }
+    }
+
+    try {
+        let response = await foxEngine.sendPostAndGetAnswer({
+            user_doaction: "getUnits"
+        }, "JSON");
+
+        let allData = {};
+
+        response.forEach(item => {
+            let key = Object.keys(item)[0];
+            let value = item[key];
+            allData[key] = value;
+        });
+        currencies.forEach(async currency => {
+            if (allData.hasOwnProperty(currency)) {
+                let oldBalance = Math.round(parseFloat($(`#${currency}`).text()));
+                let newBalance = Math.round(parseFloat(allData[currency]));
+                await animateValueChange(oldBalance, newBalance, `#${currency}`);
+            } else {
+                console.error(`No '${currency}' data found in response.`);
+            }
+        });
+    } catch (error) {
+        console.error('Error refreshing balance:', error);
+    }
+}
+
+
+	
+	/*
+	foxEngine.request.send_post({
+            user_doaction: "getUnits"
+        });
+	refreshBalance() {
+        console.log('Parsing user balance');
+		$.post('/', {data: "updatebalance"}, function (data) {
+			data = JSON.parse(data);
+			var oldmoney = Math.round(parseFloat($("#econs").text()));
+			var oldrealmoney = Math.round(parseFloat($("#realmoney").text()));
+			var oldbonuses = Math.round(parseFloat($("#bonuses").text()));
+
+			var newmoney = Math.round(parseFloat(data['money']));
+			var newrealmoney = Math.round(parseFloat(data['realmoney']));
+			var newbonuses = Math.round(parseFloat(data['bonuses']));
+		
+		$(function () {
+				if (oldrealmoney !== newrealmoney) {
+					$({
+						n: oldrealmoney
+					}).animate({
+						n: newrealmoney
+					}, {
+						duration: 1500,
+						step: function (a) {
+							$("#realmoney").html(a | 0)
+						}
+					})
+				}
+				
+				if (oldmoney !== newmoney) {
+					$({
+						n: oldmoney
+					}).animate({
+						n: newmoney
+					}, {
+						duration: 2500,
+						step: function (a) {
+							$("#money").html(a | 0)
+						}
+					})
+				}
+		});
+	});
+} */
 
     async getBadgesArray(user) {
         let badgesArray = await foxEngine.sendPostAndGetAnswer({
@@ -115,50 +198,54 @@ export class User {
     }
 
     async showUserProfile(userDisplay) {
-
-        let userProfile = await foxEngine.sendPostAndGetAnswer({
-            "userDisplay": userDisplay,
-            "user_doaction": "ViewProfile"
-        }, "TEXT");
-
+        let userProfile = this.getUserProfile(userDisplay);
+		//foxEngine.page.langPack = await foxEngine.page.loadLangPack('userProfile');
+		foxEngine.page.setPage("");
         foxEngine.page.loadData(await this.foxEngine.entryReplacer.replaceText(userProfile), foxEngine.replaceData.contentBlock);
+		//HARDCODED!!!
         location.hash = 'user/' + userDisplay;
         foxEngine.foxesInputHandler.formInit(1000);
-    };
+    }
 
     async showProfilePopup(user, dialogOptions) {
         $("#dialog").dialog("option", "title", user);
-
-        let response = await foxEngine.sendPostAndGetAnswer({
-            "userDisplay": user,
-            "user_doaction": "ViewProfile"
-        }, "HTML");
-
-        foxEngine.page.loadData(response.getElementById('view'), '#dialogContent');
+       let userProfile = await this.getUserProfile(user);
+	   //foxEngine.page.langPack = await foxEngine.page.loadLangPack('userProfile');
+		foxEngine.page.loadData(await this.foxEngine.entryReplacer.replaceText(userProfile), '#dialogContent');
         $("#dialog").dialog(dialogOptions);
         $("#dialog").dialog('open');
         setTimeout(() => {
             this.parseBadges(user);
         }, 600);
-    };
+    }
 
     async getLastUser() {
         try {
             let lastUser = await foxEngine.sendPostAndGetAnswer({
                 userAction: "lastUser"
             }, "JSON");
-            let userView = await foxEngine.replaceTextInTemplate(await foxEngine.loadTemplate(foxEngine.elementsDir + 'lastUser.tpl'), {
+            let userView = await foxEngine.replaceTextInTemplate(await foxEngine.loadTemplate(foxEngine.elementsDir + 'lastUser.tpl', true), {
                 colorScheme: lastUser.colorScheme,
                 profilePhoto: lastUser.profilePhoto,
                 login: lastUser.login,
                 realname: lastUser.realname,
-                regDate: foxEngine.utils.convertUnixTime(lastUser.reg_date)
+                regDate: foxEngine.utils.getFormattedDate(lastUser.reg_date)
             });
             $("#lastUser").html(userView);
         } catch (error) {
             console.error(error.message);
         }
     };
+	
+	async getUserProfile(user) {
+		foxEngine.page.langPack = await foxEngine.page.loadLangPack('userProfile');
+		let userProfile = await foxEngine.sendPostAndGetAnswer({
+            "userDisplay": user,
+            "user_doaction": "ViewProfile"
+        }, "TEXT");
+		
+		return userProfile;
+	}
 	
 	async logout(button) {
 		try {

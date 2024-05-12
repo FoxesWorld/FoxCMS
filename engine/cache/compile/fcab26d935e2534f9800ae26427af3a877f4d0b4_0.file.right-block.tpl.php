@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-02-12 21:33:32
+/* Smarty version 4.0.4, created on 2024-05-13 00:46:34
   from '/var/www/FoxCMS/templates/foxengine2/right-block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_65ca647c33c147_33084369',
+  'unifunc' => 'content_664138ba45c6a3_15793179',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fcab26d935e2534f9800ae26427af3a877f4d0b4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/right-block.tpl',
-      1 => 1707571328,
+      1 => 1715016640,
       2 => 'file',
     ),
   ),
@@ -20,9 +20,9 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_65ca647c33c147_33084369 (Smarty_Internal_Template $_smarty_tpl) {
+function content_664138ba45c6a3_15793179 (Smarty_Internal_Template $_smarty_tpl) {
 if (!$_smarty_tpl->tpl_vars['isMobile']->value) {?>
-<div class="col-4 d-none d-lg-block d-sm-none">
+<aside class="col-4 d-none d-lg-block d-sm-none">
 	<div class="row rightBlock">
 		<div class="card">
 			<div id="userBlock">
@@ -61,7 +61,7 @@ if (!$_smarty_tpl->tpl_vars['isMobile']->value) {?>
 		-->
 		</div>
 	</div>
-</div>
+</aside>
 <?php }
 }
 }

@@ -5,7 +5,10 @@
     <!--<td>{email}</td>
      <td>{convertUnixTime(lastdate)}</td> -->
     <td>
-        <button class="btn bg-teal btn-sm btn-raised position-left legitRipple" data-action="profile">Profile</button>
-        <button class="btn bg-teal btn-sm btn-raised position-left legitRipple" id="loadUserBadges" data-action="badges" data-login="{login}">Badges</button>
+		<div class="buttonGroup">
+			<button class="btn bg-green btn-sm btn-raised position-left legitRipple showProfile" data-login="{login}" data-action="profile"><i class="fa-thin fa-id-card"></i></button>
+			<button class="btn bg-indigo-800 btn-sm btn-raised position-left legitRipple loadUserBadges" data-action="badges" data-login="{login}"><i class="fa-thin fa-badge"></i></button>
+			<button class="btn bg-orange-600 btn-sm btn-raised position-left legitRipple editBalance" data-action="balance" data-login="{login}"><i class="fa-thin fa-money-bill"></i></button>
+		</div>
     </td>
 </tr>

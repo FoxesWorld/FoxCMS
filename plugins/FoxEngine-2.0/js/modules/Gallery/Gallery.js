@@ -13,7 +13,7 @@ export class Gallery {
 		  "path": $(this.galleryBlock).attr('dir'),
 		  "mask": $(this.galleryBlock).attr('mask')
             }, "JSON");
-		this.foxEngine.debugSend(jsonAnswer, "");
+		//this.foxEngine.debugSend(jsonAnswer, "");
         
 		this.foxEngine.debugSend("Forming a gallery with " + jsonAnswer.fileNum + " photos", "");
         for (let j = 0; j < jsonAnswer.files.length; j++) {

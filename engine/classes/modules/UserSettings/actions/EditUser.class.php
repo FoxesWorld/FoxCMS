@@ -50,7 +50,7 @@ if(!defined('profile')) {
 							$this->inputPassword = @$request['password'];
 							if(authorize::passVerify($this->inputPassword, $this->getUserfield("password")) || init::$usrArray['groupTag'] === "admin") {
 								if(@$request['email'] !== "null") {
-									$this->inputEmail = $request['email'];
+									$this->inputEmail = @$request['email'];
 									if (filter_var($this->inputEmail, FILTER_VALIDATE_EMAIL)) {
 										if($this->canSetColor(@$request['colorScheme'])){ //HERE
 											if(@$request['user_group'] !== "null") {

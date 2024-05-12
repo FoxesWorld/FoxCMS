@@ -17,6 +17,7 @@ if(!defined('profile')) {
 				$this->db = $db;
 				$this->logger = $logger;
 				$userAction = @$request[$this->userActionReq];
+				
 				if(isset($userAction)) {
 						$this->requireFile($userAction);
 						$this->fRequest = functions::collectData($request, true);
@@ -40,14 +41,21 @@ if(!defined('profile')) {
 								$text = randTexts::getRandText('greetings');
 								die('{"text": "'.$text.'"}');
 							break;
+							
+							case 'getUnits':
+								$loadUserInfo = new loadUserInfo(init::$usrArray['login'], $this->db);
+								$userData = $loadUserInfo->userInfoArray();
+								die($userData['balance']);
+							break;
 
 							case 'ViewProfile':
 								init::classUtil('LoadUserInfo', "1.0.0");
 								$loadUserInfo = new loadUserInfo(functions::filterString($request['userDisplay']), $this->db);
 								$userData = $loadUserInfo->userInfoArray();
+								
 								if(@$userData['login']){
 									$SSV = new SSV(
-										GetOption::getPageContent('userSettings', TEMPLATE_DIR.$this->pageTplFile),
+										GetOption::getPageContent('profile', TEMPLATE_DIR.$this->pageTplFile),
 										$request['userDisplay'],
 										$userData,
 										$this->db, 

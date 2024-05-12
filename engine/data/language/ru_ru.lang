@@ -5,7 +5,7 @@
 		/*Bugs*/
 		'bugs' => '<div class="alert alert-danger" role="alert">Возможны баги!</div>',
 	
-		/*ProfilEdit*/
+		/*ProfileEdit*/
 		'profileEdit' => array(
 			'noLoginSent' => "Не передан логин!",
 			'noHashSent' => "Не передан хеш!",
@@ -21,9 +21,28 @@
 			'needAuthorise' => "Необходима авторизация!"
 		),
 		
+		/*adminPanel*/
+		'adminPanel' => array(
+			'adminOptions' => "Опции Администратора",
+			'settings.title' => "Настройки",
+			'settings.desc' => "Настройка сайта",
+			'users.title' => "Пользователи",
+			'users.desc' => "Список пользователей проекта",
+			'modules.title' => "Модули",
+			'modules.desc' => "Модули FoxEngine",
+			'groupAssoc.title' => "Группы",
+			'groupAssoc.desc' => "Ассоциация групп",
+			'servers.title' => "Сервера",
+			'servers.desc' => "Конфигурация игровых серверов",
+			'templateEditor.title' => "Шаблоны",
+			'templateEditor.desc' => "Редактор шаблонов",
+			'pages.title' => "Страницы",
+			'pages.desc' => "Страницы сайта"
+		),
+		
 		
 		'userProfile' => array(
-			'profileTitle' => "Давай, меаняй! :serum:",
+			'profileTitle' => "Давай, меняй! :fox:",
 			'profileDesc' => "Посмотрим %realname%, что ты тут можешь поменять...",
 			'personalisationTitle' => "Давай, украшай!",
 			'personalisationDesc' => "Посмотрим %realname%, что ты тут можешь сделать...",
@@ -31,7 +50,7 @@
 			'securityDesc' => "Настройки безопасности, %realname%, изменить может тут",
 			
 			'profileOf' =>"Профиль пользователя ",
-			'profileSettings' => "Настройки профиля",		
+			'profileSettings' => "Основные",		
 			'takeMeBack' => "Верни меня назад",
 			'personalisation' => "Персонализация",
 			'security' => "Безопасность",
@@ -42,11 +61,13 @@
 			'status' => "Статус",
 			'land' => "Зона обитания",
 			'email' => "Электронная почта ",
+			'timeToProject' => "Время на проекте",
 			'currentPass' => "Текущий пароль",
 			'userGroup' => "Группа пользователя",
 			'loadPhoto' => "Загрузка фото профиля:",
 			'colorScheme' => "Цветовая схема профиля:",
 			'units' => "Юниты",
+			'crystals' => "Кристаллы",
 			'online' => "Последний вход: "
 		),
 		
@@ -65,6 +86,7 @@
 		/*Register*/
 		'loginUsed' => "Данный логин уже зарегистрирован!",
 		'emailUsed' => "Данная почта уже была зарегистрирована!",
+		'noEmail' => "Кто-то забыл почту ввести",
 		'badSyms' => "Недопустимые символы - ",
 		"passUnequals" => "Пароли не совпадают",
 		'passBadSyms' => "Плохие символы пароля!",
@@ -72,7 +94,7 @@
 		'regComplete' => "Регистрация завершена!",
 		'enterCaptcha' => "Капча не завершена!",
 		'dataProcessing' => "Необходимо принять соглашение об обработке персональных данных!",
-		'acceptRules' => "Нужно согласиться с правилами!",
+		'acceptRules' => "С правилами обычно соглашаются!",
 		
 		/*Settings*/
 		'dbHost-title' => "Хост базы данных",
@@ -83,6 +105,8 @@
 		"dbPass-desc" => "Пароль, с которым пользователь может войти в базу данных",
 		"dbName-title" => "Имя базы данных",
 		"dbName-desc" => "Имя базы данных для хранения данных веб сервиса",
+		"lang-title" => "Язык сайта",
+		"lang-desc" => "Какой язык будет использоваться в HTML",
 		"siteTpl-title" => "Шаблон сайта",
 		"siteTpl-desc" => "Шаблон из папки /templates/",
 		"siteTitle-title" => "Заголовок сайта",
@@ -117,6 +141,8 @@
 		"webserviceName-desc" => "",
 		"gameFiles-title" => "Игровые файлы",
 		"gameFiles-desc" =>"В какой директории лежат файлы игры",
+		"serverPictures-title" => "Изображения серверов",
+		"serverPictures-desc" => "Директория с изображениями использующимися для серверов",
 		"jreDir-title" =>  "Путь к архивам Jre",
 		"jreDir-desc" => "В какой директории лежат JVM",
 		"userOptions-title" => "Директория опций пользователя",
@@ -149,9 +175,9 @@
 		
 		/*Tabs*/
 		"databaseTab" => '<i class="fa fa-database"></i> База данных',
-		"frontendSettingsTab" => '<i class="fa fa-code"></i> JavaScript',
+		"frontendSettingsTab" => '<i class="fa-solid fa-coffee-beans"></i> JavaScript',
 		"siteSettingsTab" => '<i class="fa fa-cogs"></i> Настройки сайта',
-		"launcherSettingsTab" => '<i class="fa fa-cogs"></i> Настройки Лаунчера',
+		"launcherSettingsTab" => '<i class="fa-thin fa-screwdriver-wrench"></i> Настройки Лаунчера',
 		"securitySetingsTab" => '<i class="fa fa-shield"></i> Безопасность',
 		"otherTab" => '<i class="fa fa-archive"></i> Другое',
 		

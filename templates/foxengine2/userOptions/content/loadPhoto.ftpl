@@ -1,0 +1,25 @@
+<useroption>
+   {
+   "optionGroup": [1,4,5],
+   "type": "pageContent"
+   }
+</useroption>
+
+<pageContent>
+
+<div class="modal_app_title">Загрузка фото [login]:</div>
+ <div class="modal_app_close" onclick="foxEngine.modalApp.closeModalApp();"></div>
+ <div class="modal_app_content">
+ <form method="POST" action="/" id="loadPhoto">
+	[input type="upload" id="profilePhoto" name="image" metadata="profilePhoto"]
+		<input name="user_doaction" class="input" type="hidden" value="EditUser" />
+     <input name="onSubmit" type="hidden" value="foxEngine.user.showUserProfile('[login]');" />
+	 [not-group=1] 
+		<input name="user_group" class="input" type="hidden" value="[user_group]" />
+	[/not-group] 
+            
+	
+    <button type="submit" class="login">%lang|submit%<div class="fa fa-cog fa-spin"></div></button>
+</form>
+ </div>
+ </pageContent>

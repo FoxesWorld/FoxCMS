@@ -6,6 +6,7 @@ if(!defined("ADMIN")){
 	class AdminOptions extends AdminPanel {
 		
 		function __construct($REQUEST, $db) {
+			global $config;
 			if(init::$usrArray['user_group'] == 1) {
 				switch($REQUEST["admPanel"]){
 					
@@ -14,8 +15,77 @@ if(!defined("ADMIN")){
 						$editServer->updateServer(RequestHandler::$REQUEST);
 					break;
 					
+					case "editUserBadges":
+					$login = RequestHandler::$REQUEST['userLogin'];
+					$badges = RequestHandler::$REQUEST['badges'];
+					$data = $db->getValue("UPDATE `users` SET `badges`='".$badges."' WHERE `login` = '".$login."'");
+					if($data) {
+							$status ="success";
+						} else {
+							$status = "warn";
+						}
+						die('{"message": "success", "type": "success"}');
+					break;
+					
+					case "editUserBalance":
+					$login = RequestHandler::$REQUEST['userLogin'];
+					$balance = RequestHandler::$REQUEST['balance'];
+					$data = $db->getValue("UPDATE `users` SET `balance`='".$balance."' WHERE `login` = '".$login."'");
+					if($data) {
+							$status ="success";
+						} else {
+							$status = "warn";
+						}
+						die('{"message": "success", "type": "success"}');
+					
+					break;
+					
 					case "showModules":
 						die(json_encode(init::$modulesArray));
+					break;
+					
+					case "parseServers":
+					init::classUtil('ServerParser', "1.0.0");
+						$serverParser = new ServerParser($db, init::$usrArray['login'], true);
+						die($serverParser->parseServers(@RequestHandler::$REQUEST['server']));
+					break;
+					
+					case "getAllBadges":
+						$query = 'SELECT `badgeName` FROM `badgesList`';
+						$badgesArr = array();
+						$data = $db->getRows($query);
+						foreach($data as $key){
+							$badgesArr[] = $key['badgeName'];
+						}
+						die(json_encode($badgesArr));
+					break;
+					
+					case "loadUserBalance":
+						die($db->getValue("SELECT balance FROM users WHERE login = '".@RequestHandler::$REQUEST['userLogin']."'"));
+					break;
+					
+					case "getGameVersions":
+						$versions = filesInDir::filesInDirArray(ROOT_DIR . UPLOADS_DIR . $config['launcherSettings']['gameFiles'].'versions');
+						die(json_encode($versions));
+					break;
+
+					case "getJavaVersions":
+						$java = filesInDir::filesInDirArray(ROOT_DIR . UPLOADS_DIR . $config['launcherSettings']['jreDir']);
+						$outputArr = array();
+						foreach($java as $jre){
+							$outputArr[] = str_replace(".zip", "" , $jre);
+						}
+						die(json_encode($outputArr));
+					break;
+
+					case "getServerPictures":
+					$imgDir = "/templates/".$config['siteSettings']['siteTpl']. DIRECTORY_SEPARATOR . $config['launcherSettings']['serverPictures'];
+						$imgs = filesInDir::filesInDirArray(ROOT_DIR . $imgDir);
+						$outputArr = array();
+						foreach($imgs as $img){
+							$outputArr[] = $imgDir.$img;
+						}
+						die(json_encode($outputArr));
 					break;
 					
 					case "scanTemplates":

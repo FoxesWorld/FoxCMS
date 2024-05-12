@@ -26,6 +26,7 @@ session_start();
 			'logged_ip' => REMOTE_IP,
 			'password' => "",
 			'user_group' => 5,
+			'balance' => "[{crystals: 0},{units: 0}]",
 			'profilePhoto' => UPLOADS_DIR.USR_SUBFOLDER."anonymous/avatar.jpg"
 		);
 		

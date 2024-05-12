@@ -1,5 +1,8 @@
 .tabs {
 	height: 100%;
+    background: #ecf0f1;
+    border-radius: 5px;
+    padding: 7px;
 }
 
 .tabs input[type="submit"] {
@@ -7,7 +10,7 @@
 
 }
 
-.tabs button {
+.tabs > button {
 	display: initial;
     width: max-content;
     margin: 5px;
@@ -15,40 +18,32 @@
 }
 
 .tab_caption {
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-flex-wrap: wrap;
-	-ms-flex-wrap: wrap;
-	flex-wrap: wrap;
-	list-style: none;
-	position: relative;
-	margin: 0;
-	padding: 0;
+align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 3px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
 }
 
 .tab_caption li {
-	padding: 9px 15px;
-	background: #b77c4c;
-	color: #FFF;
-	position: relative;
-	border-left: 1px solid #6f5544;
-	border-top: 1px solid #6f5544;
-	border-width: 2px 2px 0;
-	width: min-content;
-	text-align: center;
-    margin: 0;
-}
-
-.tab_caption li:after {
-	content: '';
-	position: absolute;
-	bottom: -5px;
-	left: 0;
-	right: 0;
-	height: 5px;
-	margin-left: -2px;
-	background: #39312f;
+border: 1px solid #e0e4e5;
+    border-bottom: none;
+    border-radius: 3px 3px 0 0;
+    box-sizing: border-box;
+    color: #677171;
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    padding: 9px 15px;
+    position: relative;
+    text-decoration: none;
+    transition: all .2s ease;
+    transition-property: background-color, color;
+    z-index: 1;
 }
 
 .tab_caption li:not(.active) {
@@ -57,9 +52,11 @@
 
 .tab_caption li:not(.active):hover {
 	transition: 0.5s;
-	background: #ffa052c7;
+	background-color:hsla(0,0%,100%,.4);
 	border-color: #6f5544;
 }
+
+/*
 
 .tab_caption .active:after {
 	content: '';
@@ -73,16 +70,18 @@
 	-moz-box-shadow: 4px 2px 79px 3px rgba(214, 202, 50, 0.55);
 	box-shadow: 0 3px 9px rgb(135 123 81 / 74%);
 }
+*/
 
 .tab_caption .active {
-	background: #6f5544;
 	transition: 0.6s;
+	background-color: #fff;
+	color: inherit;
+	z-index: 5;
 }
 
 .tab_content {
 	display: none;
 	background: #FFF;
-	border: 2px solid #6f5544;
 	padding: 7px 18px;
 }
 

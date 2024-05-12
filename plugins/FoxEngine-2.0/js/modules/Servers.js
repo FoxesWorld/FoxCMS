@@ -8,7 +8,7 @@ export class Servers {
     async parseOnline() {
         try {
             // Load the template only once
-            const entryTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/serverEntry.tpl');
+            const entryTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/serverEntry.tpl', true);
 
             let parsedJson = await foxEngine.sendPostAndGetAnswer({
                 sysRequest: 'parseMonitor'
@@ -16,7 +16,6 @@ export class Servers {
 
             if (parsedJson.servers.length > 0) {
                 let serversHtmlPromises = [];
-
                 for (const obj of parsedJson.servers) {
                     let isOnline = obj.status === "online";
                     let progressbarClass = isOnline ? 'progressbar-online' : 'progressbar-offline';
@@ -42,7 +41,7 @@ export class Servers {
                 let serversHtml = serversHtmlResults.join('');
 
                 // Replace text in the total online template
-                const totalOnlineTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/totalOnline.tpl');
+                const totalOnlineTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/totalOnline.tpl', true);
                 let totalOnlineHtml = await foxEngine.replaceTextInTemplate(totalOnlineTpl, {
                     totalPlayersOnline: parsedJson.totalPlayersOnline,
                     totalPlayersMax: parsedJson.totalPlayersMax,
@@ -66,7 +65,7 @@ export class Servers {
 		if (serverName === foxEngine.page.selectPage.thisPage || foxEngine.page.selectPage.thisPage === undefined) {
             return;
         }
-        const pageTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'serverPage/serverPage.tpl');
+        const pageTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'serverPage/serverPage.tpl', true);
         try {
             // Fetch server information
             let server = await foxEngine.sendPostAndGetAnswer({
@@ -122,7 +121,7 @@ export class Servers {
         try {
             if (modsInfo && modsInfo.length > 0) {
                 // Load the template only once
-                const template = await foxEngine.loadTemplate(foxEngine.elementsDir + 'serverPage/serverMods.tpl');
+                const template = await foxEngine.loadTemplate(foxEngine.elementsDir + 'serverPage/serverMods.tpl', true);
 
                 // Use Promise.all to execute promises concurrently
                 const promises = modsInfo.map(async mod => {
@@ -139,9 +138,6 @@ export class Servers {
 
                 // Concatenate the results
                 return modsHtmlArray.join('');
-            } else {
-                console.error("Couldn't extract server modInfo.");
-                return ''; // or handle accordingly
             }
         } catch (error) {
             console.error('Error while loading mods:', error);

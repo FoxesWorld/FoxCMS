@@ -1,9 +1,11 @@
  <useroption> { 
 	"optionTitle": "Админ панель",
+	"description": "Панель управления FoxesCraft",
 	"optionBlock": "#usrMenu",
 	"optionPreText": "<i style='color: #d8e815' class='fa fa-bolt'></i>",
 	"optionGroup": 1, 
 	"optionClass": "dropdown-item",
+	"langPack": "adminPanel",
 	"type": "page" 
 	} 
 </useroption>
@@ -13,6 +15,7 @@
          <div class="main-panel">
              <div class="content-wrapper">
                  <div class="row" id="admOptions">
+				 <h3>%lang|adminOptions%</h3>
                  </div>
                  <div class="row">
                      <div class="col-md-12 grid-margin" id="adminContent"></div>
@@ -20,22 +23,20 @@
              </div>
          </div>
      </div>
-     <script>
+<script>
 (async function() {
-    const admOptions = ["settings", "users", "modules", "groupAssoc", "servers", "templateEditor", "pages"];
-    const blockTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'admin/panel.tpl');
+    const admOptions = ["settings", "users",  "servers"]; //"pages", "modules", "groupAssoc", "templateEditor"
+    const blockTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'admin/panel.tpl', false);
     admOptions.forEach(async (option, index) => {
         let panelBlock = await foxEngine.replaceTextInTemplate(blockTpl, {
             option: option
         });
-        $("#admOptions").append(panelBlock);
+        $("#admOptions").append(await foxEngine.entryReplacer.replaceText(panelBlock));
         
         if ((index + 1) % 2 === 0 || index === admOptions.length - 1) {
-            $("#admOptions").append('<div class="w-100"></div>');
+            //$("#admOptions").append('<div class="w-100"></div>');
         }
     });
-})();
-
-         
-     </script>
+})();    
+</script>
  </pageContent>
