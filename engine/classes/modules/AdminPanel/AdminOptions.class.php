@@ -27,6 +27,19 @@ if(!defined("ADMIN")){
 						die('{"message": "success", "type": "success"}');
 					break;
 					
+					case "editUserBalance":
+					$login = RequestHandler::$REQUEST['userLogin'];
+					$balance = RequestHandler::$REQUEST['balance'];
+					$data = $db->getValue("UPDATE `users` SET `balance`='".$balance."' WHERE `login` = '".$login."'");
+					if($data) {
+							$status ="success";
+						} else {
+							$status = "warn";
+						}
+						die('{"message": "success", "type": "success"}');
+					
+					break;
+					
 					case "showModules":
 						die(json_encode(init::$modulesArray));
 					break;
@@ -45,6 +58,10 @@ if(!defined("ADMIN")){
 							$badgesArr[] = $key['badgeName'];
 						}
 						die(json_encode($badgesArr));
+					break;
+					
+					case "loadUserBalance":
+						die($db->getValue("SELECT balance FROM users WHERE login = '".@RequestHandler::$REQUEST['userLogin']."'"));
 					break;
 					
 					case "getGameVersions":

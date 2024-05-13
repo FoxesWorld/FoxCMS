@@ -1,5 +1,5 @@
 <?php 
-    /* [11.05.2024] */
+    /* [12.05.2024] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -17,7 +17,7 @@ $config = array(
 		"keywords" => "FoxEngine,FoxCMS,FoxesWorld,AidenFox,Лисий Мир,Независимая студия,Независимая игровая студия,Over Fox,OverFox,мистер лис craft,fox craft browser game,foxcraft дэйз,фокс крафт айли,foxes craft,fox craft,foxcraft,Indie,GameDev Indie,Game,GameDev,лисиный мир,leks craft,fox craft minecraf,лиса сафт,лисьи огни сайт,craft fox,fox craft shri,foxy's craft gallery",
 		"contactEmail" => "no-reply@foxesworld.ru",
 		"contactPhone" => "null",
-		"ServiceVersion" => "2.5.19"
+		"ServiceVersion" => "2.5.20"
 ),
 
 	"launcherSettings" => array(
@@ -55,7 +55,7 @@ $config = array(
 		"webserviceName" => "FoxEngine",
 		"userOptions" => "userOptions",
 		"OptionReplaceValues" => "{siteKey}->cfgVal(securitySetings|reCaptchaWebsite),{discordLink}->cfgVal(other|discordLink),{vkLink}->cfgVal(other|vkLink),{TPL}->cfgVal(siteSettings|siteTpl),{lang}->cfgVal(siteSettings|lang)",
-		"userFieldsArray" => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,colorScheme,groupName,units,badges",
+		"userFieldsArray" => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,colorScheme,groupName,badges,balance",
 		"canEditGroup" => "1,4"
 ));
 

@@ -1,14 +1,9 @@
 				   <li class="nav-item dropdown">
-					  <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center userBlock" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					  <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center userBlock" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="foxEngine.user.refreshBalance(['units', 'crystals'])">
 						 <div class="avatar">
 							<img class="profilePic uk-animation-fade" src="{$profilePhoto}" alt="Profile Photo" /> {$login}
 						 </div>
-						 <!--
-						 <div class="d-none d-sm-block">
-							<img src="{$tplDir}/assets/icons/crystals.png" alt="Crystals Icon" uk-img />
-							<span id="realmoney-info-login" class="ms-2">{$units}</span>
-						 </div> 
-						 -->
+
 					  </a>
 					  <ul class="dropdown-menu fade dropdown-menu-popover p-2 dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink"  data-popper-placement="bottom" style="width: 340px">
 						<span class="arrow"></span>
@@ -25,10 +20,6 @@
 										<ul class="me-3">
 										   <li class="fw-medium d-block">{$login}</li>
 										   <li class="text-muted">{$groupName}</li>
-										   <li class="d-xl-none d-md-none d-sm-none">
-											  <img src="/templates/foxengine2/assets/icons/crystals.png" alt="Crystals Icon" style="height: 25px;">
-											  <span id="realmoney-info-login" class="ms-2">{$units}</span>
-										   </li>
 										</ul>
 									 </div>
 								  </div>
@@ -50,12 +41,12 @@
 							   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
 					<div class="filled-box p-1 text-center lh-sm">
 						<img src="{$tplDir}/assets/icons/units.png" alt="Units Icon" uk-img />
-						<b class="fs-5" data-element="moneyDisplay">{$units}</b><br>
+						<b class="fs-5" id="units" data-element="moneyDisplay">0</b><br />
 						<span class="text-muted">Юниты</span>
 					</div>
 					<div class="filled-box p-1 text-center lh-sm">
 						<img src="{$tplDir}/assets/icons/crystals.png" alt="Crystals Icon" uk-img />
-						<b class="fs-5" data-element="bonusDisplay">0</b><br>
+						<b class="fs-5" id="crystals" data-element="bonusDisplay">0</b><br />
 						<span class="text-muted">Кристалы</span>
 					</div>
 				</div>

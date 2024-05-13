@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-05-11 23:32:29
+/* Smarty version 4.0.4, created on 2024-05-13 11:17:46
   from '/var/www/FoxCMS/templates/foxengine2/userBlock.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_663fd5dd135ba2_78752584',
+  'unifunc' => 'content_6641ccaa1dae41_00883197',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ac09135447c54bb47aa7016157f4b1ad8af62813' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/userBlock.tpl',
-      1 => 1715459214,
+      1 => 1715538974,
       2 => 'file',
     ),
   ),
@@ -20,22 +20,15 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_663fd5dd135ba2_78752584 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6641ccaa1dae41_00883197 (Smarty_Internal_Template $_smarty_tpl) {
 ?>				   <li class="nav-item dropdown">
-					  <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center userBlock" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					  <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center userBlock" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="foxEngine.user.refreshBalance(['units', 'crystals'])">
 						 <div class="avatar">
 							<img class="profilePic uk-animation-fade" src="<?php echo $_smarty_tpl->tpl_vars['profilePhoto']->value;?>
 " alt="Profile Photo" /> <?php echo $_smarty_tpl->tpl_vars['login']->value;?>
 
 						 </div>
-						 <!--
-						 <div class="d-none d-sm-block">
-							<img src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
-/assets/icons/crystals.png" alt="Crystals Icon" uk-img />
-							<span id="realmoney-info-login" class="ms-2"><?php echo $_smarty_tpl->tpl_vars['units']->value;?>
-</span>
-						 </div> 
-						 -->
+
 					  </a>
 					  <ul class="dropdown-menu fade dropdown-menu-popover p-2 dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink"  data-popper-placement="bottom" style="width: 340px">
 						<span class="arrow"></span>
@@ -55,11 +48,6 @@ function content_663fd5dd135ba2_78752584 (Smarty_Internal_Template $_smarty_tpl)
 </li>
 										   <li class="text-muted"><?php echo $_smarty_tpl->tpl_vars['groupName']->value;?>
 </li>
-										   <li class="d-xl-none d-md-none d-sm-none">
-											  <img src="/templates/foxengine2/assets/icons/crystals.png" alt="Crystals Icon" style="height: 25px;">
-											  <span id="realmoney-info-login" class="ms-2"><?php echo $_smarty_tpl->tpl_vars['units']->value;?>
-</span>
-										   </li>
 										</ul>
 									 </div>
 								  </div>
@@ -84,14 +72,13 @@ function content_663fd5dd135ba2_78752584 (Smarty_Internal_Template $_smarty_tpl)
 					<div class="filled-box p-1 text-center lh-sm">
 						<img src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/icons/units.png" alt="Units Icon" uk-img />
-						<b class="fs-5" data-element="moneyDisplay"><?php echo $_smarty_tpl->tpl_vars['units']->value;?>
-</b><br>
+						<b class="fs-5" id="units" data-element="moneyDisplay">0</b><br />
 						<span class="text-muted">Юниты</span>
 					</div>
 					<div class="filled-box p-1 text-center lh-sm">
 						<img src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/icons/crystals.png" alt="Crystals Icon" uk-img />
-						<b class="fs-5" data-element="bonusDisplay">0</b><br>
+						<b class="fs-5" id="crystals" data-element="bonusDisplay">0</b><br />
 						<span class="text-muted">Кристалы</span>
 					</div>
 				</div>

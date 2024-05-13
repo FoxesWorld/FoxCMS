@@ -4,6 +4,7 @@
               <th scope="col">#</th>
               <th scope="col">ServerName</th>
 			  <th scope="col">Status</th>
+			  <th scope="col">ServerGroups</th>
               <th scope="col">Version</th>
               <th scope="col">Description</th>
               <th scope="col"></th>
