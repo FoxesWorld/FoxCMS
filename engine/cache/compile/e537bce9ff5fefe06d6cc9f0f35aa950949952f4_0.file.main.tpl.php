@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-05-13 11:17:46
+/* Smarty version 4.0.4, created on 2024-05-13 15:20:08
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6641ccaa1cc4e1_30720517',
+  'unifunc' => 'content_664205784eb6f9_81637863',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1715453743,
+      1 => 1715598179,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_6641ccaa1cc4e1_30720517 (Smarty_Internal_Template $_smarty_tpl) {
+function content_664205784eb6f9_81637863 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -143,7 +143,7 @@ contentData<?php echo '%>'; ?>
         <div id="cookie-body">
           <p>Наш сайт использует печеньки (и не только потому, что у нас есть Печеньки-Монстр). 
 		  Они необходимы для создания невероятного опыта в использовании сайта – будь то путешествие по страницам или открытие сундука с новыми идеями.</p>
-          <a onclick="foxEngine.page.loadPage('cookies', replaceData.contentBlock); return false;" href="#">Хочу знать больше...</a>
+          <a onclick="foxEngine.page.loadPage('cookies'); return false;" href="#">Хочу знать больше...</a>
           <div class="cookie-buttons">
             <button id="btn-cookie" type="submit">Соглашусь</button>
           </div>

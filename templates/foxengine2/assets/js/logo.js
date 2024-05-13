@@ -9,14 +9,14 @@ let logoCfg = {
 						translateY: [-100, 0],
 						opacity: [0, 1],
 						elasticity: 600,
-						duration: 1000
+						duration: 100
 					},
 					{
 						targets: '.logo .letter',
 						opacity: [0, 1],
 						translateY: [60, 0],
-						duration: 1000,
-						delay: (el, i) => 100 * i
+						duration: 500,
+						delay: (el, i) => 5 * i
 					},
 					{
 						targets: '.status .letterStatus',
@@ -31,7 +31,7 @@ let logoCfg = {
 						opacity: [0, 1],
 						translateY: [-60, 0],
 						elasticity: 500,
-						duration: 1000,
+						duration: 500,
 						delay: (el, i) => 2 * i
 					},
 					/*

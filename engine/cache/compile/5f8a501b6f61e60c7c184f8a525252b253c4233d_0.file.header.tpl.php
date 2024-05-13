@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-05-13 11:17:46
+/* Smarty version 4.0.4, created on 2024-05-13 15:20:08
   from '/var/www/FoxCMS/templates/foxengine2/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6641ccaa1d4791_65771033',
+  'unifunc' => 'content_664205784f3eb0_89318779',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5f8a501b6f61e60c7c184f8a525252b253c4233d' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/header.tpl',
-      1 => 1715452307,
+      1 => 1715598140,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:userBlock.tpl' => 1,
   ),
 ),false)) {
-function content_6641ccaa1d4791_65771033 (Smarty_Internal_Template $_smarty_tpl) {
+function content_664205784f3eb0_89318779 (Smarty_Internal_Template $_smarty_tpl) {
 ?>       <header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg bar">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <!-- Logo -->
@@ -65,10 +65,10 @@ function content_6641ccaa1d4791_65771033 (Smarty_Internal_Template $_smarty_tpl)
 ?>
 				   <?php } else { ?>
 				   <li class="d-flex align-items-center">
-					  <a href="#" class="pageLink-auth" onclick="foxEngine.page.loadPage('auth', replaceData.contentBlock); return false;"> <i class="fa fa-sign-in me-2"></i> Войти </a>
+					  <a href="#" class="pageLink-auth" onclick="foxEngine.page.loadPage('auth'); return false;"> <i class="fa fa-sign-in me-2"></i> Войти </a>
 				   </li>
 				   <li class="d-flex align-items-center">
-					  <a href="#" class="pageLink-reg" onclick="foxEngine.page.loadPage('reg', replaceData.contentBlock); return false;"> <i class="fa fa-user-plus me-2"></i> Создать аккаунт</a>
+					  <a href="#" class="pageLink-reg" onclick="foxEngine.page.loadPage('reg'); return false;"> <i class="fa fa-user-plus me-2"></i> Создать аккаунт</a>
 				   </li>
 				   <?php }?>
 				

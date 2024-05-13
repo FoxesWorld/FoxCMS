@@ -38,10 +38,10 @@
 						{include file='userBlock.tpl'}
 				   {else}
 				   <li class="d-flex align-items-center">
-					  <a href="#" class="pageLink-auth" onclick="foxEngine.page.loadPage('auth', replaceData.contentBlock); return false;"> <i class="fa fa-sign-in me-2"></i> Войти </a>
+					  <a href="#" class="pageLink-auth" onclick="foxEngine.page.loadPage('auth'); return false;"> <i class="fa fa-sign-in me-2"></i> Войти </a>
 				   </li>
 				   <li class="d-flex align-items-center">
-					  <a href="#" class="pageLink-reg" onclick="foxEngine.page.loadPage('reg', replaceData.contentBlock); return false;"> <i class="fa fa-user-plus me-2"></i> Создать аккаунт</a>
+					  <a href="#" class="pageLink-reg" onclick="foxEngine.page.loadPage('reg'); return false;"> <i class="fa fa-user-plus me-2"></i> Создать аккаунт</a>
 				   </li>
 				   {/if}
 				

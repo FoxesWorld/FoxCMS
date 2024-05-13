@@ -15,6 +15,7 @@ export class Page {
 		if (page === this.selectPage.thisPage || this.selectPage.thisPage === undefined) {
 			return;
 		}
+		block = block ? block : foxEngine.replaceData.contentBlock;
 
 		window.scrollTo({
 			top: 0,
@@ -23,38 +24,43 @@ export class Page {
 
 		const response = await this.foxEngine.sendPostAndGetAnswer({
 			"getOption": page
-		}, "HTML");
+		}, "TEXT");
+		
+		if(! this.foxEngine.utils.isJson(response)) {
+			let responseHTML = this.foxEngine.parseResponseHTML(response);
+			const option = this.foxEngine.utils.getData(responseHTML, 'useroption');
+			const content = this.foxEngine.utils.getData(responseHTML, 'pageContent');
 
-		const option = this.foxEngine.utils.getData(response, 'useroption');
-		const content = this.foxEngine.utils.getData(response, 'pageContent');
+			if (option !== undefined) {
+				const jsonOption = JSON.parse(option.textContent);
+				if(jsonOption.langPack !== undefined) {
+					this.langPack = await this.loadLangPack(jsonOption.langPack);
+				}
+				if (jsonOption.onLoad) {
+					const func = jsonOption.onLoad + (jsonOption.onLoadArgs ? `(${jsonOption.onLoadArgs})` : '');
 
-		if (option !== undefined) {
-			const jsonOption = JSON.parse(option.textContent);
-			if(jsonOption.langPack !== undefined) {
-				this.langPack = await this.loadLangPack(jsonOption.langPack);
+					setTimeout(() => {
+						eval(func);
+					}, 500);
+				}
+				
+				if (this.foxEngine.entryReplacer) {
+					await this.loadData(await this.foxEngine.entryReplacer.replaceText(responseHTML.body.innerHTML), block);
+					this.setPage(page);
+					location.hash = '#page/' + page;
+				} else {
+					console.error("Invalid or undefined foxEngine.entryReplacer.replaceText");
+				}
+				let thisTag;
+				for(let j = 0; j < this.metaTags.length; j++){
+					thisTag = this.metaTags.at(j);
+					this.updateMetaTags(jsonOption[thisTag], thisTag);
+				}
 			}
-			if (jsonOption.onLoad) {
-				const func = jsonOption.onLoad + (jsonOption.onLoadArgs ? `(${jsonOption.onLoadArgs})` : '');
-
-				setTimeout(() => {
-					eval(func);
-				}, 500);
-			}
-			
-			if (this.foxEngine.entryReplacer) {
-				await this.loadData(await this.foxEngine.entryReplacer.replaceText(response.body.innerHTML), block);
-				this.setPage(page);
-				location.hash = '#page/' + page;
-			} else {
-				console.error("Invalid or undefined foxEngine.entryReplacer.replaceText");
-			}
-			let thisTag;
-			for(let j = 0; j < this.metaTags.length; j++){
-				thisTag = this.metaTags.at(j);
-				this.updateMetaTags(jsonOption[thisTag], thisTag);
-			}
+			$("#content > div > div.page-content > useroption").remove();
+		} else {
+			await this.foxEngine.utils.showErrorPage(response, block);
 		}
-		$(response).find('useroption').remove();
 	}
 	
 	   async getPage(page) {

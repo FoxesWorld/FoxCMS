@@ -28,6 +28,25 @@ getFormattedDate(unix) {
 }
 
 
+	isJson(str) {
+		try {
+			JSON.parse(str);
+			return true;
+		} catch (e) {
+			return false;
+		}
+	}
+	
+	async showErrorPage(response, block){
+		let responseJSON = JSON.parse(response);
+		const erorPage = await foxEngine.loadTemplate(this.foxEngine.elementsDir + 'pageError.tpl', true);
+        let erorHTML = await this.foxEngine.replaceTextInTemplate(erorPage, {
+			login: this.foxEngine.replaceData.login,
+			text: responseJSON.error,
+			title: ""
+        });
+		await this.foxEngine.page.loadData(await this.foxEngine.entryReplacer.replaceText(erorHTML), block);
+	}
 
 
     textAnimate(target) {

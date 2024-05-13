@@ -140,54 +140,6 @@ async refreshBalance(currencies) {
     }
 }
 
-
-	
-	/*
-	foxEngine.request.send_post({
-            user_doaction: "getUnits"
-        });
-	refreshBalance() {
-        console.log('Parsing user balance');
-		$.post('/', {data: "updatebalance"}, function (data) {
-			data = JSON.parse(data);
-			var oldmoney = Math.round(parseFloat($("#econs").text()));
-			var oldrealmoney = Math.round(parseFloat($("#realmoney").text()));
-			var oldbonuses = Math.round(parseFloat($("#bonuses").text()));
-
-			var newmoney = Math.round(parseFloat(data['money']));
-			var newrealmoney = Math.round(parseFloat(data['realmoney']));
-			var newbonuses = Math.round(parseFloat(data['bonuses']));
-		
-		$(function () {
-				if (oldrealmoney !== newrealmoney) {
-					$({
-						n: oldrealmoney
-					}).animate({
-						n: newrealmoney
-					}, {
-						duration: 1500,
-						step: function (a) {
-							$("#realmoney").html(a | 0)
-						}
-					})
-				}
-				
-				if (oldmoney !== newmoney) {
-					$({
-						n: oldmoney
-					}).animate({
-						n: newmoney
-					}, {
-						duration: 2500,
-						step: function (a) {
-							$("#money").html(a | 0)
-						}
-					})
-				}
-		});
-	});
-} */
-
     async getBadgesArray(user) {
         let badgesArray = await foxEngine.sendPostAndGetAnswer({
             user_doaction: 'GetBadges',
@@ -243,8 +195,13 @@ async refreshBalance(currencies) {
             "userDisplay": user,
             "user_doaction": "ViewProfile"
         }, "TEXT");
+		if(!foxEngine.utils.isJson(userProfile)) {
+			return userProfile;
+		} else {
+			this.foxEngine.utils.showErrorPage(userProfile, this.foxEngine.replaceData.contentBlock);
+		}
 		
-		return userProfile;
+		
 	}
 	
 	async logout(button) {

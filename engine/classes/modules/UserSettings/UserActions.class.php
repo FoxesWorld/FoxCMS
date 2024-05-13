@@ -13,7 +13,7 @@ if(!defined('profile')) {
 		private $fRequest;
 		
 		function __construct($db = '', $logger = '', $request = ''){
-			global $config;
+			global $config, $lang;
 				$this->db = $db;
 				$this->logger = $logger;
 				$userAction = @$request[$this->userActionReq];
@@ -62,7 +62,7 @@ if(!defined('profile')) {
 										$this->logger
 									);
 								} else {
-									die('User not found!!!');
+									exit('{"error":"'.str_replace('{replace}', @$request['userDisplay'], $lang['userNotFound']).'"}');
 								}
 							break;
 								

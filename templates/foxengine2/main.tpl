@@ -85,7 +85,7 @@
         <div id="cookie-body">
           <p>Наш сайт использует печеньки (и не только потому, что у нас есть Печеньки-Монстр). 
 		  Они необходимы для создания невероятного опыта в использовании сайта – будь то путешествие по страницам или открытие сундука с новыми идеями.</p>
-          <a onclick="foxEngine.page.loadPage('cookies', replaceData.contentBlock); return false;" href="#">Хочу знать больше...</a>
+          <a onclick="foxEngine.page.loadPage('cookies'); return false;" href="#">Хочу знать больше...</a>
           <div class="cookie-buttons">
             <button id="btn-cookie" type="submit">Соглашусь</button>
           </div>

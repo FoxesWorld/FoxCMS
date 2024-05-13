@@ -22,7 +22,7 @@
 	<hr>
 		
 	Все готовы к приключениям? :finley:
-	<button class="login" onclick="foxEngine.page.loadPage('startGame', replaceData.contentBlock); return false;">В путь!</button>
+	<button class="login" onclick="foxEngine.page.loadPage('startGame'); return false;">В путь!</button>
 
 </div>
 </pageContent>

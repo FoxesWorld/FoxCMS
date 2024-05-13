@@ -180,6 +180,8 @@
 		"launcherSettingsTab" => '<i class="fa-thin fa-screwdriver-wrench"></i> Настройки Лаунчера',
 		"securitySetingsTab" => '<i class="fa fa-shield"></i> Безопасность',
 		"otherTab" => '<i class="fa fa-archive"></i> Другое',
+		"configChanged" => "Конфигурация изменена",
 		
-		"configChanged" => "Конфигурация изменена"
+		"userNotFound" => 'Пользователь <strong>{replace}</strong> не найден!',
+		"optionInvalid" => 'Опция - <strong>{replace}</strong> не найдена или у вас просто нет прав её находить  :form:'
 	);

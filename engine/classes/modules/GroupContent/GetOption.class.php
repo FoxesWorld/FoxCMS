@@ -28,6 +28,7 @@ class GetOption extends UserOptions {
     }
 	
 	public static function getPageContent($pageObject, $filePath){
+		global $lang;
 		 if (@in_array($pageObject, self::$userOptions["optionNames"])) {
 				$optionJson = UserOptions::getOptionData($pageObject);
                 $optionSettings = json_decode($optionJson, true);
@@ -45,7 +46,7 @@ class GetOption extends UserOptions {
 				return $pageTemplate;
 
             } else {
-                die('{"message": "No access for option  `'.$pageObject.'`"}');
+                die('{"error": "'.str_replace('{replace}', $pageObject ,$lang['optionInvalid']).'"}');
             }
 	}
 	

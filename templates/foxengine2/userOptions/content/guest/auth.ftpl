@@ -22,7 +22,7 @@
                      </script>
                      <input name="userAction" type="hidden" value="auth" />
                  </form>
-                 <a href="#" onclick="foxEngine.page.loadPage('reg', replaceData.contentBlock); return false;">Нет аккаунта?</a>
+                 <a href="#" onclick="foxEngine.page.loadPage('reg'); return false;">Нет аккаунта?</a>
              </div>
          </div>
      </div>

@@ -73,9 +73,11 @@
 				
 				<input name="refreshPage" type="hidden" value="false" />
 				<input name="playSound" type="hidden" value="false" />
-				<button type="submit" class="btn bg-teal btn-sm btn-raised position-left legitRipple">
-					<i class="fa fa-floppy-o position-left"></i>Сохранить
-				</button>
+				<div class="buttonGroup">
+					<button type="submit" class="btn bg-teal btn-sm btn-raised position-left legitRipple">
+						<i class="fa-light fa-floppy-disk-pen"></i> &nbsp;Сохранить
+					</button>
+				</div>
 				</div>
 				</form>
 				
