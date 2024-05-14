@@ -14,7 +14,7 @@ session_start();
 		
 		private $initHelper, $ModulesLoader, $initLevels;
 		protected $debug, $logger, $db, $tpl;
-		protected static $deviceType, $permissions, $dynamicConfig, $usrArray = array(
+		protected static $deviceType, $permissions, $dynamicConfig, $sqlQueryHandler, $usrArray = array(
 			'isLogged' => false,
 			'user_id' => 0,
 			'email' => "admin@foxesworld.ru",
@@ -54,6 +54,7 @@ session_start();
 			self::libFilesInclude(SYSLIB_DIR, $this->debug); //Require classes/Syslib
 			self::requireNestedClasses(basename(__FILE__), __DIR__); //Requiring nested classes from self directory
 			$this->db = new db($config['database']['dbUser'], $config['database']['dbPass'], $config['database']['dbName'], $config['database']['dbHost']);
+			self::$sqlQueryHandler = new SafeSQLHandler($this->db);
 			$this->logger = new Logger('lastlog');
 			$this->ModulesLoader = new ModulesLoader($this->db, $this->logger);
 			$this->initHelper = new initHelper($this->db, $this->logger); //UsrArray Override (if IsLogged)

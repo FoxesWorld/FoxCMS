@@ -18,25 +18,15 @@ if(!defined("ADMIN")){
 					case "editUserBadges":
 					$login = RequestHandler::$REQUEST['userLogin'];
 					$badges = RequestHandler::$REQUEST['badges'];
-					$data = $db->getValue("UPDATE `users` SET `badges`='".$badges."' WHERE `login` = '".$login."'");
-					if($data) {
-							$status ="success";
-						} else {
-							$status = "warn";
-						}
-						die('{"message": "success", "type": "success"}');
+					$data = init::$sqlQueryHandler->updateData('users', array('badges' => $badges), 'login', $login);
+					die($data);
 					break;
 					
 					case "editUserBalance":
 					$login = RequestHandler::$REQUEST['userLogin'];
 					$balance = RequestHandler::$REQUEST['balance'];
-					$data = $db->getValue("UPDATE `users` SET `balance`='".$balance."' WHERE `login` = '".$login."'");
-					if($data) {
-							$status ="success";
-						} else {
-							$status = "warn";
-						}
-						die('{"message": "success", "type": "success"}');
+					$data = init::$sqlQueryHandler->updateData('users', array('balance' => $balance), 'login', $login);
+					die($data);
 					
 					break;
 					

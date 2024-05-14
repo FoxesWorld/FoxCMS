@@ -31,7 +31,7 @@
 		
 		private function updateUserOnline($db, $usrArray){
 			if($usrArray['isLogged']) {
-				$db->query("UPDATE `users` SET last_date='".CURRENT_TIME."' WHERE login = '".$usrArray['login']."'");
+				init::$sqlQueryHandler->updateData('users', array('last_date' => CURRENT_TIME), 'login', $usrArray['login']);
 			}
 		}
 		

@@ -41,12 +41,16 @@ if(!defined('auth')) {
 			$antiBrute = new antiBrute(REMOTE_IP, $this->db, false);
 			if(authorize::passVerify($this->inputPassword, $this->realPassword)) {
 				//$this->setLoginHash($this->inputLogin);
-				$this->authQueries($this->inputLogin);
-				$this->setUserdata($this->authData['login']);
-				$this->setTokenIfNeeded($this->rememberMe, $this->inputLogin);
-				$this->logger->WriteLine($this->inputLogin." successfuly authorised");
-				$antiBrute->clearIp(REMOTE_IP);
-				$status = true;
+				$authQuery = $this->authQueries($this->inputLogin);
+				if($authQuery->type === "success") {
+					$this->setUserdata($this->authData['login']);
+					$this->setTokenIfNeeded($this->rememberMe, $this->inputLogin);
+					$this->logger->WriteLine($this->inputLogin." successfuly authorised");
+					$antiBrute->clearIp(REMOTE_IP);
+					$status = true;
+				} else {
+					die($authQuery);
+				}
 			} else {
 				$this->logger->WriteLine($this->authData['login']." failed authorisation with password ".$this->inputPassword);
 				$antiBrute->failedAuth(REMOTE_IP);
@@ -56,13 +60,8 @@ if(!defined('auth')) {
 		}
 		
 		private function authQueries($login) {
-			$queryArray = array(
-			"lastDate" => "UPDATE `users` SET last_date='".CURRENT_TIME."' WHERE login = '".$login."'",
-			"loginHash" =>"UPDATE `users` SET hash='".authorize::generateLoginHash($login, 16)."' WHERE login = '".$login."'",
-			"loggedIp" => "UPDATE `users` SET logged_ip='".REMOTE_IP."'  WHERE login = '".$login."'");
-			foreach($queryArray as $key => $value){
-				$this->db->query($value);
-			}
+			$response = init::$sqlQueryHandler->updateData('users', array('last_date' => CURRENT_TIME, 'hash' => authorize::generateLoginHash($login, 16), 'logged_ip' => REMOTE_IP), 'login', $login);
+			return json_decode($response);
 		}
 		
 
@@ -80,15 +79,14 @@ if(!defined('auth')) {
 			switch($checkbox) {
 				case 1:
 				case true:
-					$query = "UPDATE `users` SET token='".$token."' WHERE login = '".$login."'";
 					setcookie(AuthManager::$userToken, $token, time() + (1000 * 60 * 60 * 24 * 30));
 				break;
 				
 				default:
-					$query = "UPDATE `users` SET token='' WHERE login = '".$login."'";
+					$token ="";
 					setcookie(AuthManager::$userToken, "", time() - 3600);
 				break;
 			}
-			$this->db->query($query);
+			init::$sqlQueryHandler->updateData('users', array('token' => $token), 'login', $login);
 		}
 	}
