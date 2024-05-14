@@ -96,6 +96,108 @@
                      </div>
                   </div>
                </div>
+			   
+			   <style>
+			   .cape-blur[data-v-446af5dc] {
+    -webkit-transform: scale(4);
+    transform: scale(4);
+    -webkit-filter: blur(10px);
+    filter: blur(10px);
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    position: absolute;
+    opacity: .6;
+    -webkit-transition: .35s;
+    transition: .35s
+}
+
+.opa-you-skin-not-skin[data-v-446af5dc] {
+    background: rgba(0,0,0,.28);
+    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.15);
+    box-shadow: 0 5px 15px rgba(0,0,0,.15);
+    padding: 5px 8px;
+    border-radius: 2px;
+    opacity: .85;
+    position: absolute;
+    display: block;
+    right: 0;
+    margin: 4px;
+    z-index: 999;
+    cursor: pointer;
+    -webkit-transition: .2s;
+    transition: .2s;
+    color: wheat;
+    margin-top: 372px;
+    width: 142px
+}
+
+.opa-you-skin-not-skin[data-v-446af5dc]:hover {
+    background: rgba(0,0,0,.78);
+    opacity: 1
+}
+
+.cloack-user[data-v-446af5dc] {
+    display: none;
+    width: 100%;
+    height: 406px
+}
+
+.bg-skin-cloak[data-v-446af5dc] {
+    position: relative;
+    text-align: center;
+    background: rgba(0,0,0,.26);
+    display: table;
+    margin-right: 20px;
+    width: 314px;
+    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.16);
+    box-shadow: 0 5px 15px rgba(0,0,0,.16);
+    margin-bottom: 5px
+}
+
+#senpaiskin[data-v-446af5dc] {
+    position: relative;
+    overflow: hidden;
+    cursor: -webkit-grab;
+    width: 314px
+}
+</style>
+			   
+			   <script>
+(async function () {
+    let skin = senpai_IAM_NOT_KYSY();
+    var img = new Image();
+    img.src = "/uploads/users/[login]/skin.png";
+    img.onload = function () {
+        skin.changeSkin(img);
+    };
+    img.onerror = function () {
+        var defaultSkin = new Image();
+        defaultSkin.src = "/uploads/users/skin.png";
+        defaultSkin.onload = function () {
+            skin.changeSkin(defaultSkin);
+        };
+    };
+})();
+
+
+				</script>
+<div data-v-446af5dc="" class="bg-skin-cloak">
+    <div data-v-446af5dc="" class="opa-you-skin-not-skin noselect">
+        <div data-v-446af5dc="">
+            Показать плащ
+        </div>
+    </div>
+    <div data-v-446af5dc="" id="senpaiskin">
+        <div data-v-446af5dc="" style="background: url(&quot;https://loliland.ru/api/raw/skin/AidenFox&quot;) center center / cover;"></div>
+        <canvas width="240" height="300"></canvas>
+    </div>
+    <div data-v-446af5dc="" class="cloack-user" style="display: none; position: relative; overflow: hidden;">
+        <div data-v-446af5dc="" class="cape-blur" style="background: url('https://loliland.ru/api/raw/skin/AidenFox') center center / cover;"></div>
+        <img data-v-446af5dc="" src="https://loliland.ru/api/cape/AidenFox" style="height: 60%; margin-top: 20%; position: inherit; box-shadow: rgba(0, 0, 0, 0.46) 0px 5px 17px;">
+    </div>
+</div>
+
             </div>
             <div class="tab_content">
                <h2 id="modalTitle">%lang|securityTitle%</h2>
@@ -168,31 +270,31 @@
             <div class="basecont" style="opacity: 0.8;">
                <table class="userinfo" style="width: 100%">
                   <tr class="statsTabbleItem">
-                     <td class="pageItemTitle">%lang|fullName%</td>
+                     <td class="pageItemTitle"> <i class="fa-thin fa-address-card"></i> %lang|fullName%</td>
                      <td class="pageItemValue">
                         <span style="color: #f1864e;">[realname]</span>
                      </td>
                   </tr>
                   <tr class="statsTabbleItem">
-                     <td class="pageItemTitle">%lang|userGroup%</td>
+                     <td class="pageItemTitle"><i class="fa-thin fa-user-group"></i> %lang|userGroup%</td>
                      <td class="pageItemValue">
                         <span style="color: #c25f73 !important;">[groupName]</span>
                      </td>
             </div>
             <tr class="statsTabbleItem">
-            <td class="pageItemTitle">%lang|online%</td>
+            <td class="pageItemTitle"><i class="fa-thin fa-right-to-bracket"></i> %lang|online%</td>
             <td class="pageItemValue">
             <span style="color: #f1864e;">[last_date]</span>
             </td>
             </tr>
             <tr class="statsTabbleItem">
-            <td class="pageItemTitle">%lang|timeToProject%</td>
+            <td class="pageItemTitle"><i class="fa-thin fa-calendar-days"></i> %lang|timeToProject%</td>
             <td class="pageItemValue">
             <span style="color: #f1864e;">[reg_date]</span>
             </td>
             </tr>
             <tr class="statsTabbleItem">
-            <td class="pageItemTitle">%lang|land%</td>
+            <td class="pageItemTitle"> <i class="fa-thin fa-location-dot"></i> %lang|land%</td>
             <td class="pageItemValue">[land]</td>
             </tr> 
             [hasPriviligies]
@@ -206,15 +308,15 @@
                	
             </script>
             <tr class="statsTabbleItem">
-            <td class="pageItemTitle">%lang|email%</td>
+            <td class="pageItemTitle"> <i class="fa-thin fa-envelope"></i> %lang|email%</td>
             <td class="pageItemValue">[email]</td>
             </tr>
             <tr class="statsTabbleItem">
-            <td class="pageItemTitle">%lang|units%</td>
+            <td class="pageItemTitle"> <img src="/templates/foxengine2/assets/icons/units.png" alt="Units Icon" style="height: 24px;width: 24px;" uk-img /> %lang|units%</td>
             <td class="pageItemValue">100</td>
             </tr> 
             <tr class="statsTabbleItem">
-            <td class="pageItemTitle">%lang|crystals%</td>
+            <td class="pageItemTitle"> <img src="/templates/foxengine2/assets/icons/crystals.png" alt="Crystals Icon"  style="height: 24px;width: 24px;" uk-img /> %lang|crystals%</td>
             <td class="pageItemValue">0</td>
             </tr> 
             [/hasPriviligies] 

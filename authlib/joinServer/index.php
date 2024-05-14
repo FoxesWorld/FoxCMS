@@ -1,80 +1,56 @@
 <?php
 
-/*
-=====================================================
- Have you joined or not? - joinServer | AuthLib
------------------------------------------------------
- https://arcjetsystems.ru/
------------------------------------------------------
- Copyright (c) 2016-2020  FoxesWorld
------------------------------------------------------
- Данный код защищен авторскими правами
------------------------------------------------------
- Файл: joinServer.php
------------------------------------------------------
- Версия: 1.0.7 Stable Alpha
------------------------------------------------------
- Назначение: Проверка присоединения к серверу
-=====================================================
-*/
+include_once("../database.php");
+include_once("../config.php");
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && stripos($_SERVER["CONTENT_TYPE"], "application/json") === 0) {
-    require('../config.php');
-    include('../database.php');
-    $joinServer = new JoinServer(json_decode(file_get_contents('php://input'), true));
-}
+@$user = json_decode(file_get_contents('php://input'));
+if (isset($user[0])) {
+    try {
+        $db = new db($config['db_user'], $config['db_pass'], $config['db_database']);
+        $stmt = $db->prepare("SELECT user FROM usersession WHERE userMd5= :user");
+        $stmt->bindValue(':user', $user[0]);
+        $stmt->execute();
+        $realUser = $stmt->fetchColumn();
 
-class JoinServer
-{
-
-    private $bad = ['error' => "Bad login", 'errorMessage' => "Bad login"];
-    private $selectData = ["accessToken", "selectedProfile", "serverId"];
-    private $sessData = [];
-    private $db;
-
-    public function __construct($json)
-    {
-        global $config;
-
-        try {
-            if (isset($json)) {
-                $this->db = new db($config['db_user'], $config['db_pass'], $config['db_database']);
-                foreach ($json as $key => $value) {
-                    if (!isset($json[$key]) || !preg_match("/^[a-zA-Z0-9_-]+$/", $json[$key])) {
-                        $this->db->jsonError('IllegalArgumentException', 'Invalid ' . $key);
-                    } else {
-                        $this->sessData[$key] = $value;
-                    }
-                }
-            }
-
-            $stmt = $this->db->prepare("SELECT userMd5,user FROM usersession WHERE userMd5 = :userMd5 AND accessToken = :accessToken");
-            $stmt->bindValue(':userMd5', $this->sessData['selectedProfile']);
-            $stmt->bindValue(':accessToken', $this->sessData['accessToken']);
-
-            $stmt->execute();
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $realmd5  = $row['userMd5'];
-            $realUser = $row['user'];
-
-            if ($realmd5 === $this->sessData['selectedProfile']) {
-                $stmt = $this->db->prepare("UPDATE usersession SET serverId = :serverId WHERE userMd5 = :userMd5 AND accessToken = :accessToken");
-                $stmt->bindValue(':userMd5', $this->sessData['selectedProfile']);
-                $stmt->bindValue(':accessToken', $this->sessData['accessToken']);
-                $stmt->bindValue(':serverId', $this->sessData['serverId']);
-                $stmt->execute();
-
-                if ($stmt->rowCount() === 1) {
-                    die(json_encode(['id' => $realmd5, 'name' => $realUser]));
-                } else {
-                    exit(json_encode($this->bad));
-                }
-            } else {
-                exit(json_encode($this->bad));
-            }
-        } catch (PDOException $pe) {
-            $query = strval($pe->queryString);
-            die(display_error($pe->getMessage(), $pe, $query));
+        if ($realUser !== false) {
+            $uuid = str_replace('-', '', uuidConvert($realUser));
+            $result = json_encode([['id' => $uuid, 'name' => $realUser]]);
+            die($result);
         }
+    } catch (PDOException $pe) {
+		error_log('Error fetching user data: ' . $pe->getMessage());
     }
 }
+
+function uuidFromString($string) {
+    $val = md5($string, true);
+    $byte = array_values(unpack('C16', $val));
+ 
+    $tLo = ($byte[0] << 24) | ($byte[1] << 16) | ($byte[2] << 8) | $byte[3];
+    $tMi = ($byte[4] << 8) | $byte[5];
+    $tHi = ($byte[6] << 8) | $byte[7];
+    $csLo = $byte[9];
+    $csHi = $byte[8] & 0x3f | (0x80);
+
+    if (pack('L', 0x6162797A) == pack('N', 0x6162797A)) {
+        $tLo = (($tLo & 0x000000ff) << 24) | (($tLo & 0x0000ff00) << 8) | (($tLo & 0x00ff0000) >> 8) | (($tLo & 0xff000000) >> 24);
+        $tMi = (($tMi & 0x00ff) << 8) | (($tMi & 0xff00) >> 8);
+        $tHi = (($tHi & 0x00ff) << 8) | (($tHi & 0xff00) >> 8);
+    }
+ 
+    $tHi &= 0x0fff;
+    $tHi |= (3 << 12);
+   
+    $uuid = sprintf(
+        '%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x',
+        $tLo, $tMi, $tHi, $csHi, $csLo,
+        $byte[10], $byte[11], $byte[12], $byte[13], $byte[14], $byte[15]
+    );
+    return $uuid;
+}
+
+function uuidConvert($string) {
+    $string = uuidFromString("OfflinePlayer:".$string);
+    return $string;
+}
+?>
