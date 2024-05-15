@@ -53,6 +53,7 @@ export class Page {
             $("#content > div > div.page-content > useroption").remove();
         } else {
             await this.foxEngine.utils.showErrorPage(response, block);
+			this.setPage("");
         }
     }
 

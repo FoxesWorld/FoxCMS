@@ -1,11 +1,8 @@
-// Import FoxEngine
-import { FoxEngine } from '/plugins/FoxEngine-2.0/js/FoxEngine.js';
+import { FoxEngine } from '/plugins/FoxEngine-2.1/js/FoxEngine.js';
 
-// Create foxEngine instance
 const foxEngine = new FoxEngine(replaceData, userFields);
 window.foxEngine = foxEngine;
 
-// Create Vue App
 const App = new Vue({
     delimiters: ["<%", "%>"],
     el: '#content',
@@ -15,9 +12,9 @@ const App = new Vue({
 
     mounted() {
         foxEngine.user.parseUsrOptionsMenu();
-        setTimeout(() => {
-            foxEngine.user.userAction("greeting");
-        }, 2000);
+        //setTimeout(() => {
+        //    foxEngine.user.userAction("greeting");
+        //}, 2000);
     },
 
     created() {
@@ -35,7 +32,6 @@ const App = new Vue({
             }
         });
         setTimeout(() => {
-            
 			foxEngine.logo.logoAnimation();
             foxEngine.servers.parseOnline();
         }, 500);
@@ -50,31 +46,54 @@ setInterval(() => {
 
 // Handle hash change
 (function () {
-    if (location.hash.substring(1) !== undefined) {
-        let linkTypes = [
-            {"keyWord": "user", "action": "showUserProfile", "module": "user." },
-			{"keyWord": "server", "action": "loadServerPage", "module": "servers."},
-            {"keyWord": "page", "action": "loadPage", "module":"page."}
-        ];
-        for (let k = 0; k < linkTypes.length; k++) {
-            console.log("Adding listener to " + linkTypes[k].keyWord);
-			if(location.hash !== "") {
-				if ((location.hash + '').indexOf(linkTypes[k].keyWord, (0)) > 0) {
-					let replaceValue = location.hash.split('#' + linkTypes[k].keyWord + '/')[1];
-					let runFunc = linkTypes[k].action;
-					eval(`foxEngine.${linkTypes[k].module}${runFunc}("${replaceValue}", "${replaceData.contentBlock}")`);
-				}
-			} else {
-				unhash();
-			}
+    function handleHashChange() {
+        const hash = location.hash.substring(1);
+        console.log("Current hash: ", hash);
+
+        if (hash) {
+            const linkTypes = [
+                { keyWord: "user", action: "showUserProfile", module: "user." },
+                { keyWord: "server", action: "loadServerPage", module: "servers." },
+                { keyWord: "page", action: "loadPage", module: "page." }
+            ];
+
+            for (const linkType of linkTypes) {
+                //console.log("Checking linkType: ", linkType.keyWord);
+
+                if (hash.startsWith(linkType.keyWord + '/')) {
+                    const replaceValue = hash.split(linkType.keyWord + '/')[1];
+                    const moduleFunc = `foxEngine.${linkType.module}${linkType.action}`;
+
+                    console.log(`Executing action: ${linkType.action} from module: ${linkType.module} with value: ${replaceValue}`);
+
+                    if (typeof foxEngine !== 'undefined' && typeof foxEngine[linkType.module.slice(0, -1)][linkType.action] === 'function') {
+                        foxEngine[linkType.module.slice(0, -1)][linkType.action](replaceValue, replaceData.contentBlock);
+
+                        if (typeof foxEngine.onUrlChange === 'function') {
+                            foxEngine.onUrlChange(replaceValue);
+                        }
+                    } else {
+                        console.error(`Method not found: ${moduleFunc}`);
+                    }
+                    return;
+                }
+            }
+            console.log("No matching linkType found for hash: ", hash);
+        } else {
+            console.log("Hash is empty, calling unhash()");
+            unhash();
         }
     }
+
+    function unhash() {
+        const currentURLWithoutHash = window.location.href.split('#')[0];
+        window.history.replaceState({}, document.title, currentURLWithoutHash);
+    }
+
+    window.addEventListener('hashchange', handleHashChange);
+    handleHashChange();
 }());
 
-function unhash() {
-    let currentURLWithoutHash = window.location.href.split('#')[0];
-    window.history.replaceState({}, document.title, currentURLWithoutHash);
-}
 
 // Export Vue App
 export { App, foxEngine };

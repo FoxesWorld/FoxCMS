@@ -74,14 +74,14 @@ async parseUsers(input = '*') {
             }
 
             //Action listeners
-            $('.showProfile').click((event) => {
-                const login = $(event.target).data('login');
+			$('#usersList').on('click', '.showProfile', async (event) => {
+				const login = $(event.currentTarget).data('login');
 				if (login) {
-                foxEngine.user.showProfilePopup(login);
+					foxEngine.user.showProfilePopup(login);
 				} else {
 					console.error('Login is undefined');
 				}
-            });
+			});
 
 			$('#usersList').on('click', '.loadUserBadges', async (event) => {
 				const login = $(event.currentTarget).data('login');

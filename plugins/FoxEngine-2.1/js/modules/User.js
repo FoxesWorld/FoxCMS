@@ -83,33 +83,41 @@ export class User {
         }
     }
 
-    async parseBadges(user) {
-        try {
-            const badgeTemplate = await this.foxEngine.loadTemplate(`${this.foxEngine.elementsDir}badge.tpl`, true);
-            const parsedJson = await this.getBadgesArray(user);
-
-            if (parsedJson.length > 0) {
-                for (const obj of parsedJson) {
-                    const badgeHtml = await this.foxEngine.replaceTextInTemplate(badgeTemplate, {
-                        BadgeDesc: obj.description,
-                        AcquiredDateFormatted: this.foxEngine.utils.getFormattedDate(obj.acquiredDate),
-                        BadgeName: obj.badgeName,
-                        BadgeImg: obj.badgeImg
-                    });
-
-                    $("#userBadges").append(badgeHtml);
-                    $('[data-toggle="tooltip"]').tooltip({
-                        placement: 'bottom',
-                        trigger: "hover"
-                    });
-                }
-            } else {
-                $("#userBadges").remove();
-            }
-        } catch (error) {
-            console.error('Error parsing badges:', error);
+async parseBadges(user) {
+    try {
+        const badgeWindow = $("#userBadges");
+        if (badgeWindow.children().length > 0) {
+            console.log("Badges already loaded for this user.");
+            return;
         }
+
+        const badgeTemplate = await this.foxEngine.loadTemplate(`${this.foxEngine.elementsDir}badge.tpl`, true);
+        const parsedJson = await this.getBadgesArray(user);
+
+        if (parsedJson.length > 0) {
+            for (const obj of parsedJson) {
+                const badgeHtml = await this.foxEngine.replaceTextInTemplate(badgeTemplate, {
+                    BadgeDesc: obj.description,
+                    AcquiredDateFormatted: this.foxEngine.utils.getFormattedDate(obj.acquiredDate),
+                    BadgeName: obj.badgeName,
+                    BadgeImg: obj.badgeImg
+                });
+
+                badgeWindow.append(badgeHtml);
+                $('[data-toggle="tooltip"]').tooltip({
+                    placement: 'bottom',
+                    trigger: "hover"
+                });
+            }
+        } else {
+            badgeWindow.remove();
+        }
+    } catch (error) {
+        console.error('Error parsing badges:', error);
     }
+}
+
+
 
     async refreshBalance(currencies) {
         try {

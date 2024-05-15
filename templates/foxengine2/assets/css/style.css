@@ -398,22 +398,61 @@ ul.list-inline {
 	border-bottom: 2px solid #e8d3d0;
 }
 
-.pageRoot .page-title {
-	/* background: var(--theme-color-primary); */
-	border-radius: 5px 5px 0px 0px;
+.page-title-wrap {
+    align-items: center;
+    /* background: url(../icons/svg/dot.svg) repeat-x 100% 50%; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15px
 }
 
-.pageRoot .page-title img {
-	max-width: 64px;
+.page-title-wrap>.left-part,.page-title-wrap>.right-part {
+    background: var(--page-bg)
 }
 
-.pageRoot .page-title h1 {
-	padding: 10px;
-	font-family: 'FSElliotPro-Heavy';
-	border-bottom: 1px solid;
-	margin: 0;
-	font-size: 2vh;
+.page-title-wrap>.left-part {
+    margin: 10px 0px 0px 10px;
 }
+
+.page-title-wrap>.right-part {
+    padding-left: 5px
+}
+
+.page-title-wrap .page-title {
+    display: inline-block;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    padding: 0
+}
+
+.page-title-wrap .page-title a {
+    color: inherit
+}
+
+.page-title-wrap .page-title .crumb-sep {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0 2px;
+    vertical-align: middle
+}
+
+.page-title-wrap .page-title .crumb-sep:after {
+    color: #0a7caa;
+    content: "\f054";
+    font-family: Font Awesome\ 6 Pro
+}
+
+.page-title-wrap .page-title-icon {
+    color: #0a7caa;
+    display: inline-block;
+    font-size: 32px;
+    margin-right: 5px;
+    vertical-align: -2px
+}
+
 
 .pageRoot .page-title i {
 	color: var(--secondary-color);

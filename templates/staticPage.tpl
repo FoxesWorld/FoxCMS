@@ -1,8 +1,11 @@
 <div class="pageRoot">
 
-	<div class="rw-row page-title">
-		<h1>{optPreText} {optTitle}</h1>
-	</div>
+	<div class="page-title-wrap">
+			<div class="left-part">
+				{optPreText}
+				<h1 class="page-title">{optTitle}</h1>
+			</div>
+		</div>
 	
 	<div class="page-content">
 		{optContent}
