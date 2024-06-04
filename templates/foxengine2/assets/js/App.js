@@ -11,10 +11,11 @@ const App = new Vue({
     },
 
     mounted() {
-        foxEngine.user.parseUsrOptionsMenu();
-        //setTimeout(() => {
+        
+        setTimeout(() => {
         //    foxEngine.user.userAction("greeting");
-        //}, 2000);
+		foxEngine.user.parseUsrOptionsMenu();
+        }, 1300);
     },
 
     created() {

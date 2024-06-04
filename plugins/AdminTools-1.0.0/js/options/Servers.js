@@ -59,6 +59,7 @@ export class Servers {
 				index: index + 1,
 				serverName: server.serverName,
 				serverVersion: server.serverVersion,
+				serverVstyle: server.serverVersion.split('-')[0].replaceAll('.', ''),
 				serverDescription: server.serverDescription,
 				enabled: icon,
 				serverGroups: server.serverGroups

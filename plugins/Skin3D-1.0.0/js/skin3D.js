@@ -1,1445 +1,337 @@
-function skin3D(path, elem) {
-	//input data
-	this.width = 220;
-	this.height = 185;
-	this.radius = 30;
-	this.alpha = 0.0;
-	this.delta = -0.8;
-	this.beta = 0.3;
-	this.fps = 60;
-	this.autoTurnAround = 0.005;
-	this.animSpeed = 0.011;
-	this.animDistanceK = 0.7;
-	this.pause = false;
-	this.stop = false;
-	this.sensitivity = 1;
- 
-	this.backgroundColor = 0xF8F8F8;
-	this.zoom = [15, 60];
-	this.maxBeta = Math.PI;
- 
-	this.img;
-	this.skinTexture;
-	this.cloakTexture;
-	this.blockTexture;
-	this.context;
-	this.canvas;
-	this.material1;
-	this.material2;
-	this.camera;
-	this.scene;
-	this.rendered;
-	this.loader = new THREE.TextureLoader();
- 
-	//Init
-	this.init = function() {
-		this.camera = new THREE.PerspectiveCamera(75, this.width / this.height, 1, 10000);
-		this.scene = new THREE.Scene();
-		cloakMesh = null;
-		this.createSkinImage(path);
-	};
- 
-	//Create skin image
-	this.createSkinImage = function(pathToSkin) {
-		var _this = this;
-		this.img = new Image();
-		this.img.crossOrigin = '';
-		this.img.src = pathToSkin;
-		this.img.onload = function() {
-			_this.write("Loaded Image " + _this.img.src);
- 
-			if ( _this.skinTexture == null ) {
-				_this.canvas = document.getElementById('canvas');
-				_this.canvas.width = _this.img.width;
-				_this.canvas.height = _this.img.width;
- 
-				_this.skinTexture = new THREE.Texture(_this.canvas);
-				_this.skinTexture.magFilter = THREE.NearestFilter;
-				_this.skinTexture.minFilter = THREE.NearestMipMapNearestFilter;
- 
-				_this.material1 = new THREE.MeshBasicMaterial({map: _this.skinTexture, side: THREE.FrontSide});
-				_this.material2 = new THREE.MeshBasicMaterial({map: _this.skinTexture, transparent: true, opacity: 1, alphaTest: 0.5, side: THREE.DoubleSide});
- 
-				_this.context = _this.GetCTX(_this.canvas);
-				if ( !_this.context ) return _this.loadFail(1);
-				_this.context.clearRect(0, 0, _this.img.width, _this.img.width);
-				_this.context.drawImage(_this.img, 0, 0);
-				_this.skin2D.complete(_this.context, _this);
- 
-				_this.callMethods();
-				_this.write("Init end.");
-			} else {
-				_this.canvas.width = _this.img.width;
-				_this.canvas.height = _this.img.width;
-				_this.context.clearRect(0, 0, _this.img.width, _this.img.width);
-				_this.context.drawImage(_this.img, 0, 0);
-				_this.skin2D.complete(_this.context, _this);
-				_this.needsUpdates();
-			}
-		};
- 
-		this.img.onerror = function() {
-			if ( _this.GetSkinName() != 'default' ) {
-				_this.changeSkinName('default');
-			} else {
-				_this.write("Failed loading " + _this.img.src);
-				_this.loadFail(2);
-			}
-		}
-	};
- 
-	//Change path to different skin
-	this.changeSkin = function(newpath) {
-		this.img.src = newpath;
-	};
- 
-	//Check skin
-	this.GetSkinName = function() {
-		var path = this.img.src.split('/'),
-			name = path[path.length - 1].split('.');
-		return name[0];
-	};
- 
-	//Change skin path
-	this.changeSkinName = function(nickname) {
-		var partPath = this.img.src.split('/'),
-			newpath = '';
-		for ( var i = 0; i < partPath.length - 1; i ++ ) {
-			newpath += partPath[i] + '/';
-		}
-		newpath = newpath + nickname + '.png';
-		this.img.src = newpath;
-	};
- 
-	//Change cloak path
-	this.changeCloak = function(newpath) {
-		if ( !this.IsCloak() ) return false;
-		this.removeCloak();
-		this.createCloak(newpath);
-	};
- 
-	//Update skin
-	this.updateSkin = function() {
-		this.changeSkin(this.img.src + '?update=' + Math.random());
-	};
- 
-	//Update cape
-	this.updateCloak = function() {
-		if ( this.IsCloak() ) {
-			this.changeCloak(this.cloakTexture.image.src + '?update=' + Math.random());
-		}
-	};
- 
-	//Do update
-	this.needsUpdates = function() {
-		this.skinTexture.needsUpdate = true;
-		this.material1.needsUpdate = true;
-		this.material2.needsUpdate = true;
-	};
- 
-	//Calling all methods
-	this.callMethods = function() {
-		this.needsUpdates();
-		try {
-			this.render();
-		} catch(e) {
-			return this.loadFail(3);
-		}
-		this.addEvents();
-		this.addToElement(elem);
-		this.animate();
-	};
- 
-	//Adding events
-	this.addEvents = function() {
-		var _this = this,
-			renderElem = this.rendered.domElement;
-		//Skin spinning
-		renderElem.onmousedown = function(e) {
-			var sX = _this.MouseCoords.getX(e),
-				sY = _this.MouseCoords.getY(e),
-				deltaSave = _this.delta,
-				betaSave = _this.beta;
-			_this.pause = true;
- 
-			document.onmousemove = function(e) {
-				if (!e) e = window.event;
-				_this.delta = deltaSave + (_this.MouseCoords.getX(e) - sX) / _this.width * Math.PI * _this.sensitivity;
-				_this.beta = betaSave + (_this.MouseCoords.getY(e) - sY) / _this.height * Math.PI * _this.sensitivity;
- 
-				if ( _this.beta > _this.maxBeta / 2 ) {
-					_this.beta = _this.maxBeta / 2;
-				} else if ( _this.beta < -_this.maxBeta / 2 ) {
-					_this.beta = -_this.maxBeta / 2;
-				}
-			}
- 
-			document.onmouseup = function(e) {
-				document.onmousemove = null;
-				document.onmouseup = null;
-				if ( !_this.stop ) {
-					_this.pause = false;
-				}
-			}
-		};
-		//Skin scaling
-		renderElem.onwheel = function(e) {
-			e = e || window.event;
-			var val = e.deltaY || e.detail || e.wheelDelta;
-			_this.radius += (val > 0 ? 2  : -2) * _this.sensitivity;
-			if ( _this.radius > _this.zoom[1] ) {
-				_this.radius = _this.zoom[1];
-			} else if ( _this.radius < _this.zoom[0] ) {
-				_this.radius = _this.zoom[0];
-			}
-		};
-		//Stopping animation
-		renderElem.oncontextmenu = function(e) {
-			if ( _this.stop ) {
-				_this.startAnimate();
-			} else {
-				_this.stopAnimate();
-			}
-			return false;
-		};
-	};
- 
-	//Adding skin display to HTML
-	this.addToElement = function(e) {
-		e.appendChild(this.rendered.domElement);
-	};
-	this.copyright = function(e) {
-		var text = document.createElement('div'),
-			info = this.codeDE('bWFkZSBieSA8YSBocmVmPSJodHRwOi8vdmsuY29tL3BhZ2UtMzk2NDMxNDlfNTIxNDMxMDMiPkZsZXluYXJvPC9hPg==');
-		text.innerHTML = info;
-		text.align = 'center';
-		text.style.position = 'relative';
-		text.style.fontFamily = 'tahoma';
-		text.style.fontSize = '8px';
-		text.style.color = '#000000';
-		text.title = this.codeDE('0KXQvtGC0LjRgtC1INGC0LDQutC+0Lkg0LbQtSAzRCB2aWV3ZXIg0YHQutC40L3QvtCyPyDQmtC70LjQutCw0LnRgtC1INC/0L4g0YHRgdGL0LvQutC1IQ==');
-		text.onselectstart = function(e) {
-			return false;
-		};
-		var _this = this;
-		setInterval(function() {
-			if ( text == null || !_this.IsVisibleElem(text) || text.innerHTML != info ) {
-				alert(_this.codeDE('0JHRi9C7INC40LfQvNC10L3QtdC9L9GD0LTQsNC70LXQvS/RgdC/0YDRj9GC0LDQvSDQutC+0L/QuNGA0LDQudGCIQrQldGB0LvQuCDQvdC1INGF0L7RgtC40YLQtSDQstC40LTQtdGC0Ywg0Y3RgtC+0YIg0LrQvtC/0LjRgNCw0LnRgiwg0JLRiyDQvNC+0LbQtdGC0LUg0LrRg9C/0LjRgtC1INC00LDQvdC90YvQuSAzRCDQv9GA0L7RgdC80L7RgtGAINGB0LrQuNC90L7QsiDRgSDQvtGC0LrRgNGL0YLRi9C8INC40YHRhdC+0LTQvdGL0Lwg0LrQvtC00L7QvCDQsdC10Lcg0LrQvtC/0LjRgNCw0LnRgtC+0LIg0LIg0LPRgNGD0L/Qv9C1INCS0Jo6Cmh0dHA6Ly92ay5jb20vZmxleW5hcm9fcHJvZHM='));
-				_this.stopAnimate();
-			}
-		}, 5000);	
-		e.appendChild(text);
-	};
-	this.IsVisibleElem = function(e) {
-		while ( e != null && e != elem ) {
-			if ( e.style.display != 'none' && (e.style.fontSize == null || e.style.fontSize == '8px') && (e.style.color == null || e.style.color == 'rgb(0, 0, 0)') && (e.style.fontFamily == null || e.style.fontFamily == 'tahoma') ) {
-				e = e.parentElement;
-			} else {
-				return false;
-			}
-		}
-		return true;
-	};
-	this.codeEN = function(str) {
-		return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
-			return String.fromCharCode('0x' + p1);
-		}));
-	};
-	this.codeDE = function(str) {
-		return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
-			return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-		}).join(''));
-	};
- 
-	//Showing animation
-	this.startAnimate = function() {
-		this.pause = false;
-		this.stop = false;
-	};
- 
-	//Stop animation
-	this.stopAnimate = function() {
-		this.pause = true;
-		this.stop = true;
-	};
- 
-	//Creating animation
-	this.animate = function() {
-		var _this = this;
-		setInterval(function()
-		{
-			if ( !_this.pause ) {
-				_this.alpha += _this.animSpeed * (90 / _this.fps);
-				_this.delta += _this.autoTurnAround * (90 / _this.fps);
- 
-				//Leg Swing
-				leftLeg2Mesh.rotation.x = leftLegMesh.rotation.x = Math.cos(_this.alpha*4) * _this.animDistanceK;
-				leftLeg2Mesh.position.z = leftLegMesh.position.z = 0 - 6*Math.sin(leftLegMesh.rotation.x);
-				leftLeg2Mesh.position.y = leftLegMesh.position.y = -16 - 6*Math.abs(Math.cos(leftLegMesh.rotation.x));
-				rightLeg2Mesh.rotation.x = rightLegMesh.rotation.x = Math.cos(_this.alpha*4 + (Math.PI)) * _this.animDistanceK;
-				rightLeg2Mesh.position.z = rightLegMesh.position.z = 0 - 6*Math.sin(rightLegMesh.rotation.x);
-				rightLeg2Mesh.position.y = rightLegMesh.position.y = -16 - 6*Math.abs(Math.cos(rightLegMesh.rotation.x));
-				//Arm Swing
-				leftArm2Mesh.rotation.x = leftArmMesh.rotation.x = Math.cos(_this.alpha*4 + (Math.PI)) * _this.animDistanceK;
-				leftArm2Mesh.position.z = leftArmMesh.position.z = 0 - 6*Math.sin(leftArmMesh.rotation.x);
-				leftArm2Mesh.position.y = leftArmMesh.position.y = -4 - 6*Math.abs(Math.cos(leftArmMesh.rotation.x));
-				rightArm2Mesh.rotation.x = rightArmMesh.rotation.x = Math.cos(_this.alpha*4) * _this.animDistanceK;
-				rightArm2Mesh.position.z = rightArmMesh.position.z = 0 - 6*Math.sin(rightArmMesh.rotation.x);
-				rightArm2Mesh.position.y = rightArmMesh.position.y = -4 - 6*Math.abs(Math.cos(rightArmMesh.rotation.x));
-				//head
-				headMesh.rotation.y = head2Mesh.rotation.y = Math.cos(_this.alpha*2) / 2;
-				headMesh.rotation.x = head2Mesh.rotation.x = Math.cos(_this.alpha*1.5) / 8;
-				//cloak
-				if ( _this.IsCloak() ) {
-					cloakMesh.position.y = -4.5;
-					cloakMesh.position.z = -2.5;
-					cloakMesh.translateY(-7.5)
-					cloakMesh.rotation.x = 0.2 + Math.cos(_this.alpha*3) / 6;
-				}
-			}
- 
-			var b = _this.radius * Math.cos(_this.beta);
-			_this.camera.position.z = b * Math.cos(-_this.delta);
-			_this.camera.position.x = b * Math.sin(-_this.delta);
-			_this.camera.position.y = -12 + _this.radius * Math.sin(_this.beta);
-			_this.camera.lookAt(bodyMesh.position);
-			_this.rendered.render(_this.scene, _this.camera);
-		}, 1000 / this.fps);
-	};
- 
-	//Character creation + render
-	this.render = function() {
- 
-		// Head Parts
-		var headTop = [
-			new THREE.Vector2(0.125, 0.875),
-			new THREE.Vector2(0.25, 0.875),
-			new THREE.Vector2(0.25, 1),
-			new THREE.Vector2(0.125, 1)
-		];
-		var headBottom = [
-			new THREE.Vector2(0.25, 0.875),
-			new THREE.Vector2(0.375, 0.875),
-			new THREE.Vector2(0.375, 1),
-			new THREE.Vector2(0.25, 1)
-		];
-		var headLeft = [
-			new THREE.Vector2(0, 0.75),
-			new THREE.Vector2(0.125, 0.75),
-			new THREE.Vector2(0.125, 0.875),
-			new THREE.Vector2(0, 0.875)
-		];
-		var headFront = [
-			new THREE.Vector2(0.125, 0.75),
-			new THREE.Vector2(0.25, 0.75),
-			new THREE.Vector2(0.25 ,0.875),
-			new THREE.Vector2(0.125 ,0.875)
-		];
-		var headRight = [
-			new THREE.Vector2(0.25, 0.75),
-			new THREE.Vector2(0.375, 0.75),
-			new THREE.Vector2(0.375, 0.875),
-			new THREE.Vector2(0.25, 0.875)
-		];
-		var headBack = [
-			new THREE.Vector2(0.375, 0.75),
-			new THREE.Vector2(0.5, 0.75),
-			new THREE.Vector2(0.5, 0.875),
-			new THREE.Vector2(0.375, 0.875)
-		];
-		headBox = new THREE.BoxGeometry(8, 8, 8, 0, 0, 0);
-		headBox.faceVertexUvs[0] = [];
-		headBox.faceVertexUvs[0][0] = [headRight[3], headRight[0], headRight[2]];
-		headBox.faceVertexUvs[0][1] = [headRight[0], headRight[1], headRight[2]];
-		headBox.faceVertexUvs[0][2] = [headLeft[3], headLeft[0], headLeft[2]];
-		headBox.faceVertexUvs[0][3] = [headLeft[0], headLeft[1], headLeft[2]];
-		headBox.faceVertexUvs[0][4] = [headTop[3], headTop[0], headTop[2]];
-		headBox.faceVertexUvs[0][5] = [headTop[0], headTop[1], headTop[2]];
-		headBox.faceVertexUvs[0][6] = [headBottom[0], headBottom[3], headBottom[1]];
-		headBox.faceVertexUvs[0][7] = [headBottom[3], headBottom[2], headBottom[1]];
-		headBox.faceVertexUvs[0][8] = [headFront[3], headFront[0], headFront[2]];
-		headBox.faceVertexUvs[0][9] = [headFront[0], headFront[1], headFront[2]];
-		headBox.faceVertexUvs[0][10] = [headBack[3], headBack[0], headBack[2]];
-		headBox.faceVertexUvs[0][11] = [headBack[0], headBack[1], headBack[2]];
-		headMesh = new THREE.Mesh(headBox, this.material1);
-		headMesh.name = "head";
- 		this.scene.add(headMesh);
- 
-		// Body Parts
-		var bodyTop = [
-			new THREE.Vector2(0.3125, 0.6875),
-			new THREE.Vector2(0.4375, 0.6875),
-			new THREE.Vector2(0.4375, 0.75),
-			new THREE.Vector2(0.3125, 0.75)
-		];
-		var bodyBottom = [
-			new THREE.Vector2(0.4375, 0.6875),
-			new THREE.Vector2(0.5625, 0.6875),
-			new THREE.Vector2(0.5625, 0.75),
-			new THREE.Vector2(0.4375, 0.75)
-		];
-		var bodyLeft = [
-			new THREE.Vector2(0.25, 0.5),
-			new THREE.Vector2(0.3125, 0.5),
-			new THREE.Vector2(0.3125, 0.6875),
-			new THREE.Vector2(0.25, 0.6875)
-		];
-		var bodyFront = [
-			new THREE.Vector2(0.3125, 0.5),
-			new THREE.Vector2(0.4375, 0.5),
-			new THREE.Vector2(0.4375, 0.6875),
-			new THREE.Vector2(0.3125, 0.6875)
-		];
-		var bodyRight = [
-			new THREE.Vector2(0.4375, 0.5),
-			new THREE.Vector2(0.5, 0.5),
-			new THREE.Vector2(0.5, 0.6875),
-			new THREE.Vector2(0.4375, 0.6875)
-		];
-		var bodyBack = [
-			new THREE.Vector2(0.5, 0.5),
-			new THREE.Vector2(0.625, 0.5),
-			new THREE.Vector2(0.625, 0.6875),
-			new THREE.Vector2(0.5, 0.6875)
-		];
-		bodyBox = new THREE.BoxGeometry(8, 12, 4, 0, 0, 0);
-		bodyBox.faceVertexUvs[0] = [];
-		bodyBox.faceVertexUvs[0][0] = [bodyRight[3], bodyRight[0], bodyRight[2]];
-		bodyBox.faceVertexUvs[0][1] = [bodyRight[0], bodyRight[1], bodyRight[2]];
-		bodyBox.faceVertexUvs[0][2] = [bodyLeft[3], bodyLeft[0], bodyLeft[2]];
-		bodyBox.faceVertexUvs[0][3] = [bodyLeft[0], bodyLeft[1], bodyLeft[2]];
-		bodyBox.faceVertexUvs[0][4] = [bodyTop[3], bodyTop[0], bodyTop[2]];
-		bodyBox.faceVertexUvs[0][5] = [bodyTop[0], bodyTop[1], bodyTop[2]];
-		bodyBox.faceVertexUvs[0][6] = [bodyBottom[0], bodyBottom[3], bodyBottom[1]];
-		bodyBox.faceVertexUvs[0][7] = [bodyBottom[3], bodyBottom[2], bodyBottom[1]];
-		bodyBox.faceVertexUvs[0][8] = [bodyFront[3], bodyFront[0], bodyFront[2]];
-		bodyBox.faceVertexUvs[0][9] = [bodyFront[0], bodyFront[1], bodyFront[2]];
-		bodyBox.faceVertexUvs[0][10] = [bodyBack[3], bodyBack[0], bodyBack[2]];
-		bodyBox.faceVertexUvs[0][11] = [bodyBack[0], bodyBack[1], bodyBack[2]];
-		bodyMesh = new THREE.Mesh(bodyBox, this.material1);
-		bodyMesh.name = "body";
-		bodyMesh.position.y = -10;
- 		this.scene.add(bodyMesh);
- 
-		// Right Arm Parts
-		var rightArmTop = [
-			new THREE.Vector2(0.6875, 0.6875),
-			new THREE.Vector2(0.75, 0.6875),
-			new THREE.Vector2(0.75, 0.75),
-			new THREE.Vector2(0.6875, 0.75),
-		];
-		var rightArmBottom = [
-			new THREE.Vector2(0.75, 0.6875),
-			new THREE.Vector2(0.8125, 0.6875),
-			new THREE.Vector2(0.8125, 0.75),
-			new THREE.Vector2(0.75, 0.75)
-		];
-		var rightArmLeft = [
-			new THREE.Vector2(0.625, 0.5),
-			new THREE.Vector2(0.6875, 0.5),
-			new THREE.Vector2(0.6875, 0.6875),
-			new THREE.Vector2(0.625, 0.6875)
-		];
-		var rightArmFront = [
-			new THREE.Vector2(0.6875, 0.5),
-			new THREE.Vector2(0.75, 0.5),
-			new THREE.Vector2(0.75, 0.6875),
-			new THREE.Vector2(0.6875, 0.6875)
-		];
-		var rightArmRight = [
-			new THREE.Vector2(0.75, 0.5),
-			new THREE.Vector2(0.8125, 0.5),
-			new THREE.Vector2(0.8125, 0.6875),
-			new THREE.Vector2(0.75, 0.6875)
-		];
-		var rightArmBack = [
-			new THREE.Vector2(0.8125, 0.5),
-			new THREE.Vector2(0.875, 0.5),
-			new THREE.Vector2(0.875, 0.6875),
-			new THREE.Vector2(0.8125, 0.6875)
-		];
-		rightArmBox = new THREE.BoxGeometry(4, 12, 4, 0, 0, 0);
-		rightArmBox.faceVertexUvs[0] = [];
-		rightArmBox.faceVertexUvs[0][0] = [rightArmRight[3], rightArmRight[0], rightArmRight[2]];
-		rightArmBox.faceVertexUvs[0][1] = [rightArmRight[0], rightArmRight[1], rightArmRight[2]];
-		rightArmBox.faceVertexUvs[0][2] = [rightArmLeft[3], rightArmLeft[0], rightArmLeft[2]];
-		rightArmBox.faceVertexUvs[0][3] = [rightArmLeft[0], rightArmLeft[1], rightArmLeft[2]];
-		rightArmBox.faceVertexUvs[0][4] = [rightArmTop[3], rightArmTop[0], rightArmTop[2]];
-		rightArmBox.faceVertexUvs[0][5] = [rightArmTop[0], rightArmTop[1], rightArmTop[2]];
-		rightArmBox.faceVertexUvs[0][6] = [rightArmBottom[0], rightArmBottom[3], rightArmBottom[1]];
-		rightArmBox.faceVertexUvs[0][7] = [rightArmBottom[3], rightArmBottom[2], rightArmBottom[1]];
-		rightArmBox.faceVertexUvs[0][8] = [rightArmFront[3], rightArmFront[0], rightArmFront[2]];
-		rightArmBox.faceVertexUvs[0][9] = [rightArmFront[0], rightArmFront[1], rightArmFront[2]];
-		rightArmBox.faceVertexUvs[0][10] = [rightArmBack[3], rightArmBack[0], rightArmBack[2]];
-		rightArmBox.faceVertexUvs[0][11] = [rightArmBack[0], rightArmBack[1], rightArmBack[2]];
-		rightArmMesh = new THREE.Mesh(rightArmBox, this.material1);
-		rightArmMesh.name = "rightArm";
-		rightArmMesh.position.y = -10;
-		rightArmMesh.position.x = -6;
- 		this.scene.add(rightArmMesh);
- 
-		// Left Arm Parts
-		var leftArmTop = [
-			new THREE.Vector2(0.5625, 0.1875),
-			new THREE.Vector2(0.625, 0.1875),
-			new THREE.Vector2(0.625, 0.25),
-			new THREE.Vector2(0.5625, 0.25),
-		];
-		var leftArmBottom = [
-			new THREE.Vector2(0.625, 0.1875),
-			new THREE.Vector2(0.6875, 0.1875),
-			new THREE.Vector2(0.6875, 0.25),
-			new THREE.Vector2(0.625, 0.25)
-		];
-		var leftArmLeft = [
-			new THREE.Vector2(0.5, 0),
-			new THREE.Vector2(0.5625, 0),
-			new THREE.Vector2(0.5625, 0.1875),
-			new THREE.Vector2(0.5, 0.1875)
-		];
-		var leftArmFront = [
-			new THREE.Vector2(0.5625, 0),
-			new THREE.Vector2(0.625, 0),
-			new THREE.Vector2(0.625, 0.1875),
-			new THREE.Vector2(0.5625, 0.1875)
-		];
-		var leftArmRight = [
-			new THREE.Vector2(0.625, 0),
-			new THREE.Vector2(0.6875, 0),
-			new THREE.Vector2(0.6875, 0.1875),
-			new THREE.Vector2(0.625, 0.1875)
-		];
-		var leftArmBack = [
-			new THREE.Vector2(0.6875, 0),
-			new THREE.Vector2(0.75, 0),
-			new THREE.Vector2(0.75, 0.1875),
-			new THREE.Vector2(0.6875, 0.1875)
-		];
-		leftArmBox = new THREE.BoxGeometry(4, 12, 4, 0, 0, 0);
-		leftArmBox.faceVertexUvs[0] = [];
-		leftArmBox.faceVertexUvs[0][0] = [leftArmRight[3], leftArmRight[0], leftArmRight[2]];
-		leftArmBox.faceVertexUvs[0][1] = [leftArmRight[0], leftArmRight[1], leftArmRight[2]];
-		leftArmBox.faceVertexUvs[0][2] = [leftArmLeft[3], leftArmLeft[0], leftArmLeft[2]];
-		leftArmBox.faceVertexUvs[0][3] = [leftArmLeft[0], leftArmLeft[1], leftArmLeft[2]];
-		leftArmBox.faceVertexUvs[0][4] = [leftArmTop[3], leftArmTop[0], leftArmTop[2]];
-		leftArmBox.faceVertexUvs[0][5] = [leftArmTop[0], leftArmTop[1], leftArmTop[2]];
-		leftArmBox.faceVertexUvs[0][6] = [leftArmBottom[0], leftArmBottom[3], leftArmBottom[1]];
-		leftArmBox.faceVertexUvs[0][7] = [leftArmBottom[3], leftArmBottom[2], leftArmBottom[1]];
-		leftArmBox.faceVertexUvs[0][8] = [leftArmFront[3], leftArmFront[0], leftArmFront[2]];
-		leftArmBox.faceVertexUvs[0][9] = [leftArmFront[0], leftArmFront[1], leftArmFront[2]];
-		leftArmBox.faceVertexUvs[0][10] = [leftArmBack[3], leftArmBack[0], leftArmBack[2]];
-		leftArmBox.faceVertexUvs[0][11] = [leftArmBack[0], leftArmBack[1], leftArmBack[2]];
-		leftArmMesh = new THREE.Mesh(leftArmBox, this.material1);
-		leftArmMesh.name = "leftArm";
-		leftArmMesh.position.y = -10;
-		leftArmMesh.position.x = 6;
- 		this.scene.add(leftArmMesh);
- 
-		// Right Leg Parts
-		var rightLegTop = [
-			new THREE.Vector2(0.0625, 0.6875),
-			new THREE.Vector2(0.125, 0.6875),
-			new THREE.Vector2(0.125, 0.75),
-			new THREE.Vector2(0.0625, 0.75),
-		];
-		var rightLegBottom = [
-			new THREE.Vector2(0.125, 0.6875),
-			new THREE.Vector2(0.1875, 0.6875),
-			new THREE.Vector2(0.1875, 0.75),
-			new THREE.Vector2(0.125, 0.75)
-		];
-		var rightLegLeft = [
-			new THREE.Vector2(0, 0.5),
-			new THREE.Vector2(0.0625, 0.5),
-			new THREE.Vector2(0.0625, 0.6875),
-			new THREE.Vector2(0, 0.6875)
-		];
-		var rightLegFront = [
-			new THREE.Vector2(0.0625, 0.5),
-			new THREE.Vector2(0.125, 0.5),
-			new THREE.Vector2(0.125, 0.6875),
-			new THREE.Vector2(0.0625, 0.6875)
-		];
-		var rightLegRight = [
-			new THREE.Vector2(0.125, 0.5),
-			new THREE.Vector2(0.1875, 0.5),
-			new THREE.Vector2(0.1875, 0.6875),
-			new THREE.Vector2(0.125, 0.6875)
-		];
-		var rightLegBack = [
-			new THREE.Vector2(0.1875, 0.5),
-			new THREE.Vector2(0.25, 0.5),
-			new THREE.Vector2(0.25, 0.6875),
-			new THREE.Vector2(0.1875, 0.6875)
-		];
-		rightLegBox = new THREE.BoxGeometry(4, 12, 4, 0, 0, 0);
-		rightLegBox.faceVertexUvs[0] = [];
-		rightLegBox.faceVertexUvs[0][0] = [rightLegRight[3], rightLegRight[0], rightLegRight[2]];
-		rightLegBox.faceVertexUvs[0][1] = [rightLegRight[0], rightLegRight[1], rightLegRight[2]];
-		rightLegBox.faceVertexUvs[0][2] = [rightLegLeft[3], rightLegLeft[0], rightLegLeft[2]];
-		rightLegBox.faceVertexUvs[0][3] = [rightLegLeft[0], rightLegLeft[1], rightLegLeft[2]];
-		rightLegBox.faceVertexUvs[0][4] = [rightLegTop[3], rightLegTop[0], rightLegTop[2]];
-		rightLegBox.faceVertexUvs[0][5] = [rightLegTop[0], rightLegTop[1], rightLegTop[2]];
-		rightLegBox.faceVertexUvs[0][6] = [rightLegBottom[0], rightLegBottom[3], rightLegBottom[1]];
-		rightLegBox.faceVertexUvs[0][7] = [rightLegBottom[3], rightLegBottom[2], rightLegBottom[1]];
-		rightLegBox.faceVertexUvs[0][8] = [rightLegFront[3], rightLegFront[0], rightLegFront[2]];
-		rightLegBox.faceVertexUvs[0][9] = [rightLegFront[0], rightLegFront[1], rightLegFront[2]];
-		rightLegBox.faceVertexUvs[0][10] = [rightLegBack[3], rightLegBack[0], rightLegBack[2]];
-		rightLegBox.faceVertexUvs[0][11] = [rightLegBack[0], rightLegBack[1], rightLegBack[2]];
-		rightLegMesh = new THREE.Mesh(rightLegBox, this.material1);
-		rightLegMesh.name = "rightLeg"
-		rightLegMesh.position.y = -22;
-		rightLegMesh.position.x = -2;
- 		this.scene.add(rightLegMesh);
- 
-		// Left Leg Parts
-		var leftLegTop = [
-			new THREE.Vector2(0.3125, 0.1875),
-			new THREE.Vector2(0.375, 0.1875),
-			new THREE.Vector2(0.375, 0.25),
-			new THREE.Vector2(0.3125, 0.25),
-		];
-		var leftLegBottom = [
-			new THREE.Vector2(0.375, 0.1875),
-			new THREE.Vector2(0.4375, 0.1875),
-			new THREE.Vector2(0.4375, 0.25),
-			new THREE.Vector2(0.375, 0.25)
-		];
-		var leftLegLeft = [
-			new THREE.Vector2(0.25, 0),
-			new THREE.Vector2(0.3125, 0),
-			new THREE.Vector2(0.3125, 0.1875),
-			new THREE.Vector2(0.25, 0.1875)
-		];
-		var leftLegFront = [
-			new THREE.Vector2(0.3125, 0),
-			new THREE.Vector2(0.375, 0),
-			new THREE.Vector2(0.375, 0.1875),
-			new THREE.Vector2(0.3125, 0.1875)
-		];
-		var leftLegRight = [
-			new THREE.Vector2(0.375, 0),
-			new THREE.Vector2(0.4375, 0),
-			new THREE.Vector2(0.4375, 0.1875),
-			new THREE.Vector2(0.375, 0.1875)
-		];
-		var leftLegBack = [
-			new THREE.Vector2(0.4375, 0),
-			new THREE.Vector2(0.5, 0),
-			new THREE.Vector2(0.5, 0.1875),
-			new THREE.Vector2(0.4375, 0.1875)
-		];
-		leftLegBox = new THREE.BoxGeometry(4, 12, 4, 0, 0, 0);
-		leftLegBox.faceVertexUvs[0] = [];
-		leftLegBox.faceVertexUvs[0][0] = [leftLegRight[3], leftLegRight[0], leftLegRight[2]];
-		leftLegBox.faceVertexUvs[0][1] = [leftLegRight[0], leftLegRight[1], leftLegRight[2]];
-		leftLegBox.faceVertexUvs[0][2] = [leftLegLeft[3], leftLegLeft[0], leftLegLeft[2]];
-		leftLegBox.faceVertexUvs[0][3] = [leftLegLeft[0], leftLegLeft[1], leftLegLeft[2]];
-		leftLegBox.faceVertexUvs[0][4] = [leftLegTop[3], leftLegTop[0], leftLegTop[2]];
-		leftLegBox.faceVertexUvs[0][5] = [leftLegTop[0], leftLegTop[1], leftLegTop[2]];
-		leftLegBox.faceVertexUvs[0][6] = [leftLegBottom[0], leftLegBottom[3], leftLegBottom[1]];
-		leftLegBox.faceVertexUvs[0][7] = [leftLegBottom[3], leftLegBottom[2], leftLegBottom[1]];
-		leftLegBox.faceVertexUvs[0][8] = [leftLegFront[3], leftLegFront[0], leftLegFront[2]];
-		leftLegBox.faceVertexUvs[0][9] = [leftLegFront[0], leftLegFront[1], leftLegFront[2]];
-		leftLegBox.faceVertexUvs[0][10] = [leftLegBack[3], leftLegBack[0], leftLegBack[2]];
-		leftLegBox.faceVertexUvs[0][11] = [leftLegBack[0], leftLegBack[1], leftLegBack[2]];
-		leftLegMesh = new THREE.Mesh(leftLegBox, this.material1);
-		leftLegMesh.name = "leftLeg";
-		leftLegMesh.position.y = -22;
-		leftLegMesh.position.x = 2;
- 		this.scene.add(leftLegMesh);
- 
-		// Head Overlay Parts
-		var head2Top = [
-			new THREE.Vector2(0.625, 0.875),
-			new THREE.Vector2(0.75, 0.875),
-			new THREE.Vector2(0.75, 1),
-			new THREE.Vector2(0.625, 1)
-		];
-		var head2Bottom = [
-			new THREE.Vector2(0.75, 0.875),
-			new THREE.Vector2(0.875, 0.875),
-			new THREE.Vector2(0.875, 1),
-			new THREE.Vector2(0.75, 1)
-		];
-		var head2Left = [
-			new THREE.Vector2(0.5, 0.75),
-			new THREE.Vector2(0.625, 0.75),
-			new THREE.Vector2(0.625, 0.875),
-			new THREE.Vector2(0.5, 0.875)
-		];
-		var head2Front = [
-			new THREE.Vector2(0.625, 0.75),
-			new THREE.Vector2(0.75, 0.75),
-			new THREE.Vector2(0.75, 0.875),
-			new THREE.Vector2(0.625, 0.875)
-		];
-		var head2Right = [
-			new THREE.Vector2(0.75, 0.75),
-			new THREE.Vector2(0.875, 0.75),
-			new THREE.Vector2(0.875, 0.875),
-			new THREE.Vector2(0.75, 0.875)
-		];
-		var head2Back = [
-			new THREE.Vector2(0.875, 0.75),
-			new THREE.Vector2(1, 0.75),
-			new THREE.Vector2(1, 0.875),
-			new THREE.Vector2(0.875, 0.875)
-		];
-		head2Box = new THREE.BoxGeometry(9, 9, 9, 0, 0, 0);
-		head2Box.faceVertexUvs[0] = [];
-		head2Box.faceVertexUvs[0][0] = [head2Right[3], head2Right[0], head2Right[2]];
-		head2Box.faceVertexUvs[0][1] = [head2Right[0], head2Right[1], head2Right[2]];
-		head2Box.faceVertexUvs[0][2] = [head2Left[3], head2Left[0], head2Left[2]];
-		head2Box.faceVertexUvs[0][3] = [head2Left[0], head2Left[1], head2Left[2]];
-		head2Box.faceVertexUvs[0][4] = [head2Top[3], head2Top[0], head2Top[2]];
-		head2Box.faceVertexUvs[0][5] = [head2Top[0], head2Top[1], head2Top[2]];
-		head2Box.faceVertexUvs[0][6] = [head2Bottom[0], head2Bottom[3], head2Bottom[1]];
-		head2Box.faceVertexUvs[0][7] = [head2Bottom[3], head2Bottom[2], head2Bottom[1]];
-		head2Box.faceVertexUvs[0][8] = [head2Front[3], head2Front[0], head2Front[2]];
-		head2Box.faceVertexUvs[0][9] = [head2Front[0], head2Front[1], head2Front[2]];
-		head2Box.faceVertexUvs[0][10] = [head2Back[3], head2Back[0], head2Back[2]];
-		head2Box.faceVertexUvs[0][11] = [head2Back[0], head2Back[1], head2Back[2]];
-		head2Mesh = new THREE.Mesh(head2Box, this.material2);
-		head2Mesh.name = "head2"
- 		this.scene.add(head2Mesh);
- 
-		// Body Overlay Parts
-		var body2Top = [
-			new THREE.Vector2(0.3125, 0.4375),
-			new THREE.Vector2(0.4375, 0.4375),
-			new THREE.Vector2(0.4375, 0.5),
-			new THREE.Vector2(0.3125, 0.5)
-		];
-		var body2Bottom = [
-			new THREE.Vector2(0.4375, 0.4375),
-			new THREE.Vector2(0.5625, 0.4375),
-			new THREE.Vector2(0.5625, 0.5),
-			new THREE.Vector2(0.4375, 0.5)
-		];
-		var body2Left = [
-			new THREE.Vector2(0.25, 0.25),
-			new THREE.Vector2(0.3125, 0.25),
-			new THREE.Vector2(0.3125, 0.4375),
-			new THREE.Vector2(0.25, 0.4375)
-		];
-		var body2Front = [
-			new THREE.Vector2(0.3125, 0.25),
-			new THREE.Vector2(0.4375, 0.25),
-			new THREE.Vector2(0.4375, 0.4375),
-			new THREE.Vector2(0.3125, 0.4375)
-		];
-		var body2Right = [
-			new THREE.Vector2(0.4375, 0.25),
-			new THREE.Vector2(0.5, 0.25),
-			new THREE.Vector2(0.5, 0.4375),
-			new THREE.Vector2(0.4375, 0.4375)
-		];
-		var body2Back = [
-			new THREE.Vector2(0.5, 0.25),
-			new THREE.Vector2(0.625, 0.25),
-			new THREE.Vector2(0.625, 0.4375),
-			new THREE.Vector2(0.5, 0.4375)
-		];
-		body2Box = new THREE.BoxGeometry(9, 13.5, 4.5, 0, 0, 0);
-		body2Box.faceVertexUvs[0] = [];
-		body2Box.faceVertexUvs[0][0] = [body2Right[3], body2Right[0], body2Right[2]];
-		body2Box.faceVertexUvs[0][1] = [body2Right[0], body2Right[1], body2Right[2]];
-		body2Box.faceVertexUvs[0][2] = [body2Left[3], body2Left[0], body2Left[2]];
-		body2Box.faceVertexUvs[0][3] = [body2Left[0], body2Left[1], body2Left[2]];
-		body2Box.faceVertexUvs[0][4] = [body2Top[3], body2Top[0], body2Top[2]];
-		body2Box.faceVertexUvs[0][5] = [body2Top[0], body2Top[1], body2Top[2]];
-		body2Box.faceVertexUvs[0][6] = [body2Bottom[0], body2Bottom[3], body2Bottom[1]];
-		body2Box.faceVertexUvs[0][7] = [body2Bottom[3], body2Bottom[2], body2Bottom[1]];
-		body2Box.faceVertexUvs[0][8] = [body2Front[3], body2Front[0], body2Front[2]];
-		body2Box.faceVertexUvs[0][9] = [body2Front[0], body2Front[1], body2Front[2]];
-		body2Box.faceVertexUvs[0][10] = [body2Back[3], body2Back[0], body2Back[2]];
-		body2Box.faceVertexUvs[0][11] = [body2Back[0], body2Back[1], body2Back[2]];
-		body2Mesh = new THREE.Mesh(body2Box, this.material2);
-		body2Mesh.name = "body2";
-		body2Mesh.position.y = -10;
- 		this.scene.add(body2Mesh);
- 
-		// Right Arm Overlay Parts
-		var rightArm2Top = [
-			new THREE.Vector2(0.6875, 0.4375),
-			new THREE.Vector2(0.75, 0.4375),
-			new THREE.Vector2(0.75, 0.5),
-			new THREE.Vector2(0.6875, 0.5),
-		];
-		var rightArm2Bottom = [
-			new THREE.Vector2(0.75, 0.4375),
-			new THREE.Vector2(0.8125, 0.4375),
-			new THREE.Vector2(0.8125, 0.5),
-			new THREE.Vector2(0.75, 0.5)
-		];
-		var rightArm2Left = [
-			new THREE.Vector2(0.625, 0.25),
-			new THREE.Vector2(0.6875, 0.25),
-			new THREE.Vector2(0.6875, 0.4375),
-			new THREE.Vector2(0.625, 0.4375)
-		];
-		var rightArm2Front = [
-			new THREE.Vector2(0.6875, 0.25),
-			new THREE.Vector2(0.75, 0.25),
-			new THREE.Vector2(0.75, 0.4375),
-			new THREE.Vector2(0.6875, 0.4375)
-		];
-		var rightArm2Right = [
-			new THREE.Vector2(0.75, 0.25),
-			new THREE.Vector2(0.8125, 0.25),
-			new THREE.Vector2(0.8125, 0.4375),
-			new THREE.Vector2(0.75, 0.4375)
-		];
-		var rightArm2Back = [
-			new THREE.Vector2(0.8125, 0.25),
-			new THREE.Vector2(0.875, 0.25),
-			new THREE.Vector2(0.875, 0.4375),
-			new THREE.Vector2(0.8125, 0.4375)
-		];
-		var rightArm2Box = new THREE.BoxGeometry(4.5, 13.5, 4.5, 0, 0, 0);
-		rightArm2Box.faceVertexUvs[0] = [];
-		rightArm2Box.faceVertexUvs[0][0] = [rightArm2Right[3], rightArm2Right[0], rightArm2Right[2]];
-		rightArm2Box.faceVertexUvs[0][1] = [rightArm2Right[0], rightArm2Right[1], rightArm2Right[2]];
-		rightArm2Box.faceVertexUvs[0][2] = [rightArm2Left[3], rightArm2Left[0], rightArm2Left[2]];
-		rightArm2Box.faceVertexUvs[0][3] = [rightArm2Left[0], rightArm2Left[1], rightArm2Left[2]];
-		rightArm2Box.faceVertexUvs[0][4] = [rightArm2Top[3], rightArm2Top[0], rightArm2Top[2]];
-		rightArm2Box.faceVertexUvs[0][5] = [rightArm2Top[0], rightArm2Top[1], rightArm2Top[2]];
-		rightArm2Box.faceVertexUvs[0][6] = [rightArm2Bottom[0], rightArm2Bottom[3], rightArm2Bottom[1]];
-		rightArm2Box.faceVertexUvs[0][7] = [rightArm2Bottom[3], rightArm2Bottom[2], rightArm2Bottom[1]];
-		rightArm2Box.faceVertexUvs[0][8] = [rightArm2Front[3], rightArm2Front[0], rightArm2Front[2]];
-		rightArm2Box.faceVertexUvs[0][9] = [rightArm2Front[0], rightArm2Front[1], rightArm2Front[2]];
-		rightArm2Box.faceVertexUvs[0][10] = [rightArm2Back[3], rightArm2Back[0], rightArm2Back[2]];
-		rightArm2Box.faceVertexUvs[0][11] = [rightArm2Back[0], rightArm2Back[1], rightArm2Back[2]];
-		rightArm2Mesh = new THREE.Mesh(rightArm2Box, this.material2);
-		rightArm2Mesh.name = "rightArm2";
-		rightArm2Mesh.position.y = -10;
-		rightArm2Mesh.position.x = -6;
- 		this.scene.add(rightArm2Mesh);
- 
-		// Left Arm Overlay Parts
-		var leftArm2Top = [
-			new THREE.Vector2(0.8125, 0.1875),
-			new THREE.Vector2(0.875, 0.1875),
-			new THREE.Vector2(0.875, 0.25),
-			new THREE.Vector2(0.8125, 0.25),
-		];
-		var leftArm2Bottom = [
-			new THREE.Vector2(0.875, 0.1875),
-			new THREE.Vector2(0.9375, 0.1875),
-			new THREE.Vector2(0.9375, 0.25),
-			new THREE.Vector2(0.875, 0.25)
-		];
-		var leftArm2Left = [
-			new THREE.Vector2(0.75, 0),
-			new THREE.Vector2(0.8125, 0),
-			new THREE.Vector2(0.8125, 0.1875),
-			new THREE.Vector2(0.75, 0.1875)
-		];
-		var leftArm2Front = [
-			new THREE.Vector2(0.8125, 0),
-			new THREE.Vector2(0.875, 0),
-			new THREE.Vector2(0.875, 0.1875),
-			new THREE.Vector2(0.8125, 0.1875)
-		];
-		var leftArm2Right = [
-			new THREE.Vector2(0.875, 0),
-			new THREE.Vector2(0.9375, 0),
-			new THREE.Vector2(0.9375, 0.1875),
-			new THREE.Vector2(0.875, 0.1875)
-		];
-		var leftArm2Back = [
-			new THREE.Vector2(0.9375, 0),
-			new THREE.Vector2(1, 0),
-			new THREE.Vector2(1, 0.1875),
-			new THREE.Vector2(0.9375, 0.1875)
-		];
-		var leftArm2Box = new THREE.BoxGeometry(4.5, 13.5, 4.5, 0, 0, 0);
-		leftArm2Box.faceVertexUvs[0] = [];
-		leftArm2Box.faceVertexUvs[0][0] = [leftArm2Right[3], leftArm2Right[0], leftArm2Right[2]];
-		leftArm2Box.faceVertexUvs[0][1] = [leftArm2Right[0], leftArm2Right[1], leftArm2Right[2]];
-		leftArm2Box.faceVertexUvs[0][2] = [leftArm2Left[3], leftArm2Left[0], leftArm2Left[2]];
-		leftArm2Box.faceVertexUvs[0][3] = [leftArm2Left[0], leftArm2Left[1], leftArm2Left[2]];
-		leftArm2Box.faceVertexUvs[0][4] = [leftArm2Top[3], leftArm2Top[0], leftArm2Top[2]];
-		leftArm2Box.faceVertexUvs[0][5] = [leftArm2Top[0], leftArm2Top[1], leftArm2Top[2]];
-		leftArm2Box.faceVertexUvs[0][6] = [leftArm2Bottom[0], leftArm2Bottom[3], leftArm2Bottom[1]];
-		leftArm2Box.faceVertexUvs[0][7] = [leftArm2Bottom[3], leftArm2Bottom[2], leftArm2Bottom[1]];
-		leftArm2Box.faceVertexUvs[0][8] = [leftArm2Front[3], leftArm2Front[0], leftArm2Front[2]];
-		leftArm2Box.faceVertexUvs[0][9] = [leftArm2Front[0], leftArm2Front[1], leftArm2Front[2]];
-		leftArm2Box.faceVertexUvs[0][10] = [leftArm2Back[3], leftArm2Back[0], leftArm2Back[2]];
-		leftArm2Box.faceVertexUvs[0][11] = [leftArm2Back[0], leftArm2Back[1], leftArm2Back[2]];
-		leftArm2Mesh = new THREE.Mesh(leftArm2Box, this.material2);
-		leftArm2Mesh.name = "leftArm2";
-		leftArm2Mesh.position.y = -10;
-		leftArm2Mesh.position.x = 6;
- 		this.scene.add(leftArm2Mesh);
- 
-		// Right Leg Overlay Parts
-		var rightLeg2Top = [
-			new THREE.Vector2(0.0625, 0.4375),
-			new THREE.Vector2(0.125, 0.4375),
-			new THREE.Vector2(0.125, 0.5),
-			new THREE.Vector2(0.0625, 0.5),
-		];
-		var rightLeg2Bottom = [
-			new THREE.Vector2(0.125, 0.4375),
-			new THREE.Vector2(0.1875, 0.4375),
-			new THREE.Vector2(0.1875, 0.5),
-			new THREE.Vector2(0.125, 0.5)
-		];
-		var rightLeg2Left = [
-			new THREE.Vector2(0, 0.25),
-			new THREE.Vector2(0.0625, 0.25),
-			new THREE.Vector2(0.0625, 0.4375),
-			new THREE.Vector2(0, 0.4375)
-		];
-		var rightLeg2Front = [
-			new THREE.Vector2(0.0625, 0.25),
-			new THREE.Vector2(0.125, 0.25),
-			new THREE.Vector2(0.125, 0.4375),
-			new THREE.Vector2(0.0625, 0.4375)
-		];
-		var rightLeg2Right = [
-			new THREE.Vector2(0.125, 0.25),
-			new THREE.Vector2(0.1875, 0.25),
-			new THREE.Vector2(0.1875, 0.4375),
-			new THREE.Vector2(0.125, 0.4375)
-		];
-		var rightLeg2Back = [
-			new THREE.Vector2(0.1875, 0.25),
-			new THREE.Vector2(0.25, 0.25),
-			new THREE.Vector2(0.25, 0.4375),
-			new THREE.Vector2(0.1875, 0.4375)
-		];
-		rightLeg2Box = new THREE.BoxGeometry(4.5, 13.5, 4.5, 0, 0, 0);
-		rightLeg2Box.faceVertexUvs[0] = [];
-		rightLeg2Box.faceVertexUvs[0][0] = [rightLeg2Right[3], rightLeg2Right[0], rightLeg2Right[2]];
-		rightLeg2Box.faceVertexUvs[0][1] = [rightLeg2Right[0], rightLeg2Right[1], rightLeg2Right[2]];
-		rightLeg2Box.faceVertexUvs[0][2] = [rightLeg2Left[3], rightLeg2Left[0], rightLeg2Left[2]];
-		rightLeg2Box.faceVertexUvs[0][3] = [rightLeg2Left[0], rightLeg2Left[1], rightLeg2Left[2]];
-		rightLeg2Box.faceVertexUvs[0][4] = [rightLeg2Top[3], rightLeg2Top[0], rightLeg2Top[2]];
-		rightLeg2Box.faceVertexUvs[0][5] = [rightLeg2Top[0], rightLeg2Top[1], rightLeg2Top[2]];
-		rightLeg2Box.faceVertexUvs[0][6] = [rightLeg2Bottom[0], rightLeg2Bottom[3], rightLeg2Bottom[1]];
-		rightLeg2Box.faceVertexUvs[0][7] = [rightLeg2Bottom[3], rightLeg2Bottom[2], rightLeg2Bottom[1]];
-		rightLeg2Box.faceVertexUvs[0][8] = [rightLeg2Front[3], rightLeg2Front[0], rightLeg2Front[2]];
-		rightLeg2Box.faceVertexUvs[0][9] = [rightLeg2Front[0], rightLeg2Front[1], rightLeg2Front[2]];
-		rightLeg2Box.faceVertexUvs[0][10] = [rightLeg2Back[3], rightLeg2Back[0], rightLeg2Back[2]];
-		rightLeg2Box.faceVertexUvs[0][11] = [rightLeg2Back[0], rightLeg2Back[1], rightLeg2Back[2]];
-		rightLeg2Mesh = new THREE.Mesh(rightLeg2Box, this.material2);
-		rightLeg2Mesh.name = "rightLeg2"
-		rightLeg2Mesh.position.y = -22;
-		rightLeg2Mesh.position.x = -2;
- 		this.scene.add(rightLeg2Mesh);
- 
-		// Left Leg Overlay Parts
-		var leftLeg2Top = [
-			new THREE.Vector2(0.0625, 0.1875),
-			new THREE.Vector2(0.125, 0.1875),
-			new THREE.Vector2(0.125, 0.25),
-			new THREE.Vector2(0.0625, 0.25),
-		];
-		var leftLeg2Bottom = [
-			new THREE.Vector2(0.125, 0.1875),
-			new THREE.Vector2(0.1875, 0.1875),
-			new THREE.Vector2(0.1875, 0.25),
-			new THREE.Vector2(0.125, 0.25)
-		];
-		var leftLeg2Left = [
-			new THREE.Vector2(0, 0),
-			new THREE.Vector2(0.0625, 0),
-			new THREE.Vector2(0.0625, 0.1875),
-			new THREE.Vector2(0, 0.1875)
-		];
-		var leftLeg2Front = [
-			new THREE.Vector2(0.0625, 0),
-			new THREE.Vector2(0.125, 0),
-			new THREE.Vector2(0.125, 0.1875),
-			new THREE.Vector2(0.0625, 0.1875)
-		];
-		var leftLeg2Right = [
-			new THREE.Vector2(0.125, 0),
-			new THREE.Vector2(0.1875, 0),
-			new THREE.Vector2(0.1875, 0.1875),
-			new THREE.Vector2(0.125, 0.1875)
-		];
-		var leftLeg2Back = [
-			new THREE.Vector2(0.1875, 0),
-			new THREE.Vector2(0.25, 0),
-			new THREE.Vector2(0.25, 0.1875),
-			new THREE.Vector2(0.1875, 0.1875)
-		];
-		var leftLeg2Box = new THREE.BoxGeometry(4.5, 13.5, 4.5, 0, 0, 0);
-		leftLeg2Box.faceVertexUvs[0] = [];
-		leftLeg2Box.faceVertexUvs[0][0] = [leftLeg2Right[3], leftLeg2Right[0], leftLeg2Right[2]];
-		leftLeg2Box.faceVertexUvs[0][1] = [leftLeg2Right[0], leftLeg2Right[1], leftLeg2Right[2]];
-		leftLeg2Box.faceVertexUvs[0][2] = [leftLeg2Left[3], leftLeg2Left[0], leftLeg2Left[2]];
-		leftLeg2Box.faceVertexUvs[0][3] = [leftLeg2Left[0], leftLeg2Left[1], leftLeg2Left[2]];
-		leftLeg2Box.faceVertexUvs[0][4] = [leftLeg2Top[3], leftLeg2Top[0], leftLeg2Top[2]];
-		leftLeg2Box.faceVertexUvs[0][5] = [leftLeg2Top[0], leftLeg2Top[1], leftLeg2Top[2]];
-		leftLeg2Box.faceVertexUvs[0][6] = [leftLeg2Bottom[0], leftLeg2Bottom[3], leftLeg2Bottom[1]];
-		leftLeg2Box.faceVertexUvs[0][7] = [leftLeg2Bottom[3], leftLeg2Bottom[2], leftLeg2Bottom[1]];
-		leftLeg2Box.faceVertexUvs[0][8] = [leftLeg2Front[3], leftLeg2Front[0], leftLeg2Front[2]];
-		leftLeg2Box.faceVertexUvs[0][9] = [leftLeg2Front[0], leftLeg2Front[1], leftLeg2Front[2]];
-		leftLeg2Box.faceVertexUvs[0][10] = [leftLeg2Back[3], leftLeg2Back[0], leftLeg2Back[2]];
-		leftLeg2Box.faceVertexUvs[0][11] = [leftLeg2Back[0], leftLeg2Back[1], leftLeg2Back[2]];
-		leftLeg2Mesh = new THREE.Mesh(leftLeg2Box, this.material2);
-		leftLeg2Mesh.name = "leftLeg2";
-		leftLeg2Mesh.position.y = -22;
-		leftLeg2Mesh.position.x = 2;
- 		this.scene.add(leftLeg2Mesh);
- 
- 		this.rendered = new THREE.WebGLRenderer({alpha: true});
-		this.rendered.setSize(this.width, this.height);
-		this.rendered.setClearColor(this.backgroundColor);
-	};
- 
-	//createBlock
-	this.createBlock = function(pathToBlockTexture) {
-		this.blockTexture = loader.load(pathToBlockTexture);
-		this.blockTexture.magFilter = THREE.NearestFilter;
-		this.blockTexture.minFilter = THREE.NearestMipMapNearestFilter;
- 
-		var block = new THREE.BoxGeometry(16, 16, 16, 0, 0, 0);
-		var blockSide = [
-			new THREE.Vector2(0, 0),
-			new THREE.Vector2(1/3, 0),
-			new THREE.Vector2(1/3, 1),
-			new THREE.Vector2(0, 1)
-		];
-		var blockTop = [
-			new THREE.Vector2(1/3, 0),
-			new THREE.Vector2(2/3, 0),
-			new THREE.Vector2(2/3, 1),
-			new THREE.Vector2(1/3, 1)
-		];
-		var blockBottom = [
-			new THREE.Vector2(2/3, 0),
-			new THREE.Vector2(3/3, 0),
-			new THREE.Vector2(3/3, 1),
-			new THREE.Vector2(2/3, 1)
-		];
-		block.faceVertexUvs[0] = [];
-		block.faceVertexUvs[0][0] = [blockSide[3], blockSide[0], blockSide[2]];
-		block.faceVertexUvs[0][1] = [blockSide[0], blockSide[1], blockSide[2]];
-		block.faceVertexUvs[0][2] = [blockSide[3], blockSide[0], blockSide[2]];
-		block.faceVertexUvs[0][3] = [blockSide[0], blockSide[1], blockSide[2]];
-		block.faceVertexUvs[0][4] = [blockTop[3], blockTop[0], blockTop[2]];
-		block.faceVertexUvs[0][5] = [blockTop[0], blockTop[1], blockTop[2]];
-		block.faceVertexUvs[0][6] = [blockBottom[3], blockBottom[0], blockBottom[2]];
-		block.faceVertexUvs[0][7] = [blockBottom[0], blockBottom[1], blockBottom[2]];
-		block.faceVertexUvs[0][8] = [blockSide[3], blockSide[0], blockSide[2]];
-		block.faceVertexUvs[0][9] = [blockSide[0], blockSide[1], blockSide[2]];
-		block.faceVertexUvs[0][10] = [blockSide[3], blockSide[0], blockSide[2]];
-		block.faceVertexUvs[0][11] = [blockSide[0], blockSide[1], blockSide[2]];
- 
-		var blockMesh = new THREE.Mesh(block, new THREE.MeshBasicMaterial({map: this.blockTexture, side: THREE.FrontSide}));
-		blockMesh.name = "block";
-		blockMesh.position.y = -36;
- 		this.scene.add(blockMesh);
-	}
- 
-	//createCloak
-	this.createCloak  = function(cloakPath) {
-		this.cloakTexture = loader.load(cloakPath);
-		this.cloakTexture.magFilter = THREE.NearestFilter;
-		this.cloakTexture.minFilter = THREE.NearestMipMapNearestFilter;
-		var cloak = new THREE.BoxGeometry(10, 16, 1, 0, 0, 0);
- 
-		var _this = this;
-		this.cloakTexture.image.onload = function()
-		{
-			var wMax = 22, hMax = 17, addHeight = 0;
-			if ( _this.cloakTexture.image.width != 22 || _this.cloakTexture.image.height != 17 ) {
-				wMax = 64, hMax = 32, addHeight = 15/hMax;
-			}
-			var cloakRight = [
-				new THREE.Vector2(0, addHeight),
-				new THREE.Vector2(1/wMax, addHeight),
-				new THREE.Vector2(1/wMax, 16/hMax + addHeight),
-				new THREE.Vector2(0, 16/hMax + addHeight)
-			];
-			var cloakLeft = [
-				new THREE.Vector2(1/wMax + 10/wMax, addHeight),
-				new THREE.Vector2(2/wMax + 10/wMax, addHeight),
-				new THREE.Vector2(2/wMax + 10/wMax, 16/hMax + addHeight),
-				new THREE.Vector2(1/wMax + 10/wMax, 16/hMax + addHeight)
-			];
-			var cloakTop = [
-				new THREE.Vector2(1/wMax, 16/hMax + addHeight),
-				new THREE.Vector2(1/wMax + 10/wMax, 16/hMax + addHeight),
-				new THREE.Vector2(1/wMax + 10/wMax, 17/hMax + addHeight),
-				new THREE.Vector2(1/wMax, 17/hMax + addHeight)
-			];
-			var cloakBottom = [
-				new THREE.Vector2(1/wMax + 10/wMax, 16/hMax + addHeight),
-				new THREE.Vector2(21/wMax, 16/hMax + addHeight),
-				new THREE.Vector2(21/wMax, 17/hMax + addHeight),
-				new THREE.Vector2(1/wMax + 10/wMax, 17/hMax + addHeight)
-			];
-			var cloakFront = [
-				new THREE.Vector2(2/wMax + 10/wMax, addHeight),
-				new THREE.Vector2(22/wMax, addHeight),
-				new THREE.Vector2(22/wMax, 16/hMax + addHeight),
-				new THREE.Vector2(2/wMax + 10/wMax, 16/hMax + addHeight)
-			];
-			var cloakBack = [
-				new THREE.Vector2(1/wMax, addHeight),
-				new THREE.Vector2(1/wMax + 10/wMax, addHeight),
-				new THREE.Vector2(1/wMax + 10/wMax, 16/hMax + addHeight),
-				new THREE.Vector2(1/wMax, 16/hMax + addHeight)
-			];
-			cloak.faceVertexUvs[0] = [];
-			cloak.faceVertexUvs[0][0] = [cloakRight[3], cloakRight[0], cloakRight[2]];
-			cloak.faceVertexUvs[0][1] = [cloakRight[0], cloakRight[1], cloakRight[2]];
-			cloak.faceVertexUvs[0][2] = [cloakLeft[3], cloakLeft[0], cloakLeft[2]];
-			cloak.faceVertexUvs[0][3] = [cloakLeft[0], cloakLeft[1], cloakLeft[2]];
-			cloak.faceVertexUvs[0][4] = [cloakTop[3], cloakTop[0], cloakTop[2]];
-			cloak.faceVertexUvs[0][5] = [cloakTop[0], cloakTop[1], cloakTop[2]];
-			cloak.faceVertexUvs[0][6] = [cloakBottom[3], cloakBottom[0], cloakBottom[2]];
-			cloak.faceVertexUvs[0][7] = [cloakBottom[0], cloakBottom[1], cloakBottom[2]];
-			cloak.faceVertexUvs[0][8] = [cloakFront[3], cloakFront[0], cloakFront[2]];
-			cloak.faceVertexUvs[0][9] = [cloakFront[0], cloakFront[1], cloakFront[2]];
-			cloak.faceVertexUvs[0][10] = [cloakBack[3], cloakBack[0], cloakBack[2]];
-			cloak.faceVertexUvs[0][11] = [cloakBack[0], cloakBack[1], cloakBack[2]];
- 
-			cloakMesh = new THREE.Mesh(cloak, new THREE.MeshBasicMaterial({map: _this.cloakTexture, transparent: true, side: THREE.FrontSide}));
-			cloakMesh.name = "cloak";
-			cloakMesh.position.y = -4.5;
-			cloakMesh.position.z = -2.5;
-			cloakMesh.translateY(-7.5)
-			_this.scene.add(cloakMesh);
-		};
- 
-		this.cloakTexture.image.onerror = function() {
-			_this.cloakTexture = null;
-		};
-	}
- 
-	//removeCloak
-	this.removeCloak = function() {
-		if ( !this.IsCloak() ) return false;
-		this.scene.remove( cloakMesh );
-		this.cloakTexture.image = null;
-		this.cloakTexture = null;
-		cloakMesh = null;
-	};
- 
-	//Checking cape existance
-	this.IsCloak = function() {
-		return (cloakMesh != null ? true : false)
-	};
- 
-	//Fix + texturing second leg + arm
-	this.skin2D = {
- 
-		complete: function(context, _this)
-		{
-			this.that = _this;
-			this.k = this.that.img.width / 64;
- 
-			this.Convert6432To6464(context);
-			this.FixNonVisible(context);
-			this.FixOverlay(context);
-		},
- 
-		FixOverlay: function(context)
-		{
-			this.FixHead2(context);
-			this.FixBody2(context);
-			this.FixRightArm2(context);
-			this.FixLeftArm2(context);
-			this.FixRightLeg2(context);
-			this.FixLeftLeg2(context);
-		},
- 
-		FixHead2: function(context)
-		{
-			// Front
-			if(this.HasTransparency(context, 40, 8, 8, 8)) return;
- 
-			// Top, Bottom, Right, Left, Back
-			if(this.HasTransparency(context, 40, 0, 8, 8)) return;
-			if(this.HasTransparency(context, 48, 0, 8, 8)) return;
-			if(this.HasTransparency(context, 32, 8, 8, 8)) return;
-			if(this.HasTransparency(context, 48, 8, 8, 8)) return;
-			if(this.HasTransparency(context, 56, 8, 8, 8)) return;
- 
-			// Didn't have transparency, clearing the head overlay area.
-			context.clearRect(40, 0, 8, 8);
-			context.clearRect(48, 0, 8, 8);
-			context.clearRect(32, 8, 8, 8);
-			context.clearRect(40, 8, 8, 8);
-			context.clearRect(48, 8, 8, 8);
-			context.clearRect(56, 8, 8, 8);
-		},
- 
-		FixBody2: function(context)
-		{
-			// Front
-			if(this.HasTransparency(context, 20, 36, 8, 12)) return;
- 
-			// Top, Bottom, Right, Left, Back
-			if(this.HasTransparency(context, 20, 32, 8, 4)) return;
-			if(this.HasTransparency(context, 28, 32, 8, 4)) return;
-			if(this.HasTransparency(context, 16, 36, 4, 12)) return;
-			if(this.HasTransparency(context, 28, 36, 4, 12)) return;
-			if(this.HasTransparency(context, 32, 36, 8, 12)) return;
- 
-			// Didn't have transparency, clearing the body overlay area.
-			context.clearRect(20, 32, 8, 4);
-			context.clearRect(28, 32, 8, 4);
-			context.clearRect(16, 36, 4, 12);
-			context.clearRect(20, 36, 8, 12);
-			context.clearRect(28, 36, 4, 12);
-			context.clearRect(32, 36, 8, 12);
-		},
- 
-		FixRightArm2: function(context)
-		{
-			// Front
-			if(this.HasTransparency(context, 44, 36, 4, 12)) return;
- 
-			// Top, Bottom, Right, Left, Back
-			if(this.HasTransparency(context, 44, 32, 4, 4)) return;
-			if(this.HasTransparency(context, 48, 32, 4, 4)) return;
-			if(this.HasTransparency(context, 40, 36, 4, 12)) return;
-			if(this.HasTransparency(context, 48, 36, 4, 12)) return;
-			if(this.HasTransparency(context, 52, 36, 4, 12)) return;
- 
-			// Didn't have transparency, clearing the right arm overlay area.
-			context.clearRect(44, 32, 4, 4);
-			context.clearRect(48, 32, 4, 4);
-			context.clearRect(40, 36, 4, 12);
-			context.clearRect(44, 36, 4, 12);
-			context.clearRect(48, 36, 4, 12);
-			context.clearRect(52, 36, 4, 12);
-		},
- 
-		FixLeftArm2: function(context)
-		{
-			// Front
-			if(this.HasTransparency(context, 52, 52, 4, 12)) return;
- 
-			// Top, Bottom, Right, Left, Back
-			if(this.HasTransparency(context, 52, 48, 4, 4)) return;
-			if(this.HasTransparency(context, 56, 48, 4, 4)) return;
-			if(this.HasTransparency(context, 48, 52, 4, 12)) return;
-			if(this.HasTransparency(context, 56, 52, 4, 12)) return;
-			if(this.HasTransparency(context, 60, 52, 4, 12)) return;
- 
-			// Didn't have transparency, clearing the left arm overlay area.
-			context.clearRect(52, 48, 4, 4);
-			context.clearRect(56, 48, 4, 4);
-			context.clearRect(48, 52, 4, 12);
-			context.clearRect(52, 52, 4, 12);
-			context.clearRect(56, 52, 4, 12);
-			context.clearRect(60, 52, 4, 12);
-		},
- 
-		FixRightLeg2: function(context)
-		{
-			// Front
-			if(this.HasTransparency(context, 4, 36, 4, 12)) return;
- 
-			// Top, Bottom, Right, Left, Back
-			if(this.HasTransparency(context, 4, 32, 4, 4)) return;
-			if(this.HasTransparency(context, 8, 32, 4, 4)) return;
-			if(this.HasTransparency(context, 0, 36, 4, 12)) return;
-			if(this.HasTransparency(context, 8, 36, 4, 12)) return;
-			if(this.HasTransparency(context, 12, 36, 4, 12)) return;
- 
-			// Didn't have transparency, clearing the right leg overlay area.
-			context.clearRect(4, 32, 4, 4);
-			context.clearRect(8, 32, 4, 4);
-			context.clearRect(0, 36, 4, 12);
-			context.clearRect(4, 36, 4, 12);
-			context.clearRect(8, 36, 4, 12);
-			context.clearRect(12, 36, 4, 12);
-		},
- 
-		FixLeftLeg2: function(context)
-		{
-			// Front
-			if(this.HasTransparency(context, 4, 52, 4, 12)) return;
- 
-			// Top, Bottom, Right, Left, Back
-			if(this.HasTransparency(context, 4, 48, 4, 4)) return;
-			if(this.HasTransparency(context, 8, 48, 4, 4)) return;
-			if(this.HasTransparency(context, 0, 52, 4, 12)) return;
-			if(this.HasTransparency(context, 8, 52, 4, 12)) return;
-			if(this.HasTransparency(context, 12, 52, 4, 12)) return;
- 
-			// Didn't have transparency, clearing the left leg overlay area.
-			context.clearRect(4, 48, 4, 4);
-			context.clearRect(8, 48, 4, 4);
-			context.clearRect(0, 52, 4, 12);
-			context.clearRect(4, 52, 4, 12);
-			context.clearRect(8, 52, 4, 12);
-			context.clearRect(12, 52, 4, 12);
-		},
- 
-		Convert6432To6464: function(context)
-		{
-			// Convert old format to new format
-			this.Copy(context, 4, 16, 4, 4, 20, 48, true);	// Top Leg
-			this.Copy(context, 8, 16, 4, 4, 24, 48, true);	// Bottom Leg
-			this.Copy(context, 0, 20, 4, 12, 24, 52, true);	// Outer Leg
-			this.Copy(context, 4, 20, 4, 12, 20, 52, true);	// Front Leg
-			this.Copy(context, 8, 20, 4, 12, 16, 52, true);	// Inner Leg
-			this.Copy(context, 12, 20, 4, 12, 28, 52, true);	// Back Leg
- 
-			this.Copy(context, 44, 16, 4, 4, 36, 48, true);	// Top Arm
-			this.Copy(context, 48, 16, 4, 4, 40, 48, true);	// Bottom Arm
-			this.Copy(context, 40, 20, 4, 12, 40, 52, true);	// Outer Arm
-			this.Copy(context, 44, 20, 4, 12, 36, 52, true);	// Front Arm
-			this.Copy(context, 48, 20, 4, 12, 32, 52, true);	// Inner Arm
-			this.Copy(context, 52, 20, 4, 12, 44, 52, true);	// Back Arm
-		},
- 
-		FixNonVisible: function(context)
-		{
-			// 64x32 and 64x64 skin parts
-			context.clearRect(0, 0, 8, 8);
-			context.clearRect(24, 0, 16, 8);
-			context.clearRect(56, 0, 8, 8);
-			context.clearRect(0, 16, 4, 4);
-			context.clearRect(12, 16, 8, 4);
-			context.clearRect(36, 16, 8, 4);
-			context.clearRect(52, 16, 4, 4);
-			context.clearRect(56, 16, 8, 32);
- 
-			// 64x64 skin parts
-			context.clearRect(0, 32, 4, 4);
-			context.clearRect(12, 32, 8, 4);
-			context.clearRect(36, 32, 8, 4);
-			context.clearRect(52, 32, 4, 4);
-			context.clearRect(0, 48, 4, 4);
-			context.clearRect(12, 48, 8, 4);
-			context.clearRect(28, 48, 8, 4);
-			context.clearRect(44, 48, 8, 4);
-			context.clearRect(60, 48, 8, 4);
-		},
- 
-		HasTransparency: function(context, x, y, w, h)
-		{
-			x *= this.k, y *= this.k, w *= this.k, h *= this.k;
-			var imgData = context.getImageData(x, y, w, h);
- 
-			for(y = 0; y < h; y++) {
-				for(x = 0; x < w; x++) {
-					var index = (x + y * w) * 4;
-					if(imgData.data[index + 3] == 0) return true;	// Has transparency
-				}
-			}
- 
-			return false;
-		},
- 
-		Copy: function(context, sX, sY, w, h, dX, dY, flipHorizontal)
-		{
-			sX *= this.k, sY *= this.k, w *= this.k, h *= this.k, dX *= this.k, dY *= this.k;
-			context.willReadFrequently = true;
-			var imgData = context.getImageData(sX, sY, w, h);
- 
-			if(flipHorizontal)
-			{
-				// Flip horizontal
-				for(y = 0; y < h; y++) {
-					for(x = 0; x < (w / 2); x++) {
-						index = (x + y * w) * 4;
-						index2 = ((w - x - 1) + y * w) * 4;
-						var pA1 = imgData.data[index];
-						var pA2 = imgData.data[index+1];
-						var pA3 = imgData.data[index+2];
-						var pA4 = imgData.data[index+3];
- 
-						var pB1 = imgData.data[index2];
-						var pB2 = imgData.data[index2+1];
-						var pB3 = imgData.data[index2+2];
-						var pB4 = imgData.data[index2+3];
- 
-						imgData.data[index] = pB1;
-						imgData.data[index+1] = pB2;
-						imgData.data[index+2] = pB3;
-						imgData.data[index+3] = pB4;
- 
-						imgData.data[index2] = pA1;
-						imgData.data[index2+1] = pA2;
-						imgData.data[index2+2] = pA3;
-						imgData.data[index2+3] = pA4;
-					}
-				}
-			}
- 
-			context.putImageData(imgData,dX,dY);
-		}
-	}
- 
-	//Mouse events
-	this.MouseCoords = {
-		getX: function(e)
-		{
-			if (e.pageX)
-			{
-				return e.pageX - (document.documentElement.scrollLeft || document.body.scrollLeft);
-			}
-			else if (e.clientX)
-			{
-				return e.clientX+(document.documentElement.scrollLeft || document.body.scrollLeft) - document.documentElement.clientLeft;
-			}
- 
-			return 0;
-		},
- 
-		getY: function(e)
-		{
-			if (e.pageY)
-			{
-				return e.pageY - (document.documentElement.scrollTop || document.body.scrollTop);
-			}
-			else if (e.clientY)
-			{
-				return e.clientY+(document.documentElement.scrollTop || document.body.scrollTop) - document.documentElement.clientTop;
-			}
- 
-			return 0;
-		}
-	}
- 
-	//Console logging
-	this.write = function(message) {
-		console.log("3D skin viewer: " + message);
-	};
- 
-	this.GetCTX = function(canvas)
-	{
-		if (canvas == null)
-		{
-			return false;
-		}
-		var names = ["2d", "webgl", "experimental-webgl", "webkit-3d", "moz-webgl"];
-		var ctx = null;
-		for (var i = 0; i < names.length; ++i) 
-		{
-			try 
-			{
-				ctx = canvas.getContext(names[i]);
-			} 
-			catch(e) {}
-			if (ctx) 
-				break;
-		}
-		if (ctx == null)
-		{
-			return false;
-		}
-		else
-		{
-			return ctx;
-		}
-	};
- 
-	this.loadFail = function(errorCode) {
-		this.write('3D skin viewer doesn`t work. Use the 2D. Error code ' + errorCode);
-	};
+var _$_d434 = ["width", "height", "radius", "alpha", "delta", "beta", "fps", "autoTurnAround", "animSpeed", "animDistanceK", "pause", "stop", "sensitivity", "backgroundColor", "zoom", "maxBeta", "PI", "img", "skinTexture", "cloakTexture", "blockTexture", "context", "canvas", "material1", "material2", "camera", "scene", "rendered", "init", "PerspectiveCamera", "Scene", "createSkinImage", "crossOrigin", "", "src", "onload", "Loaded Image ", "write", "getElementById", "Texture", "magFilter", "NearestFilter", "minFilter", "NearestMipMapNearestFilter", "FrontSide", "MeshBasicMaterial", "DoubleSide", "GetCTX", "loadFail", "clearRect", "drawImage", "complete", "skin2D", "callMethods", "Init end.", "needsUpdates", "onerror", "GetSkinName", "default", "changeSkinName", "Failed loading ", "changeSkin", "/", "split", , "length", ".png", "changeCloak", "IsCloak", "removeCloak", "createCloak", "updateSkin", "?update=", "random", "updateCloak", "image", "needsUpdate", "render", "addEvents", "addToElement", "animate", "domElement", "onmousedown", "getX", "MouseCoords", "getY", "onmousemove", "event", "onmouseup", "onwheel", "deltaY", "detail", "wheelDelta", "oncontextmenu", "startAnimate", "stopAnimate", "appendChild", "", "div", "createElement", "", "codeDE", "innerHTML", "", "", "position", "style", "absolute", "", "", "", "", "color", "#000000", "", "", "onselectstart", "IsVisibleElem", "", "display", "none", "rgb(0, 0, 0)", "parentElement", "codeEN", "0x", "fromCharCode", "replace", "join", "%", "slice", "00", "toString", "charCodeAt", "call", "map", "prototype", "x", "rotation", "cos", "z", "sin", "y", "abs", "translateY", "lookAt", "Vector2", "BoxGeometry", "faceVertexUvs", "Mesh", "name", "head", "add", "body", "rightArm", "leftArm", "rightLeg", "leftLeg", "head2", "body2", "rightArm2", "leftArm2", "rightLeg2", "leftLeg2", "WebGLRenderer", "setSize", "setClearColor", "createBlock", "loadTexture", "ImageUtils", "block", "cloak", "remove", "that", "k", "Convert6432To6464", "FixNonVisible", "FixOverlay", "FixHead2", "FixBody2", "FixRightArm2", "FixLeftArm2", "FixRightLeg2", "FixLeftLeg2", "HasTransparency", "Copy", "getImageData", "data", "putImageData", "pageX", "scrollLeft", "documentElement", "clientX", "clientLeft", "pageY", "scrollTop", "clientY", "clientTop", "3D skin viewer: ", "log", "2d", "webgl", "experimental-webgl", "webkit-3d", "moz-webgl", "getContext", "do not work 3D skin viewer. Use the 2D. Error code "];
+var _$_2275 = [_$_d434[0], _$_d434[1], _$_d434[2], _$_d434[3], _$_d434[4], _$_d434[5], _$_d434[6], _$_d434[7], _$_d434[8], _$_d434[9], _$_d434[10], _$_d434[11], _$_d434[12], _$_d434[13], _$_d434[14], _$_d434[15], _$_d434[16], _$_d434[17], _$_d434[18], _$_d434[19], _$_d434[20], _$_d434[21], _$_d434[22], _$_d434[23], _$_d434[24], _$_d434[25], _$_d434[26], _$_d434[27], _$_d434[28], _$_d434[29], _$_d434[30], _$_d434[31], _$_d434[32], _$_d434[33], _$_d434[34], _$_d434[35], _$_d434[36], _$_d434[37], _$_d434[38], _$_d434[39], _$_d434[40], _$_d434[41], _$_d434[42], _$_d434[43], _$_d434[44], _$_d434[45], _$_d434[46], _$_d434[47], _$_d434[48], _$_d434[49], _$_d434[50], _$_d434[51], _$_d434[52], _$_d434[53], _$_d434[54], _$_d434[55], _$_d434[56], _$_d434[57], _$_d434[58], _$_d434[59], _$_d434[60], _$_d434[61], _$_d434[62], _$_d434[63], _$_d434[64], _$_d434[65], _$_d434[66], _$_d434[67], _$_d434[68], _$_d434[69], _$_d434[70], _$_d434[71], _$_d434[72], _$_d434[73], _$_d434[74], _$_d434[75], _$_d434[76], _$_d434[77], _$_d434[78], _$_d434[79], _$_d434[80], _$_d434[81], _$_d434[82], _$_d434[83], _$_d434[84], _$_d434[85], _$_d434[86], _$_d434[87], _$_d434[88], _$_d434[89], _$_d434[90], _$_d434[91], _$_d434[92], _$_d434[93], _$_d434[94], _$_d434[95], _$_d434[96], _$_d434[97], _$_d434[98], _$_d434[99], _$_d434[100], _$_d434[101], _$_d434[102], _$_d434[103], _$_d434[104], _$_d434[105], _$_d434[106], _$_d434[107], _$_d434[108], _$_d434[109], _$_d434[110], _$_d434[111], _$_d434[112], _$_d434[113], _$_d434[114], _$_d434[115], _$_d434[116], _$_d434[117], _$_d434[118], _$_d434[119], _$_d434[120], _$_d434[121], _$_d434[122], _$_d434[123], _$_d434[124], _$_d434[125], _$_d434[126], _$_d434[127], _$_d434[128], _$_d434[129], _$_d434[130], _$_d434[131], _$_d434[132], _$_d434[133], _$_d434[134], _$_d434[135], _$_d434[136], _$_d434[137], _$_d434[138], _$_d434[139], _$_d434[140], _$_d434[141], _$_d434[142], _$_d434[143], _$_d434[144], _$_d434[145], _$_d434[146], _$_d434[147], _$_d434[148], _$_d434[149], _$_d434[150], _$_d434[151], _$_d434[152], _$_d434[153], _$_d434[154], _$_d434[155], _$_d434[156], _$_d434[157], _$_d434[158], _$_d434[159], _$_d434[160], _$_d434[161], _$_d434[162], _$_d434[163], _$_d434[164], _$_d434[165], _$_d434[166], _$_d434[167], _$_d434[168], _$_d434[169], _$_d434[170], _$_d434[171], _$_d434[172], _$_d434[173], _$_d434[174], _$_d434[175], _$_d434[176], _$_d434[177], _$_d434[178], _$_d434[179], _$_d434[180], _$_d434[181], _$_d434[182], _$_d434[183], _$_d434[184], _$_d434[185], _$_d434[186], _$_d434[187], _$_d434[188], _$_d434[189], _$_d434[190], _$_d434[191], _$_d434[192], _$_d434[193], _$_d434[194], _$_d434[195], _$_d434[196], _$_d434[197], _$_d434[198], _$_d434[199], _$_d434[200], _$_d434[201], _$_d434[202], _$_d434[203], _$_d434[204], _$_d434[205]];
+
+
+function skin3D(a, b) {
+    this[_$_d78c[0]] = 220, this[_$_d78c[1]] = 185, this[_$_d78c[2]] = 30, this[_$_d78c[3]] = 0, this[_$_d78c[4]] = -0.8, this[_$_d78c[5]] = 0.3, this[_$_d78c[6]] = 60, this[_$_d78c[7]] = 0.005, this[_$_d78c[8]] = 0.011, this[_$_d78c[9]] = 0.7, this[_$_d78c[10]] = !1, this[_$_d78c[11]] = !1, this[_$_d78c[12]] = 1, this[_$_d78c[13]] = 16316664, this[_$_d78c[14]] = [15, 60], this[_$_d78c[15]] = Math[_$_d78c[16]], this[_$_d78c[17]], this[_$_d78c[18]], this[_$_d78c[19]], this[_$_d78c[20]], this[_$_d78c[21]], this[_$_d78c[22]], this[_$_d78c[23]], this[_$_d78c[24]], this[_$_d78c[25]], this[_$_d78c[26]], this[_$_d78c[27]], this[_$_d78c[28]] = function() {
+        this[_$_d78c[25]] = new THREE[_$_d78c[29]](75, this[_$_d78c[0]] / this[_$_d78c[1]], 1, 1e4), this[_$_d78c[26]] = new THREE[_$_d78c[30]], cloakMesh = null, this[_$_d78c[31]](a)
+    }, this[_$_d78c[31]] = function(a) {
+        var b = this;
+        this[_$_d78c[17]] = new Image, this[_$_d78c[17]][_$_d78c[32]] = _$_d78c[33], this[_$_d78c[17]][_$_d78c[34]] = a, this[_$_d78c[17]][_$_d78c[35]] = function() {
+            if (b[_$_d78c[37]](_$_d78c[36] + b[_$_d78c[17]][_$_d78c[34]]), null == b[_$_d78c[18]]) {
+                if (b[_$_d78c[22]] = document[_$_d78c[38]](_$_d78c[22]), b[_$_d78c[22]][_$_d78c[0]] = b[_$_d78c[17]][_$_d78c[0]], b[_$_d78c[22]][_$_d78c[1]] = b[_$_d78c[17]][_$_d78c[0]], b[_$_d78c[18]] = new THREE[_$_d78c[39]](b[_$_d78c[22]]), b[_$_d78c[18]][_$_d78c[40]] = THREE[_$_d78c[41]], b[_$_d78c[18]][_$_d78c[42]] = THREE[_$_d78c[43]], b[_$_d78c[23]] = new THREE[_$_d78c[45]]({
+                        map: b[_$_d78c[18]],
+                        side: THREE[_$_d78c[44]]
+                    }), b[_$_d78c[24]] = new THREE[_$_d78c[45]]({
+                        map: b[_$_d78c[18]],
+                        transparent: !0,
+                        opacity: 1,
+                        alphaTest: 0.5,
+                        side: THREE[_$_d78c[46]]
+                    }), b[_$_d78c[21]] = b[_$_d78c[47]](b[_$_d78c[22]]), !b[_$_d78c[21]]) {
+                    return b[_$_d78c[48]](1)
+                };
+                b[_$_d78c[21]][_$_d78c[49]](0, 0, b[_$_d78c[17]][_$_d78c[0]], b[_$_d78c[17]][_$_d78c[0]]), b[_$_d78c[21]][_$_d78c[50]](b[_$_d78c[17]], 0, 0), b[_$_d78c[52]][_$_d78c[51]](b[_$_d78c[21]], b), b[_$_d78c[53]](), b[_$_d78c[37]](_$_d78c[54])
+            } else {
+                b[_$_d78c[22]][_$_d78c[0]] = b[_$_d78c[17]][_$_d78c[0]], b[_$_d78c[22]][_$_d78c[1]] = b[_$_d78c[17]][_$_d78c[0]], b[_$_d78c[21]][_$_d78c[49]](0, 0, b[_$_d78c[17]][_$_d78c[0]], b[_$_d78c[17]][_$_d78c[0]]), b[_$_d78c[21]][_$_d78c[50]](b[_$_d78c[17]], 0, 0), b[_$_d78c[52]][_$_d78c[51]](b[_$_d78c[21]], b), b[_$_d78c[55]]()
+            }
+        }, this[_$_d78c[17]][_$_d78c[56]] = function() {
+            b[_$_d78c[57]]() != _$_d78c[58] ? b[_$_d78c[59]](_$_d78c[58]) : (b[_$_d78c[37]](_$_d78c[60] + b[_$_d78c[17]][_$_d78c[34]]), b[_$_d78c[48]](2))
+        }
+    }, this[_$_d78c[61]] = function(a) {
+        this[_$_d78c[17]][_$_d78c[34]] = a
+    }, this[_$_d78c[57]] = function() {
+        var a = this[_$_d78c[17]][_$_d78c[34]][_$_d78c[63]](_$_d78c[62]),
+            b = a[a[_$_d78c[65]] - 1][_$_d78c[63]](_$_d78c[64]);
+        return b[0]
+    }, this[_$_d78c[59]] = function(a) {
+        for (var b = this[_$_d78c[17]][_$_d78c[34]][_$_d78c[63]](_$_d78c[62]), d = _$_d78c[33], c = 0; c < b[_$_d78c[65]] - 1; c++) {
+            d += b[c] + _$_d78c[62]
+        };
+        d = d + a + _$_d78c[66], this[_$_d78c[17]][_$_d78c[34]] = d
+    }, this[_$_d78c[67]] = function(a) {
+        return this[_$_d78c[68]]() ? (this[_$_d78c[69]](), void((this))[_$_d78c[70]](a)) : !1
+    }, this[_$_d78c[71]] = function() {
+        this[_$_d78c[61]](this[_$_d78c[17]][_$_d78c[34]] + _$_d78c[72] + Math[_$_d78c[73]]())
+    }, this[_$_d78c[74]] = function() {
+        this[_$_d78c[68]]() && this[_$_d78c[67]](this[_$_d78c[19]][_$_d78c[75]][_$_d78c[34]] + _$_d78c[72] + Math[_$_d78c[73]]())
+    }, this[_$_d78c[55]] = function() {
+        this[_$_d78c[18]][_$_d78c[76]] = !0, this[_$_d78c[23]][_$_d78c[76]] = !0, this[_$_d78c[24]][_$_d78c[76]] = !0
+    }, this[_$_d78c[53]] = function() {
+        this[_$_d78c[55]]();
+        try {
+            this[_$_d78c[77]]()
+        } catch (a) {
+            return this[_$_d78c[48]](3)
+        };
+        this[_$_d78c[78]](), this[_$_d78c[79]](b), this[_$_d78c[80]]()
+    }, this[_$_d78c[78]] = function() {
+        var a = this,
+            b = this[_$_d78c[27]][_$_d78c[81]];
+        b[_$_d78c[82]] = function(b) {
+            var d = a[_$_d78c[84]][_$_d78c[83]](b),
+                c = a[_$_d78c[84]][_$_d78c[85]](b),
+                g = a[_$_d78c[4]],
+                h = a[_$_d78c[5]];
+            a[_$_d78c[10]] = !0, document[_$_d78c[86]] = function(b) {
+                b || (b = window[_$_d78c[87]]), a[_$_d78c[4]] = g + (a[_$_d78c[84]][_$_d78c[83]](b) - d) / a[_$_d78c[0]] * Math[_$_d78c[16]] * a[_$_d78c[12]], a[_$_d78c[5]] = h + (a[_$_d78c[84]][_$_d78c[85]](b) - c) / a[_$_d78c[1]] * Math[_$_d78c[16]] * a[_$_d78c[12]], a[_$_d78c[5]] > a[_$_d78c[15]] / 2 ? a[_$_d78c[5]] = a[_$_d78c[15]] / 2 : a[_$_d78c[5]] < -a[_$_d78c[15]] / 2 && (a[_$_d78c[5]] = -a[_$_d78c[15]] / 2)
+            }, document[_$_d78c[88]] = function() {
+                document[_$_d78c[86]] = null, document[_$_d78c[88]] = null, a[_$_d78c[11]] || (a[_$_d78c[10]] = !1)
+            }
+        }, b[_$_d78c[89]] = function(b) {
+            b = b || window[_$_d78c[87]];
+            var d = b[_$_d78c[90]] || b[_$_d78c[91]] || b[_$_d78c[92]];
+            a[_$_d78c[2]] += (d > 0 ? 2 : -2) * a[_$_d78c[12]], a[_$_d78c[2]] > a[_$_d78c[14]][1] ? a[_$_d78c[2]] = a[_$_d78c[14]][1] : a[_$_d78c[2]] < a[_$_d78c[14]][0] && (a[_$_d78c[2]] = a[_$_d78c[14]][0])
+        }, b[_$_d78c[93]] = function() {
+            return a[_$_d78c[11]] ? a[_$_d78c[94]]() : a[_$_d78c[95]](), !1
+        }
+    }, this[_$_d78c[79]] = function(a) {
+        a[_$_d78c[96]](this[_$_d78c[27]][_$_d78c[81]]), this[_$_d78c[97]](a)
+    }, this[_$_d78c[97]] = function(a) {
+        var b = document[_$_d78c[99]](_$_d78c[98]),
+            d = this[_$_d78c[101]](_$_d78c[100]);
+        b[_$_d78c[102]] = d, b[_$_d78c[103]] = _$_d78c[104], b[_$_d78c[106]][_$_d78c[105]] = _$_d78c[107], b[_$_d78c[106]][_$_d78c[108]] = _$_d78c[109], b[_$_d78c[106]][_$_d78c[110]] = _$_d78c[111], b[_$_d78c[106]][_$_d78c[112]] = _$_d78c[113], b[_$_d78c[114]] = this[_$_d78c[101]](_$_d78c[115]), b[_$_d78c[116]] = function() {
+            return !1
+        };
+        var c = this;
+        setInterval(function() {
+            null != b && c[_$_d78c[117]](b) && b[_$_d78c[102]] == d || (alert(c[_$_d78c[101]](_$_d78c[118])), c[_$_d78c[95]]())
+        }, 5e3), a[_$_d78c[96]](b)
+    }, this[_$_d78c[117]] = function(a) {
+        for (; null != a && a != b;) {
+            if (a[_$_d78c[106]][_$_d78c[119]] == _$_d78c[120] || null != a[_$_d78c[106]][_$_d78c[110]] && a[_$_d78c[106]][_$_d78c[110]] != _$_d78c[111] || null != a[_$_d78c[106]][_$_d78c[112]] && a[_$_d78c[106]][_$_d78c[112]] != _$_d78c[121] || null != a[_$_d78c[106]][_$_d78c[108]] && a[_$_d78c[106]][_$_d78c[108]] != _$_d78c[109]) {
+                return !1
+            };
+            a = a[_$_d78c[122]]
+        };
+        return !0
+    }, this[_$_d78c[123]] = function(a) {
+        return btoa(encodeURIComponent(a)[_$_d78c[126]](/%([0-9A-F]{2})/g, function(a, b) {
+            return String[_$_d78c[125]](_$_d78c[124] + b)
+        }))
+    }, this[_$_d78c[101]] = function(a) {
+        return decodeURIComponent(Array[_$_d78c[135]][_$_d78c[134]][_$_d78c[133]](atob(a), function(a) {
+            return _$_d78c[128] + (_$_d78c[130] + a[_$_d78c[132]](0)[_$_d78c[131]](16))[_$_d78c[129]](-2)
+        })[_$_d78c[127]](_$_d78c[33]))
+    }, this[_$_d78c[94]] = function() {
+        this[_$_d78c[10]] = !1, this[_$_d78c[11]] = !1
+    }, this[_$_d78c[95]] = function() {
+        this[_$_d78c[10]] = !0, this[_$_d78c[11]] = !0
+    }, this[_$_d78c[80]] = function() {
+        var a = this;
+        setInterval(function() {
+            a[_$_d78c[10]] || (a[_$_d78c[3]] += a[_$_d78c[8]] * (90 / a[_$_d78c[6]]), a[_$_d78c[4]] += a[_$_d78c[7]] * (90 / a[_$_d78c[6]]), leftLeg2Mesh[_$_d78c[137]][_$_d78c[136]] = leftLegMesh[_$_d78c[137]][_$_d78c[136]] = Math[_$_d78c[138]](4 * a[_$_d78c[3]]) * a[_$_d78c[9]], leftLeg2Mesh[_$_d78c[105]][_$_d78c[139]] = leftLegMesh[_$_d78c[105]][_$_d78c[139]] = 0 - 6 * Math[_$_d78c[140]](leftLegMesh[_$_d78c[137]][_$_d78c[136]]), leftLeg2Mesh[_$_d78c[105]][_$_d78c[141]] = leftLegMesh[_$_d78c[105]][_$_d78c[141]] = -16 - 6 * Math[_$_d78c[142]](Math[_$_d78c[138]](leftLegMesh[_$_d78c[137]][_$_d78c[136]])), rightLeg2Mesh[_$_d78c[137]][_$_d78c[136]] = rightLegMesh[_$_d78c[137]][_$_d78c[136]] = Math[_$_d78c[138]](4 * a[_$_d78c[3]] + Math[_$_d78c[16]]) * a[_$_d78c[9]], rightLeg2Mesh[_$_d78c[105]][_$_d78c[139]] = rightLegMesh[_$_d78c[105]][_$_d78c[139]] = 0 - 6 * Math[_$_d78c[140]](rightLegMesh[_$_d78c[137]][_$_d78c[136]]), rightLeg2Mesh[_$_d78c[105]][_$_d78c[141]] = rightLegMesh[_$_d78c[105]][_$_d78c[141]] = -16 - 6 * Math[_$_d78c[142]](Math[_$_d78c[138]](rightLegMesh[_$_d78c[137]][_$_d78c[136]])), leftArm2Mesh[_$_d78c[137]][_$_d78c[136]] = leftArmMesh[_$_d78c[137]][_$_d78c[136]] = Math[_$_d78c[138]](4 * a[_$_d78c[3]] + Math[_$_d78c[16]]) * a[_$_d78c[9]], leftArm2Mesh[_$_d78c[105]][_$_d78c[139]] = leftArmMesh[_$_d78c[105]][_$_d78c[139]] = 0 - 6 * Math[_$_d78c[140]](leftArmMesh[_$_d78c[137]][_$_d78c[136]]), leftArm2Mesh[_$_d78c[105]][_$_d78c[141]] = leftArmMesh[_$_d78c[105]][_$_d78c[141]] = -4 - 6 * Math[_$_d78c[142]](Math[_$_d78c[138]](leftArmMesh[_$_d78c[137]][_$_d78c[136]])), rightArm2Mesh[_$_d78c[137]][_$_d78c[136]] = rightArmMesh[_$_d78c[137]][_$_d78c[136]] = Math[_$_d78c[138]](4 * a[_$_d78c[3]]) * a[_$_d78c[9]], rightArm2Mesh[_$_d78c[105]][_$_d78c[139]] = rightArmMesh[_$_d78c[105]][_$_d78c[139]] = 0 - 6 * Math[_$_d78c[140]](rightArmMesh[_$_d78c[137]][_$_d78c[136]]), rightArm2Mesh[_$_d78c[105]][_$_d78c[141]] = rightArmMesh[_$_d78c[105]][_$_d78c[141]] = -4 - 6 * Math[_$_d78c[142]](Math[_$_d78c[138]](rightArmMesh[_$_d78c[137]][_$_d78c[136]])), headMesh[_$_d78c[137]][_$_d78c[141]] = head2Mesh[_$_d78c[137]][_$_d78c[141]] = Math[_$_d78c[138]](2 * a[_$_d78c[3]]) / 2, headMesh[_$_d78c[137]][_$_d78c[136]] = head2Mesh[_$_d78c[137]][_$_d78c[136]] = Math[_$_d78c[138]](1.5 * a[_$_d78c[3]]) / 8, a[_$_d78c[68]]() && (cloakMesh[_$_d78c[105]][_$_d78c[141]] = -4.5, cloakMesh[_$_d78c[105]][_$_d78c[139]] = -2.5, cloakMesh[_$_d78c[143]](-7.5), cloakMesh[_$_d78c[137]][_$_d78c[136]] = 0.2 + Math[_$_d78c[138]](3 * a[_$_d78c[3]]) / 6));
+            var b = a[_$_d78c[2]] * Math[_$_d78c[138]](a[_$_d78c[5]]);
+            a[_$_d78c[25]][_$_d78c[105]][_$_d78c[139]] = b * Math[_$_d78c[138]](-a[_$_d78c[4]]), a[_$_d78c[25]][_$_d78c[105]][_$_d78c[136]] = b * Math[_$_d78c[140]](-a[_$_d78c[4]]), a[_$_d78c[25]][_$_d78c[105]][_$_d78c[141]] = -12 + a[_$_d78c[2]] * Math[_$_d78c[140]](a[_$_d78c[5]]), a[_$_d78c[25]][_$_d78c[144]](bodyMesh[_$_d78c[105]]), a[_$_d78c[27]][_$_d78c[77]](a[_$_d78c[26]], a[_$_d78c[25]])
+        }, 1e3 / this[_$_d78c[6]])
+    }, this[_$_d78c[77]] = function() {
+        var a = [new THREE[_$_d78c[145]](0.125, 0.875), new THREE[_$_d78c[145]](0.25, 0.875), new THREE[_$_d78c[145]](0.25, 1), new THREE[_$_d78c[145]](0.125, 1)],
+            b = [new THREE[_$_d78c[145]](0.25, 0.875), new THREE[_$_d78c[145]](0.375, 0.875), new THREE[_$_d78c[145]](0.375, 1), new THREE[_$_d78c[145]](0.25, 1)],
+            d = [new THREE[_$_d78c[145]](0, 0.75), new THREE[_$_d78c[145]](0.125, 0.75), new THREE[_$_d78c[145]](0.125, 0.875), new THREE[_$_d78c[145]](0, 0.875)],
+            c = [new THREE[_$_d78c[145]](0.125, 0.75), new THREE[_$_d78c[145]](0.25, 0.75), new THREE[_$_d78c[145]](0.25, 0.875), new THREE[_$_d78c[145]](0.125, 0.875)],
+            g = [new THREE[_$_d78c[145]](0.25, 0.75), new THREE[_$_d78c[145]](0.375, 0.75), new THREE[_$_d78c[145]](0.375, 0.875), new THREE[_$_d78c[145]](0.25, 0.875)],
+            h = [new THREE[_$_d78c[145]](0.375, 0.75), new THREE[_$_d78c[145]](0.5, 0.75), new THREE[_$_d78c[145]](0.5, 0.875), new THREE[_$_d78c[145]](0.375, 0.875)];
+        headBox = new THREE[_$_d78c[146]](8, 8, 8, 0, 0, 0), headBox[_$_d78c[147]][0] = [], headBox[_$_d78c[147]][0][0] = [g[3], g[0], g[2]], headBox[_$_d78c[147]][0][1] = [g[0], g[1], g[2]], headBox[_$_d78c[147]][0][2] = [d[3], d[0], d[2]], headBox[_$_d78c[147]][0][3] = [d[0], d[1], d[2]], headBox[_$_d78c[147]][0][4] = [a[3], a[0], a[2]], headBox[_$_d78c[147]][0][5] = [a[0], a[1], a[2]], headBox[_$_d78c[147]][0][6] = [b[0], b[3], b[1]], headBox[_$_d78c[147]][0][7] = [b[3], b[2], b[1]], headBox[_$_d78c[147]][0][8] = [c[3], c[0], c[2]], headBox[_$_d78c[147]][0][9] = [c[0], c[1], c[2]], headBox[_$_d78c[147]][0][10] = [h[3], h[0], h[2]], headBox[_$_d78c[147]][0][11] = [h[0], h[1], h[2]], headMesh = new THREE[_$_d78c[148]](headBox, this[_$_d78c[23]]), headMesh[_$_d78c[149]] = _$_d78c[150], this[_$_d78c[26]][_$_d78c[151]](headMesh);
+        var G = [new THREE[_$_d78c[145]](0.3125, 0.6875), new THREE[_$_d78c[145]](0.4375, 0.6875), new THREE[_$_d78c[145]](0.4375, 0.75), new THREE[_$_d78c[145]](0.3125, 0.75)],
+            cf = [new THREE[_$_d78c[145]](0.4375, 0.6875), new THREE[_$_d78c[145]](0.5625, 0.6875), new THREE[_$_d78c[145]](0.5625, 0.75), new THREE[_$_d78c[145]](0.4375, 0.75)],
+            U = [new THREE[_$_d78c[145]](0.25, 0.5), new THREE[_$_d78c[145]](0.3125, 0.5), new THREE[_$_d78c[145]](0.3125, 0.6875), new THREE[_$_d78c[145]](0.25, 0.6875)],
+            bJ = [new THREE[_$_d78c[145]](0.3125, 0.5), new THREE[_$_d78c[145]](0.4375, 0.5), new THREE[_$_d78c[145]](0.4375, 0.6875), new THREE[_$_d78c[145]](0.3125, 0.6875)],
+            A = [new THREE[_$_d78c[145]](0.4375, 0.5), new THREE[_$_d78c[145]](0.5, 0.5), new THREE[_$_d78c[145]](0.5, 0.6875), new THREE[_$_d78c[145]](0.4375, 0.6875)],
+            D = [new THREE[_$_d78c[145]](0.5, 0.5), new THREE[_$_d78c[145]](0.625, 0.5), new THREE[_$_d78c[145]](0.625, 0.6875), new THREE[_$_d78c[145]](0.5, 0.6875)];
+        bodyBox = new THREE[_$_d78c[146]](8, 12, 4, 0, 0, 0), bodyBox[_$_d78c[147]][0] = [], bodyBox[_$_d78c[147]][0][0] = [A[3], A[0], A[2]], bodyBox[_$_d78c[147]][0][1] = [A[0], A[1], A[2]], bodyBox[_$_d78c[147]][0][2] = [U[3], U[0], U[2]], bodyBox[_$_d78c[147]][0][3] = [U[0], U[1], U[2]], bodyBox[_$_d78c[147]][0][4] = [G[3], G[0], G[2]], bodyBox[_$_d78c[147]][0][5] = [G[0], G[1], G[2]], bodyBox[_$_d78c[147]][0][6] = [cf[0], cf[3], cf[1]], bodyBox[_$_d78c[147]][0][7] = [cf[3], cf[2], cf[1]], bodyBox[_$_d78c[147]][0][8] = [bJ[3], bJ[0], bJ[2]], bodyBox[_$_d78c[147]][0][9] = [bJ[0], bJ[1], bJ[2]], bodyBox[_$_d78c[147]][0][10] = [D[3], D[0], D[2]], bodyBox[_$_d78c[147]][0][11] = [D[0], D[1], D[2]], bodyMesh = new THREE[_$_d78c[148]](bodyBox, this[_$_d78c[23]]), bodyMesh[_$_d78c[149]] = _$_d78c[152], bodyMesh[_$_d78c[105]][_$_d78c[141]] = -10, this[_$_d78c[26]][_$_d78c[151]](bodyMesh);
+        var k = [new THREE[_$_d78c[145]](0.6875, 0.6875), new THREE[_$_d78c[145]](0.75, 0.6875), new THREE[_$_d78c[145]](0.75, 0.75), new THREE[_$_d78c[145]](0.6875, 0.75)],
+            H = [new THREE[_$_d78c[145]](0.75, 0.6875), new THREE[_$_d78c[145]](0.8125, 0.6875), new THREE[_$_d78c[145]](0.8125, 0.75), new THREE[_$_d78c[145]](0.75, 0.75)],
+            O = [new THREE[_$_d78c[145]](0.625, 0.5), new THREE[_$_d78c[145]](0.6875, 0.5), new THREE[_$_d78c[145]](0.6875, 0.6875), new THREE[_$_d78c[145]](0.625, 0.6875)],
+            W = [new THREE[_$_d78c[145]](0.6875, 0.5), new THREE[_$_d78c[145]](0.75, 0.5), new THREE[_$_d78c[145]](0.75, 0.6875), new THREE[_$_d78c[145]](0.6875, 0.6875)],
+            z = [new THREE[_$_d78c[145]](0.75, 0.5), new THREE[_$_d78c[145]](0.8125, 0.5), new THREE[_$_d78c[145]](0.8125, 0.6875), new THREE[_$_d78c[145]](0.75, 0.6875)],
+            X = [new THREE[_$_d78c[145]](0.8125, 0.5), new THREE[_$_d78c[145]](0.875, 0.5), new THREE[_$_d78c[145]](0.875, 0.6875), new THREE[_$_d78c[145]](0.8125, 0.6875)];
+        rightArmBox = new THREE[_$_d78c[146]](4, 12, 4, 0, 0, 0), rightArmBox[_$_d78c[147]][0] = [], rightArmBox[_$_d78c[147]][0][0] = [z[3], z[0], z[2]], rightArmBox[_$_d78c[147]][0][1] = [z[0], z[1], z[2]], rightArmBox[_$_d78c[147]][0][2] = [O[3], O[0], O[2]], rightArmBox[_$_d78c[147]][0][3] = [O[0], O[1], O[2]], rightArmBox[_$_d78c[147]][0][4] = [k[3], k[0], k[2]], rightArmBox[_$_d78c[147]][0][5] = [k[0], k[1], k[2]], rightArmBox[_$_d78c[147]][0][6] = [H[0], H[3], H[1]], rightArmBox[_$_d78c[147]][0][7] = [H[3], H[2], H[1]], rightArmBox[_$_d78c[147]][0][8] = [W[3], W[0], W[2]], rightArmBox[_$_d78c[147]][0][9] = [W[0], W[1], W[2]], rightArmBox[_$_d78c[147]][0][10] = [X[3], X[0], X[2]], rightArmBox[_$_d78c[147]][0][11] = [X[0], X[1], X[2]], rightArmMesh = new THREE[_$_d78c[148]](rightArmBox, this[_$_d78c[23]]), rightArmMesh[_$_d78c[149]] = _$_d78c[153], rightArmMesh[_$_d78c[105]][_$_d78c[141]] = -10, rightArmMesh[_$_d78c[105]][_$_d78c[136]] = -6, this[_$_d78c[26]][_$_d78c[151]](rightArmMesh);
+        var cg = [new THREE[_$_d78c[145]](0.5625, 0.1875), new THREE[_$_d78c[145]](0.625, 0.1875), new THREE[_$_d78c[145]](0.625, 0.25), new THREE[_$_d78c[145]](0.5625, 0.25)],
+            bX = [new THREE[_$_d78c[145]](0.625, 0.1875), new THREE[_$_d78c[145]](0.6875, 0.1875), new THREE[_$_d78c[145]](0.6875, 0.25), new THREE[_$_d78c[145]](0.625, 0.25)],
+            j = [new THREE[_$_d78c[145]](0.5, 0), new THREE[_$_d78c[145]](0.5625, 0), new THREE[_$_d78c[145]](0.5625, 0.1875), new THREE[_$_d78c[145]](0.5, 0.1875)],
+            ca = [new THREE[_$_d78c[145]](0.5625, 0), new THREE[_$_d78c[145]](0.625, 0), new THREE[_$_d78c[145]](0.625, 0.1875), new THREE[_$_d78c[145]](0.5625, 0.1875)],
+            cd = [new THREE[_$_d78c[145]](0.625, 0), new THREE[_$_d78c[145]](0.6875, 0), new THREE[_$_d78c[145]](0.6875, 0.1875), new THREE[_$_d78c[145]](0.625, 0.1875)],
+            bZ = [new THREE[_$_d78c[145]](0.6875, 0), new THREE[_$_d78c[145]](0.75, 0), new THREE[_$_d78c[145]](0.75, 0.1875), new THREE[_$_d78c[145]](0.6875, 0.1875)];
+        leftArmBox = new THREE[_$_d78c[146]](4, 12, 4, 0, 0, 0), leftArmBox[_$_d78c[147]][0] = [], leftArmBox[_$_d78c[147]][0][0] = [cd[3], cd[0], cd[2]], leftArmBox[_$_d78c[147]][0][1] = [cd[0], cd[1], cd[2]], leftArmBox[_$_d78c[147]][0][2] = [j[3], j[0], j[2]], leftArmBox[_$_d78c[147]][0][3] = [j[0], j[1], j[2]], leftArmBox[_$_d78c[147]][0][4] = [cg[3], cg[0], cg[2]], leftArmBox[_$_d78c[147]][0][5] = [cg[0], cg[1], cg[2]], leftArmBox[_$_d78c[147]][0][6] = [bX[0], bX[3], bX[1]], leftArmBox[_$_d78c[147]][0][7] = [bX[3], bX[2], bX[1]], leftArmBox[_$_d78c[147]][0][8] = [ca[3], ca[0], ca[2]], leftArmBox[_$_d78c[147]][0][9] = [ca[0], ca[1], ca[2]], leftArmBox[_$_d78c[147]][0][10] = [bZ[3], bZ[0], bZ[2]], leftArmBox[_$_d78c[147]][0][11] = [bZ[0], bZ[1], bZ[2]], leftArmMesh = new THREE[_$_d78c[148]](leftArmBox, this[_$_d78c[23]]), leftArmMesh[_$_d78c[149]] = _$_d78c[154], leftArmMesh[_$_d78c[105]][_$_d78c[141]] = -10, leftArmMesh[_$_d78c[105]][_$_d78c[136]] = 6, this[_$_d78c[26]][_$_d78c[151]](leftArmMesh);
+        var ce = [new THREE[_$_d78c[145]](0.0625, 0.6875), new THREE[_$_d78c[145]](0.125, 0.6875), new THREE[_$_d78c[145]](0.125, 0.75), new THREE[_$_d78c[145]](0.0625, 0.75)],
+            bM = [new THREE[_$_d78c[145]](0.125, 0.6875), new THREE[_$_d78c[145]](0.1875, 0.6875), new THREE[_$_d78c[145]](0.1875, 0.75), new THREE[_$_d78c[145]](0.125, 0.75)],
+            K = [new THREE[_$_d78c[145]](0, 0.5), new THREE[_$_d78c[145]](0.0625, 0.5), new THREE[_$_d78c[145]](0.0625, 0.6875), new THREE[_$_d78c[145]](0, 0.6875)],
+            Z = [new THREE[_$_d78c[145]](0.0625, 0.5), new THREE[_$_d78c[145]](0.125, 0.5), new THREE[_$_d78c[145]](0.125, 0.6875), new THREE[_$_d78c[145]](0.0625, 0.6875)],
+            M = [new THREE[_$_d78c[145]](0.125, 0.5), new THREE[_$_d78c[145]](0.1875, 0.5), new THREE[_$_d78c[145]](0.1875, 0.6875), new THREE[_$_d78c[145]](0.125, 0.6875)],
+            bO = [new THREE[_$_d78c[145]](0.1875, 0.5), new THREE[_$_d78c[145]](0.25, 0.5), new THREE[_$_d78c[145]](0.25, 0.6875), new THREE[_$_d78c[145]](0.1875, 0.6875)];
+        rightLegBox = new THREE[_$_d78c[146]](4, 12, 4, 0, 0, 0), rightLegBox[_$_d78c[147]][0] = [], rightLegBox[_$_d78c[147]][0][0] = [M[3], M[0], M[2]], rightLegBox[_$_d78c[147]][0][1] = [M[0], M[1], M[2]], rightLegBox[_$_d78c[147]][0][2] = [K[3], K[0], K[2]], rightLegBox[_$_d78c[147]][0][3] = [K[0], K[1], K[2]], rightLegBox[_$_d78c[147]][0][4] = [ce[3], ce[0], ce[2]], rightLegBox[_$_d78c[147]][0][5] = [ce[0], ce[1], ce[2]], rightLegBox[_$_d78c[147]][0][6] = [bM[0], bM[3], bM[1]], rightLegBox[_$_d78c[147]][0][7] = [bM[3], bM[2], bM[1]], rightLegBox[_$_d78c[147]][0][8] = [Z[3], Z[0], Z[2]], rightLegBox[_$_d78c[147]][0][9] = [Z[0], Z[1], Z[2]], rightLegBox[_$_d78c[147]][0][10] = [bO[3], bO[0], bO[2]], rightLegBox[_$_d78c[147]][0][11] = [bO[0], bO[1], bO[2]], rightLegMesh = new THREE[_$_d78c[148]](rightLegBox, this[_$_d78c[23]]), rightLegMesh[_$_d78c[149]] = _$_d78c[155], rightLegMesh[_$_d78c[105]][_$_d78c[141]] = -22, rightLegMesh[_$_d78c[105]][_$_d78c[136]] = -2, this[_$_d78c[26]][_$_d78c[151]](rightLegMesh);
+        var p = [new THREE[_$_d78c[145]](0.3125, 0.1875), new THREE[_$_d78c[145]](0.375, 0.1875), new THREE[_$_d78c[145]](0.375, 0.25), new THREE[_$_d78c[145]](0.3125, 0.25)],
+            bK = [new THREE[_$_d78c[145]](0.375, 0.1875), new THREE[_$_d78c[145]](0.4375, 0.1875), new THREE[_$_d78c[145]](0.4375, 0.25), new THREE[_$_d78c[145]](0.375, 0.25)],
+            q = [new THREE[_$_d78c[145]](0.25, 0), new THREE[_$_d78c[145]](0.3125, 0), new THREE[_$_d78c[145]](0.3125, 0.1875), new THREE[_$_d78c[145]](0.25, 0.1875)],
+            bT = [new THREE[_$_d78c[145]](0.3125, 0), new THREE[_$_d78c[145]](0.375, 0), new THREE[_$_d78c[145]](0.375, 0.1875), new THREE[_$_d78c[145]](0.3125, 0.1875)],
+            w = [new THREE[_$_d78c[145]](0.375, 0), new THREE[_$_d78c[145]](0.4375, 0), new THREE[_$_d78c[145]](0.4375, 0.1875), new THREE[_$_d78c[145]](0.375, 0.1875)],
+            bS = [new THREE[_$_d78c[145]](0.4375, 0), new THREE[_$_d78c[145]](0.5, 0), new THREE[_$_d78c[145]](0.5, 0.1875), new THREE[_$_d78c[145]](0.4375, 0.1875)];
+        leftLegBox = new THREE[_$_d78c[146]](4, 12, 4, 0, 0, 0), leftLegBox[_$_d78c[147]][0] = [], leftLegBox[_$_d78c[147]][0][0] = [w[3], w[0], w[2]], leftLegBox[_$_d78c[147]][0][1] = [w[0], w[1], w[2]], leftLegBox[_$_d78c[147]][0][2] = [q[3], q[0], q[2]], leftLegBox[_$_d78c[147]][0][3] = [q[0], q[1], q[2]], leftLegBox[_$_d78c[147]][0][4] = [p[3], p[0], p[2]], leftLegBox[_$_d78c[147]][0][5] = [p[0], p[1], p[2]], leftLegBox[_$_d78c[147]][0][6] = [bK[0], bK[3], bK[1]], leftLegBox[_$_d78c[147]][0][7] = [bK[3], bK[2], bK[1]], leftLegBox[_$_d78c[147]][0][8] = [bT[3], bT[0], bT[2]], leftLegBox[_$_d78c[147]][0][9] = [bT[0], bT[1], bT[2]], leftLegBox[_$_d78c[147]][0][10] = [bS[3], bS[0], bS[2]], leftLegBox[_$_d78c[147]][0][11] = [bS[0], bS[1], bS[2]], leftLegMesh = new THREE[_$_d78c[148]](leftLegBox, this[_$_d78c[23]]), leftLegMesh[_$_d78c[149]] = _$_d78c[156], leftLegMesh[_$_d78c[105]][_$_d78c[141]] = -22, leftLegMesh[_$_d78c[105]][_$_d78c[136]] = 2, this[_$_d78c[26]][_$_d78c[151]](leftLegMesh);
+        var bL = [new THREE[_$_d78c[145]](0.625, 0.875), new THREE[_$_d78c[145]](0.75, 0.875), new THREE[_$_d78c[145]](0.75, 1), new THREE[_$_d78c[145]](0.625, 1)],
+            ch = [new THREE[_$_d78c[145]](0.75, 0.875), new THREE[_$_d78c[145]](0.875, 0.875), new THREE[_$_d78c[145]](0.875, 1), new THREE[_$_d78c[145]](0.75, 1)],
+            cc = [new THREE[_$_d78c[145]](0.5, 0.75), new THREE[_$_d78c[145]](0.625, 0.75), new THREE[_$_d78c[145]](0.625, 0.875), new THREE[_$_d78c[145]](0.5, 0.875)],
+            E = [new THREE[_$_d78c[145]](0.625, 0.75), new THREE[_$_d78c[145]](0.75, 0.75), new THREE[_$_d78c[145]](0.75, 0.875), new THREE[_$_d78c[145]](0.625, 0.875)],
+            R = [new THREE[_$_d78c[145]](0.75, 0.75), new THREE[_$_d78c[145]](0.875, 0.75), new THREE[_$_d78c[145]](0.875, 0.875), new THREE[_$_d78c[145]](0.75, 0.875)],
+            r = [new THREE[_$_d78c[145]](0.875, 0.75), new THREE[_$_d78c[145]](1, 0.75), new THREE[_$_d78c[145]](1, 0.875), new THREE[_$_d78c[145]](0.875, 0.875)];
+        head2Box = new THREE[_$_d78c[146]](9, 9, 9, 0, 0, 0), head2Box[_$_d78c[147]][0] = [], head2Box[_$_d78c[147]][0][0] = [R[3], R[0], R[2]], head2Box[_$_d78c[147]][0][1] = [R[0], R[1], R[2]], head2Box[_$_d78c[147]][0][2] = [cc[3], cc[0], cc[2]], head2Box[_$_d78c[147]][0][3] = [cc[0], cc[1], cc[2]], head2Box[_$_d78c[147]][0][4] = [bL[3], bL[0], bL[2]], head2Box[_$_d78c[147]][0][5] = [bL[0], bL[1], bL[2]], head2Box[_$_d78c[147]][0][6] = [ch[0], ch[3], ch[1]], head2Box[_$_d78c[147]][0][7] = [ch[3], ch[2], ch[1]], head2Box[_$_d78c[147]][0][8] = [E[3], E[0], E[2]], head2Box[_$_d78c[147]][0][9] = [E[0], E[1], E[2]], head2Box[_$_d78c[147]][0][10] = [r[3], r[0], r[2]], head2Box[_$_d78c[147]][0][11] = [r[0], r[1], r[2]], head2Mesh = new THREE[_$_d78c[148]](head2Box, this[_$_d78c[24]]), head2Mesh[_$_d78c[149]] = _$_d78c[157], this[_$_d78c[26]][_$_d78c[151]](head2Mesh);
+        var l = [new THREE[_$_d78c[145]](0.3125, 0.4375), new THREE[_$_d78c[145]](0.4375, 0.4375), new THREE[_$_d78c[145]](0.4375, 0.5), new THREE[_$_d78c[145]](0.3125, 0.5)],
+            L = [new THREE[_$_d78c[145]](0.4375, 0.4375), new THREE[_$_d78c[145]](0.5625, 0.4375), new THREE[_$_d78c[145]](0.5625, 0.5), new THREE[_$_d78c[145]](0.4375, 0.5)],
+            bP = [new THREE[_$_d78c[145]](0.25, 0.25), new THREE[_$_d78c[145]](0.3125, 0.25), new THREE[_$_d78c[145]](0.3125, 0.4375), new THREE[_$_d78c[145]](0.25, 0.4375)],
+            t = [new THREE[_$_d78c[145]](0.3125, 0.25), new THREE[_$_d78c[145]](0.4375, 0.25), new THREE[_$_d78c[145]](0.4375, 0.4375), new THREE[_$_d78c[145]](0.3125, 0.4375)],
+            s = [new THREE[_$_d78c[145]](0.4375, 0.25), new THREE[_$_d78c[145]](0.5, 0.25), new THREE[_$_d78c[145]](0.5, 0.4375), new THREE[_$_d78c[145]](0.4375, 0.4375)],
+            N = [new THREE[_$_d78c[145]](0.5, 0.25), new THREE[_$_d78c[145]](0.625, 0.25), new THREE[_$_d78c[145]](0.625, 0.4375), new THREE[_$_d78c[145]](0.5, 0.4375)];
+        body2Box = new THREE[_$_d78c[146]](9, 13.5, 4.5, 0, 0, 0), body2Box[_$_d78c[147]][0] = [], body2Box[_$_d78c[147]][0][0] = [s[3], s[0], s[2]], body2Box[_$_d78c[147]][0][1] = [s[0], s[1], s[2]], body2Box[_$_d78c[147]][0][2] = [bP[3], bP[0], bP[2]], body2Box[_$_d78c[147]][0][3] = [bP[0], bP[1], bP[2]], body2Box[_$_d78c[147]][0][4] = [l[3], l[0], l[2]], body2Box[_$_d78c[147]][0][5] = [l[0], l[1], l[2]], body2Box[_$_d78c[147]][0][6] = [L[0], L[3], L[1]], body2Box[_$_d78c[147]][0][7] = [L[3], L[2], L[1]], body2Box[_$_d78c[147]][0][8] = [t[3], t[0], t[2]], body2Box[_$_d78c[147]][0][9] = [t[0], t[1], t[2]], body2Box[_$_d78c[147]][0][10] = [N[3], N[0], N[2]], body2Box[_$_d78c[147]][0][11] = [N[0], N[1], N[2]], body2Mesh = new THREE[_$_d78c[148]](body2Box, this[_$_d78c[24]]), body2Mesh[_$_d78c[149]] = _$_d78c[158], body2Mesh[_$_d78c[105]][_$_d78c[141]] = -10, this[_$_d78c[26]][_$_d78c[151]](body2Mesh);
+        var v = [new THREE[_$_d78c[145]](0.6875, 0.4375), new THREE[_$_d78c[145]](0.75, 0.4375), new THREE[_$_d78c[145]](0.75, 0.5), new THREE[_$_d78c[145]](0.6875, 0.5)],
+            bR = [new THREE[_$_d78c[145]](0.75, 0.4375), new THREE[_$_d78c[145]](0.8125, 0.4375), new THREE[_$_d78c[145]](0.8125, 0.5), new THREE[_$_d78c[145]](0.75, 0.5)],
+            m = [new THREE[_$_d78c[145]](0.625, 0.25), new THREE[_$_d78c[145]](0.6875, 0.25), new THREE[_$_d78c[145]](0.6875, 0.4375), new THREE[_$_d78c[145]](0.625, 0.4375)],
+            P = [new THREE[_$_d78c[145]](0.6875, 0.25), new THREE[_$_d78c[145]](0.75, 0.25), new THREE[_$_d78c[145]](0.75, 0.4375), new THREE[_$_d78c[145]](0.6875, 0.4375)],
+            bV = [new THREE[_$_d78c[145]](0.75, 0.25), new THREE[_$_d78c[145]](0.8125, 0.25), new THREE[_$_d78c[145]](0.8125, 0.4375), new THREE[_$_d78c[145]](0.75, 0.4375)],
+            u = [new THREE[_$_d78c[145]](0.8125, 0.25), new THREE[_$_d78c[145]](0.875, 0.25), new THREE[_$_d78c[145]](0.875, 0.4375), new THREE[_$_d78c[145]](0.8125, 0.4375)],
+            V = new THREE[_$_d78c[146]](4.5, 13.5, 4.5, 0, 0, 0);
+        V[_$_d78c[147]][0] = [], V[_$_d78c[147]][0][0] = [bV[3], bV[0], bV[2]], V[_$_d78c[147]][0][1] = [bV[0], bV[1], bV[2]], V[_$_d78c[147]][0][2] = [m[3], m[0], m[2]], V[_$_d78c[147]][0][3] = [m[0], m[1], m[2]], V[_$_d78c[147]][0][4] = [v[3], v[0], v[2]], V[_$_d78c[147]][0][5] = [v[0], v[1], v[2]], V[_$_d78c[147]][0][6] = [bR[0], bR[3], bR[1]], V[_$_d78c[147]][0][7] = [bR[3], bR[2], bR[1]], V[_$_d78c[147]][0][8] = [P[3], P[0], P[2]], V[_$_d78c[147]][0][9] = [P[0], P[1], P[2]], V[_$_d78c[147]][0][10] = [u[3], u[0], u[2]], V[_$_d78c[147]][0][11] = [u[0], u[1], u[2]], rightArm2Mesh = new THREE[_$_d78c[148]](V, this[_$_d78c[24]]), rightArm2Mesh[_$_d78c[149]] = _$_d78c[159], rightArm2Mesh[_$_d78c[105]][_$_d78c[141]] = -10, rightArm2Mesh[_$_d78c[105]][_$_d78c[136]] = -6, this[_$_d78c[26]][_$_d78c[151]](rightArm2Mesh);
+        var bU = [new THREE[_$_d78c[145]](0.8125, 0.1875), new THREE[_$_d78c[145]](0.875, 0.1875), new THREE[_$_d78c[145]](0.875, 0.25), new THREE[_$_d78c[145]](0.8125, 0.25)],
+            bQ = [new THREE[_$_d78c[145]](0.875, 0.1875), new THREE[_$_d78c[145]](0.9375, 0.1875), new THREE[_$_d78c[145]](0.9375, 0.25), new THREE[_$_d78c[145]](0.875, 0.25)],
+            T = [new THREE[_$_d78c[145]](0.75, 0), new THREE[_$_d78c[145]](0.8125, 0), new THREE[_$_d78c[145]](0.8125, 0.1875), new THREE[_$_d78c[145]](0.75, 0.1875)],
+            bW = [new THREE[_$_d78c[145]](0.8125, 0), new THREE[_$_d78c[145]](0.875, 0), new THREE[_$_d78c[145]](0.875, 0.1875), new THREE[_$_d78c[145]](0.8125, 0.1875)],
+            bY = [new THREE[_$_d78c[145]](0.875, 0), new THREE[_$_d78c[145]](0.9375, 0), new THREE[_$_d78c[145]](0.9375, 0.1875), new THREE[_$_d78c[145]](0.875, 0.1875)],
+            I = [new THREE[_$_d78c[145]](0.9375, 0), new THREE[_$_d78c[145]](1, 0), new THREE[_$_d78c[145]](1, 0.1875), new THREE[_$_d78c[145]](0.9375, 0.1875)],
+            i = new THREE[_$_d78c[146]](4.5, 13.5, 4.5, 0, 0, 0);
+        i[_$_d78c[147]][0] = [], i[_$_d78c[147]][0][0] = [bY[3], bY[0], bY[2]], i[_$_d78c[147]][0][1] = [bY[0], bY[1], bY[2]], i[_$_d78c[147]][0][2] = [T[3], T[0], T[2]], i[_$_d78c[147]][0][3] = [T[0], T[1], T[2]], i[_$_d78c[147]][0][4] = [bU[3], bU[0], bU[2]], i[_$_d78c[147]][0][5] = [bU[0], bU[1], bU[2]], i[_$_d78c[147]][0][6] = [bQ[0], bQ[3], bQ[1]], i[_$_d78c[147]][0][7] = [bQ[3], bQ[2], bQ[1]], i[_$_d78c[147]][0][8] = [bW[3], bW[0], bW[2]], i[_$_d78c[147]][0][9] = [bW[0], bW[1], bW[2]], i[_$_d78c[147]][0][10] = [I[3], I[0], I[2]], i[_$_d78c[147]][0][11] = [I[0], I[1], I[2]], leftArm2Mesh = new THREE[_$_d78c[148]](i, this[_$_d78c[24]]), leftArm2Mesh[_$_d78c[149]] = _$_d78c[160], leftArm2Mesh[_$_d78c[105]][_$_d78c[141]] = -10, leftArm2Mesh[_$_d78c[105]][_$_d78c[136]] = 6, this[_$_d78c[26]][_$_d78c[151]](leftArm2Mesh);
+        var Y = [new THREE[_$_d78c[145]](0.0625, 0.4375), new THREE[_$_d78c[145]](0.125, 0.4375), new THREE[_$_d78c[145]](0.125, 0.5), new THREE[_$_d78c[145]](0.0625, 0.5)],
+            bN = [new THREE[_$_d78c[145]](0.125, 0.4375), new THREE[_$_d78c[145]](0.1875, 0.4375), new THREE[_$_d78c[145]](0.1875, 0.5), new THREE[_$_d78c[145]](0.125, 0.5)],
+            C = [new THREE[_$_d78c[145]](0, 0.25), new THREE[_$_d78c[145]](0.0625, 0.25), new THREE[_$_d78c[145]](0.0625, 0.4375), new THREE[_$_d78c[145]](0, 0.4375)],
+            F = [new THREE[_$_d78c[145]](0.0625, 0.25), new THREE[_$_d78c[145]](0.125, 0.25), new THREE[_$_d78c[145]](0.125, 0.4375), new THREE[_$_d78c[145]](0.0625, 0.4375)],
+            o = [new THREE[_$_d78c[145]](0.125, 0.25), new THREE[_$_d78c[145]](0.1875, 0.25), new THREE[_$_d78c[145]](0.1875, 0.4375), new THREE[_$_d78c[145]](0.125, 0.4375)],
+            J = [new THREE[_$_d78c[145]](0.1875, 0.25), new THREE[_$_d78c[145]](0.25, 0.25), new THREE[_$_d78c[145]](0.25, 0.4375), new THREE[_$_d78c[145]](0.1875, 0.4375)];
+        rightLeg2Box = new THREE[_$_d78c[146]](4.5, 13.5, 4.5, 0, 0, 0), rightLeg2Box[_$_d78c[147]][0] = [], rightLeg2Box[_$_d78c[147]][0][0] = [o[3], o[0], o[2]], rightLeg2Box[_$_d78c[147]][0][1] = [o[0], o[1], o[2]], rightLeg2Box[_$_d78c[147]][0][2] = [C[3], C[0], C[2]], rightLeg2Box[_$_d78c[147]][0][3] = [C[0], C[1], C[2]], rightLeg2Box[_$_d78c[147]][0][4] = [Y[3], Y[0], Y[2]], rightLeg2Box[_$_d78c[147]][0][5] = [Y[0], Y[1], Y[2]], rightLeg2Box[_$_d78c[147]][0][6] = [bN[0], bN[3], bN[1]], rightLeg2Box[_$_d78c[147]][0][7] = [bN[3], bN[2], bN[1]], rightLeg2Box[_$_d78c[147]][0][8] = [F[3], F[0], F[2]], rightLeg2Box[_$_d78c[147]][0][9] = [F[0], F[1], F[2]], rightLeg2Box[_$_d78c[147]][0][10] = [J[3], J[0], J[2]], rightLeg2Box[_$_d78c[147]][0][11] = [J[0], J[1], J[2]], rightLeg2Mesh = new THREE[_$_d78c[148]](rightLeg2Box, this[_$_d78c[24]]), rightLeg2Mesh[_$_d78c[149]] = _$_d78c[161], rightLeg2Mesh[_$_d78c[105]][_$_d78c[141]] = -22, rightLeg2Mesh[_$_d78c[105]][_$_d78c[136]] = -2, this[_$_d78c[26]][_$_d78c[151]](rightLeg2Mesh);
+        var Q = [new THREE[_$_d78c[145]](0.0625, 0.1875), new THREE[_$_d78c[145]](0.125, 0.1875), new THREE[_$_d78c[145]](0.125, 0.25), new THREE[_$_d78c[145]](0.0625, 0.25)],
+            bH = [new THREE[_$_d78c[145]](0.125, 0.1875), new THREE[_$_d78c[145]](0.1875, 0.1875), new THREE[_$_d78c[145]](0.1875, 0.25), new THREE[_$_d78c[145]](0.125, 0.25)],
+            B = [new THREE[_$_d78c[145]](0, 0), new THREE[_$_d78c[145]](0.0625, 0), new THREE[_$_d78c[145]](0.0625, 0.1875), new THREE[_$_d78c[145]](0, 0.1875)],
+            bI = [new THREE[_$_d78c[145]](0.0625, 0), new THREE[_$_d78c[145]](0.125, 0), new THREE[_$_d78c[145]](0.125, 0.1875), new THREE[_$_d78c[145]](0.0625, 0.1875)],
+            S = [new THREE[_$_d78c[145]](0.125, 0), new THREE[_$_d78c[145]](0.1875, 0), new THREE[_$_d78c[145]](0.1875, 0.1875), new THREE[_$_d78c[145]](0.125, 0.1875)],
+            cb = [new THREE[_$_d78c[145]](0.1875, 0), new THREE[_$_d78c[145]](0.25, 0), new THREE[_$_d78c[145]](0.25, 0.1875), new THREE[_$_d78c[145]](0.1875, 0.1875)],
+            n = new THREE[_$_d78c[146]](4.5, 13.5, 4.5, 0, 0, 0);
+        n[_$_d78c[147]][0] = [], n[_$_d78c[147]][0][0] = [S[3], S[0], S[2]], n[_$_d78c[147]][0][1] = [S[0], S[1], S[2]], n[_$_d78c[147]][0][2] = [B[3], B[0], B[2]], n[_$_d78c[147]][0][3] = [B[0], B[1], B[2]], n[_$_d78c[147]][0][4] = [Q[3], Q[0], Q[2]], n[_$_d78c[147]][0][5] = [Q[0], Q[1], Q[2]], n[_$_d78c[147]][0][6] = [bH[0], bH[3], bH[1]], n[_$_d78c[147]][0][7] = [bH[3], bH[2], bH[1]], n[_$_d78c[147]][0][8] = [bI[3], bI[0], bI[2]], n[_$_d78c[147]][0][9] = [bI[0], bI[1], bI[2]], n[_$_d78c[147]][0][10] = [cb[3], cb[0], cb[2]], n[_$_d78c[147]][0][11] = [cb[0], cb[1], cb[2]], leftLeg2Mesh = new THREE[_$_d78c[148]](n, this[_$_d78c[24]]), leftLeg2Mesh[_$_d78c[149]] = _$_d78c[162], leftLeg2Mesh[_$_d78c[105]][_$_d78c[141]] = -22, leftLeg2Mesh[_$_d78c[105]][_$_d78c[136]] = 2, this[_$_d78c[26]][_$_d78c[151]](leftLeg2Mesh), this[_$_d78c[27]] = new THREE[_$_d78c[163]]({
+            alpha: !0
+        }), this[_$_d78c[27]][_$_d78c[164]](this[_$_d78c[0]], this[_$_d78c[1]]), this[_$_d78c[27]][_$_d78c[165]](this[_$_d78c[13]])
+    }, this[_$_d78c[166]] = function(a) {
+        this[_$_d78c[20]] = new THREE[_$_d78c[168]][_$_d78c[167]](a), this[_$_d78c[20]][_$_d78c[40]] = THREE[_$_d78c[41]], this[_$_d78c[20]][_$_d78c[42]] = THREE[_$_d78c[43]];
+        var b = new THREE[_$_d78c[146]](16, 16, 16, 0, 0, 0),
+            d = [new THREE[_$_d78c[145]](0, 0), new THREE[_$_d78c[145]](1 / 3, 0), new THREE[_$_d78c[145]](1 / 3, 1), new THREE[_$_d78c[145]](0, 1)],
+            c = [new THREE[_$_d78c[145]](1 / 3, 0), new THREE[_$_d78c[145]](2 / 3, 0), new THREE[_$_d78c[145]](2 / 3, 1), new THREE[_$_d78c[145]](1 / 3, 1)],
+            g = [new THREE[_$_d78c[145]](2 / 3, 0), new THREE[_$_d78c[145]](1, 0), new THREE[_$_d78c[145]](1, 1), new THREE[_$_d78c[145]](2 / 3, 1)];
+        b[_$_d78c[147]][0] = [], b[_$_d78c[147]][0][0] = [d[3], d[0], d[2]], b[_$_d78c[147]][0][1] = [d[0], d[1], d[2]], b[_$_d78c[147]][0][2] = [d[3], d[0], d[2]], b[_$_d78c[147]][0][3] = [d[0], d[1], d[2]], b[_$_d78c[147]][0][4] = [c[3], c[0], c[2]], b[_$_d78c[147]][0][5] = [c[0], c[1], c[2]], b[_$_d78c[147]][0][6] = [g[3], g[0], g[2]], b[_$_d78c[147]][0][7] = [g[0], g[1], g[2]], b[_$_d78c[147]][0][8] = [d[3], d[0], d[2]], b[_$_d78c[147]][0][9] = [d[0], d[1], d[2]], b[_$_d78c[147]][0][10] = [d[3], d[0], d[2]], b[_$_d78c[147]][0][11] = [d[0], d[1], d[2]];
+        var h = new THREE[_$_d78c[148]](b, new THREE[_$_d78c[45]]({
+            map: this[_$_d78c[20]],
+            side: THREE[_$_d78c[44]]
+        }));
+        h[_$_d78c[149]] = _$_d78c[169], h[_$_d78c[105]][_$_d78c[141]] = -36, this[_$_d78c[26]][_$_d78c[151]](h)
+    }, this[_$_d78c[70]] = function(a) {
+        this[_$_d78c[19]] = new THREE[_$_d78c[168]][_$_d78c[167]](a), this[_$_d78c[19]][_$_d78c[40]] = THREE[_$_d78c[41]], this[_$_d78c[19]][_$_d78c[42]] = THREE[_$_d78c[43]];
+        var b = new THREE[_$_d78c[146]](10, 16, 1, 0, 0, 0),
+            d = this;
+        this[_$_d78c[19]][_$_d78c[75]][_$_d78c[35]] = function() {
+            var a = 22,
+                c = 17,
+                g = 0;
+            22 == d[_$_d78c[19]][_$_d78c[75]][_$_d78c[0]] && 17 == d[_$_d78c[19]][_$_d78c[75]][_$_d78c[1]] || (a = 64, c = 32, g = 15 / c);
+            var h = [new THREE[_$_d78c[145]](0, g), new THREE[_$_d78c[145]](1 / a, g), new THREE[_$_d78c[145]](1 / a, 16 / c + g), new THREE[_$_d78c[145]](0, 16 / c + g)],
+                G = [new THREE[_$_d78c[145]](1 / a + 10 / a, g), new THREE[_$_d78c[145]](2 / a + 10 / a, g), new THREE[_$_d78c[145]](2 / a + 10 / a, 16 / c + g), new THREE[_$_d78c[145]](1 / a + 10 / a, 16 / c + g)],
+                cf = [new THREE[_$_d78c[145]](1 / a, 16 / c + g), new THREE[_$_d78c[145]](1 / a + 10 / a, 16 / c + g), new THREE[_$_d78c[145]](1 / a + 10 / a, 17 / c + g), new THREE[_$_d78c[145]](1 / a, 17 / c + g)],
+                U = [new THREE[_$_d78c[145]](1 / a + 10 / a, 16 / c + g), new THREE[_$_d78c[145]](21 / a, 16 / c + g), new THREE[_$_d78c[145]](21 / a, 17 / c + g), new THREE[_$_d78c[145]](1 / a + 10 / a, 17 / c + g)],
+                bJ = [new THREE[_$_d78c[145]](2 / a + 10 / a, g), new THREE[_$_d78c[145]](22 / a, g), new THREE[_$_d78c[145]](22 / a, 16 / c + g), new THREE[_$_d78c[145]](2 / a + 10 / a, 16 / c + g)],
+                A = [new THREE[_$_d78c[145]](1 / a, g), new THREE[_$_d78c[145]](1 / a + 10 / a, g), new THREE[_$_d78c[145]](1 / a + 10 / a, 16 / c + g), new THREE[_$_d78c[145]](1 / a, 16 / c + g)];
+            b[_$_d78c[147]][0] = [], b[_$_d78c[147]][0][0] = [h[3], h[0], h[2]], b[_$_d78c[147]][0][1] = [h[0], h[1], h[2]], b[_$_d78c[147]][0][2] = [G[3], G[0], G[2]], b[_$_d78c[147]][0][3] = [G[0], G[1], G[2]], b[_$_d78c[147]][0][4] = [cf[3], cf[0], cf[2]], b[_$_d78c[147]][0][5] = [cf[0], cf[1], cf[2]], b[_$_d78c[147]][0][6] = [U[3], U[0], U[2]], b[_$_d78c[147]][0][7] = [U[0], U[1], U[2]], b[_$_d78c[147]][0][8] = [bJ[3], bJ[0], bJ[2]], b[_$_d78c[147]][0][9] = [bJ[0], bJ[1], bJ[2]], b[_$_d78c[147]][0][10] = [A[3], A[0], A[2]], b[_$_d78c[147]][0][11] = [A[0], A[1], A[2]], cloakMesh = new THREE[_$_d78c[148]](b, new THREE[_$_d78c[45]]({
+                map: d[_$_d78c[19]],
+                transparent: !0,
+                side: THREE[_$_d78c[44]]
+            })), cloakMesh[_$_d78c[149]] = _$_d78c[170], cloakMesh[_$_d78c[105]][_$_d78c[141]] = -4.5, cloakMesh[_$_d78c[105]][_$_d78c[139]] = -2.5, cloakMesh[_$_d78c[143]](-7.5), d[_$_d78c[26]][_$_d78c[151]](cloakMesh)
+        }, this[_$_d78c[19]][_$_d78c[75]][_$_d78c[56]] = function() {
+            d[_$_d78c[19]] = null
+        }
+    }, this[_$_d78c[69]] = function() {
+        return this[_$_d78c[68]]() ? (this[_$_d78c[26]][_$_d78c[171]](cloakMesh), this[_$_d78c[19]][_$_d78c[75]] = null, this[_$_d78c[19]] = null, void(((cloakMesh = null)))) : !1
+    }, this[_$_d78c[68]] = function() {
+        return null != cloakMesh
+    }, this[_$_d78c[52]] = {
+        complete: function(a, b) {
+            this[_$_d78c[172]] = b, this[_$_d78c[173]] = this[_$_d78c[172]][_$_d78c[17]][_$_d78c[0]] / 64, this[_$_d78c[174]](a), this[_$_d78c[175]](a), this[_$_d78c[176]](a)
+        },
+        FixOverlay: function(a) {
+            this[_$_d78c[177]](a), this[_$_d78c[178]](a), this[_$_d78c[179]](a), this[_$_d78c[180]](a), this[_$_d78c[181]](a), this[_$_d78c[182]](a)
+        },
+        FixHead2: function(a) {
+            this[_$_d78c[183]](a, 40, 8, 8, 8) || this[_$_d78c[183]](a, 40, 0, 8, 8) || this[_$_d78c[183]](a, 48, 0, 8, 8) || this[_$_d78c[183]](a, 32, 8, 8, 8) || this[_$_d78c[183]](a, 48, 8, 8, 8) || this[_$_d78c[183]](a, 56, 8, 8, 8) || (a[_$_d78c[49]](40, 0, 8, 8), a[_$_d78c[49]](48, 0, 8, 8), a[_$_d78c[49]](32, 8, 8, 8), a[_$_d78c[49]](40, 8, 8, 8), a[_$_d78c[49]](48, 8, 8, 8), a[_$_d78c[49]](56, 8, 8, 8))
+        },
+        FixBody2: function(a) {
+            this[_$_d78c[183]](a, 20, 36, 8, 12) || this[_$_d78c[183]](a, 20, 32, 8, 4) || this[_$_d78c[183]](a, 28, 32, 8, 4) || this[_$_d78c[183]](a, 16, 36, 4, 12) || this[_$_d78c[183]](a, 28, 36, 4, 12) || this[_$_d78c[183]](a, 32, 36, 8, 12) || (a[_$_d78c[49]](20, 32, 8, 4), a[_$_d78c[49]](28, 32, 8, 4), a[_$_d78c[49]](16, 36, 4, 12), a[_$_d78c[49]](20, 36, 8, 12), a[_$_d78c[49]](28, 36, 4, 12), a[_$_d78c[49]](32, 36, 8, 12))
+        },
+        FixRightArm2: function(a) {
+            this[_$_d78c[183]](a, 44, 36, 4, 12) || this[_$_d78c[183]](a, 44, 32, 4, 4) || this[_$_d78c[183]](a, 48, 32, 4, 4) || this[_$_d78c[183]](a, 40, 36, 4, 12) || this[_$_d78c[183]](a, 48, 36, 4, 12) || this[_$_d78c[183]](a, 52, 36, 4, 12) || (a[_$_d78c[49]](44, 32, 4, 4), a[_$_d78c[49]](48, 32, 4, 4), a[_$_d78c[49]](40, 36, 4, 12), a[_$_d78c[49]](44, 36, 4, 12), a[_$_d78c[49]](48, 36, 4, 12), a[_$_d78c[49]](52, 36, 4, 12))
+        },
+        FixLeftArm2: function(a) {
+            this[_$_d78c[183]](a, 52, 52, 4, 12) || this[_$_d78c[183]](a, 52, 48, 4, 4) || this[_$_d78c[183]](a, 56, 48, 4, 4) || this[_$_d78c[183]](a, 48, 52, 4, 12) || this[_$_d78c[183]](a, 56, 52, 4, 12) || this[_$_d78c[183]](a, 60, 52, 4, 12) || (a[_$_d78c[49]](52, 48, 4, 4), a[_$_d78c[49]](56, 48, 4, 4), a[_$_d78c[49]](48, 52, 4, 12), a[_$_d78c[49]](52, 52, 4, 12), a[_$_d78c[49]](56, 52, 4, 12), a[_$_d78c[49]](60, 52, 4, 12))
+        },
+        FixRightLeg2: function(a) {
+            this[_$_d78c[183]](a, 4, 36, 4, 12) || this[_$_d78c[183]](a, 4, 32, 4, 4) || this[_$_d78c[183]](a, 8, 32, 4, 4) || this[_$_d78c[183]](a, 0, 36, 4, 12) || this[_$_d78c[183]](a, 8, 36, 4, 12) || this[_$_d78c[183]](a, 12, 36, 4, 12) || (a[_$_d78c[49]](4, 32, 4, 4), a[_$_d78c[49]](8, 32, 4, 4), a[_$_d78c[49]](0, 36, 4, 12), a[_$_d78c[49]](4, 36, 4, 12), a[_$_d78c[49]](8, 36, 4, 12), a[_$_d78c[49]](12, 36, 4, 12))
+        },
+        FixLeftLeg2: function(a) {
+            this[_$_d78c[183]](a, 4, 52, 4, 12) || this[_$_d78c[183]](a, 4, 48, 4, 4) || this[_$_d78c[183]](a, 8, 48, 4, 4) || this[_$_d78c[183]](a, 0, 52, 4, 12) || this[_$_d78c[183]](a, 8, 52, 4, 12) || this[_$_d78c[183]](a, 12, 52, 4, 12) || (a[_$_d78c[49]](4, 48, 4, 4), a[_$_d78c[49]](8, 48, 4, 4), a[_$_d78c[49]](0, 52, 4, 12), a[_$_d78c[49]](4, 52, 4, 12), a[_$_d78c[49]](8, 52, 4, 12), a[_$_d78c[49]](12, 52, 4, 12))
+        },
+        Convert6432To6464: function(a) {
+            this[_$_d78c[184]](a, 4, 16, 4, 4, 20, 48, !0), this[_$_d78c[184]](a, 8, 16, 4, 4, 24, 48, !0), this[_$_d78c[184]](a, 0, 20, 4, 12, 24, 52, !0), this[_$_d78c[184]](a, 4, 20, 4, 12, 20, 52, !0), this[_$_d78c[184]](a, 8, 20, 4, 12, 16, 52, !0), this[_$_d78c[184]](a, 12, 20, 4, 12, 28, 52, !0), this[_$_d78c[184]](a, 44, 16, 4, 4, 36, 48, !0), this[_$_d78c[184]](a, 48, 16, 4, 4, 40, 48, !0), this[_$_d78c[184]](a, 40, 20, 4, 12, 40, 52, !0), this[_$_d78c[184]](a, 44, 20, 4, 12, 36, 52, !0), this[_$_d78c[184]](a, 48, 20, 4, 12, 32, 52, !0), this[_$_d78c[184]](a, 52, 20, 4, 12, 44, 52, !0)
+        },
+        FixNonVisible: function(a) {
+            a[_$_d78c[49]](0, 0, 8, 8), a[_$_d78c[49]](24, 0, 16, 8), a[_$_d78c[49]](56, 0, 8, 8), a[_$_d78c[49]](0, 16, 4, 4), a[_$_d78c[49]](12, 16, 8, 4), a[_$_d78c[49]](36, 16, 8, 4), a[_$_d78c[49]](52, 16, 4, 4), a[_$_d78c[49]](56, 16, 8, 32), a[_$_d78c[49]](0, 32, 4, 4), a[_$_d78c[49]](12, 32, 8, 4), a[_$_d78c[49]](36, 32, 8, 4), a[_$_d78c[49]](52, 32, 4, 4), a[_$_d78c[49]](0, 48, 4, 4), a[_$_d78c[49]](12, 48, 8, 4), a[_$_d78c[49]](28, 48, 8, 4), a[_$_d78c[49]](44, 48, 8, 4), a[_$_d78c[49]](60, 48, 8, 4)
+        },
+        HasTransparency: function(a, b, d, $, g) {
+            b *= this[_$_d78c[173]], d *= this[_$_d78c[173]], $ *= this[_$_d78c[173]], g *= this[_$_d78c[173]];
+            var h = a[_$_d78c[185]](b, d, $, g);
+            for (d = 0; g > d; d++) {
+                for (b = 0; $ > b; b++) {
+                    var G = 4 * (b + d * $);
+                    if (0 == h[_$_d78c[186]][G + 3]) {
+                        return !0
+                    }
+                }
+            };
+            return !1
+        },
+        Copy: function(a, b, d, $, g, h, G, cf) {
+            b *= this[_$_d78c[173]], d *= this[_$_d78c[173]], $ *= this[_$_d78c[173]], g *= this[_$_d78c[173]], h *= this[_$_d78c[173]], G *= this[_$_d78c[173]];
+            var U = a[_$_d78c[185]](b, d, $, g);
+            if (cf) {
+                for (y = 0; y < g; y++) {
+                    for (x = 0; x < $ / 2; x++) {
+                        index = 4 * (x + y * $), index2 = 4 * ($ - x - 1 + y * $);
+                        var bJ = U[_$_d78c[186]][index],
+                            A = U[_$_d78c[186]][index + 1],
+                            D = U[_$_d78c[186]][index + 2],
+                            k = U[_$_d78c[186]][index + 3],
+                            H = U[_$_d78c[186]][index2],
+                            O = U[_$_d78c[186]][index2 + 1],
+                            W = U[_$_d78c[186]][index2 + 2],
+                            z = U[_$_d78c[186]][index2 + 3];
+                        U[_$_d78c[186]][index] = H, U[_$_d78c[186]][index + 1] = O, U[_$_d78c[186]][index + 2] = W, U[_$_d78c[186]][index + 3] = z, U[_$_d78c[186]][index2] = bJ, U[_$_d78c[186]][index2 + 1] = A, U[_$_d78c[186]][index2 + 2] = D, U[_$_d78c[186]][index2 + 3] = k
+                    }
+                }
+            };
+            a[_$_d78c[187]](U, h, G)
+        }
+    }, this[_$_d78c[84]] = {
+        getX: function(a) {
+            return a[_$_d78c[188]] ? a[_$_d78c[188]] - (document[_$_d78c[190]][_$_d78c[189]] || document[_$_d78c[152]][_$_d78c[189]]) : a[_$_d78c[191]] ? a[_$_d78c[191]] + (document[_$_d78c[190]][_$_d78c[189]] || document[_$_d78c[152]][_$_d78c[189]]) - document[_$_d78c[190]][_$_d78c[192]] : 0
+        },
+        getY: function(a) {
+            return a[_$_d78c[193]] ? a[_$_d78c[193]] - (document[_$_d78c[190]][_$_d78c[194]] || document[_$_d78c[152]][_$_d78c[194]]) : a[_$_d78c[195]] ? a[_$_d78c[195]] + (document[_$_d78c[190]][_$_d78c[194]] || document[_$_d78c[152]][_$_d78c[194]]) - document[_$_d78c[190]][_$_d78c[196]] : 0
+        }
+    }, this[_$_d78c[37]] = function(a) {
+        console[_$_d78c[198]](_$_d78c[197] + a)
+    }, this[_$_d78c[47]] = function(a) {
+        if (null == a) {
+            return !1
+        };
+        for (var b = [_$_d78c[199], _$_d78c[200], _$_d78c[201], _$_d78c[202], _$_d78c[203]], d = null, c = 0; c < b[_$_d78c[65]]; ++c) {
+            try {
+                d = a[_$_d78c[204]](b[c])
+            } catch (e) {};
+            if (d) {
+                break
+            }
+        };
+        return null == d ? !1 : d
+    }, this[_$_d78c[48]] = function(a) {
+        this[_$_d78c[37]](_$_d78c[205] + a)
+    }
 }
+var _$_d78c = [_$_2275[0], _$_2275[1], _$_2275[2], _$_2275[3], _$_2275[4], _$_2275[5], _$_2275[6], _$_2275[7], _$_2275[8], _$_2275[9], _$_2275[10], _$_2275[11], _$_2275[12], _$_2275[13], _$_2275[14], _$_2275[15], _$_2275[16], _$_2275[17], _$_2275[18], _$_2275[19], _$_2275[20], _$_2275[21], _$_2275[22], _$_2275[23], _$_2275[24], _$_2275[25], _$_2275[26], _$_2275[27], _$_2275[28], _$_2275[29], _$_2275[30], _$_2275[31], _$_2275[32], _$_2275[33], _$_2275[34], _$_2275[35], _$_2275[36], _$_2275[37], _$_2275[38], _$_2275[39], _$_2275[40], _$_2275[41], _$_2275[42], _$_2275[43], _$_2275[44], _$_2275[45], _$_2275[46], _$_2275[47], _$_2275[48], _$_2275[49], _$_2275[50], _$_2275[51], _$_2275[52], _$_2275[53], _$_2275[54], _$_2275[55], _$_2275[56], _$_2275[57], _$_2275[58], _$_2275[59], _$_2275[60], _$_2275[61], _$_2275[62], _$_2275[63], _$_2275[64], _$_2275[65], _$_2275[66], _$_2275[67], _$_2275[68], _$_2275[69], _$_2275[70], _$_2275[71], _$_2275[72], _$_2275[73], _$_2275[74], _$_2275[75], _$_2275[76], _$_2275[77], _$_2275[78], _$_2275[79], _$_2275[80], _$_2275[81], _$_2275[82], _$_2275[83], _$_2275[84], _$_2275[85], _$_2275[86], _$_2275[87], _$_2275[88], _$_2275[89], _$_2275[90], _$_2275[91], _$_2275[92], _$_2275[93], _$_2275[94], _$_2275[95], _$_2275[96], _$_2275[97], _$_2275[98], _$_2275[99], _$_2275[100], _$_2275[101], _$_2275[102], _$_2275[103], _$_2275[104], _$_2275[105], _$_2275[106], _$_2275[107], _$_2275[108], _$_2275[109], _$_2275[110], _$_2275[111], _$_2275[112], _$_2275[113], _$_2275[114], _$_2275[115], _$_2275[116], _$_2275[117], _$_2275[118], _$_2275[119], _$_2275[120], _$_2275[121], _$_2275[122], _$_2275[123], _$_2275[124], _$_2275[125], _$_2275[126], _$_2275[127], _$_2275[128], _$_2275[129], _$_2275[130], _$_2275[131], _$_2275[132], _$_2275[133], _$_2275[134], _$_2275[135], _$_2275[136], _$_2275[137], _$_2275[138], _$_2275[139], _$_2275[140], _$_2275[141], _$_2275[142], _$_2275[143], _$_2275[144], _$_2275[145], _$_2275[146], _$_2275[147], _$_2275[148], _$_2275[149], _$_2275[150], _$_2275[151], _$_2275[152], _$_2275[153], _$_2275[154], _$_2275[155], _$_2275[156], _$_2275[157], _$_2275[158], _$_2275[159], _$_2275[160], _$_2275[161], _$_2275[162], _$_2275[163], _$_2275[164], _$_2275[165], _$_2275[166], _$_2275[167], _$_2275[168], _$_2275[169], _$_2275[170], _$_2275[171], _$_2275[172], _$_2275[173], _$_2275[174], _$_2275[175], _$_2275[176], _$_2275[177], _$_2275[178], _$_2275[179], _$_2275[180], _$_2275[181], _$_2275[182], _$_2275[183], _$_2275[184], _$_2275[185], _$_2275[186], _$_2275[187], _$_2275[188], _$_2275[189], _$_2275[190], _$_2275[191], _$_2275[192], _$_2275[193], _$_2275[194], _$_2275[195], _$_2275[196], _$_2275[197], _$_2275[198], _$_2275[199], _$_2275[200], _$_2275[201], _$_2275[202], _$_2275[203], _$_2275[204], _$_2275[205]]

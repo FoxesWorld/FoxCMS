@@ -7,14 +7,14 @@ let logoCfg = {
 					{
 						targets: '.logo img',
 						translateY: [-100, 0],
-						opacity: [0, 1],
+						opacity: [0.1, 1],
 						elasticity: 600,
-						duration: 100
+						duration: 1000
 					},
 					{
 						targets: '.logo .letter',
 						opacity: [0, 1],
-						translateY: [60, 0],
+						translateZ: [60, 0],
 						duration: 500,
 						delay: (el, i) => 5 * i
 					},
@@ -29,7 +29,7 @@ let logoCfg = {
 					{
 						targets: '.logo .status',
 						opacity: [0, 1],
-						translateY: [-60, 0],
+						translateX: [-60, 0],
 						elasticity: 500,
 						duration: 500,
 						delay: (el, i) => 2 * i
@@ -47,7 +47,7 @@ let logoCfg = {
 					{
 						targets: '.logo',
 						translateY: [0, -50],
-						opacity: [1, 0],
+						opacity: [0.1, 1],
 						easing: "easeInOutQuad",
 						duration: 1000,
 						delay: 1000

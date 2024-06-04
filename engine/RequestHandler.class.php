@@ -25,7 +25,8 @@
 		
 		public static function ipCheck(){
 			if(init::$usrArray['logged_ip'] != REMOTE_IP) {
-				AuthManager::logout();
+				//AuthManager::logout();
+				//die('{"message": "Logging out!"}');
 			}
 		}
 		

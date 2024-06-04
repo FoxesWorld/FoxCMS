@@ -40,8 +40,11 @@
 					}
 				}
 			}
-
-			return json_encode($serversArray);
+			if(count($serversArray) > 0) {
+				return json_encode($serversArray);
+			} else {
+				return '{"error": "ServerNotFound"}';
+			}
 		}
 	}
 	

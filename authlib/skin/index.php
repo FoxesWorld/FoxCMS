@@ -16,8 +16,7 @@ version: 0.2.0 Alpha
 Usage: Parses skins & Cloaks
 =====================================================
 */
-Error_Reporting(E_ALL);
-Ini_Set('display_errors', true);
+<?php
 header('Content-Type: application/json; charset=utf-8');
 
 define('INCLUDE_CHECK', true);
@@ -39,7 +38,7 @@ class Skin {
 
     public function __construct($md5)
     {
-        if (preg_match('/^[a-f0-9]{32}$/', $md5)) {
+        if (strlen($md5) === 32) {
             global $config, $LOGGER;
 
             $LOGGER->WriteLine("SkinLib===");
@@ -47,7 +46,7 @@ class Skin {
             try {
                 $LOGGER->WriteLine("SkinLib is being created with " . $md5 . " UUID");
 
-                $this->md5User = $md5;
+                $this->md5User = $this->sanitizeInput($md5);
                 $this->getRealUser();
 
                 $userDir = $config['skinUrl'] . $this->realUser;
@@ -56,10 +55,10 @@ class Skin {
 
                 $this->JSONoutput();
             } catch (PDOException $pe) {
-                die('{"error": "Database error", "message": "' . $pe->getMessage() . '"}');
+                die($pe);
             }
         } else {
-            die('{"error": "Invalid input", "message": "Invalid MD5 hash"}');
+            $LOGGER->WriteLine("Length is not 32 " . $md5);
         }
     }
 
@@ -92,5 +91,13 @@ class Skin {
         $base64 = json_encode($texturesData);
         echo '{"id":"' . $this->md5User . '","name":"' . $this->realUser . '","properties":[{"name":"textures","value":"' . base64_encode($base64) . '","signature":"FoxesCraft"}]}';
     }
+
+    private function sanitizeInput($string)
+    {
+        if (!preg_match("/^[a-zA-Z0-9_-]+$/", $string)) {
+            exit;
+        } else {
+            return $string;
+        }
+    }
 }
-?>

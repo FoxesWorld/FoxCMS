@@ -77,7 +77,7 @@ export class FoxesInputHandler {
         }
 
         form.notify(response.message, response.type);
-
+		console.log(data.playSound);
         if (data.playSound !== false) {
             this.foxEngine.soundOnClick(response.type);
             this.foxEngine.buttonFreeze(submitButton, delay + 1000);

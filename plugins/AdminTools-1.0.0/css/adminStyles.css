@@ -53,6 +53,25 @@
 	margin: 10px;
 }
 
+#serversList .serverVersion {
+	/**/
+    padding: 10px;
+    display: block;
+    border-radius: 10px;
+}
+
+.serverVersion.serverVersion-1122 {
+	background: #81ab9d; 
+}
+
+.serverVersion.serverVersion-1710 {
+	background: #d2b31a; 
+}
+
+.serverVersion.serverVersion-1165 {
+	background: #0c848a; 
+}
+
 #serverOptionsForm .serverStatus {
     font-size: 23px;
     font-weight: 900;

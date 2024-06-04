@@ -11,35 +11,31 @@ export class Logo {
 					{
 						targets: '.logo img',
 						translateY: [-100, 0],
-						opacity: [0, 1],
+						opacity: [0.1, 1],
 						elasticity: 600,
 						duration: 1000
 					},
 					{
 						targets: '.logo .letter',
 						opacity: [0, 1],
-						translateY: [60, 0],
+						translateX: [80, 0],
 						duration: 1000,
-						delay: (el, i) => 100 * i
+						delay: function(el, index) { 
+							return 100 * index;
+						}
 					},
 					{
 						targets: '.logo .status',
 						opacity: [0, 1],
 						translateY: [-60, 0],
-						scaleX: 1,
+						rotate: '2turn',
 						elasticity: 500,
 						duration: 1000,
-						delay: (el, i) => 20 * i
-					},	
-					/*					
-					{
-						targets: '.logo .status',
-						rotate: '10turn',
-						elasticity: 500,
-						duration: 1000,
-						delay: (el, i) => 2 * i
-					},
-					*/			
+						//easing: "easeOutSine",
+						delay: function(el, index) { 
+							return 20 * index;
+						}
+					},						
 					{
 						targets: '.logo .line',
 						scaleX: [0.4, 1],

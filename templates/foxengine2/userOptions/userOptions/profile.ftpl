@@ -165,38 +165,19 @@
 			   
 			   <script>
 (async function () {
-    let skin = senpai_IAM_NOT_KYSY();
-    var img = new Image();
-    img.src = "/uploads/users/[login]/skin.png";
-    img.onload = function () {
-        skin.changeSkin(img);
-    };
-    img.onerror = function () {
-        var defaultSkin = new Image();
-        defaultSkin.src = "/uploads/users/skin.png";
-        defaultSkin.onload = function () {
-            skin.changeSkin(defaultSkin);
-        };
-    };
+	let userDir = "/uploads/users/[login]";
+    let skin = new skin3D(userDir + "/skin.png", document.getElementById('skinViewer3D'));
+	skin.init();
+	skin.createBlock('%assets%/img/block.png');
+	skin.createCloak(userDir + '/cape.png');
 })();
 
 
 				</script>
-<div data-v-446af5dc="" class="bg-skin-cloak">
-    <div data-v-446af5dc="" class="opa-you-skin-not-skin noselect">
-        <div data-v-446af5dc="">
-            Показать плащ
-        </div>
-    </div>
-    <div data-v-446af5dc="" id="senpaiskin">
-        <div data-v-446af5dc="" style="background: url(&quot;https://loliland.ru/api/raw/skin/AidenFox&quot;) center center / cover;"></div>
-        <canvas width="240" height="300"></canvas>
-    </div>
-    <div data-v-446af5dc="" class="cloack-user" style="display: none; position: relative; overflow: hidden;">
-        <div data-v-446af5dc="" class="cape-blur" style="background: url('https://loliland.ru/api/raw/skin/AidenFox') center center / cover;"></div>
-        <img data-v-446af5dc="" src="https://loliland.ru/api/cape/AidenFox" style="height: 60%; margin-top: 20%; position: inherit; box-shadow: rgba(0, 0, 0, 0.46) 0px 5px 17px;">
-    </div>
-</div>
+	<div id="skinViewer3D" style="margin: 15px 10px;">
+		<canvas id="canvas" style="display: none"></canvas>
+	</div>
+
 
             </div>
             <div class="tab_content">

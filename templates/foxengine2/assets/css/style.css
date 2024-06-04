@@ -46,6 +46,12 @@ body {
 	height: fit-content;
 }
 
+@media (max-width: 991px) {
+	.col-8 {
+    width: 100%;
+  }
+}
+
 #usrMenu i {
 	color: var(--theme-iconPrimary);
 	margin: -2px 3px;
@@ -95,6 +101,69 @@ img {
 	margin: 5% auto;
 	font-size: 1rem;
 }
+
+@-webkit-keyframes scale-down {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(1.8);
+    }
+
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+    }
+
+    75% {
+        opacity: .85;
+        -webkit-transform: scale(1.1);
+    }
+
+    75% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes scale-down {
+    0% {
+        opacity: 0;
+        transform: scale(1.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    75% {
+        opacity: .85;
+        transform: scale(1.1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.scale-down {
+    -webkit-animation-name: scale-down;
+    -moz-animation-name: scale-down;
+    -ms-animation-name: scale-down;
+    -o-animation-name: scale-down;
+    animation-name: scale-down;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-timing-function: linear;
+    -ms-animation-timing-function: linear;
+    -o-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-duration: .75s;
+    -moz-animation-duration: 1s;
+    -ms-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+}
+
 
 .foxesNav {
 	margin: 0px auto;

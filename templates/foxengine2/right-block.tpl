@@ -15,6 +15,16 @@
 			</div>
 
 			<div class="card text-white mb-3">
+				<div class="cardTitle">
+					<img class="img-fluid" src="{$tplDir}/assets/icons/monitor.png" uk-img />
+					Голосуй
+				</div>
+				<h3 style="margin: 0 auto;color: antiquewhite;padding: 15;">
+					Coming Soon!
+				</h3>
+			</div>
+
+			<div class="card text-white mb-3">
 				 <div class="cardTitle">
 					<img class="img-fluid" src="{$tplDir}/assets/icons/lastuser.png" uk-img />
 					Последняя регистрация

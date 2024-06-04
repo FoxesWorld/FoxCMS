@@ -6,7 +6,7 @@
 	"optionBlock": "#userBlock",
 	"optionPreText": "<img src='/templates/foxengine2/assets/icons/menu/icon_start.png' />",
 	"optionGroup": [1,4,5],
-	"optionClass": "login uk-animation-fade",
+	"optionClass": "login uk-animation-fade scale-down",
 	"type": "page"
    }
 </useroption>

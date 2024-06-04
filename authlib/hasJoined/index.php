@@ -21,15 +21,9 @@
 require('../config.php');
 include('../database.php');
 
-//if (isset($_GET['username']) && isset($_GET['serverId'])) {
-    if (@$_GET['username'] !== null && @$_GET['username'] !== '' && @$_GET['serverId'] !== null && @$_GET['serverId'] !== '') {
-        $hasJoined = new HasJoined(@$_GET['username'], @$_GET['serverId']);
-    } elseif (@$_GET['username'] === null || @$_GET['username'] === '') {
-        exit('{"error":"ValidationException","errorMessage": "Поле Имя пользователя обязательно для заполнения."}');
-    } elseif (@$_GET['serverId'] === null || @$_GET['serverId'] === '') {
-        exit('{"error":"ValidationException","errorMessage": "Поле serverId обязательно для заполнения."}');
-    }
-//}
+if (isset($_GET['username']) && isset($_GET['serverId'])) {
+    $hasJoined = new HasJoined($_GET['username'], $_GET['serverId']);
+}
 
 class HasJoined
 {
@@ -128,4 +122,3 @@ class HasJoined
         return json_encode($answer);
     }
 }
-?>

@@ -72,29 +72,34 @@ export class Servers {
                 sysRequest: "parseServers",
                 server: "serverName = '" + serverName + "'"
             }, "JSON");
+			console.log(server.error);
+			if(server.error === undefined) {
+				if (server && server.length > 0) {
+					let serverDetails = server[0];
 
-            if (server && server.length > 0) {
-                let serverDetails = server[0];
+					// Fetch modsInfo
+					let modsInfo = [];
+					if (serverDetails.modsInfo) {
+						modsInfo = JSON.parse(serverDetails.modsInfo);
+					}
 
-                // Fetch modsInfo
-                let modsInfo = [];
-                if (serverDetails.modsInfo) {
-                    modsInfo = JSON.parse(serverDetails.modsInfo);
-                }
+					let page = await foxEngine.replaceTextInTemplate(pageTemplate, {
+						serverImage: serverDetails.serverImage,
+						serverDescription: serverDetails.serverDescription,
+						serverName: serverDetails.serverName,
+						serverVersion: serverDetails.serverVersion,
+						mods: await this.loadMods(modsInfo)
+					});
 
-                let page = await foxEngine.replaceTextInTemplate(pageTemplate, {
-                    serverImage: serverDetails.serverImage,
-                    serverDescription: serverDetails.serverDescription,
-                    serverName: serverDetails.serverName,
-                    serverVersion: serverDetails.serverVersion,
-                    mods: await this.loadMods(modsInfo)
-                });
-
-                // Append the server page HTML to the container
-                foxEngine.page.loadData(page, replaceData.contentBlock);
-            } else {
-                console.error('Error: Unable to fetch server details.');
-            }
+					// Append the server page HTML to the container
+					foxEngine.page.loadData(page, replaceData.contentBlock);
+				} else {
+					console.error('Error: Unable to fetch server details.');
+				}
+		} else {
+			await this.foxEngine.utils.showErrorPage('{"error": "'+server.error+'"}', this.foxEngine.replaceData.contentBlock);
+			this.setPage("");
+		}
         } catch (error) {
             console.error('Error while loading server page:', error);
         }
