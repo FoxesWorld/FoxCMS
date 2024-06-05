@@ -32,12 +32,13 @@ class FoxEngine {
             "color: #ff2424; background: #fff; padding:5px 0;",
             "color: #ff2424; background: #fff; padding:5px 0;"
         ];
+		/*
 		this.purchasePacks = [
             { id: 1000, img: "/uploads/icons/monets-1.png", label: "1 000 монет" },
             { id: 2000, img: "/uploads/icons/monets-2.png", label: "2 000 монет" },
             { id: 3000, img: "/uploads/icons/monets-3.png", label: "3 000 монет" },
             { id: 5000, img: "/uploads/icons/monets-4.png", label: "5 000 монет" }
-        ];
+        ]; */
         console.log(...this.e);
         if (replaceData.user_group !== '1') {
             this.preventSelection(document);
@@ -57,7 +58,7 @@ class FoxEngine {
             this.page = new Page(this);
             this.modalApp = new ModalApp(this);
             this.emojis = new Emojis(this);
-			this.payment = new PaymentManager(this.purchasePacks, 'payment_buttons_list', '#unitpay_count', '#bonus_information', '#count_after_donate');
+			this.payment = new PaymentManager();
             this.snow = new Snow(this);
 
             if ([11, 0, 1].includes(this.currentDate.getMonth())) {

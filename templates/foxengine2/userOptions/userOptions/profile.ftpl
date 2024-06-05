@@ -163,17 +163,15 @@
 }
 </style>
 			   
-			   <script>
+<script>
 (async function () {
 	let userDir = "/uploads/users/[login]";
-    let skin = new skin3D(userDir + "/skin.png", document.getElementById('skinViewer3D'));
-	skin.init();
+    let skin = new skin3D(userDir + '/skin.png',document.getElementById('skinViewer3D'));
+	skin.init(240, 295);
 	skin.createBlock('%assets%/img/block.png');
 	skin.createCloak(userDir + '/cape.png');
 })();
-
-
-				</script>
+</script>
 	<div id="skinViewer3D" style="margin: 15px 10px;">
 		<canvas id="canvas" style="display: none"></canvas>
 	</div>
@@ -202,6 +200,9 @@
             <div class="modal_app_title">Загрузка фото [login]:</div>
             <div class="modal_app_close" onclick="foxEngine.modalApp.closeModalApp();"></div>
             <div class="modal_app_content">
+				<h3 style="margin: 0 auto;color: antiquewhite;padding: 15;">
+					Coming Soon!
+				</h3>
             </div>
          </div>
       </div>

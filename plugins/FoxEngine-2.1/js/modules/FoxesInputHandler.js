@@ -77,15 +77,14 @@ export class FoxesInputHandler {
         }
 
         form.notify(response.message, response.type);
-		console.log(data.playSound);
-        if (data.playSound !== false) {
+        if (data.playSound != false) {
             this.foxEngine.soundOnClick(response.type);
             this.foxEngine.buttonFreeze(submitButton, delay + 1000);
         }
 
         switch (response.type) {
             case "success":
-                if (data.refreshPage !== false) {
+                if (data.refreshPage != false) {
                     setTimeout(() => this.refreshPage(), delay);
                 }
                 if (data.onSubmit) {
@@ -94,11 +93,11 @@ export class FoxesInputHandler {
                 }
                 break;
 
-            case "error":
+            default:
                 if (typeof grecaptcha !== 'undefined') {
                     grecaptcha.reset();
                 }
-                break;
+            break;
         }
     }
 

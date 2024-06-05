@@ -1,98 +1,76 @@
 export class PaymentManager {
-	
-        constructor(paymentOptions, paymentButtonsListId, unitpayCountId, bonusInformationId, countAfterDonateId) {
-            this.paymentOptions = paymentOptions;
-            this.paymentButtonsList = document.getElementById(paymentButtonsListId);
-            this.unitpayCount = document.getElementById(unitpayCountId);
-            this.bonusInformation = document.getElementById(bonusInformationId);
-            this.countAfterDonate = document.getElementById(countAfterDonateId);
-        }
+        constructor() {}
 
-        init() {
-            this.paymentOptions.forEach(option => this.createPaymentButton(option));
-            this.unitpayCount.addEventListener('input', this.handleInputChange.bind(this));
-            this.unitpayCount.addEventListener('change', this.handleInputChange.bind(this));
-
-            this.selectPaymentBlock(1000);
-        }
-
-        createPaymentButton(option) {
-            const paymentButton = document.createElement('div');
-            paymentButton.id = `payment_${option.id}`;
-            paymentButton.classList.add('payment_button');
-            paymentButton.onclick = () => this.selectPaymentBlock(option.id);
-
-            const img = document.createElement('img');
-            img.src = option.img;
-
-            const sumDiv = document.createElement('div');
-            sumDiv.classList.add('sum');
-            sumDiv.textContent = option.label;
-
-            const sumPercentDiv = document.createElement('div');
-            sumPercentDiv.classList.add('sum_percent');
-            sumPercentDiv.textContent = `Бонус рассчитывается автоматически`;
-
-            paymentButton.appendChild(img);
-            paymentButton.appendChild(sumDiv);
-            paymentButton.appendChild(sumPercentDiv);
-            this.paymentButtonsList.appendChild(paymentButton);
-        }
-
-        handleInputChange(event) {
-            const count = parseInt(event.target.value) || 0;
-            if (count >= 0) {
-                this.selectPaymentBlock(count);
-            }
-        }
-
-        selectPaymentBlock(count) {
-            document.querySelectorAll('.payment_button').forEach(button => {
-                button.classList.remove('payment_button_selected');
-            });
-
-            const selectedButton = document.getElementById(`payment_${count}`);
-            if (selectedButton) {
-                selectedButton.classList.add('payment_button_selected');
-            }
-
-            this.unitpayCount.value = count;
-            this.setupCountAfterDonate(count);
-        }
-
-        setupCountAfterDonate(sum) {
-            const BASE_BONUS = 0.05;
-            const ADDITIONAL_BONUS = 0.05; // Бонус за каждую тысячу монет выше 1000
-
-            let bonusPercent = sum < 1000 ? 0 : BASE_BONUS + Math.floor((sum - 1000) / 1000) * ADDITIONAL_BONUS;
-            let bonusCount = Math.floor((bonusPercent * sum) / 5) * 5; // Округляем бонус до ближайшего кратного 5
-
-            let bonusMessage = sum < 1000 ? "Бонус доступен при пополнении от 1000 монет." : `Включая бонус размером ${bonusPercent * 100}%!`;
-
-            this.bonusInformation.innerHTML = bonusMessage;
-            this.countAfterDonate.innerHTML = sum < 1000 ? `${sum} монет` : `${sum + bonusCount} монет`;
-        }
-
-        purchaseMonets(paymentSystem, type) {
-            const domain = window.location.href.includes('.net') ? 'net' : 'ru';
-            const timestamp = new Date().getMilliseconds();
-
-            let urlParams = `/?operator=${type}`;
-            if (paymentSystem.includes("unitpay")) {
-                if (paymentSystem.includes('netting')) {
-                    paymentSystem = 'unitpay-netting';
-                }
-                paymentSystem = `${paymentSystem}-${domain}`;
-                urlParams = `/?email=aseo@gmail.com&operator=${type}`;
-            } else if (paymentSystem.includes("freekassa")) {
-                urlParams = `/?email=aseo@gmail.com&currency=${type}`;
-            }
-
-            window.location.href = `https://api.simpleminecraft.${domain}/v2/payments/createPayment/${paymentSystem}/Aseo/${this.getPaymentSum()}/${timestamp}${urlParams}`;
-        }
-
-        getPaymentSum() {
-            const paymentSum = parseInt(this.unitpayCount.value);
-            return isNaN(paymentSum) || paymentSum < 50 ? 50 : paymentSum;
-        }
+    init() {
+        this.selectPaymentBlock(1000);
+		 $("#unitpay_count").on("input", (event) => this.onInputChange(event));
     }
+
+    selectPaymentBlock(count) {
+        $(".payment_button").removeClass("payment_button_selected");
+        $("#payment_" + count).addClass("payment_button_selected");
+        $("#unitpay_count").val(count);
+        this.setupCountAfterDonate(count);
+    }
+
+    setupCountAfterDonate(sum) {
+        sum = parseInt(sum);
+        let bonus_percent = 0;
+
+        if (sum >= 1000) bonus_percent = 0.05;
+        if (sum >= 2000) bonus_percent = 0.10;
+        if (sum >= 3000) bonus_percent = 0.20;
+        if (sum >= 5000) bonus_percent = 0.25;
+
+        const bonus_count = bonus_percent * sum;
+
+        if (sum < 1000) {
+            $("#bonus_information").html("Вам доступен 5% бонус при пополнении от 1000 монет.");
+            $(".payment_type").removeClass("payment_select");
+        } else {
+            $("#bonus_information").html("Включая бонус размером " + (bonus_percent * 100) + "%!");
+        }
+
+        $("#count_after_donate").html((sum + bonus_count) + " монет");
+    }
+
+    onInputChange(event) {
+		console.log("GGGG");
+        let count = parseInt(event.target.value);
+        if (isNaN(count)) count = 0;
+        this.selectPaymentBlock(count);
+    }
+
+    purchaseMonets(payment_system, type) {
+        const domain = window.location.href.includes('.net') ? 'net' : 'ru';
+        let timestamp = new Date().getMilliseconds();
+
+        if (payment_system.includes("unitpay")) {
+            if (payment_system.includes('netting')) {
+                payment_system = 'unitpay-netting';
+            }
+
+            payment_system = `${payment_system}-${domain}`;
+            timestamp += `/?customerEmail=aseo@gmail.com&paymentType=${type}`;
+        } else if (payment_system.includes("enot")) {
+            timestamp += `/?operator=${type}`;
+        } else if (payment_system.includes("freekassa")) {
+            timestamp += `/?email=aseo@gmail.com&currency=${type}`;
+        }
+
+        window.location.href = `https://api.simpleminecraft.${domain}/v2/payments/create/${payment_system}/Aseo/${this.getPaymentSum(type)}/${timestamp}`;
+    }
+
+    getPaymentSum(type) {
+        let count = this.fetchSum();
+        if (count < 50) count = 50;
+        if (type === "sbp" && count < 100) count = 100;
+        return count;
+    }
+
+    fetchSum() {
+        let count = parseInt($("#unitpay_count").val());
+        if (isNaN(count)) count = 0;
+        return count;
+    }
+}

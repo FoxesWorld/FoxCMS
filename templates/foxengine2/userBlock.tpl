@@ -31,7 +31,6 @@
 								const template = await foxEngine.loadTemplate(foxEngine.elementsDir+'payment.tpl', true);
 								let data = await foxEngine.entryReplacer.replaceText(template, "");
 								foxEngine.modalApp.showModalApp(900, data);
-								//
 							}
 						 </script>
 						 <ul id="usrMenu">

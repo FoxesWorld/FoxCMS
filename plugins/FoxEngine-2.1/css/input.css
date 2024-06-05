@@ -88,6 +88,30 @@ button {
 	width: -webkit-fill-available;
 }
 
+button.download {
+    width: 40%;
+    height: 50px;
+    background: #705e49 url(%assets%icons/download.png) 22px 13px no-repeat;
+    color: #fff;
+    text-decoration: none;
+    transition: all .5s ease;
+    font-size: 18px;
+    display: inline-block;
+    text-align: left;
+    line-height: 45px;
+    margin: -20px auto 13px auto;
+    padding: 0 0 0 60px;
+    font-family: FSElliotPro-Bold;
+    box-shadow: 0 11px 27px rgb(55 49 42 / 22%), inset 0 -2px 0 #2f2b23;
+}
+
+ button.download:hover {
+	background: #eb9319 url(%assets%icons/download_hover.png) 22px 13px no-repeat;
+    color: #fff;
+    box-shadow: 0 11px 27px rgb(234 138 6 / 22%), inset 0 -2px 0 #eb9319;
+    text-shadow: 2px 4px 4px rgb(189 93 2 / 65%);
+}
+
 .login {
 	color: white;
 	margin: 0px 5px;

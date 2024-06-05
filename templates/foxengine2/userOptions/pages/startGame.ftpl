@@ -41,16 +41,16 @@
         <li style="--i: 3">
             <h3>Зов приключений  :adventure:</h3>
             <p>Теперь, когда ты укрепил свою силу Java 8, настало время загрузить лаунчер - ключ к вратам самых увлекательных приключений. Выбери свое направление и смело двигайся вперед.</p>
-				<p>
+							
+				<div style="width: 100%;margin: 15px auto;display: inline-flex;">
 					<button data-type="exe" class="download login">
 						<img  src="%assets%icons/svg/windows.svg" />Windows
 					</button>
-				</p>
-				<p>
+
 					<button data-type="jar" class="download login">
 						<img  src="%assets%icons/svg/linux.svg" />Linux
 					</button>
-				</p>
+				</div>
         </li>
         
         <li style="--i: 4">

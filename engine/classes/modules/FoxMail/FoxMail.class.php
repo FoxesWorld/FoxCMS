@@ -92,9 +92,9 @@ class foxMail extends init{
 			if (!$this->mail->send()) {
 				$this->smtp_msg = $this->mail->ErrorInfo;
 				$this->send_error = true;
-				echo '{"message": "'.$this->smtp_msg.'", "type": "error"}';
+				die ('{"message": "'.$this->smtp_msg.'", "type": "error"}');
 			} else {
-				//echo '{"message": "'.$this->smtp_msg.$to.'", "type": "success"}';
+				die('{"message": "'.$this->smtp_msg.$to.'", "type": "success"}');
 			}
 			
 			$this->mail->clearAllRecipients();
@@ -102,14 +102,12 @@ class foxMail extends init{
 	
 	}
 	
-	/*
 	function getTemplate($name) {
 		ob_start();
-		include (ETC.'mail/'.$name.".tpl");
+		include (ROOT_DIR.$name);
 		$text = ob_get_clean();
 		return $text;
     }
-	*/
 	
 	function addAttachment($path, $name = '', $encoding = 'base64', $type = '', $disposition = 'attachment') {
 		$this->mail->addAttachment( $path, $name, $encoding, $type, $disposition );

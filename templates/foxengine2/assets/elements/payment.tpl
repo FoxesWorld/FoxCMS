@@ -1,9 +1,3 @@
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-		foxEngine.payment.init();
-    });
-</script>
-
 <div class="modal_app_title">Пополнение счета:</div>
 <div class="modal_app_close" onclick="foxEngine.modalApp.closeModalApp();"></div>
 <div class="modal_app_content">
@@ -37,7 +31,7 @@
         </div>
         <div class="payment_custom_form">
             <div class="input_block" style="max-width: 418px; float: left;">
-                <input id="unitpay_count" name="unitpay_count" type="number"  class="input" required="">
+                <input type="number" id="unitpay_count" name="unitpay_count" class="input" required="" />
                 <label class="label">Введите количество монет</label>
             </div>
         </div>
@@ -53,7 +47,10 @@
     </div>
 </div>
 
-
+<script>
+	foxEngine.payment.init();
+	//document.getElementById('unitpay_count').addEventListener('input', (event) => foxEngine.payment.onInputChange(event));
+</script>
 
 	<style>
 
