@@ -64,6 +64,12 @@
 							die($Monitor->foxMonOut());
 						break;
 						
+						case "mailTest":
+							$foxMail = new foxMail(true);
+							$foxMail->send(@RequestHandler::$REQUEST['mail'], "TEST", @RequestHandler::$REQUEST['msg']);
+							die();
+						break;
+						
 						case 'skin':
 							if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
 								init::classUtil('SkinViewer', "1.0.0");

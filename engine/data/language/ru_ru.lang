@@ -40,6 +40,10 @@
 			'pages.desc' => "Страницы сайта"
 		),
 		
+		'mail' => array(
+			'register' => "Регистрация"
+		),
+		
 		
 		'userProfile' => array(
 			'profileTitle' => "Давай, меняй! :fox:",

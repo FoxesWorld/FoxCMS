@@ -1399,7 +1399,7 @@ footer .footer-copyright span img {
 .total_online_block {
 	width: 100%;
 	height: 73px;
-	border-radius: 0 0px 10px 10px;
+	border-radius: 0 0px 5px 5px;
 	/* border-left: 3px solid #5d4e55; */
 	display: inline-flex;
 	justify-content: space-around;
@@ -1448,6 +1448,130 @@ footer .footer-copyright span img {
 }
 
 /* Monitor END */
+
+/* VOTE */
+
+.right-block-content {
+	width: 340px;
+	margin: -30px 0 0 25px;
+	background: #6c5245;
+	box-shadow: -3.1px 5.1px 22px rgba(19, 23, 36, 0.83);
+}
+
+.right-block-vote-items {
+	margin: 0 -5px;
+}
+
+.right-block-vote-items a {
+	position: relative;
+	display: block;
+	width: 325px;
+	height: 71px;
+	padding: 41px 0 0 35px;
+	margin-bottom: -20px;
+	background: url(../img/vote-background.png) no-repeat;
+	text-decoration: none;
+	text-shadow: 0 4px 13px rgba(20, 27, 44, .84);
+	color: #b8c2e1;
+	font-size: 21px;
+	font-weight: 300;
+	letter-spacing: .006em;
+}
+
+.right-block-vote-items a em {
+	font-style: normal;
+	position: relative;
+}
+
+.right-block-vote-items a:nth-child(2n) {
+	background: url(../img/vote-background2.png) no-repeat;
+}
+
+.right-block-vote-items a:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 360px;
+	height: 112px;
+	background: url(../img/vote-background.png) no-repeat 0 -112px;
+	opacity: 0
+}
+
+.right-block-vote-items a:nth-child(2n):before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 360px;
+	height: 112px;
+	background: url(../img/vote-background2.png) no-repeat 0 -112px;
+	opacity: 0
+}
+
+.right-block-vote-items a:hover:before {
+	opacity: 1;
+}
+
+.right-block-vote-items a span {
+	color: #dc7b30;
+}
+
+.right-block-vote-items a i {
+	position: relative;
+	top: -32px;
+	right: 8px;
+	display: block;
+	float: right;
+	width: 97px;
+	height: 84px
+}
+
+.right-block-vote-items a:hover {
+	text-decoration: none;
+	color: #cdd6e5;
+	text-shadow: 0 0 16px rgb(127 112 152);
+}
+
+.right-block-vote-items a i:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 97px;
+	height: 84px;
+	opacity: 0;
+}
+
+.right-block-vote-items a:hover i:before {
+	opacity: 1;
+}
+
+.right-block-vote-items .vote-item-ico1 {
+	background: url(../icons/vote-item-ico1.png) no-repeat
+}
+
+.right-block-vote-items .vote-item-ico1:before {
+	background: url(../icons/vote-item-ico1.png) no-repeat 0 -84px
+}
+
+.right-block-vote-items .vote-item-ico2 {
+	background: url(../icons/vote-item-ico2.png) no-repeat
+}
+
+.right-block-vote-items .vote-item-ico2:before {
+	background: url(../icons/vote-item-ico2.png) no-repeat 0 -84px
+}
+
+.right-block-vote-items .vote-item-ico3 {
+	background: url(../icons/vote-item-ico3.png) no-repeat
+}
+
+.right-block-vote-items .vote-item-ico3:before {
+	background: url(../icons/vote-item-ico3.png) no-repeat 0 -84px
+}
+
+/* Vote End */
 
 /*---------------------------------------------
 Social

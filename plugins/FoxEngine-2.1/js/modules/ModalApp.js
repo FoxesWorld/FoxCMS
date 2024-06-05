@@ -15,7 +15,7 @@ export class ModalApp {
         $(".modal_app").empty();
         $(".modal_app").html(await foxEngine.entryReplacer.replaceText(html));
 
-        $("body").addClass("modal_open_body");
+        $(".container").addClass("modal_open_body");
         $(".modal_wrapper").css("display", "flex");
 
         $(".modal_app").addClass("show_animation");
@@ -45,7 +45,7 @@ export class ModalApp {
         $(".modal_wrapper").fadeTo(300, 0.0, function() {
             $(".modal_wrapper").hide();
             $(".modal_app").empty();
-            $("body").removeClass("modal_open_body");
+            $(".container").removeClass("modal_open_body");
         });
 
         this.modalAppDisplayed = false;

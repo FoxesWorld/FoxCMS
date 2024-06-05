@@ -29,7 +29,7 @@
 						 <script>
 							async function addFunds(){
 								const template = await foxEngine.loadTemplate(foxEngine.elementsDir+'payment.tpl', true);
-								let data = foxEngine.entryReplacer.replaceText(template, "");
+								let data = await foxEngine.entryReplacer.replaceText(template, "");
 								foxEngine.modalApp.showModalApp(900, data);
 								//
 							}
@@ -51,11 +51,11 @@
 					</div>
 				</div>
 							</li>
-							{if $user_group == 4}
+							{if $user_group == 1}
 							<li class="dropdown-item">
 							   <a class="pageLink-addFunds" onclick="addFunds(); return false; ">
 								  <div class="rightIcon">
-									 <i style="color: #d8e815" class="fa fa-money"></i>
+									 <i style="color: #d8e815" class="fa-thin fa-wallet"></i>
 								  </div>
 								  Пополнить счёт
 							   </a>

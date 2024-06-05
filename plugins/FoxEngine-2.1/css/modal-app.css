@@ -7,7 +7,7 @@
     height: 100%;
     align-items: flex-end;
     justify-content: center;
-    background: rgba(22, 22, 26, 0.9);
+    background: rgb(22 22 26 / 55%);
     z-index: 9000;
 }
 

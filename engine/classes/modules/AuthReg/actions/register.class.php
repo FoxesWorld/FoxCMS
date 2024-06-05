@@ -94,7 +94,7 @@ class Register extends AuthManager
                 $sessionManager = new sessionManager($userData);
                 functions::jsonAnswer($lang['regComplete'], false);
                 $foxMail = new foxMail(true);
-                $foxMail->send($this->regData['email'], "", "GGWP");
+                $foxMail->send($this->regData['email'], $lang['mail']['register'], "Login ". $this->regData['login'] ." was registered! Welcome <3");
             }
         } else {
 			exit('{"message": "'.$this->errorArr['message'].'", "type": "'.$this->errorArr['type'].'"}');

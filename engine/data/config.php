@@ -1,5 +1,5 @@
 <?php 
-    /* [03.06.2024] */
+    /* [05.06.2024] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -15,9 +15,17 @@ $config = array(
 		"siteStatus" => "Alpha",
 		"siteDesc" => "Независимая игровая студия",
 		"keywords" => "FoxEngine,FoxCMS,FoxesWorld,AidenFox,Лисий Мир,Независимая студия,Независимая игровая студия,Over Fox,OverFox,мистер лис craft,fox craft browser game,foxcraft дэйз,фокс крафт айли,foxes craft,fox craft,foxcraft,Indie,GameDev Indie,Game,GameDev,лисиный мир,leks craft,fox craft minecraf,лиса сафт,лисьи огни сайт,craft fox,fox craft shri,foxy's craft gallery,серв лиса,k773",
-		"contactEmail" => "no-reply@foxesworld.ru",
+		//Merge to Mail unit
+		"contactEmail" => "admin@foxesworld.ru",
+		"smtp_pass" => "pNtzBQwKsfAbpuaKBYV7",
+		'admin_mail' 		=> 'lisssicin@yandex.ru',
+		'mail_title' 		=> 'Foxesworld',
+		'mail_metod' 		=> 'smtp',
+		'smtp_host' 		=> 'smtp.mail.ru',
+		'smtp_port' 		=> '465',
+		'smtp_secure' 		=> 'ssl',
 		"contactPhone" => "null",
-		"ServiceVersion" => "2.5.22"
+		"ServiceVersion" => "2.5.23"
 ),
 
 	"launcherSettings" => array(
@@ -44,6 +52,13 @@ $config = array(
 		"dayRecordPath" => "/var/www/FoxCMS/engine/cache/tmp/record_day.log",
 		"absoluteRecordPath" => "/var/www/FoxCMS/engine/cache/tmp/record.log",
 		"tempFilePath" => "/var/www/FoxCMS/engine/cache/tmp/timefile.log"
+),
+
+	"vote" => array(
+		"mcTopSecret" => "76a844de8c67b709477825db0c5146bd",
+		"topCraftSecret" => "68089ca755b021262ea1cc1edb8f2f8d",
+		"mcRateSecret" => "WtDA7tywfI2V9b8kaawIKZps24YNLVui",
+		"moneyPerVote" => "5000"
 ),
 
 	"other" => array(

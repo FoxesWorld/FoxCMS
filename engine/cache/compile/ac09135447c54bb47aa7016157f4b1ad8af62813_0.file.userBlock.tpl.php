@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-06-04 19:17:37
+/* Smarty version 4.0.4, created on 2024-06-05 13:51:02
   from '/var/www/FoxCMS/templates/foxengine2/userBlock.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_665f3e21d22557_70274024',
+  'unifunc' => 'content_66604316a86697_05372203',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ac09135447c54bb47aa7016157f4b1ad8af62813' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/userBlock.tpl',
-      1 => 1715538974,
+      1 => 1717531524,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_665f3e21d22557_70274024 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66604316a86697_05372203 (Smarty_Internal_Template $_smarty_tpl) {
 ?>				   <li class="nav-item dropdown">
 					  <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center userBlock" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="foxEngine.user.refreshBalance(['units', 'crystals'])">
 						 <div class="avatar">
@@ -58,7 +58,7 @@ function content_665f3e21d22557_70274024 (Smarty_Internal_Template $_smarty_tpl)
 >
 							async function addFunds(){
 								const template = await foxEngine.loadTemplate(foxEngine.elementsDir+'payment.tpl', true);
-								let data = foxEngine.entryReplacer.replaceText(template, "");
+								let data = await foxEngine.entryReplacer.replaceText(template, "");
 								foxEngine.modalApp.showModalApp(900, data);
 								//
 							}
@@ -83,11 +83,11 @@ function content_665f3e21d22557_70274024 (Smarty_Internal_Template $_smarty_tpl)
 					</div>
 				</div>
 							</li>
-							<?php if ($_smarty_tpl->tpl_vars['user_group']->value == 4) {?>
+							<?php if ($_smarty_tpl->tpl_vars['user_group']->value == 1) {?>
 							<li class="dropdown-item">
 							   <a class="pageLink-addFunds" onclick="addFunds(); return false; ">
 								  <div class="rightIcon">
-									 <i style="color: #d8e815" class="fa fa-money"></i>
+									 <i style="color: #d8e815" class="fa-thin fa-wallet"></i>
 								  </div>
 								  Пополнить счёт
 							   </a>
