@@ -122,31 +122,36 @@ export class Servers {
     }
 
     // Function to load mods based on modsInfo
-    async loadMods(modsInfo) {
-        try {
-            if (modsInfo && modsInfo.length > 0) {
-                // Load the template only once
-                const template = await foxEngine.loadTemplate(foxEngine.elementsDir + 'serverPage/serverMods.tpl', true);
+	async loadMods(modsInfo) {
+		try {
+			if (modsInfo && modsInfo.length > 0) {
+				// Load the template only once
+				const template = await foxEngine.loadTemplate(foxEngine.elementsDir + 'serverPage/serverMods.tpl', true);
 
-                // Use Promise.all to execute promises concurrently
-                const promises = modsInfo.map(async mod => {
-                    // Replace text in the template for each mod
-                    return foxEngine.replaceTextInTemplate(template, {
-                        modName: mod.modName,
-                        modPicture: mod.modPicture,
-                        modDesc: mod.modDesc
-                    });
-                });
+				// Use Promise.all to execute promises concurrently
+				const promises = modsInfo.map(async mod => {
+					// Replace text in the template for each mod
+					return foxEngine.replaceTextInTemplate(template, {
+						modName: mod.modName,
+						modPicture: mod.modPicture,
+						modDesc: mod.modDesc
+					});
+				});
 
-                // Wait for all promises to resolve
-                const modsHtmlArray = await Promise.all(promises);
+				// Wait for all promises to resolve
+				const modsHtmlArray = await Promise.all(promises);
 
-                // Concatenate the results
-                return modsHtmlArray.join('');
-            }
-        } catch (error) {
-            console.error('Error while loading mods:', error);
-            return ''; // or handle accordingly
-        }
-    }
+				// Concatenate the results
+				return modsHtmlArray.join('');
+			} else {
+				return `<p class="alert alert-warning" role="alert">
+				 На данный момент модов нет!
+				</p>`;
+			}
+		} catch (error) {
+			console.error('Error while loading mods:', error);
+			return ''; // Return empty string in case of an error
+		}
+	}
+
 }

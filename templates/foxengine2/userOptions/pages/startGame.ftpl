@@ -33,24 +33,30 @@
         <li style="--i: 2">
             <h3>Испытание силы :pray:</h3>
             <p>Теперь, когда ты принял вызов регистрации, тебе предстоит проверить свою силу. Убедись, что у тебя есть Java 8 - ключ к миру приключений. Не волнуйся, великие наставники обещают, что все произойдет автоматически. Если у тебя еще нет Java 8, ты можешь загрузить ее</p>
-                <button class="login" onclick="window.open('https://adoptium.net/temurin/releases/?variant=openjdk17&jvmVariant=hotspot%2525252527&os=windows&arch=x64&package=jre&version=8', 'Java 8', 'popup');">
+                <div style="width: 100%;margin: 15px auto;display: inline-flex;">
+				<button class="download login" onclick="window.open('https://adoptium.net/temurin/releases/?variant=openjdk17&jvmVariant=hotspot%2525252527&os=windows&arch=x64&package=jre&version=8', 'Java 8', 'popup');">
                     <img  src="%assets%icons/svg/java.svg" />Java 8
                 </button>
+				</div>
         </li>
     
         <li style="--i: 3">
             <h3>Зов приключений  :adventure:</h3>
             <p>Теперь, когда ты укрепил свою силу Java 8, настало время загрузить лаунчер - ключ к вратам самых увлекательных приключений. Выбери свое направление и смело двигайся вперед.</p>
 							
-				<div style="width: 100%;margin: 15px auto;display: inline-flex;">
+				<ul style="width: 100%;margin: 15px auto;">
+					<li>
 					<button data-type="exe" class="download login">
 						<img  src="%assets%icons/svg/windows.svg" />Windows
 					</button>
+					</li>
 
+					<li>
 					<button data-type="jar" class="download login">
 						<img  src="%assets%icons/svg/linux.svg" />Linux
 					</button>
-				</div>
+					</li>
+				</ul>
         </li>
         
         <li style="--i: 4">
@@ -88,11 +94,12 @@ $('.download').off('click').on('click', async function(){
         try {
             let parsedJson = await foxEngine.sendPostAndGetAnswer({"sysRequest": "downloadUpdater", "type": type}, "JSON");
             let file = parsedJson.filename;
-            
-            var link = document.createElement('a');
-            link.setAttribute('href', thisPath + type + '/' + file);
-            link.setAttribute('download', "FoxesWorld."+type);
-            link.click();
+            if(file !== undefined) {
+				var link = document.createElement('a');
+				link.setAttribute('href', thisPath + type + '/' + file);
+				link.setAttribute('download', "FoxesWorld."+type);
+				link.click();
+			}
         } catch (error) {
             console.error('Ошибка загрузки файла:', error);
         } finally {

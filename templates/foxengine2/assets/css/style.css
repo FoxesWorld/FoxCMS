@@ -357,7 +357,7 @@ img {
 
 .logoWrapper .logo h1 {
 	font-size: 18pt;
-	margin: 0;
+	margin: 10px 0px;
 	font-weight: 700;
 	font-family: 'FSElliotPro-Heavy';
 	color: #ac6343;
@@ -433,10 +433,18 @@ ul.list-inline {
 	padding: 0;
 }
 
-.navbar-nav .nav-item {
+
+.navbar-collapse:not(.show) .navbar-nav .nav-item {
 	margin: 0px 5px;
 	display: block;
 }
+
+
+.navbar-nav:last-child {
+    border-bottom: 0;
+    display: contents;
+}
+
 
 .navbar-nav .nav-item>a {
 	padding: 12;
@@ -605,7 +613,7 @@ ul.list-inline {
 }
 
 .profilePic {
-	width: 50px;
+	width: 3vh;
 	border-radius: 25%;
 }
 

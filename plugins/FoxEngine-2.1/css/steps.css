@@ -4,7 +4,7 @@
 	padding: 0 1rem;
 }
 
-.steps li {
+.steps > li {
 	--stop: calc(100% / var(--length) * var(--i));
 	--l: 62%;
 	--l2: 88%;
@@ -57,7 +57,7 @@
 }
 
 @media (min-width: 40em) {
-	.steps li {
+	.steps > li {
 		margin: 3rem auto;
 		padding: 3rem 2rem 2rem;
 	}

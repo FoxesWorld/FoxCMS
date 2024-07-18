@@ -5,7 +5,7 @@
       <title>{$siteTitle}</title>
 	  <meta name="HandheldFriendly" content="true" />
       <meta name="format-detection" content="telephone=yes" />
-	  <meta name="viewport" content="width=760, maximum-scale=1">
+	  <meta name="viewport" content="user-scalable=no, initial-scale=2.0, maximum-scale=1.0, width=device-width, height=device-height">
 	  <meta name="author" content="FoxesWorld" />
 	  <meta name="description" content="{$siteDesc}" />
 	  <meta name="keywords" content="{$keywords}">
