@@ -1,3 +1,6 @@
+   <div id="button-up" style="display: block;">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </div>
 <footer class="bar">
    <div class="container footer--flex">
       <div class="footer-copyright">

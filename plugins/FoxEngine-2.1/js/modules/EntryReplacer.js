@@ -81,7 +81,6 @@ export class EntryReplacer {
             case 'upload':
                 return `<table>
                             <td>
-                                <h3 class="settingsTitle">%lang|loadPhoto%</h3>
                                 <input type="file" id="${id}" name="${name}" accept=".jpeg" data-file-metadata-imagetype="${metadata}" />
                             </td>
                         </table>

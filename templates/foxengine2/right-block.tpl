@@ -21,7 +21,9 @@
 				</div>
 
 				<h3 style="margin: 0 auto;color: antiquewhite;padding: 15;">
-					Coming Soon!
+				<div class="importantText">
+					<strong>Coming Soon!</strong>
+				</div>
 				</h3>
 				
 		<!--<div class="right-block-content">

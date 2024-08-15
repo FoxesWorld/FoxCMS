@@ -30,6 +30,13 @@
 }
 
 @font-face {
+	font-family: "ArcJet";
+	src: url('../fonts/concielianjet.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
     font-family: 'Docker One';
     src: url('../fonts/Docker One.ttf') format('truetype');
     font-weight: normal;
@@ -63,3 +70,12 @@
     src: url('../fonts/minecraft.ttf') format('truetype');
     font-style: normal;
 }
+
+@font-face {
+	font-family:"Minecraft Bold";
+	src:
+	url("../fonts/3_Minecraft-Bold.eot?") format("eot"),
+	url("../fonts/3_Minecraft-Bold.woff") format("woff"),
+	url("../fonts/3_Minecraft-Bold.ttf") format("truetype"),
+	url("../fonts/3_Minecraft-Bold.svg#Minecraft-Bold") format("svg");font-weight:normal;font-style:normal;}
+

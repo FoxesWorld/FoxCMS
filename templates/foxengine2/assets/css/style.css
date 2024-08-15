@@ -9,7 +9,7 @@
 
 	--theme-color-primary: #a9a094c2;
 	--theme-color-secondary: rgb(66 50 57);
-	--theme-content-pane: rgb(225 223 221 / 64%);
+	--theme-content-pane: #29282af2;
 	--theme-span-primary: rgb(125 113 119);
 	--theme-iconPrimary: rgb(113 80 8);
 	--theme-spanSprmary: #a76161;
@@ -35,7 +35,7 @@
 
 body {
 	/* font-family: 'FSElliotPro'; */
-	color: #313030;
+	color: #e4d4d4;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
@@ -174,7 +174,7 @@ img {
 }
 
 .mainBlock {
-	background-color: var(--theme-content-pane);
+	background-color: #6d7587f2;
 	border-radius: 10px;
 }
 
@@ -357,7 +357,7 @@ img {
 
 .logoWrapper .logo h1 {
 	font-size: 18pt;
-	margin: 0;
+	margin: 10px 0px;
 	font-weight: 700;
 	font-family: 'FSElliotPro-Heavy';
 	color: #ac6343;
@@ -375,7 +375,7 @@ img {
 
 .logoWrapper .titleWrapper {
 	display: inline-flex;
-	margin: 15px 0px;
+	margin: 10px 0px;
 }
 
 .logoWrapper .logo .title .letter {
@@ -393,11 +393,12 @@ img {
 }
 
 .logo .status {
-	font-family: 'Minecraft';
+	font-family: 'Minecraft Bold';
 	font-size: 9pt;
 	color: #a54e39;
 	text-transform: uppercase;
 	position: absolute;
+	margin: 5px 0px;
 }
 
 .logo .additionalStatus {
@@ -433,10 +434,18 @@ ul.list-inline {
 	padding: 0;
 }
 
-.navbar-nav .nav-item {
+
+.navbar-collapse:not(.show) .navbar-nav .nav-item {
 	margin: 0px 5px;
 	display: block;
 }
+
+
+.navbar-nav:last-child {
+    border-bottom: 0;
+    display: contents;
+}
+
 
 .navbar-nav .nav-item>a {
 	padding: 12;
@@ -464,7 +473,8 @@ ul.list-inline {
 	font-family: 'FSElliotPro-Heavy';
 	color: #894324;
 	width: fit-content;
-	border-bottom: 2px solid #e8d3d0;
+	border-bottom: 2px solid #bd8881;
+	margin: 5px;
 }
 
 .page-title-wrap {
@@ -473,7 +483,9 @@ ul.list-inline {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 15px
+    margin-bottom: 15px;
+    background: cadetblue;
+    border-radius: 10px 10px 0px 0px;
 }
 
 .page-title-wrap>.left-part,.page-title-wrap>.right-part {
@@ -493,7 +505,8 @@ ul.list-inline {
     font-size: 24px;
     font-weight: 600;
     margin: 0;
-    padding: 0
+    padding: 0;
+	color: azure;
 }
 
 .page-title-wrap .page-title a {
@@ -605,7 +618,7 @@ ul.list-inline {
 }
 
 .profilePic {
-	width: 50px;
+	width: 64px;
 	border-radius: 25%;
 }
 
@@ -1228,10 +1241,21 @@ footer .footer-copyright span img {
 	padding: 10px;
 	margin: 5% auto;
 	font-size: 12pt;
-	width: 80%;
+	width: auto;
 	border-radius: 10px;
+	color: var(--theme-spanSprmary);
 	border: 1px dashed darkred;
 }
+
+.importantText strong {
+	font-family: "Minecraft Bold";
+	color: #fd8153;
+} 
+
+.importantText b {
+	font-family: "Minecraft";
+	color: #fd8153;
+} 
 
 .optionButt {
 	position: fixed;
@@ -1244,6 +1268,22 @@ footer .footer-copyright span img {
 	font-size: 20px;
 	cursor: pointer;
 }
+
+#button-up {
+    display: none;
+    right: 30px;
+    margin: 0;
+    position: fixed;
+    bottom: 30px;
+    font-size: 40px;
+    color: #171515b3;
+    z-index: 200;
+}
+
+#button-up:hover {
+    cursor: pointer;
+}
+
 
 /* Monitor */
 .serverEntry {
@@ -1632,44 +1672,83 @@ Cookies
 ---------------------------------------------*/
 
 #cookie-popup {
-	position: fixed;
-	bottom: 20px;
-	width: 90%;
-	height: auto;
-	float: left;
-	margin: 20px;
-	border-radius: 5px;
-	background-color: #f1f1f1;
-	padding: 15px;
-	z-index: 2;
+    display: none;
+    z-index: 201;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    width: 900px;
+    max-width: 90%;
+    transform: translateX(-50%);
+    padding: 25px;
+    background-color: var(--theme-content-pane);
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.4);
 }
 
-#cookie-popup #cookie-header img {
-	width: 60px;
-	height: 60px;
+#cookie-popup p {
+    margin: 0;
+    font-size: 0.9rem;
+    text-align: left;
+    color: #fff;
 }
 
-#cookie-popup #cookie-body p,
-#cookie-popup #cookie-body a {
-	font-size: 11px;
-	margin: 0;
+
+@media (min-width: 576px) {
+    #cookie-popup.show {
+        display: flex;
+        align-items: center;
+    }
+
+    .cookie_accept {
+        margin: 0 0 0 25px;
+    }
 }
 
-#cookie-popup #cookie-body p {
-	color: #000000;
+@media (max-width: 575px) {
+    #cookie-popup.show {
+        display: block;
+        text-align: center;
+    }
+
+    #cookie-popup p {
+        text-align: justify;
+    }
+
+    .cookie_accept {
+        width: 100%;
+        justify-content: center;
+        margin: 20px auto 10px;
+    }
 }
 
-#cookie-popup #btn-cookie {
-	display: block;
-	width: 100%;
+#cookie-popup .button {
+	width: auto;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 3px 2px 0 rgb(0 0 0 / 10%);
+    text-decoration: none;
+    transition: background .3s, transform .3s, box-shadow .3s;
+    will-change: transform;
+    border: 2px solid #F09605;
+    background-color: #00000000;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+    padding: 10px 15px;
+    cursor: pointer;
 }
 
-#cookie-popup #btn-cookie {
-	margin-top: 10px;
+#cookie-popup .button:hover {
+    background: #ff9f0430;
+    box-shadow: 0 4px 17px rgb(0 0 0 / 20%);
+    transform: translate3d(0, -2px, 0);
+    color: white;
 }
 
-@media screen and (max-width: 400px) {
-	#cookie-popup {
-		width: auto;
-	}
+#cookie-popup .button:active {
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+    transform: translate3d(0, 1px, 0);
 }

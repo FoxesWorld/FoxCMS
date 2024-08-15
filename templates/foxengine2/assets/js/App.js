@@ -93,6 +93,26 @@ setInterval(() => {
 
     window.addEventListener('hashchange', handleHashChange);
     handleHashChange();
+	
+	jQuery(document).ready(function () {
+
+    jQuery(".header-cont").css({position: 'relative'});
+    jQuery(window).scroll(function() {
+        if (jQuery(this).scrollTop() > 50) {
+            jQuery('#button-up').fadeIn();
+        } else {
+            jQuery('#button-up').fadeOut();
+        }
+    });
+
+    jQuery('#button-up').click(function () {
+        jQuery('body,html').animate({
+            scrollTop: 0
+        }, 200);
+        return false;
+    });
+
+});
 }());
 
 

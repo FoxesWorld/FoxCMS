@@ -86,6 +86,8 @@
             <div class="tab_content" id="personalisation">
                <h2 id="modalTitle">%lang|personalisationTitle%</h2>
                <span id="modalDesc">%lang|personalisationDesc%</span>
+			   
+			   <h4>%lang|loadPhoto%</h1>
                [input type="upload" id="profilePhoto" name="image" metadata="profilePhoto"]
                <div class="fields_item">
                   <h3 class="settingsTitle">%lang|colorScheme%</h3>
@@ -95,74 +97,7 @@
                         <input type="hidden" id="colourVal" name="colorScheme" value="[colorScheme]" />
                      </div>
                   </div>
-               </div>
-			   
-			   <style>
-			   .cape-blur[data-v-446af5dc] {
-    -webkit-transform: scale(4);
-    transform: scale(4);
-    -webkit-filter: blur(10px);
-    filter: blur(10px);
-    width: 100%;
-    height: 100%;
-    padding: 50px;
-    position: absolute;
-    opacity: .6;
-    -webkit-transition: .35s;
-    transition: .35s
-}
-
-.opa-you-skin-not-skin[data-v-446af5dc] {
-    background: rgba(0,0,0,.28);
-    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.15);
-    box-shadow: 0 5px 15px rgba(0,0,0,.15);
-    padding: 5px 8px;
-    border-radius: 2px;
-    opacity: .85;
-    position: absolute;
-    display: block;
-    right: 0;
-    margin: 4px;
-    z-index: 999;
-    cursor: pointer;
-    -webkit-transition: .2s;
-    transition: .2s;
-    color: wheat;
-    margin-top: 372px;
-    width: 142px
-}
-
-.opa-you-skin-not-skin[data-v-446af5dc]:hover {
-    background: rgba(0,0,0,.78);
-    opacity: 1
-}
-
-.cloack-user[data-v-446af5dc] {
-    display: none;
-    width: 100%;
-    height: 406px
-}
-
-.bg-skin-cloak[data-v-446af5dc] {
-    position: relative;
-    text-align: center;
-    background: rgba(0,0,0,.26);
-    display: table;
-    margin-right: 20px;
-    width: 314px;
-    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.16);
-    box-shadow: 0 5px 15px rgba(0,0,0,.16);
-    margin-bottom: 5px
-}
-
-#senpaiskin[data-v-446af5dc] {
-    position: relative;
-    overflow: hidden;
-    cursor: -webkit-grab;
-    width: 314px
-}
-</style>
-			   
+               </div>   
 <script>
 (async function () {
 	let userDir = "/uploads/users/[login]";
@@ -175,6 +110,9 @@
 	<div id="skinViewer3D" style="margin: 15px 10px;">
 		<canvas id="canvas" style="display: none"></canvas>
 	</div>
+	
+	<div class="importantText">Загрузка скинов сейчас в разработке!</div>
+	[input type="upload" id="skin" name="skin" metadata="skin"]
 
 
             </div>
@@ -201,8 +139,10 @@
             <div class="modal_app_close" onclick="foxEngine.modalApp.closeModalApp();"></div>
             <div class="modal_app_content">
 				<h3 style="margin: 0 auto;color: antiquewhite;padding: 15;">
-					Coming Soon!
 				</h3>
+				<div class="importantText">
+					Загрузка фото профиля возможна во вкладке <b>"Персонализация"</b>
+				</div>
             </div>
          </div>
       </div>

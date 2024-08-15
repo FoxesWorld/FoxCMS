@@ -16,7 +16,7 @@
 																															<i class="fa-regular fa-shuffle"></i>
 																														</button>
 			   [input type="password" name="password2" placeholder="Повтор пароля"]
-			   <span style="background: #ffffff;padding: 5px;border-radius: 10px;">Надежность пароля: <b class="shadowText" id="passStrength"></b></span>
+			   <span style="background: #ffffff;padding: 5px;border-radius: 10px; color: black;">Надежность пароля: <b class="shadowText" id="passStrength"></b></span>
                      <!--			   
 			   <div class="input_block">
                   <input name="regCode" class="input" type="text" autocomplete="off" />

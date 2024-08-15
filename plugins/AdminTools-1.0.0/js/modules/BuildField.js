@@ -157,6 +157,8 @@ createDatePickerInput(key, value) {
             editor.setSize("100%", "auto");
             window.addEventListener('resize', () => editor.setSize("100%", "auto"));
             editor.refresh();
+			const codeMirrorContainer = editor.getWrapperElement();
+			codeMirrorContainer.classList.add("codeHtml");
         }, this.initAwait);
 
         return inputBlock;

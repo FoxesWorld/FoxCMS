@@ -153,9 +153,7 @@ async parseBadges(user) {
                     $(elementSelector).text(Math.round(now));
                 }
             });
-        } else {
-            console.log("Value hasn't changed.");
-        }
+        } else {}
     }
 
     async getBadgesArray(user) {

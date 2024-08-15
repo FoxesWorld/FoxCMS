@@ -12,7 +12,7 @@ if(!defined('FOXXEY')) {
 		private $dirsToCheck;
 		private $platform = 0;
 		private $platformExtensions = array(
-			array("so", "zip", "jar", "toml", "txt", ".cfg", "recipe", "dat", "properties", "json", "git", "sha1", ""),
+			array("so", "zip", "jar", "toml", "txt", ".cfg", "recipe", "dat", "properties", "json", "git", "sha1", "", "cache", "tsrg"),
 			array("dll", "zip", "jar", "toml", "txt", "cfg", "recipe", "dat", "properties","git", "sha1", "json"), 
 			array("dylib", "zip", "jar", "toml", "txt", "cfg", "recipe", "dat", "properties","git", "sha1", "json"), 
 			array("so", "zip", "jar", "toml", "txt", "cfg", "recipe", "dat", "properties","git", "sha1", "json"), 
@@ -31,20 +31,16 @@ if(!defined('FOXXEY')) {
 				$i = 0;
 				$outputArray = array();
 				$dirsArray = array(
-				$this->clientDir.'assets/indexes',
-				$this->clientDir.'assets/objects',
+				$this->clientDir.'versions/'.$version.'/assets/indexes',
+				$this->clientDir.'versions/'.$version.'/assets/objects',
 				$this->clientDir.'clients/'.$client,
 				$this->clientDir.'versions/'.$version);
 
-					while($i < count($dirsArray)) {
-						$outputArray[] = $dirsArray[$i];
-						$i++;
-					}
-				if($JSON === true){
-					return json_encode($outputArray, JSON_UNESCAPED_SLASHES);
-				} else {
-					return implode('<:b:>', $outputArray);
+				while($i < count($dirsArray)) {
+					$outputArray[] = $dirsArray[$i];
+					$i++;
 				}
+				return json_encode($outputArray, JSON_UNESCAPED_SLASHES);				
 			}
 			
 			public function checkfiles() {

@@ -42,14 +42,21 @@ export class FoxesInputHandler {
                 case "textarea":
                     value = $(`#${input.id}`).val();
                     break;
+					
+				case "text":
+                value = $(input).val();
+                value = value === "true" ? true : (value === "false" ? false : value);
+                break;
 
-                default:
-                    if (inputLength <= 1) {
-                        value = $(input).val() || null;
-                    } else {
-                        value = Array.from($(`input[name="${input.name}"]`)).map(el => el.value);
-                    }
-                    break;
+            default:
+                if (inputLength <= 1) {
+                    value = $(input).val() || null;
+                    value = value === "true" ? true : (value === "false" ? false : value);
+                } else {
+                    value = Array.from($(`input[name="${input.name}"]`)).map(el => el.value);
+                    value = value.map(val => val === "true" ? true : (val === "false" ? false : val));
+                }
+                break;
             }
 
             inputObj[input.name] = value;
@@ -81,9 +88,11 @@ export class FoxesInputHandler {
             this.foxEngine.soundOnClick(response.type);
             this.foxEngine.buttonFreeze(submitButton, delay + 1000);
         }
+		
 
         switch (response.type) {
             case "success":
+			console.log(data.refreshPage);
                 if (data.refreshPage != false) {
                     setTimeout(() => this.refreshPage(), delay);
                 }

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-06-05 22:04:09
+/* Smarty version 4.0.4, created on 2024-08-15 10:04:29
   from '/var/www/FoxCMS/templates/foxengine2/footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6660b6a90c6880_96380380',
+  'unifunc' => 'content_66bda87d28b2b4_33677779',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '21164cd38f4b1e20c2b131e7201342b1d7510eaf' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/footer.tpl',
-      1 => 1715154510,
+      1 => 1721310483,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,11 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6660b6a90c6880_96380380 (Smarty_Internal_Template $_smarty_tpl) {
-?><footer class="bar">
+function content_66bda87d28b2b4_33677779 (Smarty_Internal_Template $_smarty_tpl) {
+?>   <div id="button-up" style="display: block;">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </div>
+<footer class="bar">
    <div class="container footer--flex">
       <div class="footer-copyright">
          <?php echo $_smarty_tpl->tpl_vars['siteTitle']->value;?>

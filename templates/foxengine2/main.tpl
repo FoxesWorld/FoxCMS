@@ -5,7 +5,7 @@
       <title>{$siteTitle}</title>
 	  <meta name="HandheldFriendly" content="true" />
       <meta name="format-detection" content="telephone=yes" />
-	  <meta name="viewport" content="width=760, maximum-scale=1">
+	  <meta name="viewport" content="user-scalable=no, initial-scale=2.0, maximum-scale=1.0, width=device-width, height=device-height">
 	  <meta name="author" content="FoxesWorld" />
 	  <meta name="description" content="{$siteDesc}" />
 	  <meta name="keywords" content="{$keywords}">
@@ -78,19 +78,11 @@
          </div>
 		
       </div>
-	  <div id="cookie-popup" style="display: none">
-        <div class="text-center" id="cookie-header">
-          <img src="{$tplDir}/assets/icons/cookie.png" draggable="false" />
+		<div id="cookie-popup" class="show">
+		  <img src="{$tplDir}/assets/icons/cookie.png" draggable="false" />
+            <p>Для улучшения работы сайта и его взаимодействия с пользователями мы используем файлы cookie. Продолжая работу с сайтом, вы разрешаете использование cookie-файлов. Вы всегда можете отключить файлы cookie в настройках вашего браузера.</p>
+            <button class="button cookie_accept">Принять</button>
         </div>
-        <div id="cookie-body">
-          <p>Наш сайт использует печеньки (и не только потому, что у нас есть Печеньки-Монстр). 
-		  Они необходимы для создания невероятного опыта в использовании сайта – будь то путешествие по страницам или открытие сундука с новыми идеями.</p>
-          <a onclick="foxEngine.page.loadPage('cookies'); return false;" href="#">Хочу знать больше...</a>
-          <div class="cookie-buttons">
-            <button id="btn-cookie" type="submit">Соглашусь</button>
-          </div>
-        </div>
-      </div>
       {include file='footer.tpl'}
 	  {include file='../notify.tpl'}
 	  <div aria-live="polite" aria-atomic="true" class="position-relative">

@@ -33,7 +33,7 @@ border: 1px solid #e0e4e5;
     border-bottom: none;
     border-radius: 3px 3px 0 0;
     box-sizing: border-box;
-    color: #677171;
+    color: #2c3333;
     display: block;
     font-size: 14px;
     font-weight: 400;
@@ -74,8 +74,8 @@ border: 1px solid #e0e4e5;
 
 .tab_caption .active {
 	transition: 0.6s;
-	background-color: #fff;
-	color: inherit;
+	background-color: #e3cfcf;
+	color: cornflowerblue;
 	z-index: 5;
 }
 
