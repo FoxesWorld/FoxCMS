@@ -10,12 +10,13 @@
 		class SystemRequests extends RequestHandler {
 		
 			private $requestHeader = "sysRequest";
-			protected $db;
+			protected $db, $logger;
 			
-			function __construct($db) {
+			function __construct($db, $logger) {
 				init::classUtil('inDirScanner', "1.1.3");
 				init::classUtil('ImageResize', "1.0.0");
 				$this->db = $db;
+				$this->logger = $logger;
 			}
 			
 			public function requestListener(){
@@ -103,7 +104,7 @@
 							break;
 
 							case "skinPath":
-							init::classUtil('SkinViewer', "1.0.0");
+								init::classUtil('SkinViewer', "1.0.0");
 								$file_name = @RequestHandler::$REQUEST['login'] ?? null;
 								$name = empty($file_name) ? 'default' : $file_name;
 								$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR . 'skin.png';
@@ -116,6 +117,58 @@
 									$cloak = "";
 								}
 								die('{"skin": "'.str_replace(ROOT_DIR, "", $skin).'", "cape": "'.str_replace(ROOT_DIR, "", $cloak).'"}');
+							break;
+							
+							case "skinPreview":						
+								init::classUtil('SkinViewer', "1.0.0");
+								$file_name = @RequestHandler::$REQUEST['login'] ?? null;
+								$name = empty($file_name) ? 'default' : $file_name;
+								$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR . 'skin.png';
+								$cloak = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR . 'cape.png';
+								if (file_exists($skin)) {
+									$im = skinViewer2D::createPreview($skin, $cloak, @RequestHandler::$REQUEST['side']);
+								} else {
+									$im = skinViewer2D::createPreview(ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . DIRECTORY_SEPARATOR . 'skin.png', $cloak, @RequestHandler::$REQUEST['side']);
+								}
+							
+								//header('Content-Type: image/png');
+								//imagepng($im);
+								ob_start();
+								imagepng($im);
+								$image_data = ob_get_contents();
+								ob_end_clean();
+								
+								$base64_image = base64_encode($image_data);
+								die($base64_image);
+
+							break;
+							
+							case "uploadFile":
+								$type = @RequestHandler::$REQUEST['type'];
+								switch($type){
+									case "skin":
+										die('{"message": "Загрузка скина для '.init::$usrArray['login'].' в разработке!", "type": "warn"}');
+									break;
+									
+									case "cloak":
+										die('{"message": "Загрузка плащей в разработке!", "type": "warn"}');
+									break;
+								}
+							break;
+							
+								
+							
+							case "deleteFile":
+								$type = @RequestHandler::$REQUEST['type'];
+								switch($type){
+									case "skin":
+										die('{"message": "Удаление скинов в разработке!", "type": "warn"}');
+									break;
+										
+									case "cloak":
+										die('{"message": "Удаление плащей в разработке!", "type": "warn"}');
+									break;
+								}
 							break;
 						
 						case "loadFiles":

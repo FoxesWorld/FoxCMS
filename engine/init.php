@@ -134,5 +134,13 @@ session_start();
 				echo "<br />";
 			}
 		}
+		
+		public function getDb(){
+			return $this->db;
+		}
+		
+		public function getLogger(){
+			return $this->logger;
+		}
 	}
 ?>

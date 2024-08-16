@@ -25,17 +25,16 @@ export class PaymentManager {
         const bonus_count = bonus_percent * sum;
 
         if (sum < 1000) {
-            $("#bonus_information").html("Вам доступен 5% бонус при пополнении от 1000 монет.");
+            $("#bonus_information").html("Вам доступен 5% бонус при покупке от 1000 угля.");
             $(".payment_type").removeClass("payment_select");
         } else {
             $("#bonus_information").html("Включая бонус размером " + (bonus_percent * 100) + "%!");
         }
 
-        $("#count_after_donate").html((sum + bonus_count) + " монет");
+        $("#count_after_donate").html((sum + bonus_count) + " угля");
     }
 
     onInputChange(event) {
-		console.log("GGGG");
         let count = parseInt(event.target.value);
         if (isNaN(count)) count = 0;
         this.selectPaymentBlock(count);

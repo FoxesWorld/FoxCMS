@@ -1,118 +1,104 @@
 <?php
-/*
-=====================================================
- I hope it's your account
------------------------------------------------------
- https://Foxesworld.ru/
------------------------------------------------------
- Copyright (c) 2016-2021  FoxesWorld
------------------------------------------------------
- This code is reserved
------------------------------------------------------
- File: antiBrute.class.php
------------------------------------------------------
- Verssion: 0.1.5.7 Final
------------------------------------------------------
- Usage: Prevent users bruting passwords
-=====================================================
-*/
 if (!defined('FOXXEY')) {
 	die ('{"message": "Not in FOXXEY thread"}');
 }
 
-	class antiBrute {
+class antiBrute {
 
-		private $debug, $ip, $db, $maxAttempts;
+	private $debug, $ip, $db, $maxAttempts;
 
-		/* DB DATA */
-		private $DBip, $DBid, $DBtime, $DBattempts;
-		private $dbShape = "CREATE TABLE IF NOT EXISTS `antiBrute` (
-		  `id` int(11) NOT NULL,
-		  `time` varchar(255) DEFAULT NULL,
-		  `recordTime` datetime(4) NOT NULL DEFAULT current_timestamp(4),
-		  `ip` varchar(16) DEFAULT NULL,
-		  `attempts` int(16) NOT NULL DEFAULT 0
-		) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;";
-		/* DB DATA */
+	/* DB DATA */
+	private $DBip, $DBid, $DBtime, $DBattempts;
+	private $dbShape = "CREATE TABLE IF NOT EXISTS `antiBrute` (
+	  `id` int(11) NOT NULL AUTO_INCREMENT,
+	  `time` bigint(20) DEFAULT NULL,
+	  `recordTime` datetime(4) NOT NULL DEFAULT current_timestamp(4),
+	  `ip` varchar(16) NOT NULL,
+	  `attempts` int(11) NOT NULL DEFAULT 0,
+	  PRIMARY KEY (`id`),
+	  UNIQUE KEY `ip` (`ip`),
+	  KEY `time` (`time`)
+	) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;";
+	/* DB DATA */
 
-		/**
-		 * antiBrute constructor.
-		 * @param $ip
-		 * @param bool $debug
-		 */
-		function __construct ($ip, $db, $debug = false) {
-			global $config;
-			$this->ip = $ip;
-			$this->db = $db;
-			$this->debug = $debug;
-			$this->maxAttempts = $config['maxLoginAttempts'];
-			$this->db->run($this->dbShape);
-			$this->parseIpRow();
+	/**
+	 * antiBrute constructor.
+	 * @param $ip
+	 * @param $db
+	 * @param bool $debug
+	 */
+	function __construct($ip, $db, $debug = false) {
+		global $config;
+		$this->ip = $ip;
+		$this->db = $db;
+		$this->debug = $debug;
+		$this->maxAttempts = $config['maxLoginAttempts'];
+		$this->db->run($this->dbShape);
+		$this->parseIpRow();
 
-			if($this->DBattempts >= $this->maxAttempts) {
-				$this->banIp();
-			}
-
-			if(date::checkTime($this->DBtime) === false){
-				functions::jsonAnswer(randTexts::getRandText('tempban'), true);
-			}
-			$this->db->run("DELETE FROM antiBrute WHERE time < '".CURRENT_TIME."';");
+		if($this->DBattempts >= $this->maxAttempts) {
+			$this->banIp();
 		}
 
-		public function parseIpRow(){
-			$query = "SELECT * FROM antiBrute WHERE ip = '".$this->ip."'";
-			$data = $this->db->getRow($query);
-			$this->DBip = $data['ip']			  ?? null;
-			$this->DBid = $data['id'] 			  ?? null;
-			$this->DBattempts = $data['attempts'] ?? null;
-			$this->DBtime = $data['time'] 		  ?? 'notBanned';
-
-			if($this->debug === true && $this->DBip !== null && $this->DBtime == 'notBanned') {
-				echo "Parsing ".$this->ip." data <br>".
-				"<b>DBip: </b>".$this->DBip."<br>".
-				"<b>DBid: </b>".$this->DBid."<br>".
-				"<b>maxAttempts:</b> ".$this->maxAttempts."<br>".
-				"<b>Auth attempts: </b>".$this->DBattempts."<br>".
-				"<b>DBtime: </b>".$this->DBtime;
-			}
-			$this->db->run("DELETE FROM antiBrute WHERE time < '".CURRENT_TIME."';");
-		}
-		
-		public function failedAuth($ip) {
-				switch ($this->DBip) {
-				case ($ip):
-					$query = "UPDATE `antiBrute` SET `attempts`=attempts+1 WHERE ip = '".$this->ip."'";
-					$this->db::run($query);
-				break;
-
-				default:
-				if(!$this->DBip) {
-					if($this->debug === true) {
-						echo "Adding ".$this->ip." to DB";
-					}
-					$query = "INSERT INTO `antiBrute`(`ip`) VALUES ('".$this->ip."')";
-					$this->db::run($query);
-				}
-			}
+		if ($this->DBtime !== null && $this->DBtime > CURRENT_TIME) {
+			$timeLeft = $this->DBtime - CURRENT_TIME;
+			functions::jsonAnswer("Перед следующей попыткой ввода подожди " . gmdate("H:i:s", $timeLeft), true);
 		}
 
-		private function banIp(){
-			global $config;
-			$banTime = CURRENT_TIME + $config['securitySetings']['bantime'];
-			if(class_exists('Logger')) {
-				$Logger = new Logger('AuthLog');
-				if($this->debug === true) {
-					echo "Banning ".$this->ip." till ".$banTime."<br>";
-				}
-				$Logger->WriteLine('Banning '.$this->ip.' for too many authorisation errors');
-			}
-			$query = "UPDATE `antiBrute` SET `time`=".$banTime." WHERE ip = '".$this->ip."'";
-			$this->db::run($query);
-		}
-		
-		public function clearIp($ip){
-			if($this->DBip == $ip) {
-				$this->db->run("DELETE FROM antiBrute WHERE ip = '".$ip."';");
-			}
+		$this->cleanup();
+	}
+
+	private function parseIpRow() {
+		$query = "SELECT * FROM antiBrute WHERE ip = '".$this->ip."'";
+		$data = $this->db->getRow($query);
+		$this->DBip = $data['ip'] ?? null;
+		$this->DBid = $data['id'] ?? null;
+		$this->DBattempts = $data['attempts'] ?? 0;
+		$this->DBtime = $data['time'] ?? null;
+
+		if ($this->debug && $this->DBip !== null) {
+			echo "Parsing ".$this->ip." data <br>".
+			"<b>DBip: </b>".$this->DBip."<br>".
+			"<b>DBid: </b>".$this->DBid."<br>".
+			"<b>maxAttempts:</b> ".$this->maxAttempts."<br>".
+			"<b>Auth attempts: </b>".$this->DBattempts."<br>".
+			"<b>DBtime: </b>".$this->DBtime;
 		}
 	}
+
+	public function failedAuth($ip) {
+		if ($this->DBip === $ip) {
+			$query = "UPDATE `antiBrute` SET `attempts` = attempts + 1 WHERE ip = '".$this->ip."'";
+			$this->db->run($query);
+		} else {
+			$query = "INSERT INTO `antiBrute` (`ip`, `attempts`) VALUES ('".$this->ip."', 1)";
+			$this->db->run($query);
+		}
+	}
+
+	private function banIp() {
+		global $config;
+		if ($this->DBtime !== null && $this->DBtime > CURRENT_TIME) {
+			return;
+		}
+		$banTime = CURRENT_TIME + $config['securitySetings']['bantime'];
+		if (class_exists('Logger')) {
+			$Logger = new Logger('AuthLog');
+			$Logger->WriteLine('Banning '.$this->ip.' for too many authorization errors');
+		}
+		$query = "UPDATE `antiBrute` SET `time` = ".$banTime." WHERE ip = '".$this->ip."'";
+		$this->db->run($query);
+	}
+
+	private function cleanup() {
+		// Удаляем устаревшие записи
+		$this->db->run("DELETE FROM antiBrute WHERE time < '".CURRENT_TIME."'");
+	}
+
+	public function clearIp($ip) {
+		if ($this->DBip === $ip) {
+			$this->db->run("DELETE FROM antiBrute WHERE ip = '".$ip."'");
+		}
+	}
+}
+?>

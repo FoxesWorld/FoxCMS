@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-08-15 10:04:29
+/* Smarty version 4.0.4, created on 2024-08-16 15:57:05
   from '/var/www/FoxCMS/templates/foxengine2/footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_66bda87d28b2b4_33677779',
+  'unifunc' => 'content_66bf4ca1141b65_36481935',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_66bda87d28b2b4_33677779 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66bf4ca1141b65_36481935 (Smarty_Internal_Template $_smarty_tpl) {
 ?>   <div id="button-up" style="display: block;">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </div>

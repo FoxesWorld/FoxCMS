@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-08-15 10:04:29
+/* Smarty version 4.0.4, created on 2024-08-16 15:57:05
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_66bda87d270478_98200118',
+  'unifunc' => 'content_66bf4ca111fe98_16356540',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1721310985,
+      1 => 1723799481,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_66bda87d270478_98200118 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66bf4ca111fe98_16356540 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -82,10 +82,6 @@ function content_66bda87d270478_98200118 (Smarty_Internal_Template $_smarty_tpl)
 >
 	  <?php echo '<script'; ?>
  type="module" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
-/assets/js/metrics.js"><?php echo '</script'; ?>
->
-	  <?php echo '<script'; ?>
- type="module" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/js/cookie.js"><?php echo '</script'; ?>
 >
 
@@ -111,7 +107,6 @@ function content_66bda87d270478_98200118 (Smarty_Internal_Template $_smarty_tpl)
 
         body.style.backgroundImage = backgroundImage;
     }
-    window.onload = setBackgroundBySeason;
 <?php echo '</script'; ?>
 >
    </head>

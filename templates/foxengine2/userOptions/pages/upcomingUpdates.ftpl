@@ -36,7 +36,9 @@
              <div style="display: inline-block; margin: 5px;">
                  <span>Серверная часть</span>
                  <ul>
-                     <li><i class="fa fa-clock-o"></i> Внедрение улучшенного личного кабинета :hotsprings:</li>
+                     <li><i class="fa fa-clock-o"></i> Загрузка скинов :hotsprings:</li>
+					 <li><i class="fa fa-clock-o"></i> Фикс скинов :hotsprings:</li>
+					 <li><i class="fa fa-clock-o"></i> Загрузка плащей :hotsprings:</li>
                  </ul>
              </div>
          </div>

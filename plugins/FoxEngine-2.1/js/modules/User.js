@@ -1,17 +1,21 @@
 export class User {
+
     constructor(foxEngine) {
         this.foxEngine = foxEngine;
+		this.userSkin = new Array();
         this.optNamesArr = [];
         this.optionAmount = 0;
         this.optionArray = [];
         this.optionTpl = '';
 
-        const userLogin = foxEngine.replaceData.login;
-        const debugMessage = `Loading data for %c${userLogin}%c...`;
+        this.userLogin = foxEngine.replaceData.login;
+        const debugMessage = `Loading data for %c${this.userLogin}%c...`;
         const loginStyle = "color: #ff0000;";
         const textStyles = "color: #000000;";
-        //console.log(debugMessage, loginStyle, textStyles);
+        console.log(debugMessage, loginStyle, textStyles);
     }
+	
+
 
     async parseUsrOptionsMenu() {
         if (this.optNamesArr.length <= this.optionAmount) {
@@ -19,6 +23,8 @@ export class User {
         }
 
         if (this.foxEngine.replaceData.isLogged) {
+			this.userSkin['front'] = await this.getUserSkin(this.userLogin, 'front');
+			this.userSkin['back'] = await this.getUserSkin(this.userLogin, 'back');
             //this.foxEngine.debugSend(`User ${this.foxEngine.replaceData.login} is logged`, '');
         }
 
@@ -70,6 +76,11 @@ export class User {
             console.error('Error parsing user options menu:', error);
         }
     }
+
+	async getUserSkin(userLogin, side) {
+		console.log("Loading userSkin...");
+		return foxEngine.sendPostAndGetAnswer({sysRequest:"skinPreview", login: userLogin, side: side}, "TEXT");
+	}
 
     async userAction(action) {
         try {

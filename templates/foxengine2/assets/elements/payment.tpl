@@ -3,36 +3,41 @@
 <div class="modal_app_content">
     <div class="payment_buttons_list">
         <div id="payment_1000" class="payment_button payment_button_selected" onclick="foxEngine.payment.selectPaymentBlock(1000);">
-            <img src="/uploads/icons/monets-1.png">
-            <div class="sum">1 000 монет</div>
+            <img src="/uploads/icons/coal-1.png">
+            <div class="sum">1 000 угля</div>
             <div class="sum_percent">Бонус +5% в подарок</div>
         </div>
         <div id="payment_2000" class="payment_button" onclick="foxEngine.payment.selectPaymentBlock(2000);">
-            <img src="/uploads/icons/monets-2.png">
-            <div class="sum">2 000 монет</div>
+            <img src="/uploads/icons/coal-2.png">
+            <div class="sum">2 000 угля</div>
             <div class="sum_percent">Бонус +10% в подарок</div>
         </div>
         <div id="payment_3000" class="payment_button" onclick="foxEngine.payment.selectPaymentBlock(3000);">
-            <img src="/uploads/icons/monets-3.png">
-            <div class="sum">3 000 монет</div>
+            <img src="/uploads/icons/coal-3.png">
+            <div class="sum">3 000 угля</div>
             <div class="sum_percent">Бонус +20% в подарок</div>
         </div>
         <div id="payment_5000" class="payment_button" onclick="foxEngine.payment.selectPaymentBlock(5000);">
-            <img src="/uploads/icons/monets-4.png">
-            <div class="sum">5 000 монет</div>
+            <img src="/uploads/icons/coal-4.png">
+            <div class="sum">5 000 угля</div>
             <div class="sum_percent">Бонус +25% в подарок</div>
         </div>
     </div>
+	
+	<div class="importantText">
+		В данный момент текущая опция находится в разработке и поезда не возят уголь в наш город :coal: 
+		<p>Держитесь жители! <b>City Must Not Fall!</b></p>
+	</div>
 
     <div class="payment_custom">
         <div class="description">
-            Или самостоятельно укажите нужную вам сумму монет
+            Или самостоятельно укажите нужную вам сумму угля
             в специальном поле справа
         </div>
         <div class="payment_custom_form">
             <div class="input_block" style="max-width: 418px; float: left;">
                 <input type="number" id="unitpay_count" name="unitpay_count" class="input" required="" />
-                <label class="label">Введите количество монет</label>
+                <label class="label">Введите количество угля</label>
             </div>
         </div>
 
@@ -42,7 +47,7 @@
             <span id="bonus_information">Включая бонус размером 5%!</span>
         </div>
         <div class="payment_custom_form">
-            <b id="count_after_donate">1050 монет</b>
+            <b id="count_after_donate">1050 угля</b>
         </div>
     </div>
 </div>
@@ -259,99 +264,99 @@
 	<div class="payment_info">
 		<h3>Оплатить банковской картой (для России):</h3>
 		
-		<div class="payment_type_button" title="MIR" onclick="purchaseMonets('unitpay', 'card');">
-			<img src="/templates/simpleminecraft/images/payments/mir.png">
+		<div class="payment_type_button" title="MIR" onclick="purchasecoal('unitpay', 'card');">
+			<img src="/templates/foxengine/images/payments/mir.png">
 		</div>
 
-		<div class="payment_type_button" title="Visa" onclick="purchaseMonets('unitpay', 'card');">
-			<img src="/templates/simpleminecraft/images/payments/visa.png">
+		<div class="payment_type_button" title="Visa" onclick="purchasecoal('unitpay', 'card');">
+			<img src="/templates/foxengine/images/payments/visa.png">
 		</div>
 
-		<div class="payment_type_button" title="Mastercard" onclick="purchaseMonets('unitpay', 'card');">
-			<img src="/templates/simpleminecraft/images/payments/mastercard.png">
+		<div class="payment_type_button" title="Mastercard" onclick="purchasecoal('unitpay', 'card');">
+			<img src="/templates/foxengine/images/payments/mastercard.png">
 		</div>
 
-		<div class="payment_type_button" title="Union Pay" onclick="purchaseMonets('unitpay', 'card');">
-			<img src="/templates/simpleminecraft/images/payments/unionpay.png?">
+		<div class="payment_type_button" title="Union Pay" onclick="purchasecoal('unitpay', 'card');">
+			<img src="/templates/foxengine/images/payments/unionpay.png?">
 		</div>
 
-		<div class="payment_type_button" title="Tinkoff Pay" onclick="purchaseMonets('unitpay', 'card');">
-			<img src="/templates/simpleminecraft/images/payments/tinkoffpay.png?v2">
+		<div class="payment_type_button" title="Tinkoff Pay" onclick="purchasecoal('unitpay', 'card');">
+			<img src="/templates/foxengine/images/payments/tinkoffpay.png?v2">
 		</div>
 
-		<div class="payment_type_button" title="Система быстрых платежей" onclick="purchaseMonets('freekassa', '42')">
-			<img src="/templates/simpleminecraft/images/payments/sbp.png">
+		<div class="payment_type_button" title="Система быстрых платежей" onclick="purchasecoal('freekassa', '42')">
+			<img src="/templates/foxengine/images/payments/sbp.png">
 		</div>
 
 		<h3 style="margin-top: 24px">Оплатить банковской картой:</h3>
-		<!--div class="payment_type_button" title="VISA UA" onclick="purchaseMonets('freekassa', '7');">
-			<img src="/templates/simpleminecraft/images/payments/visa.png"/>
+		<!--div class="payment_type_button" title="VISA UA" onclick="purchasecoal('freekassa', '7');">
+			<img src="/templates/foxengine/images/payments/visa.png"/>
 			<p>гривны</p>
 		</div>
 
-		<div class="payment_type_button" title="Master Card UA" onclick="purchaseMonets('freekassa', '7');">
-			<img src="/templates/simpleminecraft/images/payments/mastercard.png"/>
+		<div class="payment_type_button" title="Master Card UA" onclick="purchasecoal('freekassa', '7');">
+			<img src="/templates/foxengine/images/payments/mastercard.png"/>
 			<p>гривны</p>
 		</div>
 
-		<div class="payment_type_button" title="VISA" onclick="purchaseMonets('freekassa', '41');">
-			<img src="/templates/simpleminecraft/images/payments/visa.png">
+		<div class="payment_type_button" title="VISA" onclick="purchasecoal('freekassa', '41');">
+			<img src="/templates/foxengine/images/payments/visa.png">
 			<p>тенге</p>
 		</div>
 
-		<div class="payment_type_button" title="Master Card" onclick="purchaseMonets('freekassa', '41');">
-			<img src="/templates/simpleminecraft/images/payments/mastercard.png">
+		<div class="payment_type_button" title="Master Card" onclick="purchasecoal('freekassa', '41');">
+			<img src="/templates/foxengine/images/payments/mastercard.png">
 			<p>тенге</p>
 		</div>
 
 		<h3 style="margin-top: 24px">Прочие способы:</h3>
 
-		<!--div class="payment_type_button" title="QIWI" onclick="purchaseMonets('freekassa', '10')">
-			<img src="/templates/simpleminecraft/images/payments/qiwi.png"/>
+		<!--div class="payment_type_button" title="QIWI" onclick="purchasecoal('freekassa', '10')">
+			<img src="/templates/foxengine/images/payments/qiwi.png"/>
 		</div>
 
-		<div class="payment_type_button" title="Оплата скинами" onclick="purchaseMonets('freekassa', '27')">
-			<img src="/templates/simpleminecraft/images/payments/steam.png">
+		<div class="payment_type_button" title="Оплата скинами" onclick="purchasecoal('freekassa', '27')">
+			<img src="/templates/foxengine/images/payments/steam.png">
 		</div>
 
-		<!--div class="payment_type_button" title="WebMoney" onclick="purchaseMonets('freekassa')">
-			<img src="/templates/simpleminecraft/images/payments/webmoney.png"/>
+		<!--div class="payment_type_button" title="WebMoney" onclick="purchasecoal('freekassa')">
+			<img src="/templates/foxengine/images/payments/webmoney.png"/>
 		</div>
 
-		<!--div class="payment_type_button" title="YooMoney" onclick="purchaseMonets('freekassa', '6');">
-			<img src="/templates/simpleminecraft/images/payments/yoomoney.png"/>
+		<!--div class="payment_type_button" title="YooMoney" onclick="purchasecoal('freekassa', '6');">
+			<img src="/templates/foxengine/images/payments/yoomoney.png"/>
 		</div>
 
-		<div class="payment_type_button" title="Perfect Money" onclick="purchaseMonets('enot', 'pm');">
-			<img src="/templates/simpleminecraft/images/payments/perfectmoney.png">
+		<div class="payment_type_button" title="Perfect Money" onclick="purchasecoal('enot', 'pm');">
+			<img src="/templates/foxengine/images/payments/perfectmoney.png">
 		</div>
 
-		<div class="payment_type_button" title="Bitcoin" onclick="purchaseMonets('enot', 'bt')">
-			<img src="/templates/simpleminecraft/images/payments/bitcoin.png">
+		<div class="payment_type_button" title="Bitcoin" onclick="purchasecoal('enot', 'bt')">
+			<img src="/templates/foxengine/images/payments/bitcoin.png">
 		</div>
 
-		<div class="payment_type_button" title="Ton" onclick="purchaseMonets('enot', 'ton');">
-			<img src="/templates/simpleminecraft/images/payments/ton.png?">
+		<div class="payment_type_button" title="Ton" onclick="purchasecoal('enot', 'ton');">
+			<img src="/templates/foxengine/images/payments/ton.png?">
 		</div>
 
-		<div class="payment_type_button" title="Ethereum" onclick="purchaseMonets('enot', 'et');">
-			<img src="/templates/simpleminecraft/images/payments/ethereum.png">
+		<div class="payment_type_button" title="Ethereum" onclick="purchasecoal('enot', 'et');">
+			<img src="/templates/foxengine/images/payments/ethereum.png">
 		</div>
 
-		<div class="payment_type_button" title="Dash" onclick="purchaseMonets('enot', 'ds');">
-			<img src="/templates/simpleminecraft/images/payments/dash.png">
+		<div class="payment_type_button" title="Dash" onclick="purchasecoal('enot', 'ds');">
+			<img src="/templates/foxengine/images/payments/dash.png">
 		</div>
 
-		<div class="payment_type_button" title="LiteCoin" onclick="purchaseMonets('enot', 'lt');">
-			<img src="/templates/simpleminecraft/images/payments/litecoin.png">
+		<div class="payment_type_button" title="LiteCoin" onclick="purchasecoal('enot', 'lt');">
+			<img src="/templates/foxengine/images/payments/litecoin.png">
 		</div>
 
-		<div class="payment_type_button" title="TRON" onclick="purchaseMonets('enot', 'trx');">
-			<img src="/templates/simpleminecraft/images/payments/tron.png?">
+		<div class="payment_type_button" title="TRON" onclick="purchasecoal('enot', 'trx');">
+			<img src="/templates/foxengine/images/payments/tron.png?">
 		</div>
 
-		<div class="payment_type_button" title="USDT" onclick="purchaseMonets('enot', 'erc');">
-			<img src="/templates/simpleminecraft/images/payments/usdt.png">
+		<div class="payment_type_button" title="USDT" onclick="purchasecoal('enot', 'erc');">
+			<img src="/templates/foxengine/images/payments/usdt.png">
 		</div>
 
 		<div class="payment_rights">Нажимая кнопку "Пополнить" Вы подтверждаете своё согласие с

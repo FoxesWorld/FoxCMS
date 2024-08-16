@@ -63,6 +63,13 @@ getFormattedDate(unix) {
         });
         return true;
     }
+	
+	downloadFile(path, name){
+		let link = document.createElement('a');
+		link.setAttribute('href', path);
+		link.setAttribute('download', name);
+		link.click();
+	}
 
     randomNumber(min, max) {
         const r = Math.random() * (max - min) + min + 1

@@ -25,6 +25,18 @@
             {
                 "code": "1F603",
                 "name": "relieved"
+            },
+            {
+                "code": "1F604",
+                "name": "thinking"
+            },
+            {
+                "code": "1F605",
+                "name": "smirk"
+            },
+            {
+                "code": "1F606",
+                "name": "blush"
             }
         ]
     },
@@ -137,6 +149,10 @@
             {
                 "code": "1F518",
                 "name": "guitar"
+            },
+            {
+                "code": "1F519",
+                "name": "coal"
             }
         ]
     },

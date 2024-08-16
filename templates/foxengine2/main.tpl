@@ -36,7 +36,6 @@
 		
 	</style>	  
 	  <script type="module" src="{$tplDir}/assets/js/App.js"></script>
-	  <script type="module" src="{$tplDir}/assets/js/metrics.js"></script>
 	  <script type="module" src="{$tplDir}/assets/js/cookie.js"></script>
 
 	  <script>
@@ -60,7 +59,6 @@
 
         body.style.backgroundImage = backgroundImage;
     }
-    window.onload = setBackgroundBySeason;
 </script>
    </head>
    <body>

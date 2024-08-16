@@ -50,7 +50,7 @@
 					</div>
 				</div>
 							</li>
-							{if $user_group == 1}
+							{if $user_group != 5}
 							<li class="dropdown-item">
 							   <a class="pageLink-addFunds" onclick="addFunds(); return false; ">
 								  <div class="rightIcon">

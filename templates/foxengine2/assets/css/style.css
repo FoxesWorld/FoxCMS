@@ -12,7 +12,7 @@
 	--theme-content-pane: #29282af2;
 	--theme-span-primary: rgb(125 113 119);
 	--theme-iconPrimary: rgb(113 80 8);
-	--theme-spanSprmary: #a76161;
+	--theme-spanSprmary: #473939;
 
 }
 
@@ -181,6 +181,7 @@ img {
 .contentInner {
 	margin: 5px;
 	padding: 10px;
+	color: burlywood;
 }
 
 #game canvas {
@@ -701,6 +702,14 @@ section {
 	font-size: 11;
 	width: fit-content;
 	float: right;
+}
+
+.cabinet-block__name>.span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #4d6de9;
+  margin-right: 5px;
 }
 
 .userProfile .short {
@@ -1249,12 +1258,12 @@ footer .footer-copyright span img {
 
 .importantText strong {
 	font-family: "Minecraft Bold";
-	color: #fd8153;
+	color: #a74822;
 } 
 
 .importantText b {
 	font-family: "Minecraft";
-	color: #fd8153;
+	color: #895926;
 } 
 
 .optionButt {

@@ -42,7 +42,6 @@
             margin: 0;
             padding: 10px;
             box-sizing: border-box;
-            background-color: #1a1a1a;
             color: #fff;
         }
 		
@@ -59,6 +58,7 @@
 
     .story h2 {
             color: #ff6600;
+			font-family: 'FSElliotPro-Heavy';
         }
 
     .story p {

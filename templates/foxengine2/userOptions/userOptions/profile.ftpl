@@ -15,9 +15,10 @@
       button {
       width: fit-content;
       }
-   </style>
+   </style> 
    <div class="tabs">
       [hasPriviligies] 
+	  <link rel="stylesheet" type="text/css" href="%assets%/css/skin.css">
       <script>
          function viewEdit() {
          				let view = $('#view');
@@ -68,8 +69,7 @@
          </ul>
          <form method="POST" action="/" id="viewUserProfile">
             <div class="tab_content active">
-               <h2 id="modalTitle">%lang|profileTitle%</h2>
-               <span id="modalDesc">%lang|profileDesc%</span>
+
                <section> 
                   [input type="text" name="realname" placeholder="%lang|fullName%" value="[realname]"]
                   [input type="text" name="userStatus" placeholder="%lang|status%" value="[userStatus]"]
@@ -84,8 +84,6 @@
                </section>
             </div>
             <div class="tab_content" id="personalisation">
-               <h2 id="modalTitle">%lang|personalisationTitle%</h2>
-               <span id="modalDesc">%lang|personalisationDesc%</span>
 			   
 			   <h4>%lang|loadPhoto%</h1>
                [input type="upload" id="profilePhoto" name="image" metadata="profilePhoto"]
@@ -99,27 +97,198 @@
                   </div>
                </div>   
 <script>
+
 (async function () {
+setTimeout(() => {
 	let userDir = "/uploads/users/[login]";
-    let skin = new skin3D(userDir + '/skin.png',document.getElementById('skinViewer3D'));
-	skin.init(240, 295);
-	skin.createBlock('%assets%/img/block.png');
-	skin.createCloak(userDir + '/cape.png');
+    //let skin = new skin3D(userDir + '/skin.png',document.getElementById('skinViewer3D'));
+	//skin.init(240, 295);
+	//skin.createBlock('%assets%/img/block.png');
+	//skin.createCloak(userDir + '/cape.png');
+	document.getElementById('skin_image_front').src = `data:image/png;base64,${foxEngine.user.userSkin['front']}`;
+	document.getElementById('skin_image_back').src = `data:image/png;base64,${foxEngine.user.userSkin['back']}`;
+	}, 2000);
 })();
+
+ function skinCloak(button){
+      	let toggleSwitch = $("#uploadType").val();
+      	let skin = document.getElementById('skin'); 
+      	let cloak = document.getElementById('cloak'); 
+      	if (toggleSwitch === 'skin') {
+      		skin.style.display = "block";
+      		cloak.style.display = "none";
+      	} else {
+      		skin.style.display = "none";
+      		cloak.style.display = "block";
+      	}
+      }
+
+    var skinsFiles;
+    var cloakFiles;
+
+    $('#skin_file').change(function () {
+        skinsFiles = this.files;
+        $("#file_name_skin").text(skinsFiles[0].name);
+    });
+
+    $('#cloak_file').change(function () {
+        cloakFiles = this.files;
+        $("#file_name_cloak").text(cloakFiles[0].name);
+    });
+
+    var skinsFiles;
+    var cloakFiles;
+
+    $('#skin_file').change(function () {
+        skinsFiles = this.files;
+        $("#file_name_skin").text(skinsFiles[0].name);
+    });
+
+    $('#cloak_file').change(function () {
+        cloakFiles = this.files;
+        $("#file_name_cloak").text(cloakFiles[0].name);
+    });
+
+    $("#load_skin").click(function () {
+        loadFileToServer($(this), 'skin');
+    });
+
+    $("#load_cloak").click(function () {
+        loadFileToServer($(this), 'cloak');
+    });
+
+    function deleteFileFromServer(button, type) {
+        $.post('/', {
+            csrf_token: '0729be9e3052f1ff011c2ab6cc3b00e18625a2b777223d9c64d81cbd79088e89',
+            sysRequest: 'deleteFile',
+            type: type
+        }, function (data) {
+            data = JSON.parse(data);
+            button.notify(data['message'], data['type']);
+
+            if (data['type'] === 'success') {
+                redrawSkins();
+            }
+        });
+    }
+
+    function loadFileToServer(button, type) {
+
+        var data = new FormData();
+
+        if (type === "skin") {
+            $.each(skinsFiles, function (key, value) {
+                data.append(key, value);
+            });
+        }
+
+        if (type === "cloak") {
+            $.each(cloakFiles, function (key, value) {
+                data.append(key, value);
+            });
+        }
+
+        data.append('sysRequest', 'uploadFile');
+        data.append('type', type);
+        data.append('csrf_token', '0729be9e3052f1ff011c2ab6cc3b00e18625a2b777223d9c64d81cbd79088e89');
+
+        $.ajax({
+
+            url: '/',
+            type: 'POST',
+            data: data,
+            cache: false,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+
+            success: function (respond, textStatus, jqXHR) {
+                button.notify(respond.message, respond.type);
+                redrawSkins();
+            },
+
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                button.notify(textStatus);
+            }
+        });
+    }
 </script>
 	<div id="skinViewer3D" style="margin: 15px 10px;">
 		<canvas id="canvas" style="display: none"></canvas>
 	</div>
 	
-	<div class="importantText">Загрузка скинов сейчас в разработке!</div>
-	[input type="upload" id="skin" name="skin" metadata="skin"]
+	
+	
+        <div class="basic_function_block">
+            <div class="basic_function_block_title">
+                <h3>Смена скина и плаща</h3>
+            </div>
+			
+			<div class="importantText"><strong>WARNING!</strong> <b>Загрузка скинов находится в разработке!</b></div>
+			
+		<div class="description">
+						Доступные размеры для скинов: <b>64 x 32</b>, <b>64 x 64</b>, <b>128 x 64</b>, <b>256 x 128</b>, <b>512 x 256</b>, <b>1024 x 512</b>.
+						<br>
+						Доступные размеры для плащей: <b>22 x 17</b>, <b>64 x 32</b>, <b>128 x 64</b>, <b>256 x 128</b>, <b>512 x 256</b>, <b>1024 x 512</b>.
+		 </div>
+		<div class="body">
+                <div class="changes_blocks">
+                    <div class="change_block">
+                           <img id="skin_image_front" />
 
+                        <label>
+                            <div class="file_select" title="Нажмите, чтобы выбрать файл">
+                                <span class="file_name" id="file_name_skin">74b6e9091e4fe33b.png</span>
+                                <img src="%assets%icons/cabinet_file.png">
+                                <span class="file_select_field">
+                            Выбрать файл
+                        </span>
+                                <input type="file" id="skin_file">
+                            </div>
+                        </label>
+
+                        <br><br>
+
+						<a href="#" class="green_button" onclick="loadFileToServer($(this), 'skin'); return false;">
+                            Загрузить скин
+                        </a>
+                        <a href="#" class="green_button red-button" style="margin-left: 20px !important; width: 104px;" onclick="deleteFileFromServer($(this), 'skin'); return false;">Удалить</a>
+                    </div>
+
+                    <div class="change_block">
+
+                            <img id="skin_image_back" />
+
+                        <div class="cloak_functions_block">
+                            <label>
+                                <div class="file_select" title="Нажмите, чтобы выбрать файл">
+                                    <span class="file_name" id="file_name_cloak">Файл не выбран</span>
+                                    <img src="%assets%icons/cabinet_file.png">
+                                    <span class="file_select_field">Выбрать файл</span>
+                                    <input type="file" id="cloak_file">
+                                </div>
+                            </label>
+
+                            <br><br>
+
+                            <a href="#" class="green_button" onclick="loadFileToServer($(this), 'cloak'); return false;">
+                                Загрузить плащ
+                            </a>
+                            <a href="#" class="green_button red-button" style="margin-left: 14px !important; width: 104px;" onclick="deleteFileFromServer($(this), 'cloak'); return false;">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
             </div>
             <div class="tab_content">
-               <h2 id="modalTitle">%lang|securityTitle%</h2>
-               <span id="modalDesc">%lang|securityDesc%</span>
-               <section> [input type="password" name="newPass" placeholder="Новый пароль"] [input type="password" name="repeatPass" placeholder="Повтор пароля"] </section>
+
+               <section> 
+					[input type="password" name="newPass" placeholder="Новый пароль"]
+					[input type="password" name="repeatPass" placeholder="Повтор пароля"]
+			   </section>
             </div>
             <input name="user_doaction" class="input" type="hidden" value="EditUser" />
             <input name="login" class="input" type="hidden" value="[login]" />
@@ -142,6 +311,8 @@
 				</h3>
 				<div class="importantText">
 					Загрузка фото профиля возможна во вкладке <b>"Персонализация"</b>
+					<br />
+					<small>Это временная мера, в будущем загрузка фото перейдёт сюда :smirk:</small>
 				</div>
             </div>
          </div>
@@ -234,11 +405,11 @@
             <td class="pageItemValue">[email]</td>
             </tr>
             <tr class="statsTabbleItem">
-            <td class="pageItemTitle"> <img src="/templates/foxengine2/assets/icons/units.png" alt="Units Icon" style="height: 24px;width: 24px;" uk-img /> %lang|units%</td>
-            <td class="pageItemValue">100</td>
+            <td class="pageItemTitle"> <img src="%assets%/icons/units.png" alt="Units Icon" style="height: 24px;width: 24px;" uk-img /> %lang|units%</td>
+            <td class="pageItemValue">0</td>
             </tr> 
             <tr class="statsTabbleItem">
-            <td class="pageItemTitle"> <img src="/templates/foxengine2/assets/icons/crystals.png" alt="Crystals Icon"  style="height: 24px;width: 24px;" uk-img /> %lang|crystals%</td>
+            <td class="pageItemTitle"> <img src="%assets%/icons/crystals.png" alt="Crystals Icon"  style="height: 24px;width: 24px;" uk-img /> %lang|crystals%</td>
             <td class="pageItemValue">0</td>
             </tr> 
             [/hasPriviligies] 
@@ -248,24 +419,24 @@
    </div>
    <script>
       $(function() {
-      		 foxEngine.user.parseBadges('[login]');
-      	$('ul.tab_caption').on('click', 'li:not(.active)', function() {
-      		$(this)
-      			.addClass('active').siblings().removeClass('active')
-      			.closest('div.tabs').find('div.tab_content').removeClass('active').eq($(this).index()).addClass('active');
-      			let tab = $(this);
-      	});
+   		 foxEngine.user.parseBadges('[login]');
+		 
+         $('.tabs .tab_caption').on('click', 'li:not(.active)', function() {
+            $(this)
+               .addClass('active').siblings().removeClass('active')
+               .closest('div.tabs').find('div.tab_content').removeClass('active').eq($(this).index()).addClass('active');
+         });
       });
       		 
-      		 $('input[name*="colorPicker"]').click(function () {
-      			let rad=document.getElementsByName('colorPicker');
-      				for (let i=0;i<rad.length; i++) {
-      					$('#Color' + i).removeClass('checked');
-      					if (rad[i].checked === true) {
-      						$('#Color' + i).addClass('checked');
-      						$("#colourVal").val(rad[i].value);
-      					}
-      				}
-      			});
+     $('input[name*="colorPicker"]').click(function () {
+		let rad=document.getElementsByName('colorPicker');
+      		for (let i=0;i<rad.length; i++) {
+      			$('#Color' + i).removeClass('checked');
+      			if (rad[i].checked === true) {
+      				$('#Color' + i).addClass('checked');
+      				$("#colourVal").val(rad[i].value);
+      			}
+      		}
+      	});
    </script>
 </pageContent>

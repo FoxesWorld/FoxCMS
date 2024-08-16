@@ -4,13 +4,14 @@
 	"description": "Галлерея FoxesCraft",
 	"optionBlock": "#usrMenu",
 	"optionPreText": "<i style='color: #d8e815' class='fa fa-book'></i>",
-	"optionGroup": 1,
+	"optionGroup": [1,4],
 	"optionClass": "dropdown-item",
 	"type": "page"
 }
 </useroption>
 
 <pageContent>
-<h3>Изображения Лиса Эйдена :fox:</h3>
-[input type="gallery" mask="png" dir="foxes"]
+<h3>Изображения с сервера</h3>
+<div style="width: 50%;" class="importantText">Тест галлереи :steam:</div>
+[input type="gallery" mask="png" dir="mc"]
 </pageContent>

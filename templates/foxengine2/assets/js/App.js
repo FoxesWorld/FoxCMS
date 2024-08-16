@@ -32,10 +32,13 @@ const App = new Vue({
                 $("#dialogContent").html("");
             }
         });
-        setTimeout(() => {
-			foxEngine.logo.logoAnimation();
-            foxEngine.servers.parseOnline();
-        }, 500);
+		window.onload = function() {
+			//setTimeout(() => {
+				foxEngine.logo.logoAnimation();
+				foxEngine.servers.parseOnline();
+				setBackgroundBySeason();
+			//}, 500);
+		};
     }
 
 });
