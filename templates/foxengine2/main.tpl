@@ -36,7 +36,6 @@
 		
 	</style>	  
 	  <script type="module" src="{$tplDir}/assets/js/App.js"></script>
-	  <script type="module" src="{$tplDir}/assets/js/cookie.js"></script>
 
 	  <script>
     // Function to set background image based on season
@@ -79,7 +78,7 @@
 		<div id="cookie-popup" class="show">
 		  <img src="{$tplDir}/assets/icons/cookie.png" draggable="false" />
             <p>Для улучшения работы сайта и его взаимодействия с пользователями мы используем файлы cookie. Продолжая работу с сайтом, вы разрешаете использование cookie-файлов. Вы всегда можете отключить файлы cookie в настройках вашего браузера.</p>
-            <button class="button cookie_accept">Принять</button>
+            <button class="button" onclick="foxEngine.cookies.acceptCookies()">Принять</button>
         </div>
       {include file='footer.tpl'}
 	  {include file='../notify.tpl'}

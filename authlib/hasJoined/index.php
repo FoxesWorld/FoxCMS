@@ -14,10 +14,10 @@
 -----------------------------------------------------
  Version: 0.1.8 Alpha
 -----------------------------------------------------
- Usage: UserJoin on server
+ Usage: UserJoin server
 =====================================================
 */
-
+header('Content-Type: application/json; charset=utf-8');
 require('../config.php');
 include('../database.php');
 
@@ -27,7 +27,6 @@ if (isset($_GET['username']) && isset($_GET['serverId'])) {
 
 class HasJoined
 {
-
     private $debug;
     private $user;
     private $realUser;
@@ -48,17 +47,18 @@ class HasJoined
             $this->getUserSession($this->user, $this->serverId);
             $this->userCheck();
         } catch (PDOException $pe) {
-            die("Ошибка" . $pe);
+            error_log('PDOException: ' . $pe->getMessage());
+            die("Ошибка при соединении с базой данных");
         }
     }
 
     private function pregMatch($string)
     {
         if (!preg_match("/^[a-zA-Z0-9_-]+$/", $string)) {
-            exit($this->answerConstructor('Bad login', 'Левые символы в нике!'));
+            exit($this->answerConstructor('Bad login', 'Некорректные символы - '.$string));
         } else {
             if ($this->debug === true) {
-                echo $string . ' - passed<br>';
+                echo $string . ' - прошел проверку<br>';
             }
             return $string;
         }
@@ -70,13 +70,16 @@ class HasJoined
         $stmt->bindValue(':user', $inputUser);
         $stmt->bindValue(':serverId', $inputServerId);
         $stmt->execute();
+
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$row) {
+            exit($this->answerConstructor("Bad login", "Пользователь не найден или неверный serverId"));
+        }
         $this->realUser = $row['user'];
-        $this->UUID = fun::getUserDataBy($this->db, "login", $row['user'])['uuid'];
+        $this->UUID = fun::getUserDataBy($this->db, "login", $this->realUser)['uuid'];
     }
 
-    private function userCheck()
-    {
+    private function userCheck() {
         global $config, $LOGGER;
 
         if ($this->user == $this->realUser) {
@@ -99,7 +102,7 @@ class HasJoined
 					}
 				}';
 
-            $LOGGER->WriteLine($base64);
+            $LOGGER->WriteLine("User: $this->realUser | Base64: " . $base64);
 
             echo '
 				{
@@ -111,14 +114,12 @@ class HasJoined
 					]
 				}';
         } else {
-            exit($this->answerConstructor("Bad login", "Bad login"));
+            exit($this->answerConstructor("Bad login", "Неверный логин"));
         }
     }
 
     public function answerConstructor($title, $message)
     {
-        $answer = array('error' => $title, 'errorMessage' => $message);
-
-        return json_encode($answer);
+        return json_encode(['error' => $title, 'errorMessage' => $message]);
     }
 }

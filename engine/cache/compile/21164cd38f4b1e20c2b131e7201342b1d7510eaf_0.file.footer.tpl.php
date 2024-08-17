@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-08-16 15:57:05
+/* Smarty version 4.0.4, created on 2024-08-17 10:36:27
   from '/var/www/FoxCMS/templates/foxengine2/footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_66bf4ca1141b65_36481935',
+  'unifunc' => 'content_66c052fb21e304_42045918',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '21164cd38f4b1e20c2b131e7201342b1d7510eaf' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/footer.tpl',
-      1 => 1721310483,
+      1 => 1723813872,
       2 => 'file',
     ),
   ),
@@ -20,12 +20,16 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_66bf4ca1141b65_36481935 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66c052fb21e304_42045918 (Smarty_Internal_Template $_smarty_tpl) {
 ?>   <div id="button-up" style="display: block;">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </div>
 <footer class="bar">
    <div class="container footer--flex">
+   
+   <i class="fa fa-envelope-o"></i> Почта: <b><?php echo $_smarty_tpl->tpl_vars['contactEmail']->value;?>
+</b>
+   
       <div class="footer-copyright">
          <?php echo $_smarty_tpl->tpl_vars['siteTitle']->value;?>
  <?php echo $_smarty_tpl->tpl_vars['siteStatus']->value;?>
@@ -76,8 +80,7 @@ function content_66bf4ca1141b65_36481935 (Smarty_Internal_Template $_smarty_tpl)
 				
 			</div>
 		</div>
-		<!-- <li><i class="fa fa-envelope-o"></i> Почта: <b><?php echo $_smarty_tpl->tpl_vars['contactEmail']->value;?>
-</b></li> -->
+		
 		<li class="d-none d-md-flex">
 			<a href="https://webmaster.yandex.ru/siteinfo/?site=foxescraft.ru">
 				<img width="88" height="31" alt="" border="0" src="https://yandex.ru/cycounter?foxescraft.ru&theme=light&lang=ru"/>

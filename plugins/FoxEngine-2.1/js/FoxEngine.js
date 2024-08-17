@@ -9,6 +9,7 @@ import { Utils } from './modules/Utils.js';
 import { Logo } from './modules/Logo.js';
 import { PaymentManager } from './modules/PaymentManager.js';
 import { EntryReplacer } from './modules/EntryReplacer.js';
+import { Cookies } from './modules/Cookies.js';
 import { Snow } from './modules/Snow.js';
 import '../../popper.min.js';
 import './modules/Howler/howler.core.js';
@@ -55,6 +56,7 @@ class FoxEngine {
             this.user = new User(this);
             this.servers = new Servers(this);
             this.entryReplacer = new EntryReplacer(this);
+			this.cookies = new Cookies(this);
             this.page = new Page(this);
             this.modalApp = new ModalApp(this);
             this.emojis = new Emojis(this);

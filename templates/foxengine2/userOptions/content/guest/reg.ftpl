@@ -11,8 +11,9 @@
                   <label class="label">Имя</label>
                </div> 
 			   --> 
+			   <b class="note">При указании почты использкйте настояшую! В противном случае аккаунт будет восстановить невозможно!</b>
 			   [input type="email" name="email" placeholder="Почта"]
-			   [input type="text" name="password1" display="inline-flex" onKeyUp="CheckPassStrength($(this).val())" placeholder="Пароль"] <button style="width: auto" type="button" class="btn btn-secondary btn-icon tip" onclick="generatePassword($(this), $('#password1'), $('#password2'))" data-title="Генерировать">
+			   [input type="text" name="password1" style="display: inline-flex; width: 90%;" onKeyUp="CheckPassStrength($(this).val())" placeholder="Пароль"] <button style="width: auto" type="button" class="btn btn-secondary btn-icon tip" onclick="generatePassword($(this), $('#password1'), $('#password2'))" data-title="Генерировать">
 																															<i class="fa-regular fa-shuffle"></i>
 																														</button>
 			   [input type="password" name="password2" placeholder="Повтор пароля"]
@@ -86,6 +87,7 @@
 			    function selfRandom(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+		CheckPassStrength();
 
      </script>
  </pageContent>

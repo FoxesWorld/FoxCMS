@@ -16,7 +16,6 @@ version: 0.2.0 Alpha
 Usage: Parses skins & Cloaks
 =====================================================
 */
-<?php
 header('Content-Type: application/json; charset=utf-8');
 
 define('INCLUDE_CHECK', true);
@@ -34,36 +33,58 @@ if (isset($_GET['user'])) {
 class Skin {
     private $md5User;
     private $realUser;
-    private $textures = [];
+    private $textures = array();
 
-    public function __construct($md5)
+    public function __construct($uuid)
     {
-        if (strlen($md5) === 32) {
+        if (strlen($uuid) === 32) {
             global $config, $LOGGER;
 
-            $LOGGER->WriteLine("SkinLib===");
+            $LOGGER->WriteLine("SkinLib=== ");
 
             try {
-                $LOGGER->WriteLine("SkinLib is being created with " . $md5 . " UUID");
+                $LOGGER->WriteLine("SkinLib is being created with " . $uuid . " UUID");
 
-                $this->md5User = $this->sanitizeInput($md5);
+                $this->md5User = $this->sanitizeInput($uuid);
                 $this->getRealUser();
 
                 $userDir = $config['skinUrl'] . $this->realUser;
-                $this->setTextures('skin', $userDir . '/skin.png');
-                $this->setTextures('cloak', $userDir . '/cape.png');
-
-                $this->JSONoutput();
+                $this->setTextures('SKIN', $userDir . '/skin.png');
+                $this->setTextures('CAPE', $userDir . '/cape.png');
+				die(json_encode(self::getProfileData($uuid, $this->realUser,$this->textures), JSON_UNESCAPED_SLASHES));
             } catch (PDOException $pe) {
                 die($pe);
             }
         } else {
-            $LOGGER->WriteLine("Length is not 32 " . $md5);
+            $LOGGER->WriteLine("Length is not 32 " . $uuid);
         }
     }
+	
+	public static function getProfileData($uuid, $username, $textures) {
 
-    private function getRealUser()
-    {
+        $property = array(
+            'timestamp' => time(),
+            'profileId' => $uuid,
+            'profileName' => $username,
+            'textures' => $textures
+        );
+
+        $profile = array(
+            'id' => $uuid,
+            'name' => $username,
+            'properties' => array(
+                0 => array(
+                    'name' => 'textures',
+                    'value' => base64_encode(json_encode($property, JSON_UNESCAPED_SLASHES)),
+                    'signature' => 'TEST' // Signature if needed
+                )
+            )
+        );
+
+        return $profile;
+    }
+
+    private function getRealUser() {
         global $config;
         $db = new db($config['db_user'], $config['db_pass'], $config['db_database']);
         $stmt = $db->prepare("SELECT user FROM usersession WHERE userMd5 = :md5");
@@ -74,26 +95,11 @@ class Skin {
         $this->realUser = ($row && isset($row['user'])) ? $row['user'] : "undefined";
     }
 
-    private function setTextures($type, $url)
-    {
+    private function setTextures($type, $url) {
         $this->textures[$type] = ['url' => $url];
     }
 
-    private function JSONoutput()
-    {
-        $texturesData = [
-            'timestamp' => CURRENT_TIME,
-            'profileId' => $this->md5User,
-            'profileName' => $this->realUser,
-            'textures' => $this->textures
-        ];
-
-        $base64 = json_encode($texturesData);
-        echo '{"id":"' . $this->md5User . '","name":"' . $this->realUser . '","properties":[{"name":"textures","value":"' . base64_encode($base64) . '","signature":"FoxesCraft"}]}';
-    }
-
-    private function sanitizeInput($string)
-    {
+    private function sanitizeInput($string) {
         if (!preg_match("/^[a-zA-Z0-9_-]+$/", $string)) {
             exit;
         } else {

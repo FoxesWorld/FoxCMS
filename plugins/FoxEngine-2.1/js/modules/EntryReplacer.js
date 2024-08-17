@@ -62,7 +62,7 @@ export class EntryReplacer {
     }
 
     getInputTagReplacement(attributeMap) {
-        const { type, name, placeholder, value, onKeyUp, display, id, siteKey, lang, metadata } = attributeMap;
+        const { type, name, placeholder, value, onKeyUp, style, id, siteKey, lang, metadata } = attributeMap;
 
         switch (type) {
             case 'checkbox':
@@ -131,7 +131,7 @@ export class EntryReplacer {
                             </div>
                         </section>`;
             default:
-                return `<div class="form-floating mb-3 input_block" style="display: ${display || 'block'}">
+                return `<div class="form-floating mb-3 input_block" style="${style}">
                             <input type="${type || 'text'}" name="${name || ''}" class="form-control input" id="${name || ''}" value="${value || ''}" onKeyUp="${onKeyUp || ''}" placeholder="${placeholder || ''}" />
                             <label for="${name || ''}">${placeholder || ''}</label>
                         </div>`;

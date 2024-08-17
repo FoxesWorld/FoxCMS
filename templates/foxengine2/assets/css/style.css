@@ -35,7 +35,7 @@
 
 body {
 	/* font-family: 'FSElliotPro'; */
-	color: #e4d4d4;
+	color: #937575;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
@@ -100,6 +100,14 @@ img {
 	padding: 5px;
 	margin: 5% auto;
 	font-size: 1rem;
+}
+
+.formContent .note {
+	color: #cfb6b0;
+    line-height: 0.9;
+    font-size: 9pt;
+    margin: 10px 0px 5px;
+    display: block;
 }
 
 @-webkit-keyframes scale-down {
@@ -181,7 +189,7 @@ img {
 .contentInner {
 	margin: 5px;
 	padding: 10px;
-	color: burlywood;
+	color: #a1998e;
 }
 
 #game canvas {
@@ -1219,8 +1227,9 @@ footer .footer-end li {
 }
 
 footer b {
-	color: #b77c4c;
+	color: #63594f;
 	font-family: 'FSElliotPro-Heavy';
+	margin: 5px;
 }
 
 footer .footer-copyright span {

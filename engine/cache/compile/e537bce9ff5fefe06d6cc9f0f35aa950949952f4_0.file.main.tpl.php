@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-08-16 15:57:05
+/* Smarty version 4.0.4, created on 2024-08-17 10:36:27
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_66bf4ca111fe98_16356540',
+  'unifunc' => 'content_66c052fb1fd486_99567851',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1723799481,
+      1 => 1723878871,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_66bf4ca111fe98_16356540 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66c052fb1fd486_99567851 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -80,10 +80,6 @@ function content_66bf4ca111fe98_16356540 (Smarty_Internal_Template $_smarty_tpl)
  type="module" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/js/App.js"><?php echo '</script'; ?>
 >
-	  <?php echo '<script'; ?>
- type="module" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
-/assets/js/cookie.js"><?php echo '</script'; ?>
->
 
 	  <?php echo '<script'; ?>
 >
@@ -134,7 +130,7 @@ contentData<?php echo '%>'; ?>
 		  <img src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/icons/cookie.png" draggable="false" />
             <p>Для улучшения работы сайта и его взаимодействия с пользователями мы используем файлы cookie. Продолжая работу с сайтом, вы разрешаете использование cookie-файлов. Вы всегда можете отключить файлы cookie в настройках вашего браузера.</p>
-            <button class="button cookie_accept">Принять</button>
+            <button class="button" onclick="foxEngine.cookies.acceptCookies()">Принять</button>
         </div>
       <?php $_smarty_tpl->_subTemplateRender('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
