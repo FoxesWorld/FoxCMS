@@ -224,8 +224,6 @@ setTimeout(async () => {
                 <h3>Смена скина и плаща</h3>
             </div>
 			
-			<div class="importantText"><strong>WARNING!</strong> <b>Загрузка скинов находится в разработке!</b></div>
-			
 		<div class="description">
 						Доступные размеры для скинов: <b>64 x 32</b>, <b>64 x 64</b>, <b>128 x 64</b>, <b>256 x 128</b>, <b>512 x 256</b>, <b>1024 x 512</b>.
 						<br>

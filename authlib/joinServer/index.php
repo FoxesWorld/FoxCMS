@@ -53,6 +53,22 @@ class JoinServer {
 				if (empty($json[$key])) {
 					$this->throwException('InvalidArgumentException', "Missing required key: '{$key}'. Received data: " . json_encode($json));
 				} else {
+					switch($key) {
+						case "accessToken":
+						case "selectedProfile":
+							if(strlen($json[$key]) !== 32) {
+								$this->throwException('InvalidArgumentException', $key." has wrong length (".strlen($json[$key]).")");
+							}
+						break;
+						
+						case "serverId":
+						if(!empty($json[$key])) {
+							if(strlen($json[$key]) < 39 || strlen($json[$key]) > 41) {
+								$this->throwException('InvalidArgumentException', "serverId has wrong length!");
+							}
+						}
+						break;
+					}
 					$this->sessionData[$key] = $json[$key];
 				}
 			}
@@ -67,6 +83,7 @@ class JoinServer {
             WHERE userMd5 = :userMd5 
             AND accessToken = :accessToken
         ");
+		//die('{"error": "Bad Login", "errorMessage": "'.$this->sessionData['selectedProfile'].'"}');
         $stmt->bindValue(':userMd5', $this->sessionData['selectedProfile']);
         $stmt->bindValue(':accessToken', $this->sessionData['accessToken']);
         $stmt->execute();

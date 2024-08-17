@@ -132,50 +132,13 @@
 							break;
 							
 							case "uploadFile":
-								$type = @RequestHandler::$REQUEST['type'];
-								switch($type){
-									case "skin":
-										die('{"message": "Загрузка скина для '.init::$usrArray['login'].' в разработке!", "type": "warn"}');
-									break;
-									
-									case "cloak":
-										init::classUtil('CapeUpload', "1.0.0");
-										$perms = array( 
-											"skin"=>"64",
-											"cloak"=>"64",
-											"hd_skin" => "1024",
-											"hd_cloak" => "1024"
-										);
-										$capeUpload = new CapeUpload(init::$usrArray['login'], $perms);
-										$capeUpload->uploadCloak(ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER .init::$usrArray['login'] . '/', "cape.png");
-										die('{"message": "Загрузка плащей в разработке!", "type": "warn"}');
-									break;
-								}
+								$this->handleUploadFile(@RequestHandler::$REQUEST['type']);
 							break;
 							
 								
 							
 							case "deleteFile":
-								$type = @RequestHandler::$REQUEST['type'];
-								switch($type){
-									case "skin":
-										die('{"message": "Удаление скинов в разработке!", "type": "warn"}');
-									break;
-										
-									case "cloak":
-										if(init::$usrArray['isLogged']){
-											if(@file_exists(init::$usrFiles['cape'])) {
-												if(unlink(init::$usrFiles['cape'])){
-													die('{"message": "Плащ удален!", "type": "success"}');
-												}
-											} else {
-												die('{"message": "У вас нет плаща!"}');
-											}
-										} else {
-											die('{"message": "You are not logged!"}');
-										}
-									break;
-								}
+								$this->handleDeleteFile(@RequestHandler::$REQUEST['type']);
 							break;
 						
 						case "loadFiles":
@@ -200,18 +163,11 @@
 						break;
 						
 						case "downloadLatest":
-							init::classUtil("SelectLatestVersion", "1.0.0"); // <-- To remove
-							//$downloadScanner = new inDirScanner(ROOT_DIR.UPLOADS_DIR."launcher", @RequestHandler::$REQUEST['platform'], ".jar"); // <-- to implement
-							$selectLatestVersion = new SelectLatestVersion(ROOT_DIR.UPLOADS_DIR."launcher");
-							die($selectLatestVersion->getFile());
+							$this->handleDownloadLatest();
 						break;
 
 						case "downloadUpdater":
-							$path = ROOT_DIR.UPLOADS_DIR."updater";
-							$subDir = "/".@RequestHandler::$REQUEST['type'];
-							$downloadScanner = new inDirScanner($path, $subDir, "*");
-							$file = $this->selectLatest($downloadScanner->filesArray);
-							die('{"filename": "'.$file['name'].'", "fileHash": "'.md5_file($path.$subDir.DIRECTORY_SEPARATOR.$file['name']).'"}');
+							$this->handleDownloadUpdater();
 						break;
 						
 						case "getImg":
@@ -252,6 +208,89 @@
 					}
 					return false;
 			}
+			
+		private function handleUploadFile($fileType) : void {
+			/*TODO
+			* Replace UserFolder to init
+			*/
+			$userFolder = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER .init::$usrArray['login'] . '/';
+			$perms = array( 
+						"skin"=>"64",
+						"cloak"=>"64",
+						"hd_skin" => "1024",
+						"hd_cloak" => "1024"
+					);
+			switch($fileType){
+				case "skin":
+					init::classUtil('CapeUpload', "1.0.0");
+					$skinUpload = new CapeUpload(init::$usrArray['login'], $perms);
+					$skinUpload->uploadFile($_FILES[0], $userFolder, "skin.png");
+				break;
+									
+				case "cloak":
+					init::classUtil('CapeUpload', "1.0.0");
+					$capeUpload = new CapeUpload(init::$usrArray['login'], $perms);
+					$capeUpload->uploadFile($_FILES[0], $userFolder, "cape.png");
+					die('{"message": "Загрузка плащей в разработке!", "type": "warn"}');
+				break;
+				
+				default:
+					die('{"message": "Unknown filetype!"}');
+				break;
+			}
+		}
+		
+		private function handleDeleteFile(string $filetype): void {
+			global $lang;
+			if (!init::$usrArray['isLogged']) {
+				die('{"message": "You are not logged!"}');
+			}
+
+			$filePath = null;
+			$message = null;
+
+			switch($filetype){
+				
+				case "skin":
+					$filePath = init::$usrFiles['skin'] ?? null;
+					$message = $lang['userProfile']['skin'];
+					break;
+				
+				case "cloak":
+					$filePath = init::$usrFiles['cape'] ?? null;
+					$message = $lang['userProfile']['cape'];
+					break;
+				
+				default:
+					die('{"message": "Unknown filetype!"}');
+			}
+
+			if ($filePath && @file_exists($filePath)) {
+				if (unlink($filePath)) {
+					die('{"message": "' . ucfirst($message) . ' удален!", "type": "success"}');
+				} else {
+					die('{"message": "Ошибка при удалении ' . $message . '!"}');
+				}
+			} else {
+				die('{"message": "У вас нет ' . $message . '!"}');
+			}
+		}
+
+			
+		private function handleDownloadLatest(): void {
+			init::classUtil("SelectLatestVersion", "1.0.0"); // <-- To remove
+			//$downloadScanner = new inDirScanner(ROOT_DIR.UPLOADS_DIR."launcher", @RequestHandler::$REQUEST['platform'], ".jar"); // <-- to implement
+			$selectLatestVersion = new SelectLatestVersion(ROOT_DIR.UPLOADS_DIR."launcher");
+			die($selectLatestVersion->getFile());
+		 }
+		 
+		 private function handleDownloadUpdater() : void {
+			$path = ROOT_DIR.UPLOADS_DIR."updater";
+			$subDir = "/".@RequestHandler::$REQUEST['type'];
+			$downloadScanner = new inDirScanner($path, $subDir, "*");
+			$file = $this->selectLatest($downloadScanner->filesArray);
+			die('{"filename": "'.$file['name'].'", "fileHash": "'.md5_file($path.$subDir.DIRECTORY_SEPARATOR.$file['name']).'"}');
+		 }
 			
 			
 			  private function selectLatest($files) {

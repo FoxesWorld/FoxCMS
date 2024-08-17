@@ -67,8 +67,8 @@
 						case true:
 							$uuid = /*$this->uuidFromString */md5(init::$usrArray['login']);
 							init::$usrArray['isLogged'] = true;
-							$AuthLib = new AuthLib($this->db, init::$usrArray['login'], init::$usrArray['password'], init::$usrArray['hash'], $uuid);
-							die('{"type": "success","message": "'.$lang['authSuccess'].'", "balance":'.init::$usrArray['balance'].', "login": "'.init::$usrArray['login'].'", "token": "'.init::$usrArray['hash'].'", "group": "'.init::$usrArray['user_group'].'", "uuid": "'.str_replace('-', '', $uuid).'", "colorScheme": "'.init::$usrArray['colorScheme'].'"}');
+							$AuthLib = new AuthLib($this->db, init::$usrArray['login'], init::$usrArray['password'], init::$usrArray['token'], $uuid);
+							die('{"type": "success","message": "'.$lang['authSuccess'].'", "balance":'.init::$usrArray['balance'].', "login": "'.init::$usrArray['login'].'", "token": "'.init::$usrArray['token'].'", "group": "'.init::$usrArray['user_group'].'", "uuid": "'.str_replace('-', '', $uuid).'", "colorScheme": "'.init::$usrArray['colorScheme'].'"}');
 						break;
 						
 						case false:

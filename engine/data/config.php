@@ -1,5 +1,5 @@
 <?php 
-    /* [16.08.2024] */
+    /* [17.08.2024] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -24,7 +24,7 @@ $config = array(
 		"smtp_port" => "465",
 		"smtp_secure" => "ssl",
 		"contactPhone" => "null",
-		"ServiceVersion" => "2.6.23"
+		"ServiceVersion" => "2.7.23"
 ),
 
 	"launcherSettings" => array(
@@ -69,7 +69,7 @@ $config = array(
 		"webserviceName" => "FoxEngine",
 		"userOptions" => "userOptions",
 		"OptionReplaceValues" => "{siteKey}->cfgVal(securitySetings|reCaptchaWebsite),{discordLink}->cfgVal(other|discordLink),{vkLink}->cfgVal(other|vkLink),{TPL}->cfgVal(siteSettings|siteTpl),{lang}->cfgVal(siteSettings|lang)",
-		"userFieldsArray" => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,colorScheme,groupName,badges,balance",
+		"userFieldsArray" => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,colorScheme,groupName,badges,balance,token",
 		"canEditGroup" => "1,4"
 ));
 
