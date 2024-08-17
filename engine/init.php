@@ -14,7 +14,7 @@ session_start();
 		
 		private $initHelper, $ModulesLoader, $initLevels;
 		protected $debug, $logger, $db, $tpl;
-		protected static $deviceType, $permissions, $dynamicConfig, $sqlQueryHandler, $usrArray = array(
+		protected static $deviceType, $usrFiles, $permissions, $dynamicConfig, $sqlQueryHandler, $usrArray = array(
 			'isLogged' => false,
 			'user_id' => 0,
 			'email' => "admin@foxesworld.ru",
@@ -60,6 +60,7 @@ session_start();
 			$this->initHelper = new initHelper($this->db, $this->logger); //UsrArray Override (if IsLogged)
 			$RequestHandler = new RequestHandler($this->db);
 			init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "preInit");
+			$this->initHelper::userSkinInit();
 			$SystemRequests = new SystemRequests($this->db, $this->logger);
 			self::$deviceType = new \Detection\MobileDetect;
 			$SystemRequests->requestListener();

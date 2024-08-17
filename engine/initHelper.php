@@ -30,6 +30,22 @@
 				self::$usrArray['user_group'] = self::$groupAssociacion->userGroupNum();
 			}
 			
+			protected static function userSkinInit(){
+				init::classUtil('SkinViewer', "1.0.0");
+				$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . self::$usrArray['login'] . DIRECTORY_SEPARATOR . 'skin.png';
+				$cape = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . self::$usrArray['login'] . DIRECTORY_SEPARATOR . 'cape.png';
+				
+				if (!skinViewer2D::isValidSkin($skin)) {
+					$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . DIRECTORY_SEPARATOR .' skin.png';
+				}
+				self::$usrFiles['skin'] = $skin;
+				
+				if(file_exists($cape)){
+					self::$usrFiles['cape'] = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . self::$usrArray['login'] . DIRECTORY_SEPARATOR . 'cape.png';
+				}
+				
+			}
+			
 			public static function getUserBadges($db, $user){
 				$query = "SELECT * FROM `users` WHERE login = '".$user."'";
 				$badges = $db->getRow($query);

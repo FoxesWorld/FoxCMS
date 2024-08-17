@@ -99,14 +99,8 @@
 <script>
 
 (async function () {
-setTimeout(() => {
-	let userDir = "/uploads/users/[login]";
-    //let skin = new skin3D(userDir + '/skin.png',document.getElementById('skinViewer3D'));
-	//skin.init(240, 295);
-	//skin.createBlock('%assets%/img/block.png');
-	//skin.createCloak(userDir + '/cape.png');
-	document.getElementById('skin_image_front').src = `data:image/png;base64,${foxEngine.user.userSkin['front']}`;
-	document.getElementById('skin_image_back').src = `data:image/png;base64,${foxEngine.user.userSkin['back']}`;
+setTimeout(async () => {
+	drawSkins('[login]');
 	}, 2000);
 })();
 
@@ -167,7 +161,7 @@ setTimeout(() => {
             button.notify(data['message'], data['type']);
 
             if (data['type'] === 'success') {
-                redrawSkins();
+                drawSkins('[login]');
             }
         });
     }
@@ -193,7 +187,6 @@ setTimeout(() => {
         data.append('csrf_token', '0729be9e3052f1ff011c2ab6cc3b00e18625a2b777223d9c64d81cbd79088e89');
 
         $.ajax({
-
             url: '/',
             type: 'POST',
             data: data,
@@ -204,7 +197,7 @@ setTimeout(() => {
 
             success: function (respond, textStatus, jqXHR) {
                 button.notify(respond.message, respond.type);
-                redrawSkins();
+                drawSkins('[login]');
             },
 
             error: function (jqXHR, textStatus, errorThrown) {
@@ -213,6 +206,12 @@ setTimeout(() => {
             }
         });
     }
+	
+	async function drawSkins(login){
+		let userSkin = await foxEngine.user.parseUserLook(login);
+		document.getElementById('skin_image_front').src = `data:image/png;base64,${userSkin['front']}`;
+		document.getElementById('skin_image_back').src = `data:image/png;base64,${userSkin['back']}`;
+	}
 </script>
 	<div id="skinViewer3D" style="margin: 15px 10px;">
 		<canvas id="canvas" style="display: none"></canvas>

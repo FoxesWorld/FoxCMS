@@ -23,8 +23,7 @@ export class User {
         }
 
         if (this.foxEngine.replaceData.isLogged) {
-			this.userSkin['front'] = await this.getUserSkin(this.userLogin, 'front');
-			this.userSkin['back'] = await this.getUserSkin(this.userLogin, 'back');
+			this.parseUserLook(this.userLogin);
             //this.foxEngine.debugSend(`User ${this.foxEngine.replaceData.login} is logged`, '');
         }
 
@@ -76,6 +75,13 @@ export class User {
             console.error('Error parsing user options menu:', error);
         }
     }
+	
+	async parseUserLook(login){
+		this.userSkin['front'] = await this.getUserSkin(login, 'front');
+		this.userSkin['back'] = await this.getUserSkin(login, 'back');
+		
+		return this.userSkin;
+	}
 
 	async getUserSkin(userLogin, side) {
 		console.log("Loading userSkin...");

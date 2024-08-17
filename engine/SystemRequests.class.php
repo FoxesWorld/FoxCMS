@@ -104,19 +104,7 @@
 							break;
 
 							case "skinPath":
-								init::classUtil('SkinViewer', "1.0.0");
-								$file_name = @RequestHandler::$REQUEST['login'] ?? null;
-								$name = empty($file_name) ? 'default' : $file_name;
-								$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR . 'skin.png';
-								$cloak = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR . 'cape.png';
-								if (!skinViewer2D::isValidSkin($skin)) {
-									$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . DIRECTORY_SEPARATOR . 'skin.png';
-								}
-								
-								if(!file_exists($cloak)){
-									$cloak = "";
-								}
-								die('{"skin": "'.str_replace(ROOT_DIR, "", $skin).'", "cape": "'.str_replace(ROOT_DIR, "", $cloak).'"}');
+								die('{"skin": "'.str_replace(ROOT_DIR, "", init::$usrFiles['skin']).'", "cape": "'.str_replace(ROOT_DIR, "", init::$usrFiles['cape']).'"}');
 							break;
 							
 							case "skinPreview":						
@@ -151,6 +139,15 @@
 									break;
 									
 									case "cloak":
+										init::classUtil('CapeUpload', "1.0.0");
+										$perms = array( 
+											"skin"=>"64",
+											"cloak"=>"64",
+											"hd_skin" => "1024",
+											"hd_cloak" => "1024"
+										);
+										$capeUpload = new CapeUpload(init::$usrArray['login'], $perms);
+										$capeUpload->uploadCloak(ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER .init::$usrArray['login'] . '/', "cape.png");
 										die('{"message": "Загрузка плащей в разработке!", "type": "warn"}');
 									break;
 								}
@@ -166,7 +163,17 @@
 									break;
 										
 									case "cloak":
-										die('{"message": "Удаление плащей в разработке!", "type": "warn"}');
+										if(init::$usrArray['isLogged']){
+											if(@file_exists(init::$usrFiles['cape'])) {
+												if(unlink(init::$usrFiles['cape'])){
+													die('{"message": "Плащ удален!", "type": "success"}');
+												}
+											} else {
+												die('{"message": "У вас нет плаща!"}');
+											}
+										} else {
+											die('{"message": "You are not logged!"}');
+										}
 									break;
 								}
 							break;
