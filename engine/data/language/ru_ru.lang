@@ -147,6 +147,8 @@
 		"webserviceName-desc" => "",
 		"gameFiles-title" => "Игровые файлы",
 		"gameFiles-desc" =>"В какой директории лежат файлы игры",
+		"platformExtensions-title" => "Разрешения платформ",
+		"platformExtensions-desc" => "Файлы каких разрешений скачиваем для каждой платформы",
 		"serverPictures-title" => "Изображения серверов",
 		"serverPictures-desc" => "Директория с изображениями использующимися для серверов",
 		"jreDir-title" =>  "Путь к архивам Jre",

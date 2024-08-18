@@ -78,7 +78,8 @@ class Skin {
                     'value' => base64_encode(json_encode($property, JSON_UNESCAPED_SLASHES)),
                     'signature' => 'TEST' // Signature if needed
                 )
-            )
+            ),
+			'legacy' => true
         );
 
         return $profile;

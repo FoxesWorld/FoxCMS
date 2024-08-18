@@ -20,6 +20,7 @@
 			}
 			
 			public function requestListener(){
+
 				global $config, $lang;
 				if(isset(RequestHandler::$REQUEST[$this->requestHeader])){
 					switch(RequestHandler::$REQUEST[$this->requestHeader]) {
@@ -142,13 +143,12 @@
 							break;
 						
 						case "loadFiles":
-						if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
-						init::classUtil('GameScanner', "1.0.0");
-							$gameScanner = new GameScanner(@RequestHandler::$REQUEST['client'], @RequestHandler::$REQUEST['version'], @RequestHandler::$REQUEST['platform']);
-							die($gameScanner->checkfiles());
-						} else {
-							die('{"message": "Invalid Agent!"}');
-						}
+							if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
+								$gameScanner = new GameScanner(@RequestHandler::$REQUEST['client'], @RequestHandler::$REQUEST['version'], @RequestHandler::$REQUEST['platform']);
+								die($gameScanner->checkfiles());
+							} else {
+								die('{"message": "Invalid Agent!"}');
+							}
 						break;
 						
 						case "getJre":
@@ -224,7 +224,7 @@
 				case "skin":
 					init::classUtil('CapeUpload', "1.0.0");
 					$skinUpload = new CapeUpload(init::$usrArray['login'], $perms);
-					$skinUpload->uploadFile($_FILES[0], $userFolder, "skin.png");
+					$skinUpload->uploadFile(@$_FILES[0], $userFolder, "skin.png");
 				break;
 									
 				case "cloak":

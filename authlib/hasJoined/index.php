@@ -106,12 +106,15 @@ class HasJoined
 
             echo '
 				{
-					"id":"' . $this->UUID . '","name":"' . $this->realUser . '","properties":
+					"id":"' . $this->UUID . '",
+					"name":"' . $this->realUser . '",
+					"properties":
 					[
 						{
 							"name":"textures","value":"' . base64_encode($base64) . '","signature":""
 						}
-					]
+					],
+					"legacy": true
 				}';
         } else {
             exit($this->answerConstructor("Bad login", "Неверный логин"));

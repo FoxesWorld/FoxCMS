@@ -4,10 +4,10 @@
 <footer class="bar">
    <div class="container footer--flex">
    
-   <i class="fa fa-envelope-o"></i> Почта: <b>{$contactEmail}</b>
+   <i class="fa fa-envelope-o"></i> Почта: &nbsp; <a id="admin_contact" href="mailto:{$contactEmail}">{$contactEmail}</a>
    
       <div class="footer-copyright">
-         {$siteTitle} {$siteStatus} <b>{$year}</b>
+         {$siteTitle} {$siteStatus} <b>2016 - {$year}</b>
 		 <span>Powered by {$webserviceName} v.{$ServiceVersion}<img class="img-fluid" uk-img /></span>
       </div>
 
@@ -22,25 +22,21 @@
 				document.addEventListener('DOMContentLoaded', function () {
 					const block = document.getElementById('socialLinksBlock');
 					const links = {
+					  'telegram': { title: 'Telegram', slug: 'https://t.me/foxesworld' },
 					  'vk': { title: 'ВКонтакте', slug: 'https://vk.com/foxesworlds1' },
 					  'discord': { title: 'Discord', slug: 'https://discord.gg/MkWUjBzt3Y' },
-					  'github': { title: 'GitHub', slug: 'https://github.com/FoxesWorld' },
+					  'github': { title: 'GitHub', slug: 'https://github.com/FoxesWorld' }
 					};
 
 					for (const [key, social] of Object.entries(links)) {
 					  const a = document.createElement('a');
 					  a.classList.add('social-icon', 'tip', key);
-					  a.setAttribute('data-toggle', 'tooltip');
 					  a.title = social.title;
 					  a.rel = 'nofollow noopener';
 					  a.target = '_blank';
 					  a.href = social.slug;
-					  a.innerHTML = `<i class="fa-brands fa-${key}"></i>`;
+					  a.innerHTML = '<i class="fa-brands fa-' + key + '" />';
 					  block.appendChild(a);
-					  //$('[data-toggle="tooltip"]').tooltip({
-                      //  placement: 'bottom',
-                      //  trigger: "hover"
-                      //});
 					}
 				}, { once: true });
 				</script>

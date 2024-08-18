@@ -30,8 +30,7 @@ class JoinServer {
     private $sessionData = array();
     private $db;
 
-    public function __construct($json)
-    {
+    public function __construct($json) {
         global $config;
 
         try {
@@ -44,8 +43,7 @@ class JoinServer {
         }
     }
 
-    private function validateJson($json)
-    {
+    private function validateJson($json) : void {
         if (!$json || !is_array($json)) {
 			$this->throwException('InvalidArgumentException', 'Invalid JSON input. Expected a JSON object, but received: ' . json_encode($json));
         } else {
@@ -62,7 +60,7 @@ class JoinServer {
 						break;
 						
 						case "serverId":
-						if(!empty($json[$key])) {
+						if(strlen($json[$key]) > 0) {
 							if(strlen($json[$key]) < 39 || strlen($json[$key]) > 41) {
 								$this->throwException('InvalidArgumentException', "serverId has wrong length!");
 							}
@@ -75,15 +73,14 @@ class JoinServer {
 		}
     }
 
-    private function validateSession()
-    {
+    private function validateSession() : void {
         $stmt = $this->db->prepare("
             SELECT userMd5, passMd5, user 
             FROM usersession 
             WHERE userMd5 = :userMd5 
             AND accessToken = :accessToken
         ");
-		//die('{"error": "Bad Login", "errorMessage": "'.$this->sessionData['selectedProfile'].'"}');
+		
         $stmt->bindValue(':userMd5', $this->sessionData['selectedProfile']);
         $stmt->bindValue(':accessToken', $this->sessionData['accessToken']);
         $stmt->execute();
@@ -103,8 +100,7 @@ class JoinServer {
 		}        
     }
 
-    private function updateSession()
-    {
+    private function updateSession() : void {
         $stmt = $this->db->prepare("
             UPDATE usersession
             SET serverId = :serverId 
@@ -125,8 +121,7 @@ class JoinServer {
         }
     }
 
-    private function handleError(Exception $e)
-    {
+    private function handleError(Exception $e) : void {
         $errorDetails = [
             'error' => get_class($e),
             'errorMessage' => $e->getMessage(),
@@ -139,7 +134,7 @@ class JoinServer {
         exit(json_encode($errorDetails));
     }
 	
-	private function throwException($title, $desc){
+	private function throwException($title, $desc) : void {
 		die('{"error": "'.$title.'", "errorMessage": "'.$desc.'"}');
 	}
 }

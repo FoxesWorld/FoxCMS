@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-08-17 16:46:31
+/* Smarty version 4.0.4, created on 2024-08-18 23:23:55
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_66c0a9b7c050c3_42335013',
+  'unifunc' => 'content_66c2585ba07aa1_37303658',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1723878871,
+      1 => 1723911655,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_66c0a9b7c050c3_42335013 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66c2585ba07aa1_37303658 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -136,6 +136,27 @@ contentData<?php echo '%>'; ?>
 ?>
 	  <?php $_smarty_tpl->_subTemplateRender('file:../notify.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
+	  
+	  
+		<?php echo '<script'; ?>
+>
+			   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+			   m[i].l=1*new Date();
+			   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+			   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+			   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+			   ym(92831256, "init", {
+					clickmap:true,
+					trackLinks:true,
+					accurateTrackBounce:true,
+					webvisor:true
+			   });
+			<?php echo '</script'; ?>
+>
+
+			<noscript><div><img src="https://mc.yandex.ru/watch/92831256" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+		
 	  <div aria-live="polite" aria-atomic="true" class="position-relative">
 		<div class="toast-container position-fixed top-0 end-0 p-2"></div>
 	  </div>

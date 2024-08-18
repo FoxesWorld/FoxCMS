@@ -144,7 +144,7 @@
 		
 		private function buildNav(){
 			global $lang;
-			$tabList = '<div class="navbar navbar-default navbar-component" style="margin-bottom:20px;">
+			$tabList = '<div class="navbar navbar-default navbar-component">
 			<ul class="nav nav-tabs nav-tabs-solid" role="tablist">';
 			$thisTab = '';
 			$active = "active";

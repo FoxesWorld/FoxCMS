@@ -236,7 +236,7 @@ setTimeout(async () => {
 
                         <label>
                             <div class="file_select" title="Нажмите, чтобы выбрать файл">
-                                <span class="file_name" id="file_name_skin">74b6e9091e4fe33b.png</span>
+                                <span class="file_name" id="file_name_skin">Файл не выбран</span>
                                 <img src="%assets%icons/cabinet_file.png">
                                 <span class="file_select_field">
                             Выбрать файл
