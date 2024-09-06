@@ -58,6 +58,7 @@ session_start();
 			$this->logger = new Logger('lastlog');
 			$this->ModulesLoader = new ModulesLoader($this->db, $this->logger);
 			$this->initHelper = new initHelper($this->db, $this->logger); //UsrArray Override (if IsLogged)
+			self::$usrArray['usrFolder'] = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER .init::$usrArray['login'] . '/';
 			$RequestHandler = new RequestHandler($this->db);
 			init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "preInit");
 			$this->initHelper::userSkinInit();

@@ -35,6 +35,11 @@
 							die(json_encode(new EmojiParser()));
 						break;
 						
+						case "getJre":
+							init::classUtil('GetJre', "1.0.0");
+							die(json_encode(new GetJre(@RequestHandler::$REQUEST['jreVersion'])));
+						break;
+						
 						case "startUpSound":
 							$startUpSound = new startUpSound;
 							$startUpSound->generateAudio();
@@ -48,8 +53,8 @@
 						case "parseServers":
 						//if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
 							init::classUtil('ServerParser', "1.0.0");
-								$serverParser = new ServerParser($this->db, @RequestHandler::$REQUEST['login'] ?? init::$usrArray['login']);
-								die($serverParser->parseServers(@RequestHandler::$REQUEST['server']));
+							$serverParser = new ServerParser($this->db, @RequestHandler::$REQUEST['login'] ?? init::$usrArray['login']);
+							die($serverParser->parseServers(@RequestHandler::$REQUEST['server']));
 						//}
 						break;
 						
@@ -60,10 +65,7 @@
 						break;
 						
 						case "parseMonitor":
-							init::classUtil('ServerParser', "1.0.0");
-							$serverParser = new ServerParser($this->db, init::$usrArray['login']);
-							$Monitor = new foxesMon($serverParser->parseServers(), array('out'=> 2, 'record_day' => 86400));
-							die($Monitor->foxMonOut());
+							$this->handleParseMonitor();
 						break;
 						
 						case "mailTest":
@@ -151,12 +153,6 @@
 							}
 						break;
 						
-						case "getJre":
-							init::classUtil('GetJre', "1.0.0");
-							$getJre = new GetJre(@RequestHandler::$REQUEST['jreVersion']);
-							$getJre->getRuntime();
-						break;
-						
 						case  "scanUploads":
 							$inDirScanner = new inDirScanner(ROOT_DIR.UPLOADS_DIR, @RequestHandler::$REQUEST['path'], @RequestHandler::$REQUEST['mask']);
 							die($inDirScanner->getFiles());
@@ -167,7 +163,17 @@
 						break;
 
 						case "downloadUpdater":
-							$this->handleDownloadUpdater();
+						$this->logger->WriteLine("Updater ".REMOTE_IP." with version '".@RequestHandler::$REQUEST['version']."' requests an update information");
+						$version = @RequestHandler::$REQUEST['version'];
+						if(strlen($version) <= 0) {
+							$this->handleDownloadUpdaterLegacy();
+						} else {
+							if($version == "1.1.8-VaultDweller") {
+								$this->handleDownloadUpdater();
+							} else {
+								$this->handleDownloadUpdaterSecondLegacy();
+							}
+						}
 						break;
 						
 						case "getImg":
@@ -195,25 +201,23 @@
 				}
 			}
 			
-			//WIP
-			private function resizeImage($imgPath, $savePath, $width, $height){
-				$extensionsArr = array('png', 'jpg', 'jpeg');
-				$fileData = pathinfo($imgPath);
-					if(in_array($fileData['extension'], $extensionsArr)) {
-						$resizeObj = new resize($imgPath);
-						$resizeObj -> resizeImage($width, $height, 'exact');
-						$resizedName = $fileData['filename'].'-'.$width.'-'.$height.'.'.$fileData['extension'];
-						$resizeObj -> saveImage($savePath.$resizedName, 100);
-						return true;
-					}
-					return false;
+		//WIP
+		//TODO//
+		//Move to classes
+		private function resizeImage($imgPath, $savePath, $width, $height){
+			$extensionsArr = array('png', 'jpg', 'jpeg');
+			$fileData = pathinfo($imgPath);
+			if(in_array($fileData['extension'], $extensionsArr)) {
+				$resizeObj = new resize($imgPath);
+				$resizeObj -> resizeImage($width, $height, 'exact');
+				$resizedName = $fileData['filename'].'-'.$width.'-'.$height.'.'.$fileData['extension'];
+				$resizeObj -> saveImage($savePath.$resizedName, 100);
+				return true;
 			}
+			return false;
+		}
 			
 		private function handleUploadFile($fileType) : void {
-			/*TODO
-			* Replace UserFolder to init
-			*/
-			$userFolder = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER .init::$usrArray['login'] . '/';
 			$perms = array( 
 						"skin"=>"64",
 						"cloak"=>"64",
@@ -224,13 +228,13 @@
 				case "skin":
 					init::classUtil('CapeUpload', "1.0.0");
 					$skinUpload = new CapeUpload(init::$usrArray['login'], $perms);
-					$skinUpload->uploadFile(@$_FILES[0], $userFolder, "skin.png");
+					$skinUpload->uploadFile(@$_FILES[0], init::$usrArray['usrFolder'], "skin.png");
 				break;
 									
 				case "cloak":
 					init::classUtil('CapeUpload', "1.0.0");
 					$capeUpload = new CapeUpload(init::$usrArray['login'], $perms);
-					$capeUpload->uploadFile($_FILES[0], $userFolder, "cape.png");
+					$capeUpload->uploadFile($_FILES[0], init::$usrArray['usrFolder'], "cape.png");
 					die('{"message": "Загрузка плащей в разработке!", "type": "warn"}');
 				break;
 				
@@ -278,10 +282,14 @@
 
 			
 		private function handleDownloadLatest(): void {
-			init::classUtil("SelectLatestVersion", "1.0.0"); // <-- To remove
-			//$downloadScanner = new inDirScanner(ROOT_DIR.UPLOADS_DIR."launcher", @RequestHandler::$REQUEST['platform'], ".jar"); // <-- to implement
-			$selectLatestVersion = new SelectLatestVersion(ROOT_DIR.UPLOADS_DIR."launcher");
-			die($selectLatestVersion->getFile());
+			$path = ROOT_DIR.UPLOADS_DIR."launcher";
+			$downloadScanner = new inDirScanner(ROOT_DIR.UPLOADS_DIR."launcher", @RequestHandler::$REQUEST['platform'], ".jar"); // <-- to implement
+			$file = $this->selectLatest($downloadScanner->filesArray);
+			die('{
+				"filename": "'.str_replace(ROOT_DIR, "", $path).'/'.$file['name'].'",
+				"hash": "'.md5_file($path . '/' . $file['name']).'",
+				"size": "'.intval(filesize($path . DIRECTORY_SEPARATOR . $file['name'])).'"
+			}');
 		 }
 		 
 		 private function handleDownloadUpdater() : void {
@@ -289,16 +297,41 @@
 			$subDir = "/".@RequestHandler::$REQUEST['type'];
 			$downloadScanner = new inDirScanner($path, $subDir, "*");
 			$file = $this->selectLatest($downloadScanner->filesArray);
+			die('{"filename": "'.str_replace(ROOT_DIR, "", $path).$subDir.'/'.$file['name'].'", "hash": "'.md5_file($path.$subDir.DIRECTORY_SEPARATOR.$file['name']).'"}');
+		}
+
+		private function handleDownloadUpdaterSecondLegacy() : void {
+			$path = ROOT_DIR.UPLOADS_DIR."updater";
+			$subDir = "/".@RequestHandler::$REQUEST['type'];
+			$downloadScanner = new inDirScanner($path, $subDir, "*");
+			$file = $this->selectLatest($downloadScanner->filesArray);
+			die('{"filename": "'.str_replace(ROOT_DIR, "", $path).$subDir.'/'.$file['name'].'", "fileHash": "'.md5_file($path.$subDir.DIRECTORY_SEPARATOR.$file['name']).'"}');
+		}
+		
+		//TEMPORARY!@!!
+		private function handleDownloadUpdaterLegacy() : void {
+			$path = ROOT_DIR.UPLOADS_DIR."updater";
+			$subDir = "/".@RequestHandler::$REQUEST['type'];
+			$downloadScanner = new inDirScanner($path, $subDir, "*");
+			$file = $this->selectLatest($downloadScanner->filesArray);
 			die('{"filename": "'.$file['name'].'", "fileHash": "'.md5_file($path.$subDir.DIRECTORY_SEPARATOR.$file['name']).'"}');
 		 }
 			
-			
-			  private function selectLatest($files) {
-				usort($files, function($a, $b) {
-					return version_compare($b['name'], $a['name']);
-				});
-
-				return reset($files);
-			} 
+		
+		private function handleParseMonitor() : void {
+			init::classUtil('ServerParser', "1.0.0");
+			$serverParser = new ServerParser($this->db, init::$usrArray['login']);
+			$Monitor = new foxesMon($serverParser->parseServers(), array('out'=> 2, 'record_day' => 86400));
+			die($Monitor->foxMonOut());
 		}
+			
+			
+		private function selectLatest($files) {
+			usort($files, function($a, $b) {
+				return version_compare($b['name'], $a['name']);
+			});
+
+			return reset($files);
+		} 
+	}
 ?>
