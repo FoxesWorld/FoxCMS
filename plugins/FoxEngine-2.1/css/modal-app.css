@@ -92,6 +92,7 @@
 
 .modal_app_content a {
     color: #b58251;
+    display: inline-flex;
 }
 
 .modal_app_content a:hover {

@@ -23,10 +23,24 @@ export class Cookies {
 		return "";
   }
   
-  acceptCookies() {
-	  let date = new Date();
-      date.setTime(date.getTime() + 31536000000);
-      document.cookie = "cookie-consent=true; expires=" + date.toUTCString() + "path=/;";
-      $("#cookie-popup").fadeOut(300);
-  }
+	acceptCookies() {
+		try {
+			const date = new Date();
+			date.setFullYear(date.getFullYear() + 1);
+			document.cookie = `cookie-consent=true; expires=${date.toUTCString()}; path=/; SameSite=Lax`;
+			const cookiePopup = document.getElementById('cookie-popup');
+			if (cookiePopup) {
+				cookiePopup.style.transition = 'opacity 0.3s';
+				cookiePopup.style.opacity = '0';
+				setTimeout(() => {
+					if (cookiePopup.parentNode) {
+						cookiePopup.parentNode.removeChild(cookiePopup);
+					}
+				}, 300);
+			}
+		} catch (error) {
+			console.error('Ошибка при установке cookie:', error);
+		}
+	}
+
 }
