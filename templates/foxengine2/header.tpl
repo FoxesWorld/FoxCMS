@@ -16,8 +16,8 @@
 }
 </style>
 
-				<header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg bar">
-        <div class="container-fluid d-flex align-items-center justify-content-between">
+	<header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg bar">
+        <div class="container-fluid d-flex align-items-center justify-content-between" style="padding: 0px;">
             <!-- Logo -->
 			{include file='logo.tpl'}
             <!-- Nav -->

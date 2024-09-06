@@ -360,10 +360,6 @@ img {
 	opacity: 0;
 }
 
-.logo-block {
-	margin: 5px 0px;
-}
-
 .logoWrapper .logo h1 {
 	font-size: 18pt;
 	margin: 10px 0px;
@@ -1201,6 +1197,19 @@ footer {
     display: block;
     padding: 15px;
 
+}
+
+footer a {
+	display: inline-flex;
+}
+
+footer h5 {
+	color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: normal;
+    margin: 0;
+    text-transform: uppercase;
 }
 
 footer .footer--flex,

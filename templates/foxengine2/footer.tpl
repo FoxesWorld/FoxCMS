@@ -4,16 +4,23 @@
 <footer class="bar">
    <div class="container footer--flex">
    
-   <i class="fa fa-envelope-o"></i> Почта: &nbsp; <a id="admin_contact" href="mailto:{$contactEmail}">{$contactEmail}</a>
-   
-      <div class="footer-copyright">
-         {$siteTitle} {$siteStatus} <b>2016 - {$year}</b>
-		 <span>Powered by {$webserviceName} v.{$ServiceVersion}<img class="img-fluid" uk-img /></span>
-      </div>
+	  
+	  <div style="margin: 0px 15px;">
+			<h5>© 2016-{$year} FoxesCraft.RU</h5>
+			<noindex>
+				Все права сохранены. Копирование материалов без разрешения администрации запрещено.<br>
+				Мы предоставляем бесплатный ознакомительный вариант игры <a href="https://minecraft.net/" target="_blank" rel="nofollow noopener">Minecraft</a>.
+			</noindex>
+			<div class="pt-1">
+				<a id="admin_contact" href="mailto:{$contactEmail}">{$contactEmail}</a>
+				<a href="#" onclick="foxEngine.page.loadPage('rules'); return false;">Правила</a> ·
+				<a href="#" onclick="foxEngine.page.loadPage('privacyPolicy'); return false;">Политика конфиденциальности</a>
+			</div>
+		</div>
 
       <ul class="footer-end">
 	  
-	  <div class="ms-auto">
+	  <div class="ms-end">
 			<div class="social-icon-list py-1" id="socialLinksBlock">
 			
 			</div>

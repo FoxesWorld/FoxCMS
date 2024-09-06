@@ -1,0 +1,15 @@
+<useroption>
+{
+	"optionTitle": "Политика Конфиденциальности",
+	"optionGroup": [1,4,5],
+	"optionClass": "nav-item",
+	"type": "pageContent"
+}
+</useroption>
+
+<pageContent>
+<div class="contentInner">
+	<h4>Привет, %realname%!</h4> Не хочешь познакомиться с нашей политикой конфиденциальности? :smirk:
+
+</div>
+</pageContent>

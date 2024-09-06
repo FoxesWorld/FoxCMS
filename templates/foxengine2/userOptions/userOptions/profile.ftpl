@@ -19,44 +19,6 @@
    <div class="tabs">
       [hasPriviligies] 
 	  <link rel="stylesheet" type="text/css" href="%assets%/css/skin.css">
-      <script>
-         function viewEdit() {
-         				let view = $('#view');
-         				let edit = $('#edit');
-         
-         				if (view.is(':visible')) {
-         				  view.fadeOut('slow', function() {
-         					edit.fadeIn('slow');
-         				  });
-         				} else {
-         				  edit.fadeOut('slow', function() {
-         					view.fadeIn('slow');
-         				  });
-         				}
-         }		  
-         $(function (){
-         let colors = replaceData.allowedColors;
-         let count = 0;
-         let checked;
-         let selectedColor = $("#colourVal").val();
-         
-         if(!colors.includes(selectedColor)) {colors.push(selectedColor);}
-         colors.forEach(function(entry) {
-         if(entry === selectedColor) checked = 'checked'; else checked = '';
-         let colorBlock = '<label for="ColorInput'+entry+'">'+
-         '<div class="colorBlock '+checked+'" id="Color'+ count +'" style="background-color: '+ entry +';">' +
-         '<input type="radio" id="ColorInput'+entry+'" name="colorPicker" style="display: none;" value="'+entry+'" '+checked+'>' +
-         '<div class="innerDiv">' +
-         	'<i class="fa fa-check"></i>' +
-         '</div>' +
-         '<span class="innerSpan"></span>' +
-         '</div>'+
-         '</label>';
-         $("#profileColors").append(colorBlock);
-         count++;
-         });
-         }());
-      </script>
       <div id="edit" style="display: none;">
          <div class="d-inline-flex m-2">
             <h3 class="m-1">%lang|profileOf% [login]</h3>
@@ -97,25 +59,12 @@
                   </div>
                </div>   
 <script>
+	(async function () {
+	setTimeout(async () => {
+		drawSkins('[login]');
+		}, 2000);
+	})();
 
-(async function () {
-setTimeout(async () => {
-	drawSkins('[login]');
-	}, 2000);
-})();
-
- function skinCloak(button){
-      	let toggleSwitch = $("#uploadType").val();
-      	let skin = document.getElementById('skin'); 
-      	let cloak = document.getElementById('cloak'); 
-      	if (toggleSwitch === 'skin') {
-      		skin.style.display = "block";
-      		cloak.style.display = "none";
-      	} else {
-      		skin.style.display = "none";
-      		cloak.style.display = "block";
-      	}
-      }
 
     var skinsFiles;
     var cloakFiles;
@@ -245,8 +194,6 @@ setTimeout(async () => {
                             </div>
                         </label>
 
-                        <br><br>
-
 						<a href="#" class="green_button" onclick="loadFileToServer($(this), 'skin'); return false;">
                             Загрузить скин
                         </a>
@@ -266,8 +213,6 @@ setTimeout(async () => {
                                     <input type="file" id="cloak_file">
                                 </div>
                             </label>
-
-                            <br><br>
 
                             <a href="#" class="green_button" onclick="loadFileToServer($(this), 'cloak'); return false;">
                                 Загрузить плащ
@@ -307,7 +252,7 @@ setTimeout(async () => {
 				<h3 style="margin: 0 auto;color: antiquewhite;padding: 15;">
 				</h3>
 				<div class="importantText">
-					Загрузка фото профиля возможна во вкладке <b>"Персонализация"</b>
+					Загрузка фото профиля возможна во вкладке <a href="#" onclick="openTab(1); foxEngine.modalApp.closeModalApp();">"Персонализация"</a>
 					<br />
 					<small>Это временная мера, в будущем загрузка фото перейдёт сюда :smirk:</small>
 				</div>
@@ -414,26 +359,83 @@ setTimeout(async () => {
          </div>
       </div>
    </div>
-   <script>
-      $(function() {
-   		 foxEngine.user.parseBadges('[login]');
-		 
-         $('.tabs .tab_caption').on('click', 'li:not(.active)', function() {
-            $(this)
-               .addClass('active').siblings().removeClass('active')
-               .closest('div.tabs').find('div.tab_content').removeClass('active').eq($(this).index()).addClass('active');
+   
+         <script>
+         function viewEdit() {
+         				let view = $('#view');
+         				let edit = $('#edit');
+         
+         				if (view.is(':visible')) {
+         				  view.fadeOut('slow', function() {
+							edit.fadeIn('slow');
+         				  });
+         				} else {
+         				  edit.fadeOut('slow', function() {
+         					view.fadeIn('slow');
+         				  });
+         				}
+         }		  
+         $(function (){
+         let colors = replaceData.allowedColors;
+         let count = 0;
+         let checked;
+         let selectedColor = $("#colourVal").val();
+         
+         if(!colors.includes(selectedColor)) {colors.push(selectedColor);}
+         colors.forEach(function(entry) {
+         if(entry === selectedColor) checked = 'checked'; else checked = '';
+         let colorBlock = '<label for="ColorInput'+entry+'">'+
+         '<div class="colorBlock '+checked+'" id="Color'+ count +'" style="background-color: '+ entry +';">' +
+         '<input type="radio" id="ColorInput'+entry+'" name="colorPicker" style="display: none;" value="'+entry+'" '+checked+'>' +
+         '<div class="innerDiv">' +
+         	'<i class="fa fa-check"></i>' +
+         '</div>' +
+         '<span class="innerSpan"></span>' +
+         '</div>'+
+         '</label>';
+         $("#profileColors").append(colorBlock);
+         count++;
          });
-      });
-      		 
-     $('input[name*="colorPicker"]').click(function () {
-		let rad=document.getElementsByName('colorPicker');
-      		for (let i=0;i<rad.length; i++) {
-      			$('#Color' + i).removeClass('checked');
-      			if (rad[i].checked === true) {
-      				$('#Color' + i).addClass('checked');
-      				$("#colourVal").val(rad[i].value);
-      			}
-      		}
-      	});
-   </script>
+         }());
+
+    $(function() {
+        foxEngine.user.parseBadges('[login]');
+	});
+        // Функция для открытия вкладки по индексу
+        function openTab(index) {
+			if($('#view').is(':visible')) {
+				viewEdit();
+			}
+            const $tabs = $('.tabs');
+            const $tabCaptions = $tabs.find('.tab_caption li');
+            const $tabContents = $tabs.find('.tab_content');
+
+            $tabCaptions.removeClass('active').eq(index).addClass('active');
+            $tabContents.removeClass('active').eq(index).addClass('active');
+        }
+
+        // Обработчик клика для навигации по вкладкам
+        $('.tabs .tab_caption').on('click', 'li:not(.active)', function() {
+            const index = $(this).index();
+            openTab(index);
+        });
+
+        // Инициализация выбора цвета
+        $('input[name="colorPicker"]').on('click', function() {
+            const rad = document.getElementsByName('colorPicker');
+            for (let i = 0; i < rad.length; i++) {
+                const $colorBlock = $('#Color' + i);
+                $colorBlock.removeClass('checked');
+                if (rad[i].checked) {
+                    $colorBlock.addClass('checked');
+                    $("#colourVal").val(rad[i].value);
+                }
+            }
+        });
+
+        // Пример использования функции для открытия вкладки
+        // openTab(1); // Открыть вторую вкладку (индексация с нуля)
+    
+</script>
+
 </pageContent>

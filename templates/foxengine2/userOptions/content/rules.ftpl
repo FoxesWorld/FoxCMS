@@ -1,0 +1,17 @@
+<useroption>
+{
+	"optionTitle": "Правила",
+	"optionBlock": ".leftAction",
+	"optionPreText": "<img src='/templates/foxengine2/assets/icons/menu/icon_forum.png' />",
+	"optionGroup": [1,4,5],
+	"optionClass": "nav-item",
+	"type": "pageContent"
+}
+</useroption>
+
+<pageContent>
+<div class="contentInner">
+	<h4>Привет, %realname%!</h4> Не хочешь почитать правила? :smirk:
+
+</div>
+</pageContent>

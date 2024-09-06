@@ -67,6 +67,8 @@
 						<img  src="%assets%icons/svg/linux.svg" />Linux
 					</button>
 					</li>
+					
+						<div class="text-center form-text mb-2">Если лаунчер для Windows блокируется антивирусом – скачайте универсальный.</div>
 				</ul>
         </li>
         
@@ -95,7 +97,6 @@
 
 	
 <script>
-let thisPath = "/uploads/updater/";
 $('.updater').off('click').on('click', async function(){
     let type = $(this).data('type');
 	
@@ -103,10 +104,10 @@ $('.updater').off('click').on('click', async function(){
         $(this).addClass('loading');
         
         try {
-            let parsedJson = await foxEngine.sendPostAndGetAnswer({"sysRequest": "downloadUpdater", "type": type}, "JSON");
+            let parsedJson = await foxEngine.sendPostAndGetAnswer({"sysRequest": "downloadUpdater", "version": "1.0.0", "type": type}, "JSON");
             let file = parsedJson.filename;
             if(file !== undefined) {
-				foxEngine.utils.downloadFile(thisPath + type + '/' + file, "FoxesWorld."+type);
+				foxEngine.utils.downloadFile(file, "FoxesWorld."+type);
 			}
         } catch (error) {
             console.error('Ошибка загрузки файла:', error);
