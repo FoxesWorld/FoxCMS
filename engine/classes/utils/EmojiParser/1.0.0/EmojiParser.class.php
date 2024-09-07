@@ -32,5 +32,4 @@ class EmojiParser implements JsonSerializable {
 		return $this->emojiList;
 	} 
 }
-
 ?>

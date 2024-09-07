@@ -136,6 +136,16 @@ if (!defined('FOXXEY')) {
 
 			return $titles[($number % 100 > 4 && $number % 100 < 20) ? 2 : $cases[min($number % 10, 5) ]];
 		}
+		
+public static function unixToHumanReadable($unixTime) {
+    $months = array(
+        'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
+        'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
+    );
+    $date = @date('j n Y', $unixTime);
+    list($day, $month, $year) = explode(' ', $date);
+    return $day. ' '. $months[$month - 1]. ' '. $year;
+}
 
 	
 public static function showDateAgo($date){

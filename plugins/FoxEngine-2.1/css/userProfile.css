@@ -1,5 +1,70 @@
 	/* Full Profile */
 	
+	.userProfile {
+	background: var(--theme-content-pane);
+	-webkit-box-shadow: 0 14px 43px rgba(79, 45, 31, .2);
+	-moz-box-shadow: 0 14px 43px rgba(79, 45, 31, .2);
+	box-shadow: 0 14px 43px rgba(79, 45, 31, .2);
+	border: 3px solid #ddd4bc;
+	padding: 5px;
+	}
+
+	#profileStats {
+		background: #2b2b2b;
+		margin: 25px 0 0px;
+		color: #fff;
+		height: auto;
+		padding: 12px 12px 12px 0px;
+		font-size: 14.0px;
+		font-weight: 500;
+		position: relative;
+	}
+
+	#profileStats > [data-role="switchView"] .foxesList_inline, #profileStats > [data-role="switchView"] .foxesButton {
+		position: relative;
+		z-index: 1000;
+	}
+
+	#profileStats > ul:last-child > li {
+		margin-right: 20px;
+		padding-right: 20px;
+		border-right: 1px solid rgba(255,255,255,0.2);
+	}
+
+	#profileStats > ul:last-child > li {
+		margin: 0;
+		padding-left: 20px;
+		border-left: 1px solid rgba(255,255,255,0.2);
+	}
+
+	#profileStats > ul:last-child > li:last-child {
+		border: 0;
+	}
+
+@media screen and (max-width: 979px) {
+    #userReputation .foxesDataList .foxesDataItem_generic, #userReputation .foxesDataList .foxesDataItem_main {
+        display:table-cell;
+    }
+
+    #profileHeader .foxesColumn_narrow {
+        width: 70px;
+    }
+
+    #profileHeader .foxesUserPhoto_xlarge {
+        width: 70px;
+        height: 70px;
+    }
+
+    #profileStats {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    #profilePhoto [data-action="editPhoto"] {
+        bottom: 10px;
+    }
+}
+	
 	.profile-title {
 		color: #e6d0cf;
 		text-shadow: 0 0 16px rgb(227 205 204);
@@ -14,6 +79,116 @@
 		font-size: 1rem;
 		/* text-transform: capitalize; */
 	}
+	
+	/* AVATAR BOX */
+	[data-marker="avatar-box"] {
+		bottom: -30px;
+		left: 24px;
+		z-index: 10;
+		border-width: 0px;
+		border-style: solid;
+		border-color: rgb(22, 22, 26);
+		vertical-align: inherit;
+		max-width: 100%;
+		min-height: 0px;
+		min-width: 0px;
+		flex-shrink: 0;
+		flex-direction: column;
+		flex-basis: auto;
+		display: flex;
+		align-items: stretch;
+	}
+
+	/* AVATAR WRAPPER */
+	.avatar-wrapper {
+		position: absolute;
+		vertical-align: inherit;
+		max-width: 100%;
+		min-height: 0px;
+		min-width: 0px;
+		flex-shrink: 0;
+		flex-direction: column;
+		flex-basis: auto;
+		display: inline-table;
+		align-items: stretch;
+		width: min-content;
+		z-index: 1;
+	}
+
+	/* IMG INNER */
+	.avatar-image-inner {
+		border-width: 0px;
+		position: relative;
+	}
+
+	/* IMG */
+	.avatar-image {
+		transition: opacity 0.33s ease-in-out 0s;
+		opacity: 0;
+		position: absolute;
+		max-height: 128px;
+		max-width: 128px;
+		object-fit: cover;
+		z-index: 0;
+		width: 132px;
+		height: 132px;
+		border-radius: 132px;
+		vertical-align: inherit;
+	}
+
+	/* BUTTON */
+	.avatar-edit-button {
+		-webkit-box-align: center;
+		align-items: center;
+		-webkit-box-pack: center;
+		justify-content: center;
+		display: flex;
+		position: absolute;
+		left: 4px;
+		top: 4px;
+		background: rgba(22, 22, 26, 0.4);
+		border: 2px solid rgba(22, 22, 26, 0.1);
+		width: calc(100% - 8px);
+		height: calc(100% - 8px);
+		opacity: 0;
+		transition: all 0.15s ease-in-out 0s;
+		backdrop-filter: blur(44px);
+		transform: scale(0.85);
+		transform-origin: center center;
+		border-radius: 135px;
+	}
+
+	.avatar-edit-button:hover,
+	.avatar-edit-button:focus {
+		transform: scale(1);
+		opacity: 1;
+	}
+
+	.avatar-edit-button:active {
+		transform: scale(0.9);
+	}
+
+	.avatar-edit-button svg {
+		width: 24px;
+		height: 24px;
+		fill: white;
+	}
+
+	/* HOVER */
+	.avatar-wrapper:hover .avatar-edit-button {
+		opacity: 1;
+	}
+	
+	.FoxesStatus_online {
+	color: #249168;
+	margin: 5px;
+	}
+
+	.FoxesStatus_offline {
+		color: #d54040;
+		margin: 5px;
+	}
+
 			
 	.profile-title span {
 		font-size: 10pt;
@@ -175,13 +350,18 @@
 }
 
 /* Group Display */
+
+    .userStatus{
+		display: flow-root;
+		margin: 10px;
+	}
+	
 	span.groupStatus-1 {
 		color: #cfc09f;
 		position: relative;
 		text-transform: uppercase;
 		letter-spacing: 3px;
 		line-height: 1;
-		margin: 0;
 		font-weight: 300;
 		text-shadow: -1px 0 1px #c6bb9f, 0 1px 1px #c6bb9f, 5px 5px 10px rgba(0, 0, 0, 0.4), -5px -5px 10px rgba(0, 0, 0, 0.4);
 	}
@@ -193,8 +373,8 @@
 	
 	h1.groupStatus-4 {
 		color: #7fff00c4;
+		font-size: 15px;
 		font-family: 'Minecraft';
-		border-bottom: 1px solid tan;
 	}
 	
 	h1.groupStatus-5 {

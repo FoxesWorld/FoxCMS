@@ -99,6 +99,17 @@
     text-decoration: none;
 }
 
+.modal_app_content .fakeLink {
+	color: #b58251;
+    display: inline-flex;
+}
+
+.modal_app_content .fakeLink:hover {
+	color: #ff7e54;
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+
 .modal_app_padding {
     padding: 0 0 34px 34px;
 }

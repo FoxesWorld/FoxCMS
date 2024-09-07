@@ -7,8 +7,9 @@ class Register extends AuthManager
 {
     private $regData;
 	private $errorArr = array();
-    private $passminCount = 5;
-    private $baseUserGroup = 4;
+    private $passminCount;
+	private $maxLoginLength;
+    private $baseUserGroup;
     private $error = false;
     protected $logger, $db;
     private $SAtoCheck = array('login', 'password', 'email');
@@ -25,7 +26,10 @@ class Register extends AuthManager
 
     private function checkPass()
     {
-        global $lang;
+        global $lang, $config;
+		$this->baseUserGroup = $config['register']['baseUserGroup'];
+		$this->maxLoginLength = $config['register']['maxLoginLength'];
+		$this->passminCount = $config['register']['passminCount'];
         if (functions::FoxesStrlen($this->regData['password1']) >= $this->passminCount) {
             if (!preg_match("/[А-Яа-я]/", $this->regData['password1'])) {
                 switch ($this->regData['password1']) {
@@ -60,6 +64,10 @@ class Register extends AuthManager
 				$this->setError("Bad symbols!1!1!", "warn");
             }
         }
+		
+		if(strlen($this->regData['login']) > $this->maxLoginLength) {
+			$this->setError(str_replace("%key%", $this->maxLoginLength, $lang['loginTooLong']), "warn");
+		}
 		
         $this->checkPass();
         if (!functions::checkExistingData($this->db, 'login', $this->regData['login']) === false) {

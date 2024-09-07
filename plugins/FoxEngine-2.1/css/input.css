@@ -477,7 +477,7 @@ a {
 	padding: 10px;
 }
 
-a:not(.selectedPage, .badge, .userBlock) {
+a:not(.selectedPage, .badge, .userBlock, .foxesButton) {
 	color: #534e47;
 }
 

@@ -54,6 +54,7 @@ if(!defined('profile')) {
 									if (filter_var($this->inputEmail, FILTER_VALIDATE_EMAIL)) {
 										if($this->canSetColor(@$request['colorScheme'])){ //HERE
 											if(@$request['user_group'] !== "null") {
+												if(@functions::FoxesStrlen($request['userStatus']) <= 32) {
 												//if(@$request['user_group'] !== init::$usrArray['user_group'] && init::$usrArray['groupTag'] === "admin"){
 												$this->inputGroup = $request['user_group'];
 												if($this->inputGroup === $this->getUserfield("user_group") || init::$usrArray['groupTag'] === "admin") {
@@ -77,10 +78,10 @@ if(!defined('profile')) {
 													$this->status = "warn";
 													$this->statusInfo = $lang['profileEdit']['invaliduser_group'];
 												}
-											//} else {
-											//	$this->status = "error";
-											//	$this->statusInfo = "Not enough right for shifting a group!";
-											//}
+											} else {
+												$this->status = "warn";
+												$this->statusInfo = "Status is longer than 32!";
+											}
 											} else {
 												$this->status = "error";
 												$this->statusInfo = $lang['profileEdit']['nouser_group'];

@@ -58,8 +58,8 @@
 			'takeMeBack' => "Верни меня назад",
 			'personalisation' => "Персонализация",
 			'security' => "Безопасность",
-			'edit' => "Редактировать",
-			'submit' => "Изменить",
+			'edit' => "Изменить профиль",
+			'submit' => "Применить",
 			
 			'fullName' => "Имя",
 			'status' => "Статус",
@@ -91,6 +91,7 @@
 		
 		/*Register*/
 		'loginUsed' => "Данный логин уже зарегистрирован!",
+		'loginTooLong' => "Логин длиннее %key% символов!",
 		'emailUsed' => "Данная почта уже была зарегистрирована!",
 		'noEmail' => "Кто-то забыл почту ввести",
 		'badSyms' => "Недопустимые символы - ",
@@ -179,6 +180,11 @@
 		"discordLink-desc" =>"Приглашение для пользователей на наш сервер",
 		"vkLink-title" => "Ссылка на группу ВК",
 		"vkLink-desc" => "Приглашение пользователей в нашу группу",
+		"passminCount-title" => "Минимальная длина пароля",
+		"maxLoginLength-title" => "Максимальная длина логина",
+		"baseUserGroup-title" => "Базовая группа пользователя",
+		
+		
 		
 		
 		/*Tabs*/
@@ -187,6 +193,7 @@
 		"siteSettingsTab" => '<i class="fa fa-cogs"></i> Настройки сайта',
 		"launcherSettingsTab" => '<i class="fa-thin fa-screwdriver-wrench"></i> Настройки Лаунчера',
 		"securitySetingsTab" => '<i class="fa fa-shield"></i> Безопасность',
+		"registerTab" => "Регистрация",
 		"otherTab" => '<i class="fa fa-archive"></i> Другое',
 		"configChanged" => "Конфигурация изменена",
 		

@@ -38,7 +38,7 @@ $config = array(
 		"reCaptchaWebsite" => "6LcKeBoiAAAAAGnhfzZnLyzUApLmgnOpP4OfFOB7",
 		"bantime" => "20",
 		"maxLoginAttempts" => "2",
-		"reCaptchaCheck" => true
+		"reCaptchaCheck" => false
 ),
 
 	"frontendSettings" => array(
@@ -53,11 +53,10 @@ $config = array(
 		"tempFilePath" => "/var/www/FoxCMS/engine/cache/tmp/timefile.log"
 ),
 
-	"vote" => array(
-		"mcTopSecret" => "76a844de8c67b709477825db0c5146bd",
-		"topCraftSecret" => "68089ca755b021262ea1cc1edb8f2f8d",
-		"mcRateSecret" => "WtDA7tywfI2V9b8kaawIKZps24YNLVui",
-		"moneyPerVote" => "5000"
+	"register" => array(
+		"passminCount" => 5,
+		"maxLoginLength" => 16,
+		"baseUserGroup" => 4
 ),
 
 	"other" => array(

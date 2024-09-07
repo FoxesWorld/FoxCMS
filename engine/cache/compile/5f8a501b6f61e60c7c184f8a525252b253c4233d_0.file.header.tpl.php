@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-08-18 23:23:55
+/* Smarty version 4.0.4, created on 2024-09-07 17:05:34
   from '/var/www/FoxCMS/templates/foxengine2/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_66c2585ba11564_97328201',
+  'unifunc' => 'content_66dc5daebc2a70_56800309',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5f8a501b6f61e60c7c184f8a525252b253c4233d' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/header.tpl',
-      1 => 1721239996,
+      1 => 1725639883,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:userBlock.tpl' => 1,
   ),
 ),false)) {
-function content_66c2585ba11564_97328201 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66dc5daebc2a70_56800309 (Smarty_Internal_Template $_smarty_tpl) {
 ?><style>
 .dropdown-item {
 	display: contents;
@@ -41,8 +41,8 @@ function content_66c2585ba11564_97328201 (Smarty_Internal_Template $_smarty_tpl)
 }
 </style>
 
-				<header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg bar">
-        <div class="container-fluid d-flex align-items-center justify-content-between">
+	<header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg bar">
+        <div class="container-fluid d-flex align-items-center justify-content-between" style="padding: 0px;">
             <!-- Logo -->
 			<?php $_smarty_tpl->_subTemplateRender('file:logo.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>

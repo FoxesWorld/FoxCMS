@@ -1,22 +1,26 @@
 <?php
 
-	class GetJre {
-		
-		private $jre;
+	class GetJre implements JsonSerializable {
+
 		private $jreOutput;
 		
 		function __construct($version) {
 			global $config;
-			$this->jre = ROOT_DIR.UPLOADS_DIR.$config['launcherSettings']['jreDir'].$version;
-			$this->jreOutput = array(
-				'filename' => str_replace(ROOT_DIR, "", $this->jre).".zip",
-				'hash'     => md5_file($this->jre.".zip"),
-				'size'     => strval(filesize($this->jre.".zip"))
-		);
+			$jre = ROOT_DIR.UPLOADS_DIR.$config['launcherSettings']['jreDir'].$version;
+			if(file_exists($jre.'.zip')) {
+				$this->jreOutput = array(
+					'filename' => str_replace(ROOT_DIR, "", $jre).".zip",
+					'hash'     => md5_file($jre.".zip"),
+					'size'     => intval(filesize($jre.".zip"))
+				);
+			} else {
+				$this->jreOutput = array(
+					'message' => "File not found"
+				);
+			}
 		}
 		
-		public function getRuntime(){
-			die(json_encode($this->jreOutput, JSON_UNESCAPED_SLASHES));
-		}
-		
+		public function jsonSerialize() {
+			return $this->jreOutput;
+		}		
 	}
