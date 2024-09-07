@@ -30,6 +30,7 @@
                      <li><i class="fa fa-check"></i> Модулизация FoxEngine :wizard:</li>
                      <li><i class="fa fa-check"></i> Оптимизация и улучшение мониторинга серверов :parcell:</li>
                      <li><i class="fa fa-check"></i> Модальные окна :target:</li>
+					 <li><i class="fa fa-check"></i> Обновление профиля пользователя</li>
                      <li><i class="fa fa-clock-o"></i> Галлерея со скриншотами с сервера :hotsprings:</li>
                  </ul>
              </div>
@@ -38,6 +39,7 @@
                  <ul>
                      <li><i class="fa fa-check"></i> Загрузка скинов </li>
 					 <li><i class="fa fa-clock-o"></i> Фикс скинов </li>
+					 <li><i class="fa fa-clock-o"></i> Новостной блок </li>
 					 <li><i class="fa fa-check"></i> Загрузка плащей </li>
                  </ul>
              </div>

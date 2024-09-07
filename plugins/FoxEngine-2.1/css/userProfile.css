@@ -19,6 +19,10 @@
 		font-weight: 500;
 		position: relative;
 	}
+	
+	#profileStats li {
+		align-content: space-evenly;
+	}
 
 	#profileStats > [data-role="switchView"] .foxesList_inline, #profileStats > [data-role="switchView"] .foxesButton {
 		position: relative;
@@ -214,7 +218,7 @@
 	}
 	
 	.statsTabbleItem:nth-child(even) {
-		background: #fefdfd
+		background: #fefdfd;
 	}
 
 	.statsTabbleItem:nth-child(odd) {
@@ -238,7 +242,7 @@
 		font-weight: 600;
 		line-height: 32px;
 		color: #5d5a57;
-		/* font-size: 14px; */
+		font-size: 14px;
 	}
 
 	a.see_last_comments {

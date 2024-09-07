@@ -1,5 +1,5 @@
 <?php 
-    /* [17.08.2024] */
+    /* [07.09.2024] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -24,7 +24,7 @@ $config = array(
 		"smtp_port" => "465",
 		"smtp_secure" => "ssl",
 		"contactPhone" => "null",
-		"ServiceVersion" => "2.7.23"
+		"ServiceVersion" => "2.8.23"
 ),
 
 	"launcherSettings" => array(
@@ -37,8 +37,7 @@ $config = array(
 		"reCaptchaSecret" => "6LcKeBoiAAAAAK-dFGsiDyqZvO_1u7MKWscdEJqJ",
 		"reCaptchaWebsite" => "6LcKeBoiAAAAAGnhfzZnLyzUApLmgnOpP4OfFOB7",
 		"bantime" => "20",
-		"maxLoginAttempts" => "2",
-		"reCaptchaCheck" => false
+		"maxLoginAttempts" => "2"
 ),
 
 	"frontendSettings" => array(
@@ -54,9 +53,9 @@ $config = array(
 ),
 
 	"register" => array(
-		"passminCount" => 5,
-		"maxLoginLength" => 16,
-		"baseUserGroup" => 4
+		"passminCount" => "5",
+		"maxLoginLength" => "16",
+		"baseUserGroup" => "4"
 ),
 
 	"other" => array(

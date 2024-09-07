@@ -12,21 +12,20 @@ class SafeSQLHandler {
 
         $setClause = [];
         foreach ($data as $column => $value) {
-            $setClause[] = "$column = :$column";
+            $setClause[] = "$column = '".$value."'";
         }
 
         if (!empty($setClause)) {
             $sql .= implode(', ', $setClause);
-            $sql .= " WHERE $conditionColumn = :conditionValue";
-
+            $sql .= " WHERE $conditionColumn = '".$conditionValue."'";
             $stmt = $this->db->prepare($sql);
 
-            foreach ($data as $column => $value) {
-                $stmt->bindParam(':' . $column, $value);
-            }
-
-            $stmt->bindParam(':conditionValue', $conditionValue);
-
+            //foreach ($data as $column => $value) {
+            //    $stmt->bindParam(':'.$column, $value);
+            //}
+            //$stmt->bindParam(':conditionValue', $conditionValue);
+			//die($sql);
+			
             try {
                 if ($stmt->execute()) {
                     return '{"message": "Data updated", "type": "success"}';

@@ -53,7 +53,7 @@
 		private function authActionsInit($request) : void {
 			global $lang;
 				
-			if(!RequestHandler::$usrArray['isLogged']) {
+			if(!init::$usrArray['isLogged']) {
 
 				$auth = new authorise($request, $this->db, $this->logger);
 			} else {

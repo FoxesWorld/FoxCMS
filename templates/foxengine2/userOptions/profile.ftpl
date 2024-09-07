@@ -88,11 +88,11 @@
          
          if(!colors.includes(selectedColor)) {colors.push(selectedColor);}
 		
-         colors.forEach(function(entry) {
-         if(entry === selectedColor) checked = 'checked'; else checked = '';
-         let colorBlock = '<label for="ColorInput'+entry+'">'+
-         '<div class="colorBlock '+checked+'" id="Color'+ count +'" style="background-color: '+ entry +';">' +
-         '<input type="radio" id="ColorInput'+entry+'" name="colorPicker" style="display: none;" value="'+entry+'" '+checked+'>' +
+         colors.forEach(function(endivy) {
+         if(endivy === selectedColor) checked = 'checked'; else checked = '';
+         let colorBlock = '<label for="ColorInput'+endivy+'">'+
+         '<div class="colorBlock '+checked+'" id="Color'+ count +'" style="background-color: '+ endivy +';">' +
+         '<input type="radio" id="ColorInput'+endivy+'" name="colorPicker" style="display: none;" value="'+endivy+'" '+checked+'>' +
          '<div class="innerDiv">' +
          	'<i class="fa fa-check"></i>' +
          '</div>' +
@@ -103,10 +103,10 @@
          count++;
          }); 
  /*		 
-	colors.forEach(async function(entry) {
-        let checked = entry === selectedColor ? 'checked' : '';
-		const colorBlock = await this.foxEngine.replaceTextInTemplate(await this.foxEngine.loadTemplate(`${this.foxEngine.elementsDir}colorCheck.tpl`, true), {
-                entry: entry,
+	colors.forEach(async function(endivy) {
+        let checked = endivy === selectedColor ? 'checked' : '';
+		const colorBlock = await this.foxEngine.replaceTextInTemplate(await this.foxEngine.loadTemplate(`${this.foxEngine.elementsDir}colorCheck.tpl`, divue), {
+                endivy: endivy,
                 count: count,
                 checked: checked
             });
@@ -147,19 +147,6 @@
             }
         });    
 
-
-    var skinsFiles;
-    var cloakFiles;
-
-    $('#skin_file').change(function () {
-        skinsFiles = this.files;
-        $("#file_name_skin").text(skinsFiles[0].name);
-    });
-
-    $('#cloak_file').change(function () {
-        cloakFiles = this.files;
-        $("#file_name_cloak").text(cloakFiles[0].name);
-    });
 
     var skinsFiles;
     var cloakFiles;
@@ -354,21 +341,21 @@
 			[/group] 
 			-->
 			
-			<ul class="foxesButton_split inline" id="elEditProfile">
+			<ul class="foxesButton_split" id="elEditProfile">
 			[hasPriviligies]
 				<li>
-				<b class="fakeLink foxesButton foxesButton_small foxesButton_overlaid" onclick="viewEdit()"><i class="fa fa-pencil"></i>&nbsp;<span class="foxesResponsive_hidePhone foxesResponsive_inline">%lang|edit%</span></b>					
+					<b class="fakeLink foxesButton foxesButton_small foxesButton_overlaid" onclick="viewEdit()">
+						<i class="fa fa-pencil"></i>&nbsp;<span class="foxesResponsive_hidePhone foxesResponsive_inline">%lang|edit%</span>
+					</b>					
+				</li>
+
+				
+				<li>
+					<b class="fakeLink foxesButton foxesButton_small foxesButton_overlaid" onclick="$($(this)).notify('В разработке!', 'warn');">
+						<i class="fa fa-picture-o"></i>&nbsp;<span class="foxesResponsive_hidePhone foxesResponsive_inline">&nbsp;&nbsp;Обложка <i class="fa fa-caret-down"></i></span>
+					</b>					
 				</li>
 			[/hasPriviligies]
-				
-			[group=1]
-					<li>
-					<a href="#elEditPhoto_menu" class="foxesButton foxesButton_small foxesButton_overlaid" data-foxesmenu="" id="elEditPhoto" data-role="coverPhotoOptions">
-						<i class="fa fa-picture-o"></i>&nbsp;<span class="foxesResponsive_hidePhone foxesResponsive_inline">&nbsp;&nbsp;Обложка <i class="fa fa-caret-down"></i></span>
-					</a>
-					
-				</li>
-			[/group]
 				
 			</ul>
 			</div>
@@ -429,7 +416,7 @@
 			<span class="userStatus groupStatus-[user_group]">[userStatus]</span>
 			</li>
 			<li>
-				<h4 class="foxes_minorHeading">Зарегистрирован</h4>
+				<h4 class="foxes_minorHeading">Регистрация</h4>
 				<time>[reg_date]</time>
 			</li>
             
@@ -440,51 +427,84 @@
 				</span>
 			</li>
 			
-			<li class="d-lg-block d-sm-none">
+			<li class="d-lg-block d-none">
 				<ul class="profileBadges container-1gYwHN" id="userBadges">
                 </ul>
 			</li>
 		</ul>
 	</div>
-			
-            <div class="basecont" style="opacity: 0.8;">
-               <table class="userinfo" style="width: 100%">
-                  <tr class="statsTabbleItem">
-                     <td class="pageItemTitle"> <i class="fa-thin fa-address-card"></i> %lang|fullName%</td>
-                     <td class="pageItemValue">
-                        <span style="color: #f1864e;">[realname]</span>
-                     </td>
-                  </tr>
+	
+	<style>
+	.craft_stats_page_item:nth-child(even) {
+    background: #fefdfd
+}
 
-            <tr class="statsTabbleItem">
-            <td class="pageItemTitle"> <i class="fa-thin fa-location-dot"></i> %lang|land%</td>
-            <td class="pageItemValue">[land]</td>
-            </tr> 
-            [hasPriviligies]
-            <script>
-               (function() {
-               	let balance = [balance];
-				console.log(balance);
-               	$("#profileContents > div.basecont > table > tbody > tr:nth-child(8) > td.pageItemValue").html(balance[1].units);
-               	$("#profileContents > div.basecont > table > tbody > tr:nth-child(9) > td.pageItemValue").html(balance[0].crystals);
-               })();
-               	
-            </script>
-            <tr class="statsTabbleItem">
-            <td class="pageItemTitle"> <i class="fa-thin fa-envelope"></i> %lang|email%</td>
-            <td class="pageItemValue">[email]</td>
-            </tr>
-            <tr class="statsTabbleItem">
-            <td class="pageItemTitle"> <img src="%assets%/icons/units.png" alt="Units Icon" style="height: 24px;width: 24px;" uk-img /> %lang|units%</td>
-            <td class="pageItemValue">0</td>
-            </tr> 
-            <tr class="statsTabbleItem">
-            <td class="pageItemTitle"> <img src="%assets%/icons/crystals.png" alt="Crystals Icon"  style="height: 24px;width: 24px;" uk-img /> %lang|crystals%</td>
-            <td class="pageItemValue">0</td>
-            </tr> 
-            [/hasPriviligies] 
-            </table>
-         </div>
+.craft_stats_page_item:nth-child(odd) {
+    background: #f4f2ef
+}
+
+.craft_stats_page_item_title {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 10px 0 15px;
+    line-height: 32px;
+    font-size: 14px;
+    color: #5d5a57
+}
+
+.craft_stats_page_item_detail {
+    width: 40%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 10px;
+    font-weight: 600;
+    line-height: 32px;
+    color: #5d5a57;
+    font-size: 14px
+}
+</style>
+			
+            <div class="userinfo">
+                <div class="craft_stats_page_item">
+                    <div class="craft_stats_page_item_title"><i class="fa-thin fa-address-card"></i> %lang|fullName%</div>
+                    <div class="craft_stats_page_item_detail">
+                        <span style="color: #f1864e;">[realname]</span>
+                    </div>
+                </div>
+				
+                <div class="craft_stats_page_item">
+                    <div class="craft_stats_page_item_title"><i class="fa-thin fa-location-dot"></i> %lang|land%</div>
+                    <div class="craft_stats_page_item_detail">
+                        <span style="color: #f1864e;">[land]</span>
+                    </div>
+                </div>
+				[hasPriviligies]
+                <div class="craft_stats_page_item">
+                    <div class="craft_stats_page_item_title"><i class="fa-thin fa-envelope"></i> %lang|email%</div>
+                    <div class="craft_stats_page_item_detail">
+                        <span style="color: #f1864e;">[email]</span>
+                    </div>
+                </div>
+
+                <div class="craft_stats_page_item">
+                    <div class="craft_stats_page_item_title"><img src="%assets%/icons/units.png" alt="Units Icon" style="height: 24px;width: 24px;" uk-img /> %lang|units%</div>
+                    <div class="craft_stats_page_item_detail">0</div>
+                </div>
+				
+                <div class="craft_stats_page_item">
+                    <div class="craft_stats_page_item_title"><img src="%assets%/icons/crystals.png" alt="Crystals Icon"  style="height: 24px;width: 24px;" uk-img /> %lang|crystals%</div>
+                    <div class="craft_stats_page_item_detail">0</div>
+                </div>
+				<script>
+				   (function() {
+					let balance = [balance];
+					$("#profileContents > div.basecont > div:nth-child(5) > div.craft_stats_page_item_detail").html(balance[1].units);
+					$("#profileContents > div.basecont > div:nth-child(6) > div.craft_stats_page_item_detail").html(balance[0].crystals);
+				   })();
+				</script>
+				[/hasPriviligies] 
+            </div>
       </div>
    </div>
    

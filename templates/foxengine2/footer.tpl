@@ -4,6 +4,10 @@
 <footer class="bar">
    <div class="container footer--flex">
    
+         <div class="footer-copyright">
+         {$siteTitle} {$siteStatus} <b>{$year}</b>
+		 <span>Powered by {$webserviceName} v.{$ServiceVersion}<img class="img-fluid" uk-img /></span>
+      </div>
 	  
 	  <div style="margin: 0px 15px;">
 			<h5>© 2016-{$year} FoxesCraft.RU</h5>

@@ -1,5 +1,5 @@
 :root {
-	--sp-0: 0px;
+--sp-0: 0px;
     --sp-1: 4px;
     --sp-2: 8px;
     --sp-3: 12px;
@@ -722,7 +722,8 @@ ul.list-inline {
 }
 
 .page-title-wrap>.left-part {
-    margin: 10px 0px 0px 10px;
+    font-size: 21pt;
+    margin: 10px;
 }
 
 .page-title-wrap>.right-part {
@@ -1298,7 +1299,7 @@ footer .footer-copyright span {
 
 footer .footer-copyright span img {
 	height: 50px;
-	margin: -20px 0px;
+	margin: -20px -10px;
 	content: url('../icons/foxengine.png');
 }
 

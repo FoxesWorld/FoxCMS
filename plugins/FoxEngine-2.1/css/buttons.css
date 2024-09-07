@@ -286,3 +286,24 @@
 .foxesButton_link--negative {
     color: var(--negative-dark);
 }
+
+.foxesButton_split {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-flex;
+    border-radius: var(--button--radius);
+}
+
+.foxesButton_split li {
+	margin: 5px;
+}
+
+.foxesButton_split > :first-child, .foxesButton_split > :last-child {
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+}
+
+.foxesList_inline ul.foxesButton_split {
+    vertical-align: middle;
+}

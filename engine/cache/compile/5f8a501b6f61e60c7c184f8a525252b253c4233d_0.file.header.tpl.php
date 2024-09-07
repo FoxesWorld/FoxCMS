@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-09-07 17:05:34
+/* Smarty version 4.0.4, created on 2024-09-07 22:21:02
   from '/var/www/FoxCMS/templates/foxengine2/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_66dc5daebc2a70_56800309',
+  'unifunc' => 'content_66dca79e65a903_17264893',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:userBlock.tpl' => 1,
   ),
 ),false)) {
-function content_66dc5daebc2a70_56800309 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66dca79e65a903_17264893 (Smarty_Internal_Template $_smarty_tpl) {
 ?><style>
 .dropdown-item {
 	display: contents;
