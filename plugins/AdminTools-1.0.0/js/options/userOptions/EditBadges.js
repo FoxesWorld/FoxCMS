@@ -42,7 +42,7 @@ export class EditBadges {
 		this.formFields.forEach(field => {
 			if (field.fieldName === 'badgeName') {
 				field.optionsArray = this.allBadges;
-			}
+			} 
 		});
 
 		if (login) {
@@ -69,9 +69,9 @@ export class EditBadges {
 			$("#dialog").dialog('close');
 			foxEngine.user.showUserProfile(user);
 
-			setTimeout(() => {
-				foxEngine.user.parseBadges(user);
-			}, 500);
+			//setTimeout(() => {
+				//foxEngine.user.parseBadges(user);
+			//}, 500);
 		}, 500);
 	}
 }

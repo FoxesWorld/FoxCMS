@@ -5,8 +5,8 @@
  * It provides methods for creating various types of input fields such as text inputs, number inputs, dropdowns, checkboxes, textareas, and tag inputs.
  * 
  * Authors: AidenFox
- * Date: [10.05.24]
- * Version: 1.4.0 ALPHA
+ * Date: [08.09.24]
+ * Version: 1.5.0 ALPHA
  */
 export class BuildField {
     constructor(classInstance) {
@@ -35,8 +35,6 @@ export class BuildField {
 
 		return formHtml;
 	}
-
-
 
     async createInputBlock(fieldName, value, fieldType, optionsArray) {
         const inputHandlers = {
@@ -78,39 +76,37 @@ export class BuildField {
             </div>`;
     }
 	
-createDatePickerInput(key, value) {
-    const uniqueId = Math.random().toString(36).substring(7);
-    let html = `<div class="input_block">
-                    <label class="label" for="${key}-${uniqueId}">Choose Date</label>
-                    <input type="hidden" name="${key}" id="${key}-${uniqueId}-unix" value="${value}" />
-                    <input type="text" class="input" id="${key}-${uniqueId}" readonly />
-                </div>`;
 
-    setTimeout(() => {
-        let dateValue = foxEngine.utils.convertUnixTime(value);
+	createDatePickerInput(key, value) {
+			const uniqueId = Math.random().toString(36).substring(7);
+			let html = `<div class="input_block">
+							<label class="label" for="${key}-${uniqueId}">Выберите дату</label>
+							<input type="hidden" name="${key}" id="${key}-${uniqueId}-unix" value="${value}" />
+							<input type="text" class="input" id="${key}-${uniqueId}" readonly />
+						</div>`;
 
-        if (isNaN(dateValue.getTime())) {
-            dateValue = new Date();
-        }
+			setTimeout(() => {
+				let dateValue = new Date(parseInt(value, 10));
 
-        const datepickerElement = document.querySelector(`#${key}-${uniqueId}`);
+				if (isNaN(dateValue.getTime())) {
+					dateValue = new Date();
+				}
 
-        const datepicker = new Datepicker(datepickerElement, {
-            defaultDate: dateValue,
-            dateFormat: 'dd.mm.yyyy',
-            onChange: function(selectedDate) {
-                if (selectedDate instanceof Date) {
-                    const unixValue = selectedDate.getTime();
-                    $(`#${key}-${uniqueId}-unix`).val(unixValue);
-                }
-            }
-        });
+				flatpickr(`#${key}-${uniqueId}`, {
+					enableTime: true,
+					dateFormat: 'd.m.Y H:i',
+					defaultDate: dateValue,
+					onChange: function(selectedDates) {
+						if (selectedDates.length > 0) {
+							const unixValue = selectedDates[0].getTime();
+							document.querySelector(`#${key}-${uniqueId}-unix`).value = unixValue;
+						}
+					}
+				});
+			}, this.initAwait);
 
-        datepicker.setDate(dateValue);
-    }, this.initAwait);
-
-    return html;
-}
+			return html;
+		}
 
     createNumberInput(key, value) {
         return `
