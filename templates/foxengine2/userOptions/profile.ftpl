@@ -22,7 +22,7 @@
       <div id="edit" style="display: none;">
          <div class="d-inline-flex m-2">
             <h3 class="m-1">%lang|profileOf% [login]</h3>
-            <button class="login editProfile" style="float: right;" onclick="viewEdit()">%lang|takeMeBack%</button>
+            <button class="login editProfile" style="float: right;" onclick="foxEngine.editUser.viewEdit()">%lang|takeMeBack%</button>
          </div>
          <ul class="tab_caption">
             <li class="profileSettings active" value="profile">%lang|profileSettings%</li>
@@ -64,92 +64,14 @@
 		<script>
 			(async function () {
 			setTimeout(async () => {
-				drawSkins('[login]');
+				foxEngine.editUser.initialize('[login]');
 				}, 2000);
 			})();
-			
-			 
-			 function viewEdit() {
-								let view = $('#view');
-								let edit = $('#edit');
-				 
-								if (view.is(':visible')) {
-								  view.fadeOut('slow', function() {
-									edit.fadeIn('slow');
-								  });
-								} else {
-								  edit.fadeOut('slow', function() {
-									view.fadeIn('slow');
-								  });
-								}
-				 }		  
-				 $(function (){
-				 let colors = replaceData.allowedColors;
-				 let count = 0;
-				 let checked;
-				 let selectedColor = $("#colourVal").val();
-				 
-				 if(!colors.includes(selectedColor)) {colors.push(selectedColor);}
-				
-				 colors.forEach(function(endivy) {
-				 if(endivy === selectedColor) checked = 'checked'; else checked = '';
-				 let colorBlock = '<label for="ColorInput'+endivy+'">'+
-				 '<div class="colorBlock '+checked+'" id="Color'+ count +'" style="background-color: '+ endivy +';">' +
-				 '<input type="radio" id="ColorInput'+endivy+'" name="colorPicker" style="display: none;" value="'+endivy+'" '+checked+'>' +
-				 '<div class="innerDiv">' +
-					'<i class="fa fa-check"></i>' +
-				 '</div>' +
-				 '<span class="innerSpan"></span>' +
-				 '</div>'+
-				 '</label>';
-				 $("#profileColors").append(colorBlock);
-				 count++;
-				 }); 
-		 /*		 
-			colors.forEach(async function(endivy) {
-				let checked = endivy === selectedColor ? 'checked' : '';
-				const colorBlock = await this.foxEngine.replaceTextInTemplate(await this.foxEngine.loadTemplate(`${this.foxEngine.elementsDir}colorCheck.tpl`, divue), {
-						endivy: endivy,
-						count: count,
-						checked: checked
-					});
-			   $("#profileColors").append(colorBlock);
-				count++;
-			});*/
-				 }());
 
-
-				function openTab(index) {
-					if($('#view').is(':visible')) {
-						viewEdit();
-					}
-					const $tabs = $('.tabs');
-					const $tabCaptions = $tabs.find('.tab_caption li');
-					const $tabContents = $tabs.find('.tab_content');
-
-					$tabCaptions.removeClass('active').eq(index).addClass('active');
-					$tabContents.removeClass('active').eq(index).addClass('active');
-				}
-
-				// Обработчик клика для навигации по вкладкам
-				$('.tabs .tab_caption').on('click', 'li:not(.active)', function() {
-					const index = $(this).index();
-					openTab(index);
-				});
-
-				// Инициализация выбора цвета
-				$('input[name="colorPicker"]').on('click', function() {
-					const rad = document.getElementsByName('colorPicker');
-					for (let i = 0; i < rad.length; i++) {
-						const $colorBlock = $('#Color' + i);
-						$colorBlock.removeClass('checked');
-						if (rad[i].checked) {
-							$colorBlock.addClass('checked');
-							$("#colourVal").val(rad[i].value);
-						}
-					}
-				});    
-
+			$('.tabs .tab_caption').on('click', 'li:not(.active)', function() {
+				const index = $(this).index();
+				foxEngine.editUser.openTab(index);
+			});
 
 			var skinsFiles;
 			var cloakFiles;
@@ -165,74 +87,12 @@
 			});
 
 			$("#load_skin").click(function () {
-				loadFileToServer($(this), 'skin');
+				foxEngine.editUser.loadFileToServer($(this), 'skin');
 			});
 
 			$("#load_cloak").click(function () {
-				loadFileToServer($(this), 'cloak');
+				foxEngine.editUser.loadFileToServer($(this), 'cloak');
 			});
-
-			function deleteFileFromServer(button, type) {
-				$.post('/', {
-					csrf_token: '[hash]',
-					sysRequest: 'deleteFile',
-					type: type
-				}, function (data) {
-					data = JSON.parse(data);
-					button.notify(data['message'], data['type']);
-
-					if (data['type'] === 'success') {
-						drawSkins('[login]');
-					}
-				});
-			}
-
-			function loadFileToServer(button, type) {
-
-				var data = new FormData();
-
-				if (type === "skin") {
-					$.each(skinsFiles, function (key, value) {
-						data.append(key, value);
-					});
-				}
-
-				if (type === "cloak") {
-					$.each(cloakFiles, function (key, value) {
-						data.append(key, value);
-					});
-				}
-
-				data.append('sysRequest', 'uploadFile');
-				data.append('type', type);
-				data.append('csrf_token', '[hash]');
-
-				$.ajax({
-					url: '/',
-					type: 'POST',
-					data: data,
-					cache: false,
-					dataType: 'json',
-					processData: false,
-					contentType: false,
-
-					success: function (respond, textStatus, jqXHR) {
-						button.notify(respond.message, respond.type);
-						drawSkins('[login]');
-					},
-
-					error: function (jqXHR, textStatus, errorThrown) {
-						console.log(jqXHR);
-						button.notify(textStatus);
-					}
-				});
-			}
-			
-			async function drawSkins(login){
-				let userSkin = await foxEngine.user.parseUserLook(login);
-				document.getElementById('skin_image_front').src = `data:image/png;base64,${userSkin['front']}`;
-				document.getElementById('skin_image_back').src = `data:image/png;base64,${userSkin['back']}`;
-			}
 		</script>
 
 
@@ -262,10 +122,10 @@
                             </div>
                         </label>
 
-						<a href="#" class="green_button" onclick="loadFileToServer($(this), 'skin'); return false;">
+						<a href="#" class="green_button" onclick="foxEngine.editUser.loadFileToServer($(this), 'skin'); return false;">
                             Загрузить скин
                         </a>
-                        <a href="#" class="green_button red-button" style="margin-left: 20px !important; width: 104px;" onclick="deleteFileFromServer($(this), 'skin'); return false;">Удалить</a>
+                        <a href="#" class="green_button red-button" style="margin-left: 20px !important; width: 104px;" onclick="foxEngine.editUser.deleteFileFromServer($(this), 'skin'); return false;">Удалить</a>
                     </div>
 
                     <div class="change_block">
@@ -282,10 +142,10 @@
                                 </div>
                             </label>
 
-                            <a href="#" class="green_button" onclick="loadFileToServer($(this), 'cloak'); return false;">
+                            <a href="#" class="green_button" onclick="foxEngine.editUser.loadFileToServer($(this), 'cloak'); return false;">
                                 Загрузить плащ
                             </a>
-                            <a href="#" class="green_button red-button" style="margin-left: 14px !important; width: 104px;" onclick="deleteFileFromServer($(this), 'cloak'); return false;">Удалить</a>
+                            <a href="#" class="green_button red-button" style="margin-left: 14px !important; width: 104px;" onclick="dfoxEngine.editUser.deleteFileFromServer($(this), 'cloak'); return false;">Удалить</a>
                         </div>
                     </div>
                 </div>
@@ -320,7 +180,7 @@
 				<h3 style="margin: 0 auto;color: antiquewhite;padding: 15;">
 				</h3>
 				<div class="importantText">
-					Загрузка фото профиля возможна во вкладке <b class="fakeLink" onclick="openTab(1); foxEngine.modalApp.closeModalApp();">"Персонализация"</b>
+					Загрузка фото профиля возможна во вкладке <b class="fakeLink" onclick="foxEngine.editUser.openTab(1); foxEngine.modalApp.closeModalApp();">"Персонализация"</b>
 					<br />
 					<small>Это временная мера, в будущем загрузка фото перейдёт сюда :smirk:</small>
 				</div>
@@ -340,7 +200,7 @@
 				<ul class="foxesButton_split" id="elEditProfile">
 				[hasPriviligies]
 					<li>
-						<b class="fakeLink foxesButton foxesButton_small foxesButton_overlaid" onclick="viewEdit()">
+						<b class="fakeLink foxesButton foxesButton_small foxesButton_overlaid" onclick="foxEngine.editUser.viewEdit()">
 							<i class="fa fa-pencil"></i>&nbsp;<span class="foxesResponsive_hidePhone foxesResponsive_inline">%lang|edit%</span>
 						</b>					
 					</li>
@@ -452,27 +312,22 @@
 
 				<div class="pageItem">
 					<div class="itemTitle"><img src="%assets%/icons/units.png" alt="Units Icon" style="height: 24px;width: 24px;" uk-img /> %lang|units%</div>
-					<div class="itemDetail">0</div>
+					<div class="itemDetail" id="[login]Units">0</div>
 				</div>
 
 				<div class="pageItem">
 					<div class="itemTitle"><img src="%assets%/icons/crystals.png" alt="Crystals Icon" style="height: 24px;width: 24px;" uk-img /> %lang|crystals%</div>
-					<div class="itemDetail">0</div>
+					<div class="itemDetail" id="[login]Crystals">0</div>
 				</div>
 				<script>
-					  (function() {
-					let balance = [balance];
-					$("#profileContents > div.userinfo > div:nth-child(4) > div.itemDetail").html(balance[1].units);
-					$("#profileContents > div.userinfo > div:nth-child(5) > div.itemDetail").html(balance[0].crystals);
-					  })();
+					foxEngine.editUser.parseBalance([balance]);
 				</script>
 				[/hasPriviligies]
 			</div>
       </div>
    </div>
    
-         <script>
-		 
+<script>
     $(function() {
         foxEngine.user.parseBadges('[login]');
 	});

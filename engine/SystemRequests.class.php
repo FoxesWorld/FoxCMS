@@ -218,29 +218,37 @@
 		}
 			
 		private function handleUploadFile($fileType) : void {
-			$perms = array( 
-						"skin"=>"64",
-						"cloak"=>"64",
-						"hd_skin" => "1024",
-						"hd_cloak" => "1024"
-					);
-			switch($fileType){
-				case "skin":
-					init::classUtil('CapeUpload', "1.0.0");
-					$skinUpload = new CapeUpload(init::$usrArray['login'], $perms);
-					$skinUpload->uploadFile(@$_FILES[0], init::$usrArray['usrFolder'], "skin.png");
-				break;
-									
-				case "cloak":
-					init::classUtil('CapeUpload', "1.0.0");
-					$capeUpload = new CapeUpload(init::$usrArray['login'], $perms);
-					$capeUpload->uploadFile($_FILES[0], init::$usrArray['usrFolder'], "cape.png");
-					die('{"message": "Загрузка плащей в разработке!", "type": "warn"}');
-				break;
-				
-				default:
-					die('{"message": "Unknown filetype!"}');
-				break;
+			if(init::$usrArray['isLogged']) {
+				if(@RequestHandler::$REQUEST['csrf_token'] === init::$usrArray['hash']) {
+					$perms = array( 
+								"skin"=>"64",
+								"cloak"=>"64",
+								"hd_skin" => "1024",
+								"hd_cloak" => "1024"
+							);
+					switch($fileType){
+						case "skin":
+							init::classUtil('CapeUpload', "1.0.0");
+							$skinUpload = new CapeUpload(init::$usrArray['login'], $perms);
+							$skinUpload->uploadFile(@$_FILES[0], init::$usrArray['usrFolder'], "skin.png");
+						break;
+											
+						case "cloak":
+							init::classUtil('CapeUpload', "1.0.0");
+							$capeUpload = new CapeUpload(init::$usrArray['login'], $perms);
+							$capeUpload->uploadFile($_FILES[0], init::$usrArray['usrFolder'], "cape.png");
+							die('{"message": "Загрузка плащей в разработке!", "type": "warn"}');
+						break;
+						
+						default:
+							die('{"message": "Unknown filetype!"}');
+						break;
+					}
+				} else {
+					die('{"message": "Incorrect token!"}');
+				}
+			} else {
+				die('{"message": "Not logged in!"}');
 			}
 		}
 		
@@ -248,35 +256,35 @@
 			global $lang;
 			if (!init::$usrArray['isLogged']) {
 				die('{"message": "You are not logged!"}');
-			}
-
-			$filePath = null;
-			$message = null;
-
-			switch($filetype){
-				
-				case "skin":
-					$filePath = init::$usrFiles['skin'] ?? null;
-					$message = $lang['userProfile']['skin'];
-					break;
-				
-				case "cloak":
-					$filePath = init::$usrFiles['cape'] ?? null;
-					$message = $lang['userProfile']['cape'];
-					break;
-				
-				default:
-					die('{"message": "Unknown filetype!"}');
-			}
-
-			if ($filePath && @file_exists($filePath)) {
-				if (unlink($filePath)) {
-					die('{"message": "' . ucfirst($message) . ' удален!", "type": "success"}');
-				} else {
-					die('{"message": "Ошибка при удалении ' . $message . '!"}');
-				}
 			} else {
-				die('{"message": "У вас нет ' . $message . '!"}');
+				$filePath = null;
+				$message = null;
+
+				switch($filetype){
+					
+					case "skin":
+						$filePath = init::$usrFiles['skin'] ?? null;
+						$message = $lang['userProfile']['skin'];
+						break;
+					
+					case "cloak":
+						$filePath = init::$usrFiles['cape'] ?? null;
+						$message = $lang['userProfile']['cape'];
+						break;
+					
+					default:
+						die('{"message": "Unknown filetype!"}');
+				}
+
+				if ($filePath && @file_exists($filePath)) {
+					if (unlink($filePath)) {
+						die('{"message": "' . ucfirst($message) . ' удален!", "type": "success"}');
+					} else {
+						die('{"message": "Ошибка при удалении ' . $message . '!"}');
+					}
+				} else {
+					die('{"message": "У вас нет ' . $message . '!"}');
+				}
 			}
 		}
 

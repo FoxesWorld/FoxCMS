@@ -1,6 +1,7 @@
 import { Request } from './modules/Request.js';
 import { FoxesInputHandler } from './modules/FoxesInputHandler.js';
 import { User } from './modules/User.js';
+import { EditUser } from './modules/EditUser.js';
 import { Servers } from './modules/Servers.js';
 import { Page } from './modules/Page.js';
 import { ModalApp } from './modules/ModalApp.js';
@@ -54,6 +55,7 @@ class FoxEngine {
             this.utils = new Utils(this);
             this.logo = new Logo(this);
             this.user = new User(this);
+			this.editUser = new EditUser(this);
             this.servers = new Servers(this);
             this.entryReplacer = new EntryReplacer(this);
 			this.cookies = new Cookies(this);

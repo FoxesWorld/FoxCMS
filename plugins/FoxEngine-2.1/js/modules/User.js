@@ -14,8 +14,6 @@ export class User {
         const textStyles = "color: #000000;";
         console.log(debugMessage, loginStyle, textStyles);
     }
-	
-
 
     async parseUsrOptionsMenu() {
         if (this.optNamesArr.length <= this.optionAmount) {
@@ -133,8 +131,6 @@ async parseBadges(user) {
         console.error('Error parsing badges:', error);
     }
 }
-
-
 
     async refreshBalance(currencies) {
         try {
@@ -267,3 +263,4 @@ async parseBadges(user) {
         }
     }
 }
+
