@@ -24,6 +24,41 @@
 	display: flex;
 }
 
+        #loading {
+            display: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        #logs {
+            white-space: pre-wrap;
+            font-family: monospace;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+		    font-size: 12px;
+			margin: 10px;
+        }
+        .timestamp {
+            color: #555;
+            font-weight: bold;
+        }
+        .username {
+            color: #007bff;
+        }
+        .ip-address {
+            color: #28a745;
+        }
+        .action {
+            color: #17a2b8;
+        }
+        .error {
+            color: #dc3545;
+        }
+
 .adminPanel table {
 	/* display: inline-grid; */
 }
