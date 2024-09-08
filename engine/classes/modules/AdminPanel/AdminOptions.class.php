@@ -115,9 +115,54 @@ if(!defined("ADMIN")){
 						init::classUtil('ConfigUtils', "1.0.0");
 						die(ConfigParser::buildConfig(RequestHandler::$REQUEST));
 					break;
+					
+					case "log":
+					$file = @RequestHandler::$REQUEST['file'];
+							$logfile = ENGINE_DIR. DIRECTORY_SEPARATOR . 'cache/logs/'.$file.'.log';
+							if(file_exists($logfile)){
+								$lines = $this->getLastLines($logfile, @intval(@RequestHandler::$REQUEST['lines']));
+								foreach($lines as $line){
+									echo $line."\n";
+								}
+								die();
+							} else {
+								die('{"message": "File '.$logfile.' not found"}');
+							}
+					break;
 				}
 			} else {
 				die('{"message": "Insufficent rights!"}');
 			}
-		}		
+		}
+					private function getLastLines($filename, $numLines = 50) {
+			$lines = array();
+			$handle = fopen($filename, "r");
+			
+			if ($handle) {
+				fseek($handle, -1, SEEK_END);
+				$position = ftell($handle);
+				$buffer = "";
+				while ($position > 0 && count($lines) < $numLines) {
+					$position--;
+					fseek($handle, $position);
+					$char = fgetc($handle);
+					if ($char === "\n") {
+						array_unshift($lines, $buffer);
+						$buffer = "";
+					} else {
+						$buffer = $char . $buffer;
+					}
+				}
+				
+				if ($buffer !== "") {
+					array_unshift($lines, $buffer);
+				}
+				
+				fclose($handle);
+			} else {
+				return false;
+			}
+
+			return $lines;
+		}
 	}

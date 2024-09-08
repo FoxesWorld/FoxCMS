@@ -312,15 +312,20 @@
 
 				<div class="pageItem">
 					<div class="itemTitle"><img src="%assets%/icons/units.png" alt="Units Icon" style="height: 24px;width: 24px;" uk-img /> %lang|units%</div>
-					<div class="itemDetail" id="[login]Units">0</div>
+					<div class="itemDetail" id="[login]units">0</div>
 				</div>
 
 				<div class="pageItem">
 					<div class="itemTitle"><img src="%assets%/icons/crystals.png" alt="Crystals Icon" style="height: 24px;width: 24px;" uk-img /> %lang|crystals%</div>
-					<div class="itemDetail" id="[login]Crystals">0</div>
+					<div class="itemDetail" id="[login]crystals">0</div>
 				</div>
 				<script>
-					foxEngine.editUser.parseBalance([balance]);
+					let balance = [balance];
+					for (const item of balance) {
+						for (const [key, value] of Object.entries(item)) {
+							$("#[login]"+key).html(value);
+						}
+					}
 				</script>
 				[/hasPriviligies]
 			</div>

@@ -34,6 +34,7 @@ $config = array(
 ),
 
 	"securitySetings" => array(
+		"reCaptchaCheck" => true,
 		"reCaptchaSecret" => "6LcKeBoiAAAAAK-dFGsiDyqZvO_1u7MKWscdEJqJ",
 		"reCaptchaWebsite" => "6LcKeBoiAAAAAGnhfzZnLyzUApLmgnOpP4OfFOB7",
 		"bantime" => "20",

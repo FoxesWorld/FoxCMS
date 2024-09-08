@@ -34,13 +34,6 @@
 				 }); 
 		}
 		
-		parseBalance(balance){
-			setTimeout(async () => {	
-				$("#"+this.login + "Units").html(balance[1].units);
-				$("#"+this.login + "Crystals").html(balance[0].crystals);
-			}, 2000);
-		}
-		
 		colorPickerInit(){
 			$('input[name="colorPicker"]').on('click', function() {
 				const rad = document.getElementsByName('colorPicker');

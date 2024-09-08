@@ -50,20 +50,6 @@
 							die($SelectUsers->selectUsersBy(@RequestHandler::$REQUEST['selectKey'], "'".@RequestHandler::$REQUEST['selectValue']."'"));
 						break;
 						
-						case "log":
-							$file = @RequestHandler::$REQUEST['file'];
-							$logfile = ENGINE_DIR. DIRECTORY_SEPARATOR . 'cache/logs/'.$file.'.log';
-							if(file_exists($logfile)){
-								$lines = $this->getLastLines($logfile, @intval(@RequestHandler::$REQUEST['lines']));
-								foreach($lines as $line){
-									echo $line."\n";
-								}
-								die();
-							} else {
-								die('{"message": "File '.$logfile.' not found"}');
-							}
-						break;
-						
 						case "parseServers":
 						//if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
 							init::classUtil('ServerParser', "1.0.0");
@@ -266,38 +252,6 @@
 			} else {
 				die('{"message": "Not logged in!"}');
 			}
-		}
-		
-		private function getLastLines($filename, $numLines = 50) {
-			$lines = array();
-			$handle = fopen($filename, "r");
-			
-			if ($handle) {
-				fseek($handle, -1, SEEK_END);
-				$position = ftell($handle);
-				$buffer = "";
-				while ($position > 0 && count($lines) < $numLines) {
-					$position--;
-					fseek($handle, $position);
-					$char = fgetc($handle);
-					if ($char === "\n") {
-						array_unshift($lines, $buffer);
-						$buffer = "";
-					} else {
-						$buffer = $char . $buffer;
-					}
-				}
-				
-				if ($buffer !== "") {
-					array_unshift($lines, $buffer);
-				}
-				
-				fclose($handle);
-			} else {
-				return false;
-			}
-
-			return $lines;
 		}
 				
 		private function handleDeleteFile(string $filetype): void {
