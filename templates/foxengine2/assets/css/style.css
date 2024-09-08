@@ -172,15 +172,15 @@ body {
     color: #000;
 }
 
-.foxesPad, .foxesApp ul.foxesPad, .foxesApp ol.foxesPad {
+.foxesPad, ul.foxesPad, ol.foxesPad {
     padding: var(--sp-5);
 }
 
-.foxesPad_double, .foxesApp ul.foxesPad_double, .foxesApp ol.foxesPad_double {
+.foxesPad_double, ul.foxesPad_double, ol.foxesPad_double {
     padding: var(--sp-8);
 }
 
-.foxesPad_half, .foxesApp ul.foxesPad_half, .foxesApp ol.foxesPad_half {
+.foxesPad_half, ul.foxesPad_half, ol.foxesPad_half {
     padding: var(--sp-3);
 }
 
@@ -379,6 +379,30 @@ img {
     }
 }
 
+@media (max-width: 979px) {
+    .foxesResponsive_showDesktop {
+        display:none !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width:979px) {
+    .foxesResponsive_hideTablet {
+        display:none !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .foxesResponsive_showPhone {
+        display:none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .foxesResponsive_hidePhone, .foxesResponsive_showTablet {
+        display:none !important;
+    }
+}
+
 .scale-down {
     -webkit-animation-name: scale-down;
     -moz-animation-name: scale-down;
@@ -397,6 +421,9 @@ img {
     animation-duration: 1s;
 }
 
+.fields_item {
+	    margin: 15px;
+}
 
 .foxesNav {
 	margin: 0px auto;
