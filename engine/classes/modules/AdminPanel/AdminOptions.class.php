@@ -118,7 +118,7 @@ if(!defined("ADMIN")){
 					
 					case "log":
 					$file = @RequestHandler::$REQUEST['file'];
-							$logfile = ENGINE_DIR. DIRECTORY_SEPARATOR . 'cache/logs/'.$file.'.log';
+							$logfile = ENGINE_DIR. 'cache/logs/'.$file.'.log';
 							if(file_exists($logfile)){
 								$lines = $this->getLastLines($logfile, @intval(@RequestHandler::$REQUEST['lines']));
 								foreach($lines as $line){

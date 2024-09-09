@@ -24,6 +24,11 @@
 	display: flex;
 }
 
+
+.logWrapper {
+	margin: 10px;
+}
+
         #loading {
             display: none;
             color: #007bff;
@@ -40,24 +45,32 @@
             background-color: #f9f9f9;
             border-radius: 4px;
 		    font-size: 12px;
-			margin: 10px;
         }
-        .timestamp {
+        #logs .timestamp {
             color: #555;
             font-weight: bold;
         }
-        .username {
+		#logs .time {
+			color: green;
+		}
+		
+		#logs .username {
             color: #007bff;
         }
-        .ip-address {
+        #logs .ip-address {
             color: #28a745;
         }
-        .action {
+        #logs .action {
             color: #17a2b8;
         }
-        .error {
+        #logs .error {
             color: #dc3545;
         }
+		
+		#logs strong {
+			font-family: 'GothamPro-Bold';
+			color: #d46621;
+		}
 
 .loading-spinner {
     position: absolute;

@@ -1,11 +1,14 @@
-[09.09.2024] (09:19:53) Updater 31.173.81.10 with version '1.1.9-VaultDweller' requests an update information
-[09.09.2024] (09:19:53) Intel(R) Core(TM) i5-4590 CPU @ 3.30GHz
-[09.09.2024] (09:20:07) AidenFox successfully authorized from 31.173.81.10
-[09.09.2024] (09:20:51) AidenFox successfully authorized from 31.173.81.10
-[09.09.2024] (09:20:57) AidenFox successfully authorized from 31.173.81.10
-[09.09.2024] (09:21:13) AidenFox successfully authorized from 31.173.81.10
-[09.09.2024] (09:31:39) Updater 31.173.81.10 with version '1.1.9-VaultDweller' requests an update information
-[09.09.2024] (09:31:39) Intel(R) Core(TM) i5-4590 CPU @ 3.30GHz
-[09.09.2024] (09:31:54) AidenFox successfully authorized from 31.173.81.10
-[09.09.2024] (09:32:16) Jesus failed authorization with password Jesus12
-[09.09.2024] (09:32:23) Jesus successfully authorized from 31.173.81.10
+[09.09.2024] (11:55:35) **JoinServer constructor called**
+[09.09.2024] (11:55:35) Database connection established
+[09.09.2024] (11:55:35) Validating session for userMd5: 436246fdf1d0f84b5b2ca7e0646aecc9
+[09.09.2024] (11:55:35) Session validated successfully
+[09.09.2024] (11:55:35) Updating session for userMd5: 436246fdf1d0f84b5b2ca7e0646aecc9
+[09.09.2024] (11:55:35) Session updated successfully for userMd5: 436246fdf1d0f84b5b2ca7e0646aecc9
+[09.09.2024] (11:55:36) AidenFox - passed pregMatch
+[09.09.2024] (11:55:36) 151aada472f57458d10dd7c7d996ff099b21427c - passed pregMatch
+[09.09.2024] (11:55:36) Initialization complete: User - AidenFox, ServerId - 151aada472f57458d10dd7c7d996ff099b21427c
+[09.09.2024] (11:55:36) Fetching user session for: User AidenFox, ServerId 151aada472f57458d10dd7c7d996ff099b21427c
+[09.09.2024] (11:55:36) Session found: User - AidenFox, UUID - 436246fdf1d0f84b5b2ca7e0646aecc9
+[09.09.2024] (11:55:36) User check passed: AidenFox
+[09.09.2024] (11:55:36) **======================**
+[09.09.2024] (11:58:02) AidenFox successfully authorized from 31.173.81.10
