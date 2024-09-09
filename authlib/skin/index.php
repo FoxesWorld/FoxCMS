@@ -40,8 +40,6 @@ class Skin {
         if (strlen($uuid) === 32) {
             global $config, $LOGGER;
 
-            $LOGGER->WriteLine("SkinLib=== ");
-
             try {
                 $LOGGER->WriteLine("SkinLib is being created with " . $uuid . " UUID");
 

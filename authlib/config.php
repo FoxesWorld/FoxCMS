@@ -14,6 +14,6 @@ $config = array(
 'skinUrl' => 'https://foxescraft.ru/uploads/users/'
 );
 
-$LOGGER = new Logger('authlib');
+$LOGGER = new Logger('lastlog');
 
 require (__DIR__.'/fun.class.php');
