@@ -10,7 +10,7 @@
 	} 
 </useroption>
  <pageContent>
-     <script type="module" src="/plugins/AdminTools-1.0.0/js/AdminPanel.js"></script>
+<script type="module" src="/plugins/AdminTools-1.0.0/js/AdminPanel.js"></script>
 <div class="adminPanel">
     <div class="main-panel">
         <div class="content-wrapper">
@@ -20,7 +20,11 @@
             <div class="row">
                 <div class="col-md-12 grid-margin" id="adminContent"></div>
             </div>
-            <input type="number" id="linesNum" class="form-control" value="20" />
+			<ul class="col-xs-6 col-sm-6 col-md-5 m-1">
+				<li>
+                    <input type="number" id="linesNum" class="form-control" value="20" placeholder="Строки">
+				</li>
+			</ul>
             <div class="logger" id="logs"></div>
             <div id="loading" class="loading-spinner" style="display:none;"></div>
         </div>
@@ -28,23 +32,35 @@
 </div>
 
 
-    <script>
-		fetchLogs();
+<script>
+const logsContainer = document.getElementById('logs');
+function initializeLogging() {
+    if (document.getElementById('logs') && document.getElementById('linesNum')) {
+        fetchLogs();
+		logsContainer.classList.add('fade-in');
         setInterval(fetchLogs, 2000);
+    } else {
+        setTimeout(initializeLogging, 100); 
+    }
+}
 
-        async function fetchLogs() {
-            const fileName = "lastlog"; // Имя файла для загрузки
-            //$('#loading').show(); // Показываем индикатор загрузки
+async function fetchLogs() {
+    const fileName = "lastlog";
+    const loadingElement = document.getElementById('loading');
+    const logsElement = document.getElementById('logs');
+    
+    loadingElement.style.display = 'block';
 
-            try {
-                let logs = await foxEngine.sendPostAndGetAnswer({ admPanel: "log", file: fileName, lines: $("#linesNum").val() }, "TEXT");
-                $('#logs').html(formatLogs(logs));
-            } catch (error) {
-                $('#logs').html('<div class="error">Error fetching logs: ' + error.message + '</div>');
-            } finally {
-                //$('#loading').hide();
-            }
-        }
+    try {
+        const response = await foxEngine.sendPostAndGetAnswer({ admPanel: "log", file: fileName, lines: document.getElementById('linesNum').value }, "TEXT");
+        logsElement.innerHTML = formatLogs(response);
+        animateLogs();
+    } catch (error) {
+        logsElement.innerHTML = '<div class="error">Error fetching logs: ' + error.message + '</div>';
+    } finally {
+        loadingElement.style.display = 'none';
+    }
+}
 
 function formatLogs(logs) {
     const lines = logs.split('\n');
@@ -73,11 +89,15 @@ function formatLogs(logs) {
 }
 
 function animateLogs() {
-    const logsContainer = document.getElementById('logs');
-    logsContainer.classList.add('fade-in');
-    setTimeout(() => logsContainer.classList.remove('fade-in'), 1000);
+    setTimeout(() => {
+        logsContainer.scrollTop = logsContainer.scrollHeight;
+    }, 1000);
 }
 
+
+(function() {
+	 initializeLogging();
+})();
     </script>
 
 <script>

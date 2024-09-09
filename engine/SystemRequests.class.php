@@ -121,9 +121,7 @@
 								} else {
 									$im = skinViewer2D::createPreview(ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . DIRECTORY_SEPARATOR . 'skin.png', $cloak, @RequestHandler::$REQUEST['side']);
 								}
-							
-								//header('Content-Type: image/png');
-								//imagepng($im);
+
 								ob_start();
 								imagepng($im);
 								$image_data = ob_get_contents();
@@ -146,7 +144,10 @@
 						
 						case "loadFiles":
 							if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
-								$gameScanner = new GameScanner(@RequestHandler::$REQUEST['client'], @RequestHandler::$REQUEST['version'], @RequestHandler::$REQUEST['platform']);
+								$client = @RequestHandler::$REQUEST['client'];
+								$version = @RequestHandler::$REQUEST['version'];
+								$this->logger->WriteLine(REMOTE_IP." requests '".$client." ".$version."' files");
+								$gameScanner = new GameScanner($client, $version, @RequestHandler::$REQUEST['platform']);
 								die($gameScanner->checkfiles());
 							} else {
 								die('{"message": "Invalid Agent!"}');
@@ -221,6 +222,7 @@
 			
 		private function handleUploadFile($fileType) : void {
 			if(init::$usrArray['isLogged']) {
+				$this->logger->WriteLine("Logged user '".init::$usrArray['login']."' uploading ".$fileType);
 				if(@RequestHandler::$REQUEST['csrf_token'] === init::$usrArray['hash']) {
 					$perms = array( 
 								"skin"=>"64",
