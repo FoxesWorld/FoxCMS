@@ -11,6 +11,7 @@
 		
 			private $requestHeader = "sysRequest";
 			protected $db, $logger;
+			private $emojiParser;
 			
 			function __construct($db, $logger) {
 				init::classUtil('inDirScanner', "1.1.3");
@@ -32,7 +33,20 @@
 
 						case "parseEmojis":
 							init::classUtil('EmojiParser', "1.0.0");
-							die(json_encode(new EmojiParser()));
+							$this->emojiParser = new EmojiParser();
+							die(json_encode($this->emojiParser));
+						break;
+						
+						case "getEmoticon":
+							init::classUtil('EmojiParser', "1.0.0");
+							$this->emojiParser = new EmojiParser();
+							$emoticon = str_replace(':', "", @RequestHandler::$REQUEST['emoKey']);
+							$img = $this->emojiParser->getEmoticonUrl($emoticon);
+							if(file_exists($img)){
+								die(str_replace(ROOT_DIR, '', $img));
+							} else {
+								die('/templates/foxengine2/assets/emoticons/no-image.png');
+							}
 						break;
 						
 						case "getJre":
@@ -133,7 +147,7 @@
 							break;
 							
 							case "uploadFile":
-								$this->handleUploadFile(@RequestHandler::$REQUEST['type']);
+								$this->handleUploadFile(@RequestHandler::$REQUEST['type'], @RequestHandler::$REQUEST['login']);
 							break;
 							
 								
@@ -171,7 +185,7 @@
 						if(strlen($version) <= 0) {
 							$this->handleDownloadUpdaterLegacy();
 						} else {
-							if($version == "1.1.8-VaultDweller" || $version == "1.1.9-VaultDweller") {
+							if($version == "1.1.8-VaultDweller" || $version == "1.1.9-VaultDweller" || $version == "1.2.0-Revelation") {
 								$this->handleDownloadUpdater();
 							} else {
 								$this->handleDownloadUpdaterSecondLegacy();
@@ -220,36 +234,41 @@
 			return false;
 		}
 			
-		private function handleUploadFile($fileType) : void {
+		private function handleUploadFile($fileType, $login) : void {
 			if(init::$usrArray['isLogged']) {
-				$this->logger->WriteLine("Logged user '".init::$usrArray['login']."' uploading ".$fileType);
-				if(@RequestHandler::$REQUEST['csrf_token'] === init::$usrArray['hash']) {
-					$perms = array( 
-								"skin"=>"64",
-								"cloak"=>"64",
-								"hd_skin" => "1024",
-								"hd_cloak" => "1024"
-							);
-					switch($fileType){
-						case "skin":
-							init::classUtil('CapeUpload', "1.0.0");
-							$skinUpload = new CapeUpload(init::$usrArray['login'], $perms);
-							$skinUpload->uploadFile(@$_FILES[0], init::$usrArray['usrFolder'], "skin.png");
-						break;
-											
-						case "cloak":
-							init::classUtil('CapeUpload', "1.0.0");
-							$capeUpload = new CapeUpload(init::$usrArray['login'], $perms);
-							$capeUpload->uploadFile($_FILES[0], init::$usrArray['usrFolder'], "cape.png");
-							die('{"message": "Загрузка плащей в разработке!", "type": "warn"}');
-						break;
-						
-						default:
-							die('{"message": "Unknown filetype!"}');
-						break;
+				if($login === init::$usrArray['login'] || init::$usrArray['user_group'] == 1) {
+					$this->logger->WriteLine("Logged user '".init::$usrArray['login']."' uploading ".$fileType." for ".$login);
+					if(@RequestHandler::$REQUEST['csrf_token'] === init::$usrArray['hash'] || init::$usrArray['user_group'] == 1) {
+						$folder = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER .$login. '/';
+						$perms = array( 
+									"skin"=>"64",
+									"cloak"=>"64",
+									"hd_skin" => "1024",
+									"hd_cloak" => "1024"
+								);
+						switch($fileType){
+							case "skin":
+								init::classUtil('CapeUpload', "1.0.0");
+								$skinUpload = new CapeUpload($login, $perms);
+								$skinUpload->uploadFile(@$_FILES[0], $folder, "skin.png");
+							break;
+												
+							case "cloak":
+								init::classUtil('CapeUpload', "1.0.0");
+								$capeUpload = new CapeUpload($login, $perms);
+								$capeUpload->uploadFile($_FILES[0], $folder, "cape.png");
+								die('{"message": "Загрузка плащей в разработке!", "type": "warn"}');
+							break;
+							
+							default:
+								die('{"message": "Unknown filetype!"}');
+							break;
+						}
+					} else {
+						die('{"message": "Incorrect token!"}');
 					}
 				} else {
-					die('{"message": "Incorrect token!"}');
+					die('{"message": "Insufficent rights!"}');
 				}
 			} else {
 				die('{"message": "Not logged in!"}');

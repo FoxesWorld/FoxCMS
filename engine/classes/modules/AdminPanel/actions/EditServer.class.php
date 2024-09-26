@@ -31,7 +31,7 @@ public function updateServer($data) {
     // Build SET part of the query dynamically
     $setClause = [];
     foreach ($this->allowedColumns as $column) {
-        if (array_key_exists($column, $data) && $column !== 'serverName') {
+        if (array_key_exists($column, $data) ) {//&& $column !== 'serverName'
             $setClause[] = "$column = :$column";
         }
     }

@@ -52,5 +52,4 @@ if (isset($user[0])) {
 		$string = uuidFromString("OfflinePlayer:".$string);
 		return $string;
 	}
-}
 ?>

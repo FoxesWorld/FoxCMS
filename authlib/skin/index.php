@@ -49,6 +49,7 @@ class Skin {
                 $userDir = $config['skinUrl'] . $this->realUser;
                 $this->setTextures('SKIN', $userDir . '/skin.png');
                 $this->setTextures('CAPE', $userDir . '/cape.png');
+				$LOGGER->WriteLine($userDir);
 				die(json_encode(self::getProfileData($uuid, $this->realUser,$this->textures), JSON_UNESCAPED_SLASHES));
             } catch (PDOException $pe) {
                 die($pe);

@@ -56,7 +56,7 @@ export class Servers {
 				icon = `<i style="color: red" class="fa-regular fa-xmark-large fa-fw"></i>`;
 			}
 			const serverHtml = await foxEngine.replaceTextInTemplate(serverRowTpl, {
-				index: index + 1,
+				index: server.id, //index + 1
 				serverName: server.serverName,
 				serverVersion: server.serverVersion,
 				serverVstyle: server.serverVersion.split('-')[0].replaceAll('.', ''),
@@ -70,6 +70,11 @@ export class Servers {
 			$('.editServerButt').click((event) => {
 				const serverName = $(event.currentTarget).attr('data-serverName');
 				this.editServer.loadServerOptions(serverName);
+			});
+
+			$('.deleteServerButt').click((event) => {
+				const serverName = $(event.currentTarget).attr('data-serverName');
+				this.editServer.deleteServer(serverName);
 			});
 	}
 

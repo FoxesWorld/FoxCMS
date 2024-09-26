@@ -11,8 +11,8 @@ class GameScanner extends Init {
     private array $dirsToCheck;
     private int $platform;
     private array $platformExtensions = [
-        ["so", "zip", "jar", "toml", "txt", "cfg", "recipe", "dat", "properties", "json", "git", "sha1", "", "cache", "tsrg", "mcmeta", "png", "wav", "ogg"],
-        ["dll", "zip", "jar", "toml", "txt", "cfg", "recipe", "dat", "properties", "git", "sha1", "json", "mcmeta", "png", "wav", "ogg"],
+        ["so", "zip", "jar", "toml", "txt", "cfg", "recipe", "dat", "properties", "json", "git", "sha1", "", "cache", "tsrg", "mcmeta", "png", "wav", "ogg", "js", "local", "ks", "nbt"],
+        ["dll", "zip", "jar", "toml", "txt", "cfg", "recipe", "dat", "properties", "git", "sha1", "json", "mcmeta", "png", "wav", "ogg", "js", "local", "ks", "nbt"],
         ["dylib", "zip", "jar", "toml", "txt", "cfg", "recipe", "dat", "properties", "git", "sha1", "json"],
         ["so", "zip", "jar", "toml", "txt", "cfg", "recipe", "dat", "properties", "git", "sha1", "json"],
         ["so", "zip", "jar", "toml", "txt", "cfg", "recipe", "dat", "properties", "git", "sha1", "json"]
