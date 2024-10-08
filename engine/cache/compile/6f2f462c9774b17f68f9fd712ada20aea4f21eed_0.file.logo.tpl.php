@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-10-08 09:42:00
+/* Smarty version 4.0.4, created on 2024-09-26 10:03:33
   from '/var/www/FoxCMS/templates/foxengine2/logo.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_6704d438cec284_31871546',
+  'unifunc' => 'content_66f507458339f1_21720056',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6704d438cec284_31871546 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66f507458339f1_21720056 (Smarty_Internal_Template $_smarty_tpl) {
 ?>            <div class="logo-block">
                 <a href="/" class="navbar-brand">
                     <div class="logoWrapper">
