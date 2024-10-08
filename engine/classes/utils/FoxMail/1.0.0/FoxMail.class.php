@@ -62,49 +62,55 @@ class foxMail extends init{
 		}
 	}
 	
-	function send($to, $subject, $message) {
-	
-			if( $this->from ) {
-				$this->mail->addReplyTo($this->from, $this->from);
-			}
-			
-			$this->mail->addAddress($to);
-			$this->mail->Subject = $subject;
-			
-			if($this->mail->Mailer == 'smtp' AND $this->keepalive ) {
-				$this->mail->SMTPKeepAlive = true;
-			}
-			
-			if( $this->html_mail ) {
-				$this->mail->msgHTML($message);
-			} else {
-				$this->mail->Body = $message;
-			}
+	function send($to, $subject, $templateName, $entries = array()) {
+		$template = $this->getTemplate($templateName);
+		$message = $this->replaceEntries($template, $entries);
 
-			if( count( $this->bcc ) ) {
-				
-				foreach($this->bcc as $bcc) {
-					$this->mail->addBCC($bcc);
-				}
-				
+		if ($this->from) {
+			$this->mail->addReplyTo($this->from, $this->from);
+		}
+
+		$this->mail->addAddress($to);
+		$this->mail->Subject = $subject;
+
+		if ($this->mail->Mailer == 'smtp' && $this->keepalive) {
+			$this->mail->SMTPKeepAlive = true;
+		}
+
+		if ($this->html_mail) {
+			$this->mail->msgHTML($message);
+		} else {
+			$this->mail->Body = $message;
+		}
+
+		if (count($this->bcc)) {
+			foreach ($this->bcc as $bcc) {
+				$this->mail->addBCC($bcc);
 			}
-			
-			if (!$this->mail->send()) {
-				$this->smtp_msg = $this->mail->ErrorInfo;
-				$this->send_error = true;
-				//die ('{"message": "'.$this->smtp_msg.'", "type": "error"}');
-			} else {
-				//die('{"message": "'.$this->smtp_msg.$to.'", "type": "success"}');
-			}
-			
-			$this->mail->clearAllRecipients();
-			$this->mail->clearAttachments();
-	
+		}
+
+		if (!$this->mail->send()) {
+			$this->smtp_msg = $this->mail->ErrorInfo;
+			$this->send_error = true;
+		}
+
+		$this->mail->clearAllRecipients();
+		$this->mail->clearAttachments();
 	}
 	
+	function replaceEntries($template, $entries) {
+		foreach ($entries as $key => $value) {
+			$template = str_replace("{{" . $key . "}}", $value, $template);
+		}
+		return $template;
+	}
+
+
+	
 	function getTemplate($name) {
+		global $config;
 		ob_start();
-		include (ROOT_DIR.$name);
+		include (TEMPLATE_DIR.$config['siteSettings']['siteTpl'].DIRECTORY_SEPARATOR.'mail/'.$name);
 		$text = ob_get_clean();
 		return $text;
     }

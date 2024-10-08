@@ -84,9 +84,13 @@
 						
 						case "mailTest":
 						init::classUtil('FoxMail', "1.0.0");
+						$entries = [
+							'username' => 'Иван',
+							'activation_link' => 'http://example.com/activate?token=123456'
+						];
 							$foxMail = new foxMail(true);
-							$foxMail->send(@RequestHandler::$REQUEST['mail'], "TEST", @RequestHandler::$REQUEST['msg']);
-							die();
+							$foxMail->send(@RequestHandler::$REQUEST['mail'], "TEST", "welcome.tpl", $entries);
+							die('{"message": "success"}');
 						break;
 						
 						case 'skin':

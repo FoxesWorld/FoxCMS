@@ -12,7 +12,8 @@ export class Page {
     }
 
     async loadPage(page, block) {
-        if (page === this.selectPage.thisPage) {
+		const cleanPage = page.split('?')[0];
+        if (cleanPage === this.selectPage.thisPage) {
             return;
         }
         block = block || this.foxEngine.replaceData.contentBlock;
@@ -22,7 +23,7 @@ export class Page {
             behavior: 'smooth'
         });
 
-        const response = await this.foxEngine.sendPostAndGetAnswer({ "getOption": page }, "TEXT");
+        const response = await this.foxEngine.sendPostAndGetAnswer({ "getOption": cleanPage }, "TEXT");
 
         if (!this.foxEngine.utils.isJson(response)) {
             const responseHTML = this.foxEngine.parseResponseHTML(response);
@@ -43,8 +44,8 @@ export class Page {
 
                 if (this.foxEngine.entryReplacer) {
                     await this.loadData(await this.foxEngine.entryReplacer.replaceText(responseHTML.body.innerHTML), block);
-                    this.setPage(page);
-                    location.hash = `#page/${page}`;
+                    this.setPage(cleanPage);
+                    location.hash = `#page/${cleanPage}`;
                 } else {
                     console.error("Invalid or undefined foxEngine.entryReplacer.replaceText");
                 }

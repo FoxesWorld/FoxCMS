@@ -16,11 +16,8 @@
                              </td>
                              <td> [input type="password" name="password" placeholder="Пароль"] </td>
                          </tr>
-                     </table> [input type="checkbox" name="rememberMe" placeholder="Запомнить меня"] [input type="captcha" siteKey="{siteKey}" lang="{lang}"] <script>
-                         function fillResponse(){
-                         	$("#g-recaptcha-response").attr('value', grecaptcha.getResponse());
-                         }
-                     </script>
+                     </table> [input type="checkbox" name="rememberMe" placeholder="Запомнить меня"] 
+					 [input type="captcha" siteKey="{siteKey}" lang="{lang}"] 
                      <input name="userAction" type="hidden" value="auth" />
                  </form>
                  <a href="#" onclick="foxEngine.page.loadPage('lostpassword'); return false;">Забыли пароль?</a>

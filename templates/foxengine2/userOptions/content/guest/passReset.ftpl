@@ -1,0 +1,49 @@
+ <useroption> { "optionGroup": 5, "type": "pageContent" } </useroption>
+ <pageContent>
+     <div class="pageRoot">
+         <div class="page-content">
+             <div class="formContent">
+                 <h1>Давай сбросим!</h1>
+				 <h5>Сейчас всё восстановим!</h5>
+                <form method="POST" action="/" id="resetpassword">
+					 <div class="form-floating mb-3 input_block">
+							<input type="password" name="new_password"  class="form-control input" placeholder="Новый пароль" required />
+                            <label for="password">Новый Пароль</label>
+                     </div>
+					 
+					 
+					<div class="form-floating mb-3 input_block">
+							<input type="password" name="confirm_password" class="form-control input" placeholder="Повторите новый пароль" required />
+                            <label for="password">Повторите Пароль</label>
+                     </div>
+                    <button type="submit" class="login">Сохранить <i class="fa fa-lock"></i></button>
+                    <input name="user_doaction" type="hidden" value="resetpassword" />
+                </form>
+             </div>
+         </div>
+     </div>
+	 
+    <script>
+	(function(){
+	const url = window.location.href;
+	const params = new URLSearchParams(window.location.hash.split('?')[1]);
+	const testValue = params.get('test');
+	console.log(testValue);
+	}());
+	
+	
+	function gw(){
+// Получаем текущий URL
+const url = window.location.href;
+
+// Используем URLSearchParams для парсинга параметров
+const params = new URLSearchParams(window.location.hash.split('?')[1]);
+
+// Получаем значение параметра 'test'
+const testValue = params.get('test');
+
+console.log(testValue);
+}
+
+    </script>
+ </pageContent>

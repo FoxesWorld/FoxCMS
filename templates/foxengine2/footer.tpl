@@ -4,10 +4,11 @@
 <footer class="bar">
    <div class="container footer--flex">
    
-         <div class="footer-copyright">
-         {$siteTitle} {$siteStatus} <b>{$year}</b>
-		 <span>Powered by {$webserviceName} v.{$ServiceVersion}<img class="img-fluid" uk-img /></span>
-      </div>
+	<div class="footer-copyright d-lg-block d-none">
+		{$siteTitle} {$siteStatus} <b>{$year}</b>
+		<span>Powered by {$webserviceName} v.{$ServiceVersion}<img class="img-fluid" uk-img /></span>
+	</div>
+
 	  
 	  <div style="margin: 0px 15px;">
 			<h5>© 2016-{$year} FoxesCraft.RU</h5>
@@ -56,12 +57,6 @@
 				
 			</div>
 		</div>
-		
-		<li class="d-none d-md-flex">
-			<a href="https://webmaster.yandex.ru/siteinfo/?site=foxescraft.ru">
-				<img width="88" height="31" alt="" border="0" src="https://yandex.ru/cycounter?foxescraft.ru&theme=light&lang=ru"/>
-			</a>
-		</li>
       </ul>
    </div>
 </footer>

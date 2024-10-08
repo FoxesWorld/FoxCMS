@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-09-26 10:03:33
+/* Smarty version 4.0.4, created on 2024-10-08 16:53:44
   from '/var/www/FoxCMS/templates/foxengine2/footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_66f507458408b9_50010567',
+  'unifunc' => 'content_670539688442b1_04250156',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '21164cd38f4b1e20c2b131e7201342b1d7510eaf' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/footer.tpl',
-      1 => 1725718480,
+      1 => 1728394823,
       2 => 'file',
     ),
   ),
@@ -20,22 +20,23 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_66f507458408b9_50010567 (Smarty_Internal_Template $_smarty_tpl) {
+function content_670539688442b1_04250156 (Smarty_Internal_Template $_smarty_tpl) {
 ?>   <div id="button-up" style="display: block;">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </div>
 <footer class="bar">
    <div class="container footer--flex">
    
-         <div class="footer-copyright">
-         <?php echo $_smarty_tpl->tpl_vars['siteTitle']->value;?>
+	<div class="footer-copyright d-lg-block d-none">
+		<?php echo $_smarty_tpl->tpl_vars['siteTitle']->value;?>
  <?php echo $_smarty_tpl->tpl_vars['siteStatus']->value;?>
  <b><?php echo $_smarty_tpl->tpl_vars['year']->value;?>
 </b>
-		 <span>Powered by <?php echo $_smarty_tpl->tpl_vars['webserviceName']->value;?>
+		<span>Powered by <?php echo $_smarty_tpl->tpl_vars['webserviceName']->value;?>
  v.<?php echo $_smarty_tpl->tpl_vars['ServiceVersion']->value;?>
 <img class="img-fluid" uk-img /></span>
-      </div>
+	</div>
+
 	  
 	  <div style="margin: 0px 15px;">
 			<h5>© 2016-<?php echo $_smarty_tpl->tpl_vars['year']->value;?>
@@ -89,12 +90,6 @@ function content_66f507458408b9_50010567 (Smarty_Internal_Template $_smarty_tpl)
 				
 			</div>
 		</div>
-		
-		<li class="d-none d-md-flex">
-			<a href="https://webmaster.yandex.ru/siteinfo/?site=foxescraft.ru">
-				<img width="88" height="31" alt="" border="0" src="https://yandex.ru/cycounter?foxescraft.ru&theme=light&lang=ru"/>
-			</a>
-		</li>
       </ul>
    </div>
 </footer><?php }

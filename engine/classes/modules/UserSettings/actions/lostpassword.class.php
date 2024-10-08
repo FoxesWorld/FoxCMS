@@ -1,34 +1,64 @@
 <?php
 
-	class LostPassword extends User {
+class LostPassword extends User {
+    protected $db;
 
-		protected $db;
-		
-		function __construct($db){
-			$this->db = $db;
-		}
-		
-		function resetPass($mail){
-			init::classUtil('FoxMail', "1.0.0");
-			if($this->checkMail($mail)){
-				$foxMail = new foxMail(true);
-				$foxMail->send($mail, "Сброс пароля", "Пока не дописано =)");
-				die('{"message": "Well Done!", "type": "info"}');
-			} else {
-				die('{"message": "User not found!", "type": "warn"}');
-			}
-		}
-		
-		private function checkMail($mail) : bool {
-			$query = "SELECT COUNT(*) AS count FROM `users` WHERE `email` = :mail";
-			$stmt = $this->db->prepare($query);
-			$stmt->bindParam(':mail', $mail, \PDO::PARAM_STR);
-			$stmt->execute();
+    function __construct($db) {
+        $this->db = $db;
+    }
 
-			$result = $stmt->fetch(PDO::FETCH_ASSOC);
-			return $result['count'] > 0;
-		}
+    function resetPass($mail) {
+        init::classUtil('FoxMail', "1.0.0");
+        
+        if (!$this->checkMail($mail)) {
+            die('{"message": "User not found!", "type": "warn"}');
+        }
 
+        $userData = $this->getUserData($mail);
+        $resetToken = $this->createResetToken($userData['user_id']);
+        
+        if ($resetToken) {
+            $foxMail = new foxMail(true);
+            $entries = [
+                'username' => $userData['login'],
+                'mail' => $userData['email'],
+                'resetToken' => 'https://foxescraft.ru/#page/passReset?test='.$resetToken
+            ];
+            $foxMail->send($mail, "Сброс пароля", "lostpass.tpl", $entries);
+            die('{"message": "Sending Email!", "type": "success"}');
+        } else {
+            die('{"message": "Error creating reset token!", "type": "error"}');
+        }
+    }
 
-		
-	}
+    private function getUserData($mail) {
+        $query = "SELECT * FROM `users` WHERE `email` = :email";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':email', $mail);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    private function checkMail($mail): bool {
+        $query = "SELECT COUNT(*) AS count FROM `users` WHERE `email` = :mail";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':mail', $mail, \PDO::PARAM_STR);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count'] > 0;
+    }
+
+    private function createResetToken($userId) {
+        $token = bin2hex(random_bytes(16));
+        $expiresAt = date('Y-m-d H:i:s', strtotime('+1 hour')); // Токен истекает через 1 час
+
+        // Сохраняем токен в отдельной таблице
+        $query = "INSERT INTO `password_resets` (`user_id`, `token`, `expires_at`) VALUES (:user_id, :token, :expires_at)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $userId);
+        $stmt->bindParam(':token', $token);
+        $stmt->bindParam(':expires_at', $expiresAt);
+
+        return $stmt->execute() ? $token : false;
+    }
+}
