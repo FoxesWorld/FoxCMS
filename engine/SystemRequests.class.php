@@ -11,6 +11,7 @@
 		
 			private $requestHeader = "sysRequest";
 			protected $db, $logger;
+			private $emojiParser;
 			
 			function __construct($db, $logger) {
 				init::classUtil('inDirScanner', "1.1.3");
@@ -32,7 +33,20 @@
 
 						case "parseEmojis":
 							init::classUtil('EmojiParser', "1.0.0");
-							die(json_encode(new EmojiParser()));
+							$this->emojiParser = new EmojiParser();
+							die(json_encode($this->emojiParser));
+						break;
+						
+						case "getEmoticon":
+							init::classUtil('EmojiParser', "1.0.0");
+							$this->emojiParser = new EmojiParser();
+							$emoticon = str_replace(':', "", @RequestHandler::$REQUEST['emoKey']);
+							$img = $this->emojiParser->getEmoticonUrl($emoticon);
+							if(file_exists($img)){
+								die(str_replace(ROOT_DIR, '', $img));
+							} else {
+								die('/templates/foxengine2/assets/emoticons/no-image.png');
+							}
 						break;
 						
 						case "getJre":
@@ -69,6 +83,7 @@
 						break;
 						
 						case "mailTest":
+						init::classUtil('FoxMail', "1.0.0");
 							$foxMail = new foxMail(true);
 							$foxMail->send(@RequestHandler::$REQUEST['mail'], "TEST", @RequestHandler::$REQUEST['msg']);
 							die();
@@ -133,7 +148,7 @@
 							break;
 							
 							case "uploadFile":
-								$this->handleUploadFile(@RequestHandler::$REQUEST['type']);
+								$this->handleUploadFile(@RequestHandler::$REQUEST['type'], @RequestHandler::$REQUEST['login']);
 							break;
 							
 								
@@ -167,15 +182,13 @@
 						$version = @RequestHandler::$REQUEST['version'];
 						$systemInformation = @RequestHandler::$REQUEST['systemInformation'];
 						$this->logger->WriteLine("Updater ".REMOTE_IP." with version '".$version."' requests an update information");
-						if($systemInformation){$this->logger->WriteLine(json_decode($systemInformation)->cpu);}
+						if($systemInformation){
+							$this->fillHWID($systemInformation);
+							}
 						if(strlen($version) <= 0) {
 							$this->handleDownloadUpdaterLegacy();
 						} else {
-							if($version == "1.1.8-VaultDweller" || $version == "1.1.9-VaultDweller") {
-								$this->handleDownloadUpdater();
-							} else {
-								$this->handleDownloadUpdaterSecondLegacy();
-							}
+							$this->handleDownloadUpdater();
 						}
 						break;
 						
@@ -220,36 +233,41 @@
 			return false;
 		}
 			
-		private function handleUploadFile($fileType) : void {
+		private function handleUploadFile($fileType, $login) : void {
 			if(init::$usrArray['isLogged']) {
-				$this->logger->WriteLine("Logged user '".init::$usrArray['login']."' uploading ".$fileType);
-				if(@RequestHandler::$REQUEST['csrf_token'] === init::$usrArray['hash']) {
-					$perms = array( 
-								"skin"=>"64",
-								"cloak"=>"64",
-								"hd_skin" => "1024",
-								"hd_cloak" => "1024"
-							);
-					switch($fileType){
-						case "skin":
-							init::classUtil('CapeUpload', "1.0.0");
-							$skinUpload = new CapeUpload(init::$usrArray['login'], $perms);
-							$skinUpload->uploadFile(@$_FILES[0], init::$usrArray['usrFolder'], "skin.png");
-						break;
-											
-						case "cloak":
-							init::classUtil('CapeUpload', "1.0.0");
-							$capeUpload = new CapeUpload(init::$usrArray['login'], $perms);
-							$capeUpload->uploadFile($_FILES[0], init::$usrArray['usrFolder'], "cape.png");
-							die('{"message": "Загрузка плащей в разработке!", "type": "warn"}');
-						break;
-						
-						default:
-							die('{"message": "Unknown filetype!"}');
-						break;
+				if($login === init::$usrArray['login'] || init::$usrArray['user_group'] == 1) {
+					$this->logger->WriteLine("Logged user '".init::$usrArray['login']."' uploading ".$fileType." for ".$login);
+					if(@RequestHandler::$REQUEST['csrf_token'] === init::$usrArray['hash'] || init::$usrArray['user_group'] == 1) {
+						$folder = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER .$login. '/';
+						$perms = array( 
+									"skin"=>"64",
+									"cloak"=>"64",
+									"hd_skin" => "1024",
+									"hd_cloak" => "1024"
+								);
+						switch($fileType){
+							case "skin":
+								init::classUtil('CapeUpload', "1.0.0");
+								$skinUpload = new CapeUpload($login, $perms);
+								$skinUpload->uploadFile(@$_FILES[0], $folder, "skin.png");
+							break;
+												
+							case "cloak":
+								init::classUtil('CapeUpload', "1.0.0");
+								$capeUpload = new CapeUpload($login, $perms);
+								$capeUpload->uploadFile($_FILES[0], $folder, "cape.png");
+								die('{"message": "Загрузка плащей в разработке!", "type": "warn"}');
+							break;
+							
+							default:
+								die('{"message": "Unknown filetype!"}');
+							break;
+						}
+					} else {
+						die('{"message": "Incorrect token!"}');
 					}
 				} else {
-					die('{"message": "Incorrect token!"}');
+					die('{"message": "Insufficent rights!"}');
 				}
 			} else {
 				die('{"message": "Not logged in!"}');
@@ -291,7 +309,6 @@
 				}
 			}
 		}
-
 			
 		private function handleDownloadLatest(): void {
 			$path = ROOT_DIR.UPLOADS_DIR."launcher";
@@ -312,6 +329,7 @@
 			die('{"filename": "'.str_replace(ROOT_DIR, "", $path).$subDir.'/'.$file['name'].'", "hash": "'.md5_file($path.$subDir.DIRECTORY_SEPARATOR.$file['name']).'"}');
 		}
 
+		//TEMPORARY!@!!
 		private function handleDownloadUpdaterSecondLegacy() : void {
 			$path = ROOT_DIR.UPLOADS_DIR."updater";
 			$subDir = "/".@RequestHandler::$REQUEST['type'];
@@ -336,14 +354,58 @@
 			$Monitor = new foxesMon($serverParser->parseServers(), array('out'=> 2, 'record_day' => 86400));
 			die($Monitor->foxMonOut());
 		}
-			
-			
+
+
+private function fillHWID($hwid) {
+    $hwidArray = json_decode($hwid, true);
+     $query = "INSERT INTO `userHardware` ";
+    $queryValues = [];
+    $queryParams = [];
+
+	if(!$this->checkCpu($hwidArray['cpuId'])) {
+	foreach ($hwidArray as $key => $value) {
+		$queryParams[] = $key;
+		if(is_array($value)){ $value = json_encode($value);}
+		$queryValues[] = $value;
+	}
+	$query .= "(`" . implode("`, `", $queryParams) . "`)";
+	$query .= " VALUES (";
+	foreach($queryValues as $value){
+        if (is_string($value)) {
+            $formattedValues[] = "'" . $value . "'"; // Quote string values
+        } elseif (is_int($value)) {
+            $formattedValues[] = $value;
+        }
+	}
+	$query .= implode(", ", $formattedValues);
+	$query .= ")";
+	
+	$this->db->run($query);
+	} else {
+		 $this->logger->WriteLine("CPU ID ".$hwidArray['cpuId']." already exists in the database.");
+	}
+
+}
+
+private function checkCpu($cpuId): bool {
+    $query = "SELECT COUNT(*) AS count FROM `userHardware` WHERE `cpuId` = :cpuid";
+    $stmt = $this->db->prepare($query);
+    $stmt->bindParam(':cpuid', $cpuId, \PDO::PARAM_STR);
+    $stmt->execute();
+    
+    $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+    return ($stmt->rowCount() == 1) ? true : false;
+}
+
+
+
+
 		private function selectLatest($files) {
 			usort($files, function($a, $b) {
 				return version_compare($b['name'], $a['name']);
 			});
 
 			return reset($files);
-		} 
+		}
 	}
 ?>

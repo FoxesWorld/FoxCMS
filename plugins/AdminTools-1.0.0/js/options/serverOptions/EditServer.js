@@ -10,6 +10,7 @@ export class EditServer {
 		this.javaVersions = [];
 
 		this.formFields = [
+			//{ "fieldName": 'serverName', "fieldType": 'text' },
 			{ "fieldName": 'host', "fieldType": 'text' },
 			{ "fieldName": 'port', "fieldType": 'number' },
 			{ "fieldName": 'ignoreDirs', "fieldType": 'tagify' },
@@ -58,12 +59,13 @@ export class EditServer {
 								break;
 						}
 					});
-
+					console.log(responses[0].id);
 					let formHtml = `<form id="serverOptionsForm" method="POST" action="/" autocomplete="false">`;
 					formHtml += await this.buildField.buildFormFields(responses);
 					formHtml += `
 						<input type="hidden" name="admPanel" value="editServer" />
 						<input type="hidden" name="serverName" value="${serverName}" />
+						<input type="hidden" name="serverId" value="${responses.id}" />
 						<input name="refreshPage" type="hidden" value="false" />
 						<input name="playSound" type="hidden" value="false" />
 						<div class="buttonGroup">
@@ -94,6 +96,20 @@ export class EditServer {
 			}, 300);
 		} catch (error) {
 			console.error('An error occurred:', error.message);
+		}
+	}
+	
+	async deleteServer(serverName){
+		let answer = await foxEngine.sendPostAndGetAnswer({
+			admPanel: "deleteServer",
+			serverName: serverName
+		}, "JSON");
+		
+		if(answer.type === "success"){
+			setTimeout(() => {
+				this.serversInstance.parseServers();
+				foxEngine.servers.parseOnline();
+			}, 500);
 		}
 	}
 

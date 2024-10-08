@@ -36,6 +36,11 @@ if(!defined('profile')) {
 								//$GiveBadge->giveBadge();
 								die('{"message": "Unsuported"}');
 							break;
+							
+							case 'lostpassword':
+								$lostPassword = new LostPassword($db);
+								$lostPassword->resetPass(RequestHandler::$REQUEST['email']);
+							break;
 								
 							case 'greeting':
 								$text = randTexts::getRandText('greetings');

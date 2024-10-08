@@ -71,6 +71,8 @@
 							if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
 								$AuthLib = new AuthLib($this->db, $this->logger, init::$usrArray, $token);
 							}
+							$this->logger->WriteLine("UUID is -  <b>".$uuid."</b>");
+							$this->logger->WriteLine("TOKEN is -  <b>".$token."</b>");
 							die('{"type": "success","message": "'.$lang['authSuccess'].'", "balance":'.init::$usrArray['balance'].', "login": "'.init::$usrArray['login'].'", "token": "'.$token.'", "group": "'.init::$usrArray['user_group'].'", "uuid": "'.str_replace('-', '', $uuid).'", "colorScheme": "'.init::$usrArray['colorScheme'].'"}');
 						break;
 						
@@ -190,6 +192,8 @@
 			$this->setSession();
 		}
 		
+
+		
 		private function setSession() : void {
 
 			if($this->checkUserSession()) {
@@ -218,5 +222,12 @@
 				$stmt = $this->db->prepare("SELECT * FROM usersession WHERE user = '".$this->login."'");
 				$stmt->execute();
 				return ($stmt->rowCount() == 1) ? true : false;
+		}
+
+		private function getRealUser($login){
+			$stmt = $this->db->prepare("SELECT user, accessToken FROM usersession WHERE user= :login");
+			$stmt->bindValue(':login', $login);
+			$stmt->execute();
+			return $stmt->fetch(PDO::FETCH_ASSOC);
 		}
 	}

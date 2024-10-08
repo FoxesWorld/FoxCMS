@@ -20,8 +20,8 @@ if (!defined('FOXXEY')) {
 	class startUpSound extends init {
 
 		/*INTERNAL SETTINGS*/
-		private static $sndLevel 		= -5;
-		private static $musLevel 		= -11;
+		private static $sndLevel 		= -6;
+		private static $musLevel 		= -8;
 		private 	   $cacheFilePath 	= ENGINE_DIR.'cache/startupsound.timetable';
 		private static $serverVersion 	= '0.5.0.0 Reborn';
 		public static  $musFilesNum 	= 0;
@@ -49,75 +49,43 @@ if (!defined('FOXXEY')) {
 			'mountDir' 			=> ROOT_DIR."/plugins/StartUpSound",
 			'enableVoice' 		=> true,
 			'enableMusic' 		=> true,
-			'easterMusRarity'   => 1,
+			'easterMusRarity'   => 50,
 			'easterSndRarity'	=> 10);
 
 
-		protected static $eventsArray = array(
-			'01' => array(
-				"1-12" =>  array(
-					'eventName' => 'winterHolidays',
-				)
-			),
-
-			'02' => array(
-			
-			),
-			
-			'03' => array(
-				'3' => array(
-					'eventName' => 'casting'
-				)
-			
-			),
-			
-			'04' => array(
-			
-			),
-			
-			'05' => array(
-
-			),
-
-			'06' => array(
-
-			),
-
-			'07' => array(
-
-			),
-
-			'08' => array(
-
-			),
-
-			'09' => array(
-				'1' => array(
-					'eventName' => '8bit')
-			),
-
-			'10' => array(
-
-			),
-
-			'11' => array(
-			
-			),
-
-			'12' => array(
-
-				"26-30" =>  array(
-					'eventName' => 'winterHolidays'
-				),
-				
-				"31"	=> array(
-					'eventName' => 'newYear'
-				),
-
-
-			)
-
-		);
+	   public static $eventsArray = array(
+        '01' => array(
+            "1-12" => array(
+                'eventName' => 'winterHolidays',
+            )
+        ),
+        '02' => array(),
+        '03' => array(
+            '3' => array(
+                'eventName' => 'casting'
+            )
+        ),
+        '04' => array(),
+        '05' => array(),
+        '06' => array(),
+        '07' => array(),
+        '08' => array(),
+        '09' => array(
+            '1' => array(
+                'eventName' => '8bit'
+            )
+        ),
+        '10' => array(),
+        '11' => array(),
+        '12' => array(
+            "26-30" => array(
+                'eventName' => 'winterHolidays'
+            ),
+            "31" => array(
+                'eventName' => 'newYear'
+            )
+        )
+    );
 		protected static $musArray			= array();
 		protected static $sndArray			= array();
 

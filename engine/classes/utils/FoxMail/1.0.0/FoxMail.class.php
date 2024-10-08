@@ -29,7 +29,7 @@ class foxMail extends init{
 	
 	function __construct($is_html = false) {
 		global $config;
-		init::classUtil('Mailer', "1.0.0");
+		require('Mailer.class.php');
 		$this->mail = new PHPMailer;
 		$this->mail->CharSet = $this->config['encoding'];
 		$this->mail->Encoding = "base64";
@@ -92,9 +92,9 @@ class foxMail extends init{
 			if (!$this->mail->send()) {
 				$this->smtp_msg = $this->mail->ErrorInfo;
 				$this->send_error = true;
-				die ('{"message": "'.$this->smtp_msg.'", "type": "error"}');
+				//die ('{"message": "'.$this->smtp_msg.'", "type": "error"}');
 			} else {
-				die('{"message": "'.$this->smtp_msg.$to.'", "type": "success"}');
+				//die('{"message": "'.$this->smtp_msg.$to.'", "type": "success"}');
 			}
 			
 			$this->mail->clearAllRecipients();
@@ -110,7 +110,7 @@ class foxMail extends init{
     }
 	
 	function addAttachment($path, $name = '', $encoding = 'base64', $type = '', $disposition = 'attachment') {
-		$this->mail->addAttachment( $path, $name, $encoding, $type, $disposition );
+		$this->mail->addAttachment($path, $name, $encoding, $type, $disposition );
 	}
 }
 ?>

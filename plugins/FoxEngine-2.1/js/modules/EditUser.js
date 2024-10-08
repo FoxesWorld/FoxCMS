@@ -99,6 +99,7 @@
 
 			data.append('sysRequest', 'uploadFile');
 			data.append('type', type);
+			data.append('login', this.login);
 			data.append('csrf_token', this.foxEngine.replaceData.hash);
 
 			$.ajax({

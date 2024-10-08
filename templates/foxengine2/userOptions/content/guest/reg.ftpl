@@ -4,6 +4,7 @@
          <div class="page-content">
              <div class="formContent">
                  <h1>Регистрация</h1>
+				 <h5>Заходи, не стесняйся!</h5>
                  <form method="POST" action="/" autocomplete="false" id="reg"> [input type="text" name="login" placeholder="Логин"]
                      <!--
                <div class="input_block">
@@ -25,7 +26,8 @@
                </div>
 			   -->  [input type="captcha" siteKey="{siteKey}" lang="{lang}"] 
 					[input type="checkbox" name="dataProcessing-mustValidate" placeholder="Даю согласие на обработку персональных данных"]
-					[input type="checkbox" name="acceptRules-mustValidate" placeholder="Я принимаю "] <a href="#" onclick="foxEngine.page.loadPage('rules'); return false;">Правила</a>
+					[input type="checkbox" name="acceptRules-mustValidate" placeholder="Я принимаю "] 
+					<a href="#" onclick="foxEngine.page.loadPage('rules'); return false;" style="display: inline-block;">Правила</a>
 					<input name="userAction" class="input" type="hidden" value="register" />
                      <button type="submit" class="login">Зарегистрироваться <i class="fa fa-user-plus" aria-hidden="true"></i></button>
                  </form>

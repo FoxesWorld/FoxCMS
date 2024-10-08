@@ -4,6 +4,7 @@
          <div class="page-content">
              <div class="formContent">
                  <h1>Авторизация</h1>
+				 <h5>Мы вас ждали!</h5>
                  <form method="POST" action="/" id="auth">
                      <table>
                          <tr>
@@ -22,7 +23,7 @@
                      </script>
                      <input name="userAction" type="hidden" value="auth" />
                  </form>
-                 <a href="#" onclick="foxEngine.page.loadPage('reg'); return false;">Нет аккаунта?</a>
+                 <a href="#" onclick="foxEngine.page.loadPage('lostpassword'); return false;">Забыли пароль?</a>
              </div>
          </div>
      </div>

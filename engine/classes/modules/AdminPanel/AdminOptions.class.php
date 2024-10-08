@@ -40,6 +40,15 @@ if(!defined("ADMIN")){
 						die($serverParser->parseServers(@RequestHandler::$REQUEST['server']));
 					break;
 					
+					case "deleteServer":
+					$serverName = @RequestHandler::$REQUEST['serverName'];
+						$query = "DELETE FROM `servers` WHERE serverName = '".$serverName."'";
+						$data = $db->run($query);
+						if($data) {
+							die('{"message": "Server '.$serverName.' removed!", "type": "success"}');
+						}
+					break;
+					
 					case "getAllBadges":
 						$query = 'SELECT `badgeName` FROM `badgesList`';
 						$badgesArr = array();
@@ -134,7 +143,8 @@ if(!defined("ADMIN")){
 				die('{"message": "Insufficent rights!"}');
 			}
 		}
-					private function getLastLines($filename, $numLines = 50) {
+		
+		private function getLastLines($filename, $numLines = 50) {
 			$lines = array();
 			$handle = fopen($filename, "r");
 			

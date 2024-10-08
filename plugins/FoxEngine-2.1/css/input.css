@@ -408,8 +408,8 @@ button img {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	margin: 5px 0px;
-	padding: 0 36px;
+	margin: 5px 0px 0px 0px;
+	padding: 0 0px 0px 36px;
 	color: #ccb4af;
 }
 

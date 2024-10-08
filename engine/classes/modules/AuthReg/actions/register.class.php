@@ -16,10 +16,11 @@ class Register extends AuthManager
 
     function __construct($input, $db, $logger)
     {
-        global $lang;
+        global $lang, $config;
         if (@$input["userAction"] === "register") {
             $this->logger = $logger;
             $this->db = $db;
+			$this->maxLoginLength = $config['register']['maxLoginLength'];
             $this->regData = functions::collectData($input, true);
         }
     }
@@ -28,7 +29,6 @@ class Register extends AuthManager
     {
         global $lang, $config;
 		$this->baseUserGroup = $config['register']['baseUserGroup'];
-		$this->maxLoginLength = $config['register']['maxLoginLength'];
 		$this->passminCount = $config['register']['passminCount'];
         if (functions::FoxesStrlen($this->regData['password1']) >= $this->passminCount) {
             if (!preg_match("/[А-Яа-я]/", $this->regData['password1'])) {
@@ -65,8 +65,9 @@ class Register extends AuthManager
             }
         }
 		
-		if(strlen($this->regData['login']) > $this->maxLoginLength) {
-			$this->setError(str_replace("%key%", $this->maxLoginLength, $lang['loginTooLong']), "warn");
+		//die('{"message": "'.$this->maxLoginLength.' gg="}');
+		if(strlen($this->regData['login']) > intval($this->maxLoginLength)) {
+			$this->setError(strlen($this->regData['login']).' '.str_replace("%key%", $this->maxLoginLength, $lang['loginTooLong']), "warn");
 		}
 		
         $this->checkPass();
@@ -84,6 +85,7 @@ class Register extends AuthManager
         }
 
         if ($this->error === false) {
+			init::classUtil('FoxMail', "1.0.0");
             functions::checkSA($this->regData, $this->SAtoCheck);
             $this->logger->WriteLine("Trying to register user '" . $this->regData['login'] . "'");
             $password = password_hash($this->regData['password1'], PASSWORD_DEFAULT);
@@ -100,9 +102,9 @@ class Register extends AuthManager
                 $userData = $loadUserInfo->userInfoArray();
                 $this->logger->WriteLine("User has completed registration '" . $this->regData['login'] . "'");
                 $sessionManager = new sessionManager($userData);
-                functions::jsonAnswer($lang['regComplete'], false);
                 $foxMail = new foxMail(true);
-                $foxMail->send($this->regData['email'], $lang['mail']['register'], "Login ". $this->regData['login'] ." was registered! Welcome <3");
+                $foxMail->send($this->regData['email'], $lang['mail']['register'], "Логин ". $this->regData['login'] ." зарегистрирован! Добро пожаловать <3");
+                functions::jsonAnswer($lang['regComplete'], false);
             }
         } else {
 			exit('{"message": "'.$this->errorArr['message'].'", "type": "'.$this->errorArr['type'].'"}');

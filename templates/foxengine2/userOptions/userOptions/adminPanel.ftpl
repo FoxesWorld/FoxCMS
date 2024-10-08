@@ -18,7 +18,7 @@
                 <h3>%lang|adminOptions%</h3>
             </div>
             <div class="row">
-                <div class="col-md-12 grid-margin" id="adminContent"></div>
+                <div class="col-md-10 grid-margin" id="adminContent"></div>
             </div>
 			<div class="logWrapper">
 				<ul class="inline">
@@ -33,9 +33,12 @@
 						</select>
 					</li>
 				</ul>
+				
 				<div class="logger" id="logs"></div>
 				<div id="loading" class="loading-spinner" style="display:none;"></div>
+				<button id="toggleLogging" class="btn btn-primary">Остановить обновление</button>
 			</div>
+
         </div>
     </div>
 </div>
@@ -43,11 +46,26 @@
 
 <script>
 const logsContainer = document.getElementById('logs');
+const toggleLoggingButton = document.getElementById('toggleLogging');
+let intervalId;
+let isLoggingActive = true;
+
+toggleLoggingButton.addEventListener('click', () => {
+    if (isLoggingActive) {
+        clearInterval(intervalId);
+        toggleLoggingButton.textContent = 'Запустить обновление';
+    } else {
+        intervalId = setInterval(fetchLogs, 2000);
+        toggleLoggingButton.textContent = 'Остановить обновление';
+    }
+    isLoggingActive = !isLoggingActive;
+});
+
 function initializeLogging() {
     if (document.getElementById('logs') && document.getElementById('linesNum')) {
         fetchLogs();
-		logsContainer.classList.add('fade-in');
-        setInterval(fetchLogs, 2000);
+        logsContainer.classList.add('fade-in');
+        intervalId = setInterval(fetchLogs, 2000);
     } else {
         setTimeout(initializeLogging, 100); 
     }
@@ -63,7 +81,7 @@ async function fetchLogs() {
     try {
         const response = await foxEngine.sendPostAndGetAnswer({ admPanel: "log", file: fileName, lines: document.getElementById('linesNum').value }, "TEXT");
         logsElement.innerHTML = formatLogs(response);
-        //animateLogs();
+        // animateLogs(); // если вам нужно, чтобы это работало
     } catch (error) {
         logsElement.innerHTML = '<div class="error">Error fetching logs: ' + error.message + '</div>';
     } finally {
@@ -74,19 +92,16 @@ async function fetchLogs() {
 function formatLogs(logs) {
     const lines = logs.split('\n');
     let formattedLogs = '';
-    let currentDate = '';
 
     lines.forEach(line => {
-        const dateMatch = line.match(/\[(\d{2}\.\d{2}\.\d{4})\]/);
         formattedLogs += line
-			.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/\[(\d{2}\.\d{2}\.\d{4})\]/g, '<span class="timestamp">[$1]</span>')
             .replace(/\((\d{2}:\d{2}:\d{2})\)/g, '<span class="time">($1)</span>')
-			.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/(user\d+)/g, '<span class="username">$&</span>')
             .replace(/from (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/g, 'from <span class="ip-address">$1</span>')
-            .replace(/successfully authorized/g, '<span class="action">$1</span>') + '<br>'
-			.replace(/\/\*([\s\S]*?)\*\//g, '<span class="special-format">/*$1*/</span>');
+            .replace(/\/\*([\s\S]*?)\*\//g, '<span class="special-format">/*$1*/</span>')
+			.replace(/<b>(.*?)<\/b>/g, '<b>$1</b>') + '<br>';
     });
 
     return formattedLogs;
@@ -98,10 +113,10 @@ function animateLogs() {
     }, 1000);
 }
 
-
 (function() {
-	 initializeLogging();
+    initializeLogging();
 })();
+
     </script>
 
 <script>

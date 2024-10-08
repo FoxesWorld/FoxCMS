@@ -141,6 +141,10 @@
     border-radius: 10px;
 }
 
+#serversList button {
+	margin: 10px;
+}
+
 .codeHtml {
 	border: 1px solid;
 	background: #eae6d6;
