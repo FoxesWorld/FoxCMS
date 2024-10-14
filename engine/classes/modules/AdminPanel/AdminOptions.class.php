@@ -129,11 +129,15 @@ if(!defined("ADMIN")){
 					$file = @RequestHandler::$REQUEST['file'];
 							$logfile = ENGINE_DIR. 'cache/logs/'.$file.'.log';
 							if(file_exists($logfile)){
-								$lines = $this->getLastLines($logfile, @intval(@RequestHandler::$REQUEST['lines']));
-								foreach($lines as $line){
-									echo $line."\n";
+								if(@RequestHandler::$REQUEST['lines'] < 100) {
+									$lines = $this->getLastLines($logfile, @intval(@RequestHandler::$REQUEST['lines']));
+									foreach($lines as $line){
+										echo $line."\n";
+									}
+									die();
+								} else {
+									die('{"message": "Not as long!"}');
 								}
-								die();
 							} else {
 								die('{"message": "File '.$logfile.' not found"}');
 							}

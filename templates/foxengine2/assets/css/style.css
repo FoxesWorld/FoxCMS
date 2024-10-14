@@ -443,7 +443,7 @@ img {
 }
 
 .mainBlock {
-	background-color: #6d7587f2;
+	background-color: #eaeffbf2;
 	border-radius: 10px;
 }
 
@@ -751,6 +751,11 @@ ul.list-inline {
     justify-content: space-between;
     background: cadetblue;
     border-radius: 10px 10px 0px 0px;
+}
+
+.page-title-wrap img {
+	height: 32px;
+	width: auto;
 }
 
 .page-title-wrap>.left-part,.page-title-wrap>.right-part {

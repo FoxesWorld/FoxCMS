@@ -253,13 +253,13 @@
 							case "skin":
 								init::classUtil('CapeUpload', "1.0.0");
 								$skinUpload = new CapeUpload($login, $perms);
-								$skinUpload->uploadFile(@$_FILES[0], $folder, "skin.png");
+								$skinUpload->uploadFile(@$_FILES[0], $folder, md5(init::$usrArray['login'])."-skin.png");
 							break;
 												
 							case "cloak":
 								init::classUtil('CapeUpload', "1.0.0");
 								$capeUpload = new CapeUpload($login, $perms);
-								$capeUpload->uploadFile($_FILES[0], $folder, "cape.png");
+								$capeUpload->uploadFile($_FILES[0], $folder, md5(init::$usrArray['login'])."-cape.png");
 								die('{"message": "Загрузка плащей в разработке!", "type": "warn"}');
 							break;
 							
@@ -366,7 +366,7 @@ private function fillHWID($hwid) {
     $queryValues = [];
     $queryParams = [];
 
-	if(!$this->checkCpu($hwidArray['cpuId'])) {
+	if(@!$this->checkCpu($hwidArray['cpuId'])) {
 	foreach ($hwidArray as $key => $value) {
 		$queryParams[] = $key;
 		if(is_array($value)){ $value = json_encode($value);}
@@ -386,7 +386,7 @@ private function fillHWID($hwid) {
 	
 	$this->db->run($query);
 	} else {
-		 $this->logger->WriteLine("CPU ID ".$hwidArray['cpuId']." already exists in the database.");
+		 $this->logger->WriteLine("CPU ID ".@$hwidArray['cpuId']." already exists in the database.");
 	}
 
 }
