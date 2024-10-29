@@ -54,7 +54,6 @@
 			global $lang;
 				
 			if(!init::$usrArray['isLogged']) {
-
 				$auth = new authorise($request, $this->db, $this->logger);
 			} else {
 				RequestHandler::ipCheck();
@@ -71,9 +70,8 @@
 							if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
 								$AuthLib = new AuthLib($this->db, $this->logger, init::$usrArray, $token);
 							}
-							$this->logger->WriteLine("UUID is -  <b>".$uuid."</b>");
-							$this->logger->WriteLine("TOKEN is -  <b>".$token."</b>");
-							die('{"type": "success","message": "'.$lang['authSuccess'].'", "balance":'.init::$usrArray['balance'].', "login": "'.init::$usrArray['login'].'", "token": "'.$token.'", "group": "'.init::$usrArray['user_group'].'", "uuid": "'.str_replace('-', '', $uuid).'", "colorScheme": "'.init::$usrArray['colorScheme'].'"}');
+
+							die('{"type": "success","message": "'.$lang['authSuccess'].'","balance":'.init::$usrArray['balance'].', "login": "'.init::$usrArray['login'].'","token": "'.$token.'","group": "'.init::$usrArray['user_group'].'", "groupName": "'.init::$usrArray['groupName'].'", "uuid": "'.str_replace('-', '', $uuid).'", "colorScheme": "'.init::$usrArray['colorScheme'].'"}');
 						break;
 						
 						case false:

@@ -27,6 +27,7 @@ include('../database.php');
 if (isset($_GET['user'])) {
     $skin = new Skin($_GET['user']);
 } else {
+	$LOGGER->WriteLine("No request!");
     die('{"message": "No request!"}');
 }
 
@@ -38,7 +39,6 @@ class Skin {
     {
         global $config, $LOGGER;
         
-        // Проверка длины UUID
         if (strlen($uuid) === 32) {
             try {
                 $LOGGER->WriteLine("SkinLib is being created with **" . $uuid . "** UUID");
@@ -51,7 +51,7 @@ class Skin {
                     $this->setTextures('SKIN', $userDir . '/'.md5($this->realUser).'-skin.png');
                     $LOGGER->WriteLine("Custom skin found for user: {$this->realUser}");
                 } else {
-                    $this->setTextures('SKIN', $config['skinUrl'] . 'default_skin.png'); // Убедитесь, что здесь указан путь к дефолтному скину
+                    $this->setTextures('SKIN', $config['skinUrl'] . 'default_skin.png');
                     $LOGGER->WriteLine("Default skin used for user: {$this->realUser}");
                 }
 

@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-10-13 22:39:26
+/* Smarty version 4.0.4, created on 2024-10-29 22:29:24
   from '/var/www/FoxCMS/templates/foxengine2/userBlock.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_670c21eea5c039_21796386',
+  'unifunc' => 'content_672137943f89f0_15642708',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_670c21eea5c039_21796386 (Smarty_Internal_Template $_smarty_tpl) {
+function content_672137943f89f0_15642708 (Smarty_Internal_Template $_smarty_tpl) {
 ?>				   <li class="nav-item dropdown">
 					  <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center userBlock" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="foxEngine.user.refreshBalance(['units', 'crystals'])">
 						 <div class="avatar">

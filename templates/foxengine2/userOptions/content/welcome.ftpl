@@ -11,6 +11,7 @@
 
 <pageContent>
 <div class="contentInner">
+	<img src="%assets%/img/revelio.png" />
 	Привет, %realname%! Добро пожаловать в мир приключений!
 	Готовы отправиться в захватывающее путешествие?
 	Нажмите кнопку ниже и погрузитесь в увлекательные приключения, полные загадок, открытий и неожиданных поворотов сюжета!
@@ -28,6 +29,7 @@
 		
 	Все готовы к приключениям? :finley:
 	<button class="login" onclick="foxEngine.page.loadPage('startGame'); return false;">В путь!</button>
+	
 
 </div>
 </pageContent>

@@ -86,7 +86,7 @@ class HasJoined
         $userDir = $config['skinUrl'] . $this->realUser;
 
         $this->setTextures('SKIN', file_exists("$userFolder/".md5($this->realUser)."-skin.png") ? "$userDir/".md5($this->realUser)."-skin.png" : $config['skinUrl'] . 'default_skin.png');
-        if (file_exists("$userFolder/cape.png")) {
+        if (file_exists("$userFolder/".md5($this->realUser)."-cape.png")) {
             $this->setTextures('CAPE', "$userDir/".md5($this->realUser)."-cape.png");
         }
     }

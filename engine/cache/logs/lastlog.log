@@ -5465,3 +5465,2061 @@
 [14.10.2024] (11:22:38) Jesus successfully authorized from 104.28.198.245
 [14.10.2024] (11:22:38) UUID is -  <b>e9829608dd90ff6b8bf7cb50746eae78</b>
 [14.10.2024] (11:22:38) TOKEN is -  <b>9ae9b2c50688017a15e67507c4a8a47d</b>
+[14.10.2024] (11:25:36) Jesus successfully authorized from 104.28.230.246
+[14.10.2024] (11:25:36) UUID is -  <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[14.10.2024] (11:25:36) TOKEN is -  <b>42e078a46db6514cf4c4b947d87f1723</b>
+[14.10.2024] (11:27:17) Jesus successfully authorized from 104.28.230.246
+[14.10.2024] (11:27:17) UUID is -  <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[14.10.2024] (11:27:17) TOKEN is -  <b>9dcc8ed64f8c5c1a9d4c2291253d56f7</b>
+[14.10.2024] (11:27:40) Jesus successfully authorized from 104.28.198.245
+[14.10.2024] (11:27:40) UUID is -  <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[14.10.2024] (11:27:40) TOKEN is -  <b>21d69d022d5db9f0ae914edbe7db4421</b>
+[14.10.2024] (11:31:01) Jesus successfully authorized from 104.28.198.245
+[14.10.2024] (11:31:01) UUID is -  <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[14.10.2024] (11:31:01) TOKEN is -  <b>dedf443994310755e64dcaa5c85c1a54</b>
+[14.10.2024] (11:39:06) Jesus successfully authorized from 104.28.230.246
+[14.10.2024] (11:39:06) UUID is -  <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[14.10.2024] (11:39:06) TOKEN is -  <b>ee1ef9e7a413dba604e2ba1d688f4231</b>
+[14.10.2024] (11:43:22) Логин failed authorization with password undefined
+[14.10.2024] (11:43:48) Jesus successfully authorized from 104.28.198.245
+[14.10.2024] (11:43:48) UUID is -  <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[14.10.2024] (11:43:48) TOKEN is -  <b>fd6f67c971c501d3666ebefce38b6b37</b>
+[14.10.2024] (11:45:40) Jesus successfully authorized from 104.28.230.246
+[14.10.2024] (11:45:40) UUID is -  <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[14.10.2024] (11:45:40) TOKEN is -  <b>404185a53f3a6fb28946859e576072b9</b>
+[14.10.2024] (11:50:22) Jesus successfully authorized from 104.28.230.246
+[14.10.2024] (11:50:22) UUID is -  <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[14.10.2024] (11:50:22) TOKEN is -  <b>e34e5e1914392ef81d3e0ff03f508281</b>
+[14.10.2024] (11:51:51) Jesus successfully authorized from 104.28.198.245
+[14.10.2024] (11:51:51) UUID is -  <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[14.10.2024] (11:51:51) TOKEN is -  <b>9e47095321f5c1b06e2dc4a7247690a4</b>
+[14.10.2024] (11:53:00) Jesus successfully authorized from 104.28.230.246
+[14.10.2024] (11:53:00) UUID is -  <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[14.10.2024] (11:53:00) TOKEN is -  <b>b77dfb1e5a4738ffabc404560e9f78f1</b>
+[14.10.2024] (11:53:50) Логин failed authorization with password undefined
+[14.10.2024] (13:12:44) AidenFox successfully authorized from 104.28.230.246
+[14.10.2024] (13:12:44) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (13:12:44) TOKEN is -  <b>6432bcff1cc40ae5a2a0823fe793740e</b>
+[14.10.2024] (13:14:42) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (13:14:42) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (13:14:42) TOKEN is -  <b>8f6094b1e2f840d0ca2e3039b5ecbd11</b>
+[14.10.2024] (13:15:11) Updater 104.28.198.245 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (13:15:11) CPU ID 178BFBFF00A20F10 already exists in the database.
+[14.10.2024] (13:15:25) SAM successfully authorized from 104.28.198.246
+[14.10.2024] (13:15:25) UUID is -  <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[14.10.2024] (13:15:25) TOKEN is -  <b>98660fa12b65b7293f4653994cff1276</b>
+[14.10.2024] (13:15:42) Updater 104.28.198.245 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (13:15:42) CPU ID 178BFBFF00A20F10 already exists in the database.
+[14.10.2024] (13:15:55) SAM successfully authorized from 104.28.198.246
+[14.10.2024] (13:15:55) UUID is -  <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[14.10.2024] (13:15:55) TOKEN is -  <b>3e4d98973f22caff089aef17d70b6a61</b>
+[14.10.2024] (13:28:19) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (13:28:19) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (13:28:19) TOKEN is -  <b>f8c5cb2a1eead9c92ff2686a094165e7</b>
+[14.10.2024] (13:31:03) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (13:31:03) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (13:31:03) TOKEN is -  <b>9b992d19119756045dfc8fbc46e9f0ab</b>
+[14.10.2024] (13:34:03) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (13:34:03) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (13:34:03) TOKEN is -  <b>0cc875f04e4d718da68019f311b4d995</b>
+[14.10.2024] (13:38:04) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (13:38:04) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (13:38:04) TOKEN is -  <b>26666e3ebb812f1bbca4cbff6bb65b25</b>
+[14.10.2024] (13:41:20) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (13:41:20) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (13:41:20) TOKEN is -  <b>fb45e44353e717b268ef668d033210f8</b>
+[14.10.2024] (13:41:36) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (13:41:36) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (13:41:36) TOKEN is -  <b>06eec767afbacbb2b2f1c78335af7f43</b>
+[14.10.2024] (14:11:18) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:11:18) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:11:18) TOKEN is -  <b>15b78d14e7f5e81168a27c5b6fae3150</b>
+[14.10.2024] (14:14:55) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:14:55) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:14:55) TOKEN is -  <b>7dd5def2a37d7473c7cf738bea8736d7</b>
+[14.10.2024] (14:17:42) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:17:42) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:17:42) TOKEN is -  <b>e6b26e1f48b82c49fa4fba61112ad18e</b>
+[14.10.2024] (14:18:03) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:18:03) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:18:03) TOKEN is -  <b>42f478148f1f569f8a1082833a939748</b>
+[14.10.2024] (14:19:06) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:19:06) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:19:06) TOKEN is -  <b>95a185fd3268a2a665845dc39c27517d</b>
+[14.10.2024] (14:19:33) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:19:33) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:19:33) TOKEN is -  <b>177d4d0b59f6b2b3f115d980804d933f</b>
+[14.10.2024] (14:19:59) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:19:59) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:19:59) TOKEN is -  <b>b8f6f5ffd4d441e94bf4f8c2f2fb39eb</b>
+[14.10.2024] (14:20:23) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:20:23) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:20:23) TOKEN is -  <b>31e4752cbbf8ee93a717c0b5fe2f7c3a</b>
+[14.10.2024] (14:20:44) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:20:44) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:20:44) TOKEN is -  <b>72e3197b01efe3bf89c41bc5e5b26645</b>
+[14.10.2024] (14:20:54) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:20:54) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:20:54) TOKEN is -  <b>5e181270140f432496be721c51b8a72a</b>
+[14.10.2024] (14:21:15) AidenFox successfully authorized from 104.28.230.246
+[14.10.2024] (14:21:15) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:21:15) TOKEN is -  <b>59b6c0e14983992e19b6dd6554fa2d71</b>
+[14.10.2024] (14:21:47) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:21:47) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:21:47) TOKEN is -  <b>6f077e804d1b693cade9d30cb0620788</b>
+[14.10.2024] (14:22:08) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:22:08) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:22:08) TOKEN is -  <b>7a9075087e70d83dde46f4d977bec1dd</b>
+[14.10.2024] (14:22:21) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:22:21) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:22:21) TOKEN is -  <b>e810d8621fa69e5dcf55851c670bb143</b>
+[14.10.2024] (14:24:25) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:24:25) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:24:25) TOKEN is -  <b>c54cd5ab0c8aab16609bae660d5420f8</b>
+[14.10.2024] (14:24:42) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:24:42) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:24:42) TOKEN is -  <b>87846473a7c279c0b1c17b4fff2aa6f0</b>
+[14.10.2024] (14:26:46) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:26:46) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:26:46) TOKEN is -  <b>70c3e1832ae7104a88257a630e5a82c5</b>
+[14.10.2024] (14:27:14) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:27:14) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:27:14) TOKEN is -  <b>fbc1aa3ae11a1e7339b3042f1d2cec6c</b>
+[14.10.2024] (14:29:29) Updater 104.28.198.245 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (14:29:29) CPU ID BFEBFBFF000406F1 already exists in the database.
+[14.10.2024] (14:29:49) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:29:49) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:29:49) TOKEN is -  <b>ecbf81eeb7c042e9ef641cc50b38740b</b>
+[14.10.2024] (14:29:58) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:29:58) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:29:58) TOKEN is -  <b>ca73a06e23cf2b09b01b896ca84ea906</b>
+[14.10.2024] (14:49:34) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:49:34) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:49:34) TOKEN is -  <b>f7a3e9a9cd58a4bd674a2599ca5a8f09</b>
+[14.10.2024] (14:51:42) AidenFox successfully authorized from 104.28.230.246
+[14.10.2024] (14:51:42) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:51:42) TOKEN is -  <b>a2a40a7506c637e57a809460bd05dead</b>
+[14.10.2024] (14:51:49) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:51:49) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:51:49) TOKEN is -  <b>03539cd732962b40bbe7a8854b307031</b>
+[14.10.2024] (14:53:22) AidenFox successfully authorized from 104.28.230.246
+[14.10.2024] (14:53:22) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:53:22) TOKEN is -  <b>0bbe143abe29eab4950d447420d9face</b>
+[14.10.2024] (14:53:27) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:53:27) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:53:27) TOKEN is -  <b>0ddfa916c5a4404000badb538feafd43</b>
+[14.10.2024] (14:53:31) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:53:31) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:53:31) TOKEN is -  <b>a8794ecee3e1e6e674ef3da8a51d4eee</b>
+[14.10.2024] (14:53:34) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:53:34) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:53:34) TOKEN is -  <b>ce1716cbf8282c659447480f4dc48837</b>
+[14.10.2024] (14:53:37) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:53:37) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:53:37) TOKEN is -  <b>e9fa4e1e0dba52f7126d6356cf470604</b>
+[14.10.2024] (14:53:41) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:53:41) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:53:41) TOKEN is -  <b>4a7310c57cbc332696132558468cd1a9</b>
+[14.10.2024] (14:53:45) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:53:45) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:53:45) TOKEN is -  <b>4baadb2828dce9ab2eb7fb2fecfaffde</b>
+[14.10.2024] (14:53:50) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:53:50) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:53:50) TOKEN is -  <b>bde838fbf958983514c09b612b07a86e</b>
+[14.10.2024] (14:54:57) Updater 104.28.198.245 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (14:54:57) CPU ID BFEBFBFF000406F1 already exists in the database.
+[14.10.2024] (14:55:17) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (14:55:17) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (14:55:17) TOKEN is -  <b>366c8aca46d93fcfae24179818a30f9c</b>
+[14.10.2024] (14:57:49) 104.28.198.245 requests 'FrostPunk 1.16.5-Forge' files
+[14.10.2024] (15:03:00) Updater 104.28.198.245 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (15:03:00) CPU ID BFEBFBFF000406F1 already exists in the database.
+[14.10.2024] (15:03:15) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (15:03:15) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (15:03:15) TOKEN is -  <b>0b9e533f0eeb89c96df57973443c8a0f</b>
+[14.10.2024] (15:03:23) 104.28.198.245 requests 'FrostPunk 1.16.5-Forge' files
+[14.10.2024] (15:03:29) Updater 104.28.198.245 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (15:03:29) CPU ID BFEBFBFF000406F1 already exists in the database.
+[14.10.2024] (15:03:43) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (15:03:43) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (15:03:43) TOKEN is -  <b>2b5d37a1aa7d438d20675a37940f7170</b>
+[14.10.2024] (15:04:04) 104.28.198.245 requests 'Amber 1.16.5-Forge' files
+[14.10.2024] (15:06:06) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (15:06:06) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (15:06:06) TOKEN is -  <b>d66f50860dc095e32bf5cbf0d7e8971f</b>
+[14.10.2024] (15:06:15) 104.28.230.246 requests 'Amber 1.16.5-Forge' files
+[14.10.2024] (15:07:45) **JoinServer constructor called**
+[14.10.2024] (15:07:45) Database connection established
+[14.10.2024] (15:07:45) Validating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (15:07:45) Session validated successfully
+[14.10.2024] (15:07:45) Updating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (15:10:57) AidenFox successfully authorized from 104.28.230.246
+[14.10.2024] (15:10:57) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (15:10:57) TOKEN is -  <b>7a3f24e74602763f30a83606524b4662</b>
+[14.10.2024] (15:11:02) 104.28.198.245 requests 'Amber 1.16.5-Forge' files
+[14.10.2024] (15:12:13) **JoinServer constructor called**
+[14.10.2024] (15:12:13) Database connection established
+[14.10.2024] (15:12:13) Validating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (15:12:13) Session validated successfully
+[14.10.2024] (15:12:13) Updating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (15:21:15) **JoinServer constructor called**
+[14.10.2024] (15:21:15) Database connection established
+[14.10.2024] (15:21:15) Validating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (15:21:15) Session validated successfully
+[14.10.2024] (15:21:15) Updating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (15:34:38) **JoinServer constructor called**
+[14.10.2024] (15:34:38) Database connection established
+[14.10.2024] (15:34:38) Validating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (15:34:38) Session validated successfully
+[14.10.2024] (15:34:38) Updating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (16:13:20) Updater 104.28.198.246 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (16:13:20) CPU ID 178BFBFF00A20F10 already exists in the database.
+[14.10.2024] (16:13:40) SAM successfully authorized from 104.28.198.245
+[14.10.2024] (16:13:40) UUID is -  <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[14.10.2024] (16:13:40) TOKEN is -  <b>23bf9f2bc0567837e0dd7d5e79c9e962</b>
+[14.10.2024] (16:13:57) 104.28.198.245 requests 'Amber 1.16.5-Forge' files
+[14.10.2024] (16:15:58) SAM successfully authorized from 104.28.198.245
+[14.10.2024] (16:15:58) UUID is -  <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[14.10.2024] (16:15:58) TOKEN is -  <b>ce0c3f2b3e87a56fe9dcd4da0ee6981b</b>
+[14.10.2024] (16:16:01) 104.28.198.246 requests 'Amber 1.16.5-Forge' files
+[14.10.2024] (16:16:13) SAM successfully authorized from 104.28.198.246
+[14.10.2024] (16:16:13) UUID is -  <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[14.10.2024] (16:16:13) TOKEN is -  <b>b9774b0b925b9cbe67851d5f9b04ef84</b>
+[14.10.2024] (16:18:35) 104.28.230.246 requests 'Amber 1.16.5-Forge' files
+[14.10.2024] (16:18:46) SAM successfully authorized from 104.28.198.246
+[14.10.2024] (16:18:46) UUID is -  <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[14.10.2024] (16:18:46) TOKEN is -  <b>6b5a5838bc91aab981d978b0fc648b71</b>
+[14.10.2024] (16:23:24) 104.28.198.246 requests 'Amber 1.16.5-Forge' files
+[14.10.2024] (16:24:43) SkinLib is being created with **9f1b3be4a82b11d104e4ef7f7ccb1c19** UUID
+[14.10.2024] (16:24:43) Real user found: SAM
+[14.10.2024] (16:24:43) Custom skin found for user: SAM
+[14.10.2024] (16:33:16) **JoinServer constructor called**
+[14.10.2024] (16:33:16) Database connection established
+[14.10.2024] (16:33:16) Validating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (16:33:16) Session validated successfully
+[14.10.2024] (16:33:16) Updating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (17:18:17) **JoinServer constructor called**
+[14.10.2024] (17:18:17) Database connection established
+[14.10.2024] (17:18:17) Validating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[14.10.2024] (17:18:17) Session validated successfully
+[14.10.2024] (17:18:17) Updating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[14.10.2024] (17:24:47) SkinLib is being created with **cfb727e7efcc45968c2b9c6e38c8eea4** UUID
+[14.10.2024] (17:24:47) SkinLib is being created with **8f552657df1d42cd89c6c176e195f703** UUID
+[14.10.2024] (17:24:47) SkinLib is being created with **2714d55fffef4655a93ed8ca13230e76** UUID
+[14.10.2024] (17:33:22) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (17:33:22) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (17:33:22) TOKEN is -  <b>d95d70d6f7fd67bb8b290b39efe773b9</b>
+[14.10.2024] (17:33:47) **JoinServer constructor called**
+[14.10.2024] (17:33:47) Database connection established
+[14.10.2024] (17:33:47) Validating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[14.10.2024] (17:33:47) Session validated successfully
+[14.10.2024] (17:33:47) Updating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[14.10.2024] (17:43:25) Updater 104.28.230.246 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (17:43:25) CPU ID BFEBFBFF000806D1 already exists in the database.
+[14.10.2024] (17:43:46) Fridrih successfully authorized from 104.28.230.246
+[14.10.2024] (17:43:46) UUID is -  <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[14.10.2024] (17:43:46) TOKEN is -  <b>53294f1ea83f41d20e4799c92af392e0</b>
+[14.10.2024] (17:44:00) Updater 104.28.230.246 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (17:44:00) CPU ID BFEBFBFF000806D1 already exists in the database.
+[14.10.2024] (17:44:14) Fridrih successfully authorized from 104.28.230.246
+[14.10.2024] (17:44:14) UUID is -  <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[14.10.2024] (17:44:14) TOKEN is -  <b>9132eee8fc6cd24fa1123516040dc8cf</b>
+[14.10.2024] (17:44:45) Updater 104.28.230.246 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (17:44:45) CPU ID BFEBFBFF000806D1 already exists in the database.
+[14.10.2024] (17:44:59) Fridrih successfully authorized from 104.28.230.246
+[14.10.2024] (17:44:59) UUID is -  <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[14.10.2024] (17:44:59) TOKEN is -  <b>b09292e1ad002ce98ceb46d205393ee6</b>
+[14.10.2024] (17:45:56) Updater 104.28.230.246 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (17:45:56) CPU ID BFEBFBFF000806D1 already exists in the database.
+[14.10.2024] (17:46:10) Fridrih successfully authorized from 104.28.230.246
+[14.10.2024] (17:46:10) UUID is -  <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[14.10.2024] (17:46:10) TOKEN is -  <b>3f9525ef0992644d49170d6cc3c3fab4</b>
+[14.10.2024] (17:48:40) Updater 104.28.230.246 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (17:48:40) CPU ID BFEBFBFF000806D1 already exists in the database.
+[14.10.2024] (17:48:54) Fridrih successfully authorized from 104.28.230.246
+[14.10.2024] (17:48:54) UUID is -  <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[14.10.2024] (17:48:54) TOKEN is -  <b>5bd935d2af306f44c0269063c846bf39</b>
+[14.10.2024] (17:49:26) Updater 104.28.230.246 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (17:49:26) CPU ID BFEBFBFF000806D1 already exists in the database.
+[14.10.2024] (17:49:40) Fridrih successfully authorized from 104.28.230.246
+[14.10.2024] (17:49:40) UUID is -  <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[14.10.2024] (17:49:40) TOKEN is -  <b>9baff6684558c8254f7721ee5a65e178</b>
+[14.10.2024] (17:51:20) **JoinServer constructor called**
+[14.10.2024] (17:51:20) Database connection established
+[14.10.2024] (17:51:20) Validating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[14.10.2024] (17:51:20) Session validated successfully
+[14.10.2024] (17:51:20) Updating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[14.10.2024] (18:01:20) SkinLib is being created with **8a9b903472e03e0985bc86b7053f8158** UUID
+[14.10.2024] (18:01:20) SkinLib is being created with **a4eb5569bf383aefbc212dbd73d30851** UUID
+[14.10.2024] (18:01:21) SkinLib is being created with **e7bc803737df3dcbbc78f3026d82bce4** UUID
+[14.10.2024] (18:01:22) SkinLib is being created with **cd59de772f503df9a4f8134e1a64a298** UUID
+[14.10.2024] (20:34:11) Updater 5.42.74.177 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (20:34:11) CPU ID 178BFBFF00870F10 already exists in the database.
+[14.10.2024] (20:34:13) Updater 5.42.74.177 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (20:34:13) CPU ID 178BFBFF00870F10 already exists in the database.
+[14.10.2024] (20:35:23) SunjiKun successfully authorized from 5.42.74.177
+[14.10.2024] (20:35:23) UUID is -  <b>dc337f1207fd402bd5d3474f0fb1a239</b>
+[14.10.2024] (20:35:23) TOKEN is -  <b>3395adba638efde77533f023aa8136a9</b>
+[14.10.2024] (20:36:00) SunjiKun successfully authorized from 5.42.74.177
+[14.10.2024] (20:36:00) UUID is -  <b>dc337f1207fd402bd5d3474f0fb1a239</b>
+[14.10.2024] (20:36:00) TOKEN is -  <b>08003d5aeb03b7bec92ce38c3cf7b100</b>
+[14.10.2024] (20:36:08) Updater 5.42.74.177 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (20:36:08) CPU ID 178BFBFF00870F10 already exists in the database.
+[14.10.2024] (20:36:22) SunjiKun successfully authorized from 5.42.74.177
+[14.10.2024] (20:36:22) UUID is -  <b>dc337f1207fd402bd5d3474f0fb1a239</b>
+[14.10.2024] (20:36:22) TOKEN is -  <b>a699818eca889cdf86dccdb01f9f40d6</b>
+[14.10.2024] (20:43:55) SunjiKun successfully authorized from 5.42.74.177
+[14.10.2024] (20:43:55) UUID is -  <b>dc337f1207fd402bd5d3474f0fb1a239</b>
+[14.10.2024] (20:43:55) TOKEN is -  <b>d19956d704ca0224db0233eeeea256ec</b>
+[14.10.2024] (20:47:52) Logged user 'SunjiKun' uploading cloak for SunjiKun
+[14.10.2024] (20:48:17) Updater 5.42.74.177 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (20:48:17) CPU ID 178BFBFF00870F10 already exists in the database.
+[14.10.2024] (20:48:32) SunjiKun successfully authorized from 5.42.74.177
+[14.10.2024] (20:48:32) UUID is -  <b>dc337f1207fd402bd5d3474f0fb1a239</b>
+[14.10.2024] (20:48:32) TOKEN is -  <b>90e2a6a4c9c2ef45a15c0066ec59a399</b>
+[14.10.2024] (20:50:14) Updater 5.42.74.177 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (20:50:14) CPU ID 178BFBFF00870F10 already exists in the database.
+[14.10.2024] (20:50:19) SAM successfully authorized from 104.28.198.246
+[14.10.2024] (20:50:19) UUID is -  <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[14.10.2024] (20:50:19) TOKEN is -  <b>f85e5b7ddc72cd79521dacd97c81ba1f</b>
+[14.10.2024] (20:50:28) SunjiKun successfully authorized from 5.42.74.177
+[14.10.2024] (20:50:28) UUID is -  <b>dc337f1207fd402bd5d3474f0fb1a239</b>
+[14.10.2024] (20:50:28) TOKEN is -  <b>7c5c67d3a079a53add455e4c25387f49</b>
+[14.10.2024] (20:53:25) Updater 5.42.74.177 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (20:53:25) CPU ID 178BFBFF00870F10 already exists in the database.
+[14.10.2024] (20:53:30) Updater 5.42.74.177 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (20:53:30) CPU ID 178BFBFF00870F10 already exists in the database.
+[14.10.2024] (20:53:45) SunjiKun successfully authorized from 5.42.74.177
+[14.10.2024] (20:53:45) UUID is -  <b>dc337f1207fd402bd5d3474f0fb1a239</b>
+[14.10.2024] (20:53:45) TOKEN is -  <b>6e7d2f87d87e671c93f8b328141d8a9f</b>
+[14.10.2024] (20:53:46) SunjiKun successfully authorized from 5.42.74.177
+[14.10.2024] (20:53:46) UUID is -  <b>dc337f1207fd402bd5d3474f0fb1a239</b>
+[14.10.2024] (20:53:46) TOKEN is -  <b>54f48da6e1ef3f19dfdaef0119caadc3</b>
+[14.10.2024] (20:54:59) Updater 5.42.74.177 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (20:54:59) CPU ID 178BFBFF00870F10 already exists in the database.
+[14.10.2024] (20:55:14) SunjiKun successfully authorized from 5.42.74.177
+[14.10.2024] (20:55:14) UUID is -  <b>dc337f1207fd402bd5d3474f0fb1a239</b>
+[14.10.2024] (20:55:14) TOKEN is -  <b>9cd3eba22c1572ce8f7f7339ae26c829</b>
+[14.10.2024] (20:55:35) Updater 5.42.74.177 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (20:55:35) CPU ID 178BFBFF00870F10 already exists in the database.
+[14.10.2024] (20:55:50) SunjiKun successfully authorized from 5.42.74.177
+[14.10.2024] (20:55:50) UUID is -  <b>dc337f1207fd402bd5d3474f0fb1a239</b>
+[14.10.2024] (20:55:50) TOKEN is -  <b>5d50214329e9c7142c7dd76820fb5532</b>
+[14.10.2024] (21:06:00) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:06:00) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:06:00) TOKEN is -  <b>03461ef44398165ed5e9ac70b1c14ebc</b>
+[14.10.2024] (21:08:06) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:08:06) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:08:06) TOKEN is -  <b>f4190891531fc0dfce95f3d6d125c365</b>
+[14.10.2024] (21:09:57) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:09:57) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:09:57) TOKEN is -  <b>1111dc39e6830949e4485568756561ef</b>
+[14.10.2024] (21:10:26) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:10:26) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:10:26) TOKEN is -  <b>0ca32117794d4be34a331b986a3e68f2</b>
+[14.10.2024] (21:13:31) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:13:31) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:13:31) TOKEN is -  <b>22225c922d7f9ae8d00a476f4ebc6347</b>
+[14.10.2024] (21:13:46) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:13:46) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:13:46) TOKEN is -  <b>5e110d04a13a3731326a828e60485676</b>
+[14.10.2024] (21:17:42) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:17:42) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:17:42) TOKEN is -  <b>d8da064f1aa07e200a18b875c10a113b</b>
+[14.10.2024] (21:21:48) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:21:48) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:21:48) TOKEN is -  <b>2e802f4c5a21011fed057e02a9aca962</b>
+[14.10.2024] (21:23:45) AidenFox successfully authorized from 104.28.230.246
+[14.10.2024] (21:23:45) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:23:45) TOKEN is -  <b>7a5b5c655b2a2c46006abc5d1b8e71c9</b>
+[14.10.2024] (21:25:52) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:25:52) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:25:52) TOKEN is -  <b>0e798578659dbba8121f9dda4116d2e4</b>
+[14.10.2024] (21:28:31) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:28:31) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:28:31) TOKEN is -  <b>2743aa88e77fd22506e3aced96976a59</b>
+[14.10.2024] (21:29:35) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:29:35) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:29:35) TOKEN is -  <b>0c33d136f4e9ce10494f4cd2d4482458</b>
+[14.10.2024] (21:34:22) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:34:22) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:34:22) TOKEN is -  <b>6262ac6be2d628a407f13e73506d3a1c</b>
+[14.10.2024] (21:35:41) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:35:41) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:35:41) TOKEN is -  <b>ba83c4e72f511053c9035b8a4c2a9c31</b>
+[14.10.2024] (21:37:24) AidenFox successfully authorized from 104.28.230.246
+[14.10.2024] (21:37:24) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:37:24) TOKEN is -  <b>63cf5b923167bff7645fad110b345e46</b>
+[14.10.2024] (21:37:40) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:37:40) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:37:40) TOKEN is -  <b>b46391d6150307a809e4ff8dbce0b4ea</b>
+[14.10.2024] (21:38:12) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:38:12) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:38:12) TOKEN is -  <b>da92d62c32f097371c6e31b99945fa94</b>
+[14.10.2024] (21:38:24) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:38:24) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:38:24) TOKEN is -  <b>f743df7cd75d165f160bf73a14836eb6</b>
+[14.10.2024] (21:38:36) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:38:36) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:38:36) TOKEN is -  <b>f9dcca1a6224ab30a108b26bae51ba51</b>
+[14.10.2024] (21:38:50) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:38:50) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:38:50) TOKEN is -  <b>1b9d9e9773d9bd7a2f82a2a5e88372ac</b>
+[14.10.2024] (21:39:02) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:39:02) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:39:02) TOKEN is -  <b>5306be8811e232cfc7d170eca8a289fa</b>
+[14.10.2024] (21:39:43) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:39:43) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:39:43) TOKEN is -  <b>133a618dcc100e30c928c2b8277953be</b>
+[14.10.2024] (21:41:15) AidenFox successfully authorized from 104.28.230.246
+[14.10.2024] (21:41:15) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:41:15) TOKEN is -  <b>59c5c5ee6fd3c6b7b2576e74cb5c82fb</b>
+[14.10.2024] (21:43:31) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:43:31) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:43:31) TOKEN is -  <b>e145e9493237b500710aa83e93f0fa14</b>
+[14.10.2024] (21:47:31) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:47:31) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:47:31) TOKEN is -  <b>64863346cbba51bfa39fcb3b2288824e</b>
+[14.10.2024] (21:48:25) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:48:25) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:48:25) TOKEN is -  <b>b9ef0eb2946bcf59d4af7e4cb32edd39</b>
+[14.10.2024] (21:51:20) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:51:20) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:51:20) TOKEN is -  <b>91628114b3b96927eb1f1fa947b0ab0c</b>
+[14.10.2024] (21:53:27) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:53:27) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:53:27) TOKEN is -  <b>95c134dfd52752ddcbde6336e36df370</b>
+[14.10.2024] (21:55:59) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:55:59) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:55:59) TOKEN is -  <b>1154a4ced56c948c1a7bd885a96a5bc2</b>
+[14.10.2024] (21:58:32) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:58:32) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:58:32) TOKEN is -  <b>36f670e76aff8074c82d036186483051</b>
+[14.10.2024] (21:59:46) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (21:59:46) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (21:59:46) TOKEN is -  <b>53f2ed9ccff3be5516538d67e7460da5</b>
+[14.10.2024] (22:02:00) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (22:02:00) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (22:02:00) TOKEN is -  <b>6b6cbc863167f23bb261477f5d9c84d1</b>
+[14.10.2024] (22:04:06) AidenFox successfully authorized from 104.28.230.246
+[14.10.2024] (22:04:06) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (22:04:06) TOKEN is -  <b>89ba86e76910b04427ca11f550930345</b>
+[14.10.2024] (22:04:21) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (22:04:21) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (22:04:21) TOKEN is -  <b>cc61d73fb22a84b6bad6c16706b9099b</b>
+[14.10.2024] (22:06:18) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (22:06:18) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (22:06:18) TOKEN is -  <b>b89194bd2094b30a8a499893431cb08c</b>
+[14.10.2024] (22:09:53) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (22:09:53) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (22:09:53) TOKEN is -  <b>3beaeda53c01ca78431333ec57be747a</b>
+[14.10.2024] (22:10:01) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (22:10:01) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (22:10:01) TOKEN is -  <b>b35d8c3bdddbadccbc66b0a402dac140</b>
+[14.10.2024] (22:10:20) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (22:10:20) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (22:10:20) TOKEN is -  <b>05f985a09cda7432df3925fcce3cd4b5</b>
+[14.10.2024] (22:10:31) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (22:10:31) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (22:10:31) TOKEN is -  <b>a78228edcf7171c628159f288d01f72f</b>
+[14.10.2024] (22:14:47) Updater 104.28.198.245 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (22:14:47) CPU ID BFEBFBFF000406F1 already exists in the database.
+[14.10.2024] (22:15:07) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (22:15:07) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (22:15:07) TOKEN is -  <b>36cf1308ba1bf685c05663b29ec9d47c</b>
+[14.10.2024] (22:20:08) Updater 104.28.198.245 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (22:20:08) CPU ID BFEBFBFF000406F1 already exists in the database.
+[14.10.2024] (22:20:27) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (22:20:27) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (22:20:27) TOKEN is -  <b>6eb008330fee7626be8d85945deea7f6</b>
+[14.10.2024] (22:22:11) Updater 104.28.198.245 with version '1.2.1-Revelation' requests an update information
+[14.10.2024] (22:22:11) CPU ID BFEBFBFF000406F1 already exists in the database.
+[14.10.2024] (22:22:32) AidenFox successfully authorized from 104.28.198.245
+[14.10.2024] (22:22:32) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[14.10.2024] (22:22:32) TOKEN is -  <b>cf7c5b8139d7fafcfc227926229ec304</b>
+[15.10.2024] (00:51:14) Updater 104.28.198.245 with version '1.2.1-Revelation' requests an update information
+[15.10.2024] (00:51:14) CPU ID 178BFBFF00A20F10 already exists in the database.
+[15.10.2024] (00:51:35) SAM successfully authorized from 104.28.198.245
+[15.10.2024] (00:51:35) UUID is -  <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[15.10.2024] (00:51:35) TOKEN is -  <b>b3d71b2a41b2af5da52541981898b03b</b>
+[15.10.2024] (01:04:40) Updater 104.28.198.245 with version '1.2.1-Revelation' requests an update information
+[15.10.2024] (01:04:40) CPU ID 178BFBFF00A20F10 already exists in the database.
+[15.10.2024] (01:04:53) SAM successfully authorized from 104.28.198.245
+[15.10.2024] (01:04:53) UUID is -  <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[15.10.2024] (01:04:53) TOKEN is -  <b>7b387fbb396ea4adc0aa6b599dec0cc6</b>
+[15.10.2024] (01:05:00) 104.28.198.245 requests 'Amber 1.16.5-Forge' files
+[15.10.2024] (01:06:19) **JoinServer constructor called**
+[15.10.2024] (01:06:19) Database connection established
+[15.10.2024] (01:06:19) Validating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[15.10.2024] (01:06:19) Session validated successfully
+[15.10.2024] (01:06:19) Updating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[15.10.2024] (10:03:56) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:03:56) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:03:56) TOKEN is -  <b>3d92672d17384ba9185917281d2ec0f0</b>
+[15.10.2024] (10:04:14) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:04:14) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:04:14) TOKEN is -  <b>2f29e8d892f06618b9b4729c9b7e0676</b>
+[15.10.2024] (10:12:10) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:12:10) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:12:10) TOKEN is -  <b>a82a1b791fcd009234648e9ace466640</b>
+[15.10.2024] (10:12:37) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:12:37) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:12:37) TOKEN is -  <b>4977fdeb644c436a31d12ce6e0585729</b>
+[15.10.2024] (10:24:57) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:24:57) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:24:57) TOKEN is -  <b>89aeed292846e2dca7eb0f679bd990af</b>
+[15.10.2024] (10:25:05) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:25:05) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:25:05) TOKEN is -  <b>aa6f755e2f24e6731856ff438653b8ad</b>
+[15.10.2024] (10:26:00) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:26:00) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:26:00) TOKEN is -  <b>8e2217d2898fece529ae15a7196eb600</b>
+[15.10.2024] (10:26:05) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:26:05) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:26:05) TOKEN is -  <b>5771d86d6704ed7863d94b33950f8b9d</b>
+[15.10.2024] (10:29:17) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:29:17) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:29:17) TOKEN is -  <b>be37553c3dc9f53622fc029f8aeb28e6</b>
+[15.10.2024] (10:29:23) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:29:23) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:29:23) TOKEN is -  <b>c72342a2788c5ced47d58eddd9ee1ef8</b>
+[15.10.2024] (10:33:34) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:33:34) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:33:34) TOKEN is -  <b>7e7cfd40186d208837c5cff55bb93fac</b>
+[15.10.2024] (10:33:42) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:33:42) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:33:42) TOKEN is -  <b>5b5b401ae48a1897e95d8b81ce9c409c</b>
+[15.10.2024] (10:33:57) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:33:57) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:33:57) TOKEN is -  <b>fd3acf26452e674fa85bfa748ddf28a1</b>
+[15.10.2024] (10:35:54) Updater 104.28.198.247 with version '1.2.1-Revelation' requests an update information
+[15.10.2024] (10:35:54) CPU ID BFEBFBFF000406F1 already exists in the database.
+[15.10.2024] (10:36:14) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:36:14) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:36:14) TOKEN is -  <b>7ce5932906c3bb8939ae5e24bb18d19c</b>
+[15.10.2024] (10:42:02) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:42:02) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:42:02) TOKEN is -  <b>740b94d984e01db85f95ecce465fc8e4</b>
+[15.10.2024] (10:42:51) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:42:51) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:42:51) TOKEN is -  <b>49123f181a4b84774b1945353e8d02c3</b>
+[15.10.2024] (10:43:23) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:43:23) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:43:23) TOKEN is -  <b>5030b62bd2db071e73d82c6d210e8afd</b>
+[15.10.2024] (10:46:15) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:46:15) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:46:15) TOKEN is -  <b>07739ceacfd4c23ba27a3581471af437</b>
+[15.10.2024] (10:47:30) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:47:30) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:47:30) TOKEN is -  <b>70094cc0be9485e82884e96bc9d8b1a2</b>
+[15.10.2024] (10:47:52) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:47:52) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:47:52) TOKEN is -  <b>f6745ac4834455c38afbb9c24a449677</b>
+[15.10.2024] (10:48:48) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:48:48) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:48:48) TOKEN is -  <b>fff2354c675297087ef1bc7e79947e5f</b>
+[15.10.2024] (10:49:04) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:49:04) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:49:04) TOKEN is -  <b>d0eed08104971787b67d861ef4e3962a</b>
+[15.10.2024] (10:52:21) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:52:21) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:52:21) TOKEN is -  <b>a2871f88aaaa48fdfde186bd43335601</b>
+[15.10.2024] (10:54:38) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:54:38) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:54:38) TOKEN is -  <b>0ae18b144e72d721042d90940e80bddd</b>
+[15.10.2024] (10:56:57) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:56:57) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:56:57) TOKEN is -  <b>5ecafd3eced95ea8f5b1d9ddc4a118e6</b>
+[15.10.2024] (10:58:49) Updater 104.28.198.247 with version '1.2.1-Revelation' requests an update information
+[15.10.2024] (10:58:49) CPU ID BFEBFBFF000406F1 already exists in the database.
+[15.10.2024] (10:59:09) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (10:59:09) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (10:59:09) TOKEN is -  <b>77b0638b1861b810f9316b165a3722d8</b>
+[15.10.2024] (11:01:59) 104.28.198.247 requests 'Amber 1.16.5-Forge' files
+[15.10.2024] (11:04:15) Updater 104.28.198.247 with version '1.2.1-Revelation' requests an update information
+[15.10.2024] (11:04:15) CPU ID BFEBFBFF000406F1 already exists in the database.
+[15.10.2024] (11:04:35) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (11:04:35) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (11:04:35) TOKEN is -  <b>9369cf2c2406c3371120707eb81d0345</b>
+[15.10.2024] (11:04:53) 104.28.198.247 requests 'Amber 1.16.5-Forge' files
+[15.10.2024] (11:13:14) Updater 104.28.198.247 with version '1.2.1-Revelation' requests an update information
+[15.10.2024] (11:13:14) CPU ID BFEBFBFF000406F1 already exists in the database.
+[15.10.2024] (11:13:29) AidenFox successfully authorized from 104.28.198.247
+[15.10.2024] (11:13:29) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (11:13:29) TOKEN is -  <b>3cb65757a355a61814342159ee7698c5</b>
+[15.10.2024] (12:35:49) Checking a password 'undefined'
+[15.10.2024] (13:23:32) Updater 104.28.198.245 with version '1.2.1-Revelation' requests an update information
+[15.10.2024] (13:23:32) CPU ID BFEBFBFF000406F1 already exists in the database.
+[15.10.2024] (13:23:47) AidenFox successfully authorized from 104.28.198.245
+[15.10.2024] (13:23:47) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (13:23:47) TOKEN is -  <b>6ab37034ad3f63ee4ce997ef28dce1af</b>
+[15.10.2024] (13:32:37) Updater 104.28.198.245 with version '1.2.1-Revelation' requests an update information
+[15.10.2024] (13:32:37) CPU ID BFEBFBFF000406F1 already exists in the database.
+[15.10.2024] (13:32:52) AidenFox successfully authorized from 104.28.198.245
+[15.10.2024] (13:32:52) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (13:32:52) TOKEN is -  <b>850a6e50458dc73e8c48d954791083d6</b>
+[15.10.2024] (14:06:54) AidenFox successfully authorized from 104.28.198.245
+[15.10.2024] (14:06:54) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (14:06:54) TOKEN is -  <b>15a5c5c90202ad5ba70d0fdc092ad345</b>
+[15.10.2024] (14:09:15) 104.28.230.246 requests 'FurSpace 1.12.2-Forge' files
+[15.10.2024] (15:59:39) AidenFox successfully authorized from 104.28.198.245
+[15.10.2024] (15:59:39) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (15:59:39) TOKEN is -  <b>0c6bb8cfae271834ec9699945dc580e0</b>
+[15.10.2024] (16:10:56) Updater 104.28.198.245 with version '1.2.1-Revelation' requests an update information
+[15.10.2024] (16:10:56) CPU ID BFEBFBFF000406F1 already exists in the database.
+[15.10.2024] (16:11:11) AidenFox successfully authorized from 104.28.198.245
+[15.10.2024] (16:11:11) UUID is -  <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[15.10.2024] (16:11:11) TOKEN is -  <b>7ca4fe8f793e00deb3a6ad1fc7a65cc9</b>
+[15.10.2024] (16:11:31) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (16:11:31) UUID is -  <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[15.10.2024] (16:11:31) TOKEN is -  <b>e17bb033fba8607a625d5093d55dc4b6</b>
+[15.10.2024] (16:12:18) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (16:12:18) UUID is -  <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[15.10.2024] (16:12:18) TOKEN is -  <b>5dbbcf8d4431336e87c363d161c28442</b>
+[15.10.2024] (16:13:23) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (16:13:23) UUID is -  <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[15.10.2024] (16:13:23) TOKEN is -  <b>43fb91483ea10f1300405490474ad691</b>
+[15.10.2024] (16:18:35) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (16:19:58) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (16:23:30) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (16:23:48) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (16:24:05) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (16:24:27) AidenFox successfully authorized from 104.28.198.245
+[15.10.2024] (16:24:52) AidenFox successfully authorized from 104.28.198.245
+[15.10.2024] (16:25:14) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (16:26:16) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (16:34:51) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (16:36:03) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (16:36:28) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (18:18:26) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:18:39) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:19:28) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (18:20:30) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:21:02) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:22:57) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (18:23:12) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:25:22) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:30:16) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:32:15) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:40:17) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (18:40:38) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:41:00) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:41:20) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (18:41:42) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:43:32) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:44:18) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:44:40) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (18:44:57) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:45:15) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:45:34) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:46:03) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:46:19) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (18:46:33) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:47:20) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:47:40) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:48:55) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:49:14) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:51:43) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (18:53:08) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:53:41) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (18:54:03) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (18:59:24) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:03:56) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:04:21) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:04:36) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:04:52) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:05:17) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:05:31) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (19:06:09) Furry_Puro successfully authorized from 109.237.96.141
+[15.10.2024] (19:06:46) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (19:07:48) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:17:29) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:20:05) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (19:20:37) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:21:01) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:23:20) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:24:00) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:24:41) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:25:03) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:25:25) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:25:51) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:26:17) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:26:58) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:28:00) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:29:33) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:33:28) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:33:44) Updater 104.28.198.247 with version '1.2.1-Revelation' requests an update information
+[15.10.2024] (19:33:44) CPU ID 178BFBFF00A20F10 already exists in the database.
+[15.10.2024] (19:34:15) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:34:19) SAM successfully authorized from 104.28.198.247
+[15.10.2024] (19:37:38) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:39:21) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:39:51) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (19:40:06) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:40:41) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:42:02) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:42:44) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (19:43:42) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (20:42:37) Updater 104.28.230.246 with version '1.2.1-Revelation' requests an update information
+[15.10.2024] (20:42:37) CPU ID BFEBFBFF000806D1 already exists in the database.
+[15.10.2024] (20:42:58) Fridrih successfully authorized from 104.28.230.246
+[15.10.2024] (20:46:31) Updater 104.28.230.246 with version '1.2.1-Revelation' requests an update information
+[15.10.2024] (20:46:31) CPU ID BFEBFBFF000806D1 already exists in the database.
+[15.10.2024] (20:46:45) Fridrih successfully authorized from 104.28.230.246
+[15.10.2024] (20:56:34) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (20:57:26) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (20:58:20) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (20:58:37) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (20:59:06) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (20:59:29) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:00:10) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:00:27) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:00:50) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:01:47) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:03:47) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:04:10) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:04:32) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:04:48) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:05:20) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:05:42) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:06:27) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:07:02) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:09:24) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:09:40) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:10:10) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:14:26) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:14:49) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:17:05) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:18:30) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:19:31) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:20:05) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:20:32) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:20:59) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:21:54) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (21:22:11) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:22:56) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (21:23:27) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:23:43) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:24:13) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:24:31) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:25:07) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:25:49) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:26:23) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:26:47) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:27:12) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (21:27:50) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:28:21) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:28:42) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (21:29:00) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:29:25) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:29:48) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:30:34) Jesus successfully authorized from 104.28.230.247
+[15.10.2024] (21:35:16) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:35:48) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:36:33) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:37:00) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:37:28) Jesus successfully authorized from 104.28.230.247
+[15.10.2024] (21:37:50) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:38:34) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:39:13) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (21:39:40) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (21:40:40) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:41:23) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (21:42:06) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:42:28) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:42:49) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:43:15) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (21:43:57) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:44:22) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:44:47) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:45:08) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:45:35) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (21:46:08) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:46:38) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (21:48:41) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:49:21) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:49:47) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (21:50:11) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:50:27) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (21:55:53) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (21:58:05) Updater 89.113.147.37 with version '1.2.1-Revelation' requests an update information
+[15.10.2024] (21:58:05) CPU ID BFEBFBFF000306A9 already exists in the database.
+[15.10.2024] (21:58:48) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (22:02:29) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (22:02:58) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (22:03:29) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (22:03:59) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (22:04:26) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (22:04:56) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (22:05:37) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (22:06:20) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (22:07:50) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (22:09:00) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (22:10:30) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (22:11:50) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (22:12:44) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (22:13:43) Jesus successfully authorized from 104.28.230.246
+[15.10.2024] (22:14:31) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (22:14:59) Jesus successfully authorized from 104.28.198.246
+[15.10.2024] (22:15:23) Jesus successfully authorized from 104.28.198.245
+[15.10.2024] (22:15:52) Jesus successfully authorized from 104.28.198.246
+[16.10.2024] (12:14:02) Updater 109.252.110.179 with version '1.2.1-Revelation' requests an update information
+[16.10.2024] (12:14:02) CPU ID 178BFBFF00A20F10 already exists in the database.
+[16.10.2024] (12:14:28) SAM successfully authorized from 109.252.110.179
+[16.10.2024] (12:15:10) 109.252.110.179 requests 'Amber 1.16.5-Forge' files
+[16.10.2024] (12:22:10) **JoinServer constructor called**
+[16.10.2024] (12:22:10) Database connection established
+[16.10.2024] (12:22:10) Validating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[16.10.2024] (12:22:10) Session validated successfully
+[16.10.2024] (12:22:10) Updating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[16.10.2024] (12:22:24) **JoinServer constructor called**
+[16.10.2024] (12:22:24) Database connection established
+[16.10.2024] (12:22:24) Validating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[16.10.2024] (12:22:24) Session validated successfully
+[16.10.2024] (12:22:24) Updating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[16.10.2024] (12:22:29) **JoinServer constructor called**
+[16.10.2024] (12:22:29) Database connection established
+[16.10.2024] (12:22:29) Validating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[16.10.2024] (12:22:29) Session validated successfully
+[16.10.2024] (12:22:29) Updating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[16.10.2024] (12:22:33) **JoinServer constructor called**
+[16.10.2024] (12:22:33) Database connection established
+[16.10.2024] (12:22:33) Validating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[16.10.2024] (12:22:33) Session validated successfully
+[16.10.2024] (12:22:33) Updating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[16.10.2024] (12:22:38) SAM successfully authorized from 109.252.110.179
+[16.10.2024] (14:00:40) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:01:47) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:02:34) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:03:16) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:03:38) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:04:02) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:04:19) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:05:07) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:05:31) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:09:13) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:09:47) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:10:28) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:12:17) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:19:25) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:20:09) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:22:51) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:23:24) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:23:47) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:24:05) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:24:20) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:24:34) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:24:53) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:26:12) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:26:41) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:26:59) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:27:14) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:27:36) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:45:28) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:46:10) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (14:56:36) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:00:26) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:00:52) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:01:20) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:03:23) Логин failed authorization with password undefined
+[16.10.2024] (15:03:25) Логин failed authorization with password undefined
+[16.10.2024] (15:35:17) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:37:03) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:38:03) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:39:31) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:42:31) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:43:50) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:44:40) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:45:34) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:51:14) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:51:51) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:52:19) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:52:46) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:53:15) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:53:48) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:54:15) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:54:37) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:55:00) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:55:37) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (15:57:52) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[16.10.2024] (15:57:52) CPU ID BFEBFBFF000406F1 already exists in the database.
+[16.10.2024] (15:58:12) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (16:36:14) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (20:32:20) AidenFox successfully authorized from 109.252.4.184
+[16.10.2024] (20:33:26) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[16.10.2024] (20:33:26) CPU ID BFEBFBFF000406F1 already exists in the database.
+[16.10.2024] (20:33:40) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (20:34:39) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (20:34:58) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (20:35:13) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (20:44:41) Updater 89.113.149.116 with version '1.2.1-Revelation' requests an update information
+[16.10.2024] (20:44:41) CPU ID BFEBFBFF000306A9 already exists in the database.
+[16.10.2024] (22:16:33) Updater 79.139.148.117 with version '1.2.1-Revelation' requests an update information
+[16.10.2024] (22:16:33) CPU ID BFEBFBFF000306A9 already exists in the database.
+[16.10.2024] (22:16:58) Panncota successfully authorized from 79.139.148.117
+[16.10.2024] (23:50:02) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[16.10.2024] (23:50:02) CPU ID BFEBFBFF000406F1 already exists in the database.
+[16.10.2024] (23:50:16) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (23:55:39) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (23:56:30) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (23:57:27) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (23:57:49) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (23:58:49) Jesus successfully authorized from 109.252.4.184
+[16.10.2024] (23:59:43) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:00:26) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:00:49) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:01:08) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:01:51) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:02:42) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:03:38) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:04:44) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:06:36) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:07:11) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:08:03) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:08:27) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:09:04) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:09:12) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:09:29) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:10:37) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:11:01) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:11:17) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:11:53) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:12:26) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:12:56) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:13:08) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:13:23) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:13:39) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:14:06) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:14:23) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:15:01) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:15:14) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:15:31) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:16:15) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:16:33) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:16:53) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:17:07) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:17:26) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:17:56) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:18:13) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:18:36) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:18:52) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:19:31) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:19:49) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:20:07) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:20:21) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:20:43) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:21:05) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:21:28) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:21:36) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:22:20) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:32:44) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (00:33:16) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[17.10.2024] (09:03:28) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[17.10.2024] (09:03:28) CPU ID BFEBFBFF000406F1 already exists in the database.
+[17.10.2024] (09:03:42) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (09:04:10) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[17.10.2024] (09:04:10) CPU ID BFEBFBFF000406F1 already exists in the database.
+[17.10.2024] (09:04:24) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (09:52:40) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (09:54:57) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (09:56:34) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (10:01:51) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (10:07:01) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (10:08:24) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (10:08:36) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (10:09:11) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (10:12:17) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (10:12:48) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (10:14:18) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (10:17:46) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (10:21:43) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (10:22:30) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (10:22:53) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (10:41:23) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (13:47:22) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (13:49:03) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (13:52:45) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (13:55:53) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (13:57:14) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (14:07:03) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (14:08:35) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (14:09:04) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (14:09:42) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (14:13:37) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (14:14:04) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (14:15:25) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (14:18:13) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (14:19:13) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (14:24:53) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (14:25:07) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (14:25:18) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (14:26:24) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (14:28:21) Jesus successfully authorized from 109.252.4.184
+[17.10.2024] (20:14:43) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[17.10.2024] (20:14:43) CPU ID BFEBFBFF000806D1 already exists in the database.
+[17.10.2024] (20:15:03) Fridrih successfully authorized from 95.24.146.255
+[17.10.2024] (20:16:15) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[17.10.2024] (20:16:15) CPU ID BFEBFBFF000806D1 already exists in the database.
+[17.10.2024] (20:16:28) Fridrih successfully authorized from 95.24.146.255
+[18.10.2024] (00:48:08) Updater 109.252.110.179 with version '1.2.1-Revelation' requests an update information
+[18.10.2024] (00:48:08) CPU ID 178BFBFF00A20F10 already exists in the database.
+[18.10.2024] (00:48:27) SAM successfully authorized from 109.252.110.179
+[18.10.2024] (00:49:00) 109.252.110.179 requests 'Amber 1.16.5-Forge' files
+[18.10.2024] (00:50:30) **JoinServer constructor called**
+[18.10.2024] (00:50:30) Database connection established
+[18.10.2024] (00:50:30) Validating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[18.10.2024] (00:50:30) Session validated successfully
+[18.10.2024] (00:50:30) Updating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[18.10.2024] (00:51:28) **JoinServer constructor called**
+[18.10.2024] (00:51:28) Database connection established
+[18.10.2024] (00:51:28) Validating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[18.10.2024] (00:51:28) Session validated successfully
+[18.10.2024] (00:51:28) Updating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[18.10.2024] (01:28:12) SAM successfully authorized from 109.252.110.179
+[20.10.2024] (14:15:03) Updater 89.113.148.54 with version '1.2.1-Revelation' requests an update information
+[20.10.2024] (14:15:03) CPU ID BFEBFBFF000306A9 already exists in the database.
+[20.10.2024] (14:15:21) Panncota successfully authorized from 89.113.148.54
+[20.10.2024] (14:19:22) Updater 89.113.148.54 with version '1.2.1-Revelation' requests an update information
+[20.10.2024] (14:19:22) CPU ID BFEBFBFF000306A9 already exists in the database.
+[20.10.2024] (14:19:38) Panncota successfully authorized from 89.113.148.54
+[20.10.2024] (21:38:42) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[20.10.2024] (21:38:42) CPU ID BFEBFBFF000806D1 already exists in the database.
+[20.10.2024] (21:38:56) Fridrih successfully authorized from 95.24.146.255
+[20.10.2024] (21:39:11) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[20.10.2024] (21:39:11) CPU ID BFEBFBFF000806D1 already exists in the database.
+[20.10.2024] (21:39:24) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (19:56:01) Updater 90.154.72.13 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (19:56:01) CPU ID BFEBFBFF000A0671 already exists in the database.
+[22.10.2024] (19:56:53) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (19:56:53) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (19:57:02) The_Ferretz successfully authorized from 90.154.72.13
+[22.10.2024] (19:57:08) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (19:57:16) 90.154.72.13 requests 'Amber 1.16.5-Forge' files
+[22.10.2024] (19:58:43) Updater 95.24.146.255 with version '1.0.0' requests an update information
+[22.10.2024] (19:58:56) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (19:58:56) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (19:59:09) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (19:59:32) The_Ferretz successfully authorized from 90.154.72.13
+[22.10.2024] (19:59:32) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (19:59:32) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (19:59:46) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (19:59:50) 90.154.72.13 requests 'FurSpace 1.12.2-Forge' files
+[22.10.2024] (20:00:31) Updater 95.24.146.255 with version '1.0.0' requests an update information
+[22.10.2024] (20:00:42) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:00:42) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:00:57) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:02:01) **JoinServer constructor called**
+[22.10.2024] (20:02:01) Database connection established
+[22.10.2024] (20:02:01) Validating session for userMd5: <b>d30da7182e8210f7a1723edf80ee4d40</b>
+[22.10.2024] (20:02:01) Session validated successfully
+[22.10.2024] (20:02:01) Updating session for userMd5: <b>d30da7182e8210f7a1723edf80ee4d40</b>
+[22.10.2024] (20:02:03) SkinLib is being created with **f60b0289368b9fdfc1ada4280c61806d** UUID
+[22.10.2024] (20:02:03) Real user found: Mishail-Norty
+[22.10.2024] (20:02:03) Default skin used for user: Mishail-Norty
+[22.10.2024] (20:02:08) SkinLib is being created with **5cf8e42daf8032dc80e20ae207e917eb** UUID
+[22.10.2024] (20:02:46) Updater 95.24.146.255 with version '1.0.0' requests an update information
+[22.10.2024] (20:02:52) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:02:52) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:03:06) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:03:24) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:03:24) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:03:38) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:03:46) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:03:46) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:04:00) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:05:13) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:05:13) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:05:27) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:06:48) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:06:48) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:07:01) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:07:23) SkinLib is being created with **87dd592d7c1330aa814c3cd16167c904** UUID
+[22.10.2024] (20:07:36) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:07:36) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:07:41) SkinLib is being created with **a39eb89a5d8737589b9838433c05426b** UUID
+[22.10.2024] (20:07:51) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:14:52) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:14:52) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:16:07) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:16:36) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:16:36) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:17:04) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:18:32) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:18:32) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:18:45) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:19:21) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:19:21) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:19:34) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:19:53) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:19:53) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:20:06) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:21:52) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:21:52) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:22:05) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:25:25) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:25:25) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:25:44) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:26:30) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:26:30) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:26:50) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:27:16) Updater 31.173.86.38 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:27:16) CPU ID BFEBFBFF000306C3 already exists in the database.
+[22.10.2024] (20:27:38) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (20:29:10) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:29:10) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:29:30) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:32:05) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:32:05) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:34:00) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:35:03) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (20:35:03) CPU ID BFEBFBFF000806D1 already exists in the database.
+[22.10.2024] (20:36:05) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (20:37:12) Fridrih successfully authorized from 95.24.146.255
+[22.10.2024] (21:41:56) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (21:43:28) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (21:43:45) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (21:44:08) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (21:44:55) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (21:45:21) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (21:48:26) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (21:49:31) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (21:52:19) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (21:59:31) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:21:32) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:21:50) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:22:00) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:23:34) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:23:53) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:24:49) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:25:11) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:26:29) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:27:13) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:27:40) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:28:11) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:28:34) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:30:41) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:31:08) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:31:35) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:32:33) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:32:48) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:33:30) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:33:43) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:40:16) Updater 31.173.86.38 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (22:40:16) CPU ID BFEBFBFF000306C3 already exists in the database.
+[22.10.2024] (22:40:37) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:42:18) Updater 31.173.86.38 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (22:42:18) CPU ID BFEBFBFF000306C3 already exists in the database.
+[22.10.2024] (22:42:33) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:46:04) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:47:56) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:48:08) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:48:50) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:50:05) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:50:16) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:51:40) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:57:21) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:58:15) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (22:58:31) Jesus successfully authorized from 31.173.86.38
+[22.10.2024] (23:03:57) Updater 31.173.86.38 with version '1.2.1-Revelation' requests an update information
+[22.10.2024] (23:03:57) CPU ID BFEBFBFF000306C3 already exists in the database.
+[22.10.2024] (23:04:18) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (09:47:57) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:47:59) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:00) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:00) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:01) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:01) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:01) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:02) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:02) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:02) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:02) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:03) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:03) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:03) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:03) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:04) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:04) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:04) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:05) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:05) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:05) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:05) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:06) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:06) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:06) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:06) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:06) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:07) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:07) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:20) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:21) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:21) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:22) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:22) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:22) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:22) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:22) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:23) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:23) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:24) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:24) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:24) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:24) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:25) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:48:25) Updater 31.173.86.38 with version '' requests an update information
+[23.10.2024] (09:52:18) Updater 31.173.86.38 with version '1.2.1-Revelation' requests an update information
+[23.10.2024] (09:52:18) CPU ID BFEBFBFF000306C3 already exists in the database.
+[23.10.2024] (09:52:34) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (09:52:42) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (09:52:48) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (09:52:53) 31.173.86.38 requests 'FurSpace 1.12.2-Forge' files
+[23.10.2024] (09:53:12) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (09:53:25) 31.173.86.38 requests 'FurSpace 1.12.2-Forge' files
+[23.10.2024] (09:56:59) **JoinServer constructor called**
+[23.10.2024] (09:56:59) Database connection established
+[23.10.2024] (09:56:59) Validating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[23.10.2024] (09:56:59) Session validated successfully
+[23.10.2024] (09:56:59) Updating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[23.10.2024] (09:57:34) **JoinServer constructor called**
+[23.10.2024] (09:57:34) Database connection established
+[23.10.2024] (09:57:34) Validating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[23.10.2024] (09:57:34) Session validated successfully
+[23.10.2024] (09:57:34) Updating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[23.10.2024] (09:59:38) AidenFox successfully authorized from 128.204.79.3
+[23.10.2024] (10:01:25) **JoinServer constructor called**
+[23.10.2024] (10:01:25) Database connection established
+[23.10.2024] (10:01:25) Validating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[23.10.2024] (10:01:25) Session validated successfully
+[23.10.2024] (10:01:25) Updating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[23.10.2024] (10:01:30) **JoinServer constructor called**
+[23.10.2024] (10:01:30) Database connection established
+[23.10.2024] (10:01:30) Validating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[23.10.2024] (10:01:30) Session validated successfully
+[23.10.2024] (10:01:30) Updating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[23.10.2024] (10:03:21) **JoinServer constructor called**
+[23.10.2024] (10:03:21) Database connection established
+[23.10.2024] (10:03:21) Validating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[23.10.2024] (10:03:21) Session validated successfully
+[23.10.2024] (10:03:21) Updating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[23.10.2024] (10:05:00) **JoinServer constructor called**
+[23.10.2024] (10:05:00) Database connection established
+[23.10.2024] (10:05:00) Validating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[23.10.2024] (10:05:00) Session validated successfully
+[23.10.2024] (10:05:00) Updating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[23.10.2024] (10:05:53) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (10:06:10) 31.173.86.38 requests 'Amber 1.16.5-Forge' files
+[23.10.2024] (10:08:30) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (10:08:35) 31.173.86.38 requests 'Amber 1.16.5-Forge' files
+[23.10.2024] (10:09:47) **JoinServer constructor called**
+[23.10.2024] (10:09:47) Database connection established
+[23.10.2024] (10:09:47) Validating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[23.10.2024] (10:09:47) Session validated successfully
+[23.10.2024] (10:09:47) Updating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[23.10.2024] (10:11:22) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (10:12:09) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:12:16) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:12:21) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:12:27) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:13:57) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:16:12) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:16:24) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:16:30) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:16:35) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:18:58) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:19:19) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:23:17) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:26:12) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:27:11) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:27:30) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:28:30) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:39:58) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:42:20) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:44:24) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:44:36) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:44:46) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:44:58) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:45:17) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:46:58) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:51:07) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (10:53:38) Updater 31.173.86.38 with version '1.2.1-Revelation' requests an update information
+[23.10.2024] (10:53:38) CPU ID BFEBFBFF000306C3 already exists in the database.
+[23.10.2024] (10:54:24) Updater 31.173.86.38 with version '1.2.1-Revelation' requests an update information
+[23.10.2024] (10:54:24) CPU ID BFEBFBFF000306C3 already exists in the database.
+[23.10.2024] (10:54:45) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (11:11:38) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (11:14:06) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (11:14:27) 31.173.86.38 requests 'Amber 1.16.5-Forge' files
+[23.10.2024] (11:15:19) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (11:15:22) 31.173.86.38 requests 'Amber 1.16.5-Forge' files
+[23.10.2024] (11:16:37) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (11:16:41) 31.173.86.38 requests 'Amber 1.16.5-Forge' files
+[23.10.2024] (11:17:43) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (11:17:49) 31.173.86.38 requests 'FurSpace 1.12.2-Forge' files
+[23.10.2024] (11:19:28) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (11:19:47) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (11:19:51) 31.173.86.38 requests 'FurSpace 1.12.2-Forge' files
+[23.10.2024] (11:25:58) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (11:26:11) 31.173.86.38 requests 'FurSpace 1.12.2-Forge' files
+[23.10.2024] (11:26:47) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (11:26:51) 31.173.86.38 requests 'FurSpace 1.12.2-Forge' files
+[23.10.2024] (11:42:19) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (11:42:28) 31.173.86.38 requests 'FurSpace 1.12.2-Forge' files
+[23.10.2024] (12:42:41) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (12:43:01) 31.173.86.38 requests 'FurSpace 1.12.2-Forge' files
+[23.10.2024] (12:47:57) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (12:48:55) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (12:56:37) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (12:56:41) 31.173.86.38 requests 'FurSpace 1.12.2-Forge' files
+[23.10.2024] (13:01:51) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (13:02:00) 31.173.86.38 requests 'FurSpace 1.12.2-Forge' files
+[23.10.2024] (13:10:07) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (13:10:43) 31.173.86.38 requests 'FurSpace 1.12.2-Forge' files
+[23.10.2024] (13:20:35) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (13:21:27) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (13:24:58) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (13:25:15) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (13:26:21) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (13:27:27) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (13:29:07) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (13:31:06) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (13:32:46) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (13:33:21) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (13:34:37) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (13:35:49) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (13:38:11) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (13:38:33) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (13:38:40) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (13:38:53) 31.173.86.38 requests 'FurSpace 1.12.2-Forge' files
+[23.10.2024] (13:44:14) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (13:44:21) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (13:44:43) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (13:45:03) 31.173.86.38 requests 'FurSpace 1.12.2-Forge' files
+[23.10.2024] (13:49:33) Updater 31.173.86.38 with version '1.2.1-Revelation' requests an update information
+[23.10.2024] (13:49:33) CPU ID BFEBFBFF000306C3 already exists in the database.
+[23.10.2024] (13:56:19) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (13:57:34) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (13:57:57) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (14:00:10) Updater 31.173.86.38 with version '1.2.1-Revelation' requests an update information
+[23.10.2024] (14:00:10) CPU ID BFEBFBFF000306C3 already exists in the database.
+[23.10.2024] (14:00:47) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (14:51:54) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:12:08) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:15:02) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:17:25) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:20:11) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:20:43) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:21:27) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:22:13) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:23:23) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:24:54) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:25:54) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:26:18) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:26:23) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:26:28) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:27:08) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:27:28) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:29:54) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:31:22) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:33:59) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:34:38) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:39:18) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:39:34) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:39:59) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (15:40:18) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (15:45:19) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (16:06:54) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (16:08:44) Updater 31.173.86.38 with version '1.2.1-Revelation' requests an update information
+[23.10.2024] (16:08:44) CPU ID BFEBFBFF000306C3 already exists in the database.
+[23.10.2024] (17:40:37) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[23.10.2024] (17:40:37) CPU ID BFEBFBFF000806D1 already exists in the database.
+[23.10.2024] (17:41:11) Fridrih successfully authorized from 95.24.146.255
+[23.10.2024] (17:41:46) 95.24.146.255 requests 'Amber 1.16.5-Forge' files
+[23.10.2024] (17:43:37) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[23.10.2024] (17:43:37) CPU ID BFEBFBFF000806D1 already exists in the database.
+[23.10.2024] (17:43:50) Fridrih successfully authorized from 95.24.146.255
+[23.10.2024] (17:43:58) 95.24.146.255 requests 'FurSpace 1.12.2-Forge' files
+[23.10.2024] (17:44:59) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[23.10.2024] (17:44:59) CPU ID BFEBFBFF000806D1 already exists in the database.
+[23.10.2024] (17:45:12) Fridrih successfully authorized from 95.24.146.255
+[23.10.2024] (17:45:22) 95.24.146.255 requests 'FurSpace 1.12.2-Forge' files
+[23.10.2024] (17:47:28) Fridrih successfully authorized from 95.24.146.255
+[23.10.2024] (17:47:37) 95.24.146.255 requests 'Amber 1.16.5-Forge' files
+[23.10.2024] (17:47:54) Updater 95.24.146.255 with version '1.2.1-Revelation' requests an update information
+[23.10.2024] (17:47:54) CPU ID BFEBFBFF000806D1 already exists in the database.
+[23.10.2024] (17:48:21) Fridrih successfully authorized from 95.24.146.255
+[23.10.2024] (17:48:24) 95.24.146.255 requests 'Amber 1.16.5-Forge' files
+[23.10.2024] (17:50:26) Fridrih successfully authorized from 95.24.146.255
+[23.10.2024] (17:50:30) 95.24.146.255 requests 'Amber 1.16.5-Forge' files
+[23.10.2024] (18:41:30) Логин failed authorization with password undefined
+[23.10.2024] (19:44:43) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (19:57:38) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (19:58:38) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (19:59:05) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (21:21:17) Updater 31.173.86.38 with version '1.2.1-Revelation' requests an update information
+[23.10.2024] (21:21:17) CPU ID BFEBFBFF000306C3 already exists in the database.
+[23.10.2024] (21:26:06) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (21:35:53) 31.173.86.38 requests 'Amber 1.16.5-Forge' files
+[23.10.2024] (21:38:02) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (21:38:04) 31.173.86.38 requests 'Amber 1.16.5-Forge' files
+[23.10.2024] (21:39:17) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (21:39:28) 31.173.86.38 requests 'Amber 1.16.5-Forge' files
+[23.10.2024] (21:45:22) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (21:45:26) 31.173.86.38 requests 'Amber 1.16.5-Forge' files
+[23.10.2024] (21:54:13) Updater 31.173.86.38 with version '1.2.1-Revelation' requests an update information
+[23.10.2024] (21:54:13) CPU ID BFEBFBFF000306C3 already exists in the database.
+[23.10.2024] (21:54:28) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (21:54:32) 31.173.86.38 requests 'Amber 1.16.5-Forge' files
+[23.10.2024] (21:55:50) **JoinServer constructor called**
+[23.10.2024] (21:55:50) Database connection established
+[23.10.2024] (21:55:50) Validating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[23.10.2024] (21:55:50) Session validated successfully
+[23.10.2024] (21:55:50) Updating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[23.10.2024] (22:00:35) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (22:00:54) 31.173.86.38 requests 'Amber 1.16.5-Forge' files
+[23.10.2024] (22:01:18) Jesus successfully authorized from 31.173.86.38
+[23.10.2024] (22:05:23) Updater 31.173.86.38 with version '1.2.1-Revelation' requests an update information
+[23.10.2024] (22:05:23) CPU ID BFEBFBFF000306C3 already exists in the database.
+[23.10.2024] (22:05:26) Updater 31.173.86.38 with version '1.2.1-Revelation' requests an update information
+[23.10.2024] (22:05:26) CPU ID BFEBFBFF000306C3 already exists in the database.
+[23.10.2024] (22:06:11) AidenFox successfully authorized from 31.173.86.38
+[23.10.2024] (22:06:19) 31.173.86.38 requests 'Amber 1.16.5-Forge' files
+[23.10.2024] (22:07:35) **JoinServer constructor called**
+[23.10.2024] (22:07:35) Database connection established
+[23.10.2024] (22:07:35) Validating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[23.10.2024] (22:07:35) Session validated successfully
+[23.10.2024] (22:07:35) Updating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[24.10.2024] (09:09:59) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:10:05) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:11:03) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:11:07) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:13:24) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:13:27) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:29:05) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:29:14) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:29:54) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:29:57) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:30:41) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:30:44) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:34:17) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:34:21) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:34:56) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:40:50) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:40:54) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:41:37) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:41:41) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:42:38) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:42:41) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:43:27) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:43:29) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:43:37) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:43:40) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:44:07) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:44:10) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:48:58) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:49:02) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:52:33) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:52:36) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:52:44) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:52:47) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:52:55) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:52:59) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:53:56) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:54:00) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:54:42) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:54:45) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:55:18) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:55:21) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (09:58:11) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (09:58:15) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (10:02:27) Updater 31.173.85.51 with version '1.2.1-Revelation' requests an update information
+[24.10.2024] (10:02:27) CPU ID BFEBFBFF000306C3 already exists in the database.
+[24.10.2024] (10:03:07) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (10:03:21) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (11:24:45) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (11:31:41) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (11:31:45) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (11:33:52) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (11:33:55) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (13:46:48) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (13:46:52) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (13:53:16) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (13:53:21) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (13:59:05) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (13:59:09) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (14:00:21) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (14:00:24) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (14:04:52) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (14:05:12) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (14:05:34) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (14:05:47) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (14:05:59) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (14:06:10) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (14:06:22) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (14:06:48) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (14:12:15) Updater 31.173.85.51 with version '1.2.1-Revelation' requests an update information
+[24.10.2024] (14:12:15) CPU ID BFEBFBFF000306C3 already exists in the database.
+[24.10.2024] (14:12:36) JesussysRequest=downloadLatest failed authorization with password Jesus14
+[24.10.2024] (14:13:06) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (14:13:08) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (14:15:20) **JoinServer constructor called**
+[24.10.2024] (14:15:20) Database connection established
+[24.10.2024] (14:15:20) Validating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[24.10.2024] (14:15:20) Session validated successfully
+[24.10.2024] (14:15:20) Updating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[24.10.2024] (14:21:23) SkinLib is being created with **8f552657df1d42cd89c6c176e195f703** UUID
+[24.10.2024] (14:21:23) SkinLib is being created with **2714d55fffef4655a93ed8ca13230e76** UUID
+[24.10.2024] (14:21:23) SkinLib is being created with **cfb727e7efcc45968c2b9c6e38c8eea4** UUID
+[24.10.2024] (16:40:42) Updater 95.220.58.102 with version '1.1.9-VaultDweller' requests an update information
+[24.10.2024] (16:40:42) CPU ID  already exists in the database.
+[24.10.2024] (16:40:52) Updater 95.220.58.102 with version '1.2.1-Revelation' requests an update information
+[24.10.2024] (16:40:52) CPU ID BFEBFBFF000906EA already exists in the database.
+[24.10.2024] (16:41:35) simpozium successfully authorized from 95.220.58.102
+[24.10.2024] (16:42:10) 95.220.58.102 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (16:45:12) **JoinServer constructor called**
+[24.10.2024] (16:45:12) Database connection established
+[24.10.2024] (16:45:12) Validating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[24.10.2024] (16:45:12) Session validated successfully
+[24.10.2024] (16:45:12) Updating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[24.10.2024] (16:45:14) **JoinServer constructor called**
+[24.10.2024] (16:45:14) Database connection established
+[24.10.2024] (16:45:14) Validating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[24.10.2024] (16:45:14) Session validated successfully
+[24.10.2024] (16:45:14) Updating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[24.10.2024] (16:45:50) Simpozium failed authorization with password 14012007d
+[24.10.2024] (16:46:34) Updater 95.220.58.102 with version '1.2.1-Revelation' requests an update information
+[24.10.2024] (16:46:34) CPU ID BFEBFBFF000906EA already exists in the database.
+[24.10.2024] (16:47:46) Simpozium successfully authorized from 95.220.58.102
+[24.10.2024] (16:48:09) Simpozium successfully authorized from 95.220.58.102
+[24.10.2024] (16:48:15) 95.220.58.102 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (16:49:44) **JoinServer constructor called**
+[24.10.2024] (16:49:44) Database connection established
+[24.10.2024] (16:49:44) Validating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[24.10.2024] (16:49:44) Session validated successfully
+[24.10.2024] (16:49:44) Updating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[24.10.2024] (17:06:42) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:07:24) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:07:58) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:08:12) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:08:28) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:08:52) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:09:20) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:10:58) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:11:25) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:11:39) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:11:58) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:12:14) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:12:31) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:12:57) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:13:14) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:13:29) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:13:47) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:14:01) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:18:09) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:18:56) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:34:38) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:34:46) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (17:35:07) Jesus successfully authorized from 31.173.85.51
+[24.10.2024] (17:35:11) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (17:36:14) Updater 31.173.85.51 with version '1.2.1-Revelation' requests an update information
+[24.10.2024] (17:36:14) CPU ID BFEBFBFF000306C3 already exists in the database.
+[24.10.2024] (17:37:01) AidenFox successfully authorized from 31.173.85.51
+[24.10.2024] (17:37:03) 31.173.85.51 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (17:38:16) **JoinServer constructor called**
+[24.10.2024] (17:38:16) Database connection established
+[24.10.2024] (17:38:16) Validating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[24.10.2024] (17:38:16) Session validated successfully
+[24.10.2024] (17:38:16) Updating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[24.10.2024] (17:38:23) SkinLib is being created with **2714d55fffef4655a93ed8ca13230e76** UUID
+[24.10.2024] (17:38:23) SkinLib is being created with **8f552657df1d42cd89c6c176e195f703** UUID
+[24.10.2024] (17:38:23) SkinLib is being created with **cfb727e7efcc45968c2b9c6e38c8eea4** UUID
+[24.10.2024] (21:18:39) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (21:21:24) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (21:22:10) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (21:22:49) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (21:23:29) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (21:24:07) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (21:26:14) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (21:26:21) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (21:37:16) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (21:37:20) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (21:40:38) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (21:40:42) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (21:49:22) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (21:49:28) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (21:50:43) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (21:50:47) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (21:53:39) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (21:53:43) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (21:54:26) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (21:54:30) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (21:56:31) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (21:56:34) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (21:57:13) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (21:57:18) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (22:00:01) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (22:00:04) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (22:01:53) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (22:01:56) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (22:02:19) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (22:02:28) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (22:02:41) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (22:04:13) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (22:04:42) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (22:04:47) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (22:19:57) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (22:30:10) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (22:37:45) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (22:37:47) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (22:39:13) **JoinServer constructor called**
+[24.10.2024] (22:39:13) Database connection established
+[24.10.2024] (22:39:13) Validating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[24.10.2024] (22:39:13) Session validated successfully
+[24.10.2024] (22:39:13) Updating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[24.10.2024] (22:44:38) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (22:44:42) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (22:45:18) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (22:46:31) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (22:46:55) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (22:47:13) 109.252.4.184 requests 'Craftoria 1.21-NeoForge' files
+[24.10.2024] (22:48:24) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (22:48:26) 109.252.4.184 requests 'Craftoria 1.21-NeoForge' files
+[24.10.2024] (22:50:05) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (22:51:40) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (22:51:48) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (22:52:18) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (22:52:26) 109.252.4.184 requests 'Craftoria 1.21-NeoForge' files
+[24.10.2024] (22:52:47) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (22:52:52) 109.252.4.184 requests 'Craftoria 1.21-NeoForge' files
+[24.10.2024] (22:55:11) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (22:55:15) 109.252.4.184 requests 'Craftoria 1.21-NeoForge' files
+[24.10.2024] (22:58:22) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (22:58:25) 109.252.4.184 requests 'Craftoria 1.21-NeoForge' files
+[24.10.2024] (22:58:32) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (22:58:56) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (23:03:33) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:03:35) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[24.10.2024] (23:05:52) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[24.10.2024] (23:05:52) CPU ID BFEBFBFF000406F1 already exists in the database.
+[24.10.2024] (23:06:59) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:08:11) Jesus successfully authorized from 109.252.4.184
+[24.10.2024] (23:15:33) Logged user 'Jesus' uploading skin for Jesus
+[24.10.2024] (23:15:39) Logged user 'Jesus' uploading cloak for Jesus
+[24.10.2024] (23:15:50) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[24.10.2024] (23:15:50) CPU ID BFEBFBFF000406F1 already exists in the database.
+[24.10.2024] (23:16:34) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:16:40) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[24.10.2024] (23:16:40) CPU ID BFEBFBFF000406F1 already exists in the database.
+[24.10.2024] (23:17:22) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:17:34) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:17:48) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:17:56) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[24.10.2024] (23:17:56) CPU ID BFEBFBFF000406F1 already exists in the database.
+[24.10.2024] (23:18:21) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:18:28) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:21:48) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:22:38) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[24.10.2024] (23:22:38) CPU ID BFEBFBFF000406F1 already exists in the database.
+[24.10.2024] (23:23:09) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[24.10.2024] (23:23:09) CPU ID BFEBFBFF000406F1 already exists in the database.
+[24.10.2024] (23:27:44) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:27:44) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:28:12) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[24.10.2024] (23:28:12) CPU ID BFEBFBFF000406F1 already exists in the database.
+[24.10.2024] (23:28:32) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:30:58) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:30:58) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:31:57) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:33:55) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:35:26) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:35:51) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:39:59) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:39:59) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:40:32) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:40:32) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:41:14) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:41:14) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:42:50) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:42:50) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:43:23) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:43:23) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:46:26) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:47:19) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:47:41) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:47:41) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:51:36) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:51:36) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:52:20) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:52:20) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:52:32) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:52:32) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:52:50) AidenFox successfully authorized from 109.252.4.184
+[24.10.2024] (23:52:50) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:02:30) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:08:45) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:08:59) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:08:59) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:10:45) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:10:45) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:12:20) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:12:20) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:14:26) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:14:27) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:21:27) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:21:27) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:25:22) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:25:22) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:27:27) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:27:27) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:29:16)  failed authorization with password 
+[25.10.2024] (09:29:21)  failed authorization with password 
+[25.10.2024] (09:29:52) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:30:06) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:30:07) AidenFox successfully authorized from 109.252.4.184
+[25.10.2024] (09:30:24) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (09:31:43) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (09:31:43) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (09:31:54) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (09:32:38) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (09:33:13) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (09:34:00) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (09:34:04) Логин failed authorization with password undefined
+[25.10.2024] (09:36:25) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (09:36:30) Логин failed authorization with password undefined
+[25.10.2024] (09:38:41) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (09:38:43) Логин failed authorization with password undefined
+[25.10.2024] (09:39:35) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (09:40:13) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (09:40:23) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[25.10.2024] (09:40:23) CPU ID BFEBFBFF000406F1 already exists in the database.
+[25.10.2024] (09:40:49) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (09:40:52) Логин failed authorization with password undefined
+[25.10.2024] (09:58:57) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (09:58:59) Логин failed authorization with password undefined
+[25.10.2024] (10:00:36) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:00:37) Логин failed authorization with password undefined
+[25.10.2024] (10:47:51) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:47:51) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:50:52) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:54:04) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:54:06) Логин failed authorization with password undefined
+[25.10.2024] (10:54:22) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[25.10.2024] (10:54:22) CPU ID BFEBFBFF000406F1 already exists in the database.
+[25.10.2024] (10:54:52) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:54:53) Логин failed authorization with password undefined
+[25.10.2024] (10:55:00) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[25.10.2024] (10:55:00) CPU ID BFEBFBFF000406F1 already exists in the database.
+[25.10.2024] (10:55:16) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:56:00) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:56:00) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:56:26) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:56:27) Логин failed authorization with password undefined
+[25.10.2024] (10:56:32) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:56:32) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:56:39) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:56:39) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:56:44) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:56:44) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:56:50) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:56:50) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (10:59:05) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (15:39:02) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (15:39:04) Логин failed authorization with password undefined
+[25.10.2024] (17:35:37) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (17:35:37) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (17:35:47) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (17:35:47) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (17:43:57) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (17:43:57) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (17:49:19) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (17:49:19) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (17:54:15) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (17:54:15) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (17:57:30) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (17:57:30) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (17:57:57) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (17:57:57) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:00:01) Логин failed authorization with password undefined
+[25.10.2024] (18:08:33) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:09:02) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:09:02) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:10:47) Логин failed authorization with password undefined
+[25.10.2024] (18:11:01) undefined failed authorization with password Jesus14
+[25.10.2024] (18:11:21) undefined failed authorization with password jkljkl
+[25.10.2024] (18:14:11) Логин failed authorization with password undefined
+[25.10.2024] (18:17:50) Логин failed authorization with password undefined
+[25.10.2024] (18:18:33) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:25:17) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:25:20) Логин failed authorization with password 
+[25.10.2024] (18:28:29) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:28:54) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:29:00) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:31:54) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[25.10.2024] (18:31:54) CPU ID BFEBFBFF000406F1 already exists in the database.
+[25.10.2024] (18:34:05) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:36:42) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:37:02) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:37:20) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:37:40) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:38:21) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:38:42) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:42:24) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:42:39) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:42:52) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:43:15) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:43:30) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:43:45) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:44:00) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:44:19) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:44:42) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:45:20) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:45:36) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:47:32) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[25.10.2024] (18:47:32) CPU ID BFEBFBFF000406F1 already exists in the database.
+[25.10.2024] (18:51:45) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[25.10.2024] (18:51:45) CPU ID BFEBFBFF000406F1 already exists in the database.
+[25.10.2024] (18:52:24) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:52:28) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[25.10.2024] (18:52:28) CPU ID BFEBFBFF000406F1 already exists in the database.
+[25.10.2024] (18:52:50) Логин failed authorization with password undefined
+[25.10.2024] (18:53:19) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:55:05) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:56:23) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[25.10.2024] (18:56:23) CPU ID BFEBFBFF000406F1 already exists in the database.
+[25.10.2024] (18:56:42) Jesus successfully authorized from 109.252.4.184
+[25.10.2024] (18:57:23) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[25.10.2024] (18:58:26) **JoinServer constructor called**
+[25.10.2024] (18:58:26) Database connection established
+[25.10.2024] (18:58:26) Validating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[25.10.2024] (18:58:26) Session validated successfully
+[25.10.2024] (18:58:26) Updating session for userMd5: <b>e9829608dd90ff6b8bf7cb50746eae78</b>
+[25.10.2024] (19:14:30) SkinLib is being created with **cfb727e7efcc45968c2b9c6e38c8eea4** UUID
+[25.10.2024] (19:14:30) SkinLib is being created with **2714d55fffef4655a93ed8ca13230e76** UUID
+[25.10.2024] (19:14:30) SkinLib is being created with **8f552657df1d42cd89c6c176e195f703** UUID
+[25.10.2024] (19:41:35) Jesus successfully authorized from 109.252.4.184
+[26.10.2024] (09:33:03) Jesus successfully authorized from 109.252.4.184
+[26.10.2024] (10:03:34) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:03:34) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:03:53) Jesus successfully authorized from 109.252.4.184
+[26.10.2024] (10:04:53) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (10:06:23) 109.252.4.184 requests 'FurSpace 1.12.2-Forge' files
+[26.10.2024] (10:12:17) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:12:17) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:13:03) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (10:14:21) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:14:21) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:14:41) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:14:41) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:15:03) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:15:03) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:15:32) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:15:32) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:15:46) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:15:46) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:16:05) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:16:05) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:16:31) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:16:31) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:17:06) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:17:06) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:18:42) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:18:42) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:19:07) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:19:07) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:19:51) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:19:51) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:20:04) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (10:20:29) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:20:29) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:20:42) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (10:22:03) Updater 109.252.4.184 with version '1.2.2-Revelation' requests an update information
+[26.10.2024] (10:22:03) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:22:16) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (10:25:45) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:25:45) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:25:58) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (10:26:12) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:26:12) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:26:26) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (10:27:10) Updater 109.252.4.184 with version '1.2.1-Revelation' requests an update information
+[26.10.2024] (10:27:10) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:27:19) Updater 109.252.4.184 with version '1.2.2-Impeller' requests an update information
+[26.10.2024] (10:27:19) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:27:32) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (10:28:51) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (10:29:08) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (10:29:13) Updater 109.252.4.184 with version '1.2.2-Impeller' requests an update information
+[26.10.2024] (10:29:13) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (10:29:26) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (10:31:07) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[26.10.2024] (10:32:04) **JoinServer constructor called**
+[26.10.2024] (10:32:04) Database connection established
+[26.10.2024] (10:32:04) Validating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[26.10.2024] (10:32:04) Session validated successfully
+[26.10.2024] (10:32:04) Updating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[26.10.2024] (11:15:07) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (19:30:16) Updater 109.252.4.184 with version '1.2.2-Impeller' requests an update information
+[26.10.2024] (19:30:16) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (19:30:29) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (19:34:48) Updater 109.252.4.184 with version '1.2.2-Impeller' requests an update information
+[26.10.2024] (19:34:48) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (19:35:01) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (19:36:52) Updater 109.252.4.184 with version '1.2.2-Impeller' requests an update information
+[26.10.2024] (19:36:52) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (19:37:06) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (19:37:14) Updater 109.252.4.184 with version '1.2.2-Impeller' requests an update information
+[26.10.2024] (19:37:14) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (19:37:27) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (19:37:35) Updater 109.252.4.184 with version '1.2.2-Impeller' requests an update information
+[26.10.2024] (19:37:35) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (19:37:48) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (19:37:56) Updater 109.252.4.184 with version '1.2.2-Impeller' requests an update information
+[26.10.2024] (19:37:56) CPU ID BFEBFBFF000406F1 already exists in the database.
+[26.10.2024] (19:38:09) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (20:06:09) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (20:11:50) AidenFox successfully authorized from 109.252.4.184
+[26.10.2024] (20:13:51) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[27.10.2024] (09:16:53) Updater 109.252.4.184 with version '1.2.2-Impeller' requests an update information
+[27.10.2024] (09:16:53) CPU ID BFEBFBFF000406F1 already exists in the database.
+[27.10.2024] (09:17:06) AidenFox successfully authorized from 109.252.4.184
+[27.10.2024] (14:02:01) Updater 109.252.110.179 with version '1.2.1-Revelation' requests an update information
+[27.10.2024] (14:02:01) CPU ID 178BFBFF00A20F10 already exists in the database.
+[27.10.2024] (14:02:10) Updater 109.252.110.179 with version '1.2.2-Impeller' requests an update information
+[27.10.2024] (14:02:10) CPU ID 178BFBFF00A20F10 already exists in the database.
+[27.10.2024] (14:02:42) SAM failed authorization with password Test123
+[27.10.2024] (14:03:28) Updater 109.252.110.179 with version '1.2.2-Impeller' requests an update information
+[27.10.2024] (14:03:28) CPU ID 178BFBFF00A20F10 already exists in the database.
+[27.10.2024] (14:03:41) SAM successfully authorized from 109.252.110.179
+[27.10.2024] (14:07:13) Updater 109.252.110.179 with version '1.2.2-Impeller' requests an update information
+[27.10.2024] (14:07:13) CPU ID 178BFBFF00A20F10 already exists in the database.
+[27.10.2024] (14:07:26) SAM successfully authorized from 109.252.110.179
+[27.10.2024] (14:09:40) Updater 109.252.110.179 with version '1.2.2-Impeller' requests an update information
+[27.10.2024] (14:09:40) CPU ID 178BFBFF00A20F10 already exists in the database.
+[27.10.2024] (14:11:04) SAM failed authorization with password Test123
+[27.10.2024] (14:15:44) Updater 109.252.110.179 with version '1.2.2-Impeller' requests an update information
+[27.10.2024] (14:15:44) CPU ID 178BFBFF00A20F10 already exists in the database.
+[27.10.2024] (14:15:57) SAM successfully authorized from 109.252.110.179
+[27.10.2024] (14:16:14) 109.252.110.179 requests 'Amber 1.16.5-Forge' files
+[27.10.2024] (14:17:29) SAM successfully authorized from 109.252.110.179
+[27.10.2024] (14:17:39) 109.252.110.179 requests 'FurSpace 1.12.2-Forge' files
+[27.10.2024] (14:18:47) **JoinServer constructor called**
+[27.10.2024] (14:18:47) Database connection established
+[27.10.2024] (14:18:47) Validating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[27.10.2024] (14:18:47) Session validated successfully
+[27.10.2024] (14:18:47) Updating session for userMd5: <b>9f1b3be4a82b11d104e4ef7f7ccb1c19</b>
+[27.10.2024] (14:18:48) SkinLib is being created with **5f631a79433cd44dc89b3babf4d8c28e** UUID
+[27.10.2024] (14:18:48) Real user found: Furry_Puro
+[27.10.2024] (14:18:48) Default skin used for user: Furry_Puro
+[27.10.2024] (14:18:48) SkinLib is being created with **55124a5c0b5e4293b16b6d20a47cdee7** UUID
+[27.10.2024] (14:18:48) Real user found: Rick_Lisnsi
+[27.10.2024] (14:18:48) Default skin used for user: Rick_Lisnsi
+[27.10.2024] (14:18:52) SkinLib is being created with **44410ffe6bcc3e21813f42b3fdea3d0e** UUID
+[27.10.2024] (14:18:54) SkinLib is being created with **7faccbbf3ca5377f973f9177133f87a0** UUID
+[27.10.2024] (14:19:21) SAMsysRequest=downloadLatest failed authorization with password DownToTheSlope
+[27.10.2024] (14:45:56) Checking a password 'undefined'
+[27.10.2024] (14:46:07) Checking a password 'undefined'
+[27.10.2024] (14:46:15) AidenFox successfully authorized from 178.176.78.9
+[28.10.2024] (09:45:38) Updater 104.28.198.246 with version '1.2.2-Impeller' requests an update information
+[28.10.2024] (09:45:38) CPU ID BFEBFBFF000406F1 already exists in the database.
+[28.10.2024] (09:45:52) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (09:48:32) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (09:48:52) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (09:49:33) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (09:50:09) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (09:50:28) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (09:50:40) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (09:51:13) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (09:51:43) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (09:57:18) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (09:58:18) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (09:58:58) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (09:59:33) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (09:59:55) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:00:27) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:00:44) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:01:12) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:01:30) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:01:50) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:02:37) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:03:19) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:03:53) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:04:07) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:04:19) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:05:06) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:22:29) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:22:44) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:23:06) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:23:27) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:23:41) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:23:59) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:24:15) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:24:30) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:25:03) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:25:21) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:26:21) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:26:45) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:27:00) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:27:56) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:33:50) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:36:40) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:37:09) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (10:39:08) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (11:14:22) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (11:15:57) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (11:16:20) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (11:16:37) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (11:16:55) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (11:17:29) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (11:17:45) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (11:18:24) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (11:18:51) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (11:20:35) Updater 104.28.198.246 with version '1.2.2-Impeller' requests an update information
+[28.10.2024] (11:20:35) CPU ID BFEBFBFF000406F1 already exists in the database.
+[28.10.2024] (11:20:54) AidenFox successfully authorized from 104.28.198.246
+[28.10.2024] (16:35:19) AidenFox successfully authorized from 104.28.198.245
+[28.10.2024] (16:39:52) AidenFox successfully authorized from 104.28.198.245
+[28.10.2024] (16:40:34) Updater 104.28.198.245 with version '1.2.2-Impeller' requests an update information
+[28.10.2024] (16:40:34) CPU ID BFEBFBFF000406F1 already exists in the database.
+[28.10.2024] (16:40:47) AidenFox successfully authorized from 104.28.198.245
+[28.10.2024] (16:48:35) 104.28.198.245 requests 'Amber 1.16.5-Forge' files
+[29.10.2024] (09:38:04) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (09:39:11) Updater 81.200.10.204 with version '1.2.1-Revelation' requests an update information
+[29.10.2024] (09:39:11) CPU ID BFEBFBFF000206A7 already exists in the database.
+[29.10.2024] (09:39:12) Updater 81.200.10.204 with version '1.2.1-Revelation' requests an update information
+[29.10.2024] (09:39:12) CPU ID BFEBFBFF000206A7 already exists in the database.
+[29.10.2024] (09:39:55) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (09:40:45) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (09:40:57) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (09:41:57) Updater 81.200.10.204 with version '1.2.2-Impeller' requests an update information
+[29.10.2024] (09:41:57) CPU ID BFEBFBFF000206A7 already exists in the database.
+[29.10.2024] (09:42:03) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (09:42:07) Updater 81.200.10.204 with version '1.2.2-Impeller' requests an update information
+[29.10.2024] (09:42:07) CPU ID BFEBFBFF000206A7 already exists in the database.
+[29.10.2024] (09:43:31) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (09:44:11) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (09:44:58) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (09:49:28) Mishail-Norty successfully authorized from 81.200.10.204
+[29.10.2024] (09:49:56) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (09:49:59) 81.200.10.204 requests 'Amber 1.16.5-Forge' files
+[29.10.2024] (09:51:47) Updater 81.200.10.204 with version '1.2.2-Impeller' requests an update information
+[29.10.2024] (09:51:47) CPU ID BFEBFBFF000206A7 already exists in the database.
+[29.10.2024] (09:52:25) Mishail-Norty successfully authorized from 81.200.10.204
+[29.10.2024] (09:53:57) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (09:53:57) Mishail-Norty successfully authorized from 81.200.10.204
+[29.10.2024] (09:54:55) Updater 81.200.10.204 with version '1.2.2-Impeller' requests an update information
+[29.10.2024] (09:54:55) CPU ID BFEBFBFF000206A7 already exists in the database.
+[29.10.2024] (09:55:58) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (09:57:41) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (10:14:38) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (10:14:59) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (10:15:11) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (10:18:11) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (10:24:34) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (10:25:50) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (10:26:10) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (10:28:39) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (10:28:51) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (10:29:09) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (10:29:41) AidenFox successfully authorized from 109.252.4.184
+[29.10.2024] (10:31:54) 109.252.4.184 requests 'Amber 1.16.5-Forge' files
+[29.10.2024] (22:22:09) AidenFox successfully authorized from 109.252.4.184

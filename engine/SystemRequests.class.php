@@ -100,11 +100,11 @@
 								$show = @RequestHandler::$REQUEST['show'] ?? null;
 								$file_name = @RequestHandler::$REQUEST['login'] ?? null;
 								$name = empty($file_name) ? 'default' : $file_name;
-								$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR . 'skin.png';
-								$cloak = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR . 'cape.png';
+								$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR .md5(@RequestHandler::$REQUEST['login']).'-skin.png';
+								$cloak = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR .md5(@RequestHandler::$REQUEST['login']).'-cape.png';
 
 								if (!skinViewer2D::isValidSkin($skin)) {
-									$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER  . DIRECTORY_SEPARATOR . 'skin.png';
+									$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER  . DIRECTORY_SEPARATOR . 'default_skin.png';
 								}
 
 								if ($show !== 'head') {
@@ -133,12 +133,12 @@
 								init::classUtil('SkinViewer', "1.0.0");
 								$file_name = @RequestHandler::$REQUEST['login'] ?? null;
 								$name = empty($file_name) ? 'default' : $file_name;
-								$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR . 'skin.png';
-								$cloak = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR . 'cape.png';
+								$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR .md5(@RequestHandler::$REQUEST['login']).'-skin.png';
+								$cloak = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . $name . DIRECTORY_SEPARATOR .md5(@RequestHandler::$REQUEST['login']).'-cape.png';
 								if (file_exists($skin)) {
 									$im = skinViewer2D::createPreview($skin, $cloak, @RequestHandler::$REQUEST['side']);
 								} else {
-									$im = skinViewer2D::createPreview(ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . DIRECTORY_SEPARATOR . 'skin.png', $cloak, @RequestHandler::$REQUEST['side']);
+									$im = skinViewer2D::createPreview(ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . DIRECTORY_SEPARATOR . 'default_skin.png', $cloak, @RequestHandler::$REQUEST['side']);
 								}
 
 								ob_start();
