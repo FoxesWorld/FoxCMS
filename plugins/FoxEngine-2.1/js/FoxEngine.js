@@ -65,9 +65,9 @@ class FoxEngine {
 			this.payment = new PaymentManager();
             this.snow = new Snow(this);
 
-            if ([11, 0, 1].includes(this.currentDate.getMonth())) {
+            //if ([11, 0, 1].includes(this.currentDate.getMonth())) {
                 this.snow.loadSnow();
-            }
+            //}
 
             this.emojiArr = await this.emojis.parseEmojis();
         } catch (error) {

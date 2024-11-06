@@ -506,6 +506,7 @@ header a:not(.selectedPage, .tip-over, .badge, .userBlock):before {
 
 .leftAction a:not(.selectedPage):hover {
     background: #b6d04761;
+    border-radius: 5px;
     text-decoration: none;
     transition-duration: 0.5s;
     cursor: pointer;

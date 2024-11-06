@@ -443,14 +443,14 @@ img {
 }
 
 .mainBlock {
-	background-color: #eaeffbf2;
 	border-radius: 10px;
+	    background: var(--theme-color-primary) /*linear-gradient(300deg, var(--theme-color-primary), var(--theme-color-secondary)) */ !important;
 }
 
 .contentInner {
 	margin: 5px;
 	padding: 10px;
-	color: #a1998e;
+	color: #46423b;
 }
 
 #game canvas {
@@ -510,7 +510,8 @@ img {
 }
 
 .rightIcon>img {
-	max-height: 23px;
+	max-height: 100%;
+	max-width: 30px;
 }
 
 .rightBlock .right-profile-menu ul li a:hover i {
@@ -872,6 +873,7 @@ ul.list-inline {
 #header {
 	transition: all 0.5s;
 	z-index: 997;
+	min-height: 112px;
 }
 
 #header .navbar-brand:hover {
@@ -978,6 +980,7 @@ section {
 	display: block;
 	font-size: 18pt;
 	float: left;
+	padding: 5px;
 }
 
 .profilePhoto:before {
@@ -1376,15 +1379,19 @@ footer .footer-copyright span img {
 } 
 
 .optionButt {
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
-	left: unset;
-	background: #4542d694;
-	border-radius: 10px;
-	color: white;
-	font-size: 20px;
-	cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    left: unset;
+    background: #4542d694;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    display: list-item;
+    list-style: none;
 }
 
 #button-up {

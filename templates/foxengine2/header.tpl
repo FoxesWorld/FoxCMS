@@ -1,19 +1,51 @@
 <style>
-.dropdown-item {
-	display: contents;
-}
-					
-.dropdown-item > a {
-   width: 100%;
-   display: flex;
-   float: left;
-   height: 42px;
-   padding: 10px;
-}
-					
-  .navbar-nav > .nav-item > a {
-  width: 100%;
-}
+    .dropdown-item {
+        display: contents;
+    }
+
+    .dropdown-item > a {
+        width: 100%;
+        display: flex;
+        float: left;
+        height: 42px;
+        padding: 10px;
+    }
+
+    .navbar-nav > .nav-item > a {
+        width: 100%;
+    }
+
+    .navbar-toggler {
+        width: auto;
+    }
+
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        transform: translateX(100%);
+        transition: transform 0.35s ease;
+    }
+
+    .navbar-collapse.show {
+        transform: translateX(0);
+    }
+
+    @media (min-width: 992px) {
+        .navbar-collapse {
+            position: static;
+            height: auto;
+            width: auto;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .navbar-collapse.show {
+            transform: none;
+        }
+    }
 </style>
 
 	<header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg bar">
@@ -26,10 +58,20 @@
                     <ul class="navbar-nav leftAction me-auto mb-2 mb-lg-0 dropup">
 				   {if $user_group == 5}
 				   <li class="nav-item uk-animation-fade">
-					  <a href="#" class="pageLink-auth" onclick="foxEngine.page.loadPage('auth'); return false;"> <i class="fa fa-sign-in me-2"></i> Войти </a>
+					  <a href="#" class="pageLink-auth" onclick="foxEngine.page.loadPage('auth'); return false;"> 
+						  <div class="rightIcon">
+							<i class="fa fa-sign-in me-2"></i>
+						  </div> 
+							Войти 
+					  </a>
 				   </li>
 				   <li class="nav-item uk-animation-fade">
-					  <a href="#" class="pageLink-reg" onclick="foxEngine.page.loadPage('reg'); return false;"> <i class="fa fa-user-plus me-2"></i> Создать аккаунт</a>
+					  <a href="#" class="pageLink-reg" onclick="foxEngine.page.loadPage('reg'); return false;"> 
+						  <div class="rightIcon">
+							<i class="fa fa-user-plus me-2"></i>
+						  </div>
+							Создать аккаунт
+					  </a>
 				   </li>
 				   {/if}
 				   
@@ -62,26 +104,52 @@
     </header>
 
 <script>
-	 function toggleAbsolutePosition() {
-	     var navbarCollapse = document.getElementById("navbarSupportedContent");
-	     if (getComputedStyle(navbarCollapse).position === "absolute") {
-			setTimeout(function() {
-					navbarCollapse.style.position = "";
-			}, 350);
-	         
-	     } else {
-	         navbarCollapse.style.position = "absolute";
-	         navbarCollapse.style.right = "0";
-	         navbarCollapse.style.top = "100px";
-	     }
-	 }
+    const navbarToggler = document.querySelector(".navbar-toggler");
+    const navbarCollapse = document.getElementById("navbarSupportedContent");
+	
+    function toggleAbsolutePosition() {
+        
+        if (getComputedStyle(navbarCollapse).position === "absolute") {
+            setTimeout(function() {
+                navbarCollapse.style.position = "";
+				navbarToggler.classList.remove("collapsed");
+            }, 50);
+        } else {
+		navbarToggler.classList.add("collapsed");
+            navbarCollapse.style.position = "absolute";
+            navbarCollapse.style.right = "0";
+            navbarCollapse.style.top = "100px";
+            navbarCollapse.style.width = "100%";
+        }
+    }
+	
+    function closeNavbar() {
+        navbarCollapse.classList.remove("show");
+        setTimeout(() => {
+            navbarToggler.classList.add("collapsed");
+            toggleAbsolutePosition();
+        }, 350);
+    }
 
-	  document.addEventListener('click', function(event) {
-	     var navbarCollapse = document.getElementById("navbarSupportedContent");
-	     var navbarToggler = document.querySelector(".navbar-toggler");
+    document.addEventListener('click', (event) => {
+        if (!navbarCollapse.contains(event.target) && !navbarToggler.contains(event.target)) {
+            closeNavbar();
+        }
+    });
 
-	     if (!navbarCollapse.contains(event.target) && !navbarToggler.contains(event.target)) {
-	navbarToggler.classList.add("collapsed");
-	     }
-	 });
+    navbarToggler.addEventListener('click', () => {
+        toggleAbsolutePosition();
+        navbarCollapse.classList.toggle("show");
+        if (navbarCollapse.classList.contains("show")) {
+            navbarToggler.classList.remove("collapsed");
+        } else {
+            navbarToggler.classList.add("collapsed");
+        }
+    });
+
+    document.querySelectorAll('#navbarSupportedContent > ul').forEach((navItem) => {
+        navItem.addEventListener('click', () => {
+            closeNavbar();
+        });
+    });
 </script>
