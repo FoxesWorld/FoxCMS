@@ -1,6 +1,3 @@
-<div class="modal_app_title">Пополнение счета:</div>
-<div class="modal_app_close" onclick="foxEngine.modalApp.closeModalApp();"></div>
-<div class="modal_app_content">
     <div class="payment_buttons_list">
         <div id="payment_1000" class="payment_button payment_button_selected" onclick="foxEngine.payment.selectPaymentBlock(1000);">
             <img src="/uploads/icons/coal-1.png">
@@ -50,7 +47,6 @@
             <b id="count_after_donate">1050 угля</b>
         </div>
     </div>
-</div>
 
 <script>
 	foxEngine.payment.init();

@@ -174,9 +174,6 @@
             </button>
          </form>
          <div class="d-none" id="photoModal">
-            <div class="modal_app_title">Загрузка фото [login]:</div>
-            <div class="modal_app_close" onclick="foxEngine.modalApp.closeModalApp();"></div>
-            <div class="modal_app_content">
 				<h3 style="margin: 0 auto;color: antiquewhite;padding: 15;">
 				</h3>
 				<div class="importantText">
@@ -184,7 +181,6 @@
 					<br />
 					<small>Это временная мера, в будущем загрузка фото перейдёт сюда :smirk:</small>
 				</div>
-            </div>
          </div>
       </div>
       [/hasPriviligies] 
@@ -242,7 +238,7 @@
 								</div>
 								<script>
 									async function loadPhoto(){
-										foxEngine.modalApp.showModalApp(700, $("#photoModal").html());
+										foxEngine.modalApp.showModalApp(700, "Загрузка фото [login]:", $("#photoModal").html(), () => {});
 									}
 								</script>
 								[/hasPriviligies]
