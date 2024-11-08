@@ -1,9 +1,9 @@
 <style>
 .side-nav {
     position: fixed;
-    right: -340px;
     top: 112px;
-    width: 340px;
+    width: 40%;
+	right: -40%;
     height: 100%;
     background-color: #908489;
     overflow-x: hidden;
@@ -25,13 +25,12 @@
 }
 
 .side-nav .menu-content {
-    padding: 20px;
     color: #f1f1f1;
 }
 
 .side-nav .menu-content .dropdown-divider {
     border-top: 1px solid #575757;
-    margin: 10px 0;
+    margin: 5px 0px 0px;
 }
 
 .side-nav .menu-content .dropdown-item {
@@ -51,11 +50,10 @@
     color: rgb(34, 34, 34);
     -webkit-box-align: center;
     align-items: center;
-    display: flex;
 }
 
 .side-nav .menu-content .dropdown-item:hover {
-    <!-- background-color: #575757; -->
+    background-color: #575757;
 }
 
 .side-nav .menu-content .avatar {
@@ -103,13 +101,14 @@
     font-size: 1.25rem;
 }
 
+/* Стили для кнопки пользователя */
 .user-button {
     background: none;
     border: none;
     display: flex;
     align-items: center;
     cursor: pointer;
-	font-family: 'FSElliotPro-Heavy';
+    font-family: 'FSElliotPro-Heavy';
 }
 
 .user-button .avatar {
@@ -142,19 +141,15 @@
 .user-button .chevron {
     margin-left: 10px;
     transition: transform 0.3s;
-	font-family: 'Minecraft Bold';
-	color: #ac6343;
+    font-family: 'Minecraft Bold';
+    color: #ac6343;
 }
 
 .user-button .chevron.open {
     transform: rotate(180deg);
 }
-
-.balance {
-    margin: 0 0 15px;
-}
-
-</style>			
+</style>
+		
 
 <!-- Боковая навигация -->
 <div id="mySidenav" class="side-nav">
@@ -162,17 +157,17 @@
     <div class="menu-content">
         <ul style="width: 100%">
             <span class="arrow"></span>
-            <li>
+            <li class="userData">
                 <!-- <span class="dropdown-item"> -->
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
-                            <div class="d-flex">
+                            <div class="d-flex" style="margin: 15">
                                 <div class="flex-shrink-0">
                                     <div class="avatar">
                                         <img class="h-auto rounded-circle profilePic uk-animation-fade" src="{$profilePhoto}" alt="Profile Photo" uk-img />
                                     </div>
                                 </div>
-                                <ul class="me-3">
+                                <ul class="me-3" style="margin: 10px 0px;">
                                     <li class="fw-medium d-block">{$login}</li>
                                     <li class="text-muted">{$groupName}</li>
                                 </ul>
@@ -191,31 +186,8 @@
                 }
             </script>
             <ul id="usrMenu">
-                <li class="balance">
-                    <hr class="dropdown-divider" />
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                        <div class="filled-box p-1 text-center lh-sm">
-                            <img src="{$tplDir}/assets/icons/units.png" alt="Units Icon" uk-img />
-                            <b class="fs-5" id="units" data-element="moneyDisplay">0</b><br />
-                            <span class="text-muted">Юниты</span>
-                        </div>
-                        <div class="filled-box p-1 text-center lh-sm">
-                            <img src="{$tplDir}/assets/icons/crystals.png" alt="Crystals Icon" uk-img />
-                            <b class="fs-5" id="crystals" data-element="bonusDisplay">0</b><br />
-                            <span class="text-muted">Кристалы</span>
-                        </div>
-                    </div>
-                </li>
-                {if $user_group != 5}
-                <li class="dropdown-item">
-                    <a class="pageLink-addFunds" onclick="addFunds(); return false;">
-                        <div class="rightIcon">
-                            <i style="color: #d8e815" class="fa-thin fa-wallet"></i>
-                        </div>
-                        Пополнить счёт
-                    </a>
-                </li>
-                {/if}
+				{include file='balanceBox.tpl'}
+                
                 <!-- User options go here -->
             </ul>
             <li class="dropdown-item">
@@ -227,7 +199,6 @@
     </div>
 </div>
 
-<!-- Кнопка для открытия боковой навигации -->
 <button class="user-button" onclick="toggleNav()">
     <div class="avatar">
         <img src="{$profilePhoto}" alt="User's Avatar" />
@@ -249,7 +220,6 @@ function toggleNav() {
     } else {
         sidenav.classList.add("open");
         chevron.classList.add("open");
-        // Обновляем данные при открытии
         foxEngine.user.refreshBalance(['units', 'crystals']);
     }
 }
@@ -267,4 +237,13 @@ document.addEventListener('click', function(event) {
     }
 });
 
+        document.querySelectorAll('#usrMenu > li').forEach((navItem) => {
+            navItem.addEventListener('click', () => {
+                var sidenav = document.getElementById("mySidenav");
+                var chevron = document.querySelector(".user-button .chevron");
+
+                sidenav.classList.remove("open");
+                chevron.classList.remove("open");
+            });
+        });
 </script>

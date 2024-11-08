@@ -36,6 +36,7 @@
 		
 	</style>	  
 	  <script type="module" src="{$tplDir}/assets/js/App.js"></script>
+	  <script src="{$tplDir}/assets/js/CustomNavBar.js"></script>
 
 	  <script>
     // Function to set background image based on season

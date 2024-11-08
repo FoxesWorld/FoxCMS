@@ -174,62 +174,9 @@
 
 
 <script>
-const navbarToggler = document.querySelector(".navbar-toggler");
-const navbarCollapse = document.getElementById("navbarSupportedContent");
-const burgerButton = document.querySelector(".mantine-cahhlp");
-
-function toggleAbsolutePosition() {
-    if (getComputedStyle(navbarCollapse).position === "absolute") {
-        setTimeout(function() {
-            navbarCollapse.style.position = "";
-            navbarToggler.classList.remove("collapsed");
-        }, 50);
-    } else {
-        navbarToggler.classList.add("collapsed");
-        navbarCollapse.style.right = "0";
-        navbarCollapse.style.top = "100px";
-        navbarCollapse.style.width = "100%";
-    }
-}
-
-function closeNavbar() {
-    navbarCollapse.classList.remove("show");
-    setTimeout(() => {
-        navbarToggler.classList.add("collapsed");
-        toggleAbsolutePosition();
-    }, 350);
-
-    // Убираем атрибут data-opened при закрытии меню
-    burgerButton.removeAttribute("data-opened");
-}
-
-document.addEventListener('click', (event) => {
-    if (!navbarCollapse.contains(event.target) && !navbarToggler.contains(event.target)) {
-        closeNavbar();
-    }
+// Instantiate the CustomNavbar class when the document is ready
+document.addEventListener("DOMContentLoaded", () => {
+    new CustomNavbar();
 });
 
-navbarToggler.addEventListener('click', () => {
-    toggleAbsolutePosition();
-    navbarCollapse.classList.toggle("show");
-
-    // Переключаем атрибут data-opened для анимации кнопки бургер-меню
-    if (navbarCollapse.classList.contains("show")) {
-        burgerButton.setAttribute("data-opened", "true");
-    } else {
-        burgerButton.removeAttribute("data-opened");
-    }
-
-    if (navbarCollapse.classList.contains("show")) {
-        navbarToggler.classList.remove("collapsed");
-    } else {
-        navbarToggler.classList.add("collapsed");
-    }
-});
-
-document.querySelectorAll('#navbarSupportedContent > ul').forEach((navItem) => {
-    navItem.addEventListener('click', () => {
-        closeNavbar();
-    });
-});
 </script>
