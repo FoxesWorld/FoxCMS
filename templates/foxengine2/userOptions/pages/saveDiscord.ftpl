@@ -1,8 +1,8 @@
 <useroption> { 
     "optionTitle": "Спасти Дискорд",
-    "description": "Обновления Лисьего Мира",
-    "keywords": "О сайте, Что там у Лис?, Как дела у Лисьего мира?, ЧАВО за обновы???, Обновления Лисьего мира",
-    "optionBlock": ".leftAction",
+    "description": "Защитим королевство Дискордия!",
+    "keywords": "Вумпус в беде, Доступ к Дискорду, Обход блокировки Дискордика, ЧАВО с Дискордом?, Обновления жизни Вумпуса",
+    "optionBlock": ".pages",
     "optionPreText": "<img src='/templates/foxengine2/assets/icons/discordik.png' />",
     "optionGroup": [1,4,5],
     "optionClass": "nav-item uk-animation-fade",

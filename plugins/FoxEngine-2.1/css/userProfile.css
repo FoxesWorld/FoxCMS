@@ -73,7 +73,7 @@
     .foxesColumns.foxesColumns_collapseTablet > .foxesColumn:not( .foxesHide ), .foxesColumns.foxesColumns_collapsePhone > .foxesColumn:not( .foxesHide ) {
         position: relative;
         margin: 0 0 15px 0;
-        padding: 0;
+        display: table-cell;
     }
 
     .foxesLayout_contentSection {

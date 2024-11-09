@@ -81,15 +81,19 @@
       
       <div class="container">
          <div class="row siteContent">
+		<div class="col-12">
+			{include file='slider.tpl'}
+		</div>
             <div class="{if !$isMobile}col-8{else}container{/if}">
                <main id="content" class="mainBlock">
-					<%contentData%>
+					<%contentData%>		
                </main>
+			   
             </div>
                {include file="right-block.tpl"}
          </div>
-		
       </div>
+	  
 		<div id="cookie-popup" class="show">
 		  <img src="{$tplDir}/assets/icons/cookie.png" draggable="false" />
             <p>Для улучшения работы сайта и его взаимодействия с пользователями мы используем файлы cookie. Продолжая работу с сайтом, вы разрешаете использование cookie-файлов. Вы всегда можете отключить файлы cookie в настройках вашего браузера.</p>
@@ -97,8 +101,5 @@
         </div>
       {include file='footer.tpl'}
 	  {include file='../notify.tpl'}
-	  <div aria-live="polite" aria-atomic="true" class="position-relative">
-		<div class="toast-container position-fixed top-0 end-0 p-2"></div>
-	  </div>
    </body>
 </html>

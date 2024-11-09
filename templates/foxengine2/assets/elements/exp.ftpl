@@ -1,0 +1,31 @@
+<style>
+.disclaimer {
+    background-color: #fff3cd; /* Светлый фон для выделения */
+    border: 1px solid #ffeeba; /* Цвет границы для акцента */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.disclaimer p {
+    color: #856404; /* Темный цвет для текста */
+    line-height: 1.6; /* Увеличенный межстрочный интервал для удобства чтения */
+	display: contents;
+}
+
+</style>
+<div class="disclaimer">
+    <p>
+       Внимание! Данный функционал находится в раннем доступе! Он находится в разработке
+		и может работать не одинаково на разных типах устройств.
+    </p>
+    <p>
+        Он предоставлен для ознакомления с грядущими обновлениями :smile:
+        Наша команда активно работает над устранением всех недочетов и улучшением вашего опыта. 
+    </p>
+    <p>
+        Спасибо за ваше понимание и поддержку!
+    </p>
+	
+	<button class="login" onclick="foxEngine.modalApp.closeModalApp(true);">Я понимаю</button>
+</div>

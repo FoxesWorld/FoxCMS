@@ -2,8 +2,8 @@
 .side-nav {
     position: fixed;
     top: 112px;
-    width: 40%;
-	right: -40%;
+    width: 350px;
+	right: -350px;
     height: 100%;
     background-color: #908489;
     overflow-x: hidden;
@@ -11,26 +11,12 @@
     z-index: 9999;
 }
 
-.side-nav.open {
+.side-nav.show {
     right: 0;
-}
-
-.side-nav .closebtn {
-    position: absolute;
-    top: 10px;
-    left: 20px;
-    font-size: 36px;
-    margin-left: 50px;
-    color: #f1f1f1;
 }
 
 .side-nav .menu-content {
     color: #f1f1f1;
-}
-
-.side-nav .menu-content .dropdown-divider {
-    border-top: 1px solid #575757;
-    margin: 5px 0px 0px;
 }
 
 .side-nav .menu-content .dropdown-item {
@@ -82,25 +68,6 @@
     color: #a1a1a1;
 }
 
-.side-nav .menu-content .filled-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    background-color: #ada5a9;
-    border-radius: 10px;
-}
-
-.side-nav .menu-content .filled-box img {
-    width: 30px;
-    height: 30px;
-    margin-bottom: 5px;
-}
-
-.side-nav .menu-content .filled-box .fs-5 {
-    font-size: 1.25rem;
-}
-
 /* Стили для кнопки пользователя */
 .user-button {
     background: none;
@@ -133,11 +100,6 @@
     margin-right: 10px;
 }
 
-.user-button .user-info .user-score {
-    font-weight: bold;
-    color: #fff;
-}
-
 .user-button .chevron {
     margin-left: 10px;
     transition: transform 0.3s;
@@ -145,20 +107,21 @@
     color: #ac6343;
 }
 
-.user-button .chevron.open {
+.user-button .chevron[data-opened="true"] {
     transform: rotate(180deg);
+}
+
+#usrMenu > .pages {
+   padding: 0px 10px;
 }
 </style>
 		
 
-<!-- Боковая навигация -->
-<div id="mySidenav" class="side-nav">
-   <!--  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+<!-- UserPane -->
+<div id="userPane" class="side-nav">
     <div class="menu-content">
         <ul style="width: 100%">
-            <span class="arrow"></span>
             <li class="userData">
-                <!-- <span class="dropdown-item"> -->
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
                             <div class="d-flex" style="margin: 15">
@@ -174,7 +137,6 @@
                             </div>
                         </div>
                     </div>
-               <!-- </span> -->
             </li>
             <script>
                 async function addFunds(){
@@ -187,8 +149,12 @@
             </script>
             <ul id="usrMenu">
 				{include file='balanceBox.tpl'}
-                
+			<div class="pages d-sm-block d-xs-block d-md-block d-lg-none">
+			
+			</div>
                 <!-- User options go here -->
+				
+				
             </ul>
             <li class="dropdown-item">
                 <a href="#" class="pageLink-logout" onclick="foxEngine.user.logout($(this)); return false;">
@@ -199,7 +165,7 @@
     </div>
 </div>
 
-<button class="user-button" onclick="toggleNav()">
+<button class="user-button">
     <div class="avatar">
         <img src="{$profilePhoto}" alt="User's Avatar" />
     </div>
@@ -210,40 +176,17 @@
 </button>
 
 <script>
-function toggleNav() {
-    var sidenav = document.getElementById("mySidenav");
-    var chevron = document.querySelector(".user-button .chevron");
-
-    if (sidenav.classList.contains("open")) {
-        sidenav.classList.remove("open");
-        chevron.classList.remove("open");
-    } else {
-        sidenav.classList.add("open");
-        chevron.classList.add("open");
-        foxEngine.user.refreshBalance(['units', 'crystals']);
-    }
-}
-
-// Закрытие навигации при клике вне меню
-document.addEventListener('click', function(event) {
-    var sidenav = document.getElementById("mySidenav");
-    var chevron = document.querySelector(".user-button .chevron");
-    var isClickInside = sidenav.contains(event.target);
-    var isToggleClick = document.querySelector('.user-button').contains(event.target);
-
-    if (!isClickInside && !isToggleClick) {
-        sidenav.classList.remove("open");
-        chevron.classList.remove("open");
-    }
-});
-
-        document.querySelectorAll('#usrMenu > li').forEach((navItem) => {
-            navItem.addEventListener('click', () => {
-                var sidenav = document.getElementById("mySidenav");
-                var chevron = document.querySelector(".user-button .chevron");
-
-                sidenav.classList.remove("open");
-                chevron.classList.remove("open");
-            });
-        });
+document.addEventListener("DOMContentLoaded", () => {
+    const userBar = new CustomNavbar({
+        togglerSelector: ".user-button",
+        collapseSelector: "#userPane",
+        burgerButtonSelector: ".chevron",
+        navItemSelector: "#usrMenu > li",
+        toggleAnimationDelay: 100,
+        closeAnimationDelay: 400,
+		  onOpen: () => {
+            foxEngine.user.refreshBalance(['units', 'crystals']);
+        }
+    });
+}); 
 </script>

@@ -82,8 +82,10 @@
 .modal_app_content {
     display: block;
     min-width: auto;
+    border-radius: 15px;
     height: auto;
     padding: 34px;
+    background: #d1d7e9;
 }
 
 .modal_app_content a {

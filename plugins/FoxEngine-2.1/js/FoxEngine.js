@@ -11,6 +11,7 @@ import { Logo } from './modules/Logo.js';
 import { PaymentManager } from './modules/PaymentManager.js';
 import { EntryReplacer } from './modules/EntryReplacer.js';
 import { Cookies } from './modules/Cookies.js';
+import { CookieManager } from './modules/CookieManager.js';
 import { Snow } from './modules/Snow.js';
 import '../../popper.min.js';
 import './modules/Howler/howler.core.js';
@@ -58,6 +59,7 @@ class FoxEngine {
 			this.editUser = new EditUser(this);
             this.servers = new Servers(this);
             this.entryReplacer = new EntryReplacer(this);
+			this.cookieManager = new CookieManager(this);
 			this.cookies = new Cookies(this);
             this.page = new Page(this);
             this.modalApp = new ModalApp(this);
@@ -66,7 +68,7 @@ class FoxEngine {
             this.snow = new Snow(this);
 
             //if ([11, 0, 1].includes(this.currentDate.getMonth())) {
-                this.snow.loadSnow();
+            //    this.snow.loadSnow();
             //}
 
             this.emojiArr = await this.emojis.parseEmojis();
