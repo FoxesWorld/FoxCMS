@@ -41,7 +41,7 @@ class Skin {
         
         if (strlen($uuid) === 32) {
             try {
-                $LOGGER->WriteLine("SkinLib is being created with **" . $uuid . "** UUID");
+                //$LOGGER->WriteLine("SkinLib is being created with **" . $uuid . "** UUID");
                 $this->getRealUser($this->sanitizeInput($uuid));
 
                 $userDir = $config['skinUrl'] . $this->realUser;
@@ -49,16 +49,16 @@ class Skin {
                 // Проверка существования скина
                 if (file_exists(ROOT_DIR . '/uploads/users/' . $this->realUser . '/'.md5($this->realUser).'-skin.png')) {
                     $this->setTextures('SKIN', $userDir . '/'.md5($this->realUser).'-skin.png');
-                    $LOGGER->WriteLine("Custom skin found for user: {$this->realUser}");
+                    //$LOGGER->WriteLine("Custom skin found for user: {$this->realUser}");
                 } else {
                     $this->setTextures('SKIN', $config['skinUrl'] . 'default_skin.png');
-                    $LOGGER->WriteLine("Default skin used for user: {$this->realUser}");
+                    //$LOGGER->WriteLine("Default skin used for user: {$this->realUser}");
                 }
 
                 // Проверка существования капы
                 if (file_exists(ROOT_DIR . '/uploads/users/' . $this->realUser . '/'.md5($this->realUser).'-cape.png')) {
                     $this->setTextures('CAPE', $userDir . '/'.md5($this->realUser).'-cape.png');
-                    $LOGGER->WriteLine("Cape found for user: {$this->realUser}");
+                    //$LOGGER->WriteLine("Cape found for user: {$this->realUser}");
                 }
 
                 die(json_encode(self::getProfileData($uuid, $this->realUser, $this->textures), JSON_UNESCAPED_SLASHES));
@@ -111,7 +111,7 @@ class Skin {
             
             if ($row) {
                 $this->realUser = $row['user'];
-                $LOGGER->WriteLine("Real user found: {$this->realUser}");
+                //$LOGGER->WriteLine("Real user found: {$this->realUser}");
             } else {
 				$this->setTextures('SKIN', $config['skinUrl'] . '/default_skin.png');
 				//die(json_encode(self::getProfileData($userMd5, $this->realUser, $this->textures), JSON_UNESCAPED_SLASHES));

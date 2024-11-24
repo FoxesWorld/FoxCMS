@@ -22,11 +22,23 @@ export class Snow {
 	switchSnow() {
 		var result = this.getCookie('snow');
 		if (result === '' || result === '1') {
-			document.cookie = "snow=0;expires=Thu, 28 Feb 2024 00:00:00 UTC;";
-			location.reload(true);
+			var expirationDate = new Date();
+			expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+
+			document.cookie = "snow=0;expires=" + expirationDate.toUTCString() + ";path=/;SameSite=None;Secure;";
+
+			setTimeout(function() {
+				location.reload(true);
+			}, 100);
 		} else {
-			document.cookie = "snow=1;expires=Thu, 28 Feb 2024 00:00:00 UTC;";
-			location.reload(true);
+			var expirationDate = new Date();
+			expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+
+			document.cookie = "snow=1;expires=" + expirationDate.toUTCString() + ";path=/;SameSite=None;Secure;";
+
+			setTimeout(function() {
+				location.reload(true);
+			}, 100);
 		}
 	}
 
@@ -96,7 +108,7 @@ export class Snow {
 		const baseTexture = app.renderer.generateTexture(p)
 		let particles = genParticles(baseTexture)
 
-		// app.stage.filters = [new PIXI.filters.BlurFilter(3)]
+		//app.stage.filters = [new PIXI.filters.BlurFilter(3)]
 		app.ticker.add(i => {
 			if (
 				app.renderer.height !== innerHeight ||

@@ -1,155 +1,68 @@
-<style>
-    .dropdown-item {
-        display: contents;
-    }
+<header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg bar">
+<div class="container-fluid d-flex align-items-center justify-content-between" style="padding: 5px;">
+        <!-- Logo -->
+        {include file='logo.tpl'}
 
-    .dropdown-item > a {
-        width: 100%;
-        display: flex;
-        float: left;
-        height: 42px;
-        padding: 10px;
-    }
+        <!-- Nav -->
+        <div class="navbar-center">
+            <input type="checkbox" id="navbarToggle" hidden>
+            <div class="navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav pages me-auto mb-2 mb-lg-0 dropup" style="margin: 0 auto;">
+                    {if $user_group == 5}
+                    <li class="nav-item uk-animation-fade">
+                        <a href="#" class="pageLink-auth" onclick="foxEngine.page.loadPage('auth'); return false;">
+                            <div class="rightIcon">
+                                <i class="fa fa-sign-in me-2"></i>
+                            </div>
+                            Войти
+                        </a>
+                    </li>
+                    <li class="nav-item uk-animation-fade">
+                        <a href="#" class="pageLink-reg" onclick="foxEngine.page.loadPage('reg'); return false;">
+                            <div class="rightIcon">
+                                <i class="fa fa-user-plus me-2"></i>
+                            </div>
+                            Создать аккаунт
+                        </a>
+                    </li>
+                    {/if}
 
-    .navbar-nav > .nav-item > a {
-        width: 100%;
-    }
-
-    .navbar-toggler {
-        width: auto;
-    }
-
-    .navbar-collapse {
-        position: fixed;
-        top: 0;
-        right: 0;
-        height: 100%;
-        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-        transform: translateX(100%);
-        transition: transform 0.35s ease;
-    }
-
-    .navbar-collapse.show {
-        transform: translateX(0);
-    }
-
-    @media (min-width: 992px) {
-        .navbar-collapse {
-            position: static;
-            height: auto;
-            width: auto;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .navbar-collapse.show {
-            transform: none;
-        }
-    }
-</style>
-
-	<header id="header" class="navbar fixed-top uk-navbar navbar-expand-lg bar">
-        <div class="container-fluid d-flex align-items-center justify-content-between" style="padding: 0px;">
-            <!-- Logo -->
-			{include file='logo.tpl'}
-            <!-- Nav -->
-            <div class="navbar-center">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav leftAction me-auto mb-2 mb-lg-0 dropup">
-				   {if $user_group == 5}
-				   <li class="nav-item uk-animation-fade">
-					  <a href="#" class="pageLink-auth" onclick="foxEngine.page.loadPage('auth'); return false;"> 
-						  <div class="rightIcon">
-							<i class="fa fa-sign-in me-2"></i>
-						  </div> 
-							Войти 
-					  </a>
-				   </li>
-				   <li class="nav-item uk-animation-fade">
-					  <a href="#" class="pageLink-reg" onclick="foxEngine.page.loadPage('reg'); return false;"> 
-						  <div class="rightIcon">
-							<i class="fa fa-user-plus me-2"></i>
-						  </div>
-							Создать аккаунт
-					  </a>
-				   </li>
-				   {/if}
-				   
-					{if $user_group == 1} 
-						
-					{/if}
-					
-					</ul>
-                </div>
-            </div>
-
-            <!-- Userfields -->
-            <div class="navbar-right">
-				<ul class="userBlock">
-				   <!--  LOGGED USER -->
-				   {if $user_group != 5}
-						{include file='userBlock.tpl'}
-				   {else}
-                <button class="navbar-toggler" style="width: auto;" onclick="toggleAbsolutePosition()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon">
-                        <span class="navbar-toggler-bar bar1 mt-2"></span>
-                        <span class="navbar-toggler-bar bar2"></span>
-                        <span class="navbar-toggler-bar bar3"></span>
-                    </span>
-                </button>
-				{/if}
-				</ul>
+                    {if $user_group == 1}
+                    {/if}
+                </ul>
             </div>
         </div>
-    </header>
 
-<script>
-    const navbarToggler = document.querySelector(".navbar-toggler");
-    const navbarCollapse = document.getElementById("navbarSupportedContent");
-	
-    function toggleAbsolutePosition() {
-        
-        if (getComputedStyle(navbarCollapse).position === "absolute") {
-            setTimeout(function() {
-                navbarCollapse.style.position = "";
-				navbarToggler.classList.remove("collapsed");
-            }, 50);
-        } else {
-		navbarToggler.classList.add("collapsed");
-            navbarCollapse.style.position = "absolute";
-            navbarCollapse.style.right = "0";
-            navbarCollapse.style.top = "100px";
-            navbarCollapse.style.width = "100%";
-        }
-    }
-	
-    function closeNavbar() {
-        navbarCollapse.classList.remove("show");
-        setTimeout(() => {
-            navbarToggler.classList.add("collapsed");
-            toggleAbsolutePosition();
-        }, 350);
-    }
-
-    document.addEventListener('click', (event) => {
-        if (!navbarCollapse.contains(event.target) && !navbarToggler.contains(event.target)) {
-            closeNavbar();
-        }
-    });
-
-    navbarToggler.addEventListener('click', () => {
-        toggleAbsolutePosition();
-        navbarCollapse.classList.toggle("show");
-        if (navbarCollapse.classList.contains("show")) {
-            navbarToggler.classList.remove("collapsed");
-        } else {
-            navbarToggler.classList.add("collapsed");
-        }
-    });
-
-    document.querySelectorAll('#navbarSupportedContent > ul').forEach((navItem) => {
-        navItem.addEventListener('click', () => {
-            closeNavbar();
-        });
-    });
-</script>
+        <!-- Userfields -->
+        <div class="navbar-right">
+            <ul class="userBlock">
+                <!-- LOGGED USER -->
+                {if $user_group != 5}
+                {include file='userBlock.tpl'}
+                {else}
+                <!-- Custom burger menu button for mobile version -->
+                <button class="navbar-toggler" for="navbarToggle">
+                    <span class="mantine-cahhlp">
+                        <span class="navbar-toggler-icon"></span>
+                    </span>
+                </button>
+				
+				<script>
+					document.addEventListener("DOMContentLoaded", () => {
+						const customNavbar = new CustomNavbar({
+							togglerSelector: ".navbar-toggler",
+							collapseSelector: "#navbarSupportedContent",
+							burgerButtonSelector: ".mantine-cahhlp",
+							toggleAnimationDelay: 100,
+							closeAnimationDelay: 400,
+							  onOpen: () => {
+								console.log('NavBar opened!');
+							}
+						});
+					});
+					</script>
+                {/if}
+            </ul>
+        </div>
+    </div>
+</header>

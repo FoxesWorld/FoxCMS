@@ -1,28 +1,13 @@
 export class Cookies {
 	constructor(foxEngine){
 		this.foxEngine = foxEngine;
-		if (this.getCookie("cookie-consent") != "") {
+		if (foxEngine.cookieManager.getCookie("cookie-consent") != "") {
 			$("#cookie-popup").attr("style", "display: none;");
 		} else {
 			$("#cookie-popup").removeAttr("style");
 		}
 	}
 	
-	getCookie(cname) {
-		var name = cname + "=";
-		var ca = document.cookie.split(";");
-		for (var i = 0; i < ca.length; i++) {
-		  var c = ca[i];
-		  while (c.charAt(0) == " ") {
-			c = c.substring(1);
-		  }
-		  if (c.indexOf(name) == 0) {
-			return c.substring(name.length, c.length);
-		  }
-		}
-		return "";
-  }
-  
 	acceptCookies() {
 		try {
 			const date = new Date();

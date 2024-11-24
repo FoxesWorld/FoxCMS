@@ -1,69 +1,192 @@
-				   <li class="nav-item dropdown">
-					  <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center userBlock" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="foxEngine.user.refreshBalance(['units', 'crystals'])">
-						 <div class="avatar">
-							<img class="profilePic uk-animation-fade" src="{$profilePhoto}" alt="Profile Photo" /> {$login}
-						 </div>
+<style>
+.side-nav {
+    position: fixed;
+    top: 112px;
+    width: 350px;
+	right: -350px;
+    height: 100%;
+    background-color: #908489;
+    overflow-x: hidden;
+    transition: 0.3s;
+    z-index: 9999;
+}
 
-					  </a>
-					  <ul class="dropdown-menu fade dropdown-menu-popover p-2 dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink"  data-popper-placement="bottom" style="width: 340px">
-						<span class="arrow"></span>
-						 <li>
-							<span class="dropdown-item">
-							   <div class="d-flex align-items-center">
-								  <div class="flex-grow-1">
-									 <div class="d-flex">
-										<div class="flex-shrink-0">
-										   <div class="avatar">
-											  <img class="h-auto rounded-circle profilePic uk-animation-fade" style="width: 42px;" src="{$profilePhoto}" alt="Profile Photo" uk-img />
-										   </div>
-										</div>
-										<ul class="me-3">
-										   <li class="fw-medium d-block">{$login}</li>
-										   <li class="text-muted">{$groupName}</li>
-										</ul>
-									 </div>
-								  </div>
-							   </div>
-							</span>
-						 </li>
-						 <script>
-							async function addFunds(){
-								const template = await foxEngine.loadTemplate(foxEngine.elementsDir+'payment.tpl', true);
-								let data = await foxEngine.entryReplacer.replaceText(template, "");
-								foxEngine.modalApp.showModalApp(900, data);
-							}
-						 </script>
-						 <ul id="usrMenu">
-							<li>
-							   <hr class="dropdown-divider" />
-							   
-							   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-					<div class="filled-box p-1 text-center lh-sm">
-						<img src="{$tplDir}/assets/icons/units.png" alt="Units Icon" uk-img />
-						<b class="fs-5" id="units" data-element="moneyDisplay">0</b><br />
-						<span class="text-muted">Юниты</span>
-					</div>
-					<div class="filled-box p-1 text-center lh-sm">
-						<img src="{$tplDir}/assets/icons/crystals.png" alt="Crystals Icon" uk-img />
-						<b class="fs-5" id="crystals" data-element="bonusDisplay">0</b><br />
-						<span class="text-muted">Кристалы</span>
-					</div>
-				</div>
-							</li>
-							{if $user_group != 5}
-							<li class="dropdown-item">
-							   <a class="pageLink-addFunds" onclick="addFunds(); return false; ">
-								  <div class="rightIcon">
-									 <i style="color: #d8e815" class="fa-thin fa-wallet"></i>
-								  </div>
-								  Пополнить счёт
-							   </a>
-							</li>
-							{/if}
-							<!-- User options go here -->
-						 </ul>
-						 <li class="dropdown-item">
-							<a href="#" class="pageLink-logout" onclick="foxEngine.user.logout($(this)); return false;"> <i style="color: red" class="fa fa-sign-out me-2"></i> Выйти </a>
-						 </li>
-					  </ul>
-				   </li>
+.side-nav.show {
+    right: 0;
+}
+
+.side-nav .menu-content {
+    color: #f1f1f1;
+}
+
+.side-nav .menu-content .dropdown-item {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    -webkit-tap-highlight-color: transparent;
+    font-size: 14px;
+    border: 0px;
+    background-color: transparent;
+    outline: 0px;
+    width: 100%;
+    text-align: left;
+    text-decoration: none;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: rgb(34, 34, 34);
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.side-nav .menu-content .dropdown-item:hover {
+    background-color: #575757;
+}
+
+.side-nav .menu-content .avatar {
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.31);
+    margin-right: 10px;
+}
+
+.side-nav .menu-content .avatar img {
+    object-fit: cover;
+    width: 42px;
+    height: 42px;
+}
+
+.side-nav .menu-content .user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.side-nav .menu-content .user-info .fw-medium {
+    font-weight: 500;
+}
+
+.side-nav .menu-content .user-info .text-muted {
+    color: #a1a1a1;
+}
+
+/* Стили для кнопки пользователя */
+.user-button {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'FSElliotPro-Heavy';
+}
+
+.user-button .avatar {
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.31);
+    margin-right: 10px;
+}
+
+.user-button .avatar img {
+    object-fit: cover;
+    width: 42px;
+    height: 42px;
+}
+
+.user-button .user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-button .user-info .icon {
+    margin-right: 10px;
+}
+
+.user-button .chevron {
+    margin-left: 10px;
+    transition: transform 0.3s;
+    font-family: 'Minecraft Bold';
+    color: #ac6343;
+}
+
+.user-button .chevron[data-opened="true"] {
+    transform: rotate(180deg);
+}
+
+#usrMenu > .pages {
+   padding: 0px 10px;
+}
+</style>
+		
+
+<!-- UserPane -->
+<div id="userPane" class="side-nav">
+    <div class="menu-content">
+        <ul style="width: 100%">
+            <li class="userData">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="d-flex" style="margin: 15">
+                                <div class="flex-shrink-0">
+                                    <div class="avatar">
+                                        <img class="h-auto rounded-circle profilePic uk-animation-fade" src="{$profilePhoto}" alt="Profile Photo" uk-img />
+                                    </div>
+                                </div>
+                                <ul class="me-3" style="margin: 10px 0px;">
+                                    <li class="fw-medium d-block">{$login}</li>
+                                    <li class="text-muted">{$groupName}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+            </li>
+            <script>
+                async function addFunds(){
+                    const template = await foxEngine.loadTemplate(foxEngine.elementsDir+'payment.tpl', true);
+                    let data = await foxEngine.entryReplacer.replaceText(template, "");
+                    foxEngine.modalApp.showModalApp(900, "Пополнение счета:", data, () => {
+                        console.log('Модальное окно закрыто');
+                    });
+                }
+            </script>
+            <ul id="usrMenu">
+				{include file='balanceBox.tpl'}
+			<div class="pages d-sm-block d-xs-block d-md-block d-lg-none">
+			
+			</div>
+                <!-- User options go here -->
+				
+				
+            </ul>
+            <li class="dropdown-item">
+                <a href="#" class="pageLink-logout" onclick="foxEngine.user.logout($(this)); return false;">
+                    <i style="color: red" class="fa fa-sign-out me-2"></i> Выйти
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<button class="user-button">
+    <div class="avatar">
+        <img src="{$profilePhoto}" alt="User's Avatar" />
+    </div>
+    <div class="user-info">
+        {$login}
+        <span class="chevron"><i class="fa-solid fa-caret-down"></i></span>
+    </div>
+</button>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const userBar = new CustomNavbar({
+        togglerSelector: ".user-button",
+        collapseSelector: "#userPane",
+        burgerButtonSelector: ".chevron",
+        navItemSelector: "#usrMenu > li",
+        toggleAnimationDelay: 100,
+        closeAnimationDelay: 400,
+		  onOpen: () => {
+            foxEngine.user.refreshBalance(['units', 'crystals']);
+        }
+    });
+}); 
+</script>

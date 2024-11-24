@@ -12,10 +12,12 @@ const App = new Vue({
 
     mounted() {
         
-        setTimeout(() => {
-        //    foxEngine.user.userAction("greeting");
-		foxEngine.user.parseUsrOptionsMenu();
-        }, 1300);
+        document.addEventListener("DOMContentLoaded", () => {
+			foxEngine.user.parseUsrOptionsMenu();
+			foxEngine.logo.logoAnimation();
+			foxEngine.servers.parseOnline();
+			setBackgroundBySeason();
+        });
     },
 
     created() {
@@ -32,20 +34,13 @@ const App = new Vue({
                 $("#dialogContent").html("");
             }
         });
-		window.onload = function() {
-			//setTimeout(() => {
-				foxEngine.logo.logoAnimation();
-				foxEngine.servers.parseOnline();
-				setBackgroundBySeason();
-			//}, 500);
-		};
     }
 
 });
 
 // Set interval for foxEngine methods
 setInterval(() => {
-    foxEngine.servers.parseOnline();
+		foxEngine.servers.parseOnline();
 }, 10000);
 
 // Handle hash change

@@ -36,6 +36,7 @@
 		
 	</style>	  
 	  <script type="module" src="{$tplDir}/assets/js/App.js"></script>
+	  <script src="{$tplDir}/assets/js/CustomNavBar.js"></script>
 
 	  <script>
     // Function to set background image based on season
@@ -49,52 +50,59 @@
             backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/spring.png)';
         } else if (currentMonth >= 6 && currentMonth <= 8) {
             backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/summer.png)';
-        } else if (currentMonth >= 9 && currentMonth <= 10) {
+        } else if (currentMonth >= 9 && currentMonth <= 11) {
             backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/autumn.png)';
         } else {
             backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/winter.jpg)';
+			foxEngine.snow.loadSnow();
 			$(".container").append('<div class="moderator-button optionButt" onclick="foxEngine.snow.switchSnow();" style="width: 32px; height: 32px;"><i class="fa-light fa-snowflake"></i></div>');
-			/*document.body.appendChild((function() {
-            var button = document.createElement('div');
-            button.className = 'moderator-button optionButt';
-            button.onclick = function() {
-                foxEngine.snow.switchSnow();
-            };
-            var icon = document.createElement('i');
-            icon.className = 'fa fa-snowflake-o';
-            button.appendChild(icon);
-            return button;
-        })());*/
         }
 
         body.style.backgroundImage = backgroundImage;
     }
+	
+		
+	async function myAction() {
+		const template = await foxEngine.loadTemplate(foxEngine.elementsDir + 'discordFeelingBad.tpl', true);
+		let data = await foxEngine.entryReplacer.replaceText(template, "");
+		foxEngine.modalApp.showModalApp(900, "О нет, конец эпохи!", data, () => {
+			foxEngine.cookieManager.setCookie('modalShown', 'true', 7);
+		});
+	}
+
+    document.addEventListener('DOMContentLoaded', function() {
+		foxEngine.cookieManager.checkCookie('modalShown', 'true', 7, myAction, false);
+    });
 </script>
    </head>
-   <body>
-      {include file='header.tpl'}
-	  {include file='../modalApp.tpl'}
-      
-      <div class="container">
-         <div class="row siteContent">
-            <div class="{if !$isMobile}col-8{else}container{/if}">
-               <main id="content" class="mainBlock">
-					<%contentData%>
-               </main>
+   
+   
+<body>
+    {include file='header.tpl'}
+    {include file='../modalApp.tpl'}
+
+    <div class="container">
+        <div class="row siteContent">
+            <div class="col-12">
+                {include file='slider.tpl'}
             </div>
-               {include file="right-block.tpl"}
-         </div>
-		
-      </div>
-		<div id="cookie-popup" class="show">
-		  <img src="{$tplDir}/assets/icons/cookie.png" draggable="false" />
-            <p>Для улучшения работы сайта и его взаимодействия с пользователями мы используем файлы cookie. Продолжая работу с сайтом, вы разрешаете использование cookie-файлов. Вы всегда можете отключить файлы cookie в настройках вашего браузера.</p>
-            <button class="button" onclick="foxEngine.cookies.acceptCookies()">Принять</button>
+            <div class="{if !$isMobile}col-8{else}container{/if}">
+                <main id="content" class="mainBlock">
+                    <%contentData%>
+                </main>
+            </div>
+            {include file="right-block.tpl"}
         </div>
-      {include file='footer.tpl'}
-	  {include file='../notify.tpl'}
-	  <div aria-live="polite" aria-atomic="true" class="position-relative">
-		<div class="toast-container position-fixed top-0 end-0 p-2"></div>
-	  </div>
-   </body>
+    </div>
+
+    <div id="cookie-popup" class="show">
+        <img src="{$tplDir}/assets/icons/cookie.png" draggable="false" />
+        <p>Для улучшения работы сайта и его взаимодействия с пользователями мы используем файлы cookie. Продолжая работу с сайтом, вы разрешаете использование cookie-файлов. Вы всегда можете отключить файлы cookie в настройках вашего браузера.</p>
+        <button class="button" onclick="foxEngine.cookies.acceptCookies()">Принять</button>
+    </div>
+
+    {include file='footer.tpl'}
+    {include file='../notify.tpl'}
+</body>
+
 </html>

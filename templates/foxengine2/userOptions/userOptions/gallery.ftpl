@@ -3,7 +3,7 @@
 	"optionTitle": "Галлерея",
 	"description": "Галлерея FoxesCraft",
 	"optionBlock": "#usrMenu",
-	"optionPreText": "<i style='color: #d8e815' class='fa fa-book'></i>",
+	"optionPreText": "<i style='color: #ccd722' class='fa fa-book'></i>",
 	"optionGroup": [1,4],
 	"optionClass": "dropdown-item",
 	"type": "page"
