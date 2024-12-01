@@ -1,0 +1,104 @@
+<useroption>
+   { 
+   "optionTitle": "Написать Гайд",
+   "description": "Профиль пользователя",
+   "optionBlock": "#usrMenu",
+   "optionClass": "dropdown-item",
+   "optionPreText": "<img src='/templates/foxengine2/assets/icons/svg/article.svg' />",
+   "optionGroup": [1,3,4,5],
+   "langPack": "userProfile",
+   "type": "page"
+   } 
+</useroption>
+<pageContent>
+
+<div class="importantText">
+					<b>Попробуй написать какой-нибудь текст и он останется с тобой навсегда :sparkles:</b>
+					<p>В РАЗРАБОТКЕ!</p>
+				</div>
+	
+	<div id="froala-editor"> </div>
+<script>
+
+class FroalaEditorWithCookies {
+    constructor(editorId, cookieName, fileUploadUrl, smileysSet) {
+        this.editorId = editorId;
+        this.cookieName = cookieName;
+        this.fileUploadUrl = fileUploadUrl;
+        this.smileysSet = smileysSet || 'emoji'; // Устанавливаем набор смайлов (по умолчанию "emoji")
+        this.editor = null;
+        this.initEditor();
+    }
+
+    initEditor() {
+        // Инициализация редактора Froala
+        this.editor = $('#' + this.editorId).froalaEditor({
+            uploadArea: "short_story",
+            uploadUser: "[login]",
+            width: '100%',
+            height: '310',
+            language: 'ru',
+            quickInsertButtons: ['table', 'ul', 'ol', 'hr'],
+            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif', 'bmp', 'webp', 'avif'],
+            fileUploadURL: this.fileUploadUrl,  // URL для загрузки файлов
+            fileUploadParams: {
+                user: "{$p_name}",  // Параметры для загрузки файлов
+            },
+            imageUploadURL: this.fileUploadUrl,  // URL для загрузки изображений
+            imageUploadParams: {
+                user: "{$p_name}",
+            },
+            // Включаем возможность добавлять смайлы
+            emojiButtons: ['smile', 'laugh', 'wink', 'cry', 'angry'],
+            // Подключаем набор смайлов
+            emoticonsSet: this.smileysSet,
+            placeholderText: 'Напишите что-нибудь...',
+        }).on('froalaEditor.contentChanged', (e) => {
+            this.saveToCookies();
+        });
+
+        // Восстановление содержимого из куки
+        this.restoreFromCookies();
+    }
+
+    // Сохранение содержимого в куки
+    saveToCookies() {
+        const content = this.editor.froalaEditor('html.get');
+        this.setCookie(this.cookieName, content, 7);  // Сохраняем на 7 дней
+    }
+
+    // Восстановление содержимого из куки
+    restoreFromCookies() {
+        const content = this.getCookie(this.cookieName);
+        if (content) {
+            this.editor.froalaEditor('html.set', content);
+        }
+    }
+
+    // Установка куки
+    setCookie(name, value, days) {
+        const d = new Date();
+        d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + d.toUTCString();
+        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    // Получение куки
+    getCookie(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return "";
+    }
+}
+
+const fileUploadUrl = '/path/to/upload';
+const smileysSet = 'emoji';
+
+const editor = new FroalaEditorWithCookies('froala-editor', 'froala_content', fileUploadUrl, smileysSet);
+</script>
+</pageContent>

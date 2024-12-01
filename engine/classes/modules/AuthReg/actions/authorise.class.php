@@ -76,26 +76,26 @@ class Authorise extends AuthManager {
         InitHelper::userArrFill($this->db);
     }
     
-private function setTokenIfNeeded($checkbox, $login) {
-    $token = authorize::generateLoginHash($login);
+	private function setTokenIfNeeded($checkbox, $login) {
+		$token = authorize::generateLoginHash($login);
 
-    if ($checkbox) {
-        $cookieSet = setcookie(
-            AuthManager::$userToken, 
-            $token, 
-            time() + (30 * 24 * 60 * 60), // 30 дней
-            "/",
-            "",
-            isset($_SERVER["HTTPS"]),
-            true
-        );
-        if (!$cookieSet) {
-            $this->logger->WriteLine("Ошибка установки cookie для пользователя $login");
-        }
-    } else {
-        setcookie(AuthManager::$userToken, "", time() - 3600, "/");
-    }
-    init::$sqlQueryHandler->updateData('users', ['token' => $token], 'login', $login);
-}
+		if ($checkbox) {
+			$cookieSet = setcookie(
+				AuthManager::$userToken, 
+				$token, 
+				time() + (30 * 24 * 60 * 60),
+				"/",
+				"",
+				isset($_SERVER["HTTPS"]),
+				true
+			);
+			if (!$cookieSet) {
+				$this->logger->WriteLine("Ошибка установки cookie для пользователя $login");
+			}
+		} else {
+			setcookie(AuthManager::$userToken, "", time() - 3600, "/");
+		}
+		init::$sqlQueryHandler->updateData('users', ['token' => $token], 'login', $login);
+	}
 
 }

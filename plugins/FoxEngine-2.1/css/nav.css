@@ -9,6 +9,7 @@
 .navbar-toggler {
     width: auto;
     cursor: pointer;
+	padding: 10px;
 }
 
 .navbar-collapse {
@@ -28,7 +29,7 @@
 
 .navbar-collapse.show {
     transform: translateX(0);
-    background: #908489;
+    background: url(/templates/foxengine2/assets/img/menu_bg.png);
 }
 
 @media (min-width: 992px) {
@@ -49,6 +50,17 @@
 .navbar-nav > .nav-item > a {
     width: 100%;
 }
+
+.navbar-collapse.show a {
+    color: #dca250;
+	height: 42px;
+    padding: 10px;
+}
+
+.navbar-collapse.show a:hover {
+    background: #cac2b5;
+}
+
 
 .dropdown-item {
     display: contents;

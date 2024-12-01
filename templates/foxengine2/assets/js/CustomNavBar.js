@@ -4,9 +4,9 @@
  * This file contains the CustomNavbar class, which is responsible for creating navbars.
  * It provides methods for creating nice looking navigation bars
  * 
- * Authors: FoxesWorld
- * Date: [08.11.24]
- * Version: 1.0.0 SNAPSHOT
+ * Authors: FoxesWorld Development Group
+ * Date: [25.11.24]
+ * Version: 1.0.1 SNAPSHOT
  */
  class CustomNavbar {
     constructor(options = {}) {
@@ -55,7 +55,7 @@
         } else {
             this.hideBodyScroll();
             this.DOMelements.navbarToggler.classList.add("collapsed");
-            this.DOMelements.navbarCollapse.style.top = "112px";
+            this.DOMelements.navbarCollapse.style.top = "120px";
             this.DOMelements.navbarCollapse.style.width = "350px";
         }
     }

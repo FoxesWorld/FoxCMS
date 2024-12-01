@@ -10,6 +10,16 @@ abstract class Uploader {
     }
 
     abstract protected function validateFile($filePath);
+	
+	private function validateMime($filePath) : void {
+		global $config;
+		$fi = finfo_open(FILEINFO_MIME_TYPE);
+        $mime = (string) finfo_file($fi, $filePath);
+        finfo_close($fi);
+		if(!in_array($mime, explode(',', $config['securitySetings']['allowedMime']))) {
+			die('{"message": "Disallowed Mime/Type - '.$mime.'"}');
+		}
+	}
 
     public function uploadFile($fileResouse, $uploadPath, $fileName = null) {
         if (!isset($_FILES[0])) {
@@ -17,6 +27,7 @@ abstract class Uploader {
         }
 
         $filePath = $fileResouse['tmp_name'];
+		$this->validateMime($filePath);
         $errorCode = $fileResouse['error'];
 
         if ($errorCode !== UPLOAD_ERR_OK || !is_uploaded_file($filePath)) {

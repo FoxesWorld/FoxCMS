@@ -38,7 +38,8 @@ $config = array(
 		"reCaptchaSecret" => "6LcKeBoiAAAAAK-dFGsiDyqZvO_1u7MKWscdEJqJ",
 		"reCaptchaWebsite" => "6LcKeBoiAAAAAGnhfzZnLyzUApLmgnOpP4OfFOB7",
 		"bantime" => "20",
-		"maxLoginAttempts" => "2"
+		"maxLoginAttempts" => "2",
+		"allowedMime" => "image/jpeg,image/png,image/gif"
 ),
 
 	"frontendSettings" => array(
@@ -69,7 +70,7 @@ $config = array(
 		"userOptions" => "userOptions",
 		"OptionReplaceValues" => "{siteKey}->cfgVal(securitySetings|reCaptchaWebsite),{discordLink}->cfgVal(other|discordLink),{vkLink}->cfgVal(other|vkLink),{TPL}->cfgVal(siteSettings|siteTpl),{lang}->cfgVal(siteSettings|lang)",
 		"userFieldsArray" => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,colorScheme,groupName,badges,balance,token",
-		"canEditGroup" => "1,4"
+		"canEditGroup" => "1,4,3"
 ));
 
 ?>

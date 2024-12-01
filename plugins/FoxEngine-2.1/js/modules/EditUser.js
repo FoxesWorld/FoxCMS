@@ -26,7 +26,7 @@
 				 '<div class="innerDiv">' +
 					'<i class="fa fa-check"></i>' +
 				 '</div>' +
-				 '<span class="innerSpan"></span>' +
+				 '<span class="innerSpan '+checked+'"></span>' +
 				 '</div>'+
 				 '</label>';
 				 $("#profileColors").append(colorBlock);
@@ -36,7 +36,7 @@
 		
 		colorPickerInit(){
 			$('input[name="colorPicker"]').on('click', function() {
-				const rad = document.getElementsByName('colorPicker');
+				const rad = $('input[name="colorPicker"]');
 				for (let i = 0; i < rad.length; i++) {
 					const $colorBlock = $('#Color' + i);
 					$colorBlock.removeClass('checked');

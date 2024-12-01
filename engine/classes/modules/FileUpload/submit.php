@@ -59,6 +59,7 @@ if (!defined('profile')) {
 		
 		function handle_transfer_ids_post($ids) {
 			global $lang;
+			$this->delete_existing_files();
 			foreach ($ids as $id) {
 				$transfer = FilePond\get_transfer(TRANSFER_DIR, $id);
 				if (!$transfer) continue;
@@ -92,6 +93,17 @@ if (!defined('profile')) {
 						$message = $lang["errorLoad"];
 					}
 					return array($status, $message);
+				}
+			}
+		}
+		
+		private function delete_existing_files() {
+			$query = "SELECT profilePhoto FROM `users` WHERE login = '".$this->usrArray['login']."'";
+			$result = $this->db->getValue($query);
+			if ($result) {
+				$existingFile = ROOT_DIR.$result;
+				if ($existingFile && file_exists($existingFile)) {
+					unlink($existingFile);
 				}
 			}
 		}

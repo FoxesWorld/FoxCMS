@@ -251,15 +251,15 @@
 								);
 						switch($fileType){
 							case "skin":
-								init::classUtil('CapeUpload', "1.0.0");
-								$skinUpload = new CapeUpload($login, $perms);
+								init::classUtil('UserUpload', "1.0.0");
+								$skinUpload = new UserUpload($login, $perms);
 								$skinUpload->uploadFile(@$_FILES[0], $folder, md5(init::$usrArray['login'])."-skin.png");
 							break;
 												
 							case "cloak":
-								init::classUtil('CapeUpload', "1.0.0");
-								$capeUpload = new CapeUpload($login, $perms);
-								$capeUpload->uploadFile($_FILES[0], $folder, md5(init::$usrArray['login'])."-cape.png");
+								init::classUtil('UserUpload', "1.0.0");
+								$capeUpload = new UserUpload($login, $perms);
+								$capeUpload->uploadFile(@$_FILES[0], $folder, md5(init::$usrArray['login'])."-cape.png");
 								die('{"message": "Загрузка плащей в разработке!", "type": "warn"}');
 							break;
 							

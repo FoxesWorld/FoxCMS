@@ -1,3 +1,131 @@
+	/* User Nav*/	
+	.side-nav {
+		position: fixed;
+		top: 112px;
+		width: 350px;
+		right: -350px;
+		height: 100%;
+		background-color: #908489;
+		overflow-x: hidden;
+		transition: 0.3s;
+		z-index: 9999;
+		background: url(/templates/foxengine2/assets/img/menu_bg.png);
+		/* border-left: 2px solid #52301f; */
+	}
+
+	.side-nav.show {
+		right: 0;
+	}
+
+	.side-nav .menu-content {
+		color: #f1f1f1;
+	}
+
+.side-nav a {
+	    color: #dca250;
+}
+
+	.side-nav .menu-content .dropdown-item {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+		-webkit-tap-highlight-color: transparent;
+		font-size: 14px;
+		border: 0px;
+		background-color: transparent;
+		outline: 0px;
+		width: 100%;
+		text-align: left;
+		text-decoration: none;
+		box-sizing: border-box;
+		padding: 10px 12px;
+		cursor: pointer;
+		border-radius: 4px;
+		color: rgb(34, 34, 34);
+		-webkit-box-align: center;
+		align-items: center;
+	}
+
+	.side-nav .menu-content .dropdown-item:hover {
+		background-color: #575757;
+	}
+
+	.side-nav .menu-content .avatar {
+		overflow: hidden;
+		border-radius: 50%;
+		background-color: rgba(255, 255, 255, 0.31);
+		margin-right: 10px;
+	}
+
+	.side-nav .menu-content .avatar img {
+		object-fit: cover;
+		width: 42px;
+		height: 42px;
+	}
+
+	.side-nav .menu-content .user-info {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.side-nav .menu-content .user-info .fw-medium {
+		font-weight: 500;
+	}
+
+	.side-nav .menu-content .user-info .text-muted {
+		color: #a1a1a1;
+	}
+
+	/* UserBlock */
+	.user-button {
+		background: none;
+		border: none;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		font-family: 'FSElliotPro-Heavy';
+	}
+
+	.user-button .avatar {
+		overflow: hidden;
+		border-radius: 50%;
+		background-color: rgba(255, 255, 255, 0.31);
+		margin-right: 10px;
+	}
+
+	.user-button .avatar img {
+		object-fit: cover;
+		width: 42px;
+		height: 42px;
+	}
+
+	.user-button .user-info {
+		display: flex;
+		align-items: center;
+	}
+
+	.user-button .user-info .icon {
+		margin-right: 10px;
+	}
+
+	.user-button .chevron {
+		margin-left: 10px;
+		transition: transform 0.3s;
+		font-family: 'Minecraft Bold';
+		color: #ac6343;
+	}
+
+	.user-button .chevron[data-opened="true"] {
+		transform: rotate(180deg);
+	}
+
+	#usrMenu > .pages a {
+		height: 42px;
+		padding: 10px;
+	}
+	
+	#usrMenu > .pages a:hover {
+		background: #cac2b5;
+	}
+	
 	/* Full Profile */
 	
 	.userProfile {
@@ -7,6 +135,13 @@
 	box-shadow: 0 14px 43px rgba(79, 45, 31, .2);
 	border: 3px solid #ddd4bc;
 	padding: 5px;
+	}
+	
+	.userData {
+		font-family: 'Intro-Black';
+		background: url(/templates/foxengine2/assets/img/block-profile.png) no-repeat;
+		background-size: cover;
+		padding: 3px;
 	}
 	
 	#profileContents .pageItem:nth-child(even) {
@@ -467,6 +602,14 @@
 	background-color: rgb(217 222 231 / 54%);
 }
 
+.innerSpan.checked:before {
+	font-family: Font Awesome\ 6 Pro;
+	content: "\f00c";
+	margin: 5px;
+    font-size: 32pt;
+    color: #ffffff;
+}
+
 @keyframes bounceSelected {
   0% {
     transform: translateY(0px); }
@@ -476,7 +619,7 @@
     transform: translateY(0px); } 
 }
 	
-.checked {
+.colorBlock.checked {
 	border: 3px dotted #101010;
 	background-color: #ccc42754;
 }

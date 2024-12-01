@@ -30,21 +30,23 @@
 				self::$usrArray['user_group'] = self::$groupAssociacion->userGroupNum();
 			}
 			
-			protected static function userSkinInit(){
+			protected static function userSkinInit() {
 				init::classUtil('SkinViewer', "1.0.0");
-				$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . self::$usrArray['login'] . DIRECTORY_SEPARATOR . 'skin.png';
-				$cape = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . self::$usrArray['login'] . DIRECTORY_SEPARATOR . 'cape.png';
-				
+				$loginHash = md5(init::$usrArray['login']);
+				$skinDir = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . self::$usrArray['login'] . DIRECTORY_SEPARATOR;
+				$skin = $skinDir . $loginHash . '-skin.png';
+				$cape = $skinDir . $loginHash . '-cape.png';
+
 				if (!skinViewer2D::isValidSkin($skin)) {
-					$skin = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . DIRECTORY_SEPARATOR .' skin.png';
+					$skin = $skinDir . $loginHash . '-skin.png';
 				}
 				self::$usrFiles['skin'] = $skin;
-				
-				if(file_exists($cape)){
-					self::$usrFiles['cape'] = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER . self::$usrArray['login'] . DIRECTORY_SEPARATOR . 'cape.png';
+
+				if (file_exists($cape)) {
+					self::$usrFiles['cape'] = $cape;
 				}
-				
 			}
+
 			
 			public static function getUserBadges($db, $user){
 				$query = "SELECT * FROM `users` WHERE login = '".$user."'";

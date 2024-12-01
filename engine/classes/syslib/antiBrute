@@ -32,7 +32,7 @@ class antiBrute {
 		$this->ip = $ip;
 		$this->db = $db;
 		$this->debug = $debug;
-		$this->maxAttempts = $config['maxLoginAttempts'];
+		$this->maxAttempts = $config['securitySetings']['maxLoginAttempts'];
 		$this->db->run($this->dbShape);
 		$this->parseIpRow();
 

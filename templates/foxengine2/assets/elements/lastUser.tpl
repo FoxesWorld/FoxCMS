@@ -1,7 +1,7 @@
     <div id="profileContents" style="background: linear-gradient(45deg, #c5c5e19c, {colorScheme});">
     <table>
         <tr>
-            <td>
+            <td style="width: 10px;">
                 <img class="profilePhoto" src="{profilePhoto}" style="width: 64px;" alt="{login}">
             </td>
             <td>

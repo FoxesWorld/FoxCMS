@@ -7,225 +7,214 @@
 }
 <%FoxesModule*/
 
-	if(!defined('FOXXEY')) {
-		die("Hacking attempt!");
-	} else {
-		define('auth', true);
-	}
+if (!defined('FOXXEY')) {
+    die("Hacking attempt!");
+} else {
+    define('auth', true);
+}
 
-	$authWrapper = new AuthManager($this->db, $this->logger);
+$authWrapper = new AuthManager($this->db, $this->logger);
 
-	class AuthManager extends init {
-		
-		protected $db;
-		protected $logger;
-		private $dbShape = "";
-		private $moduleName;
-		private $requestListener = "userAction";
-		protected static $userToken = "userToken";
-		protected static $usrArray = array(
-			'isLogged' => false,
-			'user_id' => 0,
-			'email' => "admin@foxesworld.ru",
-			'login' => "anonymous",
-			'realname' => "",
-			'hash' => "",
-			'reg_date' => 1664055169,
-			'last_date' => CURRENT_TIME,
-			'logged_ip' => REMOTE_IP,
-			'password' => "",
-			'user_group' => 5,
-			'profilePhoto' => UPLOADS_DIR.USR_SUBFOLDER."anonymous/avatar.jpg"
-		);
-		
-		function __construct($db, $logger) {
-			$this->db = $db;
-			$this->logger = $logger;
-			$this->moduleName = basename(__FILE__, '.class.php');
-			init::classUtil('LoadUserInfo', "1.0.0");
-			init::classUtil('SessionManager', "1.0.0");
-			init::requireNestedClasses($this->moduleName, __DIR__."/actions/");
-			self::$usrArray['realname'] = randTexts::getRandText('noName');	
-			self::checkUserToken($db, $logger);
-			$this->authActionsInit(RequestHandler::$REQUEST);	
-		}
-		
-		private function authActionsInit($request) : void {
-			global $lang;
-				
-			if(!init::$usrArray['isLogged']) {
-				$auth = new authorise($request, $this->db, $this->logger);
-			} else {
-				RequestHandler::ipCheck();
-			}
-			switch(@$request[$this->requestListener]) {	
-				case 'auth':
+class AuthManager extends init {
+    
+    protected $db;
+    protected $logger;
+    private $dbShape = "";
+    private $moduleName;
+    private $requestListener = "userAction";
+    protected static $userToken = "userToken";
+    protected static $usrArray = array(
+        'isLogged' => false,
+        'user_id' => 0,
+        'email' => "admin@foxesworld.ru",
+        'login' => "anonymous",
+        'realname' => "",
+        'hash' => "",
+        'reg_date' => 1664055169,
+        'last_date' => CURRENT_TIME,
+        'logged_ip' => REMOTE_IP,
+        'password' => "",
+        'user_group' => 5,
+        'profilePhoto' => UPLOADS_DIR.USR_SUBFOLDER."anonymous/avatar.jpg"
+    );
+    
+    function __construct($db, $logger) {
+        $this->db = $db;
+        $this->logger = $logger;
+        $this->moduleName = basename(__FILE__, '.class.php');
+        init::classUtil('LoadUserInfo', "1.0.0");
+        init::classUtil('SessionManager', "1.0.0");
+        init::requireNestedClasses($this->moduleName, __DIR__."/actions/");
+        self::$usrArray['realname'] = randTexts::getRandText('noName');    
+        self::checkUserToken($db, $logger);
+        $this->authActionsInit(RequestHandler::$REQUEST);    
+    }
+    
+    private function authActionsInit($request) : void {
+        global $lang;
+            
+        if (!init::$usrArray['isLogged']) {
+            $auth = new authorise($request, $this->db, $this->logger);
+        } else {
+            RequestHandler::ipCheck();
+        }
+        switch (@$request[$this->requestListener]) {    
+            case 'auth':
+                @$authorisationStatus = $auth->auth();
+                switch ($authorisationStatus) {
+                    case true:
+                        $uuid = md5(init::$usrArray['login']);
+                        $token = $this->token();
+                        init::$usrArray['isLogged'] = true;
+                        if ($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher") {
+                            $AuthLib = new AuthLib($this->db, $this->logger, init::$usrArray, $token);
+                        }
+                        die('{"type": "success","message": "'.$lang['authSuccess'].'","balance":'.init::$usrArray['balance'].', "login": "'.init::$usrArray['login'].'","token": "'.$token.'","group": "'.init::$usrArray['user_group'].'", "groupName": "'.init::$usrArray['groupName'].'", "uuid": "'.str_replace('-', '', $uuid).'", "colorScheme": "'.init::$usrArray['colorScheme'].'"}');
+                    break;
+                    
+                    case false:
+                        functions::jsonAnswer($lang['authWrong']);
+                        $antiBrute = new antiBrute(REMOTE_IP, $this->db);
+                        $antiBrute->failedAuth(REMOTE_IP);
+                    break;
+                }
+            break;
+                        
+            case 'register':
+                $reg = new register($request, $this->db, $this->logger);    
+                $reg->register();
+            break;
+            
+            case 'checkPass':
+                init::classUtil('PasswordStrength', "1.0.0");
+                $this->logger->WriteLine("Checking a password '".$request['password']."'");
+                die(json_encode(new PasswordStrength($request['password'])));
+            break;
+            
+            case "lastUser":
+                die(json_encode(new lastUser($request, $this->db, $this->logger)));
+            break;
+                
+            case 'logout':
+                self::logout($lang['loggedOut']);
+            break;
+        }
+    }
+    
+    private function uuidFromString($string) : string {
+        $val = md5($string, true);
+        $byte = array_values(unpack('C16', $val));
+         
+        $tLo = ($byte[0] << 24) | ($byte[1] << 16) | ($byte[2] << 8) | $byte[3];
+        $tMi = ($byte[4] << 8) | $byte[5];
+        $tHi = ($byte[6] << 8) | $byte[7];
+        $csLo = $byte[9];
+        $csHi = $byte[8] & 0x3f | (1 << 7);
+         
+        if (pack('L', 0x6162797A) == pack('N', 0x6162797A)) {
+            $tLo = (($tLo & 0x000000ff) << 24) | (($tLo & 0x0000ff00) << 8) | (($tLo & 0x00ff0000) >> 8) | (($tLo & 0xff000000) >> 24);
+            $tMi = (($tMi & 0x00ff) << 8) | (($tMi & 0xff00) >> 8);
+            $tHi = (($tHi & 0x00ff) << 8) | (($tHi & 0xff00) >> 8);
+        }
+         
+        $tHi &= 0x0fff;
+        $tHi |= (3 << 12);
+           
+        $uuid = sprintf(
+            '%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x',
+            $tLo, $tMi, $tHi, $csHi, $csLo,
+            $byte[10], $byte[11], $byte[12], $byte[13], $byte[14], $byte[15]
+        );
+        return $uuid;
+    }
+    
+    protected function updateSession() : void {
+        $loadUserInfo = new LoadUserInfo(init::$usrArray['login'], $this->db);
+        $userData = $loadUserInfo->userInfoArray();
+        $sessionManager = new SessionManager($userData);
+    }
+    
+    protected static function checkUserToken($db, $logger) : void {
+        $username = "";
+        if (isset($_COOKIE[self::$userToken])) {
+            $token = functions::filterString($_COOKIE[self::$userToken]);
+            $query = "SELECT login from `users` WHERE token = '".$token."'";
+            $username = $db->getValue($query);
+            if ($username && !init::$usrArray['isLogged']) {
+                $auth = new authorise("", $db, $logger, $username);
+            }
+        }
+    }
+    
+    public static function logout($message = "") : void {
+        if (init::$usrArray["isLogged"] === true) {
+            session_destroy();
+            setcookie(self::$userToken, "", time() - 3600);
+            functions::jsonAnswer($message, false);
+        } else {
+            functions::jsonAnswer("Cant logOut!", true);
+        }
+    }
+    
+    private function token($max = 32) : string {
+        $chars = "0123456789abcdef";
+        $size = strlen($chars) - 1;
+        $password = null;
+        while ($max--) {
+            $password .= $chars[rand(0, $size)];
+        }
+        return $password;
+    }
+}
 
-					@$authorisationStatus = $auth->auth();
-					switch($authorisationStatus) {
-						case true:
-							$uuid = /*$this->uuidFromString */md5(init::$usrArray['login']);
-							$token = $this->token();
-							init::$usrArray['isLogged'] = true;
-							if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
-								$AuthLib = new AuthLib($this->db, $this->logger, init::$usrArray, $token);
-							}
+class AuthLib {
+    
+    private $db;
+    private $UUID;
+    private $logger;
+    private $login;
+    private $passMd5;
+    private $accessToken;
+    private $userMd5;
+    
+    function __construct($db, $logger, $usrArray, $accessToken) {
+        $this->db = $db;
+        $this->logger = $logger;
+        $this->login = $usrArray['login'];
+        $this->UUID = md5($usrArray['login']);
+        $this->accessToken = $accessToken;
+        $this->userMd5 = md5($usrArray['login']);
+        $this->passMd5 = md5($usrArray['password']);
+        $this->setSession();
+    }
+    
+    private function setSession() : void {
+        if ($this->checkUserSession()) {
+            $stmt = $this->db->prepare("UPDATE usersession SET accessToken = :accessToken WHERE user = :login");
+            $stmt->bindValue(':accessToken', $this->accessToken);
+            $stmt->bindValue(':login', $this->login);
+            $stmt->execute();
+        } else {
+            $stmt = $this->db->prepare("INSERT INTO usersession (user, userMd5, passMd5, accessToken) VALUES (:login, :userMd5, :passMd5, :accessToken)");
+            $stmt->bindValue(':login', $this->login);
+            $stmt->bindValue(':userMd5', $this->userMd5);
+            $stmt->bindValue(':passMd5', $this->passMd5);
+            $stmt->bindValue(':accessToken', $this->accessToken);
+            $stmt->execute();
+        }
+    }
+    
+    private function checkUserSession() : bool {
+        $stmt = $this->db->prepare("SELECT * FROM usersession WHERE user = :login");
+        $stmt->bindValue(':login', $this->login);
+        $stmt->execute();
+        return ($stmt->rowCount() == 1);
+    }
 
-							die('{"type": "success","message": "'.$lang['authSuccess'].'","balance":'.init::$usrArray['balance'].', "login": "'.init::$usrArray['login'].'","token": "'.$token.'","group": "'.init::$usrArray['user_group'].'", "groupName": "'.init::$usrArray['groupName'].'", "uuid": "'.str_replace('-', '', $uuid).'", "colorScheme": "'.init::$usrArray['colorScheme'].'"}');
-						break;
-						
-						case false:
-							functions::jsonAnswer($lang['authWrong']);
-							$antiBrute = new antiBrute(REMOTE_IP, $this->db);
-							$antiBrute->failedAuth(REMOTE_IP);
-						break;
-					}
-					
-				break;
-							
-				case 'register':
-					$reg = new register($request, $this->db, $this->logger);	
-					$reg->register();
-				break;
-				
-				case 'checkPass':
-					init::classUtil('PasswordStrength', "1.0.0");
-					$this->logger->WriteLine("Checking a password '".$request['password']."'");
-					die(json_encode(new PasswordStrength($request['password'])));
-				break;
-				
-				case "lastUser":
-					die(json_encode(new lastUser($request, $this->db, $this->logger)));
-				break;
-					
-				case 'logout':
-					self::logout($lang['loggedOut']);
-				break;
-			}
-		}
-		
-		private function uuidFromString($string) : string {
-			$val = md5($string, true);
-			$byte = array_values(unpack('C16', $val));
-			 
-			$tLo = ($byte[0] << 24) | ($byte[1] << 16) | ($byte[2] << 8) | $byte[3];
-			$tMi = ($byte[4] << 8) | $byte[5];
-			$tHi = ($byte[6] << 8) | $byte[7];
-			$csLo = $byte[9];
-			$csHi = $byte[8] & 0x3f | (1 << 7);
-			 
-			if (pack('L', 0x6162797A) == pack('N', 0x6162797A)) {
-				$tLo = (($tLo & 0x000000ff) << 24) | (($tLo & 0x0000ff00) << 8) | (($tLo & 0x00ff0000) >> 8) | (($tLo & 0xff000000) >> 24);
-				$tMi = (($tMi & 0x00ff) << 8) | (($tMi & 0xff00) >> 8);
-				$tHi = (($tHi & 0x00ff) << 8) | (($tHi & 0xff00) >> 8);
-			}
-			 
-			$tHi &= 0x0fff;
-			$tHi |= (3 << 12);
-			   
-			$uuid = sprintf(
-				'%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x',
-				$tLo, $tMi, $tHi, $csHi, $csLo,
-				$byte[10], $byte[11], $byte[12], $byte[13], $byte[14], $byte[15]
-			);
-			return $uuid;
-		}
-		
-		public static function updateSession($db) : void {
-			$loadUserInfo = new loadUserInfo(init::$usrArray['login'], $db);
-			$userData = $loadUserInfo->userInfoArray();
-			$sessionManager = new sessionManager($userData);
-		}
-		
-		protected static function checkUserToken($db, $logger) : void {
-			$username = "";
-			if(isset($_COOKIE[self::$userToken])) {
-				$token = functions::filterString($_COOKIE[self::$userToken]);
-				$query = "SELECT login from `users` WHERE token = '".$token."'";
-				$username = $db->getValue($query);
-				if($username && !init::$usrArray['isLogged']) {
-					$auth = new authorise("", $db, $logger, $username);
-				}
-			}
-		}
-		
-		public static function logout($message = "") : void{
-			if(init::$usrArray["isLogged"] === true) {
-				session_destroy();
-				setcookie(self::$userToken, "", time() - 3600);
-				functions::jsonAnswer($message, false);
-			} else {
-				functions::jsonAnswer("Cant logOut!", true);
-			}
-		}
-		
-		private function token($max = 32) : string {
-			$chars="0123456789abcdef";
-			$size=StrLen($chars)-1;
-			$password=null;
-			while($max--)
-			$password.=$chars[rand(0,$size)];
-			return $password;
-		}
-	}
-	
-	class AuthLib {
-		
-		private $db;
-		private $UUID;
-		private $logger;
-		private $login;
-		private $passMd5;
-		private $accessToken;
-		private $userMd5;
-		
-		function __construct($db, $logger, $usrArray, $accessToken){
-			$this->db = $db;
-			$this->logger = $logger;
-			$this->login = $usrArray['login'];
-			$this->UUID = md5($usrArray['login']);
-			$this->accessToken = $accessToken;
-			$this->userMd5 = md5($usrArray['login']);
-			$this->passMd5 = md5($usrArray['password']);
-			$this->setSession();
-		}
-		
-
-		
-		private function setSession() : void {
-
-			if($this->checkUserSession()) {
-				$stmt =$this->db->prepare("UPDATE usersession SET accessToken = :accessToken WHERE user = :login");//AND passMd5 = :passMd5 AND userMd5 = :userMd5
-				$stmt->bindValue(':accessToken', $this->accessToken);
-				$stmt->bindValue(':login', $this->login);
-					
-				//$stmt->bindValue(':passMd5', $this->passMd5);
-				//$stmt->bindValue(':userMd5', $this->userMd5);
-				$stmt->execute();
-			
-			//If userRow is not present
-			} else {
-				$stmt = $this->db->prepare("INSERT INTO usersession (user, userMd5, passMd5, accessToken) VALUES (:login, :userMd5, :passMd5, :accessToken)");
-				$stmt->bindValue(':login', $this->login);
-				$stmt->bindValue(':userMd5', $this->userMd5);
-				$stmt->bindValue(':passMd5', $this->passMd5);
-				$stmt->bindValue(':accessToken', $this->accessToken);
-				$stmt->execute();
-			}
-		}
-		
-		
-		private function checkUserSession() : bool {
-				$userSession = '';
-				$stmt = $this->db->prepare("SELECT * FROM usersession WHERE user = '".$this->login."'");
-				$stmt->execute();
-				return ($stmt->rowCount() == 1) ? true : false;
-		}
-
-		private function getRealUser($login){
-			$stmt = $this->db->prepare("SELECT user, accessToken FROM usersession WHERE user= :login");
-			$stmt->bindValue(':login', $login);
-			$stmt->execute();
-			return $stmt->fetch(PDO::FETCH_ASSOC);
-		}
-	}
+    private function getRealUser($login) {
+        $stmt = $this->db->prepare("SELECT user, accessToken FROM usersession WHERE user= :login");
+        $stmt->bindValue(':login', $login);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+}
