@@ -11,52 +11,67 @@ export class Page {
         };
     }
 
-    async loadPage(page, block) {
-		const cleanPage = page.split('?')[0];
-        if (cleanPage === this.selectPage.thisPage) {
-            return;
-        }
-        block = block || this.foxEngine.replaceData.contentBlock;
-
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-
-        const response = await this.foxEngine.sendPostAndGetAnswer({ "getOption": cleanPage }, "TEXT");
-
-        if (!this.foxEngine.utils.isJson(response)) {
-            const responseHTML = this.foxEngine.parseResponseHTML(response);
-            const option = this.foxEngine.utils.getData(responseHTML, 'useroption');
-            const content = this.foxEngine.utils.getData(responseHTML, 'pageContent');
-
-            if (option) {
-                const jsonOption = JSON.parse(option.textContent);
-                if (jsonOption.langPack) {
-                    this.langPack = await this.loadLangPack(jsonOption.langPack);
-                }
-                if (jsonOption.onLoad) {
-                    const func = jsonOption.onLoad + (jsonOption.onLoadArgs ? `(${jsonOption.onLoadArgs})` : '');
-                    setTimeout(() => {
-                        eval(func);
-                    }, 500);
-                }
-
-                if (this.foxEngine.entryReplacer) {
-                    await this.loadData(await this.foxEngine.entryReplacer.replaceText(responseHTML.body.innerHTML), block);
-                    this.setPage(cleanPage);
-                    location.hash = `#page/${cleanPage}`;
-                } else {
-                    console.error("Invalid or undefined foxEngine.entryReplacer.replaceText");
-                }
-                this.updateMetaTags(jsonOption);
-            }
-            $("#content > div > div.page-content > useroption").remove();
-        } else {
-            await this.foxEngine.utils.showErrorPage(response, block);
-			this.setPage("");
-        }
+async loadPage(page, block) {
+    const cleanPage = page.split('?')[0];
+    if (cleanPage === this.selectPage.thisPage) {
+        return;
     }
+    block = block || this.foxEngine.replaceData.contentBlock;
+
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+
+    const response = await this.foxEngine.sendPostAndGetAnswer({ "getOption": cleanPage }, "TEXT");
+
+    if (!this.foxEngine.utils.isJson(response)) {
+        const responseHTML = this.foxEngine.parseResponseHTML(response);
+        const option = this.foxEngine.utils.getData(responseHTML, 'useroption');
+        const content = this.foxEngine.utils.getData(responseHTML, 'pageContent');
+
+        if (option) {
+            const jsonOption = JSON.parse(option.textContent);
+            if (jsonOption.langPack) {
+                this.langPack = await this.loadLangPack(jsonOption.langPack);
+            }
+            if (jsonOption.onLoad) {
+                const func = jsonOption.onLoad + (jsonOption.onLoadArgs ? `(${jsonOption.onLoadArgs})` : '');
+                setTimeout(() => {
+                    eval(func);
+                }, 500);
+            }
+
+            if (this.foxEngine.entryReplacer) {
+                await this.loadData(await this.foxEngine.entryReplacer.replaceText(responseHTML.body.innerHTML), block);
+                this.setPage(cleanPage);
+                location.hash = `#page/${cleanPage}`;
+            } else {
+                console.error("Invalid or undefined foxEngine.entryReplacer.replaceText");
+            }
+            this.updateMetaTags(jsonOption);
+        }
+        $("#content > div > div.page-content > useroption").remove();
+
+        /*
+        const contentBlock = document.querySelector(block);
+		const targetOption = document.querySelector('.useroption');  
+        if (contentBlock) {
+            contentBlock.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+		if (contentBlock) {
+            const blockHeight = contentBlock.offsetHeight; 
+            console.log("Высота загруженного блока: ", blockHeight);
+        }*/
+    } else {
+        await this.foxEngine.utils.showErrorPage(response, block);
+        this.setPage("");
+    }
+}
+
 
     async getPage(page) {
         const response = await this.foxEngine.sendPostAndGetAnswer({ "getOption": page }, "HTML");

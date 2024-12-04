@@ -14,7 +14,6 @@ a {
 }
 
 .collapse.show {
-	background: var(--theme-span-primary);
 	border: 1px solid var(--border-color);
 	transition: 0.5s;
 }

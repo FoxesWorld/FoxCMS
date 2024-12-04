@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-12-01 13:05:01
+/* Smarty version 4.0.4, created on 2024-12-04 19:24:05
   from '/var/www/FoxCMS/templates/modalApp.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_674c34cd0881a3_22578066',
+  'unifunc' => 'content_67508225154d44_06555580',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_674c34cd0881a3_22578066 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67508225154d44_06555580 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="modal_wrapper" data-modal-close>
         <div class="modal_dialog">		
             <div class="modal_app"></div>

@@ -182,17 +182,23 @@ async parseBadges(user) {
         }
     }
 
-    async showUserProfile(userDisplay) {
-        try {
-            const userProfile = await this.getUserProfile(userDisplay);
-            this.foxEngine.page.setPage("");
-            this.foxEngine.page.loadData(await this.foxEngine.entryReplacer.replaceText(userProfile), this.foxEngine.replaceData.contentBlock);
-            location.hash = `user/${userDisplay}`;
-            this.foxEngine.foxesInputHandler.formInit(1000);
-        } catch (error) {
-            console.error('Error showing user profile:', error);
-        }
+async showUserProfile(userDisplay) {
+    try {
+        const userProfile = await this.getUserProfile(userDisplay);
+        const playtimeWidgetHtml = PlaytimeWidgetGenerator.generatePlaytimeWidget(this.foxEngine.replaceData.serversOnline);
+        
+        this.foxEngine.page.setPage("");
+        this.foxEngine.page.loadData(await this.foxEngine.entryReplacer.replaceText(userProfile), this.foxEngine.replaceData.contentBlock);
+        location.hash = `user/${userDisplay}`;
+        this.foxEngine.foxesInputHandler.formInit(1000);
+        setTimeout(() => {
+			$('.playtime-widget-container').html(playtimeWidgetHtml);
+        }, 600);
+    } catch (error) {
+        console.error('Error showing user profile:', error);
     }
+}
+
 
     async showProfilePopup(user, dialogOptions) {
         try {
@@ -262,5 +268,83 @@ async parseBadges(user) {
             console.error('Error logging out:', error);
         }
     }
+	
 }
+
+class PlaytimeWidgetGenerator {
+    static generatePlaytimeWidget(servers) {
+        const totalPlayTime = servers.reduce((total, server) => total + server.time, 0);
+        
+        let htmlBuilder = `
+        <div class="playtime-widget">
+            <button type="button" class="widget-header" data-bs-toggle="collapse" data-bs-target=".playtime-widget-collapse" aria-expanded="true">
+                Наиграно: <b>${totalPlayTime.toFixed(2)} часов</b>
+            </button>
+            <div class="playtime-widget-collapse collapse" style="">
+                <div class="widget-content">
+                    <table class="playtime-server-stats">
+                        <thead>
+                            <tr><th style="width: 110px;"></th>
+                            <th></th>
+                            <th style="width: 90px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+        
+        servers.forEach(server => {
+            const percentage = (server.time / totalPlayTime * 100).toFixed(2);
+            const color = PlaytimeWidgetGenerator.getColorForServer(server.server);
+            
+            htmlBuilder += `
+            <tr>
+                <td>
+                    <span class="${percentage < 5 ? 'text-muted' : ''}" title="">
+                        ${server.server}
+                    </span>
+                </td>
+                <td class="px-2">
+                    <div class="progress">
+                        <div class="progress-bar" style="width:${percentage}%; --bar-color:${color};"></div>
+                    </div>
+                </td>
+                <td><b>${server.time.toFixed(2)} часов</b></td>
+            </tr>`;
+        });
+        
+        htmlBuilder += `
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="playtime-widget-collapse collapse show" style="">
+                <div class="widget-progress">`;
+        
+        servers.forEach(server => {
+            const percentage = (server.time / totalPlayTime * 100).toFixed(2);
+            const color = PlaytimeWidgetGenerator.getColorForServer(server.server);
+            
+            htmlBuilder += `
+                <div class="bar-fill" style="width:${percentage}%; --server-color:${color};"></div>`;
+        });
+        
+        htmlBuilder += `
+                </div>
+            </div>
+        </div>`;
+        
+        return htmlBuilder;
+    }
+
+    static getColorForServer(serverName) {
+        switch (serverName) {
+            case "Craftoria":
+                return "#3498DB";
+            case "Amber":
+                return "#c17d22";
+            default:
+                return "#AAAAAA";
+        }
+    }
+}
+
 

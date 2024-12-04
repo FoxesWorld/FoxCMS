@@ -22,31 +22,9 @@
 	}
 
 .side-nav a {
-	    color: #dca250;
+	    color: var(--link-color-primary);
 }
 
-	.side-nav .menu-content .dropdown-item {
-		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-		-webkit-tap-highlight-color: transparent;
-		font-size: 14px;
-		border: 0px;
-		background-color: transparent;
-		outline: 0px;
-		width: 100%;
-		text-align: left;
-		text-decoration: none;
-		box-sizing: border-box;
-		padding: 10px 12px;
-		cursor: pointer;
-		border-radius: 4px;
-		color: rgb(34, 34, 34);
-		-webkit-box-align: center;
-		align-items: center;
-	}
-
-	.side-nav .menu-content .dropdown-item:hover {
-		background-color: #575757;
-	}
 
 	.side-nav .menu-content .avatar {
 		overflow: hidden;
@@ -59,19 +37,6 @@
 		object-fit: cover;
 		width: 42px;
 		height: 42px;
-	}
-
-	.side-nav .menu-content .user-info {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.side-nav .menu-content .user-info .fw-medium {
-		font-weight: 500;
-	}
-
-	.side-nav .menu-content .user-info .text-muted {
-		color: #a1a1a1;
 	}
 
 	/* UserBlock */
@@ -95,15 +60,6 @@
 		object-fit: cover;
 		width: 42px;
 		height: 42px;
-	}
-
-	.user-button .user-info {
-		display: flex;
-		align-items: center;
-	}
-
-	.user-button .user-info .icon {
-		margin-right: 10px;
 	}
 
 	.user-button .chevron {

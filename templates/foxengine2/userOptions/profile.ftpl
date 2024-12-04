@@ -324,7 +324,10 @@
 					}
 				</script>
 				[/hasPriviligies]
+				
+				
 			</div>
+		<div class="playtime-widget-container"></div>
       </div>
    </div>
    

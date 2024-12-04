@@ -1,0 +1,179 @@
+.playtime-widget {
+    background: #fff;
+    border: 1px solid #e0e4e5;
+    border-radius: 5px
+}
+
+.playtime-widget .widget-header {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: none;
+    border: none;
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 8px;
+    text-align: center;
+    text-shadow: none;
+    width: 100%
+}
+
+.playtime-widget .widget-header:not(:disabled) {
+    cursor: pointer
+}
+
+.playtime-widget .widget-content {
+    border-top: 1px solid #ecf0f1;
+    box-shadow: inset 0 2px 0 rgba(40,40,40,.025);
+    padding: 15px
+}
+
+.playtime-widget .widget-content .has-date {
+    border-bottom: 1px dotted #e0e4e5;
+    cursor: help
+}
+
+.playtime-widget .widget-progress {
+    background: #ecf0f1;
+    border-radius: 0 0 4px 4px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    height: 7px;
+    overflow: hidden;
+    padding: 0;
+    width: 100%
+}
+
+.playtime-widget .widget-progress .bar-fill {
+    background: var(--server-color);
+    box-sizing: border-box;
+    display: block;
+    height: 100%
+}
+
+.playtime-widget .playtime-server-stats {
+    width: 100%
+}
+
+.playtime-widget .playtime-server-stats th {
+    padding: 0
+}
+
+.playtime-widget .playtime-server-stats td,.playtime-widget .playtime-server-stats th {
+    box-sizing: content-box
+}
+
+.playtime-widget .playtime-server-stats td {
+    padding: 1px 0;
+    vertical-align: middle
+}
+
+.playtime-bar-wrapper {
+    border-radius: 2.5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    height: 5px;
+    margin: 2px 0;
+    overflow: hidden;
+    width: 100%
+}
+
+.playtime-bar-wrapper .playtime-bar {
+    background: var(--server-color);
+    box-sizing: border-box;
+    height: inherit
+}
+
+@keyframes progress-bar-stripes {
+    0% {
+        background-position: 0 0
+    }
+
+    to {
+        background-position: 40px 0
+    }
+}
+
+.progress {
+    --bar-color: #3498db;
+    background: #ecf0f1;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    height: 6px;
+    width: 100%
+}
+
+.progress.progress-bordered {
+    box-shadow: inset 0 0 1px rgba(0,0,0,.3)
+}
+
+.progress.progress-tiny {
+    border-radius: 1.5px;
+    height: 3px
+}
+
+.progress .progress-bar {
+    background-color: var(--bar-color);
+    border-radius: inherit;
+    height: 100%
+}
+
+.progress .progress-bar-striped {
+    background-image: linear-gradient(45deg,hsla(0,0%,100%,.2) 25%,transparent 0,transparent 50%,hsla(0,0%,100%,.2) 0,hsla(0,0%,100%,.2) 75%,transparent 0,transparent);
+    background-size: 40px 40px
+}
+
+.progress .progress-bar-animated {
+    animation: progress-bar-stripes 1s linear infinite
+}
+
+.progress .progress-bar-transitioned {
+    transition: width .15s ease
+}
+
+.server-id-point {
+    --server-color: #f0f0f0;
+    background: var(--server-color);
+    border-radius: 50%;
+    cursor: help;
+    display: block;
+    font-size: 1px;
+    height: 8px;
+    width: 8px
+}
+
+.server-id-point.hidden {
+    cursor: default
+}
+
+.circle-loader {
+    --size: 40px;
+    --color: #3498db;
+    animation: circle_loader .8s linear infinite;
+    border-bottom: 3px solid transparent;
+    border-left: 3px solid transparent;
+    border-radius: 50%;
+    border-right: 3px solid transparent;
+    border-right-color: var(--color);
+    border-top: 3px solid transparent;
+    border-top-color: var(--color);
+    box-sizing: border-box;
+    display: block;
+    height: var(--size);
+    padding: 1px;
+    width: var(--size)
+}
+
+@keyframes circle_loader {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    to {
+        transform: rotate(1turn)
+    }
+}

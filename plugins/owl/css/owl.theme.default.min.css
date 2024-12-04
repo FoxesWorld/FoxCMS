@@ -3,43 +3,59 @@
  * Copyright 2013-2018 David Deutsch
  * Licensed under: SEE LICENSE IN https://github.com/OwlCarousel2/OwlCarousel2/blob/master/LICENSE
  */
-.owl-theme .owl-dots,.owl-theme .owl-nav {
+
+:root {
+    --dot-background: #6f5547;
+    --dot-active-background: var(--button-primary);
+    --nav-background: #D6D6D6;
+    --nav-hover-background: #869791;
+    --disabled-opacity: 0.5;
+    --shadow-color: rgba(255, 181, 22, 0.89);
+    --dot-size: 10px;
+    --dot-margin: 5px 7px;
+    --nav-font-size: 14px;
+    --nav-padding: 4px 7px;
+}
+
+.owl-theme .owl-dots,
+.owl-theme .owl-nav {
     text-align: center;
     -webkit-tap-highlight-color: transparent;
     z-index: 888;
     left: 15px;
-    bottom: 75px;
-    display: inline-flex;
+    bottom: 55px;
     position: absolute;
+    display: inline-flex;
 }
 
 .owl-theme .owl-nav {
-    margin-top: 10px
+    margin-top: 10px;
 }
 
 .owl-theme .owl-nav [class*=owl-] {
     color: #FFF;
-    font-size: 14px;
+    font-size: var(--nav-font-size);
     margin: 5px;
-    padding: 4px 7px;
-    background: #D6D6D6;
+    padding: var(--nav-padding);
+    background: var(--nav-background);
     display: inline-block;
     cursor: pointer;
-    border-radius: 3px
+    border-radius: 3px;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .owl-theme .owl-nav [class*=owl-]:hover {
-    background: #869791;
+    background: var(--nav-hover-background);
     color: #FFF;
-    text-decoration: none
+    text-decoration: none;
 }
 
 .owl-theme .owl-nav .disabled {
-    opacity: .5;
-    cursor: default
+    opacity: var(--disabled-opacity);
+    cursor: default;
 }
 
-.owl-theme .owl-nav.disabled+.owl-dots {
+.owl-theme .owl-nav.disabled + .owl-dots {
     background: #292323;
     border-radius: 10px;
     padding: 2px;
@@ -47,25 +63,26 @@
 
 .owl-theme .owl-dots .owl-dot {
     display: inline-block;
-    zoom:1}
+    zoom: 1;
+}
 
 .owl-theme .owl-dots .owl-dot span {
-    width: 10px;
-    height: 10px;
-    margin: 5px 7px;
-    background: #6f5547;
+    width: var(--dot-size);
+    height: var(--dot-size);
+    margin: var(--dot-margin);
+    background: var(--dot-background);
     display: block;
     -webkit-backface-visibility: visible;
-    transition: opacity .2s ease;
-    border-radius: 30px
+    transition: opacity 0.2s ease, background-color 0.2s ease;
+    border-radius: 50%;
 }
 
-.owl-theme .owl-dots .owl-dot.active span,.owl-theme .owl-dots .owl-dot:hover span {
-    background: var(--button-primary);
-    -webkit-box-shadow: 0 1px 21px rgba(255, 181, 22, .89);
-    -moz-box-shadow: 0 1px 21px rgba(255, 181, 22, .89);
-    box-shadow: 0 1px 21px rgba(255, 181, 22, .89)
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+    background: var(--dot-active-background);
+    box-shadow: 0 1px 21px var(--shadow-color);
 }
+
 
 .progress-bar-wrapper {
     position: absolute;

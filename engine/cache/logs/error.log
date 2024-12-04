@@ -456,3 +456,77 @@ Stack trace:
 2024/12/01 12:50:04 [error] 1013931#1013931: *63107 FastCGI sent in stderr: "PHP message: PHP Warning:  in_array() expects parameter 2 to be array, string given in /var/www/FoxCMS/engine/classes/modules/Uploader/Uploader.class.php on line 19" while reading response header from upstream, client: 209.250.232.8, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
 2024/12/01 12:56:08 [error] 1013933#1013933: *63204 FastCGI sent in stderr: "PHP message: PHP Notice:  Undefined offset: 0 in /var/www/FoxCMS/engine/SystemRequests.class.php on line 262" while reading response header from upstream, client: 209.250.232.8, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
 2024/12/01 12:56:15 [error] 1013933#1013933: *63204 FastCGI sent in stderr: "PHP message: PHP Notice:  Undefined offset: 0 in /var/www/FoxCMS/engine/SystemRequests.class.php on line 262" while reading response header from upstream, client: 209.250.232.8, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2024/12/01 14:06:47 [error] 1013925#1013925: *64563 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Call to undefined function errorResponse() in /var/www/FoxCMS/authlib/hasJoined/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /var/www/FoxCMS/authlib/hasJoined/index.php on line 14" while reading response header from upstream, client: 109.173.96.129, server: foxescraft.ru, request: "GET /authlib/hasJoined/?serverId=2cf6cce04f128f3fcadef059b2c768c9738bee5&username=AidenFox HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2024/12/01 22:27:11 [error] 1013933#1013933: *71715 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Call to undefined function errorResponse() in /var/www/FoxCMS/authlib/hasJoined/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /var/www/FoxCMS/authlib/hasJoined/index.php on line 14" while reading response header from upstream, client: 109.173.96.129, server: foxescraft.ru, request: "GET /authlib/hasJoined/?serverId=a6d01fe657e33642132d1a31f734fb213c93522&username=Fridrih HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2024/12/02 00:01:21 [error] 1075813#1075813: *72622 directory index of "/var/www/FoxCMS/.git/" is forbidden, client: 209.38.17.216, server: foxescraft.ru, request: "GET /.git/ HTTP/1.1", host: "109.173.96.129"
+2024/12/02 05:59:07 [error] 1092825#1092825: *73438 directory index of "/var/www/FoxCMS/.git/" is forbidden, client: 15.168.133.130, server: foxescraft.ru, request: "GET /.git/ HTTP/1.1", host: "foxescraft.ru"
+2024/12/02 06:39:51 [crit] 1092828#1092828: *73499 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 5.181.27.147, server: 0.0.0.0:443
+2024/12/02 06:40:05 [crit] 1092828#1092828: *73504 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 5.34.178.101, server: 0.0.0.0:443
+2024/12/02 10:20:16 [crit] 1121072#1121072: *73898 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 5.181.27.147, server: 0.0.0.0:443
+2024/12/02 10:22:54 [crit] 1121069#1121069: *73915 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 5.181.27.147, server: 0.0.0.0:443
+2024/12/02 11:14:11 [error] 1121075#1121075: *73998 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Call to a member function auth() on null in /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php:63
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php(50): AuthManager->authActionsInit()
+#1 /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php(16): AuthManager->__construct()
+#2 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#3 /var/www/FoxCMS/engine/init.php(63): ModulesLoader->modulesInc()
+#4 /var/www/FoxCMS/engine/init.php(38): init->preInit()
+#5 /var/www/FoxCMS/index.php(8): init->__construct()
+#6 {main}
+  thrown in /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php on line 63" while reading response header from upstream, client: 81.26.152.194, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2024/12/02 15:12:56 [crit] 1121072#1121072: *75529 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 212.192.158.70, server: 0.0.0.0:443
+2024/12/02 18:01:21 [crit] 1121076#1121076: *75982 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 118.193.58.20, server: 0.0.0.0:443
+2024/12/02 22:30:13 [error] 1121075#1121075: *80286 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Call to undefined function errorResponse() in /var/www/FoxCMS/authlib/hasJoined/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /var/www/FoxCMS/authlib/hasJoined/index.php on line 14" while reading response header from upstream, client: 109.173.96.129, server: foxescraft.ru, request: "GET /authlib/hasJoined/?serverId=9979df6eee41f2f737e2f62e4708b291f546825&username=AidenFox HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2024/12/03 02:04:56 [error] 1185364#1185364: *83807 directory index of "/var/www/FoxCMS/.git/" is forbidden, client: 98.81.83.175, server: foxescraft.ru, request: "GET /.git/ HTTP/1.1", host: "www.foxesworld.ru"
+2024/12/03 04:04:38 [crit] 1202237#1202237: *84061 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 116.203.20.2, server: 0.0.0.0:443
+2024/12/03 04:05:45 [crit] 1202238#1202238: *84064 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 116.203.20.2, server: 0.0.0.0:443
+2024/12/03 04:22:45 [error] 1202238#1202238: *84088 directory index of "/var/www/FoxCMS/.git/" is forbidden, client: 34.201.151.65, server: foxescraft.ru, request: "GET /.git/ HTTP/1.1", host: "foxesworld.ru"
+2024/12/03 09:43:13 [crit] 1225821#1225821: *85185 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 116.203.20.2, server: 0.0.0.0:443
+2024/12/03 09:44:20 [crit] 1225823#1225823: *85191 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 116.203.20.2, server: 0.0.0.0:443
+2024/12/03 20:52:40 [error] 1225822#1225822: *86617 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Call to undefined function errorResponse() in /var/www/FoxCMS/authlib/hasJoined/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /var/www/FoxCMS/authlib/hasJoined/index.php on line 14" while reading response header from upstream, client: 109.173.96.129, server: foxescraft.ru, request: "GET /authlib/hasJoined/?serverId=9bced82f40be9a241d49e1a469d2019e2b49f3d&username=Simpozium HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2024/12/03 21:14:26 [error] 1225828#1225828: *86781 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Call to undefined function errorResponse() in /var/www/FoxCMS/authlib/hasJoined/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /var/www/FoxCMS/authlib/hasJoined/index.php on line 14" while reading response header from upstream, client: 109.173.96.129, server: foxescraft.ru, request: "GET /authlib/hasJoined/?serverId=a9bdc13332bb1cec21196348fe2578a659f9649&username=Fridrih HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2024/12/04 04:05:10 [crit] 1302218#1302218: *88026 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 167.172.243.227, server: 0.0.0.0:443
+2024/12/04 05:00:03 [error] 1302222#1302222: *88111 directory index of "/var/www/FoxCMS/.git/" is forbidden, client: 45.148.10.86, server: foxescraft.ru, request: "GET /.git/ HTTP/1.1", host: "109.173.96.129"
+2024/12/04 16:32:47 [crit] 1329098#1329098: *91276 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 165.154.40.205, server: 0.0.0.0:443
+2024/12/04 16:56:09 [error] 1329106#1329106: *91562 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'SystemRequests' not found in /var/www/FoxCMS/engine/init.php:65
+Stack trace:
+#0 /var/www/FoxCMS/engine/init.php(38): init->preInit()
+#1 /var/www/FoxCMS/index.php(8): init->__construct()
+#2 {main}
+  thrown in /var/www/FoxCMS/engine/init.php on line 65" while reading response header from upstream, client: 77.222.53.235, server: foxescraft.ru, request: "GET https://foxescraft.ru/ HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2024/12/04 18:14:16 [error] 1329104#1329104: *92633 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Call to undefined method db::beginTransaction() in /var/www/FoxCMS/engine/SystemRequests.class.php:347
+Stack trace:
+#0 /var/www/FoxCMS/engine/SystemRequests.class.php(220): SystemRequests->recordPlayTime()
+#1 /var/www/FoxCMS/engine/init.php(67): SystemRequests->requestListener()
+#2 /var/www/FoxCMS/engine/init.php(38): init->preInit()
+#3 /var/www/FoxCMS/index.php(8): init->__construct()
+#4 {main}
+  thrown in /var/www/FoxCMS/engine/SystemRequests.class.php on line 347" while reading response header from upstream, client: 104.28.198.246, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2024/12/04 18:14:45 [error] 1329102#1329102: *92359 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'SystemRequests' not found in /var/www/FoxCMS/engine/init.php:65
+Stack trace:
+#0 /var/www/FoxCMS/engine/init.php(38): init->preInit()
+#1 /var/www/FoxCMS/index.php(8): init->__construct()
+#2 {main}
+  thrown in /var/www/FoxCMS/engine/init.php on line 65" while reading response header from upstream, client: 104.28.198.246, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2024/12/04 18:14:51 [error] 1329104#1329104: *92658 FastCGI sent in stderr: "PHP message: PHP Notice:  Array to string conversion in /var/www/FoxCMS/engine/classes/syslib/syslog on line 22" while reading response header from upstream, client: 104.28.198.246, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2024/12/04 18:14:55 [error] 1329104#1329104: *92662 FastCGI sent in stderr: "PHP message: PHP Notice:  Array to string conversion in /var/www/FoxCMS/engine/classes/syslib/syslog on line 22" while reading response header from upstream, client: 104.28.198.246, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2024/12/04 18:17:54 [error] 1329106#1329106: *92756 FastCGI sent in stderr: "PHP message: PHP Notice:  Array to string conversion in /var/www/FoxCMS/engine/classes/syslib/syslog on line 22" while reading response header from upstream, client: 104.28.198.246, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2024/12/04 18:17:57 [error] 1329106#1329106: *92756 FastCGI sent in stderr: "PHP message: PHP Notice:  Array to string conversion in /var/www/FoxCMS/engine/classes/syslib/syslog on line 22" while reading response header from upstream, client: 104.28.198.246, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2024/12/04 18:17:57 [error] 1329106#1329106: *92750 FastCGI sent in stderr: "PHP message: PHP Notice:  Array to string conversion in /var/www/FoxCMS/engine/classes/syslib/syslog on line 22" while reading response header from upstream, client: 104.28.198.246, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2024/12/04 18:17:58 [error] 1329106#1329106: *92750 FastCGI sent in stderr: "PHP message: PHP Notice:  Array to string conversion in /var/www/FoxCMS/engine/classes/syslib/syslog on line 22" while reading response header from upstream, client: 104.28.198.246, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2024/12/04 18:17:58 [error] 1329106#1329106: *92750 FastCGI sent in stderr: "PHP message: PHP Notice:  Array to string conversion in /var/www/FoxCMS/engine/classes/syslib/syslog on line 22" while reading response header from upstream, client: 104.28.198.246, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
