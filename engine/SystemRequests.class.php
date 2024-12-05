@@ -82,6 +82,11 @@
 							$this->handleParseMonitor();
 						break;
 						
+						case "topPlayers":
+							$userTop = new UserTop($this->db, $this->logger);
+							$userTop->getTopPlayers();
+						break;
+						
 						case "mailTest":
 						init::classUtil('FoxMail', "1.0.0");
 						$entries = [
@@ -94,7 +99,7 @@
 						break;
 						
 						case 'skin':
-							if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
+							//if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
 								init::classUtil('SkinViewer', "1.0.0");
 								header("Content-type: text/plain");
 								$show = @RequestHandler::$REQUEST['show'] ?? null;
@@ -122,7 +127,7 @@
 								$base64_image = base64_encode($image_data);
 
 								die($base64_image);
-							}
+							//}
 							break;
 
 							case "skinPath":

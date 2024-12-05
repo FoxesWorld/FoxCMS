@@ -15,10 +15,8 @@ if (!defined('FOXXEY')) {
 
 $authWrapper = new AuthManager($this->db, $this->logger);
 
-class AuthManager extends init {
+class AuthManager extends Module {
     
-    protected $db;
-    protected $logger;
     private $dbShape = "";
     private $moduleName;
     private $requestListener = "userAction";

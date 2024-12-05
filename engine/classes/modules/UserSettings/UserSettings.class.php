@@ -14,10 +14,8 @@
 
 	$User = new User($this->db, $this->logger);
 
-		class User extends init {
+		class User extends Module {
 			
-			protected $db;
-			protected $logger;
 			protected static array $AnonymousUser;
 			
 			function __construct($db, $logger){

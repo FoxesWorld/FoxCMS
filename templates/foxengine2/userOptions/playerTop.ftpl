@@ -1,0 +1,208 @@
+<useroption>
+   { 
+   "optionTitle": "Топ Игроков",
+   "description": "Самые успешные пользователи",
+   "optionBlock": ".pages",
+   "optionClass": "nav-item uk-animation-fade",
+   "optionPreText": "<i class='page-title-icon fa-regular fa-trophy'></i>",
+   "optionGroup": [1,3,4,5],
+   "langPack": "userProfile",
+   "type": "page"
+   } 
+</useroption>
+
+<pageContent>
+
+    <style>
+        .user {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .server {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+
+   <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center fs-3">#</th>
+                <th>Игрок</th>
+                <th>Время Игры</th>
+            </tr>
+        </thead>
+        <tbody id="usersContainer"></tbody>
+    </table>
+
+    <script>
+class UserTable {
+    constructor(containerId) {
+        this.container = document.getElementById(containerId);
+    }
+
+    async fetchAndDisplayUsers() {
+        try {
+            // Fetch users data
+            const users = await foxEngine.sendPostAndGetAnswer({
+                "sysRequest": "topPlayers"
+            }, "JSON");
+
+            // Sort users by playtime
+            const sortedUsers = this.sortUsersByPlaytime(users);
+
+            // Render users to the table
+            this.renderUsers(sortedUsers);
+        } catch (error) {
+            console.error("Error fetching users data:", error);
+        }
+    }
+
+    sortUsersByPlaytime(users) {
+        return users.sort((a, b) => {
+            const totalMinutesA = this.calculateTotalPlaytime(a.serversOnline);
+            const totalMinutesB = this.calculateTotalPlaytime(b.serversOnline);
+
+            return totalMinutesB - totalMinutesA;
+        });
+    }
+
+    calculateTotalPlaytime(serversOnline) {
+        const servers = JSON.parse(serversOnline);
+        return servers.reduce((total, server) => total + server.time * 60, 0); // Sum of playtime in minutes
+    }
+
+    async renderUsers(users) {
+        this.container.innerHTML = '';
+
+        for (const [index, user] of users.entries()) {
+			console.log(user.login);
+            const row = await this.createUserRow(user, index + 1);
+            this.container.appendChild(row);
+        }
+    }
+
+    async createUserRow(user, rank) {
+        const row = document.createElement('tr');
+        row.style.background = 'linear-gradient(45deg, #c5c5e19c, '+user.colorScheme+')';
+
+        const rankCell = this.createRankCell(rank);
+        row.appendChild(rankCell);
+
+        const playerCell = await this.createPlayerCell(user);
+        row.appendChild(playerCell);
+
+        const playtimeCell = this.createPlaytimeCell(user);
+        row.appendChild(playtimeCell);
+
+        return row;
+    }
+
+    createRankCell(rank) {
+        const rankCell = document.createElement('td');
+        rankCell.className = 'text-center fs-3';
+        rankCell.textContent = rank;
+        return rankCell;
+    }
+
+    async createPlayerCell(user) {
+        const playerCell = document.createElement('td');
+        const playerDiv = document.createElement('div');
+        playerDiv.className = 'd-flex align-items-center';
+
+        const playerInfo = document.createElement('div');
+        playerInfo.className = 'flex-shrink-0';
+        const playerList = document.createElement('ul');
+        playerList.className = 'player-head';
+
+        const profileItem = document.createElement('li');
+        const profileLink = document.createElement('a');
+        profileLink.href = `#user/${user.login}`;
+
+        const profileImage = document.createElement('img');
+        profileImage.className = 'head-image';
+        profileImage.alt = user.login;
+        const base64Image = await this.fetchPlayerHeadImage(user.login);
+        profileImage.src = `data:image/png;base64,${base64Image}`;
+        profileLink.appendChild(profileImage);
+        profileItem.appendChild(profileLink);
+
+        const nameItem = document.createElement('li');
+        const nameLink = document.createElement('a');
+        nameLink.href = `#user/${user.login}`;
+        nameLink.textContent = user.login;
+        nameItem.appendChild(nameLink);
+
+        playerList.appendChild(profileItem);
+        playerList.appendChild(nameItem);
+        playerInfo.appendChild(playerList);
+        playerDiv.appendChild(playerInfo);
+
+/*
+        const statusDiv = document.createElement('div');
+        statusDiv.className = 'ms-auto';
+        const statusBadge = document.createElement('span');
+        statusBadge.className = 'badge badge-success';
+        statusBadge.textContent = 'В игре';
+        statusDiv.appendChild(statusBadge);
+        playerDiv.appendChild(statusDiv); */
+
+        playerCell.appendChild(playerDiv);
+        return playerCell;
+    }
+
+    async fetchPlayerHeadImage(login) {
+        try {
+            // Request the head image using the provided API method
+            const base64Image = await foxEngine.sendPostAndGetAnswer({
+                "sysRequest": "skin",
+                "show": "head",
+                "login": login
+            }, "TEXT");
+
+            return base64Image; // Return the base64 image
+        } catch (error) {
+            console.error(`Error fetching head image for ${login}:`, error);
+            return ''; // Return an empty string or a default image base64 if needed
+        }
+    }
+
+    createPlaytimeCell(user) {
+        const playtimeCell = document.createElement('td');
+        const servers = JSON.parse(user.serversOnline);
+        const totalMinutes = servers.reduce((total, server) => total + server.time * 60, 0);
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = Math.round(totalMinutes % 60);
+        playtimeCell.textContent = `${hours} часа и ${minutes} минуты`;
+
+        const barWrapper = document.createElement('div');
+        barWrapper.className = 'playtime-bar-wrapper my-1';
+        barWrapper.style.width = '100%';
+
+        servers.forEach(server => {
+            const bar = document.createElement('div');
+            bar.className = 'playtime-bar';
+            bar.style.width = `${(server.time * 60 / totalMinutes) * 100}%`;
+            bar.style.setProperty('--server-color', this.getServerColor(server.server));
+            barWrapper.appendChild(bar);
+        });
+
+        playtimeCell.appendChild(barWrapper);
+        return playtimeCell;
+    }
+
+    getServerColor(server) {
+        const colors = {
+            "Craftoria": "#3498DB",
+            "Amber": "#c17d22",
+            // Add more server colors as needed
+        };
+        return colors[server] || '#AAAAAA';
+    }
+}
+            const userTable = new UserTable('usersContainer');
+            userTable.fetchAndDisplayUsers();
+    </script>
+</pageContent>

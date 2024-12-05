@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-12-04 19:22:58
+/* Smarty version 4.0.4, created on 2024-12-05 12:31:10
   from '/var/www/FoxCMS/templates/foxengine2/userBlock.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_675081e2dc8ce1_60466079',
+  'unifunc' => 'content_675172de4821a3_66124803',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:balanceBox.tpl' => 1,
   ),
 ),false)) {
-function content_675081e2dc8ce1_60466079 (Smarty_Internal_Template $_smarty_tpl) {
+function content_675172de4821a3_66124803 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- UserPane -->
 <div id="userPane" class="side-nav">
     <div class="menu-content">

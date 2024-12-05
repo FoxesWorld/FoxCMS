@@ -12,14 +12,15 @@
 		
 		protected $db;
 		
-		function __construct($db, $table){
+		function __construct($db, $table, $fieldsToSelect){
 			$this->db = $db;
 			$this->dbTable = $table;
+			$this->fieldsToSelect = $fieldsToSelect;
 		}
 		
-		public function selectUsersBy($field, $value){
+		public function selectUsersBy($field, $condition, $value){
 			if($field !== null && $value !== null) {
-				$query = "SELECT * FROM `".$this->dbTable."` WHERE ".functions::filterString($field)." = '".functions::filterString($value)."'";
+				$query = "SELECT * FROM `".$this->dbTable."` WHERE ".functions::filterString($field).$condition."'".$value."'";
 				$data = $this->db->getRows($query);
 				$allUsers = array();
 				for($j=0; $j < count($data); $j++){

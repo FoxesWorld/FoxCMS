@@ -11,6 +11,7 @@ if(!defined('profile')) {
 		private $pageTplFile = "staticPage.tpl";
 		protected $db, $logger;
 		private $fRequest;
+		private $safeUsrData = array("login", "user_group", "realname", "reg_date", "last_date", "profilePhoto", "userStatus", "colorScheme", "balance", "badges", "serversOnline");
 		
 		function __construct($db = '', $logger = '', $request = ''){
 			global $config, $lang;
@@ -29,6 +30,23 @@ if(!defined('profile')) {
 							
 							case 'GetBadges':
 								die(json_encode(new GetBadges($db, $this->fRequest), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+							break;
+							
+							case "getUserData":
+							$loadUserInfo = new loadUserInfo(@RequestHandler::$REQUEST['login'], $this->db);
+								$userData = $loadUserInfo->userInfoArray();
+								if(init::$usrArray['user_group'] !== 1) {
+									$newUserData = array();
+									foreach($userData as $key => $value){
+										if(in_array($key, $this->safeUsrData)){
+											$newUserData[$key] = $value;
+										}
+									}
+									die(json_encode($newUserData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+								} else {
+									die(json_encode($userData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+								}
+								
 							break;
 							
 							case 'GiveBadge':

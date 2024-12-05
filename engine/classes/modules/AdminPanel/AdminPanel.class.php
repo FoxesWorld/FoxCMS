@@ -8,7 +8,7 @@
 <%FoxesModule*/
 	define("ADMIN", true);
 	$AdminPanel = new AdminPanel($this->db);
-	class AdminPanel extends init {
+	class AdminPanel extends Module {
 		
 		private $requestListener = "admPanel";
 		

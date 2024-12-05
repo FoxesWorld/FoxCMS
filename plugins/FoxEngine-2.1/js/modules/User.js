@@ -1,35 +1,28 @@
 export class User {
-
     constructor(foxEngine) {
         this.foxEngine = foxEngine;
-		this.userSkin = new Array();
+        this.userSkin = new Array();
         this.optNamesArr = [];
         this.optionAmount = 0;
         this.optionArray = [];
         this.optionTpl = '';
-
         this.userLogin = foxEngine.replaceData.login;
-        const debugMessage = `Loading data for %c${this.userLogin}%c...`;
-        const loginStyle = "color: #ff0000;";
-        const textStyles = "color: #000000;";
-        console.log(debugMessage, loginStyle, textStyles);
+        this.userData = [];
+
+        console.log(`Loading data for %c${this.userLogin}%c...`, "color: #ff0000;", "color: #000000;");
     }
 
     async parseUsrOptionsMenu() {
-        if (this.optNamesArr.length <= this.optionAmount) {
-            this.foxEngine.debugSend('Using FoxesWorld UserOptions', 'background: #39312fc7; color: yellow; font-size: 14pt');
-        }
-
-        if (this.foxEngine.replaceData.isLogged) {
-			this.parseUserLook(this.userLogin);
-            //this.foxEngine.debugSend(`User ${this.foxEngine.replaceData.login} is logged`, '');
-        }
-
         try {
-            const json = await this.foxEngine.sendPostAndGetAnswer({
-                getUserOptionsMenu: this.foxEngine.replaceData.login
-            }, "JSON");
+            if (this.optNamesArr.length <= this.optionAmount) {
+                this.foxEngine.debugSend('Using FoxesWorld UserOptions', 'background: #39312fc7; color: yellow; font-size: 14pt');
+            }
 
+            if (this.foxEngine.replaceData.isLogged) {
+                await this.parseUserLook(this.userLogin);
+            }
+
+            const json = await this.foxEngine.sendPostAndGetAnswer({ getUserOptionsMenu: this.userLogin }, "JSON");
             this.optionAmount = json.optionAmount;
             this.optionArray = json.optionArray;
 
@@ -39,58 +32,68 @@ export class User {
 
             for (const obj of this.optionArray) {
                 for (const optionName in obj) {
-                    const option = obj[optionName];
-                    let appendBlock = option.optionBlock;
-
-                    switch (option.type) {
-                        case "page":
-                            this.optionTpl = `
-                                <li class="${option.optionClass}">
-                                    <a class="pageLink-${optionName}" onclick="foxEngine.page.loadPage('${optionName}', replaceData.contentBlock); return false;">
-                                        <div class="rightIcon">
-                                            ${option.optionPreText}
-                                        </div>
-                                        ${option.optionTitle}
-                                    </a>
-                                </li>`;
-                            break;
-                        case "pageContent":
-                            // Add your case logic here
-                            break;
-                        case "plainText":
-                            this.optionTpl = option.optionTitle;
-                            break;
+                    if (obj.hasOwnProperty(optionName)) {
+                        this.processOption(optionName, obj[optionName]);
                     }
-
-                    if (appendBlock) {
-                        $(appendBlock).append(this.optionTpl);
-                    }
-
-                    this.optNamesArr.push(optionName);
                 }
             }
         } catch (error) {
             console.error('Error parsing user options menu:', error);
         }
     }
-	
-	async parseUserLook(login){
-		this.userSkin['front'] = await this.getUserSkin(login, 'front');
-		this.userSkin['back'] = await this.getUserSkin(login, 'back');
-		
-		return this.userSkin;
-	}
 
-	async getUserSkin(userLogin, side) {
-		console.log("Loading userSkin...");
-		return foxEngine.sendPostAndGetAnswer({sysRequest:"skinPreview", login: userLogin, side: side}, "TEXT");
-	}
+    processOption(optionName, option) {
+        let appendBlock = option.optionBlock;
+        this.optionTpl = this.generateOptionTemplate(option, optionName);
+
+        if (appendBlock) {
+            $(appendBlock).append(this.optionTpl);
+        }
+
+        this.optNamesArr.push(optionName);
+    }
+
+    generateOptionTemplate(option, optionName) {
+        switch (option.type) {
+            case "page":
+                return `
+                    <li class="${option.optionClass}">
+                        <a class="pageLink-${optionName}" onclick="foxEngine.page.loadPage('${optionName}', replaceData.contentBlock); return false;">
+                            <div class="rightIcon">${option.optionPreText}</div>
+                            ${option.optionTitle}
+                        </a>
+                    </li>`;
+            case "plainText":
+                return option.optionTitle;
+            default:
+                return '';
+        }
+    }
+
+    async parseUserLook(login) {
+        try {
+            this.userSkin.front = await this.getUserSkin(login, 'front');
+            this.userSkin.back = await this.getUserSkin(login, 'back');
+			this.getPlayTimeWidget(this.userData['serversOnline']);
+			this.parseBadges(login);
+        } catch (error) {
+            console.error('Error parsing user look:', error);
+        }
+    }
+
+    async getUserSkin(userLogin, side) {
+        try {
+            console.log("Loading userSkin "+side+"...");
+            await this.getUserData(userLogin);
+            return this.foxEngine.sendPostAndGetAnswer({ sysRequest: "skinPreview", login: userLogin, side: side }, "TEXT");
+        } catch (error) {
+            console.error('Error getting user skin:', error);
+        }
+    }
 
     async userAction(action) {
         try {
-            const answer = await this.foxEngine.sendPostAndGetAnswer({
-                user_doaction: action
-            }, "JSON");
+            const answer = await this.foxEngine.sendPostAndGetAnswer({ user_doaction: action }, "JSON");
             $("#actionBlock").html(`${answer.text} ${this.foxEngine.replaceData.realname}!`);
             this.foxEngine.utils.textAnimate("#actionBlock");
         } catch (error) {
@@ -98,18 +101,17 @@ export class User {
         }
     }
 
-async parseBadges(user) {
-    try {
-        const badgeWindow = $("#userBadges");
-        if (badgeWindow.children().length > 0) {
-            console.log("Badges already loaded for this user.");
-            return;
-        }
+    async parseBadges(user) {
+        try {
+            const badgeWindow = $("#userBadges");
+            if (badgeWindow.children().length > 0) {
+                console.log("Badges already loaded for this user.");
+                return;
+            }
 
-        const badgeTemplate = await this.foxEngine.loadTemplate(`${this.foxEngine.elementsDir}badge.tpl`, true);
-        const parsedJson = await this.getBadgesArray(user);
+            const badgeTemplate = await this.foxEngine.loadTemplate(`${this.foxEngine.elementsDir}badge.tpl`, true);
+            const parsedJson = await this.getBadgesArray(user);
 
-        if (parsedJson.length > 0) {
             for (const obj of parsedJson) {
                 const badgeHtml = await this.foxEngine.replaceTextInTemplate(badgeTemplate, {
                     BadgeDesc: obj.description,
@@ -119,25 +121,20 @@ async parseBadges(user) {
                 });
 
                 badgeWindow.append(badgeHtml);
-                $('[data-toggle="tooltip"]').tooltip({
-                    placement: 'bottom',
-                    trigger: "hover"
-                });
+                $('[data-toggle="tooltip"]').tooltip({ placement: 'bottom', trigger: "hover" });
             }
-        } else {
-            badgeWindow.remove();
+
+            if (parsedJson.length === 0) {
+                badgeWindow.remove();
+            }
+        } catch (error) {
+            console.error('Error parsing badges:', error);
         }
-    } catch (error) {
-        console.error('Error parsing badges:', error);
     }
-}
 
     async refreshBalance(currencies) {
         try {
-            const response = await this.foxEngine.sendPostAndGetAnswer({
-                user_doaction: "getUnits"
-            }, "JSON");
-
+            const response = await this.foxEngine.sendPostAndGetAnswer({ user_doaction: "getUnits" }, "JSON");
             const allData = response.reduce((acc, item) => {
                 const key = Object.keys(item)[0];
                 acc[key] = item[key];
@@ -166,39 +163,43 @@ async parseBadges(user) {
                     $(elementSelector).text(Math.round(now));
                 }
             });
-        } else {}
+        }
     }
 
     async getBadgesArray(user) {
         try {
-            const badgesArray = await this.foxEngine.sendPostAndGetAnswer({
-                user_doaction: 'GetBadges',
-                userDisplay: user
-            }, "JSON");
-
-            return badgesArray;
+            return await this.foxEngine.sendPostAndGetAnswer({ user_doaction: 'GetBadges', userDisplay: user }, "JSON");
         } catch (error) {
             console.error('Error getting badges array:', error);
         }
     }
 
-async showUserProfile(userDisplay) {
-    try {
-        const userProfile = await this.getUserProfile(userDisplay);
-        const playtimeWidgetHtml = PlaytimeWidgetGenerator.generatePlaytimeWidget(this.foxEngine.replaceData.serversOnline);
-        
-        this.foxEngine.page.setPage("");
-        this.foxEngine.page.loadData(await this.foxEngine.entryReplacer.replaceText(userProfile), this.foxEngine.replaceData.contentBlock);
-        location.hash = `user/${userDisplay}`;
-        this.foxEngine.foxesInputHandler.formInit(1000);
-        setTimeout(() => {
-			$('.playtime-widget-container').html(playtimeWidgetHtml);
-        }, 600);
-    } catch (error) {
-        console.error('Error showing user profile:', error);
+    async getPlayTimeWidget(serversOnline) {
+        try {
+            const playtimeWidgetHtml = PlaytimeWidgetGenerator.generatePlaytimeWidget(JSON.parse(serversOnline));
+            $('.playtime-widget-container').html(playtimeWidgetHtml);
+        } catch (error) {
+            console.error('Error getting playtime widget:', error);
+        }
     }
-}
 
+    async showUserProfile(userDisplay) {
+        try {
+            const userProfile = await this.getUserProfile(userDisplay);
+            await this.getUserData(userDisplay);
+            this.foxEngine.page.setPage("");
+            this.foxEngine.page.loadData(await this.foxEngine.entryReplacer.replaceText(userProfile), this.foxEngine.replaceData.contentBlock);
+            location.hash = `user/${userDisplay}`;
+            
+            this.foxEngine.foxesInputHandler.formInit(1000);
+            setTimeout(() => {
+                //this.getPlayTimeWidget(this.userData['serversOnline']);
+                this.parseBadges(userDisplay);
+            }, 600);
+        } catch (error) {
+            console.error('Error showing user profile:', error);
+        }
+    }
 
     async showProfilePopup(user, dialogOptions) {
         try {
@@ -207,9 +208,6 @@ async showUserProfile(userDisplay) {
             this.foxEngine.page.loadData(await this.foxEngine.entryReplacer.replaceText(userProfile), '#dialogContent');
             $("#dialog").dialog(dialogOptions);
             $("#dialog").dialog('open');
-            setTimeout(() => {
-                this.parseBadges(user);
-            }, 600);
         } catch (error) {
             console.error('Error showing profile popup:', error);
         }
@@ -217,10 +215,7 @@ async showUserProfile(userDisplay) {
 
     async getLastUser() {
         try {
-            const lastUser = await this.foxEngine.sendPostAndGetAnswer({
-                userAction: "lastUser"
-            }, "JSON");
-
+            const lastUser = await this.foxEngine.sendPostAndGetAnswer({ userAction: "lastUser" }, "JSON");
             const userView = await this.foxEngine.replaceTextInTemplate(await this.foxEngine.loadTemplate(`${this.foxEngine.elementsDir}lastUser.tpl`, true), {
                 colorScheme: lastUser.colorScheme,
                 profilePhoto: lastUser.profilePhoto,
@@ -238,10 +233,7 @@ async showUserProfile(userDisplay) {
     async getUserProfile(user) {
         try {
             this.foxEngine.page.langPack = await this.foxEngine.page.loadLangPack('userProfile');
-            const userProfile = await this.foxEngine.sendPostAndGetAnswer({
-                userDisplay: user,
-                user_doaction: "ViewProfile"
-            }, "TEXT");
+            const userProfile = await this.foxEngine.sendPostAndGetAnswer({ userDisplay: user, user_doaction: "ViewProfile" }, "TEXT");
 
             if (!this.foxEngine.utils.isJson(userProfile)) {
                 return userProfile;
@@ -255,10 +247,7 @@ async showUserProfile(userDisplay) {
 
     async logout(button) {
         try {
-            const request = await this.foxEngine.sendPostAndGetAnswer({
-                userAction: "logout"
-            }, "JSON");
-
+            const request = await this.foxEngine.sendPostAndGetAnswer({ userAction: "logout" }, "JSON");
             button.notify(request.message, request.type);
             this.foxEngine.soundOnClick(request.type);
             setTimeout(() => {
@@ -268,17 +257,42 @@ async showUserProfile(userDisplay) {
             console.error('Error logging out:', error);
         }
     }
-	
+
+    async getUserData(login) {
+        try {
+            const userData = await this.foxEngine.sendPostAndGetAnswer({ user_doaction: "getUserData", login: login }, "JSON");
+            this.userData = userData;
+        } catch (error) {
+            console.error('Error getting user data:', error);
+            throw error;
+        }
+    }
 }
+
 
 class PlaytimeWidgetGenerator {
     static generatePlaytimeWidget(servers) {
+        if (servers.length === 0) {
+            return `
+            <div class="py-2">
+                <div class="playtime-widget">
+                    <button type="button" class="widget-header" data-bs-toggle="collapse" data-bs-target=".playtime-widget-collapse" disabled="">
+                        <span class="text-muted">Никогда не заходил в игру</span>
+                    </button>
+                    <div class="playtime-widget-collapse collapse show">
+                        <div class="widget-progress"></div>
+                    </div>
+                </div>
+            </div>`;
+        }
+
         const totalPlayTime = servers.reduce((total, server) => total + server.time, 0);
-        
+        const totalPlayTimeStr = this.formatTime(totalPlayTime);
+
         let htmlBuilder = `
         <div class="playtime-widget">
             <button type="button" class="widget-header" data-bs-toggle="collapse" data-bs-target=".playtime-widget-collapse" aria-expanded="true">
-                Наиграно: <b>${totalPlayTime.toFixed(2)} часов</b>
+                Наиграно: <b>${totalPlayTimeStr}</b>
             </button>
             <div class="playtime-widget-collapse collapse" style="">
                 <div class="widget-content">
@@ -294,7 +308,8 @@ class PlaytimeWidgetGenerator {
         servers.forEach(server => {
             const percentage = (server.time / totalPlayTime * 100).toFixed(2);
             const color = PlaytimeWidgetGenerator.getColorForServer(server.server);
-            
+            const serverTimeStr = this.formatTime(server.time);
+
             htmlBuilder += `
             <tr>
                 <td>
@@ -307,7 +322,7 @@ class PlaytimeWidgetGenerator {
                         <div class="progress-bar" style="width:${percentage}%; --bar-color:${color};"></div>
                     </div>
                 </td>
-                <td><b>${server.time.toFixed(2)} часов</b></td>
+                <td><b>${serverTimeStr}</b></td>
             </tr>`;
         });
         
@@ -345,6 +360,26 @@ class PlaytimeWidgetGenerator {
                 return "#AAAAAA";
         }
     }
+
+    static formatTime(hours) {
+        const totalSeconds = Math.round(hours * 3600);
+        const hoursPart = Math.floor(totalSeconds / 3600);
+        const minutesPart = Math.floor((totalSeconds % 3600) / 60);
+        const secondsPart = totalSeconds % 60;
+
+        const hoursStr = hoursPart > 0 ? `${hoursPart} ${this.declineWord(hoursPart, 'час', 'часа', 'часов')}` : '';
+        const minutesStr = minutesPart > 0 ? `${minutesPart} ${this.declineWord(minutesPart, 'минута', 'минуты', 'минут')}` : '';
+        const secondsStr = secondsPart > 0 ? `${secondsPart} ${this.declineWord(secondsPart, 'секунда', 'секунды', 'секунд')}` : '';
+
+        return [hoursStr, minutesStr, secondsStr].filter(Boolean).join(' ');
+    }
+
+    static declineWord(number, one, two, five) {
+        const n = Math.abs(number) % 100;
+        const n1 = n % 10;
+        if (n > 10 && n < 20) return five;
+        if (n1 > 1 && n1 < 5) return two;
+        if (n1 == 1) return one;
+        return five;
+    }
 }
-
-

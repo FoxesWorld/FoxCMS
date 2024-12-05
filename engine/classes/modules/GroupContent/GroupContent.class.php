@@ -14,7 +14,7 @@ if(@functions::userExists(self::$usrArray['login'], $this->db)) {
 	functions::jsonAnswer("User ".self::$usrArray['login']." not found!", true);
 }
 
-class UserOptions extends init {
+class UserOptions extends Module {
 
     /* UserOptions Configuration */
     private array $dataToReplace = array(

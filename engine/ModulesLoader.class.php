@@ -98,6 +98,7 @@
 									require_once($moduleMainFilePath);
 								}
 							$counter++;
+							//echo $moduleName;
 							}
 						}
 					}

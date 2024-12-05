@@ -56,6 +56,7 @@ session_start();
 			$this->db = new db($config['database']['dbUser'], $config['database']['dbPass'], $config['database']['dbName'], $config['database']['dbHost']);
 			self::$sqlQueryHandler = new SafeSQLHandler($this->db);
 			$this->logger = new Logger('lastlog');
+			require('classes/modules/Module.class.php');
 			$this->ModulesLoader = new ModulesLoader($this->db, $this->logger);
 			$this->initHelper = new initHelper($this->db, $this->logger); //UsrArray Override (if IsLogged)
 			self::$usrArray['usrFolder'] = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER .init::$usrArray['login'] . '/';
