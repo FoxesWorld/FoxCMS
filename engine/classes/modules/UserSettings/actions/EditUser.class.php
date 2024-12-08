@@ -69,7 +69,7 @@ if(!defined('profile')) {
 																	'BASE64_ENCODED_FILE_OBJECTS' => 'handle_base64_encoded_file_post',
 																	'TRANSFER_IDS' 				  => 'handle_transfer_ids_post'
 																], $this->db, $this->logger, $this->requestArray);
-														AuthManager::updateSession($db);
+														AuthManager::updateSession($this->db);
 													} else {
 														$this->status = "warn";
 														$this->statusInfo = $lang['profileEdit']['restrictduser_group'];

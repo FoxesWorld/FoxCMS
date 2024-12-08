@@ -3379,3 +3379,594 @@
 [05.12.2024] (09:20:06) Simpozium successfully authorized from 31.173.83.245
 [05.12.2024] (10:17:11) AidenFox successfully authorized from 104.28.198.247
 [05.12.2024] (10:55:31) AidenFox successfully authorized from 104.28.198.247
+[05.12.2024] (12:59:03) Updater 104.28.230.245 with version '1.2.2-Impeller' requests an update information
+[05.12.2024] (12:59:03) CPU ID BFEBFBFF000406F1 already exists in the database.
+[05.12.2024] (12:59:19) AidenFox successfully authorized from 104.28.230.245
+[05.12.2024] (13:03:13) 104.28.230.245 requests 'Amber 1.16.5-Forge' files
+[05.12.2024] (13:37:14) **JoinServer constructor called**
+[05.12.2024] (13:37:14) Database connection established
+[05.12.2024] (13:37:14) Validating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[05.12.2024] (13:37:14) Session validated successfully
+[05.12.2024] (13:37:14) Updating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[05.12.2024] (13:39:43) AidenFox successfully authorized from 104.28.198.246
+[05.12.2024] (13:49:03) Updater 104.28.198.245 with version '1.2.2-Impeller' requests an update information
+[05.12.2024] (13:49:18) AidenFox successfully authorized from 104.28.198.245
+[05.12.2024] (13:50:34) 104.28.230.245 requests 'FrostPunk 1.16.5-Forge' files
+[05.12.2024] (13:52:09) Updater 217.73.117.65 with version '1.2.2-Impeller' requests an update information
+[05.12.2024] (13:52:35) Bimpy successfully authorized from 217.73.117.65
+[05.12.2024] (13:53:48) 217.73.117.65 requests 'Amber 1.16.5-Forge' files
+[05.12.2024] (13:55:31) AidenFox successfully authorized from 104.28.198.245
+[05.12.2024] (13:58:03) Updater 104.28.230.245 with version '1.2.2-Impeller' requests an update information
+[05.12.2024] (13:58:03) CPU ID BFEBFBFF000406F1 already exists in the database.
+[05.12.2024] (13:58:18) AidenFox successfully authorized from 104.28.198.247
+[05.12.2024] (13:58:27) AidenFox successfully authorized from 104.28.198.247
+[05.12.2024] (13:58:29) Updater 217.73.117.65 with version '1.2.2-Impeller' requests an update information
+[05.12.2024] (13:58:29) CPU ID 178BFBFF00600F20 already exists in the database.
+[05.12.2024] (13:58:31) Updater 217.73.117.65 with version '1.2.2-Impeller' requests an update information
+[05.12.2024] (13:58:31) CPU ID 178BFBFF00600F20 already exists in the database.
+[05.12.2024] (13:58:50) Bimpy successfully authorized from 217.73.117.65
+[05.12.2024] (13:58:53) 104.28.198.245 requests 'Amber 1.16.5-Forge' files
+[05.12.2024] (13:59:51) 217.73.117.65 requests 'Amber 1.16.5-Forge' files
+[05.12.2024] (14:00:25) **JoinServer constructor called**
+[05.12.2024] (14:00:25) Database connection established
+[05.12.2024] (14:00:25) Validating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[05.12.2024] (14:00:25) Session validated successfully
+[05.12.2024] (14:00:25) Updating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[05.12.2024] (14:02:16) **JoinServer constructor called**
+[05.12.2024] (14:02:16) Database connection established
+[05.12.2024] (14:02:16) Validating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[05.12.2024] (14:02:16) Session validated successfully
+[05.12.2024] (14:02:16) Updating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[05.12.2024] (14:02:19) **JoinServer constructor called**
+[05.12.2024] (14:02:19) Database connection established
+[05.12.2024] (14:02:19) Validating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[05.12.2024] (14:02:19) Session validated successfully
+[05.12.2024] (14:02:19) Updating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[05.12.2024] (14:02:23) **JoinServer constructor called**
+[05.12.2024] (14:02:23) Database connection established
+[05.12.2024] (14:02:23) Validating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[05.12.2024] (14:02:23) Session validated successfully
+[05.12.2024] (14:02:23) Updating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[05.12.2024] (14:02:27) **JoinServer constructor called**
+[05.12.2024] (14:02:27) Database connection established
+[05.12.2024] (14:02:27) Validating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[05.12.2024] (14:02:27) Session validated successfully
+[05.12.2024] (14:02:27) Updating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[05.12.2024] (14:02:30) **JoinServer constructor called**
+[05.12.2024] (14:02:30) Database connection established
+[05.12.2024] (14:02:30) Validating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[05.12.2024] (14:02:30) Session validated successfully
+[05.12.2024] (14:02:30) Updating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[05.12.2024] (14:02:40) Bimpy successfully authorized from 217.73.117.65
+[05.12.2024] (14:35:48) AidenFox successfully authorized from 104.28.230.245
+[05.12.2024] (14:46:40) Updater 217.73.117.65 with version '1.2.2-Impeller' requests an update information
+[05.12.2024] (14:46:40) CPU ID 178BFBFF00600F20 already exists in the database.
+[05.12.2024] (14:46:57) Bimpy successfully authorized from 217.73.117.65
+[05.12.2024] (14:47:06) 217.73.117.65 requests 'Amber 1.16.5-Forge' files
+[05.12.2024] (14:49:27) **JoinServer constructor called**
+[05.12.2024] (14:49:27) Database connection established
+[05.12.2024] (14:49:27) Validating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[05.12.2024] (14:49:27) Session validated successfully
+[05.12.2024] (14:49:27) Updating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[05.12.2024] (14:49:29) **JoinServer constructor called**
+[05.12.2024] (14:49:29) Database connection established
+[05.12.2024] (14:49:29) Validating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[05.12.2024] (14:49:29) Session validated successfully
+[05.12.2024] (14:49:29) Updating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[05.12.2024] (14:49:34) **JoinServer constructor called**
+[05.12.2024] (14:49:34) Database connection established
+[05.12.2024] (14:49:34) Validating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[05.12.2024] (14:49:34) Session validated successfully
+[05.12.2024] (14:49:34) Updating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[05.12.2024] (14:49:44) Bimpy successfully authorized from 217.73.117.65
+[05.12.2024] (14:55:30) Updater 5.228.113.210 with version '1.2.2-Impeller' requests an update information
+[05.12.2024] (14:55:53) Fennec_Fesya successfully authorized from 5.228.113.210
+[05.12.2024] (14:56:27) 5.228.113.210 requests 'Amber 1.16.5-Forge' files
+[05.12.2024] (14:56:37) AidenFox successfully authorized from 104.28.198.245
+[05.12.2024] (15:02:00) **JoinServer constructor called**
+[05.12.2024] (15:02:00) Database connection established
+[05.12.2024] (15:02:00) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (15:02:00) Session validated successfully
+[05.12.2024] (15:02:00) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (15:03:05) Updater 104.28.198.245 with version '1.2.2-Impeller' requests an update information
+[05.12.2024] (15:03:05) CPU ID BFEBFBFF000406F1 already exists in the database.
+[05.12.2024] (15:03:20) AidenFox successfully authorized from 104.28.198.245
+[05.12.2024] (15:03:23) 104.28.198.245 requests 'Amber 1.16.5-Forge' files
+[05.12.2024] (15:04:47) **JoinServer constructor called**
+[05.12.2024] (15:04:47) Database connection established
+[05.12.2024] (15:04:47) Validating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[05.12.2024] (15:04:47) Session validated successfully
+[05.12.2024] (15:04:47) Updating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[05.12.2024] (15:46:04) Updater 95.220.58.102 with version '1.2.2-Impeller' requests an update information
+[05.12.2024] (15:46:20) Simpozium successfully authorized from 95.220.58.102
+[05.12.2024] (15:46:31) 95.220.58.102 requests 'Amber 1.16.5-Forge' files
+[05.12.2024] (15:48:54) **JoinServer constructor called**
+[05.12.2024] (15:48:54) Database connection established
+[05.12.2024] (15:48:54) Validating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[05.12.2024] (15:48:54) Session validated successfully
+[05.12.2024] (15:48:54) Updating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[05.12.2024] (15:50:38) **JoinServer constructor called**
+[05.12.2024] (15:50:38) Database connection established
+[05.12.2024] (15:50:38) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (15:50:38) Session validated successfully
+[05.12.2024] (15:50:38) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (16:13:53) **JoinServer constructor called**
+[05.12.2024] (16:13:53) Database connection established
+[05.12.2024] (16:13:53) Validating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[05.12.2024] (16:13:53) Session validated successfully
+[05.12.2024] (16:13:53) Updating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[05.12.2024] (16:16:50) **JoinServer constructor called**
+[05.12.2024] (16:16:50) Database connection established
+[05.12.2024] (16:16:50) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (16:16:50) Session validated successfully
+[05.12.2024] (16:16:50) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (16:35:03) **JoinServer constructor called**
+[05.12.2024] (16:35:03) Database connection established
+[05.12.2024] (16:35:03) Validating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[05.12.2024] (16:35:03) Session validated successfully
+[05.12.2024] (16:35:03) Updating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[05.12.2024] (16:44:30) **JoinServer constructor called**
+[05.12.2024] (16:44:30) Database connection established
+[05.12.2024] (16:44:30) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (16:44:30) Session validated successfully
+[05.12.2024] (16:44:30) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (16:52:59) Updater 95.24.153.11 with version '1.2.2-Impeller' requests an update information
+[05.12.2024] (16:52:59) CPU ID BFEBFBFF000806D1 already exists in the database.
+[05.12.2024] (16:53:14) Fridrih successfully authorized from 95.24.153.11
+[05.12.2024] (16:55:39) 95.24.153.11 requests 'Amber 1.16.5-Forge' files
+[05.12.2024] (16:59:24) **JoinServer constructor called**
+[05.12.2024] (16:59:24) Database connection established
+[05.12.2024] (16:59:24) Validating session for userMd5: <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[05.12.2024] (16:59:24) Session validated successfully
+[05.12.2024] (16:59:24) Updating session for userMd5: <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[05.12.2024] (17:06:25) **JoinServer constructor called**
+[05.12.2024] (17:06:25) Database connection established
+[05.12.2024] (17:06:25) Validating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[05.12.2024] (17:06:25) Session validated successfully
+[05.12.2024] (17:06:25) Updating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[05.12.2024] (17:49:36) AidenFox successfully authorized from 104.28.198.245
+[05.12.2024] (18:09:49) **JoinServer constructor called**
+[05.12.2024] (18:09:49) Database connection established
+[05.12.2024] (18:09:49) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (18:09:49) Session validated successfully
+[05.12.2024] (18:09:49) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (18:10:22) AidenFox successfully authorized from 104.28.198.245
+[05.12.2024] (18:10:29) 104.28.230.245 requests 'Amber 1.16.5-Forge' files
+[05.12.2024] (18:15:10) AidenFox successfully authorized from 104.28.198.245
+[05.12.2024] (18:15:24) 104.28.198.245 requests 'Hi-Tech 1.7.10-Forge' files
+[05.12.2024] (18:16:11) AidenFox successfully authorized from 104.28.198.246
+[05.12.2024] (18:16:17) 104.28.198.245 requests 'Amber 1.16.5-Forge' files
+[05.12.2024] (18:17:55) **JoinServer constructor called**
+[05.12.2024] (18:17:55) Database connection established
+[05.12.2024] (18:17:55) Validating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[05.12.2024] (18:17:55) Session validated successfully
+[05.12.2024] (18:17:55) Updating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[05.12.2024] (18:49:08) Updater 104.28.230.245 with version '1.2.2-Impeller' requests an update information
+[05.12.2024] (18:49:08) CPU ID BFEBFBFF000406F1 already exists in the database.
+[05.12.2024] (18:49:29) AidenFox successfully authorized from 104.28.198.245
+[05.12.2024] (18:49:59) Updater 104.28.198.245 with version '1.2.2-Impeller' requests an update information
+[05.12.2024] (18:49:59) CPU ID BFEBFBFF000406F1 already exists in the database.
+[05.12.2024] (18:50:14) AidenFox successfully authorized from 104.28.198.246
+[05.12.2024] (18:50:42) Updater 104.28.198.245 with version '1.2.2-Impeller' requests an update information
+[05.12.2024] (18:50:42) CPU ID BFEBFBFF000406F1 already exists in the database.
+[05.12.2024] (18:50:57) AidenFox successfully authorized from 104.28.198.245
+[05.12.2024] (19:00:24) **JoinServer constructor called**
+[05.12.2024] (19:00:24) Database connection established
+[05.12.2024] (19:00:24) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (19:00:24) Session validated successfully
+[05.12.2024] (19:00:24) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (19:45:06) **JoinServer constructor called**
+[05.12.2024] (19:45:06) Database connection established
+[05.12.2024] (19:45:06) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (19:45:06) Session validated successfully
+[05.12.2024] (19:45:06) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (19:45:18) **JoinServer constructor called**
+[05.12.2024] (19:45:18) Database connection established
+[05.12.2024] (19:45:18) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (19:45:18) Session validated successfully
+[05.12.2024] (19:45:18) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (20:15:01) Fridrih successfully authorized from 95.24.153.11
+[05.12.2024] (20:18:26) **JoinServer constructor called**
+[05.12.2024] (20:18:26) Database connection established
+[05.12.2024] (20:18:26) Validating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[05.12.2024] (20:18:26) Session validated successfully
+[05.12.2024] (20:18:26) Updating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[05.12.2024] (20:33:58) **JoinServer constructor called**
+[05.12.2024] (20:33:58) Database connection established
+[05.12.2024] (20:33:58) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (20:33:58) Session validated successfully
+[05.12.2024] (20:33:58) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (20:42:12) Updater 95.24.153.11 with version '1.2.2-Impeller' requests an update information
+[05.12.2024] (20:42:12) CPU ID BFEBFBFF000806D1 already exists in the database.
+[05.12.2024] (20:42:32) Fridrih successfully authorized from 95.24.153.11
+[05.12.2024] (20:42:55) 95.24.153.11 requests 'Amber 1.16.5-Forge' files
+[05.12.2024] (20:46:35) **JoinServer constructor called**
+[05.12.2024] (20:46:35) Database connection established
+[05.12.2024] (20:46:35) Validating session for userMd5: <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[05.12.2024] (20:46:35) Session validated successfully
+[05.12.2024] (20:46:35) Updating session for userMd5: <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[05.12.2024] (20:46:38) **JoinServer constructor called**
+[05.12.2024] (20:46:38) Database connection established
+[05.12.2024] (20:46:38) Validating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[05.12.2024] (20:46:38) Session validated successfully
+[05.12.2024] (20:46:38) Updating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[05.12.2024] (20:47:23) **JoinServer constructor called**
+[05.12.2024] (20:47:23) Database connection established
+[05.12.2024] (20:47:23) Validating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[05.12.2024] (20:47:23) Session validated successfully
+[05.12.2024] (20:47:23) Updating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[05.12.2024] (20:59:14) Fridrih successfully authorized from 95.24.153.11
+[05.12.2024] (20:59:18) 95.24.153.11 requests 'Amber 1.16.5-Forge' files
+[05.12.2024] (21:01:22) **JoinServer constructor called**
+[05.12.2024] (21:01:22) Database connection established
+[05.12.2024] (21:01:22) Validating session for userMd5: <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[05.12.2024] (21:01:22) Session validated successfully
+[05.12.2024] (21:01:22) Updating session for userMd5: <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[05.12.2024] (21:44:03) **JoinServer constructor called**
+[05.12.2024] (21:44:03) Database connection established
+[05.12.2024] (21:44:03) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (21:44:03) Session validated successfully
+[05.12.2024] (21:44:03) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (21:44:07) **JoinServer constructor called**
+[05.12.2024] (21:44:07) Database connection established
+[05.12.2024] (21:44:07) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (21:44:07) Session validated successfully
+[05.12.2024] (21:44:07) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (21:44:10) **JoinServer constructor called**
+[05.12.2024] (21:44:10) Database connection established
+[05.12.2024] (21:44:10) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (21:44:10) Session validated successfully
+[05.12.2024] (21:44:10) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (21:44:12) **JoinServer constructor called**
+[05.12.2024] (21:44:12) Database connection established
+[05.12.2024] (21:44:12) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (21:44:12) Session validated successfully
+[05.12.2024] (21:44:12) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (21:50:29) **JoinServer constructor called**
+[05.12.2024] (21:50:29) Database connection established
+[05.12.2024] (21:50:29) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (21:50:29) Session validated successfully
+[05.12.2024] (21:50:29) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (21:50:59) **JoinServer constructor called**
+[05.12.2024] (21:50:59) Database connection established
+[05.12.2024] (21:50:59) Validating session for userMd5: <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[05.12.2024] (21:50:59) Session validated successfully
+[05.12.2024] (21:50:59) Updating session for userMd5: <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[05.12.2024] (21:51:03) **JoinServer constructor called**
+[05.12.2024] (21:51:03) Database connection established
+[05.12.2024] (21:51:03) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (21:51:03) Session validated successfully
+[05.12.2024] (21:51:03) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (22:30:30) **JoinServer constructor called**
+[05.12.2024] (22:30:30) Database connection established
+[05.12.2024] (22:30:30) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (22:30:30) Session validated successfully
+[05.12.2024] (22:30:30) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[05.12.2024] (23:05:02) Simpozium successfully authorized from 95.220.58.102
+[05.12.2024] (23:19:45) Fridrih successfully authorized from 95.24.153.11
+[06.12.2024] (10:48:08) Updater 31.173.86.175 with version '1.2.1-Revelation' requests an update information
+[06.12.2024] (10:48:08) CPU ID BFEBFBFF000306C3 already exists in the database.
+[06.12.2024] (10:48:24) Updater 31.173.86.175 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (10:48:24) CPU ID BFEBFBFF000306C3 already exists in the database.
+[06.12.2024] (10:48:55) AidenFox successfully authorized from 31.173.86.175
+[06.12.2024] (10:49:01) 31.173.86.175 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (11:13:49) AidenFox successfully authorized from 31.173.86.175
+[06.12.2024] (11:20:41) Updater 31.173.86.175 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (11:20:41) CPU ID BFEBFBFF000306C3 already exists in the database.
+[06.12.2024] (11:20:57) AidenFox successfully authorized from 31.173.86.175
+[06.12.2024] (11:21:04) 31.173.86.175 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (11:22:43) AidenFox successfully authorized from 31.173.86.175
+[06.12.2024] (11:27:41) Updater 31.173.86.175 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (11:27:41) CPU ID BFEBFBFF000306C3 already exists in the database.
+[06.12.2024] (11:27:57) AidenFox successfully authorized from 31.173.86.175
+[06.12.2024] (11:28:01) 31.173.86.175 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (11:29:40) AidenFox successfully authorized from 31.173.86.175
+[06.12.2024] (11:44:04) Updater 31.173.86.175 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (11:44:04) CPU ID BFEBFBFF000306C3 already exists in the database.
+[06.12.2024] (11:44:20) AidenFox successfully authorized from 31.173.86.175
+[06.12.2024] (11:44:58) 31.173.86.175 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (11:47:00) AidenFox successfully authorized from 31.173.86.175
+[06.12.2024] (11:48:59) Updater 31.173.86.175 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (11:48:59) CPU ID BFEBFBFF000306C3 already exists in the database.
+[06.12.2024] (11:49:15) AidenFox successfully authorized from 31.173.86.175
+[06.12.2024] (11:49:24) 31.173.86.175 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (11:50:56) AidenFox successfully authorized from 31.173.86.175
+[06.12.2024] (12:04:14) 31.173.86.175 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (12:06:04) AidenFox successfully authorized from 31.173.86.175
+[06.12.2024] (17:01:34) Updater 104.28.230.243 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (17:01:34) CPU ID BFEBFBFF000406F1 already exists in the database.
+[06.12.2024] (17:01:53) AidenFox successfully authorized from 104.28.230.243
+[06.12.2024] (17:02:45) Updater 104.28.230.243 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (17:02:45) CPU ID BFEBFBFF000406F1 already exists in the database.
+[06.12.2024] (17:03:28) AidenFox successfully authorized from 104.28.230.243
+[06.12.2024] (17:03:33) 104.28.230.243 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (17:03:36) 104.28.230.243 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (17:04:50) AidenFox successfully authorized from 104.28.230.243
+[06.12.2024] (18:02:35) Updater 95.24.151.232 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (18:02:35) CPU ID BFEBFBFF000806D1 already exists in the database.
+[06.12.2024] (18:02:50) Fridrih successfully authorized from 95.24.151.232
+[06.12.2024] (18:02:54) 95.24.151.232 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (18:06:17) **JoinServer constructor called**
+[06.12.2024] (18:06:17) Database connection established
+[06.12.2024] (18:06:17) Validating session for userMd5: <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[06.12.2024] (18:06:17) Session validated successfully
+[06.12.2024] (18:06:17) Updating session for userMd5: <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[06.12.2024] (18:53:23) Updater 104.28.198.248 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (18:53:23) CPU ID BFEBFBFF000406F1 already exists in the database.
+[06.12.2024] (18:55:31) AidenFox successfully authorized from 104.28.198.248
+[06.12.2024] (18:55:41) 104.28.198.248 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (18:57:34) Fridrih successfully authorized from 95.24.151.232
+[06.12.2024] (18:58:08) Fridrih successfully authorized from 95.24.151.232
+[06.12.2024] (18:59:05) Fridrih successfully authorized from 95.24.151.232
+[06.12.2024] (19:05:35) AidenFox successfully authorized from 104.28.230.248
+[06.12.2024] (19:06:27) 104.28.230.248 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (19:13:54) AidenFoxsysRequest=downloadLatest failed authorization with password Aiden2556308
+[06.12.2024] (19:14:55) AidenFox successfully authorized from 104.28.230.248
+[06.12.2024] (19:15:06) 104.28.230.248 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (19:15:08) 104.28.230.248 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (19:15:09) 104.28.230.248 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (19:15:12) 104.28.230.248 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (19:15:13) 104.28.230.248 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (19:15:17) 104.28.230.248 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (19:16:28) AidenFox successfully authorized from 104.28.230.248
+[06.12.2024] (19:17:28) 104.28.230.248 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (19:20:21) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (19:20:21) CPU ID BFEBFBFF000406F1 already exists in the database.
+[06.12.2024] (19:20:37) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:20:40) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (19:21:13) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:22:02) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:22:49) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:22:54) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (19:24:35) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:25:04) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:25:15) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:25:18) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:26:34) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:28:05) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (19:28:05) CPU ID BFEBFBFF000406F1 already exists in the database.
+[06.12.2024] (19:28:35) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (19:28:35) CPU ID BFEBFBFF000406F1 already exists in the database.
+[06.12.2024] (19:28:53) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:29:01) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:29:04) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (19:30:07) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:30:33) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:32:49) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (19:32:49) CPU ID BFEBFBFF000406F1 already exists in the database.
+[06.12.2024] (19:33:07) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:33:18) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (19:34:23) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:44:43) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (19:44:43) CPU ID BFEBFBFF000406F1 already exists in the database.
+[06.12.2024] (19:45:02) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:45:18) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (19:46:36) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (19:46:36) CPU ID BFEBFBFF000406F1 already exists in the database.
+[06.12.2024] (19:46:49) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:46:57) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (19:48:00) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:48:30) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (19:55:34) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (19:55:34) CPU ID BFEBFBFF000406F1 already exists in the database.
+[06.12.2024] (19:55:54) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:55:57) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (19:57:04) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:58:39) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (19:58:39) CPU ID BFEBFBFF000406F1 already exists in the database.
+[06.12.2024] (19:58:59) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (19:59:16) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (20:00:32) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (20:06:04) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (20:06:04) CPU ID BFEBFBFF000406F1 already exists in the database.
+[06.12.2024] (20:06:24) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (20:06:30) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (20:07:36) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (20:07:54) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (20:07:56) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (20:26:13) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (20:26:13) CPU ID BFEBFBFF000406F1 already exists in the database.
+[06.12.2024] (20:26:33) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (20:26:44) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (20:26:46) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (20:27:53) AidenFox successfully authorized from 109.252.2.131
+[06.12.2024] (21:37:18) Updater 95.24.151.232 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (21:37:18) CPU ID BFEBFBFF000806D1 already exists in the database.
+[06.12.2024] (21:37:38) Fridrih successfully authorized from 95.24.151.232
+[06.12.2024] (21:37:43) 95.24.151.232 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (21:40:02) **JoinServer constructor called**
+[06.12.2024] (21:40:02) Database connection established
+[06.12.2024] (21:40:02) Validating session for userMd5: <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[06.12.2024] (21:40:02) Session validated successfully
+[06.12.2024] (21:40:02) Updating session for userMd5: <b>4f7373a8dbccca0f6827ec3040870fda</b>
+[06.12.2024] (22:05:02) Fridrih successfully authorized from 95.24.151.232
+[06.12.2024] (22:55:39) Updater 95.220.58.102 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (22:55:39) CPU ID BFEBFBFF000906EA already exists in the database.
+[06.12.2024] (22:56:02) Simpozium successfully authorized from 95.220.58.102
+[06.12.2024] (22:56:13) 95.220.58.102 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (23:00:38) Updater 95.220.58.102 with version '1.2.2-Impeller' requests an update information
+[06.12.2024] (23:00:38) CPU ID BFEBFBFF000906EA already exists in the database.
+[06.12.2024] (23:00:53) Simpozium successfully authorized from 95.220.58.102
+[06.12.2024] (23:01:15) Simpozium successfully authorized from 95.220.58.102
+[06.12.2024] (23:01:28) 95.220.58.102 requests 'Amber 1.16.5-Forge' files
+[06.12.2024] (23:03:05) **JoinServer constructor called**
+[06.12.2024] (23:03:05) Database connection established
+[06.12.2024] (23:03:05) Validating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[06.12.2024] (23:03:05) Session validated successfully
+[06.12.2024] (23:03:05) Updating session for userMd5: <b>0f89c8871cde75cf29f6390bf8b39af3</b>
+[06.12.2024] (23:48:36) Simpozium successfully authorized from 95.220.58.102
+[07.12.2024] (13:46:12) **JoinServer constructor called**
+[07.12.2024] (13:46:12) Database connection established
+[07.12.2024] (13:46:12) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[07.12.2024] (13:46:12) Session validated successfully
+[07.12.2024] (13:46:12) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[07.12.2024] (14:26:09) **JoinServer constructor called**
+[07.12.2024] (14:26:09) Database connection established
+[07.12.2024] (14:26:09) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[07.12.2024] (14:26:09) Session validated successfully
+[07.12.2024] (14:26:09) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[07.12.2024] (15:13:44) **JoinServer constructor called**
+[07.12.2024] (15:13:44) Database connection established
+[07.12.2024] (15:13:44) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[07.12.2024] (15:13:44) Session validated successfully
+[07.12.2024] (15:13:44) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[07.12.2024] (15:16:45) Fennec_Fesya successfully authorized from 5.228.113.210
+[07.12.2024] (15:16:59) Updater 5.228.113.210 with version '1.2.2-Impeller' requests an update information
+[07.12.2024] (15:16:59) CPU ID BFEBFBFF000806C1 already exists in the database.
+[07.12.2024] (15:17:22) Fennec_Fesya successfully authorized from 5.228.113.210
+[07.12.2024] (15:17:28) 5.228.113.210 requests 'Amber 1.16.5-Forge' files
+[07.12.2024] (15:23:19) **JoinServer constructor called**
+[07.12.2024] (15:23:19) Database connection established
+[07.12.2024] (15:23:19) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[07.12.2024] (15:23:19) Session validated successfully
+[07.12.2024] (15:23:19) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[07.12.2024] (15:45:46) **JoinServer constructor called**
+[07.12.2024] (15:45:46) Database connection established
+[07.12.2024] (15:45:46) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[07.12.2024] (15:45:46) Session validated successfully
+[07.12.2024] (15:45:46) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[07.12.2024] (16:20:46) **JoinServer constructor called**
+[07.12.2024] (16:20:46) Database connection established
+[07.12.2024] (16:20:46) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[07.12.2024] (16:20:46) Session validated successfully
+[07.12.2024] (16:20:46) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[07.12.2024] (16:31:44) **JoinServer constructor called**
+[07.12.2024] (16:31:44) Database connection established
+[07.12.2024] (16:31:44) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[07.12.2024] (16:31:44) Session validated successfully
+[07.12.2024] (16:31:44) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[07.12.2024] (16:43:38) **JoinServer constructor called**
+[07.12.2024] (16:43:38) Database connection established
+[07.12.2024] (16:43:38) Validating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[07.12.2024] (16:43:38) Session validated successfully
+[07.12.2024] (16:43:38) Updating session for userMd5: <b>ec1a84029a5eedc238f0d554ab31c3d1</b>
+[07.12.2024] (17:52:06) Fennec_Fesya successfully authorized from 5.228.113.210
+[07.12.2024] (20:59:28) Checking a password 'undefined'
+[07.12.2024] (20:59:32) Checking a password 'T1SbGARPZya3CLUBRW2d'
+[07.12.2024] (20:59:32) Checking a password 'CHPN1feroMg7ZiPwnHYc'
+[07.12.2024] (20:59:32) Checking a password 'jOospmoHwVMFCYYMBcYZOyxkVt'
+[07.12.2024] (20:59:33) Checking a password 'fZvqUSz-Rc7cVM-3kxGAl0pbE'
+[07.12.2024] (20:59:33) Checking a password '_1Eav4HWwpYjrOOJNMjSGMDpvqC'
+[07.12.2024] (20:59:33) Checking a password '0eat-qX-6aedVxXu3Mw8kVS'
+[07.12.2024] (20:59:34) Checking a password 'xMjjTPe_rbrzJa7prAGp1n'
+[07.12.2024] (20:59:34) Checking a password 'RnXl0uTfp7UAa6IknSG'
+[07.12.2024] (20:59:35) Checking a password 'uM4oo0ewOvqgQf6Gj1gbAcQ8'
+[07.12.2024] (20:59:35) Checking a password 'NnMtrWUJTFR4Y8ihCr'
+[07.12.2024] (20:59:36) Checking a password 'K3Wobf2DfvQEUE1UR2kKP1B4'
+[07.12.2024] (20:59:36) Checking a password 'qzmk85cFZnekbvc2'
+[07.12.2024] (20:59:37) Checking a password 'HcFa2CAqsNcQFPJElcglE'
+[07.12.2024] (20:59:38) Checking a password 't5TbiVOH4HZPv66myW5xhWTw'
+[07.12.2024] (21:13:36) Updater 95.24.151.232 with version '1.2.2-Impeller' requests an update information
+[07.12.2024] (21:13:36) CPU ID BFEBFBFF000806D1 already exists in the database.
+[07.12.2024] (21:13:51) Fridrih successfully authorized from 95.24.151.232
+[07.12.2024] (21:13:57) 95.24.151.232 requests 'Amber 1.16.5-Forge' files
+[07.12.2024] (21:17:36) Fridrih successfully authorized from 95.24.151.232
+[07.12.2024] (22:05:32) Checking a password 'undefined'
+[07.12.2024] (22:05:49) Checking a password 'undefined'
+[07.12.2024] (22:05:51) Checking a password 'undefined'
+[07.12.2024] (22:06:19) Checking a password 'undefined'
+[07.12.2024] (22:06:34) The_Ferretz successfully authorized from 5.228.112.167
+[07.12.2024] (22:09:07) Checking a password 'U'
+[07.12.2024] (22:09:08) Checking a password 'U'
+[07.12.2024] (22:09:09) Checking a password 'Uk'
+[07.12.2024] (22:09:09) Checking a password 'Uki'
+[07.12.2024] (22:09:18) Checking a password 'Uk'
+[07.12.2024] (22:09:18) Checking a password 'U'
+[07.12.2024] (22:09:19) Checking a password 'Ul'
+[07.12.2024] (22:09:20) Checking a password 'Uli'
+[07.12.2024] (22:09:24) Checking a password 'Ulia'
+[07.12.2024] (22:09:24) Checking a password 'Ulian'
+[07.12.2024] (22:09:24) Checking a password 'Uliank'
+[07.12.2024] (22:09:26) Checking a password 'Uliank_'
+[07.12.2024] (22:09:26) Checking a password 'Uliank_'
+[07.12.2024] (22:09:27) Checking a password 'Uliank_Y'
+[07.12.2024] (22:09:27) Checking a password 'Uliank_Y'
+[07.12.2024] (22:09:27) Checking a password 'Uliank_Ya'
+[07.12.2024] (22:09:28) Checking a password 'Uliank_Yar'
+[07.12.2024] (22:09:28) Checking a password 'Uliank_Yarr'
+[07.12.2024] (22:09:28) Checking a password 'Uliank_Yarra'
+[07.12.2024] (22:09:29) Checking a password 'Uliank_Yarra'
+[07.12.2024] (22:09:30) Checking a password 'Uliank_Yarra5'
+[07.12.2024] (22:09:30) Checking a password 'Uliank_Yarra50'
+[07.12.2024] (22:09:31) Checking a password 'Uliank_Yarra502'
+[07.12.2024] (22:09:31) Checking a password 'Uliank_Yarra5025'
+[07.12.2024] (22:09:35) Checking a password 'Ulianka_Yarra5025'
+[07.12.2024] (22:09:48) Checking a password 'Ulianka_Yarra5025A'
+[07.12.2024] (22:09:48) Checking a password 'Ulianka_Yarra5025A'
+[07.12.2024] (22:09:48) Checking a password 'Ulianka_Yarra5025Al'
+[07.12.2024] (22:09:59) Checking a password 'Ulianka5025Al'
+[07.12.2024] (22:10:03) Checking a password 'Ulianka5025Aly'
+[07.12.2024] (22:10:03) Checking a password 'Ulianka5025AlyA'
+[07.12.2024] (22:10:03) Checking a password 'Ulianka5025AlyA'
+[07.12.2024] (22:10:04) Checking a password 'Ulianka5025AlyAr'
+[07.12.2024] (22:10:04) Checking a password 'Ulianka5025AlyArr'
+[07.12.2024] (22:10:04) Checking a password 'Ulianka5025AlyArra'
+[07.12.2024] (22:10:06) Checking a password 'Ulianka5025AlyArr'
+[07.12.2024] (22:10:06) Checking a password 'Ulianka5025AlyAr'
+[07.12.2024] (22:10:06) Checking a password 'Ulianka5025AlyA'
+[07.12.2024] (22:10:06) Checking a password 'Ulianka5025Aly'
+[07.12.2024] (22:10:06) Checking a password 'Ulianka5025Al'
+[07.12.2024] (22:10:07) Checking a password 'Ulianka5025A'
+[07.12.2024] (22:10:08) Checking a password 'Ulianka5025Al'
+[07.12.2024] (22:10:09) Checking a password 'Ulianka5025AlY'
+[07.12.2024] (22:10:09) Checking a password 'Ulianka5025AlY'
+[07.12.2024] (22:10:10) Checking a password 'Ulianka5025AlYa'
+[07.12.2024] (22:10:10) Checking a password 'Ulianka5025AlYar'
+[07.12.2024] (22:10:10) Checking a password 'Ulianka5025AlYarr'
+[07.12.2024] (22:10:10) Checking a password 'Ulianka5025AlYarra'
+[07.12.2024] (22:10:14) Checking a password 'Ulianka5025AlYarra1'
+[07.12.2024] (22:10:15) Checking a password 'Ulianka5025AlYarra13'
+[07.12.2024] (22:10:16) Checking a password 'Ulianka5025AlYarra1'
+[07.12.2024] (22:10:17) Checking a password 'Ulianka5025AlYarra'
+[07.12.2024] (22:10:39) Checking a password 'Ulianka5025AlYarra'
+[07.12.2024] (22:10:40) Checking a password 'Ulianka5025AlYarra'
+[07.12.2024] (22:12:03) Yarra failed authorization with password Ulianka5025AlYarra
+[07.12.2024] (22:13:48) Checking a password 'undefined'
+[07.12.2024] (22:14:38) Checking a password 'Ulianka5025AlYarra'
+[07.12.2024] (22:15:18) Trying to register user 'Yarra'
+[07.12.2024] (22:15:18) User has completed registration 'Yarra'
+[07.12.2024] (22:16:27) Updater 176.111.79.98 with version '1.0.0' requests an update information
+[07.12.2024] (22:18:45) Updater 5.228.112.167 with version '1.2.2-Impeller' requests an update information
+[07.12.2024] (22:19:06) The_Ferretz successfully authorized from 5.228.112.167
+[07.12.2024] (22:27:43) Updater 176.111.79.98 with version '1.2.2-Impeller' requests an update information
+[07.12.2024] (22:32:13) Yarra successfully authorized from 176.111.79.98
+[07.12.2024] (22:39:55) Logged user 'Yarra' uploading skin for Yarra
+[07.12.2024] (22:40:11) Logged user 'Yarra' uploading skin for Yarra
+[07.12.2024] (22:40:26) Logged user 'Yarra' uploading skin for Yarra
+[08.12.2024] (09:43:07) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[08.12.2024] (09:43:07) CPU ID BFEBFBFF000406F1 already exists in the database.
+[08.12.2024] (09:43:22) AidenFox successfully authorized from 109.252.2.131
+[08.12.2024] (09:43:26) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[08.12.2024] (09:50:56) AidenFox successfully authorized from 109.252.2.131
+[08.12.2024] (09:54:18) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[08.12.2024] (09:54:18) CPU ID BFEBFBFF000406F1 already exists in the database.
+[08.12.2024] (09:54:33) AidenFox successfully authorized from 109.252.2.131
+[08.12.2024] (09:54:48) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[08.12.2024] (09:55:54) AidenFox successfully authorized from 109.252.2.131
+[08.12.2024] (09:58:04) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[08.12.2024] (09:58:04) CPU ID BFEBFBFF000406F1 already exists in the database.
+[08.12.2024] (09:58:18) AidenFox successfully authorized from 109.252.2.131
+[08.12.2024] (09:58:23) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[08.12.2024] (10:04:55) AidenFox successfully authorized from 109.252.2.131
+[08.12.2024] (10:05:08) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[08.12.2024] (10:05:08) CPU ID BFEBFBFF000406F1 already exists in the database.
+[08.12.2024] (10:05:23) AidenFox successfully authorized from 109.252.2.131
+[08.12.2024] (10:05:31) AidenFox successfully authorized from 109.252.2.131
+[08.12.2024] (10:05:35) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[08.12.2024] (10:10:59) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[08.12.2024] (10:10:59) CPU ID BFEBFBFF000406F1 already exists in the database.
+[08.12.2024] (10:11:14) AidenFox successfully authorized from 109.252.2.131
+[08.12.2024] (10:11:25) 109.252.2.131 requests 'Amber 1.16.5-Forge' files
+[08.12.2024] (10:13:49) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[08.12.2024] (10:13:49) CPU ID BFEBFBFF000406F1 already exists in the database.
+[08.12.2024] (10:14:04) AidenFox successfully authorized from 109.252.2.131
+[08.12.2024] (10:34:47) AidenFox successfully authorized from 109.252.2.131
+[08.12.2024] (10:55:59) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[08.12.2024] (10:55:59) CPU ID BFEBFBFF000406F1 already exists in the database.
+[08.12.2024] (10:56:14) AidenFox successfully authorized from 109.252.2.131
+[08.12.2024] (10:56:23) 109.252.2.131 requests 'Hi-Tech 1.7.10-Forge' files
+[08.12.2024] (11:10:19) AidenFox successfully authorized from 109.252.2.131
+[08.12.2024] (11:11:19) Updater 109.252.2.131 with version '1.2.2-Impeller' requests an update information
+[08.12.2024] (11:11:19) CPU ID BFEBFBFF000406F1 already exists in the database.
+[08.12.2024] (11:11:34) AidenFox successfully authorized from 109.252.2.131
+[08.12.2024] (11:11:43) 109.252.2.131 requests 'FurSpace 1.12.2-Forge' files

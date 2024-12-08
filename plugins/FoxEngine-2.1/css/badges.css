@@ -1,3 +1,37 @@
+.badge {
+    background: #afafaf;
+    border-radius: 10px;
+    color: #fff;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1!important;
+    padding: 4px 8px;
+    text-decoration: none;
+    text-shadow: none;
+    vertical-align: 1px
+}
+
+.badge.badge-success {
+    background-color: #6db201
+}
+
+.badge.badge-danger {
+    background-color: #b94a48
+}
+
+.badge.badge-warning {
+    background-color: #ed7914
+}
+
+.badge.badge-info {
+    background-color: #39a0ca
+}
+
+.badge.badge-primary {
+    background-color: #8b3bc9
+}
+
 .profileBadges {
     -webkit-box-sizing: content-box;
     box-sizing: content-box;

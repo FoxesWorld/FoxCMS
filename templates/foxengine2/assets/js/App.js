@@ -109,8 +109,13 @@ setInterval(() => {
         }, 200);
         return false;
     });
-
 });
+
+setTimeout(() => {
+		document.querySelector('.option_select').addEventListener('click', function() {
+			this.classList.toggle('open');
+		});
+}, 1000);
 }());
 
 

@@ -18,6 +18,7 @@
 	  <meta property="og:image" content="{$tplDir}/img/assets/logo.png" />
 	  <!-- <script src="//code.jivo.ru/widget/X47ofXrus3" async></script> -->
 	  <script src="https://www.google.com/recaptcha/api.js?hl=ru_RU" async defer></script>
+	  <script src="/templates/foxengine2/assets/js/UserTable.js"></script>
       <link href="{$tplDir}/assets/css/style.css" rel="stylesheet">
 	  <link rel="shortcut icon" href="/favicon.ico">
       {$builtInJS}

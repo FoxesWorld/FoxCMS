@@ -219,9 +219,17 @@
 							die($path.$resizedName);
 						break;
 						
+						case "startedPlaying":
+						init::classUtil('PlayTimeWidget', "1.0.0");
+						$playTimeWidget = new GameServerManager($this->db);
+							$playTimeWidget->startGame(@RequestHandler::$REQUEST["login"] ,@RequestHandler::$REQUEST["serverName"], 0);
+						break;
+						
 						case "donePlaying":
+						init::classUtil('PlayTimeWidget', "1.0.0");
+							$playTimeWidget = new GameServerManager($this->db);
 							$timeHours = @RequestHandler::$REQUEST["playTime"] / 3600;
-							$this->recordPlayTime(@RequestHandler::$REQUEST["login"] ,@RequestHandler::$REQUEST["serverName"], $timeHours);
+							$playTimeWidget->finishGame(@RequestHandler::$REQUEST["login"] ,@RequestHandler::$REQUEST["serverName"], $timeHours);
 						break;
 						
 						default:
@@ -323,57 +331,6 @@
 				}
 			}
 		}
-		
-		private function getOnlineData($login) {
-			$sql = "SELECT serversOnline FROM users WHERE login = :login";
-			$stmt = $this->db->prepare($sql);
-			$stmt->execute([':login' => $login]);
-			
-			return $stmt->fetch(PDO::FETCH_ASSOC);
-		}
-
-		private function checkServerExists($login, $serverName) {
-			$data = $this->getOnlineData($login);
-			if ($data) {
-				$serversOnline = json_decode($data['serversOnline'], true);
-				foreach ($serversOnline as $entry) {
-					if ($entry['server'] == $serverName) {
-						return true;
-					}
-				}
-			}
-			return false;
-		}
-
-		private function recordPlayTime($login, $serverName, $playTimeHours) {
-			try {
-
-				$data = $this->getOnlineData($login);
-				$currentPlayTimeData = $data ? json_decode($data['serversOnline'], true) : [];
-
-				if ($this->checkServerExists($login, $serverName)) {
-					foreach ($currentPlayTimeData as &$entry) {
-						if ($entry['server'] == $serverName) {
-							$entry['time'] += $playTimeHours;
-							break;
-						}
-					}
-				} else {
-					$currentPlayTimeData[] = [
-						'server' => $serverName,
-						'time' => $playTimeHours
-					];
-				}
-
-				$newPlayTimeData = json_encode($currentPlayTimeData);
-				
-			   $sql = "UPDATE users SET serversOnline = '".$newPlayTimeData."' WHERE login = '".$login."'";
-			   $this->db->run($sql);
-			} catch (Exception $e) {
-				throw $e;
-			}
-		}
-
 
 			
 		private function handleDownloadLatest(): void {
@@ -451,10 +408,8 @@ private function checkCpu($cpuId): bool {
     $stmt->execute();
     
     $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-    return ($stmt->rowCount() == 1) ? true : false;
+    return ($result['count'] > 0);
 }
-
-
 
 
 		private function selectLatest($files) {

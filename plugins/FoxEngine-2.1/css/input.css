@@ -331,16 +331,30 @@ button img {
 	max-width: 268px;
 }
 
-.option_select:after {
-	content: "\f078";
-	position: absolute;
-	top: 5px;
-    right: 10px;
-	pointer-events: none;
-	font-family: Font Awesome\ 6 Pro;
-	font-weight: 600;
-    border-bottom: 0;
+.option_select {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
 }
+
+.option_select:after {
+    content: "\f078"; /* Шеврон вниз */
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    pointer-events: none;
+    font-family: Font Awesome\ 6 Pro;
+    font-weight: 600;
+    border-bottom: 0;
+    transition: transform 0.3s ease; /* Плавное изменение */
+}
+
+/* Когда .option_select имеет класс 'open', изменяем шеврон */
+.option_select.open:after {
+    content: "\f077"; /* Шеврон вверх */
+    transform: rotate(180deg); /* Поворот шеврона */
+}
+
 
 .option_select_label {
     text-transform: uppercase;
@@ -358,7 +372,7 @@ button img {
 
 .option_select_text:focus~.option_select_label,
 .option_select_text:valid~.option_select_label {
-	top: 3px;
+	top: 3;
 	left: 14px;
 	transition: .2s ease all;
 	font-size: 9px;

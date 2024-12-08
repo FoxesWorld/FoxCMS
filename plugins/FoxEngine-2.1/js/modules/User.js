@@ -174,14 +174,37 @@ export class User {
         }
     }
 
-    async getPlayTimeWidget(serversOnline) {
-        try {
-            const playtimeWidgetHtml = PlaytimeWidgetGenerator.generatePlaytimeWidget(JSON.parse(serversOnline));
-            $('.playtime-widget-container').html(playtimeWidgetHtml);
-        } catch (error) {
-            console.error('Error getting playtime widget:', error);
+async getPlayTimeWidget(serversOnline) {
+    try {
+        const serversData = JSON.parse(serversOnline);
+
+        if (!serversData || !Array.isArray(serversData.servers) || serversData.servers.length === 0) {
+            console.warn('No server data available.');
+            $('.playtime-widget-container').html(`
+			<div class="playtime-widget">
+	<button type="button" class="widget-header" data-bs-toggle="collapse" data-bs-target=".playtime-widget-collapse" disabled="">
+					<span class="text-muted">Нет данных о серверах</span>
+			</button>
+
+	
+	<div class="playtime-widget-collapse collapse show">
+		<div class="widget-progress">
+					</div>
+	</div>
+</div>
+`);
+			return;
         }
+
+        const playtimeWidgetHtml = PlaytimeWidgetGenerator.generatePlaytimeWidget(serversData.servers);
+
+        $('.playtime-widget-container').html(playtimeWidgetHtml);
+    } catch (error) {
+        console.error('Error getting playtime widget:', error);
+        $('.playtime-widget-container').html('<p>Error loading playtime widget</p>');
     }
+}
+
 
     async showUserProfile(userDisplay) {
         try {
@@ -356,6 +379,8 @@ class PlaytimeWidgetGenerator {
                 return "#3498DB";
             case "Amber":
                 return "#c17d22";
+			case "FurSpace":
+				return "#37bbd0";
             default:
                 return "#AAAAAA";
         }

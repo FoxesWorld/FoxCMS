@@ -16,28 +16,38 @@
 			}
 		}
 		
-		protected function assignJs(){
-			global $jsCfg, $config;
-			$userPermissions = init::$permissions;
-			$builtInJS = '<script>';
-				$replaceArray = array_merge($config['frontendSettings'], init::$usrArray);
-				foreach($replaceArray as $key => $value){
-					$replaceFields[] = '"'.$key.'"';
-					$data;
-					if(is_array(json_decode($value))){
-						$data = $value;
-					} else {
-						$data = '"'.$value.'"';
-					}
-					$jsData[] = '"'.$key.'":' .$data;	
-				}
-				for($i=0; $i<count($userPermissions); $i++){
-					$jsData[] = $userPermissions[$i];
-				}
+protected function assignJs() {
+    global $jsCfg, $config;
+    $userPermissions = init::$permissions;
+    $builtInJS = '<script>';
+    $replaceArray = array_merge($config['frontendSettings'], init::$usrArray);
 
-				$builtInJS .= "const replaceData = {\n".implode(",\n", $jsData).'};'."\n";
-				$builtInJS .= "const userFields = [".implode(",\n", $replaceFields).'];'."\n";
-			$builtInJS .= '</script>';
-			return $builtInJS;
-		}
+    $jsData = [];
+    $replaceFields = [];
+
+    foreach ($replaceArray as $key => $value) {
+        $replaceFields[] = '"' . $key . '"';
+
+        $decodedValue = json_decode($value, true);
+
+        if (is_array($decodedValue)) {
+            $data = json_encode($decodedValue);
+        } else {
+            $data = '"' . addslashes($value) . '"';
+        }
+
+        $jsData[] = '"' . $key . '": ' . $data;
+    }
+
+    foreach ($userPermissions as $permission) {
+        $jsData[] = $permission;
+    }
+
+    $builtInJS .= "const replaceData = {\n" . implode(",\n", $jsData) . "\n};\n";
+    $builtInJS .= "const userFields = [" . implode(",\n", $replaceFields) . "];\n";
+    $builtInJS .= '</script>';
+
+    return $builtInJS;
+}
+
 	}

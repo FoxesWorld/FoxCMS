@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-12-05 12:34:45
+/* Smarty version 4.0.4, created on 2024-12-08 11:41:05
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_675173b56e4435_13898482',
+  'unifunc' => 'content_67555ba1b9cb85_73440930',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1732659723,
+      1 => 1733646995,
       2 => 'file',
     ),
   ),
@@ -26,7 +26,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_675173b56e4435_13898482 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67555ba1b9cb85_73440930 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -57,6 +57,9 @@ function content_675173b56e4435_13898482 (Smarty_Internal_Template $_smarty_tpl)
 > -->
 	  <?php echo '<script'; ?>
  src="https://www.google.com/recaptcha/api.js?hl=ru_RU" async defer><?php echo '</script'; ?>
+>
+	  <?php echo '<script'; ?>
+ src="/templates/foxengine2/assets/js/UserTable.js"><?php echo '</script'; ?>
 >
       <link href="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
 /assets/css/style.css" rel="stylesheet">

@@ -126,8 +126,8 @@ class AuthManager extends Module {
         return $uuid;
     }
     
-    protected function updateSession() : void {
-        $loadUserInfo = new LoadUserInfo(init::$usrArray['login'], $this->db);
+    public static function updateSession($db) : void {
+        $loadUserInfo = new LoadUserInfo(init::$usrArray['login'], $db);
         $userData = $loadUserInfo->userInfoArray();
         $sessionManager = new SessionManager($userData);
     }
