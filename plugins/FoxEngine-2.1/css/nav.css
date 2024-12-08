@@ -61,6 +61,26 @@
     background: #cac2b5;
 }
 
+header li.nav-sep {
+    background: hsla(0,0%,100%,.3);
+    margin: 0 6px;
+    width: 1px
+}
+
+.active-indicator {
+    background: #1abc9c;
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 7px;
+    overflow: hidden;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    width: 7px;
+    z-index: 2
+}
+
 
 .dropdown-item {
     display: contents;

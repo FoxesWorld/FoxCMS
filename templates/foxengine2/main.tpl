@@ -55,8 +55,8 @@
             backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/autumn.png)';
         } else {
             backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/winter.jpg)';
-			foxEngine.snow.loadSnow();
-			$(".container").append('<div class="moderator-button optionButt" onclick="foxEngine.snow.switchSnow();" style="width: 32px; height: 32px;"><i class="fa-light fa-snowflake"></i></div>');
+			foxEngine.snow.init();
+			//$(".container").append('<div class="moderator-button optionButt" onclick="foxEngine.snow.switchSnow();" style="width: 32px; height: 32px;"><i class="fa-light fa-snowflake"></i></div>');
         }
 
         body.style.backgroundImage = backgroundImage;
@@ -66,7 +66,7 @@
 	async function myAction() {
 		const template = await foxEngine.loadTemplate(foxEngine.elementsDir + 'discordFeelingBad.tpl', true);
 		let data = await foxEngine.entryReplacer.replaceText(template, "");
-		foxEngine.modalApp.showModalApp(900, "О нет, конец эпохи!", data, () => {
+		foxEngine.modalApp.showModalApp('auto', "О нет, конец эпохи!", data, () => {
 			foxEngine.cookieManager.setCookie('modalShown', 'true', 7);
 		});
 	}

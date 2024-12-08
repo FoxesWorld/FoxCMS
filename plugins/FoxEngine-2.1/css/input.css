@@ -534,9 +534,27 @@ header a:not(.selectedPage, .tip-over, .badge, .userBlock):before {
 }
 
 a:not(.selectedPage):hover {
-    color: #ff7e54;
+    color: #dc6842;
     transition-duration: 0.5s;
 	cursor: pointer;
+}
+.userBlock a:hover {
+	background-color: hsla(0,0%,100%,.2)
+}
+
+.userBlock a {
+	align-items: center;
+    border-radius: 5px;
+    color: #fff;
+    display: flex;
+    font-size: 14px;
+    font-weight: 600;
+    height: 36px;
+    justify-content: center;
+    padding: 0 8px;
+    text-decoration: none;
+    text-shadow: var(--header-text-shadow);
+    transition: background .3s ease
 }
 
 .dropdown-item > a:not(.selectedPage):hover {

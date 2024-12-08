@@ -225,51 +225,63 @@ class UserTable {
         }
     }
 
-createLastLoginCell(user, selectedServer) {
-    const lastLoginCell = document.createElement('td');
+    createLastLoginCell(user, selectedServer) {
+        const lastLoginCell = document.createElement('td');
 
-    // Парсим строку JSON из поля user.serversOnline, чтобы получить список серверов
-    let servers = JSON.parse(user.serversOnline).servers;
+        // Парсим строку JSON из поля user.serversOnline, чтобы получить список серверов
+        let servers = JSON.parse(user.serversOnline).servers;
 
-    // Проверяем, что selectedServer передается корректно
-    if (!selectedServer) {
-        // Если сервер не выбран, то показываем дату последней игры на последнем сервере
-        const lastServer = servers[servers.length - 1];  // Получаем последний сервер из списка
-        if (lastServer && lastServer.lastPlayed) {
-            const lastLoginDate = new Date(lastServer.lastPlayed * 1000); // Преобразуем в миллисекунды
-            lastLoginCell.textContent = lastLoginDate.toLocaleDateString('ru-RU', {
+        // Проверяем, что selectedServer передается корректно
+        if (!selectedServer) {
+            // Если сервер не выбран, то показываем дату последней игры на последнем сервере
+            const lastServer = servers[servers.length - 1];  // Получаем последний сервер из списка
+            if (lastServer && lastServer.lastPlayed) {
+                const lastLoginDate = new Date(lastServer.lastPlayed * 1000); // Преобразуем в миллисекунды
+                lastLoginCell.textContent = this.formatLastLoginDate(lastLoginDate);
+            } else {
+                lastLoginCell.textContent = 'Нет данных';
+            }
+            return lastLoginCell;
+        }
+
+        // Если сервер выбран, ищем соответствующий сервер в списке
+        const server = servers.find(s => s.server === selectedServer);
+        // Если сервер найден и поле lastPlayed существует
+        if (server && server.lastPlayed) {
+            const lastLoginDate = new Date(server.lastPlayed * 1000); // Преобразуем в миллисекунды
+            lastLoginCell.textContent = this.formatLastLoginDate(lastLoginDate);
+        } else {
+            lastLoginCell.textContent = 'Нет данных';
+        }
+
+        return lastLoginCell;
+    }
+
+    formatLastLoginDate(date) {
+        const now = new Date();
+        const diffTime = now - date;
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        const timeString = date.toLocaleTimeString('ru-RU', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+        if (diffDays === 0) {
+            return `Сегодня в ${timeString}`;
+        } else if (diffDays === 1) {
+            return `Вчера в ${timeString}`;
+        } else if (diffDays === 2) {
+            return `Позавчера в ${timeString}`;
+        } else {
+            return date.toLocaleDateString('ru-RU', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit'
             });
-        } else {
-            lastLoginCell.textContent = 'Нет данных';
         }
-        return lastLoginCell;
     }
-
-    // Если сервер выбран, ищем соответствующий сервер в списке
-    const server = servers.find(s => s.server === selectedServer);
-    // Если сервер найден и поле lastPlayed существует
-    if (server && server.lastPlayed) {
-        const lastLoginDate = new Date(server.lastPlayed * 1000); // Преобразуем в миллисекунды
-        lastLoginCell.textContent = lastLoginDate.toLocaleDateString('ru-RU', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-    } else {
-        lastLoginCell.textContent = 'Нет данных';
-    }
-
-    return lastLoginCell;
-}
-
-
 
 
     declineWord(number, words) {
@@ -292,7 +304,3 @@ createLastLoginCell(user, selectedServer) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const userTable = new UserTable('user-table');
-    userTable.fetchAndDisplayUsers();
-});

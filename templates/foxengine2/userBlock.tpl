@@ -50,10 +50,10 @@
     <div class="avatar">
         <img src="{$profilePhoto}" alt="User's Avatar" />
     </div>
-    <div class="user-info">
+    <a class="user-info">
         {$login}
         <span class="chevron"><i class="fa-solid fa-caret-down"></i></span>
-    </div>
+    </a>
 </button>
 
 <script>

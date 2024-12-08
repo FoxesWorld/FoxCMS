@@ -963,6 +963,38 @@ ul.list-inline {
 	box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
+.userBlock .regular-btn {
+    align-items: center;
+    border-radius: 5px;
+    color: #fff;
+    display: flex;
+    font-size: 14px;
+    font-weight: 600;
+    height: 36px;
+    justify-content: center;
+    padding: 0 8px;
+    text-decoration: none;
+    text-shadow: var(--header-text-shadow);
+    transition: background .3s ease
+}
+
+.userBlock .regular-btn:hover {
+    background-color: hsla(0,0%,100%,.2)
+}
+
+.userBlock .regular-btn:active {
+    background-color: rgba(0,0,0,.1);
+    transition: none
+}
+
+.userBlock .regular-btn.regular-btn-icon {
+    font-size: 24px;
+    padding: 0;
+    position: relative;
+    text-shadow: 0 1px 1px rgba(0,0,0,.1);
+    width: 36px
+}
+
 /*--------------------------------------------------------------
 # Sections General
 --------------------------------------------------------------*/
