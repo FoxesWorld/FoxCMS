@@ -8,6 +8,7 @@ class EditServer {
     private $allowedColumns = [
         'serverVersion',
 		'enabled',
+		'checkLib',
 		'serverGroups',
         'host',
         'port',

@@ -47,4 +47,35 @@ class Logger {
         }
         fclose($fp);
     }
+	
+	    public function log($level, $message) {
+        $timestamp = date($this->logDateFormat);
+        $formattedMessage = "{$timestamp} [{$level}] {$message}";
+
+        try {
+            $fp = fopen($this->file, "a+");
+            if ($fp) {
+                fwrite($fp, $formattedMessage . PHP_EOL);
+            } else {
+                $this->error = "Error writing to log file: {$this->file}";
+                error_log($this->error);
+            }
+            fclose($fp);
+        } catch (Exception $e) {
+            error_log('{"message": "Error writing to log file: ' . $e->getMessage() . '"}');
+        }
+    }
+
+    public function logInfo($message) {
+        $this->log('INFO', $message);
+    }
+
+    public function logWarn($message) {
+        $this->log('WARN', $message);
+    }
+
+    public function logError($message) {
+        $this->log('ERROR', $message);
+    }
+
 }

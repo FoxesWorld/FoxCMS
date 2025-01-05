@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-12-08 11:39:50
+/* Smarty version 4.0.4, created on 2025-01-05 18:03:32
   from '/var/www/FoxCMS/templates/foxengine2/userBlock.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_67555b569df884_58404280',
+  'unifunc' => 'content_677a9f448a8bb5_27481674',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ac09135447c54bb47aa7016157f4b1ad8af62813' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/userBlock.tpl',
-      1 => 1733043977,
+      1 => 1733657176,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:balanceBox.tpl' => 1,
   ),
 ),false)) {
-function content_67555b569df884_58404280 (Smarty_Internal_Template $_smarty_tpl) {
+function content_677a9f448a8bb5_27481674 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- UserPane -->
 <div id="userPane" class="side-nav">
     <div class="menu-content">
@@ -81,11 +81,11 @@ function content_67555b569df884_58404280 (Smarty_Internal_Template $_smarty_tpl)
         <img src="<?php echo $_smarty_tpl->tpl_vars['profilePhoto']->value;?>
 " alt="User's Avatar" />
     </div>
-    <div class="user-info">
+    <a class="user-info">
         <?php echo $_smarty_tpl->tpl_vars['login']->value;?>
 
         <span class="chevron"><i class="fa-solid fa-caret-down"></i></span>
-    </div>
+    </a>
 </button>
 
 <?php echo '<script'; ?>

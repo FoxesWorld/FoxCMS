@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-12-08 11:41:05
+/* Smarty version 4.0.4, created on 2025-01-05 18:03:32
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_67555ba1b9cb85_73440930',
+  'unifunc' => 'content_677a9f448970b4_77793111',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1733646995,
+      1 => 1733656578,
       2 => 'file',
     ),
   ),
@@ -26,7 +26,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_67555ba1b9cb85_73440930 (Smarty_Internal_Template $_smarty_tpl) {
+function content_677a9f448970b4_77793111 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -106,8 +106,8 @@ function content_67555ba1b9cb85_73440930 (Smarty_Internal_Template $_smarty_tpl)
             backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/autumn.png)';
         } else {
             backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/winter.jpg)';
-			foxEngine.snow.loadSnow();
-			$(".container").append('<div class="moderator-button optionButt" onclick="foxEngine.snow.switchSnow();" style="width: 32px; height: 32px;"><i class="fa-light fa-snowflake"></i></div>');
+			foxEngine.snow.init();
+			//$(".container").append('<div class="moderator-button optionButt" onclick="foxEngine.snow.switchSnow();" style="width: 32px; height: 32px;"><i class="fa-light fa-snowflake"></i></div>');
         }
 
         body.style.backgroundImage = backgroundImage;
@@ -117,7 +117,7 @@ function content_67555ba1b9cb85_73440930 (Smarty_Internal_Template $_smarty_tpl)
 	async function myAction() {
 		const template = await foxEngine.loadTemplate(foxEngine.elementsDir + 'discordFeelingBad.tpl', true);
 		let data = await foxEngine.entryReplacer.replaceText(template, "");
-		foxEngine.modalApp.showModalApp(900, "О нет, конец эпохи!", data, () => {
+		foxEngine.modalApp.showModalApp('auto', "О нет, конец эпохи!", data, () => {
 			foxEngine.cookieManager.setCookie('modalShown', 'true', 7);
 		});
 	}

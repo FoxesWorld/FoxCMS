@@ -12,7 +12,7 @@
 				<div id="servers"></div>
 			</div>
 
-			<div class="card text-white mb-3">
+		<!--	<div class="card text-white mb-3">
 				<div class="cardTitle">
 					<img class="img-fluid" src="{$tplDir}/assets/icons/monitor.png" uk-img />
 					Голосуй
@@ -24,14 +24,14 @@
 				</div>
 				</h3>
 				
-		<!--<div class="right-block-content">
+		<div class="right-block-content">
             <div class="right-block-vote-items">
                     <a href="https://mcrate.su/rate/9012" target="_blank"><em>Голосуй за нас на <span>McRate</span></em> <i class="vote-item-ico1"></i></a>
                     <a href="https://topcraft.ru/servers/10656/" target="_blank"><em>Голосуй за нас на <span>TopCraft</span></em> <i class="vote-item-ico2"></i></a>
                     <a href="https://mctop.su/servers/6204/" target="_blank"><em>Голосуй за нас на <span>McTop</span></em> <i class="vote-item-ico3"></i></a>
             </div>
-   		 </div> -->
-			</div>
+   		 </div> 
+			</div>-->
 
 			<div class="card text-white mb-3">
 				 <div class="cardTitle">

@@ -1,0 +1,101 @@
+<useroption>
+{
+    "optionTitle": "Отключённая проверка библиотек",
+    "description": "Что значит отключённая проверка библиотек?",
+    "keywords": "Отключённая проверка библиотек, использование с невалидным хешем, проверка отключена",
+    "optionBlock": ".pages",
+    "optionPreText": "<img src='/templates/foxengine2/assets/icons/menu/icon_warning.png' />",
+    "optionGroup": [1, 4, 5],
+    "optionClass": "nav-item uk-animation-fade",
+    "type": "pageContent"
+}
+</useroption>
+
+<pageContent>
+<div class="library-info">
+    <section>
+        <h2>Что значит отключённая проверка библиотек? :warning:</h2>
+        <p>Отключённая проверка библиотек означает, что система позволяет использовать компоненты даже в случаях, когда их хеш не совпадает с официальным значением. Это полезно для упрощённой разработки, тестирования или в случаях, когда нет доступа к проверенным версиям библиотек.</p>
+    </section>
+
+    <section>
+        <h2>Какие риски это несёт? :exclamation:</h2>
+        <p>Использование библиотек с отключённой проверкой может привести к следующим рискам:</p>
+        <ul>
+            <li>Модиффикации и решения третих разработчиков</li>
+            <li>Качество кода может быть посредственным.</li>
+            <li>Отсутствие гарантии безопасности и стабильности.</li>
+        </ul>
+        <p><strong>Важно:</strong> Отключение проверки хеша рекомендуется только для использования устаревших и/или экспериментальных сборок</p>
+    </section>
+
+    <section>
+        <h2>Когда можно использовать отключённую проверку? :gear:</h2>
+        <p>Отключённая проверка может быть полезна в следующих случаях:</p>
+        <ul>
+            <li>Во время разработки, чтобы быстро протестировать экспериментальные библиотеки.</li>
+            <li>При использовании старых или модифицированных версий библиотек, которые больше не поддерживаются официально.</li>
+            <li>В ситуациях, когда проверка хеша не критична, а библиотека необходима для работы проекта.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Рекомендации :bulb:</h2>
+        <p>Если вы видите сообщение об отключенной проверке это не повод пугаться, это указано только для ознакомления и не повлияет на ваш игровой опыт, а только уведомляет
+			об устаревших версиях библиотек, которые уже не обновляются.
+		</p>
+    </section>
+</div>
+
+<style>
+.library-info {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.library-info section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #3a3a3a;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.library-info h2 {
+    color: #ff4444;
+    font-family: 'FSElliotPro-Heavy', sans-serif;
+    margin-bottom: 15px;
+}
+
+.library-info p {
+    line-height: 1.6;
+    color: #e0e0e0;
+    margin-bottom: 10px;
+}
+
+.library-info ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    color: #d1d1d1;
+}
+
+.library-info ul li {
+    margin-bottom: 8px;
+}
+
+.library-info ul li strong {
+    color: #ff4444;
+}
+
+pre {
+    background: #232323;
+    color: #ffcc00;
+    padding: 10px;
+    border-radius: 5px;
+    overflow: auto;
+}
+</style>
+</pageContent>

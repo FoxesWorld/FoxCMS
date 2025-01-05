@@ -15,6 +15,7 @@ export class EditServer {
 			{ "fieldName": 'port', "fieldType": 'number' },
 			{ "fieldName": 'ignoreDirs', "fieldType": 'tagify' },
 			{ "fieldName": 'enabled', "fieldType": 'checkbox' },
+			{ "fieldName": 'checkLib', "fieldType": 'checkbox' },
 			{ "fieldName": 'serverGroups', "fieldType": 'tagify' },
 			{ "fieldName": 'serverDescription', "fieldType": 'textarea' },
 			{ "fieldName": 'serverVersion', "fieldType": 'dropdown', "optionsArray": this.versions },

@@ -72,6 +72,7 @@ export class User {
 
     async parseUserLook(login) {
         try {
+			this.getUserData(login);
             this.userSkin.front = await this.getUserSkin(login, 'front');
             this.userSkin.back = await this.getUserSkin(login, 'back');
 			this.getPlayTimeWidget(this.userData['serversOnline']);
@@ -216,7 +217,7 @@ async getPlayTimeWidget(serversOnline) {
             
             this.foxEngine.foxesInputHandler.formInit(1000);
             setTimeout(() => {
-                //this.getPlayTimeWidget(this.userData['serversOnline']);
+                this.getPlayTimeWidget(this.userData['serversOnline']); //TEST
                 this.parseBadges(userDisplay);
             }, 600);
         } catch (error) {

@@ -5,60 +5,62 @@ export class Servers {
     }
 
     /* Servers parser */
-    async parseOnline() {
-        try {
-            // Load the template only once
-            const entryTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/serverEntry.tpl', true);
+async parseOnline() {
+    try {
+        // Загрузка шаблона для серверов
+        const entryTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/serverEntry.tpl', true);
 
-            let parsedJson = await foxEngine.sendPostAndGetAnswer({
-                sysRequest: 'parseMonitor'
-            }, "JSON");
+        let parsedJson = await foxEngine.sendPostAndGetAnswer({
+            sysRequest: 'parseMonitor'
+        }, "JSON");
 
-            if (parsedJson.servers.length > 0) {
-                let serversHtmlPromises = [];
-                for (const obj of parsedJson.servers) {
-                    let isOnline = obj.status === "online";
-                    let progressbarClass = isOnline ? 'progressbar-online' : 'progressbar-offline';
-                    let playersOnline = isOnline ? obj.playersOnline : 0;
-                    let playersMax = isOnline ? obj.playersMax : 0;
+        if (parsedJson.servers.length > 0) {
+            let serversHtmlPromises = [];
 
-                    // Push the promise to the array
-                    serversHtmlPromises.push(foxEngine.replaceTextInTemplate(entryTemplate, {
-                        version: obj.version ? obj.version : "Offline",
-                        serverName: obj.serverName,
-                        playersOnline: playersOnline,
-                        playersMax: playersMax,
-                        percent: obj.percent,
-                        statusClass: isOnline ? 'online' : 'offline',
-                        progressbarClass: progressbarClass
-                    }));
-                }
+            for (const obj of parsedJson.servers) {
+                let isOnline = obj.status === "online";
+                let progressbarClass = isOnline ? 'progressbar-online' : 'progressbar-offline';
+                let playersOnline = isOnline ? obj.playersOnline : 0;
+                let playersMax = isOnline ? obj.playersMax : 0;
 
-                // Wait for all promises to be resolved
-                let serversHtmlResults = await Promise.all(serversHtmlPromises);
+                let percent = playersMax > 0 ? Math.round((playersOnline / playersMax) * 100) : 0;
 
-                // Combine the results into a single string
-                let serversHtml = serversHtmlResults.join('');
-
-                // Replace text in the total online template
-                const totalOnlineTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/totalOnline.tpl', true);
-                let totalOnlineHtml = await foxEngine.replaceTextInTemplate(totalOnlineTpl, {
-                    totalPlayersOnline: parsedJson.totalPlayersOnline,
-                    totalPlayersMax: parsedJson.totalPlayersMax,
-                    percent: parsedJson.percent,
-                    todaysRecord: parsedJson.todaysRecord
-                });
-
-
-                // Update the content
-                $("#servers").html(serversHtml + totalOnlineHtml);
-            } else {
-                $("#servers").empty();
+                serversHtmlPromises.push(foxEngine.replaceTextInTemplate(entryTemplate, {
+                    version: obj.version ? obj.version : "Offline",
+                    serverName: obj.serverName,
+                    playersOnline: playersOnline,
+                    playersMax: playersMax,
+                    percent: percent,
+					favicon: obj.favicon,
+                    statusClass: isOnline ? 'online' : 'offline',
+                    progressbarClass: progressbarClass
+                }));
             }
-        } catch (error) {
-            console.error('Error parsing online servers:', error);
+
+            let serversHtmlResults = await Promise.all(serversHtmlPromises);
+            let serversHtml = serversHtmlResults.join('');
+
+            const totalOnlineTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/totalOnline.tpl', true);
+            let totalOnlinePercent = parsedJson.totalPlayersMax > 0 
+                ? Math.round((parsedJson.totalPlayersOnline / parsedJson.totalPlayersMax) * 100) 
+                : 0;
+
+            let totalOnlineHtml = await foxEngine.replaceTextInTemplate(totalOnlineTpl, {
+                totalPlayersOnline: parsedJson.totalPlayersOnline,
+                totalPlayersMax: parsedJson.totalPlayersMax,
+                percent: totalOnlinePercent,
+                todaysRecord: parsedJson.todaysRecord
+            });
+
+            $("#servers").html(serversHtml + totalOnlineHtml);
+        } else {
+            $("#servers").empty();
         }
-    };
+    } catch (error) {
+        console.error('Error parsing online servers:', error);
+    }
+}
+
 
     // Load server page content
     async loadServerPage(serverName) {
@@ -88,6 +90,7 @@ export class Servers {
 						serverDescription: serverDetails.serverDescription,
 						serverName: serverDetails.serverName,
 						serverVersion: serverDetails.serverVersion,
+						isSecure: this.secureHtml(serverDetails.checkLib),
 						mods: await this.loadMods(modsInfo)
 					});
 
@@ -106,6 +109,28 @@ export class Servers {
         location.hash = 'server/' + serverName;
         foxEngine.page.setPage(serverName);
     }
+	
+	secureHtml(secure){
+		if(secure == "true"){
+			return `<div class="security-icon">
+        <i class="fas fa-shield-alt"></i>
+        <div class="security-text">
+            Верифицированные библиотеки
+            <span>Библиотеки проходят проверку на валидность</span>
+			<a href="#" onclick="foxEngine.page.loadPage('verifiedLibs', replaceData.contentBlock);">Что это значит?</a>
+        </div>
+    </div>`;
+		} else {
+			return `<div class="danger-icon">
+        <i class="fas fa-exclamation-triangle"></i>
+        <div class="danger-text">
+            Устаревшие библиотеки
+            <span>Используются библиотеки без проверки валидности!</span>
+			<a href="#" onclick="foxEngine.page.loadPage('unVerifiedLibs', replaceData.contentBlock);">Что это значит?</a>
+        </div>
+    </div>`;
+		}
+	}
 
     async getServerDetails(serverName) {
         try {

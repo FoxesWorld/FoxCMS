@@ -1,8 +1,8 @@
 class UserTable {
     constructor(containerId) {
         this.container = document.getElementById(containerId);
-        this.servers = new Set();
-        this.selectedServer = '';
+        this.servers = new Set(['all']); // Initialize with 'all'
+        this.selectedServer = 'all'; // Default to 'all'
         this.users = [];
     }
 
@@ -12,7 +12,7 @@ class UserTable {
 
             this.collectServers(users);
             this.updateServerSelect();
-            this.users = this.sortUsersByPlaytime(users);
+            this.users = this.sortUsersByPlaytime(users, 'all'); // Sort users by 'all' servers on initial load
             this.renderUsers(this.users);
 
         } catch (error) {
@@ -33,12 +33,14 @@ class UserTable {
         const serverSelect = document.getElementById('serverSelect');
         serverSelect.innerHTML = ''; // Clear existing options
 
-        const allOption = this.createOptionElement('', 'Все сервера');
+        const allOption = this.createOptionElement('all', 'Все сервера');
         serverSelect.appendChild(allOption);
 
         this.servers.forEach(server => {
-            const option = this.createOptionElement(server, server);
-            serverSelect.appendChild(option);
+            if (server !== 'all') {
+                const option = this.createOptionElement(server, server);
+                serverSelect.appendChild(option);
+            }
         });
 
         serverSelect.addEventListener('change', () => {
@@ -54,22 +56,36 @@ class UserTable {
         return option;
     }
 
-    sortUsersByPlaytime(users) {
-        return users.sort((a, b) => this.calculateTotalPlaytime(b.serversOnline) - this.calculateTotalPlaytime(a.serversOnline));
+    sortUsersByPlaytime(users, selectedServer) {
+        return users.sort((a, b) => this.calculateTotalPlaytime(b.serversOnline, selectedServer) - this.calculateTotalPlaytime(a.serversOnline, selectedServer));
     }
 
-    calculateTotalPlaytime(serversOnline) {
+    calculateTotalPlaytime(serversOnline, selectedServer) {
         const servers = JSON.parse(serversOnline).servers;
-        return servers.reduce((total, server) => total + server.time * 60, 0);
+        if (selectedServer === 'all') {
+            return servers.reduce((total, server) => total + server.time * 60, 0);
+        } else {
+            const server = servers.find(s => s.server === selectedServer);
+            return server ? server.time * 60 : 0;
+        }
     }
 
     async renderUsers(users) {
         this.container.innerHTML = ''; // Clear existing content
         const rows = await Promise.all(users.map((user, index) => this.createUserRow(user, index + 1)));
-        rows.forEach(row => this.container.appendChild(row));
+        rows.forEach(row => {
+            if (row) {
+                this.container.appendChild(row);
+            }
+        });
     }
 
     async createUserRow(user, rank) {
+        const servers = JSON.parse(user.serversOnline).servers;
+        if (this.selectedServer !== 'all' && !servers.some(server => server.server === this.selectedServer)) {
+            return null;
+        }
+
         const row = document.createElement('tr');
         row.style.background = `linear-gradient(45deg, #c5c5e19c, ${user.colorScheme})`;
 
@@ -143,7 +159,7 @@ class UserTable {
 
     createPlaytimeCell(user) {
         const playtimeCell = document.createElement('td');
-        const totalMinutes = user.totalMinutes !== undefined ? user.totalMinutes : this.calculateTotalPlaytime(user.serversOnline);
+        const totalMinutes = this.calculateTotalPlaytime(user.serversOnline, this.selectedServer);
         playtimeCell.textContent = this.formatPlaytimeText(totalMinutes);
 
         const barWrapper = this.createPlaytimeBar(user.serversOnline, totalMinutes);
@@ -189,8 +205,8 @@ class UserTable {
 
         const servers = userData.servers;
         const isPlaying = userData.isPlaying;
-        
-        const lastSessionInfo = selectedServer ? this.getServerSessionInfo(servers, selectedServer, isPlaying) : this.formatSessionInfo(servers[servers.length - 1], isPlaying);
+
+        const lastSessionInfo = selectedServer !== 'all' ? this.getServerSessionInfo(servers, selectedServer, isPlaying) : this.formatSessionInfo(servers[servers.length - 1], isPlaying);
         lastSessionCell.innerHTML = lastSessionInfo;
 
         return lastSessionCell;
@@ -220,44 +236,26 @@ class UserTable {
         } else {
             const hours = Math.floor(seconds / 3600);
             const remMinutes = Math.floor((seconds % 3600) / 60);
-            const remSeconds = seconds % 60;
-            return `<div class="session-info">${hours} ${this.declineWord(hours, ['час', 'часа', 'часов'])}, ${remMinutes} ${this.declineWord(remMinutes, ['минута', 'минуты', 'минут'])} и ${remSeconds} ${this.declineWord(remSeconds, ['секунда', 'секунды', 'секунд'])}</div>`;
+            return `<div class="session-info">${hours} ${this.declineWord(hours, ['час', 'часа', 'часов'])} и ${remMinutes} ${this.declineWord(remMinutes, ['минута', 'минуты', 'минут'])}</div>`;
         }
     }
 
     createLastLoginCell(user, selectedServer) {
         const lastLoginCell = document.createElement('td');
+        const servers = JSON.parse(user.serversOnline).servers;
+        const lastServerLogin = selectedServer === 'all' ? servers[servers.length - 1] : servers.find(s => s.server === selectedServer);
 
-        // Парсим строку JSON из поля user.serversOnline, чтобы получить список серверов
-        let servers = JSON.parse(user.serversOnline).servers;
-
-        // Проверяем, что selectedServer передается корректно
-        if (!selectedServer) {
-            // Если сервер не выбран, то показываем дату последней игры на последнем сервере
-            const lastServer = servers[servers.length - 1];  // Получаем последний сервер из списка
-            if (lastServer && lastServer.lastPlayed) {
-                const lastLoginDate = new Date(lastServer.lastPlayed * 1000); // Преобразуем в миллисекунды
-                lastLoginCell.textContent = this.formatLastLoginDate(lastLoginDate);
-            } else {
-                lastLoginCell.textContent = 'Нет данных';
-            }
-            return lastLoginCell;
-        }
-
-        // Если сервер выбран, ищем соответствующий сервер в списке
-        const server = servers.find(s => s.server === selectedServer);
-        // Если сервер найден и поле lastPlayed существует
-        if (server && server.lastPlayed) {
-            const lastLoginDate = new Date(server.lastPlayed * 1000); // Преобразуем в миллисекунды
-            lastLoginCell.textContent = this.formatLastLoginDate(lastLoginDate);
+        if (lastServerLogin) {
+             const lastLoginDate = new Date(lastServerLogin.lastPlayed  * 1000);
+             lastLoginCell.textContent = this.formatLastLoginDate(lastLoginDate);
         } else {
             lastLoginCell.textContent = 'Нет данных';
         }
 
         return lastLoginCell;
     }
-
-    formatLastLoginDate(date) {
+	
+	    formatLastLoginDate(date) {
         const now = new Date();
         const diffTime = now - date;
         const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
@@ -283,17 +281,6 @@ class UserTable {
         }
     }
 
-
-    declineWord(number, words) {
-        const cases = [2, 0, 1, 1, 1, 2];
-        return words[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
-    }
-
-    sortAndRenderUsersByServer(server) {
-        const filteredUsers = server ? this.users.filter(user => JSON.parse(user.serversOnline).servers.some(s => s.server === server)) : this.users;
-        this.renderUsers(filteredUsers);
-    }
-
     getServerColor(server) {
         const colors = {
             "Craftoria": "#3498DB",
@@ -302,5 +289,14 @@ class UserTable {
         };
         return colors[server] || '#AAAAAA';
     }
-}
 
+    declineWord(number, declensions) {
+        const cases = [2, 0, 1, 1, 1, 2];
+        return declensions[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
+    }
+
+    sortAndRenderUsersByServer(selectedServer) {
+        const sortedUsers = this.sortUsersByPlaytime(this.users, selectedServer);
+        this.renderUsers(sortedUsers);
+    }
+}

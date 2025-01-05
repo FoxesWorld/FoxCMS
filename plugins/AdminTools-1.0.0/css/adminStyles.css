@@ -29,6 +29,27 @@
 	margin: 10px;
 }
 
+.logLevel {
+	font-weight: 900;
+	font-family: "Minecraft Bold";
+}
+
+.logLevel > .info {
+	color: #1c9f4c;
+}
+
+.logLevel > .error {
+	color: #cb4a16;
+}
+
+.logLevel > .warn {
+	color: #dbce12;
+}
+
+.logLevel > .debug {
+	color: #b324a7;
+}
+
         #loading {
             display: none;
             color: #007bff;

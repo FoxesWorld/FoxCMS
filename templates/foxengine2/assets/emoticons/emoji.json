@@ -153,6 +153,10 @@
             {
                 "code": "1F519",
                 "name": "coal"
+            },
+            {
+                "code": "1F520",
+                "name": "warning"
             }
         ]
     },

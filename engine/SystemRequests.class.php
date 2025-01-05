@@ -220,18 +220,35 @@
 						break;
 						
 						case "startedPlaying":
-						init::classUtil('PlayTimeWidget', "1.0.0");
-						$playTimeWidget = new GameServerManager($this->db);
-							$playTimeWidget->startGame(@RequestHandler::$REQUEST["login"] ,@RequestHandler::$REQUEST["serverName"], 0);
-						break;
-						
-						case "donePlaying":
-						init::classUtil('PlayTimeWidget', "1.0.0");
+							init::classUtil('PlayTimeWidget', "1.0.0");
 							$playTimeWidget = new GameServerManager($this->db);
-							$timeHours = @RequestHandler::$REQUEST["playTime"] / 3600;
-							$playTimeWidget->finishGame(@RequestHandler::$REQUEST["login"] ,@RequestHandler::$REQUEST["serverName"], $timeHours);
-						break;
-						
+							$login = @RequestHandler::$REQUEST["login"];
+							$serverName = @RequestHandler::$REQUEST["serverName"];
+							
+							if ($login && $serverName) {
+								$playTimeWidget->startGame($login, $serverName, 0);
+								//die('{"message": "Good Luck Have Fun, '.$login.'!"}');
+							} else {
+								// Handle error: missing login or serverName
+							}
+							break;
+
+						case "donePlaying":
+							init::classUtil('PlayTimeWidget', "1.0.0");
+							$playTimeWidget = new GameServerManager($this->db);
+							$login = @RequestHandler::$REQUEST["login"];
+							$serverName = @RequestHandler::$REQUEST["serverName"];
+							$playTime = @RequestHandler::$REQUEST["playTime"];
+
+							if ($login && $serverName && $playTime !== false) {
+								$timeHours = $playTime / 3600;
+								$playTimeWidget->finishGame($login, $serverName, $timeHours);
+								//die('DONE');
+							} else {
+								// Handle error: missing or invalid login, serverName, or playTime
+							}
+							break;
+
 						default:
 							die('{"message": "Unknown sysRequest option!"}');
 						break;
@@ -271,13 +288,13 @@
 							case "skin":
 								init::classUtil('UserUpload', "1.0.0");
 								$skinUpload = new UserUpload($login, $perms);
-								$skinUpload->uploadFile(@$_FILES[0], $folder, md5(init::$usrArray['login'])."-skin.png");
+								$skinUpload->uploadFile(@$_FILES[0], $folder, md5($login)."-skin.png");
 							break;
 												
 							case "cloak":
 								init::classUtil('UserUpload', "1.0.0");
 								$capeUpload = new UserUpload($login, $perms);
-								$capeUpload->uploadFile(@$_FILES[0], $folder, md5(init::$usrArray['login'])."-cape.png");
+								$capeUpload->uploadFile(@$_FILES[0], $folder, md5($login)."-cape.png");
 								die('{"message": "Загрузка плащей в разработке!", "type": "warn"}');
 							break;
 							
@@ -365,8 +382,8 @@
 		private function handleParseMonitor() : void {
 			init::classUtil('ServerParser', "1.0.0");
 			$serverParser = new ServerParser($this->db, init::$usrArray['login']);
-			$Monitor = new foxesMon($serverParser->parseServers(), array('out'=> 2, 'record_day' => 86400));
-			die($Monitor->foxMonOut());
+			$Monitor = new foxesMon($this->logger, $serverParser->parseServers(), array('out'=> 2, 'record_day' => 86400));
+			die($Monitor->outputMonitoringData());
 		}
 
 

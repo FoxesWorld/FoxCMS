@@ -15,24 +15,41 @@ class GameServerManager {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    private function checkServerExists($servers, $serverName) {
-        foreach ($servers as $server) {
-            if ($server['server'] == $serverName) {
-                return true;
-            }
+    private function updateUserData($login, $userData) {
+        $newUserData = json_encode($userData, JSON_UNESCAPED_UNICODE);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new RuntimeException('Failed to encode JSON: ' . json_last_error_msg());
         }
-        return false;
+        $sql = "UPDATE users SET serversOnline = :serversOnline WHERE login = :login";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            ':serversOnline' => $newUserData,
+            ':login' => $login
+        ]);
     }
 
     public function startGame($login, $serverName, $playTimeHours) {
         try {
+            if ($playTimeHours <= 0) {
+                throw new InvalidArgumentException('Play time must be greater than zero.');
+            }
+
             $data = $this->getUserData($login);
-            $userData = $data ? json_decode($data['serversOnline'], true) : ['isPlaying' => false, 'servers' => []];
-            $servers = $userData['servers'];
+            if (!$data) {
+                throw new Exception('User not found.');
+            }
+
+            $userData = json_decode($data['serversOnline'], true);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new RuntimeException('Failed to decode JSON: ' . json_last_error_msg());
+            }
+            $userData = $userData ?: ['isPlaying' => false, 'servers' => []];
+
+            $servers = &$userData['servers'];
             $serverExists = false;
 
             foreach ($servers as &$server) {
-                if ($server['server'] == $serverName) {
+                if ($server['server'] === $serverName) {
                     $server['time'] += $playTimeHours;
                     $server['startTimeStamp'] = time();
                     $serverExists = true;
@@ -49,53 +66,61 @@ class GameServerManager {
             }
 
             $userData['isPlaying'] = true;
-            $userData['servers'] = $servers;
-
-            $newUserData = json_encode($userData);
-
-            $sql = "UPDATE users SET serversOnline = :serversOnline WHERE login = :login";
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute([
-                ':serversOnline' => $newUserData,
-                ':login' => $login
-            ]);
+            $this->updateUserData($login, $userData);
         } catch (Exception $e) {
+            error_log($e->getMessage());
             throw $e;
         }
     }
 
     public function finishGame($login, $serverName, $playTimeHours) {
         try {
+            if ($playTimeHours <= 0) {
+                throw new InvalidArgumentException('Play time must be greater than zero.');
+            }
+
             $data = $this->getUserData($login);
-            $userData = $data ? json_decode($data['serversOnline'], true) : ['isPlaying' => false, 'servers' => []];
-            $servers = $userData['servers'];
+            if (!$data) {
+                throw new Exception('User not found.');
+            }
+
+            $userData = json_decode($data['serversOnline'], true);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new RuntimeException('Failed to decode JSON: ' . json_last_error_msg());
+            }
+            $userData = $userData ?: ['isPlaying' => false, 'servers' => []];
+
+            $servers = &$userData['servers'];
+            $serverExists = false;
 
             foreach ($servers as &$server) {
-                if ($server['server'] == $serverName) {
+                if ($server['server'] === $serverName) {
                     $server['time'] += $playTimeHours;
                     if (isset($server['startTimeStamp'])) {
                         $server['lastSessionLength'] = time() - $server['startTimeStamp'];
-                        $server['lastPlayed'] = time();
                     } else {
-                        $server['lastSessionLength'] = 0;
+                        $server['lastSessionLength'] = $playTimeHours * 3600;
                     }
+                    $server['lastPlayed'] = time();
                     unset($server['startTimeStamp']);
+                    $serverExists = true;
                     break;
                 }
             }
 
+            if (!$serverExists) {
+                $servers[] = [
+                    'server' => $serverName,
+                    'time' => $playTimeHours,
+                    'lastSessionLength' => $playTimeHours * 3600,
+                    'lastPlayed' => time()
+                ];
+            }
+
             $userData['isPlaying'] = false;
-            $userData['servers'] = $servers;
-
-            $newUserData = json_encode($userData);
-
-            $sql = "UPDATE users SET serversOnline = :serversOnline WHERE login = :login";
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute([
-                ':serversOnline' => $newUserData,
-                ':login' => $login
-            ]);
+            $this->updateUserData($login, $userData);
         } catch (Exception $e) {
+            error_log($e->getMessage());
             throw $e;
         }
     }

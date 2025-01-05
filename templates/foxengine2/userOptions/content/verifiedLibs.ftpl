@@ -1,0 +1,91 @@
+<useroption>
+{
+    "optionTitle": "Проверенные библиотеки",
+    "description": "Что значит проверенные библиотеки в системе?",
+    "keywords": "Проверенные библиотеки, безопасность, надёжность, контроль версий",
+    "optionBlock": ".pages",
+    "optionPreText": "<img src='/templates/foxengine2/assets/icons/menu/icon_check.png' />",
+    "optionGroup": [1, 4, 5],
+    "optionClass": "nav-item uk-animation-fade",
+    "type": "pageContent"
+}
+</useroption>
+
+<pageContent>
+<div class="library-info">
+    <section>
+        <h2>Что значит проверенные библиотеки? :lock:</h2>
+        <p>Проверенные библиотеки — это компоненты, которые прошли тщательную проверку на соответствие стандартам качества, безопасности и совместимости. Используя такие библиотеки, 
+		вы можете быть уверены, что игра будет работать стабильно, минимизируя краши и вылеты.</p>
+    </section>
+
+    <section>
+        <h2>Почему это важно? :shield:</h2>
+        <p>Безопасность и надёжность — ключевые факторы в современной разработке. Непроверенные библиотеки могут содержать уязвимости, устаревший код или ошибки, которые приведут к непредсказуемым результатам. Проверенные библиотеки гарантируют, что каждая строка кода была протестирована и соответствует высоким стандартам.</p>
+    </section>
+
+    <section>
+        <h2>Как проверяются библиотеки? :mag:</h2>
+        <p>Процесс проверки включает:</p>
+        <ul>
+            <li>Сравнение хэша библиотеки с официальным значением для подтверждения целостности.</li>
+            <li>Анализ безопасности на наличие известных уязвимостей.</li>
+            <li>Тестирование на совместимость с текущей версией платформы.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Преимущества использования проверенных библиотек :star:</h2>
+        <p>Когда вы выбираете проверенные библиотеки, вы получаете:</p>
+        <ul>
+            <li><strong>Уверенность</strong>: вы используете качественные и безопасные компоненты.</li>
+            <li><strong>Стабильность</strong>: меньше ошибок и проблем в проекте.</li>
+            <li><strong>Совместимость</strong>: гарантированная работа с другими элементами вашего проекта.</li>
+        </ul>
+    </section>
+</div>
+
+<style>
+.library-info {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.library-info section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #292929;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.library-info h2 {
+    color: #ff6600;
+    font-family: 'FSElliotPro-Heavy', sans-serif;
+    margin-bottom: 15px;
+}
+
+.library-info p {
+    line-height: 1.6;
+    color: #e0e0e0;
+    margin-bottom: 10px;
+}
+
+.library-info ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    color: #d1d1d1;
+}
+
+.library-info ul li {
+    margin-bottom: 8px;
+}
+
+.library-info ul li strong {
+    color: #ff6600;
+}
+</style>
+</pageContent>

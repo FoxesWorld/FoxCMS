@@ -21,7 +21,7 @@ if (!defined('FOXXEY')) {
 
 		/*INTERNAL SETTINGS*/
 		private static $sndLevel 		= -6;
-		private static $musLevel 		= -8;
+		private static $musLevel 		= -10;
 		private 	   $cacheFilePath 	= ENGINE_DIR.'cache/startupsound.timetable';
 		private static $serverVersion 	= '0.5.0.0 Reborn';
 		public static  $musFilesNum 	= 0;
@@ -49,8 +49,8 @@ if (!defined('FOXXEY')) {
 			'mountDir' 			=> ROOT_DIR."/plugins/StartUpSound",
 			'enableVoice' 		=> true,
 			'enableMusic' 		=> true,
-			'easterMusRarity'   => 50,
-			'easterSndRarity'	=> 10);
+			'easterMusRarity'   => 500,
+			'easterSndRarity'	=> 200);
 
 
 	   public static $eventsArray = array(
@@ -98,9 +98,9 @@ if (!defined('FOXXEY')) {
 			init::requireNestedClasses(basename(__FILE__), __DIR__.'/modules');
 			init::classUtil('mp3Tag', "1.0.0");
 
-			if(!isset($_REQUEST['startUpSoundAPI'])) {
-				startUpSound::$eventsArray = file::efile($this->cacheFilePath, true, startUpSound::$eventsArray)['content'];
-			}
+			//if(!isset($_REQUEST['startUpSoundAPI'])) {
+			//	startUpSound::$eventsArray = file::efile($this->cacheFilePath, true, startUpSound::$eventsArray)['content'];
+			//}
 
 			startUpSound::$absMnt = self::$config['mountDir'];
 

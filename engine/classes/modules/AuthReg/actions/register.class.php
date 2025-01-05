@@ -102,6 +102,7 @@ class Register extends AuthManager
                 $userData = $loadUserInfo->userInfoArray();
                 $this->logger->WriteLine("User has completed registration '" . $this->regData['login'] . "'");
                 $sessionManager = new sessionManager($userData);
+				mkdir(init::$usrArray['usrFolder'], 0755, true);
 				$entries = ['username' => $this->regData['login']];
                 $foxMail = new foxMail(true);
                 $foxMail->send($this->regData['email'], $lang['mail']['register'], "welcome.tpl", $entries);

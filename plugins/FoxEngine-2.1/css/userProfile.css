@@ -76,6 +76,7 @@
 	#usrMenu > .pages a {
 		height: 42px;
 		padding: 10px;
+		display: block;
 	}
 	
 	#usrMenu > .pages a:hover {

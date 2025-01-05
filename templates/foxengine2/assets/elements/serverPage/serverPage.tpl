@@ -3,7 +3,7 @@
 		<div class="card">
 			<div class="card-body">
 				<h1 class="card-title">
-				<p>Сервер {serverName} {serverVersion}</p>
+				<p>Сервер {serverName} {serverVersion} {isSecure}</p>
 					<img src="{serverImage}" alt="{serverImage}" class="server-image" />	
 				</h1>
 				<p class="card-text">

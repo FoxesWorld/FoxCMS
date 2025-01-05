@@ -133,7 +133,7 @@ button.download {
 	text-decoration: none;
 	background: var(--button-primary);
 	border: 2px solid var(--border-color);
-	box-shadow: 0px 5px 0px rgb(151 127 41);
+	box-shadow: var(--button-shadow);
 	border-radius: 5px;
 	padding: 0.5rem;
 	transition: all 0.1s;
@@ -338,7 +338,7 @@ button img {
 }
 
 .option_select:after {
-    content: "\f078"; /* Шеврон вниз */
+    content: "\f078"; /* Ð¨ÐµÐ²Ñ€Ð¾Ð½ Ð²Ð½Ð¸Ð· */
     position: absolute;
     top: 12px;
     right: 10px;
@@ -346,13 +346,13 @@ button img {
     font-family: Font Awesome\ 6 Pro;
     font-weight: 600;
     border-bottom: 0;
-    transition: transform 0.3s ease; /* Плавное изменение */
+    transition: transform 0.3s ease; /* ÐŸÐ»Ð°Ð²Ð½Ð¾Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ */
 }
 
-/* Когда .option_select имеет класс 'open', изменяем шеврон */
+/* ÐšÐ¾Ð³Ð´Ð° .option_select Ð¸Ð¼ÐµÐµÑ‚ ÐºÐ»Ð°ÑÑ 'open', Ð¸Ð·Ð¼ÐµÐ½ÑÐµÐ¼ ÑˆÐµÐ²Ñ€Ð¾Ð½ */
 .option_select.open:after {
-    content: "\f077"; /* Шеврон вверх */
-    transform: rotate(180deg); /* Поворот шеврона */
+    content: "\f077"; /* Ð¨ÐµÐ²Ñ€Ð¾Ð½ Ð²Ð²ÐµÑ€Ñ… */
+    transform: rotate(180deg); /* ÐŸÐ¾Ð²Ð¾Ñ€Ð¾Ñ‚ ÑˆÐµÐ²Ñ€Ð¾Ð½Ð° */
 }
 
 
@@ -511,7 +511,7 @@ a {
 }
 
 a:not(.selectedPage, .badge, .userBlock, .foxesButton) {
-	color: #534e47;
+	color: var(--button-text-color)
 }
 
 header a:not(.selectedPage, .tip-over, .badge, .userBlock):before {
@@ -521,7 +521,7 @@ header a:not(.selectedPage, .tip-over, .badge, .userBlock):before {
   position: absolute;
   bottom: 0;
   left: 50%;
-  background: #ff9100;
+  background: #b34b0c;
   transition: all 0.3s;
 }
 

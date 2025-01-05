@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2024-12-08 11:41:05
+/* Smarty version 4.0.4, created on 2025-01-05 18:03:32
   from '/var/www/FoxCMS/templates/foxengine2/slider.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_67555ba1ba52d5_52202488',
+  'unifunc' => 'content_677a9f448b47f3_40767764',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '19d6ded3ae4746ec9c89282ea86894932a2e0223' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/slider.tpl',
-      1 => 1732567522,
+      1 => 1734031011,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67555ba1ba52d5_52202488 (Smarty_Internal_Template $_smarty_tpl) {
+function content_677a9f448b47f3_40767764 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 	 <div class="owl-carousel owl-theme">
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const slidesData = [
     {
         "title": "Ранний доступ",
-        "desc": "Мы рады сообщить, что вы можете стать частью нашего проекта на раннем этапе! Получите доступ к эксклюзивным функциям и первыми испытайте все преимущества. Ваши отзывы помогут нам улучшить продукт перед официальным запуском. :fox:",
+        "desc": "Мы рады сообщить, что вы можете стать частью нашего проекта на раннем этапе! Получите доступ к эксклюзивным функциям и первыми испытайте все преимущества. Ваши отзывы помогут нам улучшить продукт перед официальным запуском.",
         "image": "/templates/foxengine2/assets/img/slides/slide1.jpg",
         "overlayColor": "rgba(0, 0, 0, 0.5)"
     },
