@@ -20,8 +20,8 @@
                      <thead>
                         <tr class="ligth">
 						   <th>№</th>
-                           <th>Avatar</th>
-                           <th>Name</th>
+                           <th>Аватар</th>
+                           <th>Логин</th>
                            <!-- <th>E-mail</th> -->
                             <th scope="col">
 								<input type="text" onKeyUp="adminPanel.users.parseUsers($(this).val());" class="input" placeholder="Поиск пользователя" required />

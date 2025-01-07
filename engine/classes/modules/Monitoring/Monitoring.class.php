@@ -61,8 +61,7 @@ private function fetchServersData()
                 'favicon' => $result->getFavicon() ?? null,
             ];
         } catch (Exception $e) {
-            // Логируем ошибку и добавляем сервер в список оффлайн
-            $this->logger->writeLine("Error querying server {$server['host']}: {$e->getMessage()}");
+            //$this->logger->writeLine("Error querying server {$server['host']}: {$e->getMessage()}");
 
             $this->results[] = [
                 'serverName' => $server['name'],

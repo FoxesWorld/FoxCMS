@@ -1,5 +1,5 @@
 <div class="serverEntry">
-    <img class="serverEntry-icon" src="{favicon}" alt="{serverName} icon" />
+    {favicon}
     
     <div class="serverEntry-content">
         <div class="serverEntry-title">

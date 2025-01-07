@@ -2,6 +2,7 @@
 	import { Settings } from "./options/Settings.js";
 	import { Users } from "./options/Users.js";
 	//import { Modules } from "./options/Modules.js";
+	import { Permissions } from "./options/Permissions.js";
 	import { Servers } from "./options/Servers.js";
 	//import { GroupAssoc } from "./options/GroupAssoc.js";
 	//import { TemplateEditor } from "./options/TemplateEditor.js";
@@ -14,6 +15,7 @@ class AdminPanel {
 		this.settings = new Settings();
 		this.users = new Users();
 		//this.modules = new Modules();
+		this.permissions = new Permissions();
 		this.servers = new Servers();
 		//this.groupAssoc = new GroupAssoc();
 		//this.templateEditor = new TemplateEditor();
@@ -34,8 +36,7 @@ class AdminPanel {
 	async loadAdmOpt(option){
 		eval("this."+option+".parse"+this.capitalizeFirstLetter(option)+"();");
 		eval("this."+option+".addContent();");
-		this.setAdmOption(option);
-		
+		this.setAdmOption(option);	
 	};
 	
 	capitalizeFirstLetter(string) {

@@ -42,6 +42,7 @@
         this.DOMelements.navbarToggler.addEventListener('click', () => this.navbarTogglerClickHandler());
 
         document.querySelectorAll(this.options.navItemSelector).forEach((navItem) => {
+			console.log(navItem);
             navItem.addEventListener('click', () => this.closeNavbar());
         });
     }

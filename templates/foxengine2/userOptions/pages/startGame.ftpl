@@ -33,7 +33,10 @@
         <li style="--i: 2">
             <h3>Испытание силы :pray:</h3>
             <p>Теперь, когда ты принял вызов регистрации, тебе предстоит проверить свою силу. Убедись, что у тебя есть Java 8 - ключ к миру приключений. Не волнуйся, великие наставники обещают, что все произойдет автоматически. Если у тебя еще нет Java 8, ты можешь загрузить ее</p>
-                <div style="width: 100%;margin: 15px auto;display: inline-flex;">
+                
+				<div class="importantText">:warning:<b>ВНИМАНИЕ!</b>:warning: <br /> Запуск возможен только на Java 8 новее 2016 года, если у вас запскается, но ничего не происходит - у вас старя джава и ее нужно обновить!
+				Если у вас 8u51 или идентичная, то он не будет работать с вероятностью 100%</div>
+				<div style="width: 100%;margin: 15px auto;display: inline-flex;">
 					<ul style="width: 100%;margin: 15px auto;">
 						<li>
 							<button class="download login" onclick="window.open('https://adoptium.net/temurin/releases/?variant=openjdk17&jvmVariant=hotspot%2525252527&os=windows&arch=x64&package=jre&version=8', 'Java 8', 'popup');">

@@ -3,7 +3,6 @@
 define('FOXXEY', true);
 require ('data/const.php');
 require ('data/config.php');
-session_start();
 
 	class init {
 		

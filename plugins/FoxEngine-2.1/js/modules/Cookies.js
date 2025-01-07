@@ -1,7 +1,7 @@
 export class Cookies {
 	constructor(foxEngine){
 		this.foxEngine = foxEngine;
-		if (foxEngine.cookieManager.getCookie("cookie-consent") != "") {
+		if (foxEngine.cookieManager.getCookie("cookie-consent") == 'true') {
 			$("#cookie-popup").attr("style", "display: none;");
 		} else {
 			$("#cookie-popup").removeAttr("style");

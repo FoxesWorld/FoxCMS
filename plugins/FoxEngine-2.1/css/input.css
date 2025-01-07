@@ -247,7 +247,7 @@ button:hover.logout:not(:disabled)  {
     transform: translateY(5px);
 }
 
-button img {
+button > img {
 	margin: 0px 15px;
 	width: 32px;
 	height: 32px;

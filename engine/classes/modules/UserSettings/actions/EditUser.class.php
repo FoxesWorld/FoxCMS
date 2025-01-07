@@ -62,6 +62,7 @@ if(!defined('profile')) {
 													if(in_array(init::$usrArray['user_group'], $profileEditGroups)) {
 													//ALL CHECKS PASSED
 														$this->profileChanges();
+														if(@$request['image'] != 'null') {
 															require_once (MODULES_DIR."FileUpload/submit.php");
 															$loadImage = routeEntry(ENTRY_FIELD, 
 																[
@@ -69,6 +70,7 @@ if(!defined('profile')) {
 																	'BASE64_ENCODED_FILE_OBJECTS' => 'handle_base64_encoded_file_post',
 																	'TRANSFER_IDS' 				  => 'handle_transfer_ids_post'
 																], $this->db, $this->logger, $this->requestArray);
+														}
 														AuthManager::updateSession($this->db);
 													} else {
 														$this->status = "warn";

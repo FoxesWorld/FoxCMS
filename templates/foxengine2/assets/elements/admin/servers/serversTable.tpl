@@ -2,16 +2,16 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">ServerName</th>
-			  <th scope="col">Status</th>
-			  <th scope="col">ServerGroups</th>
-              <th scope="col">Version</th>
-              <th scope="col">Description</th>
+              <th scope="col">Название</th>
+			  <th scope="col">Статус</th>
+			  <th scope="col">Группы</th>
+              <th scope="col">Версия</th>
+              <th scope="col">Описание</th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody id="serversList"></tbody>
         </table>
 		<p class="buttonGroup">
-			<button id="addServerButton" class="btn btn-primary">Add New Server</button>
+			<button id="addServerButton" class="btn btn-primary">Добавить сервер</button>
 		</p>

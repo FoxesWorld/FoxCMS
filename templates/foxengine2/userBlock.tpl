@@ -28,11 +28,9 @@
                     });
                 }
             </script>
+			{include file='balanceBox.tpl'}
             <ul id="usrMenu">
-				{include file='balanceBox.tpl'}
-			<div class="pages d-sm-block d-xs-block d-md-block d-lg-none">
-			
-			</div>
+				
                 <!-- User options go here -->
 				
 				
@@ -62,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         togglerSelector: ".user-button",
         collapseSelector: "#userPane",
         burgerButtonSelector: ".chevron",
-        navItemSelector: "#usrMenu > li",
+        navItemSelector: "#usrMenu",
         toggleAnimationDelay: 100,
         closeAnimationDelay: 400,
 		  onOpen: () => {

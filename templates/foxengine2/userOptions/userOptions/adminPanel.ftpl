@@ -126,7 +126,7 @@ function animateLogs() {
 
 <script>
 (async function() {
-    const admOptions = ["settings", "users",  "servers"]; //"pages", "modules", "groupAssoc", "templateEditor"
+    const admOptions = ["settings", "users",  "servers", "permissions"]; //"pages", "modules", "groupAssoc", "templateEditor"
     const blockTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'admin/panel.tpl', false);
     admOptions.forEach(async (option, index) => {
         let panelBlock = await foxEngine.replaceTextInTemplate(blockTpl, {

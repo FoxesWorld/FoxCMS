@@ -25,21 +25,27 @@ async parseOnline() {
 
                 let percent = playersMax > 0 ? Math.round((playersOnline / playersMax) * 100) : 0;
 
+                // Если favicon существует, то добавляем его, иначе оставляем пустое значение
+                let favicon = obj.favicon ? `<img src="${obj.favicon}" class="serverEntry-icon" alt="${obj.serverName} icon" />` : '';
+
+                // Заменяем шаблон
                 serversHtmlPromises.push(foxEngine.replaceTextInTemplate(entryTemplate, {
                     version: obj.version ? obj.version : "Offline",
                     serverName: obj.serverName,
                     playersOnline: playersOnline,
                     playersMax: playersMax,
                     percent: percent,
-					favicon: obj.favicon,
+                    favicon: favicon, // Вставляем иконку или пустое значение
                     statusClass: isOnline ? 'online' : 'offline',
                     progressbarClass: progressbarClass
                 }));
             }
 
+            // Ждем, пока все промисы не завершатся
             let serversHtmlResults = await Promise.all(serversHtmlPromises);
             let serversHtml = serversHtmlResults.join('');
 
+            // Загрузка шаблона для отображения общего числа онлайн
             const totalOnlineTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/totalOnline.tpl', true);
             let totalOnlinePercent = parsedJson.totalPlayersMax > 0 
                 ? Math.round((parsedJson.totalPlayersOnline / parsedJson.totalPlayersMax) * 100) 
@@ -52,8 +58,10 @@ async parseOnline() {
                 todaysRecord: parsedJson.todaysRecord
             });
 
+            // Вставляем собранный HTML на страницу
             $("#servers").html(serversHtml + totalOnlineHtml);
         } else {
+            // Если серверы не найдены, очищаем блок
             $("#servers").empty();
         }
     } catch (error) {

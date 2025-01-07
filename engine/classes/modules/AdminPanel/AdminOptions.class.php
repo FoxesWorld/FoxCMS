@@ -1,182 +1,301 @@
 <?php
 if(!defined("ADMIN")){
-	die();
+    die();
 }
 
-	class AdminOptions extends AdminPanel {
-		
-		function __construct($REQUEST, $db) {
-			global $config;
-			if(init::$usrArray['user_group'] == 1) {
-				switch($REQUEST["admPanel"]){
-					
-					case "editServer":
-						$editServer = new EditServer($db);
+class AdminOptions extends AdminPanel {
+
+    function __construct($REQUEST, $db) {
+        global $config;
+        if(init::$usrArray['user_group'] == 1) {
+            switch($REQUEST["admPanel"]){
+                case "editServer":
+                    	$editServer = new EditServer($db);
 						$editServer->updateServer(RequestHandler::$REQUEST);
-					break;
-					
-					case "editUserBadges":
-					$login = RequestHandler::$REQUEST['userLogin'];
-					$badges = RequestHandler::$REQUEST['badges'];
-					$data = init::$sqlQueryHandler->updateData('users', array('badges' => $badges), 'login', $login);
-					die($data);
-					break;
-					
-					case "editUserBalance":
-					$login = RequestHandler::$REQUEST['userLogin'];
-					$balance = RequestHandler::$REQUEST['balance'];
-					$data = init::$sqlQueryHandler->updateData('users', array('balance' => $balance), 'login', $login);
-					die($data);
-					
-					break;
-					
-					case "showModules":
-						die(json_encode(init::$modulesArray));
-					break;
-					
-					case "parseServers":
-					init::classUtil('ServerParser', "1.0.0");
-						$serverParser = new ServerParser($db, init::$usrArray['login'], true);
-						die($serverParser->parseServers(@RequestHandler::$REQUEST['server']));
-					break;
-					
-					case "deleteServer":
-					$serverName = @RequestHandler::$REQUEST['serverName'];
-						$query = "DELETE FROM `servers` WHERE serverName = '".$serverName."'";
-						$data = $db->run($query);
-						if($data) {
-							die('{"message": "Server '.$serverName.' removed!", "type": "success"}');
-						}
-					break;
-					
-					case "getAllBadges":
-						$query = 'SELECT `badgeName` FROM `badgesList`';
-						$badgesArr = array();
-						$data = $db->getRows($query);
-						foreach($data as $key){
-							$badgesArr[] = $key['badgeName'];
-						}
-						die(json_encode($badgesArr));
-					break;
-					
-					case "loadUserBalance":
-						die($db->getValue("SELECT balance FROM users WHERE login = '".@RequestHandler::$REQUEST['userLogin']."'"));
-					break;
-					
-					case "getGameVersions":
-						$versions = filesInDir::filesInDirArray(ROOT_DIR . UPLOADS_DIR . $config['launcherSettings']['gameFiles'].'versions');
-						die(json_encode($versions));
-					break;
+                    break;
 
-					case "getJavaVersions":
-						$java = filesInDir::filesInDirArray(ROOT_DIR . UPLOADS_DIR . $config['launcherSettings']['jreDir']);
-						$outputArr = array();
-						foreach($java as $jre){
-							$outputArr[] = str_replace(".zip", "" , $jre);
-						}
-						die(json_encode($outputArr));
-					break;
+                case "editUserBadges":
+                    $this->updateUserField($db, 'badges', $REQUEST);
+                    break;
 
-					case "getServerPictures":
-					$imgDir = "/templates/".$config['siteSettings']['siteTpl']. DIRECTORY_SEPARATOR . $config['launcherSettings']['serverPictures'];
-						$imgs = filesInDir::filesInDirArray(ROOT_DIR . $imgDir);
-						$outputArr = array();
-						foreach($imgs as $img){
-							$outputArr[] = $imgDir.$img;
+                case "editUserBalance":
+                    $this->updateUserField($db, 'balance', $REQUEST);
+                    break;
+					
+				case "editPermissions":
+					$permArray = json_decode($REQUEST['permissions'], true); // Декодируем JSON в ассоциативный массив
+					if(is_array($permArray)) {
+					$i = 1;
+
+					try {
+
+						foreach ($permArray as $permission) {
+							$groupName = $permission['groupName'];
+							$permName = $permission['permName'];
+							$permValue = $permission['permValue'];
+
+							// Пример SQL-запроса для обновления или вставки
+							$sql = "
+								UPDATE groupPermissions SET groupName = :groupName, permName = :permName, 
+								permValue = :permValue
+								WHERE id = '".$i."'";
+
+							$stmt = $db->prepare($sql);
+							$stmt->bindParam(':groupName', $groupName, PDO::PARAM_STR);
+							$stmt->bindParam(':permName', $permName, PDO::PARAM_STR);
+							$stmt->bindParam(':permValue', $permValue, PDO::PARAM_STR);
+
+							$stmt->execute();
+							$i++;
 						}
-						die(json_encode($outputArr));
-					break;
-					
-					case "scanTemplates":
-						$inDirScanner = new inDirScanner(ROOT_DIR.'/templates/', @RequestHandler::$REQUEST['path'], "*");
-						die(json_encode($inDirScanner->scanDirectory()));
-					break;
-					
-					case "readFile":
-						die(file::efile(ROOT_DIR.@RequestHandler::$REQUEST['path'])['content']);
-					break;
-					
-					case "updateFile":
-						$updater = file::efile(ROOT_DIR.@RequestHandler::$REQUEST['filePath'], false, @RequestHandler::$REQUEST['fileContents']);
-						if($updater['status'] === "true") {
-							$status ="success";
-						} else {
-							$status = "warn";
-						}
-						die('{"message": "'.$updater['message'].'", "status": "'.$status.'"}');
-					break;
-					
-					case "usersList":
-						die(json_encode(new UsersList($db, $REQUEST)));
-					break;
-					
-					case "groupAssoc":
-						die(json_encode(new GroupAssocAdmin($db)));
-					break;
-					
-					case "cfgParse":
-						init::classUtil('ConfigUtils', "1.0.0");
-						$cfg = new ConfigParser();
-						die($cfg->buildConfigPage());
-					break;
-					
-					case "setConfig":
-						init::classUtil('ConfigUtils', "1.0.0");
-						die(ConfigParser::buildConfig(RequestHandler::$REQUEST));
-					break;
-					
-					case "log":
-					$file = @RequestHandler::$REQUEST['file'];
-							$logfile = ENGINE_DIR. 'cache/logs/'.$file.'.log';
-							if(file_exists($logfile)){
-								if(@RequestHandler::$REQUEST['lines'] < 100) {
-									$lines = $this->getLastLines($logfile, @intval(@RequestHandler::$REQUEST['lines']));
-									foreach($lines as $line){
-										echo $line."\n";
-									}
-									die();
-								} else {
-									die('{"message": "Not as long!"}');
-								}
-							} else {
-								die('{"message": "File '.$logfile.' not found"}');
-							}
-					break;
-				}
-			} else {
-				die('{"message": "Insufficent rights!"}');
-			}
-		}
-		
-		private function getLastLines($filename, $numLines = 50) {
-			$lines = array();
-			$handle = fopen($filename, "r");
-			
-			if ($handle) {
-				fseek($handle, -1, SEEK_END);
-				$position = ftell($handle);
-				$buffer = "";
-				while ($position > 0 && count($lines) < $numLines) {
-					$position--;
-					fseek($handle, $position);
-					$char = fgetc($handle);
-					if ($char === "\n") {
-						array_unshift($lines, $buffer);
-						$buffer = "";
-					} else {
-						$buffer = $char . $buffer;
+						die(json_encode(['type' => 'success', 'message' => "$i записей обновлено."]));
+					} catch (Exception $e) {
+						die(json_encode(['type' => 'error', 'message' => 'Ошибка при обновлении: ' . $e->getMessage()]));
 					}
-				}
-				
-				if ($buffer !== "") {
-					array_unshift($lines, $buffer);
-				}
-				
-				fclose($handle);
-			} else {
-				return false;
-			}
+					} else die('{"message": "WIP!", "type": "warn"}');
+				break;
 
-			return $lines;
-		}
-	}
+                case "showModules":
+                    $this->showModules();
+                    break;
+
+                case "showPermissions":
+                    $this->showPermissions($db);
+                    break;
+
+                case "parseServers":
+                    $this->parseServers($db, $REQUEST);
+                    break;
+
+                case "deleteServer":
+                    $this->deleteServer($db, $REQUEST);
+                    break;
+
+                case "getAllBadges":
+                    $this->getAllBadges($db);
+                    break;
+
+                case "loadUserBalance":
+                    $this->loadUserBalance($db, $REQUEST);
+                    break;
+
+                case "getGameVersions":
+                    	$versions = filesInDir::filesInDirArray(ROOT_DIR . UPLOADS_DIR . $config['launcherSettings']['gameFiles'].'versions');
+						die(json_encode($versions));
+                    break;
+
+                case "getJavaVersions":
+                    $this->getJavaVersions($config);
+                    break;
+
+                case "getServerPictures":
+                    $this->getServerPictures($config);
+                    break;
+
+                case "scanTemplates":
+                    $this->scanTemplates($REQUEST);
+                    break;
+
+                case "readFile":
+                    $this->readFile($REQUEST);
+                    break;
+
+                case "updateFile":
+                    $this->updateFile($REQUEST);
+                    break;
+
+                case "usersList":
+                    $this->usersList($db, $REQUEST);
+                    break;
+
+                case "groupAssoc":
+                    $this->groupAssoc($db);
+                    break;
+
+                case "cfgParse":
+                    $this->cfgParse();
+                    break;
+
+                case "setConfig":
+                    $this->setConfig($REQUEST);
+                    break;
+
+                case "log":
+                    $this->handleLog($REQUEST);
+                    break;
+            }
+        } else {
+            die('{"message": "Insufficient rights!"}');
+        }
+    }
+
+    // Обновление данных пользователя
+    private function updateUserField($db, $field, $REQUEST) {
+        $login = $REQUEST['userLogin'];
+        $value = $REQUEST[$field];
+        $data = init::$sqlQueryHandler->updateData('users', array($field => $value), 'login', $login);
+        die($data);
+    }
+
+    // Показать доступные модули
+    private function showModules() {
+        die(json_encode(init::$modulesArray));
+    }
+
+    // Показать разрешения
+    private function showPermissions($db) {
+        $query = 'SELECT * FROM `groupPermissions`';
+        $permArr = $db->getRows($query);
+        die(json_encode($permArr));
+    }
+
+    // Парсинг серверов
+    private function parseServers($db, $REQUEST) {
+        init::classUtil('ServerParser', "1.0.0");
+        $serverParser = new ServerParser($db, init::$usrArray['login'], true);
+        die($serverParser->parseServers(@$REQUEST['server']));
+    }
+
+    // Удаление сервера
+    private function deleteServer($db, $REQUEST) {
+        $serverName = @$REQUEST['serverName'];
+        $query = "DELETE FROM `servers` WHERE serverName = '".$serverName."'";
+        $data = $db->run($query);
+        if($data) {
+            die('{"message": "Server '.$serverName.' removed!", "type": "success"}');
+        }
+    }
+
+    // Получить все бейджи
+    private function getAllBadges($db) {
+        $query = 'SELECT `badgeName` FROM `badgesList`';
+        $badgesArr = array();
+        $data = $db->getRows($query);
+        foreach($data as $key){
+            $badgesArr[] = $key['badgeName'];
+        }
+        die(json_encode($badgesArr));
+    }
+
+    // Получить баланс пользователя
+    private function loadUserBalance($db, $REQUEST) {
+        $balance = $db->getValue("SELECT balance FROM users WHERE login = '".@$REQUEST['userLogin']."'");
+        die($balance);
+    }
+
+    // Получение файлов в директории
+    private function getFilesInDir($config, $dirKey, $REQUEST) {
+        $dir = ROOT_DIR . UPLOADS_DIR . $config['launcherSettings'][$dirKey];
+        $files = filesInDir::filesInDirArray($dir);
+        die(json_encode($files));
+    }
+
+    // Получить версии Java
+    private function getJavaVersions($config) {
+        $java = filesInDir::filesInDirArray(ROOT_DIR . UPLOADS_DIR . $config['launcherSettings']['jreDir']);
+        $outputArr = array_map(fn($jre) => str_replace(".zip", "", $jre), $java);
+        die(json_encode($outputArr));
+    }
+
+    // Получить картинки серверов
+    private function getServerPictures($config) {
+        $imgDir = "/templates/".$config['siteSettings']['siteTpl']. DIRECTORY_SEPARATOR . $config['launcherSettings']['serverPictures'];
+        $imgs = filesInDir::filesInDirArray(ROOT_DIR . $imgDir);
+        $outputArr = array_map(fn($img) => $imgDir . $img, $imgs);
+        die(json_encode($outputArr));
+    }
+
+    // Сканирование шаблонов
+    private function scanTemplates($REQUEST) {
+        $inDirScanner = new inDirScanner(ROOT_DIR.'/templates/', @$REQUEST['path'], "*");
+        die(json_encode($inDirScanner->scanDirectory()));
+    }
+
+    // Чтение файла
+    private function readFile($REQUEST) {
+        die(file::efile(ROOT_DIR.@$REQUEST['path'])['content']);
+    }
+
+    // Обновление файла
+    private function updateFile($REQUEST) {
+        $updater = file::efile(ROOT_DIR.@$REQUEST['filePath'], false, @$REQUEST['fileContents']);
+        $status = $updater['status'] === "true" ? "success" : "warn";
+        die('{"message": "'.$updater['message'].'", "status": "'.$status.'"}');
+    }
+
+    // Список пользователей
+    private function usersList($db, $REQUEST) {
+        die(json_encode(new UsersList($db, $REQUEST)));
+    }
+
+    // Группировка ассоциаций
+    private function groupAssoc($db) {
+        die(json_encode(new GroupAssocAdmin($db)));
+    }
+
+    // Разбор конфигурации
+    private function cfgParse() {
+        init::classUtil('ConfigUtils', "1.0.0");
+        $cfg = new ConfigParser();
+        die($cfg->buildConfigPage());
+    }
+
+    // Установка конфигурации
+    private function setConfig($REQUEST) {
+        init::classUtil('ConfigUtils', "1.0.0");
+        die(ConfigParser::buildConfig(RequestHandler::$REQUEST));
+    }
+
+    // Обработка логов
+    private function handleLog($REQUEST) {
+        $file = @$REQUEST['file'];
+        $logfile = ENGINE_DIR. 'cache/logs/'.$file.'.log';
+        if (file_exists($logfile)) {
+            $lines = $this->getLastLines($logfile, @intval(@$REQUEST['lines']));
+            if ($lines !== false) {
+                foreach ($lines as $line) {
+                    echo $line . "\n";
+                }
+            } else {
+                die('{"message": "Not as long!"}');
+            }
+        } else {
+            die('{"message": "File '.$logfile.' not found"}');
+        }
+		die();
+    }
+
+    // Получить последние строки из файла
+    private function getLastLines($filename, $numLines = 50) {
+        $lines = array();
+        $handle = fopen($filename, "r");
+
+        if ($handle) {
+            fseek($handle, -1, SEEK_END);
+            $position = ftell($handle);
+            $buffer = "";
+            while ($position > 0 && count($lines) < $numLines) {
+                $position--;
+                fseek($handle, $position);
+                $char = fgetc($handle);
+                if ($char === "\n") {
+                    array_unshift($lines, $buffer);
+                    $buffer = "";
+                } else {
+                    $buffer = $char . $buffer;
+                }
+            }
+
+            if ($buffer !== "") {
+                array_unshift($lines, $buffer);
+            }
+
+            fclose($handle);
+        } else {
+            return false;
+        }
+
+        return $lines;
+    }
+}
+?>

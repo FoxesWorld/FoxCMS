@@ -37,7 +37,9 @@
 			'templateEditor.title' => "Шаблоны",
 			'templateEditor.desc' => "Редактор шаблонов",
 			'pages.title' => "Страницы",
-			'pages.desc' => "Страницы сайта"
+			'pages.desc' => "Страницы сайта",
+			'permissions.title' => "Права",
+			'permissions.desc' => "Настройки прав пользователей"
 		),
 		
 		'mail' => array(

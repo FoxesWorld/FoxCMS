@@ -5,114 +5,90 @@
  * It provides methods for creating various types of input fields such as text inputs, number inputs, dropdowns, checkboxes, textareas, and tag inputs.
  * 
  * Authors: AidenFox
- * Date: [08.09.24]
- * Version: 1.5.0 ALPHA
+ * Date: [07.01.25]
+ * Version: 2.0.0
  */
 export class BuildField {
-    constructor(classInstance) {
+    constructor(classInstance, options = {}) {
         this.classInstance = classInstance;
-        this.inputFields = classInstance.formFields;
-        this.initAwait = 600;
-    }
-	
-	async buildFormFields(values) {
-		let formHtml = '';
+        this.inputFields = classInstance.formFields || [];
+        this.initAwait = options.initAwait || 600;
 
-		for (let i = 0; i < values.length; i++) {
-			const rowData = values[i];
-			formHtml += '<tr>';
-
-			for (let j = 0; j < this.inputFields.length; j++) {
-				const { fieldName, fieldType, optionsArray } = this.inputFields[j];
-				const value = rowData[fieldName];
-				formHtml += "<td>";
-				formHtml += await this.createInputBlock(fieldName, value, fieldType, optionsArray);
-				formHtml += "</td>";
-			}
-
-			formHtml += '</tr>';
-		}
-
-		return formHtml;
-	}
-
-    async createInputBlock(fieldName, value, fieldType, optionsArray) {
-        const inputHandlers = {
-            'text': () => this.createTextInput(fieldName, value),
-            'number': () => this.createNumberInput(fieldName, value),
-            'dropdown': () => this.createDropdown(fieldName, value, optionsArray),
-            'checkbox': () => this.createCheckboxInput(fieldName, value),
-            'textarea': () => this.createTextareaInput(fieldName, value),
-            'tagify': () => this.createTagifyInput(fieldName, value),
-			'date': () => this.createDatePickerInput(fieldName, value)
+        this.defaultHandlers = {
+			label: this.createLabel.bind(this),
+            text: this.createTextInput.bind(this),
+            number: this.createNumberInput.bind(this),
+            dropdown: this.createDropdown.bind(this),
+            checkbox: this.createCheckboxInput.bind(this),
+            textarea: this.createTextareaInput.bind(this),
+            tagify: this.createTagifyInput.bind(this),
+            date: this.createDatePickerInput.bind(this),
         };
 
-        if (this.inputFields) {
-            const fieldInfo = this.inputFields.find(field => field.fieldName === fieldName);
-            if (fieldInfo) {
-                //const { fieldType } = fieldInfo;
-                const handler = inputHandlers[fieldType];
-                if (handler) {
-                    return handler();
-                } else {
-                    console.error(`Unknown input type for field: ${fieldName}`);
-                    return '';
-                }
-            } else {
-                console.error(`Field not found in inputFields: ${fieldName}`);
-                return '';
+        this.handlers = { ...this.defaultHandlers, ...(options.customHandlers || {}) };
+    }
+
+    async buildFormFields(data) {
+        const rows = await Promise.all(data.map(async (rowData) => {
+            let rowHtml = '<tr>';
+            for (const field of this.inputFields) {
+                const { fieldName, fieldType, optionsArray } = field;
+                const value = rowData[fieldName];
+                rowHtml += `<td>${await this.createInputBlock(fieldName, value, fieldType, optionsArray)}</td>`;
             }
+            rowHtml += '</tr>';
+            return rowHtml;
+        }));
+        return rows.join('');
+    }
+	
+	async buildTable(fields, data, rowTemplate) {
+    const rows = await Promise.all(data.map(async (rowData, index) => {
+        const rowHtml = await this.renderRow(fields, { ...rowData, index }, rowTemplate);
+        return `<tr>${rowHtml}</tr>`;
+    }));
+    return rows.join("");
+}
+
+
+    async createInputBlock(fieldName, value, fieldType, optionsArray) {
+        const handler = this.handlers[fieldType];
+        if (handler) {
+            return handler(fieldName, value, optionsArray);
         } else {
-            console.error('inputFields not defined');
+            console.error(`Unknown input type for field: ${fieldName}`);
             return '';
         }
     }
+	
+	createLabel(fieldName, value) {
+		return `<b>${value}`;
+	}
 
-    createTextInput(key, value) {
+    createTextInput(fieldName, value) {
         return `
             <div class="input_block">
-                <label class="label" for="${key}">${key}:</label>
-                <input type="text" name="${key}" class="input" value="${value}" />
+                <label class="label" for="${fieldName}">${fieldName}:</label>
+                <input type="text" name="${fieldName}" class="input" value="${value}" />
             </div>`;
     }
-	
 
-	createDatePickerInput(key, value) {
-			const uniqueId = Math.random().toString(36).substring(7);
-			let html = `<div class="input_block">
-							<label class="label" for="${key}-${uniqueId}">Выберите дату</label>
-							<input type="hidden" name="${key}" id="${key}-${uniqueId}-unix" value="${value}" />
-							<input type="text" class="input" id="${key}-${uniqueId}" readonly />
-						</div>`;
-
-			setTimeout(() => {
-				let dateValue = new Date(parseInt(value, 10));
-
-				if (isNaN(dateValue.getTime())) {
-					dateValue = new Date();
-				}
-
-				flatpickr(`#${key}-${uniqueId}`, {
-					enableTime: true,
-					dateFormat: 'd.m.Y H:i',
-					defaultDate: dateValue,
-					onChange: function(selectedDates) {
-						if (selectedDates.length > 0) {
-							const unixValue = selectedDates[0].getTime();
-							document.querySelector(`#${key}-${uniqueId}-unix`).value = unixValue;
-						}
-					}
-				});
-			}, this.initAwait);
-
-			return html;
-		}
-
-    createNumberInput(key, value) {
+    createNumberInput(fieldName, value) {
         return `
             <div class="input_block">
-                <label class="label" for="${key}">${key}:</label>
-                <input type="number" name="${key}" class="input" value="${value}" />
+                <label class="label" for="${fieldName}">${fieldName}:</label>
+                <input type="number" name="${fieldName}" class="input" value="${value}" />
+            </div>`;
+    }
+
+    createDropdown(fieldName, value, optionsArray = []) {
+        const options = optionsArray
+            .map(option => `<option value="${option}" ${option === value ? 'selected' : ''}>${option}</option>`)
+            .join('');
+        return `
+            <div class="input_block">
+                <label class="label" for="${fieldName}">${fieldName}:</label>
+                <select name="${fieldName}" class="input">${options}</select>
             </div>`;
     }
 
@@ -131,77 +107,81 @@ export class BuildField {
         return inputBlock;
     }
 
-    createTextareaInput(key, value) {
-        const textareaId = `${key}_textarea`;
+    createTextareaInput(fieldName, value) {
+        const textareaId = `${fieldName}_textarea`;
+        return `
+            <div class="input_block">
+                <label class="label d-none" for="${textareaId}">${fieldName}:</label>
+                <textarea id="${textareaId}" name="${fieldName}" class="d-none">${value}</textarea>
+            </div>`;
+    }
+
+    createTagifyInput(fieldName, value) {
+        const uniqueId = `${fieldName}_${Math.random().toString(36).substr(2, 9)}`;
         const inputBlock = `
             <div class="input_block">
-                <label class="label d-none" for="${textareaId}">${key}:</label>
-                <textarea id="${textareaId}" name="${key}" class="d-none">${value}</textarea>
+                <label class="label" for="${uniqueId}">${fieldName}:</label>
+                <input type="text" id="${uniqueId}" name="${fieldName}" class="input" value="${value}">
             </div>`;
-
         setTimeout(() => {
-            const textarea = document.getElementById(textareaId);
-            const parent = textarea.parentNode;
-            const editor = CodeMirror.fromTextArea(textarea, {
-                value: value,
-                mode: "htmlmixed",
-                lineNumbers: false,
-                theme: "default",
-                viewportMargin: Infinity,
-                lineWrapping: true
+            const input = document.getElementById(uniqueId);
+            new Tagify(input, {
+                originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(','),
+                delimiters: ',',
             });
-            editor.setSize("100%", "auto");
-            window.addEventListener('resize', () => editor.setSize("100%", "auto"));
-            editor.refresh();
-			const codeMirrorContainer = editor.getWrapperElement();
-			codeMirrorContainer.classList.add("codeHtml");
         }, this.initAwait);
-
         return inputBlock;
     }
 
-    createDropdown(key, value, optionsArray) {
-        let selectOptions = '';
-        optionsArray.forEach(option => {
-            let displayValue = option;
-            if (option.includes('/')) {
-                displayValue = option.split('/').pop();
-            }
-            const isSelected = option === value ? 'selected' : '';
-            selectOptions += `<option value="${option}" ${isSelected}>${displayValue}</option>`;
-        });
-
-        return `
+    createDatePickerInput(fieldName, value) {
+        const uniqueId = `${fieldName}_${Math.random().toString(36).substr(2, 9)}`;
+        const unixInputId = `${uniqueId}_unix`;
+        const html = `
             <div class="input_block">
-                <label class="label" for="${key}">${key}:</label>
-                <select name="${key}" id="${key}" class="input">
-                    ${selectOptions}
-                </select>
+                <label class="label" for="${uniqueId}">${fieldName}:</label>
+                <input type="hidden" name="${fieldName}" id="${unixInputId}" value="${value}" />
+                <input type="text" class="input" id="${uniqueId}" readonly />
             </div>`;
-    }
-
-    createTagifyInput(key, value) {
-        const inputBlock = `
-            <div class="input_block">
-                <label class="label" for="${key}">${key}:</label>
-                <input type="text" id="${key}" name="${key}" class="input" value="${value}">
-            </div>`;
-
         setTimeout(() => {
-            const input = document.getElementById(key);
-            new Tagify(input, {
-                originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(','),
-                whitelist: [],
-                enforceWhitelist: false,
-                delimiters: ",",
-                callbacks: {
-                    //input: (e) => {
-                    //    e.target.setCustomValidity('');
-                    //}
+            const dateValue = new Date(parseInt(value, 10)) || new Date();
+            flatpickr(`#${uniqueId}`, {
+                enableTime: true,
+                dateFormat: 'd.m.Y H:i',
+                defaultDate: dateValue,
+                onChange: (selectedDates) => {
+                    if (selectedDates.length > 0) {
+                        document.getElementById(unixInputId).value = selectedDates[0].getTime();
+                    }
                 }
             });
         }, this.initAwait);
+        return html;
+    }
 
-        return inputBlock;
+    async renderRow(fields, rowData, template) {
+        const replacements = {};
+        for (const field of fields) {
+            const { fieldName, fieldType } = field;
+            const value = rowData[fieldName];
+            replacements[fieldName] = await this.createInputBlock(fieldName, value, fieldType);
+        }
+        return foxEngine.replaceTextInTemplate(template, replacements);
+    }
+
+    validateForm(fields, data) {
+        const errors = [];
+        fields.forEach(field => {
+            const { fieldName, validation } = field;
+            const value = data[fieldName];
+            if (validation) {
+                if (validation.required && !value) {
+                    errors.push(`${fieldName} is required.`);
+                }
+                if (validation.regex && !validation.regex.test(value)) {
+                    errors.push(`${fieldName} has an invalid format.`);
+                }
+            }
+        });
+        return errors;
     }
 }
