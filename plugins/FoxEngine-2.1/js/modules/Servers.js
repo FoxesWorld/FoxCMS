@@ -1,190 +1,194 @@
 export class Servers {
     constructor(foxEngine) {
         this.foxEngine = foxEngine;
-        //foxEngine.debugSend("Servers init", "background: #c89f27; padding: 5px;");
+        this.serversArr = [];
+        this.templateCache = {};
+        this.isInitialized = false;
     }
 
-    /* Servers parser */
-async parseOnline() {
-    try {
-        // Загрузка шаблона для серверов
-        const entryTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/serverEntry.tpl', true);
+    /**
+     * Инициализация массива серверов.
+     */
+    async initializeServers() {
+        if (this.isInitialized) return;
 
-        let parsedJson = await foxEngine.sendPostAndGetAnswer({
-            sysRequest: 'parseMonitor'
-        }, "JSON");
-
-        if (parsedJson.servers.length > 0) {
-            let serversHtmlPromises = [];
-
-            for (const obj of parsedJson.servers) {
-                let isOnline = obj.status === "online";
-                let progressbarClass = isOnline ? 'progressbar-online' : 'progressbar-offline';
-                let playersOnline = isOnline ? obj.playersOnline : 0;
-                let playersMax = isOnline ? obj.playersMax : 0;
-
-                let percent = playersMax > 0 ? Math.round((playersOnline / playersMax) * 100) : 0;
-
-                // Если favicon существует, то добавляем его, иначе оставляем пустое значение
-                let favicon = obj.favicon ? `<img src="${obj.favicon}" class="serverEntry-icon" alt="${obj.serverName} icon" />` : '';
-
-                // Заменяем шаблон
-                serversHtmlPromises.push(foxEngine.replaceTextInTemplate(entryTemplate, {
-                    version: obj.version ? obj.version : "Offline",
-                    serverName: obj.serverName,
-                    playersOnline: playersOnline,
-                    playersMax: playersMax,
-                    percent: percent,
-                    favicon: favicon, // Вставляем иконку или пустое значение
-                    statusClass: isOnline ? 'online' : 'offline',
-                    progressbarClass: progressbarClass
+        try {
+            const parsedJson = await this.foxEngine.sendPostAndGetAnswer({ sysRequest: 'parseMonitor' }, "JSON");
+            if (parsedJson.servers?.length > 0) {
+                this.serversArr = parsedJson.servers.map(server => ({
+                    serverName: server.serverName,
+                    server
                 }));
+                this.isInitialized = true;
             }
+        } catch (error) {
+            console.error('Error initializing servers:', error);
+        }
+    }
 
-            // Ждем, пока все промисы не завершатся
-            let serversHtmlResults = await Promise.all(serversHtmlPromises);
-            let serversHtml = serversHtmlResults.join('');
+    /**
+     * Загрузка шаблона с кэшированием.
+     */
+    async loadTemplateWithCache(path) {
+        if (!this.templateCache[path]) {
+            try {
+                this.templateCache[path] = await this.foxEngine.loadTemplate(path, true);
+            } catch (error) {
+                console.error(`Error loading template from ${path}:`, error);
+                throw error;
+            }
+        }
+        return this.templateCache[path];
+    }
 
-            // Загрузка шаблона для отображения общего числа онлайн
-            const totalOnlineTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'monitor/totalOnline.tpl', true);
-            let totalOnlinePercent = parsedJson.totalPlayersMax > 0 
-                ? Math.round((parsedJson.totalPlayersOnline / parsedJson.totalPlayersMax) * 100) 
+    /**
+     * Генерация HTML для иконки сервера.
+     */
+    getFaviconHtml(favicon, serverName) {
+        return favicon
+            ? `<img src="${favicon}" class="serverEntry-icon" alt="${serverName} icon" />`
+            : '';
+    }
+
+    /**
+     * Генерация HTML для сервера.
+     */
+    async getServerHtml(template, server) {
+        const isOnline = server.status === "online";
+        const playersOnline = isOnline ? server.playersOnline : 0;
+        const playersMax = isOnline ? server.playersMax : 0;
+        const percent = playersMax > 0 ? Math.round((playersOnline / playersMax) * 100) : 0;
+
+        return this.foxEngine.replaceTextInTemplate(template, {
+            version: server.version || "Offline",
+            serverName: server.serverName,
+            playersOnline,
+            playersMax,
+            percent,
+            favicon: this.getFaviconHtml(server.favicon, server.serverName),
+            statusClass: isOnline ? 'online' : 'offline',
+            progressbarClass: isOnline ? 'progressbar-online' : 'progressbar-offline'
+        });
+    }
+
+    /**
+     * Парсинг и отображение онлайн серверов.
+     */
+    async parseOnline() {
+        try {
+            await this.initializeServers();
+
+            const entryTemplate = await this.loadTemplateWithCache(`${this.foxEngine.elementsDir}monitor/serverEntry.tpl`);
+            const totalOnlineTpl = await this.loadTemplateWithCache(`${this.foxEngine.elementsDir}monitor/totalOnline.tpl`);
+
+            const serversHtml = (await Promise.all(
+                this.serversArr.map(({ server }) => this.getServerHtml(entryTemplate, server))
+            )).join('');
+
+            const parsedJson = await this.foxEngine.sendPostAndGetAnswer({ sysRequest: 'parseMonitor' }, "JSON");
+            const totalOnlinePercent = parsedJson.totalPlayersMax > 0
+                ? Math.round((parsedJson.totalPlayersOnline / parsedJson.totalPlayersMax) * 100)
                 : 0;
 
-            let totalOnlineHtml = await foxEngine.replaceTextInTemplate(totalOnlineTpl, {
+            const totalOnlineHtml = await this.foxEngine.replaceTextInTemplate(totalOnlineTpl, {
                 totalPlayersOnline: parsedJson.totalPlayersOnline,
                 totalPlayersMax: parsedJson.totalPlayersMax,
                 percent: totalOnlinePercent,
                 todaysRecord: parsedJson.todaysRecord
             });
 
-            // Вставляем собранный HTML на страницу
             $("#servers").html(serversHtml + totalOnlineHtml);
-        } else {
-            // Если серверы не найдены, очищаем блок
-            $("#servers").empty();
+        } catch (error) {
+            console.error('Error parsing online servers:', error);
         }
-    } catch (error) {
-        console.error('Error parsing online servers:', error);
     }
-}
 
+    /**
+     * Получение объекта сервера по имени.
+     */
+    getServerByName(serverName) {
+        return this.serversArr.find(({ serverName: name }) => name === serverName)?.server || null;
+    }
 
-    // Load server page content
+    /**
+     * Загрузка страницы сервера.
+     */
     async loadServerPage(serverName) {
-		if (serverName === foxEngine.page.selectPage.thisPage || foxEngine.page.selectPage.thisPage === undefined) {
-            return;
-        }
-        const pageTemplate = await foxEngine.loadTemplate(foxEngine.elementsDir + 'serverPage/serverPage.tpl', true);
+        if (serverName === this.foxEngine.page.selectPage.thisPage) return;
+
         try {
-            // Fetch server information
-            let server = await foxEngine.sendPostAndGetAnswer({
+            await this.initializeServers();
+
+            const serverObject = this.getServerByName(serverName);
+            if (!serverObject) {
+                console.error('Server not found:', serverName);
+                return;
+            }
+
+            const pageTemplate = await this.loadTemplateWithCache(`${this.foxEngine.elementsDir}serverPage/serverPage.tpl`);
+            const serverDetails = await this.foxEngine.sendPostAndGetAnswer({
                 sysRequest: "parseServers",
-                server: "serverName = '" + serverName + "'"
-            }, "JSON");
-			console.log(server.error);
-			if(server.error === undefined) {
-				if (server && server.length > 0) {
-					let serverDetails = server[0];
-
-					// Fetch modsInfo
-					let modsInfo = [];
-					if (serverDetails.modsInfo) {
-						modsInfo = JSON.parse(serverDetails.modsInfo);
-					}
-
-					let page = await foxEngine.replaceTextInTemplate(pageTemplate, {
-						serverImage: serverDetails.serverImage,
-						serverDescription: serverDetails.serverDescription,
-						serverName: serverDetails.serverName,
-						serverVersion: serverDetails.serverVersion,
-						isSecure: this.secureHtml(serverDetails.checkLib),
-						mods: await this.loadMods(modsInfo)
-					});
-
-					// Append the server page HTML to the container
-					foxEngine.page.loadData(page, replaceData.contentBlock);
-				} else {
-					console.error('Error: Unable to fetch server details.');
-				}
-		} else {
-			await this.foxEngine.utils.showErrorPage('{"error": "'+server.error+'"}', this.foxEngine.replaceData.contentBlock);
-			this.setPage("");
-		}
-        } catch (error) {
-            console.error('Error while loading server page:', error);
-        }
-        location.hash = 'server/' + serverName;
-        foxEngine.page.setPage(serverName);
-    }
-	
-	secureHtml(secure){
-		if(secure == "true"){
-			return `<div class="security-icon">
-        <i class="fas fa-shield-alt"></i>
-        <div class="security-text">
-            Верифицированные библиотеки
-            <span>Библиотеки проходят проверку на валидность</span>
-			<a href="#" onclick="foxEngine.page.loadPage('verifiedLibs', replaceData.contentBlock);">Что это значит?</a>
-        </div>
-    </div>`;
-		} else {
-			return `<div class="danger-icon">
-        <i class="fas fa-exclamation-triangle"></i>
-        <div class="danger-text">
-            Устаревшие библиотеки
-            <span>Используются библиотеки без проверки валидности!</span>
-			<a href="#" onclick="foxEngine.page.loadPage('unVerifiedLibs', replaceData.contentBlock);">Что это значит?</a>
-        </div>
-    </div>`;
-		}
-	}
-
-    async getServerDetails(serverName) {
-        try {
-            // Fetch server information
-            let server = await foxEngine.sendPostAndGetAnswer({
-                sysRequest: "parseServers",
-                server: "serverName = '" + serverName + "'"
+                server: `serverName = '${serverName}'`
             }, "JSON");
 
-            return server[0];
+            if (serverDetails.error) {
+                await this.foxEngine.utils.showErrorPage(`{"error": "${serverDetails.error}"}`, this.foxEngine.replaceData.contentBlock);
+                this.foxEngine.page.setPage("");
+                return;
+            }
+
+            const modsInfo = serverDetails[0]?.modsInfo ? JSON.parse(serverDetails[0].modsInfo) : [];
+            const pageHtml = await this.foxEngine.replaceTextInTemplate(pageTemplate, {
+                favicon: this.getFaviconHtml(serverObject.favicon, serverName),
+                serverImage: serverDetails[0].serverImage,
+                serverDescription: serverDetails[0].serverDescription,
+                serverName: serverDetails[0].serverName,
+                serverVersion: serverDetails[0].serverVersion,
+                isSecure: this.getSecureHtml(serverDetails[0].checkLib),
+                mods: await this.loadMods(modsInfo)
+            });
+
+            this.foxEngine.page.loadData(pageHtml, this.foxEngine.replaceData.contentBlock);
+            this.foxEngine.page.setPage(serverName);
+            location.hash = `server/${serverName}`;
         } catch (error) {
-            console.error('Error while loading server page:', error);
+            console.error('Error loading server page:', error);
         }
     }
 
-    // Function to load mods based on modsInfo
-	async loadMods(modsInfo) {
-		try {
-			if (modsInfo && modsInfo.length > 0) {
-				// Load the template only once
-				const template = await foxEngine.loadTemplate(foxEngine.elementsDir + 'serverPage/serverMods.tpl', true);
+    /**
+     * Генерация HTML для статуса безопасности.
+     */
+    getSecureHtml(secure) {
+        const statusClass = secure === "true" ? 'security' : 'danger';
+        const message = secure === "true"
+            ? 'Верифицированные библиотеки. Библиотеки проходят проверку на валидность.'
+            : 'Устаревшие библиотеки. Используются библиотеки без проверки валидности!';
+        return `
+            <div class="${statusClass}-icon">
+                <i class="fas ${secure === "true" ? 'fa-shield-alt' : 'fa-exclamation-triangle'}"></i>
+                <div class="${statusClass}-text">
+                    ${message}
+                    <a href="#" onclick="foxEngine.page.loadPage('${secure === "true" ? 'verifiedLibs' : 'unVerifiedLibs'}', replaceData.contentBlock);">Что это значит?</a>
+                </div>
+            </div>`;
+    }
 
-				// Use Promise.all to execute promises concurrently
-				const promises = modsInfo.map(async mod => {
-					// Replace text in the template for each mod
-					return foxEngine.replaceTextInTemplate(template, {
-						modName: mod.modName,
-						modPicture: mod.modPicture,
-						modDesc: mod.modDesc
-					});
-				});
+    /**
+     * Загрузка модов.
+     */
+    async loadMods(modsInfo) {
+        if (!modsInfo || modsInfo.length === 0) {
+            return `<p class="alert alert-warning" role="alert">На данный момент модов нет!</p>`;
+        }
 
-				// Wait for all promises to resolve
-				const modsHtmlArray = await Promise.all(promises);
-
-				// Concatenate the results
-				return modsHtmlArray.join('');
-			} else {
-				return `<p class="alert alert-warning" role="alert">
-				 На данный момент модов нет!
-				</p>`;
-			}
-		} catch (error) {
-			console.error('Error while loading mods:', error);
-			return ''; // Return empty string in case of an error
-		}
-	}
-
+        const template = await this.loadTemplateWithCache(`${this.foxEngine.elementsDir}serverPage/serverMods.tpl`);
+        return (await Promise.all(modsInfo.map(mod =>
+            this.foxEngine.replaceTextInTemplate(template, {
+                modName: mod.modName,
+                modPicture: mod.modPicture,
+                modDesc: mod.modDesc
+            })
+        ))).join('');
+    }
 }

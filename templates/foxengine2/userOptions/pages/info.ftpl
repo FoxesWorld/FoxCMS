@@ -4,7 +4,7 @@
 	"description": "Информация о сайте FoxesCraft",
 	"keywords": "О сайте, Я расскажу тебе историю, Подробнее о Мире Лис, Что за сайт Лисий Мир?",
 	"optionBlock": ".pages",
-	"optionPreText": "<img src='/templates/foxengine2/assets/icons/menu/icon_donate.png' />",
+	"optionPreText": "<i class=\"fa-regular fa-sparkle\"></i>",
 	"optionGroup": [1,4,5],
 	"optionClass": "nav-item uk-animation-fade",
 	"type": "page"

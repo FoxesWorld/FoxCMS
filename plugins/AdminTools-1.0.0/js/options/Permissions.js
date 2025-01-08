@@ -110,18 +110,104 @@ export class Permissions {
 		}
 	}
 
+addRow() {
+    // Создание новой строки
+    const newRow = document.createElement('tr');
 
-    initEventListeners() {
-        console.log("Инициализация обработчиков событий...");
-        this.formInit(500);
+    // Генерация полей для строки
+    this.formFields.forEach((field) => {
+        const cell = document.createElement('td');
+        const inputBlock = document.createElement('div');
+        inputBlock.className = 'input_block';
 
-        const formElement = $('#permissionsForm');
-        if (formElement.length > 0) {
-            formElement.on('submit', (event) => this.submitForm(event));
+        // Создание label
+        const label = document.createElement('label');
+        label.className = 'label';
+        label.setAttribute('for', field.fieldName);
+        label.textContent = '';
+
+        // Создание input или readonly отображения для index
+        let input;
+        if (field.fieldName === 'index') {
+            input = document.createElement('span');
+            input.textContent = document.querySelectorAll('#permList tr').length + 1; // Уникальный индекс
+            input.className = 'index';
         } else {
-            console.error('#permissionsForm не найден в DOM');
+            input = document.createElement('input');
+            input.type = field.fieldType === 'tagify' ? 'text' : field.fieldType;
+            input.name = field.fieldName;
+            input.className = 'input';
+            input.value = ''; // Установите значение по умолчанию, если требуется
         }
+
+        // Сборка блока
+        inputBlock.appendChild(label);
+        inputBlock.appendChild(input);
+        cell.appendChild(inputBlock);
+        newRow.appendChild(cell);
+    });
+
+    // Добавление кнопки удаления строки
+    const deleteCell = document.createElement('td');
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Удалить';
+    deleteButton.className = 'btn btn-danger btn-sm';
+    deleteButton.addEventListener('click', () => this.deleteRow(newRow));
+    deleteCell.appendChild(deleteButton);
+    newRow.appendChild(deleteCell);
+
+    // Добавление строки в таблицу
+    const tableBody = document.querySelector('#permList');
+    if (tableBody) {
+        tableBody.appendChild(newRow);
+
+        // Инициализация дополнительных компонентов, если требуется (например, Tagify)
+        const tagifyInputs = newRow.querySelectorAll('.tagify');
+        tagifyInputs.forEach((input) => new Tagify(input));
+    } else {
+        console.error('#permList не найден.');
     }
+}
+
+deleteRow(row) {
+    const tableBody = document.querySelector('#permList');
+    if (tableBody) {
+        tableBody.removeChild(row);
+
+        // Обновление индексов
+        Array.from(tableBody.querySelectorAll('tr')).forEach((row, index) => {
+            const indexSpan = row.querySelector('.index');
+            if (indexSpan) {
+                indexSpan.textContent = index + 1;
+            }
+        });
+    } else {
+        console.error('Таблица #permList не найдена.');
+    }
+}
+
+
+
+initEventListeners() {
+    console.log("Инициализация обработчиков событий...");
+    this.formInit(500);
+
+    const formElement = $('#permissionsForm');
+    if (formElement.length > 0) {
+        formElement.on('submit', (event) => this.submitForm(event));
+    } else {
+        console.error('#permissionsForm не найден в DOM');
+    }
+
+    // Обработчик для кнопки добавления строки
+    const addRowButton = document.querySelector('#addRowButton');
+    if (addRowButton) {
+        addRowButton.addEventListener('click', () => this.addRow());
+    } else {
+        console.warn('Кнопка для добавления строки не найдена.');
+    }
+}
+
 
     formInit(awaitms) {
         setTimeout(() => {
@@ -145,4 +231,4 @@ export class Permissions {
             }
         }, awaitms);
     }
-}
+}  

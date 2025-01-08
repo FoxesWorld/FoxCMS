@@ -11,101 +11,74 @@ export class Page {
         };
     }
 
-async loadPage(page, block) {
-    const cleanPage = page.split('?')[0];
-    if (cleanPage === this.selectPage.thisPage) {
-        return;
-    }
-    block = block || this.foxEngine.replaceData.contentBlock;
+    async loadPage(page, block = this.foxEngine.replaceData.contentBlock) {
+        const cleanPage = page.split('?')[0];
+        if (cleanPage === this.selectPage.thisPage) return;
 
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+        try {
+            const response = await this.foxEngine.sendPostAndGetAnswer({ "getOption": cleanPage }, "TEXT");
 
-    const response = await this.foxEngine.sendPostAndGetAnswer({ "getOption": cleanPage }, "TEXT");
+            if (!this.foxEngine.utils.isJson(response)) {
+                const responseHTML = this.foxEngine.parseResponseHTML(response);
+                const option = this.foxEngine.utils.getData(responseHTML, 'useroption');
 
-    if (!this.foxEngine.utils.isJson(response)) {
-        const responseHTML = this.foxEngine.parseResponseHTML(response);
-        const option = this.foxEngine.utils.getData(responseHTML, 'useroption');
-        const content = this.foxEngine.utils.getData(responseHTML, 'pageContent');
+                if (option) {
+                    const jsonOption = JSON.parse(option.textContent);
+                    await this.handlePageOptions(jsonOption);
 
-        if (option) {
-            const jsonOption = JSON.parse(option.textContent);
-            if (jsonOption.langPack) {
-                this.langPack = await this.loadLangPack(jsonOption.langPack);
-            }
-            if (jsonOption.onLoad) {
-                const func = jsonOption.onLoad + (jsonOption.onLoadArgs ? `(${jsonOption.onLoadArgs})` : '');
-                setTimeout(() => {
-                    eval(func);
-                }, 500);
-            }
+                    if (this.foxEngine.entryReplacer) {
+                        const replacedContent = await this.foxEngine.entryReplacer.replaceText(responseHTML.body.innerHTML);
+                        await this.loadData(replacedContent, block);
+                        this.updateNavigation(cleanPage);
+                    } else {
+                        console.error("Invalid or undefined foxEngine.entryReplacer.replaceText");
+                    }
+                }
 
-            if (this.foxEngine.entryReplacer) {
-                await this.loadData(await this.foxEngine.entryReplacer.replaceText(responseHTML.body.innerHTML), block);
-                this.setPage(cleanPage);
-                location.hash = `#page/${cleanPage}`;
+                this.removeUserOptionElement();
+                //this.scrollToBlock(block);
             } else {
-                console.error("Invalid or undefined foxEngine.entryReplacer.replaceText");
+                await this.foxEngine.utils.showErrorPage(response, block);
+                this.setPage("");
             }
-            this.updateMetaTags(jsonOption);
+        } catch (error) {
+            console.error("Error loading page:", error);
         }
-        $("#content > div > div.page-content > useroption").remove();
-
-        /*
-        const contentBlock = document.querySelector(block);
-		const targetOption = document.querySelector('.useroption');  
-        if (contentBlock) {
-            contentBlock.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-		if (contentBlock) {
-            const blockHeight = contentBlock.offsetHeight; 
-            console.log("Высота загруженного блока: ", blockHeight);
-        }*/
-    } else {
-        await this.foxEngine.utils.showErrorPage(response, block);
-        this.setPage("");
     }
-}
-
 
     async getPage(page) {
-        const response = await this.foxEngine.sendPostAndGetAnswer({ "getOption": page }, "HTML");
-        const option = this.foxEngine.utils.getData(response, 'useroption');
+        try {
+            const response = await this.foxEngine.sendPostAndGetAnswer({ "getOption": page }, "HTML");
+            const option = this.foxEngine.utils.getData(response, 'useroption');
 
-        if (option) {
-            const jsonOption = JSON.parse(option.textContent);
-            if (jsonOption.langPack) {
-                this.langPack = await this.loadLangPack(jsonOption.langPack);
-            }
-            if (jsonOption.onLoad) {
-                const func = jsonOption.onLoad + (jsonOption.onLoadArgs ? `(${jsonOption.onLoadArgs})` : '');
-                setTimeout(() => {
-                    eval(func);
-                }, 500);
-            }
+            if (option) {
+                const jsonOption = JSON.parse(option.textContent);
+                await this.handlePageOptions(jsonOption);
 
-            let data = await this.foxEngine.entryReplacer.replaceText(response.body.innerHTML);
+                let data = await this.foxEngine.entryReplacer.replaceText(response.body.innerHTML);
+                if (data?.includes('<section class="gallery"')) {
+                    new Gallery(this.foxEngine, data).loadGallery();
+                }
 
-            if (data && data.includes('<section class="gallery"')) {
-                const galleryInstance = new Gallery(this.foxEngine, data);
-                galleryInstance.loadGallery();
+                return data;
             }
 
-            return data;
-        } else {
             console.error('Page option not found.');
+            return null;
+        } catch (error) {
+            console.error("Error fetching page:", error);
             return null;
         }
     }
 
     async loadLangPack(langPackKey) {
-        const langText = await this.foxEngine.sendPostAndGetAnswer({ sysRequest: "getLangPack", langPackKey }, "JSON");
-        return langText || null;
+        try {
+            const langText = await this.foxEngine.sendPostAndGetAnswer({ sysRequest: "getLangPack", langPackKey }, "JSON");
+            return langText || null;
+        } catch (error) {
+            console.error("Error loading language pack:", error);
+            return null;
+        }
     }
 
     updateMetaTags(jsonOption) {
@@ -113,40 +86,72 @@ async loadPage(page, block) {
             const content = jsonOption[tagName];
             if (content) {
                 let metaTag = document.querySelector(`meta[name="${tagName}"]`);
-                if (metaTag) {
-                    metaTag.setAttribute('content', content);
-                } else {
+                if (!metaTag) {
                     metaTag = document.createElement('meta');
                     metaTag.name = tagName;
-                    metaTag.content = content;
                     document.head.appendChild(metaTag);
                 }
+                metaTag.setAttribute('content', content);
             }
         });
     }
 
     async loadData(data, block) {
-        $(block).fadeOut(500);
-        setTimeout(() => {
-            if (data && data.includes('<section class="gallery"')) {
-                const galleryInstance = new Gallery(this.foxEngine, data);
-                galleryInstance.loadGallery();
+        $(block).fadeOut(500, () => {
+            if (data?.includes('<section class="gallery"')) {
+                new Gallery(this.foxEngine, data).loadGallery();
             }
 
             $(block).html(data).fadeIn(500);
             this.foxEngine.foxesInputHandler.formInit(500, data);
-        }, 500);
+        });
     }
 
     setPage(page) {
         document.querySelectorAll('.selectedPage').forEach(el => el.classList.remove('selectedPage'));
-
         const newPageLink = document.querySelector(`.pageLink-${page}`);
-        if (newPageLink) {
-            newPageLink.classList.add('selectedPage');
-        }
+        if (newPageLink) newPageLink.classList.add('selectedPage');
 
         this.selectPage.thatPage = this.selectPage.thisPage;
         this.selectPage.thisPage = page;
+    }
+
+    async handlePageOptions(jsonOption) {
+        if (jsonOption.langPack) {
+            this.langPack = await this.loadLangPack(jsonOption.langPack);
+        }
+
+        if (jsonOption.onLoad) {
+            const func = `${jsonOption.onLoad}${jsonOption.onLoadArgs ? `(${jsonOption.onLoadArgs})` : ''}`;
+            setTimeout(() => {
+                try {
+                    eval(func);
+                } catch (error) {
+                    console.error("Error executing onLoad function:", error);
+                }
+            }, 500);
+        }
+
+        this.updateMetaTags(jsonOption);
+    }
+
+    updateNavigation(cleanPage) {
+        this.setPage(cleanPage);
+        location.hash = `#page/${cleanPage}`;
+    }
+
+    removeUserOptionElement() {
+        const userOption = document.querySelector("#content > div > div.page-content > useroption");
+        if (userOption) userOption.remove();
+    }
+
+    scrollToBlock(block) {
+        const contentBlock = document.querySelector(block);
+        if (contentBlock) {
+            window.scrollTo({
+                top: contentBlock.offsetTop,
+                behavior: 'smooth'
+            });
+        }
     }
 }

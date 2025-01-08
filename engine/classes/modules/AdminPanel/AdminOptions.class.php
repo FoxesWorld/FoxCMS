@@ -23,7 +23,7 @@ class AdminOptions extends AdminPanel {
                     break;
 					
 				case "editPermissions":
-					$permArray = json_decode($REQUEST['permissions'], true); // Декодируем JSON в ассоциативный массив
+					$permArray = json_decode(@$REQUEST['permissions'], true); // Декодируем JSON в ассоциативный массив
 					if(is_array($permArray)) {
 					$i = 1;
 

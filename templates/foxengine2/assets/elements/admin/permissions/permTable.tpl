@@ -17,7 +17,10 @@
 			<input type="hidden" name="admPanel" value="editPermissions" />
 						<input name="refreshPage" type="hidden" value="false" />
 						<input name="playSound" type="hidden" value="false" />
-				<button type="submit" class="login">Apply</button>
+						<div class="buttonGroup">
+							<button onclick="return false" id="addRowButton" class="btn btn-primary">Добавить строку</button>
+							<button type="submit" class="login">Применить</button>
+						</div>
 			</form>
                </div>
             </div>
