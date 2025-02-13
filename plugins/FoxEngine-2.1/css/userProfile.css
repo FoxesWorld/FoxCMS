@@ -208,7 +208,7 @@
 		color: #fff;
 		height: auto;
 		padding: 12px 12px 12px 0px;
-		font-size: 14.0px;
+		font-size: 18px;
 		font-weight: 500;
 		position: relative;
 	}
@@ -564,6 +564,40 @@
 	margin: 5px;
     font-size: 32pt;
     color: #ffffff;
+}
+
+.foxesButton_split {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-flex;
+    border-radius: var(--button--radius);
+}
+
+.foxesMenu {
+    background: rgb( var(--theme-area_background_reset) );
+    box-shadow: var(--popup--boxShadow);
+    border: var(--popup--border);
+    background-clip: padding-box;
+    border-radius: var(--popup--radius);
+    z-index: 10000;
+    position: absolute;
+}
+
+.foxesMenu .foxesMenu_item:first-child a, .foxesMenu .foxesMenu_item:first-child > span {
+    border-top-left-radius: var(--popup--radius);
+    border-top-right-radius: var(--popup--radius);
+}
+
+.foxesMenu .foxesMenu_item:last-child a, .foxesMenu .foxesMenu_item:last-child > span {
+    border-bottom-left-radius: var(--popup--radius);
+    border-bottom-right-radius: var(--popup--radius);
+}
+
+ul.foxesMenu, .foxesMenu > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 @keyframes bounceSelected {

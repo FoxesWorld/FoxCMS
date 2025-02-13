@@ -66,6 +66,10 @@
     font-size: 11pt;
 }
 
+.navbar-brand {
+	display: contents;
+}
+
 @media (min-width: 576px) {
     .container {
         max-width:576px
@@ -540,6 +544,14 @@ img {
 }
 
 .rightBlock .card:first-child {
+}
+
+#lastUser a {
+	    color: #7e7c7d;
+}
+
+#lastUser a:hover {
+	    color: var(--theme-color-secondary);
 }
 
 .card span {
@@ -1524,10 +1536,15 @@ footer .footer-copyright span img {
 
 
 /* Monitor */
+
+#servers{
+	margin: 5px;
+}
+
 .serverEntry {
     display: flex;
     align-items: center;
-    gap: 10px; /* Расстояние между элементами */
+    gap: 10px; /* Ð Ð°ÑÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð¼ÐµÐ¶Ð´Ñƒ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°Ð¼Ð¸ */
     padding: 5px;
     margin: 10px;
     background-color: var(--theme-color-secondary);
@@ -1544,7 +1561,7 @@ footer .footer-copyright span img {
 }
 
 .serverEntry-content {
-    flex: 1; /* Расширение содержимого, чтобы занимать доступное пространство */
+    flex: 1; /* Ð Ð°ÑÑˆÐ¸Ñ€ÐµÐ½Ð¸Ðµ ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ð¼Ð¾Ð³Ð¾, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð·Ð°Ð½Ð¸Ð¼Ð°Ñ‚ÑŒ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¾Ðµ Ð¿Ñ€Ð¾ÑÑ‚Ñ€Ð°Ð½ÑÑ‚Ð²Ð¾ */
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -1593,10 +1610,6 @@ footer .footer-copyright span img {
     justify-content: center;
     gap: 5px;
     transition: background-color 0.2s;
-}
-
-.button:hover {
-    background-color: #0056b3;
 }
 
 .online_text {
@@ -1722,17 +1735,17 @@ footer .footer-copyright span img {
 }
 
 .total_online_block {
-    display: flex;
+    display: inline-flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #2e2a2f; /* Более приятный фон */
+    background-color: #2e2a2f; /* Ð‘Ð¾Ð»ÐµÐµ Ð¿Ñ€Ð¸ÑÑ‚Ð½Ñ‹Ð¹ Ñ„Ð¾Ð½ */
     padding: 0px 10px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .total_online_block .information {
-    flex: 1; /* Равномерное распределение */
+    flex: 1; /* Ð Ð°Ð²Ð½Ð¾Ð¼ÐµÑ€Ð½Ð¾Ðµ Ñ€Ð°ÑÐ¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ðµ */
     border-right: 1px solid #4a4248;
     box-sizing: border-box;
     text-align: center;
@@ -1740,7 +1753,7 @@ footer .footer-copyright span img {
 }
 
 .total_online_block .information:hover {
-    background-color: #3b343a; /* Легкий эффект наведения */
+    background-color: #3b343a; /* Ð›ÐµÐ³ÐºÐ¸Ð¹ ÑÑ„Ñ„ÐµÐºÑ‚ Ð½Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ñ */
 }
 
 .total_online_block .information:last-child {
@@ -1752,7 +1765,7 @@ footer .footer-copyright span img {
     font-size: 28px;
     color: #f4eed2;
     margin-bottom: 8px;
-    white-space: nowrap; /* Предотвращает перенос текста */
+    white-space: nowrap; /* ÐŸÑ€ÐµÐ´Ð¾Ñ‚Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚ Ð¿ÐµÑ€ÐµÐ½Ð¾Ñ Ñ‚ÐµÐºÑÑ‚Ð° */
     overflow: hidden;
     text-overflow: ellipsis;
 }

@@ -129,6 +129,28 @@
 								die($base64_image);
 							//}
 							break;
+							
+							case "userHead":
+								$login = @RequestHandler::$REQUEST['login'] ?? null;
+								$loadUserInfo = new LoadUserInfo($login, $this->db);
+								$userData = $loadUserInfo->userInfoArray();
+								$photoPath = ROOT_DIR . $userData['profilePhoto'];
+
+								$mimeType = mime_content_type($photoPath);
+								if (strpos($mimeType, 'image/') !== 0) {
+									die(json_encode(['error' => 'Invalid image file']));
+								}
+
+								// Чтение и кодирование изображения
+								$imageData = file_get_contents($photoPath);
+								if ($imageData === false) {
+									die(json_encode(['error' => 'Failed to read image file']));
+								}
+
+								$base64Image = base64_encode($imageData);
+								die($base64Image);
+								
+							break;
 
 							case "skinPath":
 								die('{"skin": "'.str_replace(ROOT_DIR, "", init::$usrFiles['skin']).'", "cape": "'.str_replace(ROOT_DIR, "", init::$usrFiles['cape']).'"}');
@@ -226,10 +248,30 @@
 							$serverName = @RequestHandler::$REQUEST["serverName"];
 							
 							if ($login && $serverName) {
-								$playTimeWidget->startGame($login, $serverName, 0);
-								//die('{"message": "Good Luck Have Fun, '.$login.'!"}');
+								$start = $playTimeWidget->startGame($login, $serverName);
+								die($start);//'{"message": "Good Luck Have Fun, '.$login.'!"}');
 							} else {
 								// Handle error: missing login or serverName
+							}
+							break;
+							
+							
+						case "playing":
+							init::classUtil('PlayTimeWidget', "1.0.0");
+							$playTimeWidget = new GameServerManager($this->db);
+							$login = @RequestHandler::$REQUEST["login"];
+							$serverName = @RequestHandler::$REQUEST["serverName"];
+							$playTime = @RequestHandler::$REQUEST["playTime"];
+
+							if ($login && $serverName && $playTime !== false) {
+								$host = @RequestHandler::$REQUEST["serverIp"];
+								$port = @RequestHandler::$REQUEST["serverPort"];
+								//$timeHours = $playTime / 3600;
+								$update = $playTimeWidget->updateGameTime($login, $serverName, $host, $port, intval($playTime));
+								// Optionally return some status or message
+								 die($update);//'{"message": "Playtime updated for '.$login.'!"}');
+							} else {
+								// Handle error: missing or invalid login, serverName, or playTime
 							}
 							break;
 
@@ -238,19 +280,47 @@
 							$playTimeWidget = new GameServerManager($this->db);
 							$login = @RequestHandler::$REQUEST["login"];
 							$serverName = @RequestHandler::$REQUEST["serverName"];
-							$playTime = @RequestHandler::$REQUEST["playTime"];
+							$playTime = intval(@RequestHandler::$REQUEST["playTime"]);
 
 							if ($login && $serverName && $playTime !== false) {
-								$timeHours = $playTime / 3600;
-								$playTimeWidget->finishGame($login, $serverName, $timeHours);
-								//die('DONE');
+								$finish = $playTimeWidget->finishGame($login, $serverName, $playTime);
+								die($finish);
 							} else {
-								// Handle error: missing or invalid login, serverName, or playTime
 							}
 							break;
+							
+						case "pay":
+							$client = new Client();
+							$client->setAuth('shopId', 'secretKey');
+						break;
+						
+						case "getUserData":
+							$token = @RequestHandler::$REQUEST["accessToken"];
+							$uuid  = @RequestHandler::$REQUEST["uuid"];
+							$query = "SELECT * FROM `usersession` WHERE `accessToken` = :token";
+
+						    $stmt = $this->db->prepare($query);
+							$stmt->bindParam(':token', $token, \PDO::PARAM_STR);
+							$stmt->execute();
+							
+							$result = $stmt->fetch(\PDO::FETCH_ASSOC);
+							if($result) {
+							$login = $result["user"];
+							$loadUserInfo = new LoadUserInfo($login, $this->db);
+							$userData = $loadUserInfo->userInfoArray();
+							$groupAssoc = new groupAssociacion($userData['user_group'], $this->db);
+							$userData['groupName'] = $groupAssoc->userGroupTag();
+							die(json_encode($userData));
+							} else {
+								//die('{"message": "incorrect session"}');
+								
+								die('{"realname": "ErrorWin", "groupName": "#Ошибка 0xc32", "colorScheme": "#c1a634", "userStatus": "Неверный токен!", "land": "FoxesLand", "profilePhoto": "/templates/foxengine2/assets/img/no-photo.jpg", "groupName": "tester", "user_group": "4"}');
+							}
+							//
+						break;
 
 						default:
-							die('{"message": "Unknown sysRequest option!"}');
+							die('{"message": "Unknown sysRequest option - '.RequestHandler::$REQUEST[$this->requestHeader].'!"}');
 						break;
 					}
 				}
@@ -278,6 +348,9 @@
 					$this->logger->WriteLine("Logged user '".init::$usrArray['login']."' uploading ".$fileType." for ".$login);
 					if(@RequestHandler::$REQUEST['csrf_token'] === init::$usrArray['hash'] || init::$usrArray['user_group'] == 1) {
 						$folder = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER .$login. '/';
+						if(!file_exists($folder)){
+							mkdir($folder, 0755);
+						}
 						$perms = array( 
 									"skin"=>"64",
 									"cloak"=>"64",

@@ -58,6 +58,10 @@ class AdminOptions extends AdminPanel {
                 case "showModules":
                     $this->showModules();
                     break;
+					
+				case "selectUsers":
+					$this->selectUsers($db);
+				break;
 
                 case "showPermissions":
                     $this->showPermissions($db);
@@ -119,6 +123,10 @@ class AdminOptions extends AdminPanel {
                 case "setConfig":
                     $this->setConfig($REQUEST);
                     break;
+					
+				case "resetUserTop":
+					$this->resetOnline($db);
+					break;
 
                 case "log":
                     $this->handleLog($REQUEST);
@@ -165,6 +173,27 @@ class AdminOptions extends AdminPanel {
             die('{"message": "Server '.$serverName.' removed!", "type": "success"}');
         }
     }
+	
+	private function selectUsers($db){
+		$query = 'SELECT * FROM `users`';
+        $users = $db->getRows($query);
+        die(json_encode($users));
+	}
+	
+	private function resetOnline($db){
+		$query = 'SELECT * FROM `users`';
+		$users = $db->getRows($query);
+    
+		foreach ($users as $user) {
+			$newValue = '[]';
+			$updateQuery = "UPDATE `users` SET `serversOnline` = :someField WHERE `user_id` = :userId";
+			$stmt = $db->prepare($updateQuery);
+			$stmt->bindParam(':someField', $newValue, PDO::PARAM_STR);
+			$stmt->bindParam(':userId', $user['user_id'], PDO::PARAM_INT);
+			$stmt->execute();
+		}
+		die('{"message": "Cleared '.count($users).'", "type": "success"}');
+	}
 
     // Получить все бейджи
     private function getAllBadges($db) {

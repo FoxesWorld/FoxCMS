@@ -3,7 +3,7 @@
     "description": "Защитим королевство Дискордия!",
     "keywords": "Вумпус в беде, Доступ к Дискорду, Обход блокировки Дискордика, ЧАВО с Дискордом?, Обновления жизни Вумпуса",
     "optionBlock": ".pages",
-    "optionPreText": "<i class=\"fa-brands fa-discord\"></i>",
+    "optionPreText": "<i class=\"page-title-icon fa-brands fa-discord\"></i>",
     "optionGroup": [1,4,5],
     "optionClass": "nav-item uk-animation-fade",
     "type": "page" 

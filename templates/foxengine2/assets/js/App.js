@@ -41,7 +41,7 @@ const App = new Vue({
 // Set interval for foxEngine methods
 setInterval(() => {
 		foxEngine.servers.parseOnline();
-}, 10000);
+}, 5000);
 
 // Handle hash change
 (function () {

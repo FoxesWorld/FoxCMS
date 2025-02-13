@@ -49,13 +49,13 @@ if (!defined('FOXXEY')) {
 			'mountDir' 			=> ROOT_DIR."/plugins/StartUpSound",
 			'enableVoice' 		=> true,
 			'enableMusic' 		=> true,
-			'easterMusRarity'   => 500,
-			'easterSndRarity'	=> 200);
+			'easterMusRarity'   => 50,
+			'easterSndRarity'	=> 20);
 
 
 	   public static $eventsArray = array(
         '01' => array(
-            "1-12" => array(
+            "1-10" => array(
                 'eventName' => 'winterHolidays',
             )
         ),
@@ -259,18 +259,18 @@ if (!defined('FOXXEY')) {
 		private function outputJson() {
 			$mountPoint = str_replace(ROOT_DIR, '', static::$absMnt);
 			$outputArray = array(
-					"maxDuration" 		=> (Integer) static::$maxDuration,
-					"sndLvl" 			=> (Integer) static::$sndLevel,
-					"musLvl" 			=> (Integer) static::$musLevel,
-					"delay"				=> (Integer) static::$sndArray['timeShift'],
-					"musFile" 			=> (String)  static::$musArray['selMus'],
-					"sndFile" 			=> (String)  static::$sndArray['selSnd'],
-					"sndMd5" 			=> (String)  static::$sndArray['sndMd5'],
-					"musMd5" 			=> (String)  static::$musArray['musMd5'],
-					"eventInfo"			=> (String)  static::$sndArray['sndADT'],
-					"eventName" 		=> (String)  static::$eventNow,
-					'serverVersion'		=> (String)  static::$serverVersion,
-					'mountPoint'		=> (String)  $mountPoint);
+					"maxDuration" 		=> (Integer) @static::$maxDuration,
+					"sndLvl" 			=> (Integer) @static::$sndLevel,
+					"musLvl" 			=> (Integer) @static::$musLevel,
+					"delay"				=> (Integer) @static::$sndArray['timeShift'],
+					"musFile" 			=> (String)  @static::$musArray['selMus'],
+					"sndFile" 			=> (String)  @static::$sndArray['selSnd'],
+					"sndMd5" 			=> (String)  @static::$sndArray['sndMd5'],
+					"musMd5" 			=> (String)  @static::$musArray['musMd5'],
+					"eventInfo"			=> (String)  @static::$sndArray['sndADT'],
+					"eventName" 		=> (String)  @static::$eventNow,
+					'serverVersion'		=> (String)  @static::$serverVersion,
+					'mountPoint'		=> (String)  @$mountPoint);
 
 			return json_encode($outputArray, JSON_UNESCAPED_SLASHES);
 		}

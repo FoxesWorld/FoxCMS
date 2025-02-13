@@ -71,37 +71,47 @@ export class Servers {
         });
     }
 
-    /**
-     * Парсинг и отображение онлайн серверов.
-     */
-    async parseOnline() {
-        try {
-            await this.initializeServers();
+async parseOnline() {
+    try {
+        await this.initializeServers();
 
-            const entryTemplate = await this.loadTemplateWithCache(`${this.foxEngine.elementsDir}monitor/serverEntry.tpl`);
-            const totalOnlineTpl = await this.loadTemplateWithCache(`${this.foxEngine.elementsDir}monitor/totalOnline.tpl`);
+        const updatedData = await this.foxEngine.sendPostAndGetAnswer({ sysRequest: 'parseMonitor' }, "JSON");
+        if (updatedData.servers?.length > 0) {
+            updatedData.servers.forEach(newServerData => {
+                const existingServer = this.serversArr.find(({ serverName }) => serverName === newServerData.serverName);
 
-            const serversHtml = (await Promise.all(
-                this.serversArr.map(({ server }) => this.getServerHtml(entryTemplate, server))
-            )).join('');
-
-            const parsedJson = await this.foxEngine.sendPostAndGetAnswer({ sysRequest: 'parseMonitor' }, "JSON");
-            const totalOnlinePercent = parsedJson.totalPlayersMax > 0
-                ? Math.round((parsedJson.totalPlayersOnline / parsedJson.totalPlayersMax) * 100)
-                : 0;
-
-            const totalOnlineHtml = await this.foxEngine.replaceTextInTemplate(totalOnlineTpl, {
-                totalPlayersOnline: parsedJson.totalPlayersOnline,
-                totalPlayersMax: parsedJson.totalPlayersMax,
-                percent: totalOnlinePercent,
-                todaysRecord: parsedJson.todaysRecord
+                if (existingServer) {
+                    Object.assign(existingServer.server, newServerData);
+                } else {
+                    this.serversArr.push({ serverName: newServerData.serverName, server: newServerData });
+                }
             });
-
-            $("#servers").html(serversHtml + totalOnlineHtml);
-        } catch (error) {
-            console.error('Error parsing online servers:', error);
         }
+
+        const entryTemplate = await this.loadTemplateWithCache(`${this.foxEngine.elementsDir}monitor/serverEntry.tpl`);
+        const totalOnlineTpl = await this.loadTemplateWithCache(`${this.foxEngine.elementsDir}monitor/totalOnline.tpl`);
+
+        const serversHtml = (await Promise.all(
+            this.serversArr.map(({ server }) => this.getServerHtml(entryTemplate, server))
+        )).join('');
+
+        const totalOnlinePercent = updatedData.totalPlayersMax > 0
+            ? Math.round((updatedData.totalPlayersOnline / updatedData.totalPlayersMax) * 100)
+            : 0;
+
+        const totalOnlineHtml = await this.foxEngine.replaceTextInTemplate(totalOnlineTpl, {
+            totalPlayersOnline: updatedData.totalPlayersOnline,
+            totalPlayersMax: updatedData.totalPlayersMax,
+            percent: totalOnlinePercent,
+            todaysRecord: updatedData.todaysRecord
+        });
+
+        $("#servers").html(serversHtml + totalOnlineHtml);
+    } catch (error) {
+        console.error('Error parsing online servers:', error);
     }
+}
+
 
     /**
      * Получение объекта сервера по имени.

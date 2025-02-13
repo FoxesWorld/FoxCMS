@@ -54,7 +54,7 @@
         } else if (currentMonth >= 9 && currentMonth <= 11) {
             backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/autumn.png)';
         } else {
-            backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/winter.jpg)';
+            backgroundImage = 'url('+foxEngine.replaceData.assets+'img/background/season/winter.png)';
 			foxEngine.snow.init();
 			//$(".container").append('<div class="moderator-button optionButt" onclick="foxEngine.snow.switchSnow();" style="width: 32px; height: 32px;"><i class="fa-light fa-snowflake"></i></div>');
         }

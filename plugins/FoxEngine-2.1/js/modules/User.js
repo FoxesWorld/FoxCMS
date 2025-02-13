@@ -179,7 +179,7 @@ async getPlayTimeWidget(serversOnline) {
     try {
         const serversData = JSON.parse(serversOnline);
 
-        if (!serversData || !Array.isArray(serversData.servers) || serversData.servers.length === 0) {
+        if (!serversData) {
             console.warn('No server data available.');
             $('.playtime-widget-container').html(`
 			<div class="playtime-widget">
@@ -293,119 +293,182 @@ async getPlayTimeWidget(serversOnline) {
     }
 }
 
-
 class PlaytimeWidgetGenerator {
-    static generatePlaytimeWidget(servers) {
-        if (servers.length === 0) {
-            return `
-            <div class="py-2">
-                <div class="playtime-widget">
-                    <button type="button" class="widget-header" data-bs-toggle="collapse" data-bs-target=".playtime-widget-collapse" disabled="">
-                        <span class="text-muted">Никогда не заходил в игру</span>
-                    </button>
-                    <div class="playtime-widget-collapse collapse show">
-                        <div class="widget-progress"></div>
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        const totalPlayTime = servers.reduce((total, server) => total + server.time, 0);
-        const totalPlayTimeStr = this.formatTime(totalPlayTime);
-
-        let htmlBuilder = `
-        <div class="playtime-widget">
-            <button type="button" class="widget-header" data-bs-toggle="collapse" data-bs-target=".playtime-widget-collapse" aria-expanded="true">
-                Наиграно: <b>${totalPlayTimeStr}</b>
+  static generatePlaytimeWidget(serversData) {
+    if (
+      !serversData ||
+      typeof serversData !== "object" ||
+      Object.keys(serversData).length === 0
+    ) {
+      return `
+      <div class="py-2">
+        <div class="playtime-widget card">
+          <div class="card-header">
+            <button type="button" class="widget-header" disabled>
+              <span class="text-muted">Никогда не заходил в игру</span>
             </button>
-            <div class="playtime-widget-collapse collapse" style="">
-                <div class="widget-content">
-                    <table class="playtime-server-stats">
-                        <thead>
-                            <tr><th style="width: 110px;"></th>
-                            <th></th>
-                            <th style="width: 90px;"></th>
-                            </tr>
-                        </thead>
-                        <tbody>`;
-        
-        servers.forEach(server => {
-            const percentage = (server.time / totalPlayTime * 100).toFixed(2);
-            const color = PlaytimeWidgetGenerator.getColorForServer(server.server);
-            const serverTimeStr = this.formatTime(server.time);
+          </div>
+          <div class="collapse show">
+            <div class="card-body p-0">
+              <div class="widget-progress"></div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }
 
-            htmlBuilder += `
-            <tr>
-                <td>
-                    <span class="${percentage < 5 ? 'text-muted' : ''}" title="">
-                        ${server.server}
-                    </span>
-                </td>
-                <td class="px-2">
-                    <div class="progress">
-                        <div class="progress-bar" style="width:${percentage}%; --bar-color:${color};"></div>
+    // Если сервер возвращает объект с данными в свойстве "servers"
+    const serversObj = serversData.servers ? serversData.servers : serversData;
+
+    // Важно: делим totalTime на 60, чтобы перевести его в секунды
+    const servers = Object.entries(serversObj).map(([serverName, data]) => ({
+      server: serverName,
+      totalTime: (data.totalTime || 0) / 60,
+      lastSession: data.lastSession || 0,
+      lastPlayed: data.lastPlayed || 0
+    }));
+
+    const totalPlayTime = servers.reduce(
+      (total, server) => total + server.totalTime,
+      0
+    );
+    const totalPlayTimeStr = this.formatTime(totalPlayTime);
+
+    const overallSegments = servers
+      .map(server => {
+        const percentage =
+          totalPlayTime > 0
+            ? ((server.totalTime / totalPlayTime) * 100).toFixed(2)
+            : 0;
+        const color = this.getColorForServer(server.server);
+        return `<div class="progress-bar" role="progressbar" style="width: ${percentage}%; background-color: ${color};" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100"></div>`;
+      })
+      .join("");
+
+    let htmlBuilder = `
+      <div class="playtime-widget card">
+        <div class="card-header">
+          <button type="button" class="widget-header" data-bs-toggle="collapse" data-bs-target="#detailedProgress" aria-expanded="false">
+            Наиграно: <b>${totalPlayTimeStr}</b>
+          </button>
+          <div id="overallProgressBar" class="mt-2">
+            <div class="progress" style="height: 10px;">
+              ${overallSegments}
+            </div>
+          </div>
+        </div>
+        <div id="detailedProgress" class="collapse">
+          <div class="card-body p-0">
+            <table class="table table-sm mb-0">
+              <thead>
+                <tr>
+                  <th style="width: 110px;"></th>
+                  <th></th>
+                  <th style="width: 90px;"></th>
+                </tr>
+              </thead>
+              <tbody>`;
+
+    servers.forEach(server => {
+      const percentage =
+        totalPlayTime > 0
+          ? ((server.totalTime / totalPlayTime) * 100).toFixed(2)
+          : 0;
+      const color = this.getColorForServer(server.server);
+      const serverTimeStr = this.formatTime(server.totalTime);
+      htmlBuilder += `
+                <tr>
+                  <td>
+                    <span class="${percentage < 5 ? "text-muted" : ""}">${server.server}</span>
+                  </td>
+                  <td class="px-2">
+                    <div class="progress" style="height: 10px;">
+                      <div class="progress-bar" role="progressbar" style="width: ${percentage}%; background-color: ${color};" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                </td>
-                <td><b>${serverTimeStr}</b></td>
-            </tr>`;
+                  </td>
+                  <td><b>${serverTimeStr}</b></td>
+                </tr>`;
+    });
+
+    htmlBuilder += `
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <script>
+        var detailedEl = document.getElementById("detailedProgress");
+        var overallEl = document.getElementById("overallProgressBar");
+        detailedEl.addEventListener("show.bs.collapse", function () {
+          overallEl.style.display = "none";
         });
-        
-        htmlBuilder += `
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="playtime-widget-collapse collapse show" style="">
-                <div class="widget-progress">`;
-        
-        servers.forEach(server => {
-            const percentage = (server.time / totalPlayTime * 100).toFixed(2);
-            const color = PlaytimeWidgetGenerator.getColorForServer(server.server);
-            
-            htmlBuilder += `
-                <div class="bar-fill" style="width:${percentage}%; --server-color:${color};"></div>`;
+        detailedEl.addEventListener("hide.bs.collapse", function () {
+          overallEl.style.display = "block";
         });
-        
-        htmlBuilder += `
-                </div>
-            </div>
-        </div>`;
-        
-        return htmlBuilder;
+      </script>
+    `;
+    return htmlBuilder;
+  }
+
+  static getColorForServer(serverName) {
+    switch (serverName) {
+      case "Craftoria":
+        return "#3498DB";
+      case "Amber":
+        return "#c17d22";
+      case "Celeste":
+        return "#37bbd0";
+      case "TEST":
+        return "#d79c1c";
+      default:
+        return "#AAAAAA";
     }
+  }
 
-    static getColorForServer(serverName) {
-        switch (serverName) {
-            case "Craftoria":
-                return "#3498DB";
-            case "Amber":
-                return "#c17d22";
-			case "FurSpace":
-				return "#37bbd0";
-            default:
-                return "#AAAAAA";
-        }
-    }
+  static formatTime(seconds) {
+    seconds = Math.round(seconds);
+    const hoursPart = Math.floor(seconds / 3600);
+    const minutesPart = Math.floor((seconds % 3600) / 60);
+    const secondsPart = seconds % 60;
+    const hoursStr =
+      hoursPart > 0
+        ? `${hoursPart} ${this.declineWord(
+            hoursPart,
+            "час",
+            "часа",
+            "часов"
+          )}`
+        : "";
+    const minutesStr =
+      minutesPart > 0
+        ? `${minutesPart} ${this.declineWord(
+            minutesPart,
+            "минута",
+            "минуты",
+            "минут"
+          )}`
+        : "";
+    const secondsStr =
+      secondsPart > 0
+        ? `${secondsPart} ${this.declineWord(
+            secondsPart,
+            "секунда",
+            "секунды",
+            "секунд"
+          )}`
+        : "";
+    return [hoursStr, minutesStr, secondsStr]
+      .filter(Boolean)
+      .join(" ") ||
+      `0 ${this.declineWord(0, "секунда", "секунды", "секунд")}`;
+  }
 
-    static formatTime(hours) {
-        const totalSeconds = Math.round(hours * 3600);
-        const hoursPart = Math.floor(totalSeconds / 3600);
-        const minutesPart = Math.floor((totalSeconds % 3600) / 60);
-        const secondsPart = totalSeconds % 60;
-
-        const hoursStr = hoursPart > 0 ? `${hoursPart} ${this.declineWord(hoursPart, 'час', 'часа', 'часов')}` : '';
-        const minutesStr = minutesPart > 0 ? `${minutesPart} ${this.declineWord(minutesPart, 'минута', 'минуты', 'минут')}` : '';
-        const secondsStr = secondsPart > 0 ? `${secondsPart} ${this.declineWord(secondsPart, 'секунда', 'секунды', 'секунд')}` : '';
-
-        return [hoursStr, minutesStr, secondsStr].filter(Boolean).join(' ');
-    }
-
-    static declineWord(number, one, two, five) {
-        const n = Math.abs(number) % 100;
-        const n1 = n % 10;
-        if (n > 10 && n < 20) return five;
-        if (n1 > 1 && n1 < 5) return two;
-        if (n1 == 1) return one;
-        return five;
-    }
+  static declineWord(number, one, two, five) {
+    const n = Math.abs(number) % 100;
+    const n1 = n % 10;
+    if (n > 10 && n < 20) return five;
+    if (n1 > 1 && n1 < 5) return two;
+    if (n1 === 1) return one;
+    return five;
+  }
 }

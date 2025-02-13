@@ -28,6 +28,10 @@ if(!defined('profile')) {
 								$EditUser = new EditUser($this->fRequest, $db, $logger);
 							break;
 							
+							case 'loadPhoto':
+								die('{"message": "WIP"}');
+							break;
+							
 							case 'GetBadges':
 								die(json_encode(new GetBadges($db, $this->fRequest), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 							break;

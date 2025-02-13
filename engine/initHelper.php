@@ -97,7 +97,7 @@
 				return $this->dbRequest()["groupName"] ?? randTexts::getRandText('noGroup');
 			}
 			
-			protected function userGroupTag(){
+			public function userGroupTag(){
 				return $this->dbRequest()["groupType"] ?? "cursed";
 			}
 			

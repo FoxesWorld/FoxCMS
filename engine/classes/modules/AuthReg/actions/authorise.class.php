@@ -26,7 +26,8 @@ class Authorise extends AuthManager {
                     $this->authData = functions::collectData($input, true);
                     $this->inputPassword = $this->authData['password'] ?? null;
                     $this->inputLogin = $this->authData['login'] ?? null;
-                    $this->rememberMe = $this->authData['rememberMe'] ?? false;
+                    // Приводим значение "rememberMe" к булевому типу
+                    $this->rememberMe = isset($this->authData['rememberMe']) && $this->authData['rememberMe'] ? true : false;
                     $this->realPassword = functions::getUserData($this->inputLogin, 'password', $db);
                 }
             }
@@ -44,7 +45,7 @@ class Authorise extends AuthManager {
             if ($authQuery->type === "success") {
                 $this->setUserdata($this->inputLogin);
                 $this->setTokenIfNeeded($this->rememberMe, $this->inputLogin);
-                $this->logger->WriteLine("{$this->inputLogin} successfully authorized from ".REMOTE_IP);
+                $this->logger->WriteLine("{$this->inputLogin} successfully authorized from " . REMOTE_IP);
                 $antiBrute->clearIp(REMOTE_IP);
                 return true;
             } else {
@@ -58,9 +59,10 @@ class Authorise extends AuthManager {
     }
     
     private function authQueries($login) {
+        // Здесь генерируем хеш фиксированной длины (например, 16 символов) для внутреннего использования
         $updateData = [
             'last_date' => CURRENT_TIME,
-            'hash' => authorize::generateLoginHash($login, 16),
+            'hash'      => authorize::generateLoginHash($login, 16),
             'logged_ip' => REMOTE_IP
         ];
         $response = init::$sqlQueryHandler->updateData('users', $updateData, 'login', $login);
@@ -76,26 +78,41 @@ class Authorise extends AuthManager {
         InitHelper::userArrFill($this->db);
     }
     
-	private function setTokenIfNeeded($checkbox, $login) {
-		$token = authorize::generateLoginHash($login);
-
-		if ($checkbox) {
-			$cookieSet = setcookie(
-				AuthManager::$userToken, 
-				$token, 
-				time() + (30 * 24 * 60 * 60),
-				"/",
-				"",
-				isset($_SERVER["HTTPS"]),
-				true
-			);
-			if (!$cookieSet) {
-				$this->logger->WriteLine("Ошибка установки cookie для пользователя $login");
-			}
-		} else {
-			setcookie(AuthManager::$userToken, "", time() - 3600, "/");
-		}
-		init::$sqlQueryHandler->updateData('users', ['token' => $token], 'login', $login);
-	}
+    /**
+     * Если пользователь выбрал "Запомнить меня", генерируется токен,
+     * который устанавливается в cookie на 30 дней и сохраняется в базе.
+     * Если флажок не выбран, то cookie удаляется, а значение токена в базе очищается.
+     *
+     * @param bool   $checkbox Флаг "Запомнить меня"
+     * @param string $login    Логин пользователя
+     */
+    private function setTokenIfNeeded($checkbox, $login) {
+        if ($checkbox) {
+            // Генерируем токен (без параметра длины, чтобы использовать стандартное значение)
+            $token = authorize::generateLoginHash($login);
+            
+            $cookieSet = setcookie(
+                AuthManager::$userToken, 
+                $token, 
+                time() + (30 * 24 * 60 * 60), // 30 дней
+                "/",
+                "",
+                isset($_SERVER["HTTPS"]),
+                true // HttpOnly
+            );
+            
+            if (!$cookieSet) {
+                $this->logger->WriteLine("Ошибка установки cookie для пользователя $login");
+            }
+            
+            // Обновляем поле token в базе
+            init::$sqlQueryHandler->updateData('users', ['token' => $token], 'login', $login);
+        } else {
+            // Удаляем cookie, сбрасывая его срок действия
+            setcookie(AuthManager::$userToken, "", time() - 3600, "/");
+            // Очищаем значение токена в базе
+            init::$sqlQueryHandler->updateData('users', ['token' => ''], 'login', $login);
+        }
+    }
 
 }

@@ -43,7 +43,7 @@
     <div class="sort-controls">
         <div class="description">
             Список игроков по наигранным часам за всё время ведения статистики c [07.12.24]<br>
-            Отображаются игроки посещавшие игровые серверы в течение последнего года.
+            Отображаются игроки посещавшие игровые сервера в течение последнего года.
         </div>
         <div class="flex-shrink-0 ms-auto server">
             <div class="option_select">
@@ -55,6 +55,38 @@
             </div>
         </div>
     </div>
+	
+	[group=1]
+<form method="POST" action="/" id="adminGroupStatsForm">
+  <input type="hidden" name="admPanel" value="resetUserTop">
+  <input type="hidden" name="refreshPage" value="false">
+  <fieldset class="border p-3">
+    <legend class="w-auto px-2">Настройка групповой статистики пользователей</legend>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="confirmReset" name="confirmReset" value="1" required>
+      <label class="form-check-label" for="confirmReset">Подтвердите сброс групповой статистики</label>
+    </div>
+    <div class="mb-3">
+      <label for="userGroup" class="form-label">Выберите группу пользователей:</label>
+      <select class="form-select" id="userGroup" name="userGroup">
+        <option value="all">Все пользователи</option>
+        <option value="admins">Администраторы</option>
+        <option value="moderators">Модераторы</option>
+        <option value="users">Обычные пользователи</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="resetDate" class="form-label">Дата и время сброса (при необходимости):</label>
+      <input type="datetime-local" class="form-control" id="resetDate" name="resetDate">
+    </div>
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary">Обновить статистику</button>
+    </div>
+    <input type="hidden" name="onSubmit" value="userTable.fetchAndDisplayUsers();">
+  </fieldset>
+</form>
+
+	[/group]	
 
     <table class="table">
         <thead>

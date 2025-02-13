@@ -197,17 +197,11 @@
     background: #e5e7eb;
     border-radius: 50%;
     display: block;
-    height: 32px;
+    height: 45px;
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
-    width: 32px
-}
-
-.playtime-widget {
-    background: #fff;
-    border: 1px solid #e0e4e5;
-    border-radius: 5px
+    width: auto;
 }
 
 .playtime-widget .widget-header {
@@ -226,7 +220,8 @@
 }
 
 .playtime-widget .widget-header:not(:disabled) {
-    cursor: pointer
+    cursor: pointer;
+    text-align: left;
 }
 
 .playtime-widget .widget-content {
@@ -324,7 +319,7 @@
 
 .progress .progress-bar {
     background-color: var(--bar-color);
-    border-radius: inherit;
+    border-radius: 0;
     height: 100%
 }
 

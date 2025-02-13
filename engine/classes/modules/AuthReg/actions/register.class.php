@@ -61,7 +61,7 @@ class Register extends AuthManager
         $not_allow_symbol = array("\x22", "\x60", "\t", '\n', '\r', "\n", "\r", '\\', ",", "/", "¬", "#", ";", ":", "~", "[", "]", "{", "}", ")", "(", "*", "^", "%", "$", "<", ">", "?", "!", '"', "'", " ", "&");
         foreach ($not_allow_symbol as $key) {
             if (strpos($this->regData['login'], $key)) {
-				$this->setError("Bad symbols!1!1!", "warn");
+				$this->setError($lang['badSyms'], "warn");
             }
         }
 		

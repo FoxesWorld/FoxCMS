@@ -1,37 +1,50 @@
 class UserTable {
     constructor(containerId) {
         this.container = document.getElementById(containerId);
-        this.servers = new Set(['all']); // Initialize with 'all'
-        this.selectedServer = 'all'; // Default to 'all'
+        this.servers = new Set(['all']);
+        this.selectedServer = 'all';
+        this.availableServers = new Set();
         this.users = [];
+    }
+
+    async parseAvailableServers() {
+        try {
+            const response = await foxEngine.sendPostAndGetAnswer({
+                "sysRequest": "parseServers",
+                "login": foxEngine.replaceData.login
+            }, "JSON");
+
+            response.forEach(server => {
+                this.availableServers.add(server.serverName);
+            });
+        } catch (error) {
+            console.error("Ошибка при парсинге серверов:", error);
+        }
     }
 
     async fetchAndDisplayUsers() {
         try {
             const users = await foxEngine.sendPostAndGetAnswer({ "sysRequest": "topPlayers" }, "JSON");
-
+            await this.parseAvailableServers();
             this.collectServers(users);
             this.updateServerSelect();
-            this.users = this.sortUsersByPlaytime(users, 'all'); // Sort users by 'all' servers on initial load
+            this.users = this.sortUsersByPlaytime(users, this.selectedServer);
             this.renderUsers(this.users);
-
         } catch (error) {
-            console.error("Error fetching users data:", error);
+            console.error("Ошибка получения данных о пользователях:", error);
         }
     }
 
     collectServers(users) {
         users.forEach(user => {
-            const servers = JSON.parse(user.serversOnline).servers;
-            servers.forEach(server => {
-                this.servers.add(server.server);
-            });
+            const parsedData = this.parseServersOnline(user.serversOnline);
+            parsedData.forEach(server => this.servers.add(server.serverName));
         });
     }
 
     updateServerSelect() {
         const serverSelect = document.getElementById('serverSelect');
-        serverSelect.innerHTML = ''; // Clear existing options
+        serverSelect.innerHTML = '';
 
         const allOption = this.createOptionElement('all', 'Все сервера');
         serverSelect.appendChild(allOption);
@@ -52,37 +65,74 @@ class UserTable {
     createOptionElement(value, text) {
         const option = document.createElement('option');
         option.value = value;
-        option.textContent = text;
+        option.textContent = this.availableServers.has(value) || value === 'all' ? text : `${text} (Закрыт)`;
         return option;
     }
 
-    sortUsersByPlaytime(users, selectedServer) {
-        return users.sort((a, b) => this.calculateTotalPlaytime(b.serversOnline, selectedServer) - this.calculateTotalPlaytime(a.serversOnline, selectedServer));
-    }
-
-    calculateTotalPlaytime(serversOnline, selectedServer) {
-        const servers = JSON.parse(serversOnline).servers;
-        if (selectedServer === 'all') {
-            return servers.reduce((total, server) => total + server.time * 60, 0);
-        } else {
-            const server = servers.find(s => s.server === selectedServer);
-            return server ? server.time * 60 : 0;
+    /**
+     * Парсит JSON-строку с данными серверов и возвращает массив объектов.
+     * Ожидаемый формат JSON:
+     * {
+     *   "isPlaying": boolean,
+     *   "playingOn": string,
+     *   "servers": {
+     *       "serverName1": {
+     *           "totalTime": number,
+     *           "startTimestamp": number,
+     *           "lastUpdated": number,
+     *           "lastSession": number,
+     *           "lastPlayed": number
+     *       },
+     *       ...
+     *   }
+     * }
+     */
+    parseServersOnline(serversOnline) {
+        try {
+            const data = JSON.parse(serversOnline);
+            return Object.entries(data.servers).map(([serverName, serverData]) => ({
+                serverName,
+                totalTime: serverData.totalTime || 0,
+                lastUpdated: serverData.lastUpdated,
+                lastSession: serverData.lastSession || 0,
+                lastPlayed: serverData.lastPlayed,
+            }));
+        } catch (error) {
+            console.error("Ошибка при парсинге серверов онлайн:", error);
+            return [];
         }
     }
 
+    sortUsersByPlaytime(users, selectedServer) {
+        return users.sort((a, b) =>
+            this.calculateTotalPlaytime(b.serversOnline, selectedServer) -
+            this.calculateTotalPlaytime(a.serversOnline, selectedServer)
+        );
+    }
+
+	calculateTotalPlaytime(serversOnline, selectedServer) {
+		const servers = this.parseServersOnline(serversOnline);
+		// Функция преобразования: приводим к "настоящим" секундам
+		const convertTime = time => time / 60; // корректировка в 60 раз
+		
+		if (selectedServer === 'all') {
+			return servers.reduce((total, server) => total + convertTime(server.totalTime || 0), 0);
+		} else {
+			const server = servers.find(s => s.serverName === selectedServer);
+			return server ? convertTime(server.totalTime) : 0;
+		}
+	}
+
+
     async renderUsers(users) {
-        this.container.innerHTML = ''; // Clear existing content
+        this.container.innerHTML = '';
         const rows = await Promise.all(users.map((user, index) => this.createUserRow(user, index + 1)));
-        rows.forEach(row => {
-            if (row) {
-                this.container.appendChild(row);
-            }
-        });
+        rows.forEach(row => row && this.container.appendChild(row));
     }
 
     async createUserRow(user, rank) {
-        const servers = JSON.parse(user.serversOnline).servers;
-        if (this.selectedServer !== 'all' && !servers.some(server => server.server === this.selectedServer)) {
+        const servers = this.parseServersOnline(user.serversOnline);
+        if (this.selectedServer !== 'all' && !servers.some(server => server.serverName === this.selectedServer)) {
             return null;
         }
 
@@ -92,8 +142,8 @@ class UserTable {
         row.appendChild(this.createRankCell(rank));
         row.appendChild(await this.createPlayerCell(user));
         row.appendChild(this.createPlaytimeCell(user));
-        row.appendChild(this.createLastSessionCell(user, this.selectedServer));
-        row.appendChild(this.createLastLoginCell(user, this.selectedServer));
+        row.appendChild(this.createLastSessionCell(user));
+        row.appendChild(this.createLastLoginCell(user));
 
         return row;
     }
@@ -107,40 +157,22 @@ class UserTable {
 
     async createPlayerCell(user) {
         const playerCell = document.createElement('td');
-        const playerDiv = document.createElement('div');
-        playerDiv.className = 'd-flex align-items-center';
-
-        const playerInfo = document.createElement('div');
-        playerInfo.className = 'flex-shrink-0';
-
-        const playerList = document.createElement('ul');
-        playerList.className = 'player-head';
-
-        const profileItem = document.createElement('li');
-        const profileLink = document.createElement('a');
-        profileLink.href = `#user/${user.login}`;
-
-        const profileImage = document.createElement('img');
-        profileImage.className = 'head-image';
-        profileImage.alt = user.login;
-        profileImage.src = `data:image/png;base64,${await this.fetchPlayerHeadImage(user.login)}`;
-
-        profileLink.appendChild(profileImage);
-        profileItem.appendChild(profileLink);
-
-        const nameItem = document.createElement('li');
-        const nameLink = document.createElement('a');
-        nameLink.href = `#user/${user.login}`;
-        nameLink.textContent = user.login;
-        nameItem.appendChild(nameLink);
-
-        playerList.appendChild(profileItem);
-        playerList.appendChild(nameItem);
-
-        playerInfo.appendChild(playerList);
-        playerDiv.appendChild(playerInfo);
-        playerCell.appendChild(playerDiv);
-
+        const headImage = await this.fetchPlayerHeadImage(user.login);
+        playerCell.innerHTML = `
+            <div class="d-flex align-items-center">
+                <div class="flex-shrink-0">
+                    <ul class="player-head">
+                        <li>
+                            <a href="#user/${user.login}">
+                                <img class="head-image" src="data:image/png;base64,${headImage}" alt="${user.login}">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#user/${user.login}">${user.login}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>`;
         return playerCell;
     }
 
@@ -152,147 +184,140 @@ class UserTable {
                 "login": login
             }, "TEXT");
         } catch (error) {
-            console.error(`Error fetching head image for ${login}:`, error);
+            console.error(`Ошибка получения изображения для ${login}:`, error);
             return '';
         }
     }
 
     createPlaytimeCell(user) {
         const playtimeCell = document.createElement('td');
-        const totalMinutes = this.calculateTotalPlaytime(user.serversOnline, this.selectedServer);
-        playtimeCell.textContent = this.formatPlaytimeText(totalMinutes);
-
-        const barWrapper = this.createPlaytimeBar(user.serversOnline, totalMinutes);
-        playtimeCell.appendChild(barWrapper);
-
+        const totalSeconds = this.calculateTotalPlaytime(user.serversOnline, this.selectedServer);
+        playtimeCell.textContent = this.formatPlaytimeText(totalSeconds);
         return playtimeCell;
     }
 
-    formatPlaytimeText(totalMinutes) {
-        if (totalMinutes < 1) {
-            return `${Math.round(totalMinutes * 60)} ${this.declineWord(Math.round(totalMinutes * 60), ['секунда', 'секунды', 'секунд'])}`;
-        } else if (totalMinutes < 60) {
-            return `${Math.round(totalMinutes)} ${this.declineWord(Math.round(totalMinutes), ['минута', 'минуты', 'минут'])}`;
-        } else {
-            const hours = Math.floor(totalMinutes / 60);
-            const minutes = Math.round(totalMinutes % 60);
-            return `${hours} ${this.declineWord(hours, ['час', 'часа', 'часов'])} и ${minutes} ${this.declineWord(minutes, ['минута', 'минуты', 'минут'])}`;
+    /**
+     * Форматирует общее время игры так, чтобы учитывались часы, минуты и секунды.
+     * Например, 80 секунд будет отображено как "1 минута 20 секунд".
+     *
+     * @param {number} totalSeconds Общее число секунд.
+     * @return {string} Отформатированное строковое представление времени.
+     */
+    formatPlaytimeText(totalSeconds) {
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        let parts = [];
+        if (hours > 0) {
+            parts.push(`${hours} ${this.declineWord(hours, ['час', 'часа', 'часов'])}`);
         }
+        if (minutes > 0) {
+            parts.push(`${minutes} ${this.declineWord(minutes, ['минута', 'минуты', 'минут'])}`);
+        }
+        if (seconds > 0) {
+            parts.push(`${seconds} ${this.declineWord(seconds, ['секунда', 'секунды', 'секунд'])}`);
+        }
+        return parts.join(' ') || `0 ${this.declineWord(0, ['секунда', 'секунды', 'секунд'])}`;
     }
 
-    createPlaytimeBar(serversOnline, totalMinutes) {
-        const barWrapper = document.createElement('div');
-        barWrapper.className = 'playtime-bar-wrapper my-1';
-        barWrapper.style.width = '100%';
-
-        const servers = JSON.parse(serversOnline).servers;
-        const totalServerMinutes = servers.reduce((total, server) => total + server.time * 60, 0);
-
-        servers.forEach(server => {
-            const bar = document.createElement('div');
-            bar.className = 'playtime-bar';
-            bar.style.width = `${(server.time * 60 / totalServerMinutes) * 100}%`;
-            bar.style.setProperty('--server-color', this.getServerColor(server.server));
-            barWrapper.appendChild(bar);
-        });
-
-        return barWrapper;
-    }
-
-    createLastSessionCell(user, selectedServer) {
+    createLastSessionCell(user) {
         const lastSessionCell = document.createElement('td');
-        const userData = JSON.parse(user.serversOnline);
+        let serversOnline;
+        try {
+            serversOnline = JSON.parse(user.serversOnline);
+        } catch (error) {
+            console.error("Ошибка при парсинге JSON в createLastSessionCell:", error);
+            lastSessionCell.textContent = 'Нет данных';
+            return lastSessionCell;
+        }
 
-        const servers = userData.servers;
-        const isPlaying = userData.isPlaying;
+        const servers = this.parseServersOnline(user.serversOnline);
 
-        const lastSessionInfo = selectedServer !== 'all' ? this.getServerSessionInfo(servers, selectedServer, isPlaying) : this.formatSessionInfo(servers[servers.length - 1], isPlaying);
-        lastSessionCell.innerHTML = lastSessionInfo;
+        // Если пользователь сейчас играет, выводим соответствующий бейдж
+        if (serversOnline.isPlaying && serversOnline.playingOn) {
+            lastSessionCell.innerHTML = `<span class="badge badge-success">Играет на ${serversOnline.playingOn}</span>`;
+        } else if (this.selectedServer === 'all') {
+            // Для всех серверов: находим сервер с максимальным значением lastPlayed
+            if (servers.length > 0) {
+                const mostRecentServer = servers.reduce((prev, curr) => (prev.lastPlayed > curr.lastPlayed ? prev : curr));
+                const lastSessionLength = mostRecentServer.lastSession;
+                lastSessionCell.textContent = lastSessionLength
+                    ? this.formatTime(parseInt(lastSessionLength, 10))
+                    : 'Нет данных';
+            } else {
+                lastSessionCell.textContent = 'Нет данных';
+            }
+        } else {
+            // Для выбранного конкретного сервера
+            const selectedServer = servers.find(server => server.serverName === this.selectedServer);
+            const lastSessionLength = selectedServer ? selectedServer.lastSession : 0;
+            lastSessionCell.textContent = lastSessionLength
+                ? this.formatTime(parseInt(lastSessionLength, 10))
+                : 'Нет данных';
+        }
 
         return lastSessionCell;
     }
 
-    getServerSessionInfo(servers, serverName, isPlaying) {
-        const server = servers.find(s => s.server === serverName);
-        return server ? this.formatSessionInfo(server, isPlaying) : 'Нет данных';
-    }
-
-    formatSessionInfo(server, isPlaying) {
-        if (isPlaying) {
-            return '<div class="ms-auto"><span class="badge badge-success">В игре</span></div>';
-        } else {
-            const seconds = server.lastSessionLength || 0;
-            return this.formatTime(seconds);
-        }
-    }
-
-    formatTime(seconds) {
-        if (seconds < 60) {
-            return `<div class="session-info">${Math.round(seconds)} ${this.declineWord(Math.round(seconds), ['секунда', 'секунды', 'секунд'])}</div>`;
-        } else if (seconds < 3600) {
-            const minutes = Math.floor(seconds / 60);
-            const remSeconds = seconds % 60;
-            return `<div class="session-info">${minutes} ${this.declineWord(minutes, ['минута', 'минуты', 'минут'])} и ${remSeconds} ${this.declineWord(remSeconds, ['секунда', 'секунды', 'секунд'])}</div>`;
-        } else {
-            const hours = Math.floor(seconds / 3600);
-            const remMinutes = Math.floor((seconds % 3600) / 60);
-            return `<div class="session-info">${hours} ${this.declineWord(hours, ['час', 'часа', 'часов'])} и ${remMinutes} ${this.declineWord(remMinutes, ['минута', 'минуты', 'минут'])}</div>`;
-        }
-    }
-
-    createLastLoginCell(user, selectedServer) {
+    createLastLoginCell(user) {
         const lastLoginCell = document.createElement('td');
-        const servers = JSON.parse(user.serversOnline).servers;
-        const lastServerLogin = selectedServer === 'all' ? servers[servers.length - 1] : servers.find(s => s.server === selectedServer);
-
-        if (lastServerLogin) {
-             const lastLoginDate = new Date(lastServerLogin.lastPlayed  * 1000);
-             lastLoginCell.textContent = this.formatLastLoginDate(lastLoginDate);
+        const servers = this.parseServersOnline(user.serversOnline);
+        if (servers.length > 0) {
+            // Находим сервер с наибольшим значением lastPlayed
+            const mostRecentServer = servers.reduce((prev, curr) => (prev.lastPlayed > curr.lastPlayed ? prev : curr));
+            if (mostRecentServer && mostRecentServer.lastPlayed) {
+                const lastLoginDate = new Date(mostRecentServer.lastPlayed * 1000);
+                lastLoginCell.textContent = this.formatLastLoginDate(lastLoginDate);
+            } else {
+                lastLoginCell.textContent = 'Нет данных';
+            }
         } else {
             lastLoginCell.textContent = 'Нет данных';
         }
-
         return lastLoginCell;
     }
-	
-	    formatLastLoginDate(date) {
+
+    /**
+     * Функция форматирования времени (аналогична formatPlaytimeText).
+     */
+    formatTime(totalSeconds) {
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        let parts = [];
+        if (hours > 0) {
+            parts.push(`${hours} ${this.declineWord(hours, ['час', 'часа', 'часов'])}`);
+        }
+        if (minutes > 0) {
+            parts.push(`${minutes} ${this.declineWord(minutes, ['минута', 'минуты', 'минут'])}`);
+        }
+        if (seconds > 0) {
+            parts.push(`${seconds} ${this.declineWord(seconds, ['секунда', 'секунды', 'секунд'])}`);
+        }
+        return parts.join(' ') || `0 ${this.declineWord(0, ['секунда', 'секунды', 'секунд'])}`;
+    }
+
+    formatLastLoginDate(date) {
         const now = new Date();
         const diffTime = now - date;
         const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-        const timeString = date.toLocaleTimeString('ru-RU', {
-            hour: '2-digit',
-            minute: '2-digit'
-        });
+        const timeString = date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
 
         if (diffDays === 0) {
             return `Сегодня в ${timeString}`;
         } else if (diffDays === 1) {
             return `Вчера в ${timeString}`;
-        } else if (diffDays === 2) {
-            return `Позавчера в ${timeString}`;
         } else {
-            return date.toLocaleDateString('ru-RU', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
+            return date.toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' });
         }
-    }
-
-    getServerColor(server) {
-        const colors = {
-            "Craftoria": "#3498DB",
-			"FurSpace": "#37bbd0",
-            "Amber": "#c17d22",
-        };
-        return colors[server] || '#AAAAAA';
     }
 
     declineWord(number, declensions) {
         const cases = [2, 0, 1, 1, 1, 2];
-        return declensions[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
+        return declensions[
+            (number % 100 > 4 && number % 100 < 20) ? 2 :
+            cases[(number % 10 < 5) ? number % 10 : 5]
+        ];
     }
 
     sortAndRenderUsersByServer(selectedServer) {

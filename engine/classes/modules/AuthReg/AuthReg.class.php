@@ -59,7 +59,7 @@ class AuthManager extends Module {
         switch (@$request[$this->requestListener]) {    
             case 'auth':
                 @$authorisationStatus = $auth->auth();
-                switch ($authorisationStatus) {
+				switch ($authorisationStatus) {
                     case true:
                         $uuid = md5(init::$usrArray['login']);
                         $token = $this->token();
@@ -67,7 +67,7 @@ class AuthManager extends Module {
                         if ($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher") {
                             $AuthLib = new AuthLib($this->db, $this->logger, init::$usrArray, $token);
                         }
-                        die('{"type": "success","message": "'.$lang['authSuccess'].'","balance":'.init::$usrArray['balance'].', "login": "'.init::$usrArray['login'].'","token": "'.$token.'","group": "'.init::$usrArray['user_group'].'", "groupName": "'.init::$usrArray['groupName'].'", "uuid": "'.str_replace('-', '', $uuid).'", "colorScheme": "'.init::$usrArray['colorScheme'].'"}');
+                        die('{"type": "success","message": "'.$lang['authSuccess'].'","balance":'.init::$usrArray['balance'].', "login": "'.init::$usrArray['login'].'","token": "'.$token.'","group": "'.init::$usrArray['user_group'].'", "groupName": "'.init::$usrArray['groupName'].'", "uuid": "'.str_replace('-', '', $uuid).'", "colorScheme": "'.init::$usrArray['colorScheme'].'", "userFullName": "'.init::$usrArray['realname'].'"}');
                     break;
                     
                     case false:
@@ -75,7 +75,10 @@ class AuthManager extends Module {
                         $antiBrute = new antiBrute(REMOTE_IP, $this->db);
                         $antiBrute->failedAuth(REMOTE_IP);
                     break;
-                }
+                } 
+
+
+
             break;
                         
             case 'register':

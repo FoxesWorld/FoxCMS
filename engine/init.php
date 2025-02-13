@@ -33,6 +33,9 @@ require ('data/config.php');
 
 		function __construct($initLevels, $debug = false) {
 			global $config;
+			if(isset($_REQUEST['Authorization'])) {
+				die('{"message": "TEST"}');
+			}
 			$this->initLevels = $initLevels;
 			$this->preInit($debug);
 			$this->init();

@@ -45,6 +45,18 @@ const slidesData = [
         "image": "/templates/foxengine2/assets/img/slides/slide6.jpg",
         "overlayColor": "rgba(0, 0, 0, 0.5)"
     },
+	{
+        "title": "Неожиданные события",
+        "desc": "Происходит что-то непонятное, нужно выяснить что это...",
+        "image": "/templates/foxengine2/assets/img/slides/slide7.png",
+        "overlayColor": "rgba(0, 0, 0, 0.5)"
+    }/*
+	{
+        "title": "Не забываем о важном!",
+        "desc": "Он хочет с тобой связаться!",
+        "image": "/templates/foxengine2/assets/img/slides/slide8.png",
+        "overlayColor": "rgba(0, 0, 0, 0.5)"
+    }, */
 ];
 
 

@@ -8,7 +8,7 @@ if (!defined('FOXXEY')) {
 
 
 
-require_once 'loadQuery.php';
+init::classUtil('McQuery', "1.0.0");
 use PHPMinecraft\MinecraftQuery\MinecraftQueryResolver;
 class FoxesMon
 {
@@ -47,22 +47,35 @@ class FoxesMon
 
 private function fetchServersData()
 {
+	global $config;
     foreach ($this->servers as $server) {
         try {
             $resolver = new MinecraftQueryResolver($server['host'], $server['port']);
             $result = $resolver->getResult($tryOldQueryProtocolPre17 = true);
 
+            $playersOnline = $result->getOnlinePlayers() ?? 0;
             $this->results[] = [
                 'serverName' => $server['name'],
                 'status' => $result->isOnline() ? 'online' : 'offline',
                 'version' => $result->getVersion() ?? null,
-                'playersOnline' => $result->getOnlinePlayers() ?? 0,
+                'playersOnline' => $playersOnline,
                 'playersMax' => $result->getMaxPlayers() ?? 0,
+                'playersOnServer' => $result->getPlayersSample(),
                 'favicon' => $result->getFavicon() ?? null,
             ];
-        } catch (Exception $e) {
-            //$this->logger->writeLine("Error querying server {$server['host']}: {$e->getMessage()}");
 
+            // Обновление абсолютного рекорда
+            if ($playersOnline > $this->record['all']) {
+                $this->record['all'] = $playersOnline;
+                file_put_contents($config['monitor']['absoluteRecordPath'], $playersOnline);
+            }
+
+            // Обновление дневного рекорда
+            if ($playersOnline > $this->record['day']) {
+                $this->record['day'] = $playersOnline;
+                file_put_contents($config['monitor']['dayRecordPath'], $playersOnline);
+            }
+        } catch (Exception $e) {
             $this->results[] = [
                 'serverName' => $server['name'],
                 'status' => 'offline',
@@ -76,10 +89,12 @@ private function fetchServersData()
 }
 
 
+
     private function initializeRecords($config)
     {
-        $this->record['all'] = @file_get_contents($config['absoluteRecordPath']) ?: 0;
-        $this->record['day'] = @file_get_contents($config['dayRecordPath']) ?: 0;
+		global $config;
+        $this->record['all'] = @file_get_contents($config['monitor']['absoluteRecordPath']) ?: 0;
+        $this->record['day'] = @file_get_contents($config['monitor']['dayRecordPath']) ?: 0;
     }
 
     private function parseServers($serversArray)

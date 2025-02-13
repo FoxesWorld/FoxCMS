@@ -20,6 +20,15 @@
             <div class="row">
                 <div class="grid-margin" id="adminContent"></div>
             </div>
+			
+			<div class="row" id="engineInfo" style="margin: 15px; border: 1px solid black;padding: 15px;">
+			<ul>
+				<li>Всего пользователей: <b id="totalUsers"></b></li>
+				<li>Авторизаций за последний день: <b id="loginCount"></b></li>
+				<li></li>
+				<li></li>
+			</ul>
+			</div>
 			<div class="logWrapper">
 				<ul class="inline">
 					<li>
@@ -49,6 +58,7 @@ const logsContainer = document.getElementById('logs');
 const toggleLoggingButton = document.getElementById('toggleLogging');
 let intervalId;
 let isLoggingActive = true;
+let usersInfo = [];
 
 toggleLoggingButton.addEventListener('click', () => {
     if (isLoggingActive) {
@@ -122,9 +132,7 @@ function animateLogs() {
     initializeLogging();
 })();
 
-    </script>
 
-<script>
 (async function() {
     const admOptions = ["settings", "users",  "servers", "permissions"]; //"pages", "modules", "groupAssoc", "templateEditor"
     const blockTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'admin/panel.tpl', false);
@@ -138,6 +146,36 @@ function animateLogs() {
             //$("#admOptions").append('<div class="w-100"></div>');
         }
     });
-})();    
+	await selectUsers();
+})();
+
+async function selectUsers(){
+	let usersInfo = [];
+	let countRecentLogins = 0;
+	let totalUsers = 0;
+	const currentTime = Date.now();
+		let users = await foxEngine.sendPostAndGetAnswer({
+		"admPanel": "selectUsers",
+		"login": foxEngine.replaceData.login
+			}, "JSON");
+			
+	const time24HoursAgo = currentTime - 24 * 60 * 60 * 1000;
+
+	users.forEach(user => {
+	  const lastLogin = parseInt(user.last_date) * 1000;
+
+	  if (lastLogin > time24HoursAgo) {
+		countRecentLogins++;
+	  }
+	  totalUsers++;
+	});
+	//usersInfo.push({loginCount: countRecentLogins});
+	$("#totalUsers").html(totalUsers);
+	$("#loginCount").html(countRecentLogins);
+	//usersInfo.push({totalUsers: totalUsers});
+	return usersInfo;
+}
+
+
 </script>
  </pageContent>
