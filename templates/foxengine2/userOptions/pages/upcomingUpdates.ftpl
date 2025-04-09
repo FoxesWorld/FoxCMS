@@ -4,7 +4,7 @@
 	 "keywords": "О сайте, Что там у Лис?, Как дела у Лисьего мира?, ЧАВО за обновы???, Обновления Лисьего мира",
 	 "optionBlock": ".pages",
 	 "optionPreText": "<img src='/templates/foxengine2/assets/icons/menu/icon_lc.png' />",
-	 "optionGroup": 0,
+	 "optionGroup": 1,
 	 "optionClass": "nav-item uk-animation-fade",
 	 "type": "page" 
  } </useroption>
@@ -45,6 +45,35 @@
              </div>
          </div>
      </div>
+	 
+	 <div>
+  <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
      <style>
          .information_block ul li {
          			margin: 5px;

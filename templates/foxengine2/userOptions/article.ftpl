@@ -35,6 +35,7 @@ class FroalaEditorWithCookies {
         this.editor = $('#' + this.editorId).froalaEditor({
             uploadArea: "short_story",
             uploadUser: "[login]",
+			dle_root: "/",
             width: '100%',
             height: '310',
             language: 'ru',

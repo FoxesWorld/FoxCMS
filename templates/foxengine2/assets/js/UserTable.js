@@ -110,19 +110,19 @@ class UserTable {
         );
     }
 
-	calculateTotalPlaytime(serversOnline, selectedServer) {
-		const servers = this.parseServersOnline(serversOnline);
-		// Функция преобразования: приводим к "настоящим" секундам
-		const convertTime = time => time / 60; // корректировка в 60 раз
-		
-		if (selectedServer === 'all') {
-			return servers.reduce((total, server) => total + convertTime(server.totalTime || 0), 0);
-		} else {
-			const server = servers.find(s => s.serverName === selectedServer);
-			return server ? convertTime(server.totalTime) : 0;
-		}
-	}
 
+  calculateTotalPlaytime(serversOnline, selectedServer) {
+    const servers = this.parseServersOnline(serversOnline);
+    // Преобразование: делим на 60, чтобы перевести в секунды
+    const convertTime = time => time;
+    
+    if (selectedServer === 'all') {
+      return servers.reduce((total, server) => total + convertTime(server.totalTime || 0), 0);
+    } else {
+      const server = servers.find(s => s.serverName === selectedServer);
+      return server ? convertTime(server.totalTime) : 0;
+    }
+  }
 
     async renderUsers(users) {
         this.container.innerHTML = '';

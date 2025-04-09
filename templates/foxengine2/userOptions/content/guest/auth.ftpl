@@ -21,6 +21,7 @@
                      <input name="userAction" type="hidden" value="auth" />
                  </form>
                  <a href="#" onclick="foxEngine.page.loadPage('lostpassword'); return false;">Забыли пароль?</a>
+				 
              </div>
          </div>
      </div>

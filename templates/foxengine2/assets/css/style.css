@@ -144,6 +144,16 @@ body {
     flex-wrap: nowrap;
 }
 
+.emoji_category {
+	display: grid;
+    margin: 5px;
+    padding: 0px;
+}
+
+.emoji_symbol {
+	display: contents;
+}
+
 .foxesColumns {
     width: 100%;
     display: table;
@@ -963,9 +973,14 @@ ul.list-inline {
 # Header
 --------------------------------------------------------------*/
 #header {
-	transition: all 0.5s;
+	position: sticky;
+    transform: none;
+    transition: transform .3s;
+    top: 0;
+    left: 0;
+    display: block;
 	z-index: 4;
-	min-height: 112px;
+	min-height: 120px;
 }
 
 #header .navbar-brand:hover {

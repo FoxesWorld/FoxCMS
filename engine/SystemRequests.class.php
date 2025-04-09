@@ -178,6 +178,24 @@
 
 							break;
 							
+							case "serverImage":
+								$file_name = @RequestHandler::$REQUEST['srvImgName'] ?? null;
+								$srvImg = CURRENT_TEMPLATE.'assets/img/servers/'.$file_name;
+								if (file_exists($srvImg)) {
+									$imageData = file_get_contents($srvImg);
+									$base64Image = base64_encode($imageData);
+									$mimeType = mime_content_type($srvImg);
+									header('Content-Type: application/json');
+									die($base64Image);
+									} else {
+									header('Content-Type: application/json');
+									die(json_encode([
+										'status' => 'error',
+										'message' => 'Bazooooka Joooeeee!!'
+									]));
+								}
+							break;
+							
 							case "uploadFile":
 								$this->handleUploadFile(@RequestHandler::$REQUEST['type'], @RequestHandler::$REQUEST['login']);
 							break;
@@ -274,6 +292,35 @@
 								// Handle error: missing or invalid login, serverName, or playTime
 							}
 							break;
+							
+							case "checkStatus":
+								init::classUtil('PlayTimeWidget', "1.0.0");
+								$playTimeWidget = new GameServerManager($this->db);
+								$login = @RequestHandler::$REQUEST["login"];
+								$host = @RequestHandler::$REQUEST["serverIp"];
+								$port = @RequestHandler::$REQUEST["serverPort"];
+
+								if ($login) {
+									$status = $playTimeWidget->isPlayerOnline($host, $port, $login);
+
+									if ($status) {
+										$response = [
+											"message" => "Player status retrieved",
+											"isPlaying" => true,
+											"startTimestamp" => time() // Отправляем время входа игрока
+										];
+									} else {
+										$response = [
+											"message" => "Player is offline",
+											"isPlaying" => false
+										];
+									}
+									die(json_encode($response));
+								} else {
+									die(json_encode(["message" => "Invalid request: missing login or serverName"]));
+								}
+								break;
+
 
 						case "donePlaying":
 							init::classUtil('PlayTimeWidget', "1.0.0");
@@ -424,8 +471,8 @@
 
 			
 		private function handleDownloadLatest(): void {
-			$path = ROOT_DIR.UPLOADS_DIR."launcher";
-			$downloadScanner = new inDirScanner(ROOT_DIR.UPLOADS_DIR."launcher", @RequestHandler::$REQUEST['platform'], ".jar"); // <-- to implement
+			$path = ROOT_DIR.UPLOADS_DIR."files/launcher";
+			$downloadScanner = new inDirScanner($path, @RequestHandler::$REQUEST['platform'], ".jar"); // <-- to implement
 			$file = $this->selectLatest($downloadScanner->filesArray);
 			die('{
 				"filename": "'.str_replace(ROOT_DIR, "", $path).'/'.$file['name'].'",
@@ -435,7 +482,7 @@
 		 }
 		 
 		 private function handleDownloadUpdater() : void {
-			$path = ROOT_DIR.UPLOADS_DIR."updater";
+			$path = ROOT_DIR.UPLOADS_DIR."files/updater";
 			$subDir = "/".@RequestHandler::$REQUEST['type'];
 			$downloadScanner = new inDirScanner($path, $subDir, "*");
 			$file = $this->selectLatest($downloadScanner->filesArray);

@@ -74,11 +74,44 @@
     document.addEventListener('DOMContentLoaded', function() {
 		foxEngine.cookieManager.checkCookie('modalShown', 'true', 7, myAction, false);
     });
+	
+    /**
+     * Инициализация анимации Lottie
+     *
+     * Параметры:
+     * - container: DOM-элемент, в котором отрисовывается анимация.
+     * - renderer: Метод отрисовки ('svg', 'canvas' или 'html').
+     * - loop: Логическое значение или число повторов анимации.
+     * - autoplay: Автоматически запускать анимацию при загрузке.
+     * - path: Путь к JSON-файлу с данными анимации.
+     */
+	 function animation(path, loop){
+	 
+    var animation = bodymovin.loadAnimation({
+      container: document.getElementById('lottie-container'), // Контейнер для анимации
+      renderer: 'canvas',       // Используем SVG-рендерер для качественной отрисовки
+      loop: loop,            // Зацикленная анимация
+      autoplay: true,        // Автоматический запуск при загрузке страницы
+      path: path // Путь к JSON-файлу с анимацией
+    });
+	}
+
+    /**
+     * Дополнительные опции:
+     * Вы можете управлять анимацией, используя методы объекта animation.
+     * Например:
+     * - animation.play() - запустить анимацию.
+     * - animation.pause() - приостановить анимацию.
+     * - animation.stop() - остановить анимацию и сбросить к началу.
+     * - animation.setSpeed(1.5) - изменить скорость воспроизведения.
+     */
+  
 </script>
    </head>
    
    
 <body>
+<div id="lottie-container"></div>
     {include file='header.tpl'}
     {include file='../modalApp.tpl'}
 
