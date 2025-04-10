@@ -86,33 +86,58 @@ class Authorise extends AuthManager {
      * @param bool   $checkbox Флаг "Запомнить меня"
      * @param string $login    Логин пользователя
      */
-    private function setTokenIfNeeded($checkbox, $login) {
-        if ($checkbox) {
-            // Генерируем токен (без параметра длины, чтобы использовать стандартное значение)
-            $token = authorize::generateLoginHash($login);
-            
-            $cookieSet = setcookie(
-                AuthManager::$userToken, 
-                $token, 
-                time() + (30 * 24 * 60 * 60), // 30 дней
-                "/",
-                "",
-                isset($_SERVER["HTTPS"]),
-                true // HttpOnly
-            );
-            
-            if (!$cookieSet) {
-                $this->logger->WriteLine("Ошибка установки cookie для пользователя $login");
-            }
-            
-            // Обновляем поле token в базе
-            init::$sqlQueryHandler->updateData('users', ['token' => $token], 'login', $login);
-        } else {
-            // Удаляем cookie, сбрасывая его срок действия
-            setcookie(AuthManager::$userToken, "", time() - 3600, "/");
-            // Очищаем значение токена в базе
-            init::$sqlQueryHandler->updateData('users', ['token' => ''], 'login', $login);
-        }
-    }
+	private function setTokenIfNeeded($checkbox, $login) {
+		// Продолжительность действия токена (например, 365 дней)
+		$tokenLifetime = 365 * 24 * 60 * 60;
 
+		// Устанавливаем cookie-домен
+		$cookieDomain = $_SERVER['HTTP_HOST'];
+		
+		// HTTPS проверка
+		$isSecure = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on';
+
+		if ($checkbox) {
+			// Генерация нового токена
+			$token = authorize::generateLoginHash($login);
+
+			// Установка cookie со всеми флагами безопасности
+			$cookieSet = setcookie(
+				AuthManager::$userToken,
+				$token,
+				[
+					'expires'  => time() + $tokenLifetime,
+					'path'     => '/',
+					'domain'   => $cookieDomain,
+					'secure'   => $isSecure,
+					'httponly' => true,
+					'samesite' => 'Lax', // Или 'Strict', если не нужна кросс-сайтовая авторизация
+				]
+			);
+
+			if (!$cookieSet) {
+				$this->logger->WriteLine("Ошибка установки cookie для пользователя {$login}");
+			}
+
+			// Обновляем токен в базе
+			init::$sqlQueryHandler->updateData('users', ['token' => $token], 'login', $login);
+
+		} else {
+			// Удаление cookie
+			setcookie(
+				AuthManager::$userToken,
+				'',
+				[
+					'expires'  => time() - 3600,
+					'path'     => '/',
+					'domain'   => $cookieDomain,
+					'secure'   => $isSecure,
+					'httponly' => true,
+					'samesite' => 'Lax',
+				]
+			);
+
+			// Очистка токена в БД
+			init::$sqlQueryHandler->updateData('users', ['token' => ''], 'login', $login);
+		}
+	}
 }

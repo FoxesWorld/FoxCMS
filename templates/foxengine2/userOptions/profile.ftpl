@@ -22,7 +22,7 @@
       <div id="edit" style="display: none;">
          <div class="d-inline-flex m-2">
             <h3 class="m-1">%lang|profileOf% [login]</h3>
-            <button class="login editProfile" style="float: right;" onclick="foxEngine.editUser.viewEdit()">%lang|takeMeBack%</button>
+            <button class="login editProfile" style="float: right;" onclick="foxEngine.editUser.toggleEditView()">%lang|takeMeBack%</button>
          </div>
          <ul class="tab_caption">
             <li class="profileSettings active" value="profile">%lang|profileSettings%</li>
@@ -52,10 +52,26 @@
                <div class="fields_item">
                   <h3 class="settingsTitle">%lang|colorScheme%</h3>
                   <div class="container">
+				 <div id="demo">
+					<input type="text" value="[colorScheme]" />
+				  </div>
+				  
+				  <script>
+					$(function() {
+					  $('#demo').colorpicker({
+						popover: false,
+						inline: true,
+						container: '#demo'
+					  }).on('colorpickerChange', function(event) {
+						$('#colourVal').val(event.color.toString());
+					  });
+					});
+				  </script>
+				  <!--
                      <div class="row row-cols-2 row-cols-md-4 g-4" id="profileColors">
-                        <!-- Colors go here -->
-                        <input type="hidden" id="colourVal" name="colorScheme" value="[colorScheme]" />
+
                      </div>
+					 -->
                   </div>
          
 		 </div>  
@@ -162,6 +178,7 @@
             </div>
             <input name="user_doaction" type="hidden" value="EditUser" />
             <input name="login" type="hidden" value="[login]" />
+			<input type="hidden" id="colourVal" name="colorScheme" value="[colorScheme]" />
             <input name="refreshPage" type="hidden" value="false" />
             <input name="onSubmit" type="hidden" value="foxEngine.user.showUserProfile('[login]');" /> 
             [not-group=1]
@@ -196,7 +213,7 @@
 				<ul class="foxesButton_split" id="elEditProfile">
 				[hasPriviligies]
 					<li>
-						<b class="fakeLink foxesButton foxesButton_small foxesButton_overlaid" onclick="foxEngine.editUser.viewEdit()">
+						<b class="fakeLink foxesButton foxesButton_small foxesButton_overlaid" onclick="foxEngine.editUser.toggleEditView()">
 							<i class="fa fa-pencil"></i>&nbsp;<span class="foxesResponsive_hidePhone foxesResponsive_inline">%lang|edit%</span>
 						</b>					
 					</li>
@@ -330,11 +347,4 @@
 		<div class="playtime-widget-container"></div>
       </div>
    </div>
-   
-<script>
-    $(function() {
-        //foxEngine.user.parseBadges('[login]');
-	});
-</script>
-
 </pageContent>

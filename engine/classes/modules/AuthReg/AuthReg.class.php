@@ -147,15 +147,66 @@ class AuthManager extends Module {
         }
     }
     
-    public static function logout($message = "") : void {
-        if (init::$usrArray["isLogged"] === true) {
+public static function logout(string $message = ""): void {
+    // Проверка: был ли пользователь авторизован
+    if (!empty(init::$usrArray["isLogged"])) {
+
+        // Очистка всех переменных сессии
+        $_SESSION = [];
+
+        // Уничтожение сессии и cookie
+        if (session_id()) {
+            session_unset();
             session_destroy();
-            setcookie(self::$userToken, "", time() - 3600);
-            functions::jsonAnswer($message, false);
-        } else {
-            functions::jsonAnswer("Cant logOut!", true);
+
+            // Удаление файла сессии (по желанию)
+            if (ini_get("session.use_cookies")) {
+                $params = session_get_cookie_params();
+                setcookie(
+                    session_name(),
+                    '',
+                    [
+                        'expires'  => time() - 42000,
+                        'path'     => $params["path"],
+                        'domain'   => $params["domain"],
+                        'secure'   => $params["secure"],
+                        'httponly' => $params["httponly"],
+                        'samesite' => $params["samesite"] ?? 'Lax',
+                    ]
+                );
+            }
         }
+
+        // Удаление токена-куки (тот, что используется для авторизации)
+        $domain   = $_SERVER["HTTP_HOST"];
+        $isSecure = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on';
+
+        setcookie(
+            self::$userToken,
+            '',
+            [
+                'expires'  => time() - 3600,
+                'path'     => '/',
+                'domain'   => $domain,
+                'secure'   => $isSecure,
+                'httponly' => true,
+                'samesite' => 'Lax',
+            ]
+        );
+
+        // Если используется токен в БД — очистить
+        if (!empty(init::$usrArray["login"])) {
+            init::$sqlQueryHandler->updateData('users', ['token' => ''], 'login', init::$usrArray["login"]);
+        }
+
+        // Ответ клиенту
+        functions::jsonAnswer($message ?: "Logged out successfully", false);
+
+    } else {
+        functions::jsonAnswer("Can't log out — not logged in", true);
     }
+}
+
     
     private function token($max = 32) : string {
         $chars = "0123456789abcdef";

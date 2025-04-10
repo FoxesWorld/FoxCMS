@@ -52,7 +52,7 @@ if(!defined('profile')) {
 								if(@$request['email'] !== "null") {
 									$this->inputEmail = @$request['email'];
 									if (filter_var($this->inputEmail, FILTER_VALIDATE_EMAIL)) {
-										if($this->canSetColor(@$request['colorScheme'])){ //HERE
+										//if($this->canSetColor(@$request['colorScheme'])){ //HERE
 											if(@$request['user_group'] !== "null") {
 												if(@functions::FoxesStrlen($request['userStatus']) <= 32) {
 												//if(@$request['user_group'] !== init::$usrArray['user_group'] && init::$usrArray['groupTag'] === "admin"){
@@ -88,10 +88,10 @@ if(!defined('profile')) {
 												$this->status = "error";
 												$this->statusInfo = $lang['profileEdit']['nouser_group'];
 											}
-										} else {
-										$this->status = "warn";
-										$this->statusInfo = 'invalidColour '.$request['colorScheme'];
-										}
+										//} else {
+										//$this->status = "warn";
+										//$this->statusInfo = 'invalidColour '.@$request['colorScheme'];
+										//}
 									} else {
 										$this->status = "warn";
 										$this->statusInfo = $lang['profileEdit']['invalidEmail'];
