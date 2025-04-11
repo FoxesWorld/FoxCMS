@@ -37,8 +37,11 @@
                   [input type="text" name="userStatus" placeholder="%lang|status%" value="[userStatus]"]
                   [input type="text" name="land" placeholder="%lang|land%" value="[land]"]
                   [input type="text" name="email" placeholder="%lang|email%" value="[email]"]
-                  [group=4] 
+				  
+                  [group=4,3]
+				  <div class="currentPass"> 
 					[input type="password" name="password" placeholder="%lang|currentPass%"]
+				  </div>
                   [/group]
                   
 					  [group=1]

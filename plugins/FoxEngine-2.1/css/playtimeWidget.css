@@ -87,6 +87,12 @@
     height: inherit
 }
 
+.indent {
+	background: aliceblue;
+    padding: 15px;
+    border-radius: 5px;
+}
+
 @keyframes progress-bar-stripes {
     0% {
         background-position: 0 0

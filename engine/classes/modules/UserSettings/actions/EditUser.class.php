@@ -10,6 +10,7 @@ if(!defined('profile')) {
 		
 		/*EditStatus*/
 		private string $status = "success";
+		private string $action = "";
 		private $statusInfo;
 		private $baseColor = "#bfc0c0ab";
 		
@@ -106,6 +107,7 @@ if(!defined('profile')) {
 							}
 						} else {
 							$this->status = "error";
+							$this->action = $this->addScript(".currentPass", 0, "shake");
 							$this->statusInfo = $lang['profileEdit']['noPassword'];
 						}
 					} else {
@@ -124,7 +126,7 @@ if(!defined('profile')) {
 				$this->status = "error";
 				$this->statusInfo = $lang['profileEdit']['noLoginSent'];
 			}
-			die('{"message": "'.$this->statusInfo.'", "type": "'.$this->status.'"}');
+			die('{"message": "'.$this->statusInfo.'", "type": "'.$this->status.'", "action": "'.$this->action.'"}');
 		}
 		
 		private function profileChanges() {
@@ -158,6 +160,7 @@ if(!defined('profile')) {
 
 				if($newPass != $repeatPass) {
 					$this->statusInfo = "PassMismatch";
+					$this->action = $this->addScript(".tab_content" ,2, "shake");
 					$this->status = "error";
 				}
 							
@@ -204,4 +207,26 @@ if(!defined('profile')) {
 		private function getUserfield($userfiled){
 			return functions::getUserData($this->inputLogin, $userfiled, $this->db);
 		}
+		
+		private function addScript($element, $n, $anim) {
+			$script = "(function() {
+				if (typeof foxEngine !== 'undefined' && foxEngine.editUser && typeof foxEngine.editUser.openTab === 'function') {
+					foxEngine.editUser.openTab({$n});
+				} else {
+				}
+				var tabContents = document.querySelectorAll('{$element}');
+				tabContents.forEach(function(el) {
+					el.classList.add('{$anim}');
+					el.addEventListener('animationend', function() {
+						el.classList.remove('{$anim}');
+					});
+				});
+			})();";
+			
+			$script = preg_replace('/\r|\n/', ' ', $script);
+			$script = trim(preg_replace('/\s+/', ' ', $script));
+			
+			return $script;
+		}
+
 	}

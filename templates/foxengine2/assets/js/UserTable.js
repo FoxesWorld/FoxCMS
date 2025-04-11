@@ -110,19 +110,15 @@ class UserTable {
         );
     }
 
-
-  calculateTotalPlaytime(serversOnline, selectedServer) {
-    const servers = this.parseServersOnline(serversOnline);
-    // Преобразование: делим на 60, чтобы перевести в секунды
-    const convertTime = time => time;
-    
-    if (selectedServer === 'all') {
-      return servers.reduce((total, server) => total + convertTime(server.totalTime || 0), 0);
-    } else {
-      const server = servers.find(s => s.serverName === selectedServer);
-      return server ? convertTime(server.totalTime) : 0;
+    calculateTotalPlaytime(serversOnline, selectedServer) {
+        const servers = this.parseServersOnline(serversOnline);
+        if (selectedServer === 'all') {
+            return servers.reduce((total, server) => total + (server.totalTime || 0), 0);
+        } else {
+            const server = servers.find(s => s.serverName === selectedServer);
+            return server ? server.totalTime : 0;
+        }
     }
-  }
 
     async renderUsers(users) {
         this.container.innerHTML = '';
@@ -131,6 +127,7 @@ class UserTable {
     }
 
     async createUserRow(user, rank) {
+        // Если выбран конкретный сервер и пользователь не играет на нём – пропускаем его
         const servers = this.parseServersOnline(user.serversOnline);
         if (this.selectedServer !== 'all' && !servers.some(server => server.serverName === this.selectedServer)) {
             return null;
@@ -141,6 +138,7 @@ class UserTable {
 
         row.appendChild(this.createRankCell(rank));
         row.appendChild(await this.createPlayerCell(user));
+        // Заменяем простое текстовое отображение общей игры на ячейку с полосой
         row.appendChild(this.createPlaytimeCell(user));
         row.appendChild(this.createLastSessionCell(user));
         row.appendChild(this.createLastLoginCell(user));
@@ -189,19 +187,66 @@ class UserTable {
         }
     }
 
+    /**
+     * Создаёт ячейку, в которой выводится общее время игры в виде отформатированного текста 
+     * и полосы с сегментами по серверам, пропорциональными вкладу каждого сервера.
+     */
     createPlaytimeCell(user) {
         const playtimeCell = document.createElement('td');
+		//$(playtimeCell).addClass("indent");
         const totalSeconds = this.calculateTotalPlaytime(user.serversOnline, this.selectedServer);
-        playtimeCell.textContent = this.formatPlaytimeText(totalSeconds);
+        // Текстовое представление общего времени
+        const timeText = document.createElement('div');
+        timeText.textContent = this.formatPlaytimeText(totalSeconds);
+        playtimeCell.appendChild(timeText);
+        // Полоса с сегментами
+        const bar = this.createPlaytimeBar(user);
+        playtimeCell.appendChild(bar);
         return playtimeCell;
     }
 
     /**
-     * Форматирует общее время игры так, чтобы учитывались часы, минуты и секунды.
+     * Создаёт элемент полосы, в которой каждому серверу отведена своя доля по времени игры.
+     */
+    createPlaytimeBar(user) {
+        const servers = this.parseServersOnline(user.serversOnline);
+        let relevantServers = servers;
+        // Если выбран конкретный сервер – отфильтровываем данные
+        if (this.selectedServer !== 'all') {
+            relevantServers = servers.filter(s => s.serverName === this.selectedServer);
+        }
+        const totalTime = relevantServers.reduce((sum, s) => sum + s.totalTime, 0);
+        
+        if (totalTime === 0) {
+            const emptyBar = document.createElement('div');
+            emptyBar.textContent = 'Нет данных';
+            return emptyBar;
+        }
+        
+        // Создаём контейнер полосы
+        const barContainer = document.createElement('div');
+        // Стилизация – можно вынести в CSS
+		$(barContainer).addClass("playtime-bar-wrapper");
+        barContainer.style.width = '100%';
+        
+        // Для каждого сервера создаём сегмент с шириной пропорциональной времени
+        relevantServers.forEach(s => {
+            const pct = ((s.totalTime / totalTime) * 100).toFixed(2);
+            const segment = document.createElement('div');
+            segment.style.width = `${pct}%`;
+            // Используем цвет из карты (foxEngine.serversColorMap) или задаём запасной вариант
+            const color = (foxEngine.serversColorMap && foxEngine.serversColorMap[s.serverName]) || '#AAA';
+            segment.style.backgroundColor = color;
+            segment.title = `${s.serverName}: ${this.formatPlaytimeText(s.totalTime)}`;
+            barContainer.appendChild(segment);
+        });
+        
+        return barContainer;
+    }
+
+    /**
+     * Форматирует время, показывая часы, минуты и секунды.
      * Например, 80 секунд будет отображено как "1 минута 20 секунд".
-     *
-     * @param {number} totalSeconds Общее число секунд.
-     * @return {string} Отформатированное строковое представление времени.
      */
     formatPlaytimeText(totalSeconds) {
         const hours = Math.floor(totalSeconds / 3600);
@@ -233,11 +278,9 @@ class UserTable {
 
         const servers = this.parseServersOnline(user.serversOnline);
 
-        // Если пользователь сейчас играет, выводим соответствующий бейдж
         if (serversOnline.isPlaying && serversOnline.playingOn) {
             lastSessionCell.innerHTML = `<span class="badge badge-success">Играет на ${serversOnline.playingOn}</span>`;
         } else if (this.selectedServer === 'all') {
-            // Для всех серверов: находим сервер с максимальным значением lastPlayed
             if (servers.length > 0) {
                 const mostRecentServer = servers.reduce((prev, curr) => (prev.lastPlayed > curr.lastPlayed ? prev : curr));
                 const lastSessionLength = mostRecentServer.lastSession;
@@ -248,7 +291,6 @@ class UserTable {
                 lastSessionCell.textContent = 'Нет данных';
             }
         } else {
-            // Для выбранного конкретного сервера
             const selectedServer = servers.find(server => server.serverName === this.selectedServer);
             const lastSessionLength = selectedServer ? selectedServer.lastSession : 0;
             lastSessionCell.textContent = lastSessionLength
@@ -263,7 +305,6 @@ class UserTable {
         const lastLoginCell = document.createElement('td');
         const servers = this.parseServersOnline(user.serversOnline);
         if (servers.length > 0) {
-            // Находим сервер с наибольшим значением lastPlayed
             const mostRecentServer = servers.reduce((prev, curr) => (prev.lastPlayed > curr.lastPlayed ? prev : curr));
             if (mostRecentServer && mostRecentServer.lastPlayed) {
                 const lastLoginDate = new Date(mostRecentServer.lastPlayed * 1000);
@@ -277,9 +318,6 @@ class UserTable {
         return lastLoginCell;
     }
 
-    /**
-     * Функция форматирования времени (аналогична formatPlaytimeText).
-     */
     formatTime(totalSeconds) {
         const hours = Math.floor(totalSeconds / 3600);
         const minutes = Math.floor((totalSeconds % 3600) / 60);

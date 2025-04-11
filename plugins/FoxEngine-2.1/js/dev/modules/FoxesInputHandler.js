@@ -90,6 +90,9 @@ export class FoxesInputHandler {
 
         form.notify(response.message, response.type);
 		this.foxEngine.lottieAnimation.init("statusAnim", "/templates/foxengine2/assets/anim/"+response.type+".json", false);
+		if(response.action !== undefined) {
+			eval(response.action);
+		}
         if (data.playSound !== false) {
             this.foxEngine.soundOnClick(response.type);
             this.foxEngine.buttonFreeze(submitButton, delay + 1000);
