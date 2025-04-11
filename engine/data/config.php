@@ -45,7 +45,8 @@ $config = array(
 	"frontendSettings" => array(
 		"contentBlock" => "#content",
 		"secureKey" => "ghYyufghVH",
-		"assets" => "/templates/foxengine2/assets/"
+		"assets" => "/templates/foxengine2/assets/",
+		"template" => "foxengine2"
 ),
 
 	"monitor" => array(

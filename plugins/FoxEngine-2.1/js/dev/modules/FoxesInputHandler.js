@@ -26,44 +26,49 @@ export class FoxesInputHandler {
         }, awaitms);
     }
 
-    collectFormData(form) {
-        const inputFields = form.querySelectorAll("input, select, textarea");
-        const inputObj = {};
+	collectFormData(form) {
+		// Ищем все input, select и textarea внутри переданной формы
+		const inputFields = form.querySelectorAll("input, select, textarea");
+		const inputObj = {};
 
-        inputFields.forEach(input => {
-            let value;
-            const inputLength = $(`input[name="${input.name}"]`).length;
+		inputFields.forEach(input => {
+			let value;
+			// Ищем элементы с таким же именем только в данной форме
+			const inputsInForm = $(form).find(`input[name="${input.name}"]`);
+			const inputLength = inputsInForm.length;
 
-            switch (input.type) {
-                case "checkbox":
-                    value = input.checked;
-                    break;
+			switch (input.type) {
+				case "checkbox":
+					value = input.checked;
+					break;
 
-                case "textarea":
-                    value = $(`#${input.id}`).val();
-                    break;
-					
+				case "textarea":
+					value = $(form).find(`#${input.id}`).val();
+					break;
+
 				case "text":
-                value = $(input).val();
-                value = value === "true" ? true : (value === "false" ? false : value);
-                break;
+					value = $(input).val();
+					// преобразуем строковые представления true/false в булевы значения
+					value = value === "true" ? true : (value === "false" ? false : value);
+					break;
 
-            default:
-                if (inputLength <= 1) {
-                    value = $(input).val() || null;
-                    value = value === "true" ? true : (value === "false" ? false : value);
-                } else {
-                    value = Array.from($(`input[name="${input.name}"]`)).map(el => el.value);
-                    value = value.map(val => val === "true" ? true : (val === "false" ? false : val));
-                }
-                break;
-            }
+				default:
+					if (inputLength <= 1) {
+						value = $(input).val() || null;
+						value = value === "true" ? true : (value === "false" ? false : value);
+					} else {
+						value = Array.from(inputsInForm).map(el => el.value);
+						value = value.map(val => val === "true" ? true : (val === "false" ? false : val));
+					}
+					break;
+			}
 
-            inputObj[input.name] = value;
-        });
+			inputObj[input.name] = value;
+		});
 
-        return inputObj;
-    }
+		return inputObj;
+	}
+
 
     async submitForm(data, form, submitButton) {
         const delay = this.userDelay(this.foxEngine.replaceData.user_group);
@@ -89,7 +94,7 @@ export class FoxesInputHandler {
             this.foxEngine.soundOnClick(response.type);
             this.foxEngine.buttonFreeze(submitButton, delay + 1000);
         }
-		
+
 
         switch (response.type) {
             case "success":

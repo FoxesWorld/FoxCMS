@@ -54,6 +54,7 @@ export class Utils {
         const content   = await this.foxEngine.entryReplacer.replaceText(html);
         await this.foxEngine.page.loadData(content, block);
     }
+	
 
     textAnimate(target) {
         return anime.timeline({ loop: false })

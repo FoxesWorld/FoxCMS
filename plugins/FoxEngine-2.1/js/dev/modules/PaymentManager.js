@@ -57,7 +57,7 @@ export class PaymentManager {
             timestamp += `/?email=aseo@gmail.com&currency=${type}`;
         }
 
-        window.location.href = `https://api.simpleminecraft.${domain}/v2/payments/create/${payment_system}/Aseo/${this.getPaymentSum(type)}/${timestamp}`;
+        window.location.href = `https://api.foxescraft.ry.${domain}/v2/payments/create/${payment_system}/Aseo/${this.getPaymentSum(type)}/${timestamp}`;
     }
 
     getPaymentSum(type) {

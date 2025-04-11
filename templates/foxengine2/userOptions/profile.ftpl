@@ -39,10 +39,11 @@
                   [input type="text" name="email" placeholder="%lang|email%" value="[email]"]
                   [group=4] 
 					[input type="password" name="password" placeholder="%lang|currentPass%"]
-                  [/group] 
-                  [group=1]
-                  [input type="number" name="user_group" placeholder="%lang|userGroup%" value="[user_group]"] 
-                  [/group] 
+                  [/group]
+                  
+					  [group=1]
+						[input type="number" name="user_group" placeholder="%lang|userGroup%" value="[user_group]"] 
+					  [/group]
                </section>
             </div>
             <div class="tab_content" id="personalisation">
@@ -176,6 +177,7 @@
 					[input type="password" name="repeatPass" placeholder="Повтор пароля"]
 			   </section>
             </div>
+			
             <input name="user_doaction" type="hidden" value="EditUser" />
             <input name="login" type="hidden" value="[login]" />
 			<input type="hidden" id="colourVal" name="colorScheme" value="[colorScheme]" />
@@ -197,9 +199,22 @@
 					Загрузка фото профиля возможна во вкладке <b class="fakeLink" onclick="foxEngine.editUser.openTab(1); foxEngine.modalApp.closeModalApp();">"Персонализация"</b>
 					<br />
 					<small>Это временная мера, в будущем загрузка фото перейдёт сюда :smirk:</small>
+					<!--
+					<form method="POST" action="/" id="loadPhoto">
+						[input type="upload" id="profilePhoto" name="image" metadata="profilePhoto"]
+						<input name="refreshPage" type="hidden" value="false" />
+						<input name="onSubmit" type="hidden" value="foxEngine.modalApp.closeModalApp();" /> 
+						<input name="user_doaction" type="hidden" value="loadPhoto" />
+						<input name="foxesHash" class="input" type="hidden" value="[hash]" />
+						<button type="submit" class="m-2 login">
+						   %lang|submit%
+						   <div class="fa fa-cog fa-spin"></div>
+						</button>
+					</form> -->
 				</div>
          </div>
       </div>
+	  </div>
       [/hasPriviligies] 
       <div id="view" style="display: block;">
          <div id="profileContents"  class="foxesPageHead_special" id="profileHeader"style="background: linear-gradient(45deg, #c5c5e19c, [colorScheme]);">

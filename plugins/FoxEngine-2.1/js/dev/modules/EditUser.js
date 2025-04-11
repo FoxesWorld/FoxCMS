@@ -5,68 +5,11 @@ export class EditUser extends User {
     super(foxEngine);
   }
 
-  /**
-   * Инициализация редактора: скины + UI‑контролы
-   */
   async initialize(login) {
     this.login = login;
     await this.drawSkins(login);
-    //this.loadColors();
-    //this.initColorPicker();
     this.initTabListeners();
   }
-
-  /**
-   * Рендер палитры цветов (единожды)
-   
-  loadColors() {
-    const allowed = [...this.foxEngine.replaceData.allowedColors];
-    const $val    = $('#colourVal');
-    let selected  = $val.val() || allowed[0];
-    if (!allowed.includes(selected)) allowed.push(selected);
-    $val.val(selected);
-
-    const container = document.getElementById('profileColors');
-    container.innerHTML = '';
-    const frag = document.createDocumentFragment();
-
-    allowed.forEach((color, idx) => {
-      const isChecked = color === selected;
-      const label     = document.createElement('label');
-      label.htmlFor   = `ColorInput_${idx}`;
-      label.innerHTML = `
-        <div class="colorBlock ${isChecked ? 'checked' : ''}" id="Color${idx}"
-             style="background-color:${color}">
-          <input type="radio" name="colorPicker" id="ColorInput_${idx}"
-                 value="${color}" ${isChecked ? 'checked' : ''} hidden>
-          <div class="innerDiv" style="display:${isChecked?'block':'none'}">
-            <i class="fa fa-check"></i>
-          </div>
-        </div>`;
-      frag.appendChild(label);
-    });
-
-    container.appendChild(frag);
-  }
-
-  /**
-   * Делегированный выбор цвета:
-   *  - переключает .checked
-   *  - прячет/показывает innerDiv
-   *  - записывает в #colourVal
-   
-  initColorPicker() {
-    $('#profileColors').on('click', '.colorBlock', event => {
-      const $block = $(event.currentTarget);
-      // сброс у всех
-      $('#profileColors .colorBlock').removeClass('checked').find('.innerDiv').hide();
-      // пометка текущего
-      $block.addClass('checked').find('.innerDiv').show();
-      // запись в скрытое поле
-      const color = $block.find('input[name="colorPicker"]').val();
-      $('#colourVal').val(color);
-    });
-  } */
 
   initTabListeners() {
     $('.tabs .tab_caption').on('click', 'li:not(.active)', event => {

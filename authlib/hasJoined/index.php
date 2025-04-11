@@ -66,8 +66,14 @@ class HasJoined
             $this->logger->WriteLine("[WARN] Сессия не найдена для пользователя: {$inputUser}");
             exit($this->errorResponse("Bad login", "Пользователь не найден или неверный serverId"));
         }
-
-        $this->realUser = $row['user'];
+		
+		if($inputUser == $row['user']) {
+			$this->realUser = $row['user'];
+		} else {
+			$this->logger->WriteLine("[WARN] Пользователь: {$inputUser} не равен: {$row['user']}");
+			exit($this->errorResponse("Bad login", "Пользователь не соответствует сессии!"));
+		}
+		
         $this->UUID = $row['userMd5'];
         $this->logger->WriteLine("[INFO] Найден пользователь: {$this->realUser} (UUID: {$this->UUID})");
     }

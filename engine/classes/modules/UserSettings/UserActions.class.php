@@ -29,7 +29,8 @@ if(!defined('profile')) {
 							break;
 							
 							case 'loadPhoto':
-								die('{"message": "WIP"}');
+							$loadPhoto = new LoadPhoto($this->fRequest, $db, $logger);
+								
 							break;
 							
 							case 'GetBadges':

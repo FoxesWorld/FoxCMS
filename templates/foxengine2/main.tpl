@@ -71,9 +71,9 @@
 		});
 	}
 
-    document.addEventListener('DOMContentLoaded', function() {
-		foxEngine.cookieManager.checkCookie('modalShown', 'true', 7, myAction, false);
-    });
+    //document.addEventListener('DOMContentLoaded', function() {
+	//	foxEngine.cookieManager.checkCookie('modalShown', 'true', 7, myAction, false);
+    //});
 	
     /**
      * Инициализация анимации Lottie

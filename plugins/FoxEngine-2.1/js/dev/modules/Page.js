@@ -16,7 +16,7 @@ export class Page {
         if (cleanPage === this.selectPage.thisPage) return;
 
         try {
-            const response = await this.foxEngine.sendPostAndGetAnswer({ "getOption": cleanPage }, "TEXT");
+            const response = await this.foxEngine.sendPostAndGetAnswer({ getOption: cleanPage }, "TEXT");
 
             if (!this.foxEngine.utils.isJson(response)) {
                 const responseHTML = this.foxEngine.parseResponseHTML(response);
@@ -28,6 +28,7 @@ export class Page {
 
                     if (this.foxEngine.entryReplacer) {
                         const replacedContent = await this.foxEngine.entryReplacer.replaceText(responseHTML.body.innerHTML);
+                        // Загружаем данные в блок, только когда DOM готов
                         await this.loadData(replacedContent, block);
                         this.updateNavigation(cleanPage);
                     } else {
@@ -36,7 +37,7 @@ export class Page {
                 }
 
                 this.removeUserOptionElement();
-                //this.scrollToBlock(block);
+                // this.scrollToBlock(block);
             } else {
                 await this.foxEngine.utils.showErrorPage(response, block);
                 this.setPage("");
@@ -48,7 +49,7 @@ export class Page {
 
     async getPage(page) {
         try {
-            const response = await this.foxEngine.sendPostAndGetAnswer({ "getOption": page }, "HTML");
+            const response = await this.foxEngine.sendPostAndGetAnswer({ getOption: page }, "HTML");
             const option = this.foxEngine.utils.getData(response, 'useroption');
 
             if (option) {
@@ -96,14 +97,20 @@ export class Page {
         });
     }
 
+    /**
+     * Загрузка данных с обновлением содержимого блока.
+     * Выполнение манипуляций происходит только после полной готовности страницы.
+     */
     async loadData(data, block) {
-        $(block).fadeOut(500, () => {
-            if (data?.includes('<section class="gallery"')) {
-                new Gallery(this.foxEngine, data).loadGallery();
-            }
-
-            $(block).html(data).fadeIn(500);
-            this.foxEngine.foxesInputHandler.formInit(500, data);
+        $(document).ready(() => {
+            $(block).fadeOut(500, () => {
+                // Если на странице присутствует gallery – инициализируем её
+                if (data?.includes('<section class="gallery"')) {
+                    new Gallery(this.foxEngine, data).loadGallery();
+                }
+                $(block).html(data).fadeIn(500);
+                this.foxEngine.foxesInputHandler.formInit(500, data);
+            });
         });
     }
 

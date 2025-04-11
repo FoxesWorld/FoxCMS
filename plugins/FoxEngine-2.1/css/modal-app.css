@@ -43,6 +43,7 @@
     z-index: 15;
     animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     animation-fill-mode: both;
+    display: contents;
     animation-duration: 300ms;
     animation-name: in;
 }

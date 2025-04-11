@@ -21,7 +21,7 @@
             </li>
             <script>
                 async function addFunds(){
-                    const template = await foxEngine.loadTemplate(foxEngine.elementsDir+'payment.tpl', true);
+                    const template = foxEngine.templateCache["payment"];
                     let data = await foxEngine.entryReplacer.replaceText(template, "");
                     foxEngine.modalApp.showModalApp(900, "Пополнение счета:", data, () => {
                         console.log('Модальное окно закрыто');

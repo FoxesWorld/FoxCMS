@@ -1,6 +1,26 @@
 import { FoxEngine } from '/plugins/FoxEngine-2.1/js/FoxEngine.js';
 
-const foxEngine = new FoxEngine(replaceData, userFields);
+const templates = {
+  "templates": {
+    "lastUser": "/templates/" + replaceData['template'] + "/foxEngine/lastUser.tpl",
+	"badge": "/templates/" + replaceData['template'] + "/foxEngine/badge.tpl",
+	//"errorPage": replaceData['assets'] + "elements/pageError.tpl",
+	"payment": "/templates/" + replaceData['template'] + "/foxEngine/payment.tpl",
+	"playTimeWidgetCard": "/templates/" + replaceData['template'] + "/foxEngine/playTimeWidget/widgetCard.tpl",
+	"emptyWidget": "/templates/" + replaceData['template'] + "/foxEngine/playTimeWidget/emptyWidget.tpl",
+	"widgetSegment": "/templates/" + replaceData['template'] + "/foxEngine/playTimeWidget/widgetSegment.tpl",
+	"widgetRow": "/templates/" + replaceData['template'] + "/foxEngine/playTimeWidget/widgetRow.tpl"
+  }
+};
+
+const serversColorMap = {
+            Prodigium: '#3498DB',
+            Amber:     '#c17d22',
+            Celeste:   '#37bbd0',
+            Industrial:'#d79c1c'
+        };
+
+const foxEngine = new FoxEngine(replaceData, userFields, templates, serversColorMap);
 window.foxEngine = foxEngine;
 
 const App = new Vue({
@@ -11,17 +31,16 @@ const App = new Vue({
     },
 
     mounted() {
-        
         document.addEventListener("DOMContentLoaded", () => {
 			foxEngine.user.parseUsrOptionsMenu();
 			foxEngine.logo.logoAnimation();
 			foxEngine.servers.parseOnline();
 			setBackgroundBySeason();
+			foxEngine.user.getLastUser();
         });
     },
 
     created() {
-        foxEngine.user.getLastUser();
         $("#dialog").dialog({
             autoOpen: false,
             show: 'fade',
@@ -118,6 +137,4 @@ setTimeout(() => {
 }, 1000);
 }());
 
-
-// Export Vue App
 export { App, foxEngine };
