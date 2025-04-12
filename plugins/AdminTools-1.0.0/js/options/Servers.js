@@ -11,7 +11,8 @@
 import { EditServer } from './serverOptions/EditServer.js'; 
 
 export class Servers {
-    constructor() {
+    constructor(adminPanel) {
+		this.adminPanel = adminPanel;
 		this.editServer = new EditServer(this);
     }
 
@@ -34,7 +35,7 @@ export class Servers {
             if (servers.length > 0) {
                 await this.displayServers(servers);
             } else {
-                const noServersHtml = `<div class="noServers"><h1>No Servers available</h1></div>`;
+                const noServersHtml = this.adminPanel.templateCache["noServers"];
                 foxEngine.page.loadData(noServersHtml, "#adminContent");
             }
         } catch (error) {
@@ -45,7 +46,7 @@ export class Servers {
 	async displayServers(servers) {
 		const serversList = $("#serversList");
 		serversList.html("");
-		const serverRowTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/servers/serverRow.tpl', true);
+		const serverRowTpl = this.adminPanel.templateCache["serverRow"];
 
 		for (let index = 0; index < servers.length; index++) {
 			const server = servers[index];
@@ -83,7 +84,7 @@ export class Servers {
         adminContent.html(" ");
 
         if (!adminContent.find("> table").length) {
-            const tableHeader = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/servers/serversTable.tpl');
+            const tableHeader = this.adminPanel.templateCache["serversTable"];
             adminContent.html(tableHeader);
         }
     }

@@ -5211,9 +5211,9 @@ var require_jquery = __commonJS({
         }
       }
       jQuery2.param = function(a, traditional) {
-        var prefix, s2 = [], add = function(key, valueOrFunction) {
+        var prefix, s = [], add = function(key, valueOrFunction) {
           var value = isFunction(valueOrFunction) ? valueOrFunction() : valueOrFunction;
-          s2[s2.length] = encodeURIComponent(key) + "=" + encodeURIComponent(value == null ? "" : value);
+          s[s.length] = encodeURIComponent(key) + "=" + encodeURIComponent(value == null ? "" : value);
         };
         if (a == null) {
           return "";
@@ -5227,7 +5227,7 @@ var require_jquery = __commonJS({
             buildParams(prefix, a[prefix], traditional, add);
           }
         }
-        return s2.join("&");
+        return s.join("&");
       };
       jQuery2.fn.extend({
         serialize: function() {
@@ -5306,12 +5306,12 @@ var require_jquery = __commonJS({
         }
         return target;
       }
-      function ajaxHandleResponses(s2, jqXHR, responses) {
-        var ct, type, finalDataType, firstDataType, contents = s2.contents, dataTypes = s2.dataTypes;
+      function ajaxHandleResponses(s, jqXHR, responses) {
+        var ct, type, finalDataType, firstDataType, contents = s.contents, dataTypes = s.dataTypes;
         while (dataTypes[0] === "*") {
           dataTypes.shift();
           if (ct === void 0) {
-            ct = s2.mimeType || jqXHR.getResponseHeader("Content-Type");
+            ct = s.mimeType || jqXHR.getResponseHeader("Content-Type");
           }
         }
         if (ct) {
@@ -5326,7 +5326,7 @@ var require_jquery = __commonJS({
           finalDataType = dataTypes[0];
         } else {
           for (type in responses) {
-            if (!dataTypes[0] || s2.converters[type + " " + dataTypes[0]]) {
+            if (!dataTypes[0] || s.converters[type + " " + dataTypes[0]]) {
               finalDataType = type;
               break;
             }
@@ -5343,20 +5343,20 @@ var require_jquery = __commonJS({
           return responses[finalDataType];
         }
       }
-      function ajaxConvert(s2, response2, jqXHR, isSuccess) {
-        var conv2, current, conv, tmp, prev, converters = {}, dataTypes = s2.dataTypes.slice();
+      function ajaxConvert(s, response2, jqXHR, isSuccess) {
+        var conv2, current, conv, tmp, prev, converters = {}, dataTypes = s.dataTypes.slice();
         if (dataTypes[1]) {
-          for (conv in s2.converters) {
-            converters[conv.toLowerCase()] = s2.converters[conv];
+          for (conv in s.converters) {
+            converters[conv.toLowerCase()] = s.converters[conv];
           }
         }
         current = dataTypes.shift();
         while (current) {
-          if (s2.responseFields[current]) {
-            jqXHR[s2.responseFields[current]] = response2;
+          if (s.responseFields[current]) {
+            jqXHR[s.responseFields[current]] = response2;
           }
-          if (!prev && isSuccess && s2.dataFilter) {
-            response2 = s2.dataFilter(response2, s2.dataType);
+          if (!prev && isSuccess && s.dataFilter) {
+            response2 = s.dataFilter(response2, s.dataType);
           }
           prev = current;
           current = dataTypes.shift();
@@ -5383,7 +5383,7 @@ var require_jquery = __commonJS({
                 }
               }
               if (conv !== true) {
-                if (conv && s2.throws) {
+                if (conv && s.throws) {
                   response2 = conv(response2);
                 } else {
                   try {
@@ -5485,7 +5485,7 @@ var require_jquery = __commonJS({
             url = void 0;
           }
           options = options || {};
-          var transport, cacheURL, responseHeadersString, responseHeaders, timeoutTimer, urlAnchor, completed2, fireGlobals, i, uncached, s2 = jQuery2.ajaxSetup({}, options), callbackContext = s2.context || s2, globalEventContext = s2.context && (callbackContext.nodeType || callbackContext.jquery) ? jQuery2(callbackContext) : jQuery2.event, deferred = jQuery2.Deferred(), completeDeferred = jQuery2.Callbacks("once memory"), statusCode = s2.statusCode || {}, requestHeaders = {}, requestHeadersNames = {}, strAbort = "canceled", jqXHR = {
+          var transport, cacheURL, responseHeadersString, responseHeaders, timeoutTimer, urlAnchor, completed2, fireGlobals, i, uncached, s = jQuery2.ajaxSetup({}, options), callbackContext = s.context || s, globalEventContext = s.context && (callbackContext.nodeType || callbackContext.jquery) ? jQuery2(callbackContext) : jQuery2.event, deferred = jQuery2.Deferred(), completeDeferred = jQuery2.Callbacks("once memory"), statusCode = s.statusCode || {}, requestHeaders = {}, requestHeadersNames = {}, strAbort = "canceled", jqXHR = {
             readyState: 0,
             // Builds headers hashtable if needed
             getResponseHeader: function(key) {
@@ -5516,7 +5516,7 @@ var require_jquery = __commonJS({
             // Overrides response content-type header
             overrideMimeType: function(type) {
               if (completed2 == null) {
-                s2.mimeType = type;
+                s.mimeType = type;
               }
               return this;
             },
@@ -5545,48 +5545,48 @@ var require_jquery = __commonJS({
             }
           };
           deferred.promise(jqXHR);
-          s2.url = ((url || s2.url || location2.href) + "").replace(rprotocol, location2.protocol + "//");
-          s2.type = options.method || options.type || s2.method || s2.type;
-          s2.dataTypes = (s2.dataType || "*").toLowerCase().match(rnothtmlwhite) || [""];
-          if (s2.crossDomain == null) {
+          s.url = ((url || s.url || location2.href) + "").replace(rprotocol, location2.protocol + "//");
+          s.type = options.method || options.type || s.method || s.type;
+          s.dataTypes = (s.dataType || "*").toLowerCase().match(rnothtmlwhite) || [""];
+          if (s.crossDomain == null) {
             urlAnchor = document2.createElement("a");
             try {
-              urlAnchor.href = s2.url;
+              urlAnchor.href = s.url;
               urlAnchor.href = urlAnchor.href;
-              s2.crossDomain = originAnchor.protocol + "//" + originAnchor.host !== urlAnchor.protocol + "//" + urlAnchor.host;
+              s.crossDomain = originAnchor.protocol + "//" + originAnchor.host !== urlAnchor.protocol + "//" + urlAnchor.host;
             } catch (e) {
-              s2.crossDomain = true;
+              s.crossDomain = true;
             }
           }
-          if (s2.data && s2.processData && typeof s2.data !== "string") {
-            s2.data = jQuery2.param(s2.data, s2.traditional);
+          if (s.data && s.processData && typeof s.data !== "string") {
+            s.data = jQuery2.param(s.data, s.traditional);
           }
-          inspectPrefiltersOrTransports(prefilters, s2, options, jqXHR);
+          inspectPrefiltersOrTransports(prefilters, s, options, jqXHR);
           if (completed2) {
             return jqXHR;
           }
-          fireGlobals = jQuery2.event && s2.global;
+          fireGlobals = jQuery2.event && s.global;
           if (fireGlobals && jQuery2.active++ === 0) {
             jQuery2.event.trigger("ajaxStart");
           }
-          s2.type = s2.type.toUpperCase();
-          s2.hasContent = !rnoContent.test(s2.type);
-          cacheURL = s2.url.replace(rhash, "");
-          if (!s2.hasContent) {
-            uncached = s2.url.slice(cacheURL.length);
-            if (s2.data && (s2.processData || typeof s2.data === "string")) {
-              cacheURL += (rquery.test(cacheURL) ? "&" : "?") + s2.data;
-              delete s2.data;
+          s.type = s.type.toUpperCase();
+          s.hasContent = !rnoContent.test(s.type);
+          cacheURL = s.url.replace(rhash, "");
+          if (!s.hasContent) {
+            uncached = s.url.slice(cacheURL.length);
+            if (s.data && (s.processData || typeof s.data === "string")) {
+              cacheURL += (rquery.test(cacheURL) ? "&" : "?") + s.data;
+              delete s.data;
             }
-            if (s2.cache === false) {
+            if (s.cache === false) {
               cacheURL = cacheURL.replace(rantiCache, "$1");
               uncached = (rquery.test(cacheURL) ? "&" : "?") + "_=" + nonce.guid++ + uncached;
             }
-            s2.url = cacheURL + uncached;
-          } else if (s2.data && s2.processData && (s2.contentType || "").indexOf("application/x-www-form-urlencoded") === 0) {
-            s2.data = s2.data.replace(r20, "+");
+            s.url = cacheURL + uncached;
+          } else if (s.data && s.processData && (s.contentType || "").indexOf("application/x-www-form-urlencoded") === 0) {
+            s.data = s.data.replace(r20, "+");
           }
-          if (s2.ifModified) {
+          if (s.ifModified) {
             if (jQuery2.lastModified[cacheURL]) {
               jqXHR.setRequestHeader("If-Modified-Since", jQuery2.lastModified[cacheURL]);
             }
@@ -5594,38 +5594,38 @@ var require_jquery = __commonJS({
               jqXHR.setRequestHeader("If-None-Match", jQuery2.etag[cacheURL]);
             }
           }
-          if (s2.data && s2.hasContent && s2.contentType !== false || options.contentType) {
-            jqXHR.setRequestHeader("Content-Type", s2.contentType);
+          if (s.data && s.hasContent && s.contentType !== false || options.contentType) {
+            jqXHR.setRequestHeader("Content-Type", s.contentType);
           }
           jqXHR.setRequestHeader(
             "Accept",
-            s2.dataTypes[0] && s2.accepts[s2.dataTypes[0]] ? s2.accepts[s2.dataTypes[0]] + (s2.dataTypes[0] !== "*" ? ", " + allTypes + "; q=0.01" : "") : s2.accepts["*"]
+            s.dataTypes[0] && s.accepts[s.dataTypes[0]] ? s.accepts[s.dataTypes[0]] + (s.dataTypes[0] !== "*" ? ", " + allTypes + "; q=0.01" : "") : s.accepts["*"]
           );
-          for (i in s2.headers) {
-            jqXHR.setRequestHeader(i, s2.headers[i]);
+          for (i in s.headers) {
+            jqXHR.setRequestHeader(i, s.headers[i]);
           }
-          if (s2.beforeSend && (s2.beforeSend.call(callbackContext, jqXHR, s2) === false || completed2)) {
+          if (s.beforeSend && (s.beforeSend.call(callbackContext, jqXHR, s) === false || completed2)) {
             return jqXHR.abort();
           }
           strAbort = "abort";
-          completeDeferred.add(s2.complete);
-          jqXHR.done(s2.success);
-          jqXHR.fail(s2.error);
-          transport = inspectPrefiltersOrTransports(transports, s2, options, jqXHR);
+          completeDeferred.add(s.complete);
+          jqXHR.done(s.success);
+          jqXHR.fail(s.error);
+          transport = inspectPrefiltersOrTransports(transports, s, options, jqXHR);
           if (!transport) {
             done(-1, "No Transport");
           } else {
             jqXHR.readyState = 1;
             if (fireGlobals) {
-              globalEventContext.trigger("ajaxSend", [jqXHR, s2]);
+              globalEventContext.trigger("ajaxSend", [jqXHR, s]);
             }
             if (completed2) {
               return jqXHR;
             }
-            if (s2.async && s2.timeout > 0) {
+            if (s.async && s.timeout > 0) {
               timeoutTimer = window2.setTimeout(function() {
                 jqXHR.abort("timeout");
-              }, s2.timeout);
+              }, s.timeout);
             }
             try {
               completed2 = false;
@@ -5651,15 +5651,15 @@ var require_jquery = __commonJS({
             jqXHR.readyState = status > 0 ? 4 : 0;
             isSuccess = status >= 200 && status < 300 || status === 304;
             if (responses) {
-              response2 = ajaxHandleResponses(s2, jqXHR, responses);
+              response2 = ajaxHandleResponses(s, jqXHR, responses);
             }
-            if (!isSuccess && jQuery2.inArray("script", s2.dataTypes) > -1 && jQuery2.inArray("json", s2.dataTypes) < 0) {
-              s2.converters["text script"] = function() {
+            if (!isSuccess && jQuery2.inArray("script", s.dataTypes) > -1 && jQuery2.inArray("json", s.dataTypes) < 0) {
+              s.converters["text script"] = function() {
               };
             }
-            response2 = ajaxConvert(s2, response2, jqXHR, isSuccess);
+            response2 = ajaxConvert(s, response2, jqXHR, isSuccess);
             if (isSuccess) {
-              if (s2.ifModified) {
+              if (s.ifModified) {
                 modified = jqXHR.getResponseHeader("Last-Modified");
                 if (modified) {
                   jQuery2.lastModified[cacheURL] = modified;
@@ -5669,7 +5669,7 @@ var require_jquery = __commonJS({
                   jQuery2.etag[cacheURL] = modified;
                 }
               }
-              if (status === 204 || s2.type === "HEAD") {
+              if (status === 204 || s.type === "HEAD") {
                 statusText = "nocontent";
               } else if (status === 304) {
                 statusText = "notmodified";
@@ -5700,12 +5700,12 @@ var require_jquery = __commonJS({
             if (fireGlobals) {
               globalEventContext.trigger(
                 isSuccess ? "ajaxSuccess" : "ajaxError",
-                [jqXHR, s2, isSuccess ? success : error]
+                [jqXHR, s, isSuccess ? success : error]
               );
             }
             completeDeferred.fireWith(callbackContext, [jqXHR, statusText]);
             if (fireGlobals) {
-              globalEventContext.trigger("ajaxComplete", [jqXHR, s2]);
+              globalEventContext.trigger("ajaxComplete", [jqXHR, s]);
               if (!--jQuery2.active) {
                 jQuery2.event.trigger("ajaxStop");
               }
@@ -5736,11 +5736,11 @@ var require_jquery = __commonJS({
           }, jQuery2.isPlainObject(url) && url));
         };
       });
-      jQuery2.ajaxPrefilter(function(s2) {
+      jQuery2.ajaxPrefilter(function(s) {
         var i;
-        for (i in s2.headers) {
+        for (i in s.headers) {
           if (i.toLowerCase() === "content-type") {
-            s2.contentType = s2.headers[i] || "";
+            s.contentType = s.headers[i] || "";
           }
         }
       });
@@ -5924,9 +5924,9 @@ var require_jquery = __commonJS({
           };
         }
       });
-      jQuery2.ajaxPrefilter(function(s2) {
-        if (s2.crossDomain) {
-          s2.contents.script = false;
+      jQuery2.ajaxPrefilter(function(s) {
+        if (s.crossDomain) {
+          s.contents.script = false;
         }
       });
       jQuery2.ajaxSetup({
@@ -5943,20 +5943,20 @@ var require_jquery = __commonJS({
           }
         }
       });
-      jQuery2.ajaxPrefilter("script", function(s2) {
-        if (s2.cache === void 0) {
-          s2.cache = false;
+      jQuery2.ajaxPrefilter("script", function(s) {
+        if (s.cache === void 0) {
+          s.cache = false;
         }
-        if (s2.crossDomain) {
-          s2.type = "GET";
+        if (s.crossDomain) {
+          s.type = "GET";
         }
       });
-      jQuery2.ajaxTransport("script", function(s2) {
-        if (s2.crossDomain || s2.scriptAttrs) {
+      jQuery2.ajaxTransport("script", function(s) {
+        if (s.crossDomain || s.scriptAttrs) {
           var script, callback;
           return {
             send: function(_, complete) {
-              script = jQuery2("<script>").attr(s2.scriptAttrs || {}).prop({ charset: s2.scriptCharset, src: s2.url }).on("load error", callback = function(evt) {
+              script = jQuery2("<script>").attr(s.scriptAttrs || {}).prop({ charset: s.scriptCharset, src: s.url }).on("load error", callback = function(evt) {
                 script.remove();
                 callback = null;
                 if (evt) {
@@ -5982,22 +5982,22 @@ var require_jquery = __commonJS({
           return callback;
         }
       });
-      jQuery2.ajaxPrefilter("json jsonp", function(s2, originalSettings, jqXHR) {
-        var callbackName, overwritten, responseContainer, jsonProp = s2.jsonp !== false && (rjsonp.test(s2.url) ? "url" : typeof s2.data === "string" && (s2.contentType || "").indexOf("application/x-www-form-urlencoded") === 0 && rjsonp.test(s2.data) && "data");
-        if (jsonProp || s2.dataTypes[0] === "jsonp") {
-          callbackName = s2.jsonpCallback = isFunction(s2.jsonpCallback) ? s2.jsonpCallback() : s2.jsonpCallback;
+      jQuery2.ajaxPrefilter("json jsonp", function(s, originalSettings, jqXHR) {
+        var callbackName, overwritten, responseContainer, jsonProp = s.jsonp !== false && (rjsonp.test(s.url) ? "url" : typeof s.data === "string" && (s.contentType || "").indexOf("application/x-www-form-urlencoded") === 0 && rjsonp.test(s.data) && "data");
+        if (jsonProp || s.dataTypes[0] === "jsonp") {
+          callbackName = s.jsonpCallback = isFunction(s.jsonpCallback) ? s.jsonpCallback() : s.jsonpCallback;
           if (jsonProp) {
-            s2[jsonProp] = s2[jsonProp].replace(rjsonp, "$1" + callbackName);
-          } else if (s2.jsonp !== false) {
-            s2.url += (rquery.test(s2.url) ? "&" : "?") + s2.jsonp + "=" + callbackName;
+            s[jsonProp] = s[jsonProp].replace(rjsonp, "$1" + callbackName);
+          } else if (s.jsonp !== false) {
+            s.url += (rquery.test(s.url) ? "&" : "?") + s.jsonp + "=" + callbackName;
           }
-          s2.converters["script json"] = function() {
+          s.converters["script json"] = function() {
             if (!responseContainer) {
               jQuery2.error(callbackName + " was not called");
             }
             return responseContainer[0];
           };
-          s2.dataTypes[0] = "json";
+          s.dataTypes[0] = "json";
           overwritten = window2[callbackName];
           window2[callbackName] = function() {
             responseContainer = arguments;
@@ -6008,8 +6008,8 @@ var require_jquery = __commonJS({
             } else {
               window2[callbackName] = overwritten;
             }
-            if (s2[callbackName]) {
-              s2.jsonpCallback = originalSettings.jsonpCallback;
+            if (s[callbackName]) {
+              s.jsonpCallback = originalSettings.jsonpCallback;
               oldCallbacks.push(callbackName);
             }
             if (responseContainer && isFunction(overwritten)) {
@@ -10237,15 +10237,15 @@ var Request = class {
 // modules/FoxesInputHandler.js
 var import_Notify = __toESM(require_Notify());
 var FoxesInputHandler = class {
-  constructor(foxEngine2) {
-    this.foxEngine = foxEngine2;
+  constructor(foxEngine) {
+    this.foxEngine = foxEngine;
     this.forms = [];
   }
   formInit(awaitms) {
     setTimeout(() => {
       this.forms = document.querySelectorAll("form");
       if (this.forms.length > 0) {
-        console.log(`Forms found: ${this.forms.length}`);
+        this.foxEngine.log(`Forms found: ${this.forms.length}`);
         this.forms.forEach((form2) => {
           form2.onsubmit = async (event) => {
             event.preventDefault();
@@ -10256,7 +10256,7 @@ var FoxesInputHandler = class {
           };
         });
       } else {
-        console.log("No forms were found!");
+        this.foxEngine.log("No forms were found!", "WARN");
       }
     }, awaitms);
   }
@@ -10343,7 +10343,6 @@ var FoxesInputHandler = class {
     }
   }
   refreshPage() {
-    console.log("Updating");
     if ("pushState" in history) {
       history.pushState("", document.title, location.pathname + location.search);
     } else {
@@ -10358,8 +10357,8 @@ var FoxesInputHandler = class {
 
 // modules/PlaytimeWidgetGenerator.js
 var PlaytimeWidgetGenerator = class {
-  constructor(foxEngine2) {
-    this.foxEngine = foxEngine2;
+  constructor(foxEngine) {
+    this.foxEngine = foxEngine;
     this.colorMap = this.foxEngine.serversColorMap;
   }
   async generate(data2) {
@@ -10371,11 +10370,11 @@ var PlaytimeWidgetGenerator = class {
       name,
       total: (d.totalTime || 0) / 60
     }));
-    const totalAll = servers.reduce((sum, s2) => sum + s2.total, 0);
+    const totalAll = servers.reduce((sum, s) => sum + s.total, 0);
     const totalStr = this.formatTime(totalAll);
-    const barsArr = await Promise.all(servers.map((s2) => this.createSegment(s2, totalAll)));
+    const barsArr = await Promise.all(servers.map((s) => this.createSegment(s, totalAll)));
     const bars = barsArr.join("");
-    const rowsArr = await Promise.all(servers.map((s2) => this.createRow(s2, totalAll)));
+    const rowsArr = await Promise.all(servers.map((s) => this.createRow(s, totalAll)));
     const rows = rowsArr.join("");
     const html = await this.foxEngine.replaceTextInTemplate(
       this.foxEngine.templateCache["playTimeWidgetCard"],
@@ -10410,7 +10409,7 @@ var PlaytimeWidgetGenerator = class {
     );
   }
   formatTime(sec) {
-    const s2 = Math.round(sec), h = Math.floor(s2 / 60), m = s2 % 60;
+    const s = Math.round(sec), h = Math.floor(s / 60), m = s % 60;
     const parts = [];
     if (h) parts.push(`${h} ${this.decline(h, "\u0447\u0430\u0441", "\u0447\u0430\u0441\u0430", "\u0447\u0430\u0441\u043E\u0432")}`);
     if (m) parts.push(`${m} ${this.decline(m, "\u043C\u0438\u043D\u0443\u0442\u0430", "\u043C\u0438\u043D\u0443\u0442\u044B", "\u043C\u0438\u043D\u0443\u0442")}`);
@@ -10427,13 +10426,13 @@ var PlaytimeWidgetGenerator = class {
 
 // modules/User.js
 var User = class _User {
-  constructor(foxEngine2) {
-    this.foxEngine = foxEngine2;
+  constructor(foxEngine) {
+    this.foxEngine = foxEngine;
     this.userSkin = { front: "", back: "" };
     this.optNamesArr = [];
     this.optionArray = [];
     this.optionAmount = 0;
-    this.userLogin = foxEngine2.replaceData.login;
+    this.userLogin = foxEngine.replaceData.login;
     this.userData = {};
     this.playTimeWidget = null;
   }
@@ -10445,12 +10444,10 @@ var User = class _User {
       throw err;
     }
   }
-  logDebug(msg, style = "") {
-    this.foxEngine.debugSend(msg, style);
-  }
   async parseUsrOptionsMenu() {
     try {
       if (this.optNamesArr.length <= this.optionAmount) {
+        this.foxEngine.log("Using FoxesWorld UserOptions");
       }
       if (this.foxEngine.replaceData.isLogged) {
         await this.parseUserLook(this.userLogin);
@@ -10458,7 +10455,7 @@ var User = class _User {
       const json = await this.apiRequest({ getUserOptionsMenu: this.userLogin });
       this.optionAmount = json.optionAmount || 0;
       this.optionArray = Array.isArray(json.optionArray) ? json.optionArray : [];
-      this.logDebug(`UserOptions available: ${this.optionAmount}`);
+      this.foxEngine.log(`UserOptions available: ${this.optionAmount}`);
       this.optionArray.forEach((optObj) => {
         Object.entries(optObj).forEach(([name, opt]) => {
           this.processOption(name, opt);
@@ -10511,7 +10508,7 @@ var User = class _User {
       if (block) {
         block.insertAdjacentHTML("beforeend", html);
       } else {
-        console.warn(`\u0411\u043B\u043E\u043A \u0434\u043B\u044F \u043E\u043F\u0446\u0438\u0438 "${name}" \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D: ${opt.optionBlock}`);
+        this.foxEngine.log(`\u0411\u043B\u043E\u043A \u0434\u043B\u044F \u043E\u043F\u0446\u0438\u0438 "${name}" \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D: ${opt.optionBlock}`, "WARN");
       }
     }
     this.optNamesArr.push(name);
@@ -10576,7 +10573,7 @@ var User = class _User {
     try {
       const badgesContainer = document.getElementById("userBadges");
       if (!badgesContainer) {
-        console.warn("\u041A\u043E\u043D\u0442\u0435\u0439\u043D\u0435\u0440 \u0431\u0435\u0439\u0434\u0436\u0435\u0439 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D");
+        this.foxEngine.log("\u041A\u043E\u043D\u0442\u0435\u0439\u043D\u0435\u0440 \u0431\u0435\u0439\u0434\u0436\u0435\u0439 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D", "WARN");
         return;
       }
       const existingIds = new Set(
@@ -10744,7 +10741,7 @@ var User = class _User {
       const last = await this.apiRequest({ userAction: "lastUser" });
       const tpl = this.foxEngine.templateCache["lastUser"];
       if (!tpl) {
-        console.error('\u0428\u0430\u0431\u043B\u043E\u043D "lastUser" \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D \u0432 \u043A\u0435\u0448\u0435');
+        this.foxEngine.log('\u0428\u0430\u0431\u043B\u043E\u043D "lastUser" \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D \u0432 \u043A\u0435\u0448\u0435', "ERROR");
         return;
       }
       const userPic = new Image();
@@ -10789,7 +10786,7 @@ var User = class _User {
     try {
       const data2 = await this.apiRequest({ user_doaction: "getUserData", login });
       this.userData[login] = data2;
-      console.log(`Loading data for %c${login}%c...`, "color: #ff0000;", "color: #000000;");
+      this.foxEngine.log(`Loading data for %c${login}%c...`);
     } catch (err) {
       console.error("Error in getUserData:", err);
       throw err;
@@ -10799,8 +10796,8 @@ var User = class _User {
 
 // modules/EditUser.js
 var EditUser = class extends User {
-  constructor(foxEngine2) {
-    super(foxEngine2);
+  constructor(foxEngine) {
+    super(foxEngine);
   }
   async initialize(login) {
     this.login = login;
@@ -10881,8 +10878,8 @@ var EditUser = class extends User {
 
 // modules/Servers.js
 var Servers = class {
-  constructor(foxEngine2) {
-    this.foxEngine = foxEngine2;
+  constructor(foxEngine) {
+    this.foxEngine = foxEngine;
     this.serversArr = [];
     this.templateCache = {};
     this.isInitialized = false;
@@ -10904,20 +10901,6 @@ var Servers = class {
     } catch (error) {
       console.error("Error initializing servers:", error);
     }
-  }
-  /**
-   * Загрузка шаблона с кэшированием.
-   */
-  async loadTemplateWithCache(path) {
-    if (!this.templateCache[path]) {
-      try {
-        this.templateCache[path] = await this.foxEngine.loadTemplate(path, true);
-      } catch (error) {
-        console.error(`Error loading template from ${path}:`, error);
-        throw error;
-      }
-    }
-    return this.templateCache[path];
   }
   /**
    * Генерация HTML для иконки сервера.
@@ -10958,8 +10941,8 @@ var Servers = class {
           }
         });
       }
-      const entryTemplate = await this.loadTemplateWithCache(`${this.foxEngine.elementsDir}monitor/serverEntry.tpl`);
-      const totalOnlineTpl = await this.loadTemplateWithCache(`${this.foxEngine.elementsDir}monitor/totalOnline.tpl`);
+      const entryTemplate = this.foxEngine.templateCache["serverEntry"];
+      const totalOnlineTpl = this.foxEngine.templateCache["totalOnline"];
       const serversHtml = (await Promise.all(
         this.serversArr.map(({ server }) => this.getServerHtml(entryTemplate, server))
       )).join("");
@@ -10993,7 +10976,7 @@ var Servers = class {
         console.error("Server not found:", serverName);
         return;
       }
-      const pageTemplate = await this.loadTemplateWithCache(`${this.foxEngine.elementsDir}serverPage/serverPage.tpl`);
+      const pageTemplate = this.foxEngine.templateCache["serverPage"];
       const serverDetails = await this.foxEngine.sendPostAndGetAnswer({
         sysRequest: "parseServers",
         server: `serverName = '${serverName}'`
@@ -11042,7 +11025,7 @@ var Servers = class {
     if (!modsInfo || modsInfo.length === 0) {
       return `<p class="alert alert-warning" role="alert">\u041D\u0430 \u0434\u0430\u043D\u043D\u044B\u0439 \u043C\u043E\u043C\u0435\u043D\u0442 \u043C\u043E\u0434\u043E\u0432 \u043D\u0435\u0442!</p>`;
     }
-    const template = await this.loadTemplateWithCache(`${this.foxEngine.elementsDir}serverPage/serverMods.tpl`);
+    const template = this.foxEngine.templateCache["serverMods"];
     return (await Promise.all(modsInfo.map(
       (mod) => this.foxEngine.replaceTextInTemplate(template, {
         modName: mod.modName,
@@ -11139,15 +11122,15 @@ var Servers = class {
         });
     }
     var k2 = q[a2], l2 = k2.thumbs, m2 = {}, n2 = k2.viewport[0].getElementsByTagName("a"), o2 = k2.viewport[0].getElementsByTagName("img");
-    s2.onStart = function(a3) {
+    s.onStart = function(a3) {
       k2.freeze || (m2.x1 = a3.clientX || a3.touches && a3.touches[0].clientX, m2.y1 = a3.clientY || a3.touches && a3.touches[0].clientY, m2.t1 = /* @__PURE__ */ new Date(), m2.isPressed = true, m2.isThumbs = f(this, k2.params.thumbs), m2.thumbsStartX = k2.thumbsIndent, k2.layer.css("transition-duration", "0s"), k2.thumbsLayer.css("transition-duration", "0s"));
-    }, s2.onMove = function(e3) {
+    }, s.onMove = function(e3) {
       if (m2.isPressed && !k2.freeze) {
         if (m2.shiftX = (e3.clientX || e3.touches && e3.touches[0].clientX) - m2.x1, m2.shiftY = (e3.clientY || e3.touches && e3.touches[0].clientY) - m2.y1, m2.shiftXAbs = Math.abs(m2.shiftX), m2.shiftYAbs = Math.abs(m2.shiftY), m2.isMultitouch = m2.isMultitouch || !!e3.touches && e3.touches.length > 1, m2.isMultitouch)
           return void c2();
         m2.isSlide || m2.isScroll || (m2.shiftYAbs >= 5 && m2.shiftYAbs > m2.shiftXAbs && (m2.isScroll = true), m2.shiftXAbs >= 5 && m2.shiftXAbs > m2.shiftYAbs && (k2.root.addClass(k2.params._dragging), m2.isSlide = true, m2.startShift = b2(a2))), m2.isSlide && (m2.isThumbs ? k2.thumbsDragging && g2() : k2.params.transition && d2(), e3.preventDefault && e3.preventDefault());
       }
-    }, s2.onEnd = function(b3) {
+    }, s.onEnd = function(b3) {
       if (!m2.isSlide && !m2.isScroll && m2.isPressed) {
         if (f(b3.target, k2.params.prev) && t.prev(a2), f(b3.target, k2.params.next) && t.next(a2), f(b3.target, k2.params.thumbImg) || f(b3.target, k2.params.thumb)) {
           var d3 = parseInt(b3.target.getAttribute("data-rel"));
@@ -11159,41 +11142,41 @@ var Servers = class {
     }, k2.events.push({
       element: k2.viewport[0],
       event: r[0],
-      handler: s2.onStart
+      handler: s.onStart
     }, {
       element: k2.viewport[0],
       event: r[1],
-      handler: s2.onMove,
+      handler: s.onMove,
       capture: true
     }, {
       element: k2.viewport[0],
       event: r[2],
-      handler: s2.onEnd
+      handler: s.onEnd
     }, {
       element: k2.viewport[0],
       event: r[3],
-      handler: s2.onEnd
+      handler: s.onEnd
     }, {
       element: l2[0],
       event: r[0],
-      handler: s2.onStart
+      handler: s.onStart
     }, {
       element: l2[0],
       event: r[1],
-      handler: s2.onMove,
+      handler: s.onMove,
       capture: true
     }, {
       element: l2[0],
       event: r[2],
-      handler: s2.onEnd
+      handler: s.onEnd
     }, {
       element: l2[0],
       event: r[3],
-      handler: s2.onEnd
+      handler: s.onEnd
     }), j2(k2.thumb, "click"), j2(k2.thumbImg, "dragstart"), j2(n2, "dragstart"), j2(o2, "dragstart");
   }
   function i(a2) {
-    if (!s2.resize) {
+    if (!s.resize) {
       var b2 = q[a2];
       b2.events.push({
         element: window,
@@ -11204,7 +11187,7 @@ var Servers = class {
   }
   function j(a2) {
     var b2 = q[a2];
-    s2.keydown = function(b3) {
+    s.keydown = function(b3) {
       var c2 = b3.which || b3.keyCode, d2 = b3.target.nodeName.toLowerCase(), e2 = !!b3.target.attributes.contenteditable;
       if ("input" != d2 && "textarea" != d2 && "select" != d2 && !e2)
         switch (c2) {
@@ -11220,12 +11203,12 @@ var Servers = class {
     }, b2.events.push({
       element: window,
       event: "keydown",
-      handler: s2.keydown
+      handler: s.keydown
     });
   }
   function k(a2) {
     var b2 = q[a2], c2 = ["webkitTransitionEnd", "MSTransitionEnd", "oTransitionEnd", "transitionend"];
-    s2.transitionEnd = function(b3) {
+    s.transitionEnd = function(b3) {
       var c3 = b3.propertyName;
       (c3.lastIndexOf("transform") == c3.length - "transform".length || "left" == c3) && l(a2);
     };
@@ -11233,7 +11216,7 @@ var Servers = class {
       b2.events.push({
         element: b2.layer[0],
         event: c2[d2],
-        handler: s2.transitionEnd
+        handler: s.transitionEnd
       });
   }
   function l(a2) {
@@ -11261,7 +11244,7 @@ var Servers = class {
       MozTransform: "-moz-transform",
       msTransform: "-ms-transform",
       OTransform: "-o-transform"
-    }, q = [], r = g(), s2 = [], t = {
+    }, q = [], r = g(), s = [], t = {
       init: function(e2) {
         var f2 = "photor__";
         return o = a.extend({
@@ -11470,9 +11453,9 @@ var Servers = class {
 
 // modules/Gallery/Gallery.js
 var Gallery = class {
-  constructor(foxEngine2, content) {
+  constructor(foxEngine, content) {
     this.content = content;
-    this.foxEngine = foxEngine2;
+    this.foxEngine = foxEngine;
     this.galleryBlock = $(content).find("section").get(0).outerHTML;
   }
   async loadGallery() {
@@ -11507,8 +11490,8 @@ var Gallery = class {
 
 // modules/Page.js
 var Page = class {
-  constructor(foxEngine2) {
-    this.foxEngine = foxEngine2;
+  constructor(foxEngine) {
+    this.foxEngine = foxEngine;
     this.metaTags = ["description", "keywords"];
     this.langPack = [];
     this.selectPage = {
@@ -11646,8 +11629,8 @@ var Page = class {
 
 // modules/ModalApp.js
 var ModalApp = class {
-  constructor(foxEngine2) {
-    this.foxEngine = foxEngine2;
+  constructor(foxEngine) {
+    this.foxEngine = foxEngine;
     this.modalAppDisplayed = false;
     this.closeCallback = null;
   }
@@ -11706,8 +11689,8 @@ var ModalApp = class {
 
 // modules/Emojis.js
 var Emojis = class {
-  constructor(foxEngine2) {
-    this.foxEngine = foxEngine2;
+  constructor(foxEngine) {
+    this.foxEngine = foxEngine;
     this.emojis = [];
     this.emojiCount = 0;
   }
@@ -11735,16 +11718,16 @@ var Emojis = class {
               }
             }
           } else {
-            console.error("Invalid category structure:", emojiData[category]);
+            this.foxEngine.log("Invalid category structure:" + emojiData[category], "ERROR");
           }
         }
-        foxEngine.debugSend("Emojis loaded " + this.emojiCount);
+        this.foxEngine.log("Emojis loaded " + this.emojiCount, "SUCCESS");
       } else {
-        console.error("Invalid emoji data:", emojiData);
+        this.foxEngine.log("Invalid emoji data:" + emojiData, "ERROR");
       }
       return this.emojis;
     } catch (error) {
-      console.error("Error parsing emojis:", error);
+      this.foxEngine.log("Error parsing emojis:" + error, "ERROR");
       throw error;
     }
   }
@@ -11752,8 +11735,8 @@ var Emojis = class {
 
 // modules/Utils.js
 var Utils = class _Utils {
-  constructor(foxEngine2) {
-    this.foxEngine = foxEngine2;
+  constructor(foxEngine) {
+    this.foxEngine = foxEngine;
   }
   static monthNames = [
     "\u042F\u043D\u0432\u0430\u0440\u044C",
@@ -11843,8 +11826,8 @@ var Utils = class _Utils {
 
 // modules/Logo.js
 var Logo = class {
-  constructor(foxEngine2) {
-    this.foxEngine = foxEngine2;
+  constructor(foxEngine) {
+    this.foxEngine = foxEngine;
     this.timelineCfg = {
       timeline: [
         // Этап 1: Плавное появление контейнера логотипа с эффектом масштабирования и затухания
@@ -11912,8 +11895,8 @@ var Logo = class {
       }
     };
     this.timeline = anime.timeline(this.timelineCfg.construct);
-    foxEngine2.utils.splitWrapLetters(".logo .title", "letter");
-    foxEngine2.utils.splitWrapLetters(".logo .status", "letterStatus");
+    foxEngine.utils.splitWrapLetters(".logo .title", "letter");
+    foxEngine.utils.splitWrapLetters(".logo .status", "letterStatus");
     this.array = this.timelineCfg.timeline;
   }
   logoAnimation() {
@@ -11989,8 +11972,8 @@ var PaymentManager = class {
 
 // modules/EntryReplacer.js
 var EntryReplacer = class {
-  constructor(foxEngine2) {
-    this.foxEngine = foxEngine2;
+  constructor(foxEngine) {
+    this.foxEngine = foxEngine;
   }
   async replaceText(text) {
     this.replacedTimes = 0;
@@ -12117,7 +12100,7 @@ var EntryReplacer = class {
       default:
         let styleAttr = "";
         if (style !== void 0) {
-          styleAttr = s`tyle="${style}"`;
+          styleAttr = `style="${style}"`;
         }
         return `<div class="form-floating mb-3 input_block" ${styleAttr}>
                             <input type="${type || "text"}" name="${name || ""}" class="form-control input" id="${name || ""}" value="${value || ""}" onKeyUp="${onKeyUp || ""}" placeholder="${placeholder || ""}" />
@@ -12139,9 +12122,9 @@ var EntryReplacer = class {
 
 // modules/Cookies.js
 var Cookies = class {
-  constructor(foxEngine2) {
-    this.foxEngine = foxEngine2;
-    if (foxEngine2.cookieManager.getCookie("cookie-consent") === "true") {
+  constructor(foxEngine) {
+    this.foxEngine = foxEngine;
+    if (foxEngine.cookieManager.getCookie("cookie-consent") === "true") {
       $("#cookie-popup").attr("style", "display: none;");
     } else {
       $("#cookie-popup").removeAttr("style");
@@ -12170,7 +12153,7 @@ var Cookies = class {
 
 // modules/CookieManager.js
 var CookieManager = class {
-  constructor(foxEngine2) {
+  constructor(foxEngine) {
   }
   checkCookie(cookieName, cookieValue, expiryDays, action, setCookie) {
     const cookie = this.getCookie(cookieName);
@@ -12204,8 +12187,8 @@ var CookieManager = class {
 
 // modules/LottieAnimation.js
 var LottieAnimation = class {
-  constructor(foxEngine2) {
-    this.foxEngine = foxEngine2;
+  constructor(foxEngine) {
+    this.foxEngine = foxEngine;
     this.anim = null;
   }
   /**
@@ -12274,8 +12257,8 @@ var LottieAnimation = class {
 
 // modules/Snow.js
 var Snow = class {
-  constructor(foxEngine2) {
-    this.foxEngine = foxEngine2;
+  constructor(foxEngine) {
+    this.foxEngine = foxEngine;
     this.currentSeason = this.getCurrentSeason();
     this.init();
   }
@@ -12427,7 +12410,7 @@ var FoxEngine = class {
     this.templatesConfig = templatesConfig;
     this.serversColorMap = serversColorMap;
     this.e = [
-      "\n %c %c %c FoxEngine 2.6 - \u{1F98A} WebUI \u{1F98A}  %c  %c  https://foxescraft.ru/  %c %c \u22C6\u{1F43E}\xB0%c\u{1F332}%c\u{1F342} \n\n",
+      "\n %c %c %c FoxEngine 2.8 - \u{1F98A} WebUI \u{1F98A}  %c  %c  https://foxescraft.ru/  %c %c \u22C6\u{1F43E}\xB0%c\u{1F332}%c\u{1F342} \n\n",
       "background: #c89f27; padding:5px 0;",
       "background: #c89f27; padding:5px 0;",
       "color: #c89f27; background: #030307; padding:5px 0;",
@@ -12468,14 +12451,14 @@ var FoxEngine = class {
       }
       this.emojiArr = await this.emojis.parseEmojis();
     } catch (error) {
-      console.error("Error during initialization:", error);
+      this.log("Error during initialization:" + error, "ERROR");
       throw error;
     }
   }
   async loadTemplates() {
     const templates = this.templatesConfig.templates;
     if (!templates) {
-      console.warn("\u041D\u0435\u0442 \u043F\u0443\u0442\u0435\u0439 \u0434\u043E \u0448\u0430\u0431\u043B\u043E\u043D\u043E\u0432 \u0432 \u043A\u043E\u043D\u0444\u0438\u0433\u0443\u0440\u0430\u0446\u0438\u0438");
+      this.log("\u041D\u0435\u0442 \u043F\u0443\u0442\u0435\u0439 \u0434\u043E \u0448\u0430\u0431\u043B\u043E\u043D\u043E\u0432 \u0432 \u043A\u043E\u043D\u0444\u0438\u0433\u0443\u0440\u0430\u0446\u0438\u0438", "WARN");
       return;
     }
     if (!this.templateCache) {
@@ -12486,9 +12469,9 @@ var FoxEngine = class {
       try {
         const html = await this.loadTemplate(path, true);
         self2.templateCache[key] = html;
-        console.log(`\u0428\u0430\u0431\u043B\u043E\u043D ${key} \u0443\u0441\u043F\u0435\u0448\u043D\u043E \u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043D`);
+        this.log(`\u0428\u0430\u0431\u043B\u043E\u043D ${key} \u0443\u0441\u043F\u0435\u0448\u043D\u043E \u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043D`);
       } catch (error) {
-        console.error(`\u041E\u0448\u0438\u0431\u043A\u0430 \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0438 \u0448\u0430\u0431\u043B\u043E\u043D\u0430 \u0434\u043B\u044F "${key}" \u0441 \u043F\u0443\u0442\u0451\u043C "${path}":`, error);
+        this.log(`\u041E\u0448\u0438\u0431\u043A\u0430 \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0438 \u0448\u0430\u0431\u043B\u043E\u043D\u0430 \u0434\u043B\u044F "${key}" \u0441 \u043F\u0443\u0442\u0451\u043C "${path}":` + error, "ERROR");
       }
     });
     await Promise.all(templatePromises);
@@ -12508,7 +12491,7 @@ var FoxEngine = class {
           throw new Error("Invalid answerType specified");
       }
     } catch (error) {
-      console.error("Error in sendPostAndGetAnswer:", error);
+      this.log("Error in sendPostAndGetAnswer:" + error, "ERROR");
       throw error;
     }
   }
@@ -12521,7 +12504,7 @@ var FoxEngine = class {
     try {
       return JSON.parse(responseText);
     } catch (error) {
-      console.error("Error parsing JSON:", error);
+      this.log("Error parsing JSON:" + error, "ERROR");
       throw error;
     }
   }
@@ -12529,7 +12512,7 @@ var FoxEngine = class {
     try {
       return new DOMParser().parseFromString(responseText, "text/html");
     } catch (error) {
-      console.error("Error parsing HTML:", error);
+      this.log("Error parsing HTML:" + error, "ERROR");
       throw error;
     }
   }
@@ -12540,7 +12523,7 @@ var FoxEngine = class {
         return replacedTemplate.replace(regex, replacements[key]);
       }, template);
     } catch (error) {
-      console.error("Error replacing text in template:", error);
+      this.log("Error replacing text in template:" + error, "ERROR");
       return "";
     }
   }
@@ -12554,6 +12537,22 @@ var FoxEngine = class {
       button.disabled = false;
     }, delay2);
   }
+  log(message, level = "INFO") {
+    const timestamp = (/* @__PURE__ */ new Date()).toLocaleString();
+    const levelStyles = {
+      INFO: "color: white; background: #2b78e4; padding: 2px 6px; border-radius: 3px;",
+      WARN: "color: black; background: #ffd966; padding: 2px 6px; border-radius: 3px;",
+      ERROR: "color: white; background: #e06666; padding: 2px 6px; border-radius: 3px;",
+      DEBUG: "color: black; background: #b6d7a8; padding: 2px 6px; border-radius: 3px;",
+      SUCCESS: "color: white; background: #6aa84f; padding: 2px 6px; border-radius: 3px;"
+    };
+    const label = `%c${level}`;
+    const time = `%c[${timestamp}]`;
+    const msg = `%c${message}`;
+    const timeStyle = "color: gray;";
+    const msgStyle = "color: inherit;";
+    console.log(`${label} ${time} ${msg}`, levelStyles[level] || "", timeStyle, msgStyle);
+  }
   async soundOnClick(type) {
     try {
       const sndArr = await this.fetchSoundData(type);
@@ -12562,7 +12561,7 @@ var FoxEngine = class {
         this.playSound(soundUrl);
       }
     } catch (error) {
-      console.error("Error in soundOnClick:", error);
+      this.log("Error in soundOnClick:" + error, "ERROR");
     }
   }
   async fetchSoundData(type) {

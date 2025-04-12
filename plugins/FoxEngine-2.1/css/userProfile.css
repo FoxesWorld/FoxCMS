@@ -288,7 +288,7 @@
 }
 	
 	.profile-title {
-		color: #e6d0cf;
+		color: #886f1d;
 		font-family: 'FSElliotPro-Heavy';
 		display: inline-block;
 		border-radius: 5px;
@@ -686,3 +686,47 @@ ul.foxesMenu, .foxesMenu > ul {
 	h1.groupStatus-5 {
 		text-transform: capitalize;
 	}
+	
+	.connected-account__list {
+    --provider-color: $text-color;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr
+}
+
+.connected-account__list .connected-account {
+    align-items: center;
+    background: #ecf0f1;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    transition: all .3s ease;
+    transition-property: border
+}
+
+.connected-account__list .connected-account.connected-account--placeholder {
+    background: transparent;
+    border-color: #ecf0f1;
+    border-style: dashed
+}
+
+.connected-account__list .connected-account__info {
+    line-height: 1.2
+}
+
+.connected-account__list .connected-account__icon {
+    background: var(--provider-color);
+    border-radius: 10px;
+    box-sizing: content-box;
+    color: #fff;
+    display: block;
+    flex-shrink: 0;
+    font-size: 24px;
+    height: 30px;
+    line-height: 30px;
+    padding: 5px 5px 3px;
+    text-align: center;
+    width: 30px
+}

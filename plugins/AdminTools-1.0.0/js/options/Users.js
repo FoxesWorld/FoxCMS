@@ -4,7 +4,8 @@ import { EditBalance } from './userOptions/EditBalance.js';
 import { EditBadges }  from './userOptions/EditBadges.js';
 
 export class Users {
-    constructor() {
+    constructor(adminPanel) {
+		this.adminPanel = adminPanel;
         this.userArr = [];
 		this.allBadges = [];
 		this.contentAdded = false;
@@ -46,7 +47,7 @@ async parseUsers(input = '*') {
         $("#usersList").html("");
 
         if (usersArray !== null) {
-            let userTpl = await foxEngine.loadTemplate(replaceData.assets + '/elements/admin/users/userRow.tpl', true);
+            let userTpl = this.adminPanel.templateCache["userRow"];
 
             for (let j = 0; j < usersArray.length; j++) {
                 let singleUser = usersArray.at(j);
@@ -124,7 +125,7 @@ async parseUsers(input = '*') {
 
     async addContent() {
         if (!$("#adminContent > table").length) {
-            const contentHtml = await foxEngine.loadTemplate(foxEngine.elementsDir + 'admin/users/userTable.tpl', true);
+		const contentHtml = this.adminPanel.templateCache["userTable"];
             $("#adminContent").html(contentHtml);
         }
     }

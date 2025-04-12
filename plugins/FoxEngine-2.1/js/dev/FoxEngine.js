@@ -181,6 +181,26 @@ export class FoxEngine {
             button.disabled = false;
         }, delay);
     }
+	
+	log(message, level = 'INFO') {
+			const timestamp = new Date().toLocaleString();
+			const levelStyles = {
+				INFO:    'color: white; background: #2b78e4; padding: 2px 6px; border-radius: 3px;',
+				WARN:    'color: black; background: #ffd966; padding: 2px 6px; border-radius: 3px;',
+				ERROR:   'color: white; background: #e06666; padding: 2px 6px; border-radius: 3px;',
+				DEBUG:   'color: black; background: #b6d7a8; padding: 2px 6px; border-radius: 3px;',
+				SUCCESS: 'color: white; background: #6aa84f; padding: 2px 6px; border-radius: 3px;',
+			};
+
+			const label = `%c${level}`;
+			const time = `%c[${timestamp}]`;
+			const msg = `%c${message}`;
+
+			const timeStyle = 'color: gray;';
+			const msgStyle = 'color: inherit;';
+
+			console.log(`${label} ${time} ${msg}`, levelStyles[level] || '', timeStyle, msgStyle);
+	}
 
     async soundOnClick(type) {
         try {

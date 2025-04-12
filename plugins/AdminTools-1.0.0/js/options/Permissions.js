@@ -2,7 +2,8 @@ import { JsonArrConfig } from '../modules/JsonArrConfig.js';
 import { BuildField } from '../modules/BuildField.js';
 
 export class Permissions {
-    constructor() {
+    constructor(adminPanel) {
+		this.adminPanel = adminPanel;
         this.contentHtml = '';
         this.formFields = [
             { fieldName: 'index', fieldType: 'label' },
@@ -17,10 +18,7 @@ export class Permissions {
 
     async addContent() {
         try {
-            const tableTemplate = await foxEngine.loadTemplate(
-                `${foxEngine.elementsDir}admin/permissions/permTable.tpl`,
-                true
-            );
+            const tableTemplate = this.adminPanel.templateCache["permTable"];
             this.contentHtml = tableTemplate;
             $('#adminContent').html(this.contentHtml);
             this.initEventListeners();

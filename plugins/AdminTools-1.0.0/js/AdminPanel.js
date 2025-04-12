@@ -10,16 +10,21 @@
 
 class AdminPanel {
 
-	constructor(){
+	constructor(foxEngine, templateConfig){
+		this.foxEngine = foxEngine;
+		this.templateConfig = templateConfig;
+		this.loadAdminTemplates();
 		this.selectoption = {thisAdmoption: "",thatAdmoption: ""}
 		this.settings = new Settings();
-		this.users = new Users();
+		this.users = new Users(this);
 		//this.modules = new Modules();
-		this.permissions = new Permissions();
-		this.servers = new Servers();
+		this.permissions = new Permissions(this);
+		this.servers = new Servers(this);
 		//this.groupAssoc = new GroupAssoc();
 		//this.templateEditor = new TemplateEditor();
 		//this.pages = new Pages();
+		
+		
 	}
 	
 	
@@ -30,7 +35,7 @@ class AdminPanel {
             $(".admOpt-" +this.selectoption.thatAdmoption).removeClass("active");
         }
        this.selectoption.thisAdmoption = option;
-		window.foxEngine.foxesInputHandler.formInit(500);
+		this.foxEngine.foxesInputHandler.formInit(500);
     };
 	
 	async loadAdmOpt(option){
@@ -42,7 +47,47 @@ class AdminPanel {
 	capitalizeFirstLetter(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
+	
+	async loadAdminTemplates() {
+		const templates = this.templateConfig.templates;
+		if (!templates) {
+			this.foxEngine.log("Нет путей до шаблонов в конфигурации", "WARN");
+			return;
+		}
+		
+		if (!this.templateCache) {
+			this.templateCache = {};
+		}
+		
+		const self = this;
+		const templatePromises = Object.entries(templates).map(async ([key, path]) => {
+			try {
+				const html = await this.foxEngine.loadTemplate(path, true);
+				self.templateCache[key] = html;
+				this.foxEngine.log(`Шаблон админпанели ${key} успешно загружен`);
+			} catch (error) {
+				this.foxEngine.log(`Ошибка загрузки шаблона для "${key}" с путём "${path}":`, "ERROR");
+			}
+		});
+		
+		await Promise.all(templatePromises);
+	}
+
 }
 
-	const adminPanel = new AdminPanel();
-	window.adminPanel = adminPanel;
+
+	let adminTemplates = {
+		"templates": {
+			"userTable": "/templates/" + replaceData['template'] + "/foxEngine/admin/users/userTable.tpl",
+			"userRow": "/templates/" + replaceData['template'] + "/foxEngine/admin/users/userRow.tpl",
+			"serverRow": "/templates/" + replaceData['template'] + "/foxEngine/admin/servers/serverRow.tpl",
+			"serversTable": "/templates/" + replaceData['template'] + "/foxEngine/admin/servers/serversTable.tpl",
+			"noServers": "/templates/" + replaceData['template'] + "/foxEngine/admin/servers/noServers.tpl",
+			"permRow": "/templates/" + replaceData['template'] + "/foxEngine/admin/permissions/permRow.tpl",
+			"permTable": "/templates/" + replaceData['template'] + "/foxEngine/admin/permissions/permTable.tpl"
+		}
+	};
+	document.addEventListener("DOMContentLoaded", () => {
+		const adminPanel = new AdminPanel(window.foxEngine, adminTemplates);
+		window.adminPanel = adminPanel;
+	});

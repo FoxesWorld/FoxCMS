@@ -140,7 +140,7 @@ export class EntryReplacer {
             default:
 			let styleAttr = "";
 			if(style !== undefined) {
-				styleAttr = s`tyle="${style}"`
+				styleAttr = `style="${style}"`
 			}
                 return `<div class="form-floating mb-3 input_block" ${styleAttr}>
                             <input type="${type || 'text'}" name="${name || ''}" class="form-control input" id="${name || ''}" value="${value || ''}" onKeyUp="${onKeyUp || ''}" placeholder="${placeholder || ''}" />
