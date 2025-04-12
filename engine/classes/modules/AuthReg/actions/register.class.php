@@ -96,8 +96,8 @@ class Register extends AuthManager
             $userReg = $this->db->run($query);
             if ($userReg) {
                 init::classUtil('GiveBadge', "1.0.0");
-                $GiveBadge = new GiveBadge($this->db, $this->regData['login']);
-                $GiveBadge->giveBadge("earlyUser");
+                //$GiveBadge = new GiveBadge($this->db, $this->regData['login']);
+                //$GiveBadge->giveBadge("earlyUser");
                 $loadUserInfo = new loadUserInfo($this->regData['login'], $this->db);
                 $userData = $loadUserInfo->userInfoArray();
                 $this->logger->WriteLine("User has completed registration '" . $this->regData['login'] . "'");

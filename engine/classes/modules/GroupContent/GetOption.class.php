@@ -2,80 +2,104 @@
 if (!defined('FOXXEY')) {
     die("Hacking attempt!");
 }
-class GetOption extends UserOptions {
 
-    private $getOptionRequest = "getOption";
-    private $pageRplace = array();
-    private $pageTplFile = "staticPage.tpl";
-    private $requestedOption;
-    private $requestLogin;
+class GetOption extends UserOptions
+{
+    private string $optionRequestKey = "getOption";
+    private string $pageTplFile = "staticPage.tpl";
 
-    function __construct($userLogin, $db, $logger) {
+    public function __construct(string $userLogin, $db, $logger)
+    {
         global $config;
-		init::classUtil('SSV', "1.0.0");
-        if (@isset(RequestHandler::$REQUEST[$this->getOptionRequest])) {
-			$login = functions::filterString($userLogin);
-			init::classUtil('LoadUserInfo', "1.0.0");
-			$loadUserInfo = new loadUserInfo($login, $db);
-			$userData = $loadUserInfo->userInfoArray();
-            $requestedOption = functions::filterString($_POST[$this->getOptionRequest]);
-			$pageTemplate = self::getPageContent($requestedOption, TEMPLATE_DIR.$this->pageTplFile);
-			/*
-			*	SERVER SIDE VERIFICATION
-			*/
-			$SSV = new SSV($pageTemplate, $login, $userData, $db, $logger);
-			}
+
+        init::classUtil('SSV', "1.0.0");
+
+        if (!empty(RequestHandler::$REQUEST[$this->optionRequestKey])) {
+            $login = functions::filterString($userLogin);
+
+            init::classUtil('LoadUserInfo', "1.0.0");
+            $loadUserInfo = new LoadUserInfo($login, $db);
+            $userData = $loadUserInfo->userInfoArray();
+
+            $requestedOption = functions::filterString($_POST[$this->optionRequestKey] ?? '');
+            $templatePath = TEMPLATE_DIR . $this->pageTplFile;
+
+            $pageTemplate = self::getPageContent($requestedOption, $templatePath);
+
+            // SERVER SIDE VERIFICATION
+            new SSV($pageTemplate, $login, $userData, $db, $logger);
+        }
     }
-	
-	public static function getPageContent($pageObject, $filePath){
-		global $lang;
-		 if (@in_array($pageObject, self::$userOptions["optionNames"])) {
-				$optionJson = UserOptions::getOptionData($pageObject);
-                $optionSettings = json_decode($optionJson, true);
-                $optionBody = self::$userOptions[$pageObject];
-                switch ($optionSettings["type"]) {
-                    case "page":
-                        $pageTemplate = self::buildPage($optionBody, $filePath);
-                        break;
 
-                    case "pageContent":
-                        $pageTemplate = $optionBody["optContent"];
-                        break;
-                }
+    public static function getPageContent(string $optionName, string $filePath): string
+    {
+        global $lang;
 
-				return $pageTemplate;
+        if (!in_array($optionName, self::$userOptions['optionNames'] ?? [])) {
+            $error = str_replace('{replace}', $optionName, $lang['optionInvalid'] ?? 'Invalid option: {replace}');
+            die(json_encode(['error' => $error]));
+        }
 
-            } else {
-                die('{"error": "'.str_replace('{replace}', $pageObject ,$lang['optionInvalid']).'"}');
-            }
-	}
-	
-	private static function getPageContents($page) {
-		return functions::getStrBetween($page, "<pageContent>", "</pageContent>")[0];
-	}
-	
-	private static function selectContent($parentName) {
-		
-	}
+        $optionJson = UserOptions::getOptionData($optionName);
+        $optionSettings = json_decode($optionJson, true);
+        $optionBody = self::$userOptions[$optionName] ?? [];
 
-    private static function buildPage($requestedOption, $file) {
-        $pageTemplate = self::setTpl($file);
-        foreach ($requestedOption as $key => $value) {
-            $toReplace = "{".$key."}";
-            if (strpos($pageTemplate, $toReplace)) {
-				/*
-				switch($toReplace){
-					case "{optContent}":
-						$value = self::getPageContents($value);
-					break;
-				} */
-			$pageTemplate = str_replace($toReplace, $value, $pageTemplate);
+        if (!isset($optionSettings['type'])) {
+            die(json_encode(['error' => 'Missing option type.']));
+        }
+
+        switch ($optionSettings['type']) {
+            case 'page':
+                return self::buildPage($optionBody, $filePath);
+
+            case 'userOption':
+                $template = self::buildPage($optionBody, $filePath);
+                $content = $optionBody['optContent'] ?? '';
+                return self::replaceContentBlock($template, $content);
+
+            case 'pageContent':
+                return $optionBody['optContent'] ?? '';
+
+            default:
+                die(json_encode(['error' => 'Unknown option type.']));
+        }
+    }
+
+    private static function buildPage(array $data, string $templateFile): string
+    {
+        $pageTemplate = self::loadTemplate($templateFile);
+
+        foreach ($data as $key => $value) {
+            $placeholder = "{" . $key . "}";
+            if (strpos($pageTemplate, $placeholder) !== false) {
+                $pageTemplate = str_replace($placeholder, $value, $pageTemplate);
             }
         }
-		return $pageTemplate;
+
+        return $pageTemplate;
     }
 
-    private static function setTpl($file) {
-        return file::efile($file)["content"];
+    private static function loadTemplate(string $filePath): string
+    {
+        $fileContent = file::efile($filePath);
+        return $fileContent['content'] ?? '';
+    }
+
+    private static function replaceContentBlock(string $template, string $content): string
+    {
+        return preg_replace(
+            '#<pageContent>.*?</pageContent>#is',
+            '<pageContent>' . $content . '</pageContent>',
+            $template
+        ) ?: $template;
+    }
+
+    private static function replaceUserOptionBlock(string $template, string $content): string
+    {
+        return preg_replace(
+            '#<useroption>.*?</useroption>#is',
+            '<useroption>' . $content . '</useroption>',
+            $template
+        ) ?: $template;
     }
 }

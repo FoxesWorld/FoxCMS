@@ -160,7 +160,7 @@ if(!defined('profile')) {
 
 				if($newPass != $repeatPass) {
 					$this->statusInfo = "PassMismatch";
-					$this->action = $this->addScript(".tab_content" ,2, "shake");
+					$this->action = $this->addScript(".changePass" ,2, "shake");
 					$this->status = "error";
 				}
 							

@@ -11,15 +11,24 @@ export class ModalApp {
         }
 
         this.closeCallback = closeCallback;
+		let modalTpl = this.foxEngine.templateCache["modalApp"];
+		
+		const data = await this.foxEngine.replaceTextInTemplate(modalTpl, {
+                    title:             title,
+                    content: 			await this.foxEngine.entryReplacer.replaceText(html)
+                });
 
         $(".modal_app").css("width", width);
         $(".modal_app").empty();
+		$(".modal_app").append(data);
+		/*
         $(".modal_app").append(`
             <div class="modal_app_close" onclick="foxEngine.modalApp.closeModalApp(true);"></div>
             <div class="modal_app_title">${title}</div>
             <div class="modal_app_content"></div>
         `);
         $(".modal_app_content").html(await this.foxEngine.entryReplacer.replaceText(html));
+		*/
 
         $(".container").addClass("modal_open_body");
         $(".modal_wrapper").css("display", "flex");

@@ -1,0 +1,57 @@
+.form-horizontal {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%
+}
+
+.form-horizontal>.form-row {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+}
+
+.form-horizontal>.form-row>.label {
+    flex-shrink: 0;
+    font-weight: 400;
+    padding-right: 12px;
+    padding-top: 8px;
+    width: 30%
+}
+
+.form-horizontal>.form-row>.label.top {
+    padding-top: 1px
+}
+
+.form-horizontal>.form-row>.control {
+    flex: 1 1 auto
+}
+
+.form-horizontal>.form-row>.control .form-control,.form-horizontal>.form-row>.control .form-select {
+    display: block;
+    max-width: 350px;
+    width: 100%
+}
+
+.form-horizontal>.form-row>.control textarea.form-control {
+    max-width: unset;
+    min-height: 100px
+}
+
+.form-horizontal>.form-row.column {
+    display: block
+}
+
+.form-horizontal>.form-row.column>.label {
+    padding-bottom: 8px;
+    padding-top: 0;
+    width: auto
+}
+
+.form-horizontal>.form-row.column>.control {
+    flex: none
+}
+
+.form-horizontal>.hr {
+    margin: 8px 0
+}

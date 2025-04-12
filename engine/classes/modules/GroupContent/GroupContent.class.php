@@ -23,11 +23,13 @@ class UserOptions extends Module {
         "optionName",
         "optionBlock",
 		"optionClass",
+		"func",
         "type"
     );
 	
 	private array $additionalVars = array(
 		"page" => array('wrapper', "closer", "class"),
+		"userOption" => array(),
 		"pageContent" => array()
 	);
 	
@@ -87,6 +89,7 @@ class UserOptions extends Module {
                     switch ($decodedOption["type"]) {
                         case "plainText":
                             case "page":
+							case "userOption":
                                 self::$userOptions[$optionFname]["optContent"] = $this->getContentByName($optionFname);
                                 self::$userOptions[$optionFname]["optSettings"] = $this->getConfigByName($optionFname);
                                 self::$userOptions[$optionFname]["optTitle"] = $decodedOption["optionTitle"];

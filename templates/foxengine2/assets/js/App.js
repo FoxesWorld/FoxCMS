@@ -9,7 +9,8 @@ const templates = {
 	"playTimeWidgetCard": "/templates/" + replaceData['template'] + "/foxEngine/playTimeWidget/widgetCard.tpl",
 	"emptyWidget": "/templates/" + replaceData['template'] + "/foxEngine/playTimeWidget/emptyWidget.tpl",
 	"widgetSegment": "/templates/" + replaceData['template'] + "/foxEngine/playTimeWidget/widgetSegment.tpl",
-	"widgetRow": "/templates/" + replaceData['template'] + "/foxEngine/playTimeWidget/widgetRow.tpl"
+	"widgetRow": "/templates/" + replaceData['template'] + "/foxEngine/playTimeWidget/widgetRow.tpl",
+	"modalApp": "/templates/" + replaceData['template'] + "/foxEngine/modalApp.tpl"
   }
 };
 
@@ -130,11 +131,13 @@ setInterval(() => {
     });
 });
 
-setTimeout(() => {
+//setTimeout(() => {
+	document.addEventListener("DOMContentLoaded", () => {
 		document.querySelector('.option_select').addEventListener('click', function() {
 			this.classList.toggle('open');
 		});
-}, 1000);
+	});
+//}, 1000);
 }());
 
 export { App, foxEngine };

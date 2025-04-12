@@ -2,12 +2,13 @@
    { 
    "optionTitle": "Профиль",
    "description": "Профиль пользователя",
+   "func": "foxEngine.user.showUserProfile(foxEngine.replaceData.login); return false;",
    "optionBlock": "#usrMenu",
    "optionClass": "dropdown-item",
    "optionPreText": "<i style='color: #736d5f' class='fa fa-user'></i>",
    "optionGroup": [1,3,4,5],
    "langPack": "userProfile",
-   "type": "page"
+   "type": "userOption"
    } 
 </useroption>
 <pageContent>
@@ -21,9 +22,12 @@
 	  <link rel="stylesheet" type="text/css" href="%assets%/css/skin.css">
       <div id="edit" style="display: none;">
          <div class="d-inline-flex m-2">
-            <h3 class="m-1">%lang|profileOf% [login]</h3>
-            <button class="login editProfile" style="float: right;" onclick="foxEngine.editUser.toggleEditView()">%lang|takeMeBack%</button>
+		 <button class="login editProfile" style="float: right;" onclick="foxEngine.editUser.toggleEditView()">
+			<img src="/templates/foxengine2/assets/icons/svg/back.svg" />
+		 </button>
+            <h3 class="m-1">%lang|profileOf% [login]</h3>   
          </div>
+		 <div class="tabs-box">
          <ul class="tab_caption">
             <li class="profileSettings active" value="profile">%lang|profileSettings%</li>
             <li class="personalisation">%lang|personalisation%</li>
@@ -32,11 +36,30 @@
          <form method="POST" action="/" id="viewUserProfile">
             <div class="tab_content active">
 
-               <section> 
-                  [input type="text" name="realname" placeholder="%lang|fullName%" value="[realname]"]
+               <section class="form-horizontal"> 
+                  <!--  <div class="form-row">
+				   <div class="control"> -->
+					[input type="text" name="realname" placeholder="%lang|fullName%" value="[realname]"]
+					<!-- </div>
+				   </div> -->
                   [input type="text" name="userStatus" placeholder="%lang|status%" value="[userStatus]"]
                   [input type="text" name="land" placeholder="%lang|land%" value="[land]"]
                   [input type="text" name="email" placeholder="%lang|email%" value="[email]"]
+				  
+				 
+				 
+				 <!--
+				<div class="form-row">
+							
+							<div class="form-floating mb-3 input_block">
+							<div class="control">
+								<textarea name="about" id="about" class="form-control input" ></textarea>
+								<label for="about">Кто Вы? Чем занимаетесь?</label>
+							</div>
+							</div>
+				</div> -->
+					
+				  
 				  
                   [group=4,3]
 				  <div class="currentPass"> 
@@ -98,6 +121,7 @@
 
 			$('#skin_file').change(function () {
 				skinsFiles = this.files;
+				console.log(skinsFiles);
 				$("#file_name_skin").text(skinsFiles[0].name);
 			});
 
@@ -107,11 +131,11 @@
 			});
 
 			$("#load_skin").click(function () {
-				foxEngine.editUser.loadFileToServer($(this), 'skin');
+				foxEngine.editUser.uploadFile($(this), 'skin');
 			});
 
 			$("#load_cloak").click(function () {
-				foxEngine.editUser.loadFileToServer($(this), 'cloak');
+				foxEngine.editUser.uploadFile($(this), 'cloak');
 			});
 		</script>
 
@@ -138,14 +162,14 @@
                                 <span class="file_select_field">
                             Выбрать файл
                         </span>
-                                <input type="file" id="skin_file">
+                                <input type="file" name="skin_file" id="skin_file">
                             </div>
                         </label>
 
-						<a href="#" class="green_button" onclick="foxEngine.editUser.loadFileToServer($(this), 'skin'); return false;">
+						<a href="#" class="green_button" onclick="foxEngine.editUser.uploadFile($(this), 'skin'); return false;">
                             Загрузить скин
                         </a>
-                        <a href="#" class="green_button red-button" style="margin-left: 20px !important; width: 104px;" onclick="foxEngine.editUser.deleteFileFromServer($(this), 'skin'); return false;">Удалить</a>
+                        <a href="#" class="green_button red-button" style="margin-left: 20px !important; width: 104px;" onclick="foxEngine.editUser.deleteFile($(this), 'skin'); return false;">Удалить</a>
                     </div>
 
                     <div class="change_block">
@@ -158,14 +182,14 @@
                                     <span class="file_name" id="file_name_cloak">Файл не выбран</span>
                                     <img src="%assets%icons/cabinet_file.png">
                                     <span class="file_select_field">Выбрать файл</span>
-                                    <input type="file" id="cloak_file">
+                                    <input type="file" name="cloak_file" id="cloak_file">
                                 </div>
                             </label>
 
-                            <a href="#" class="green_button" onclick="foxEngine.editUser.loadFileToServer($(this), 'cloak'); return false;">
+                            <a href="#" class="green_button" onclick="foxEngine.editUser.uploadFile($(this), 'cloak'); return false;">
                                 Загрузить плащ
                             </a>
-                            <a href="#" class="green_button red-button" style="margin-left: 14px !important; width: 104px;" onclick="foxEngine.editUser.deleteFileFromServer($(this), 'cloak'); return false;">Удалить</a>
+                            <a href="#" class="green_button red-button" style="margin-left: 14px !important; width: 104px;" onclick="foxEngine.editUser.deleteFile($(this), 'cloak'); return false;">Удалить</a>
                         </div>
                     </div>
                 </div>
@@ -175,11 +199,12 @@
             </div>
             <div class="tab_content">
 
-               <section> 
+               <section class="changePass"> 
 					[input type="password" name="newPass" placeholder="Новый пароль"]
 					[input type="password" name="repeatPass" placeholder="Повтор пароля"]
 			   </section>
             </div>
+			</div>
 			
             <input name="user_doaction" type="hidden" value="EditUser" />
             <input name="login" type="hidden" value="[login]" />
@@ -220,7 +245,7 @@
 	  </div>
       [/hasPriviligies] 
       <div id="view" style="display: block;">
-         <div id="profileContents"  class="foxesPageHead_special" id="profileHeader"style="background: linear-gradient(45deg, #c5c5e19c, [colorScheme]);">
+         <div id="profileContents"  class="foxesPageHead_special" id="profileHeader">
             <div class="profileActions"> 
 				<!--[not-login=[login]] 
 				<button class="logout ban" style="float: right;" onclick="">

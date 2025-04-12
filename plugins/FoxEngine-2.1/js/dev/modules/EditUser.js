@@ -31,23 +31,45 @@ export class EditUser extends User {
   }
 
   async uploadFile(button, type) {
-    try {
-      const files = window[`${type}Files`] || {};
-      const fd    = new FormData();
-      Object.entries(files).forEach(([k,f]) => fd.append(k,f));
-      fd.append('sysRequest','uploadFile');
-      fd.append('type',type);
-      fd.append('login',this.login);
-      fd.append('csrf_token',this.foxEngine.replaceData.hash);
+	var data = new FormData();
 
-      const resp = await fetch('/', { method:'POST', body:fd, credentials:'same-origin' });
-      const json = await resp.json();
-      button.notify(json.message, json.type);
-      if (json.type==='success') await this.drawSkins(this.login);
-    } catch (err) {
-      console.error('EditUser.uploadFile error:', err);
-      button.notify('Ошибка при загрузке файла','error');
-    }
+				if (type === "skin") {
+					$.each(skinsFiles, function (key, value) {
+						data.append(key, value);
+					});
+					//console.log(data);
+				}
+
+				if (type === "cloak") {
+					$.each(cloakFiles, function (key, value) {
+						data.append(key, value);
+					});
+				}
+
+				data.append('sysRequest', 'uploadFile');
+				data.append('type', type);
+				data.append('login', this.login);
+				data.append('csrf_token', this.foxEngine.replaceData.hash);
+
+				$.ajax({
+					url: '/',
+					type: 'POST',
+					data: data,
+					cache: false,
+					dataType: 'json',
+					processData: false,
+					contentType: false,
+
+					success: (respond, textStatus, jqXHR) => {
+						button.notify(respond.message, respond.type);
+						this.drawSkins(this.login);
+					},
+
+					error: function (jqXHR, textStatus, errorThrown) {
+						console.log(jqXHR);
+						button.notify(textStatus);
+					}
+				});
   }
 
   async deleteFile(button, type) {

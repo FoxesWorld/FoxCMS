@@ -5211,9 +5211,9 @@ var require_jquery = __commonJS({
         }
       }
       jQuery2.param = function(a, traditional) {
-        var prefix, s = [], add = function(key, valueOrFunction) {
+        var prefix, s2 = [], add = function(key, valueOrFunction) {
           var value = isFunction(valueOrFunction) ? valueOrFunction() : valueOrFunction;
-          s[s.length] = encodeURIComponent(key) + "=" + encodeURIComponent(value == null ? "" : value);
+          s2[s2.length] = encodeURIComponent(key) + "=" + encodeURIComponent(value == null ? "" : value);
         };
         if (a == null) {
           return "";
@@ -5227,7 +5227,7 @@ var require_jquery = __commonJS({
             buildParams(prefix, a[prefix], traditional, add);
           }
         }
-        return s.join("&");
+        return s2.join("&");
       };
       jQuery2.fn.extend({
         serialize: function() {
@@ -5306,12 +5306,12 @@ var require_jquery = __commonJS({
         }
         return target;
       }
-      function ajaxHandleResponses(s, jqXHR, responses) {
-        var ct, type, finalDataType, firstDataType, contents = s.contents, dataTypes = s.dataTypes;
+      function ajaxHandleResponses(s2, jqXHR, responses) {
+        var ct, type, finalDataType, firstDataType, contents = s2.contents, dataTypes = s2.dataTypes;
         while (dataTypes[0] === "*") {
           dataTypes.shift();
           if (ct === void 0) {
-            ct = s.mimeType || jqXHR.getResponseHeader("Content-Type");
+            ct = s2.mimeType || jqXHR.getResponseHeader("Content-Type");
           }
         }
         if (ct) {
@@ -5326,7 +5326,7 @@ var require_jquery = __commonJS({
           finalDataType = dataTypes[0];
         } else {
           for (type in responses) {
-            if (!dataTypes[0] || s.converters[type + " " + dataTypes[0]]) {
+            if (!dataTypes[0] || s2.converters[type + " " + dataTypes[0]]) {
               finalDataType = type;
               break;
             }
@@ -5343,20 +5343,20 @@ var require_jquery = __commonJS({
           return responses[finalDataType];
         }
       }
-      function ajaxConvert(s, response2, jqXHR, isSuccess) {
-        var conv2, current, conv, tmp, prev, converters = {}, dataTypes = s.dataTypes.slice();
+      function ajaxConvert(s2, response2, jqXHR, isSuccess) {
+        var conv2, current, conv, tmp, prev, converters = {}, dataTypes = s2.dataTypes.slice();
         if (dataTypes[1]) {
-          for (conv in s.converters) {
-            converters[conv.toLowerCase()] = s.converters[conv];
+          for (conv in s2.converters) {
+            converters[conv.toLowerCase()] = s2.converters[conv];
           }
         }
         current = dataTypes.shift();
         while (current) {
-          if (s.responseFields[current]) {
-            jqXHR[s.responseFields[current]] = response2;
+          if (s2.responseFields[current]) {
+            jqXHR[s2.responseFields[current]] = response2;
           }
-          if (!prev && isSuccess && s.dataFilter) {
-            response2 = s.dataFilter(response2, s.dataType);
+          if (!prev && isSuccess && s2.dataFilter) {
+            response2 = s2.dataFilter(response2, s2.dataType);
           }
           prev = current;
           current = dataTypes.shift();
@@ -5383,7 +5383,7 @@ var require_jquery = __commonJS({
                 }
               }
               if (conv !== true) {
-                if (conv && s.throws) {
+                if (conv && s2.throws) {
                   response2 = conv(response2);
                 } else {
                   try {
@@ -5485,7 +5485,7 @@ var require_jquery = __commonJS({
             url = void 0;
           }
           options = options || {};
-          var transport, cacheURL, responseHeadersString, responseHeaders, timeoutTimer, urlAnchor, completed2, fireGlobals, i, uncached, s = jQuery2.ajaxSetup({}, options), callbackContext = s.context || s, globalEventContext = s.context && (callbackContext.nodeType || callbackContext.jquery) ? jQuery2(callbackContext) : jQuery2.event, deferred = jQuery2.Deferred(), completeDeferred = jQuery2.Callbacks("once memory"), statusCode = s.statusCode || {}, requestHeaders = {}, requestHeadersNames = {}, strAbort = "canceled", jqXHR = {
+          var transport, cacheURL, responseHeadersString, responseHeaders, timeoutTimer, urlAnchor, completed2, fireGlobals, i, uncached, s2 = jQuery2.ajaxSetup({}, options), callbackContext = s2.context || s2, globalEventContext = s2.context && (callbackContext.nodeType || callbackContext.jquery) ? jQuery2(callbackContext) : jQuery2.event, deferred = jQuery2.Deferred(), completeDeferred = jQuery2.Callbacks("once memory"), statusCode = s2.statusCode || {}, requestHeaders = {}, requestHeadersNames = {}, strAbort = "canceled", jqXHR = {
             readyState: 0,
             // Builds headers hashtable if needed
             getResponseHeader: function(key) {
@@ -5516,7 +5516,7 @@ var require_jquery = __commonJS({
             // Overrides response content-type header
             overrideMimeType: function(type) {
               if (completed2 == null) {
-                s.mimeType = type;
+                s2.mimeType = type;
               }
               return this;
             },
@@ -5545,48 +5545,48 @@ var require_jquery = __commonJS({
             }
           };
           deferred.promise(jqXHR);
-          s.url = ((url || s.url || location2.href) + "").replace(rprotocol, location2.protocol + "//");
-          s.type = options.method || options.type || s.method || s.type;
-          s.dataTypes = (s.dataType || "*").toLowerCase().match(rnothtmlwhite) || [""];
-          if (s.crossDomain == null) {
+          s2.url = ((url || s2.url || location2.href) + "").replace(rprotocol, location2.protocol + "//");
+          s2.type = options.method || options.type || s2.method || s2.type;
+          s2.dataTypes = (s2.dataType || "*").toLowerCase().match(rnothtmlwhite) || [""];
+          if (s2.crossDomain == null) {
             urlAnchor = document2.createElement("a");
             try {
-              urlAnchor.href = s.url;
+              urlAnchor.href = s2.url;
               urlAnchor.href = urlAnchor.href;
-              s.crossDomain = originAnchor.protocol + "//" + originAnchor.host !== urlAnchor.protocol + "//" + urlAnchor.host;
+              s2.crossDomain = originAnchor.protocol + "//" + originAnchor.host !== urlAnchor.protocol + "//" + urlAnchor.host;
             } catch (e) {
-              s.crossDomain = true;
+              s2.crossDomain = true;
             }
           }
-          if (s.data && s.processData && typeof s.data !== "string") {
-            s.data = jQuery2.param(s.data, s.traditional);
+          if (s2.data && s2.processData && typeof s2.data !== "string") {
+            s2.data = jQuery2.param(s2.data, s2.traditional);
           }
-          inspectPrefiltersOrTransports(prefilters, s, options, jqXHR);
+          inspectPrefiltersOrTransports(prefilters, s2, options, jqXHR);
           if (completed2) {
             return jqXHR;
           }
-          fireGlobals = jQuery2.event && s.global;
+          fireGlobals = jQuery2.event && s2.global;
           if (fireGlobals && jQuery2.active++ === 0) {
             jQuery2.event.trigger("ajaxStart");
           }
-          s.type = s.type.toUpperCase();
-          s.hasContent = !rnoContent.test(s.type);
-          cacheURL = s.url.replace(rhash, "");
-          if (!s.hasContent) {
-            uncached = s.url.slice(cacheURL.length);
-            if (s.data && (s.processData || typeof s.data === "string")) {
-              cacheURL += (rquery.test(cacheURL) ? "&" : "?") + s.data;
-              delete s.data;
+          s2.type = s2.type.toUpperCase();
+          s2.hasContent = !rnoContent.test(s2.type);
+          cacheURL = s2.url.replace(rhash, "");
+          if (!s2.hasContent) {
+            uncached = s2.url.slice(cacheURL.length);
+            if (s2.data && (s2.processData || typeof s2.data === "string")) {
+              cacheURL += (rquery.test(cacheURL) ? "&" : "?") + s2.data;
+              delete s2.data;
             }
-            if (s.cache === false) {
+            if (s2.cache === false) {
               cacheURL = cacheURL.replace(rantiCache, "$1");
               uncached = (rquery.test(cacheURL) ? "&" : "?") + "_=" + nonce.guid++ + uncached;
             }
-            s.url = cacheURL + uncached;
-          } else if (s.data && s.processData && (s.contentType || "").indexOf("application/x-www-form-urlencoded") === 0) {
-            s.data = s.data.replace(r20, "+");
+            s2.url = cacheURL + uncached;
+          } else if (s2.data && s2.processData && (s2.contentType || "").indexOf("application/x-www-form-urlencoded") === 0) {
+            s2.data = s2.data.replace(r20, "+");
           }
-          if (s.ifModified) {
+          if (s2.ifModified) {
             if (jQuery2.lastModified[cacheURL]) {
               jqXHR.setRequestHeader("If-Modified-Since", jQuery2.lastModified[cacheURL]);
             }
@@ -5594,38 +5594,38 @@ var require_jquery = __commonJS({
               jqXHR.setRequestHeader("If-None-Match", jQuery2.etag[cacheURL]);
             }
           }
-          if (s.data && s.hasContent && s.contentType !== false || options.contentType) {
-            jqXHR.setRequestHeader("Content-Type", s.contentType);
+          if (s2.data && s2.hasContent && s2.contentType !== false || options.contentType) {
+            jqXHR.setRequestHeader("Content-Type", s2.contentType);
           }
           jqXHR.setRequestHeader(
             "Accept",
-            s.dataTypes[0] && s.accepts[s.dataTypes[0]] ? s.accepts[s.dataTypes[0]] + (s.dataTypes[0] !== "*" ? ", " + allTypes + "; q=0.01" : "") : s.accepts["*"]
+            s2.dataTypes[0] && s2.accepts[s2.dataTypes[0]] ? s2.accepts[s2.dataTypes[0]] + (s2.dataTypes[0] !== "*" ? ", " + allTypes + "; q=0.01" : "") : s2.accepts["*"]
           );
-          for (i in s.headers) {
-            jqXHR.setRequestHeader(i, s.headers[i]);
+          for (i in s2.headers) {
+            jqXHR.setRequestHeader(i, s2.headers[i]);
           }
-          if (s.beforeSend && (s.beforeSend.call(callbackContext, jqXHR, s) === false || completed2)) {
+          if (s2.beforeSend && (s2.beforeSend.call(callbackContext, jqXHR, s2) === false || completed2)) {
             return jqXHR.abort();
           }
           strAbort = "abort";
-          completeDeferred.add(s.complete);
-          jqXHR.done(s.success);
-          jqXHR.fail(s.error);
-          transport = inspectPrefiltersOrTransports(transports, s, options, jqXHR);
+          completeDeferred.add(s2.complete);
+          jqXHR.done(s2.success);
+          jqXHR.fail(s2.error);
+          transport = inspectPrefiltersOrTransports(transports, s2, options, jqXHR);
           if (!transport) {
             done(-1, "No Transport");
           } else {
             jqXHR.readyState = 1;
             if (fireGlobals) {
-              globalEventContext.trigger("ajaxSend", [jqXHR, s]);
+              globalEventContext.trigger("ajaxSend", [jqXHR, s2]);
             }
             if (completed2) {
               return jqXHR;
             }
-            if (s.async && s.timeout > 0) {
+            if (s2.async && s2.timeout > 0) {
               timeoutTimer = window2.setTimeout(function() {
                 jqXHR.abort("timeout");
-              }, s.timeout);
+              }, s2.timeout);
             }
             try {
               completed2 = false;
@@ -5651,15 +5651,15 @@ var require_jquery = __commonJS({
             jqXHR.readyState = status > 0 ? 4 : 0;
             isSuccess = status >= 200 && status < 300 || status === 304;
             if (responses) {
-              response2 = ajaxHandleResponses(s, jqXHR, responses);
+              response2 = ajaxHandleResponses(s2, jqXHR, responses);
             }
-            if (!isSuccess && jQuery2.inArray("script", s.dataTypes) > -1 && jQuery2.inArray("json", s.dataTypes) < 0) {
-              s.converters["text script"] = function() {
+            if (!isSuccess && jQuery2.inArray("script", s2.dataTypes) > -1 && jQuery2.inArray("json", s2.dataTypes) < 0) {
+              s2.converters["text script"] = function() {
               };
             }
-            response2 = ajaxConvert(s, response2, jqXHR, isSuccess);
+            response2 = ajaxConvert(s2, response2, jqXHR, isSuccess);
             if (isSuccess) {
-              if (s.ifModified) {
+              if (s2.ifModified) {
                 modified = jqXHR.getResponseHeader("Last-Modified");
                 if (modified) {
                   jQuery2.lastModified[cacheURL] = modified;
@@ -5669,7 +5669,7 @@ var require_jquery = __commonJS({
                   jQuery2.etag[cacheURL] = modified;
                 }
               }
-              if (status === 204 || s.type === "HEAD") {
+              if (status === 204 || s2.type === "HEAD") {
                 statusText = "nocontent";
               } else if (status === 304) {
                 statusText = "notmodified";
@@ -5700,12 +5700,12 @@ var require_jquery = __commonJS({
             if (fireGlobals) {
               globalEventContext.trigger(
                 isSuccess ? "ajaxSuccess" : "ajaxError",
-                [jqXHR, s, isSuccess ? success : error]
+                [jqXHR, s2, isSuccess ? success : error]
               );
             }
             completeDeferred.fireWith(callbackContext, [jqXHR, statusText]);
             if (fireGlobals) {
-              globalEventContext.trigger("ajaxComplete", [jqXHR, s]);
+              globalEventContext.trigger("ajaxComplete", [jqXHR, s2]);
               if (!--jQuery2.active) {
                 jQuery2.event.trigger("ajaxStop");
               }
@@ -5736,11 +5736,11 @@ var require_jquery = __commonJS({
           }, jQuery2.isPlainObject(url) && url));
         };
       });
-      jQuery2.ajaxPrefilter(function(s) {
+      jQuery2.ajaxPrefilter(function(s2) {
         var i;
-        for (i in s.headers) {
+        for (i in s2.headers) {
           if (i.toLowerCase() === "content-type") {
-            s.contentType = s.headers[i] || "";
+            s2.contentType = s2.headers[i] || "";
           }
         }
       });
@@ -5924,9 +5924,9 @@ var require_jquery = __commonJS({
           };
         }
       });
-      jQuery2.ajaxPrefilter(function(s) {
-        if (s.crossDomain) {
-          s.contents.script = false;
+      jQuery2.ajaxPrefilter(function(s2) {
+        if (s2.crossDomain) {
+          s2.contents.script = false;
         }
       });
       jQuery2.ajaxSetup({
@@ -5943,20 +5943,20 @@ var require_jquery = __commonJS({
           }
         }
       });
-      jQuery2.ajaxPrefilter("script", function(s) {
-        if (s.cache === void 0) {
-          s.cache = false;
+      jQuery2.ajaxPrefilter("script", function(s2) {
+        if (s2.cache === void 0) {
+          s2.cache = false;
         }
-        if (s.crossDomain) {
-          s.type = "GET";
+        if (s2.crossDomain) {
+          s2.type = "GET";
         }
       });
-      jQuery2.ajaxTransport("script", function(s) {
-        if (s.crossDomain || s.scriptAttrs) {
+      jQuery2.ajaxTransport("script", function(s2) {
+        if (s2.crossDomain || s2.scriptAttrs) {
           var script, callback;
           return {
             send: function(_, complete) {
-              script = jQuery2("<script>").attr(s.scriptAttrs || {}).prop({ charset: s.scriptCharset, src: s.url }).on("load error", callback = function(evt) {
+              script = jQuery2("<script>").attr(s2.scriptAttrs || {}).prop({ charset: s2.scriptCharset, src: s2.url }).on("load error", callback = function(evt) {
                 script.remove();
                 callback = null;
                 if (evt) {
@@ -5982,22 +5982,22 @@ var require_jquery = __commonJS({
           return callback;
         }
       });
-      jQuery2.ajaxPrefilter("json jsonp", function(s, originalSettings, jqXHR) {
-        var callbackName, overwritten, responseContainer, jsonProp = s.jsonp !== false && (rjsonp.test(s.url) ? "url" : typeof s.data === "string" && (s.contentType || "").indexOf("application/x-www-form-urlencoded") === 0 && rjsonp.test(s.data) && "data");
-        if (jsonProp || s.dataTypes[0] === "jsonp") {
-          callbackName = s.jsonpCallback = isFunction(s.jsonpCallback) ? s.jsonpCallback() : s.jsonpCallback;
+      jQuery2.ajaxPrefilter("json jsonp", function(s2, originalSettings, jqXHR) {
+        var callbackName, overwritten, responseContainer, jsonProp = s2.jsonp !== false && (rjsonp.test(s2.url) ? "url" : typeof s2.data === "string" && (s2.contentType || "").indexOf("application/x-www-form-urlencoded") === 0 && rjsonp.test(s2.data) && "data");
+        if (jsonProp || s2.dataTypes[0] === "jsonp") {
+          callbackName = s2.jsonpCallback = isFunction(s2.jsonpCallback) ? s2.jsonpCallback() : s2.jsonpCallback;
           if (jsonProp) {
-            s[jsonProp] = s[jsonProp].replace(rjsonp, "$1" + callbackName);
-          } else if (s.jsonp !== false) {
-            s.url += (rquery.test(s.url) ? "&" : "?") + s.jsonp + "=" + callbackName;
+            s2[jsonProp] = s2[jsonProp].replace(rjsonp, "$1" + callbackName);
+          } else if (s2.jsonp !== false) {
+            s2.url += (rquery.test(s2.url) ? "&" : "?") + s2.jsonp + "=" + callbackName;
           }
-          s.converters["script json"] = function() {
+          s2.converters["script json"] = function() {
             if (!responseContainer) {
               jQuery2.error(callbackName + " was not called");
             }
             return responseContainer[0];
           };
-          s.dataTypes[0] = "json";
+          s2.dataTypes[0] = "json";
           overwritten = window2[callbackName];
           window2[callbackName] = function() {
             responseContainer = arguments;
@@ -6008,8 +6008,8 @@ var require_jquery = __commonJS({
             } else {
               window2[callbackName] = overwritten;
             }
-            if (s[callbackName]) {
-              s.jsonpCallback = originalSettings.jsonpCallback;
+            if (s2[callbackName]) {
+              s2.jsonpCallback = originalSettings.jsonpCallback;
               oldCallbacks.push(callbackName);
             }
             if (responseContainer && isFunction(overwritten)) {
@@ -10371,11 +10371,11 @@ var PlaytimeWidgetGenerator = class {
       name,
       total: (d.totalTime || 0) / 60
     }));
-    const totalAll = servers.reduce((sum, s) => sum + s.total, 0);
+    const totalAll = servers.reduce((sum, s2) => sum + s2.total, 0);
     const totalStr = this.formatTime(totalAll);
-    const barsArr = await Promise.all(servers.map((s) => this.createSegment(s, totalAll)));
+    const barsArr = await Promise.all(servers.map((s2) => this.createSegment(s2, totalAll)));
     const bars = barsArr.join("");
-    const rowsArr = await Promise.all(servers.map((s) => this.createRow(s, totalAll)));
+    const rowsArr = await Promise.all(servers.map((s2) => this.createRow(s2, totalAll)));
     const rows = rowsArr.join("");
     const html = await this.foxEngine.replaceTextInTemplate(
       this.foxEngine.templateCache["playTimeWidgetCard"],
@@ -10410,7 +10410,7 @@ var PlaytimeWidgetGenerator = class {
     );
   }
   formatTime(sec) {
-    const s = Math.round(sec), h = Math.floor(s / 60), m = s % 60;
+    const s2 = Math.round(sec), h = Math.floor(s2 / 60), m = s2 % 60;
     const parts = [];
     if (h) parts.push(`${h} ${this.decline(h, "\u0447\u0430\u0441", "\u0447\u0430\u0441\u0430", "\u0447\u0430\u0441\u043E\u0432")}`);
     if (m) parts.push(`${m} ${this.decline(m, "\u043C\u0438\u043D\u0443\u0442\u0430", "\u043C\u0438\u043D\u0443\u0442\u044B", "\u043C\u0438\u043D\u0443\u0442")}`);
@@ -10436,7 +10436,6 @@ var User = class _User {
     this.userLogin = foxEngine2.replaceData.login;
     this.userData = {};
     this.playTimeWidget = null;
-    console.log(`Loading data for %c${this.userLogin}%c...`, "color: #ff0000;", "color: #000000;");
   }
   async apiRequest(payload, type = "JSON") {
     try {
@@ -10452,7 +10451,6 @@ var User = class _User {
   async parseUsrOptionsMenu() {
     try {
       if (this.optNamesArr.length <= this.optionAmount) {
-        this.logDebug("Using FoxesWorld UserOptions", "background:#39312fc7;color:yellow;");
       }
       if (this.foxEngine.replaceData.isLogged) {
         await this.parseUserLook(this.userLogin);
@@ -10470,13 +10468,20 @@ var User = class _User {
       console.error("Error in parseUsrOptionsMenu:", err);
     }
   }
-  getDominantColor(img, quantize = 24) {
+  /** @private */
+  _calculateDominantColor(img, quantize = 16, alphaThreshold = 128) {
     const canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
+    canvas.width = img.naturalWidth || img.width;
+    canvas.height = img.naturalHeight || img.height;
     const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0, img.width, img.height);
-    const data2 = ctx.getImageData(0, 0, img.width, img.height).data;
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    let data2;
+    try {
+      data2 = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    } catch (e) {
+      console.error("\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u0434\u0430\u043D\u043D\u044B\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F:", e);
+      return "#000000";
+    }
     const colorMap = {};
     let maxCount = 0;
     let dominantColor = { r: 0, g: 0, b: 0 };
@@ -10485,7 +10490,7 @@ var User = class _User {
       const g = data2[i + 1];
       const b = data2[i + 2];
       const a = data2[i + 3];
-      if (a < 128) continue;
+      if (a < alphaThreshold) continue;
       const qr = Math.floor(r / quantize) * quantize;
       const qg = Math.floor(g / quantize) * quantize;
       const qb = Math.floor(b / quantize) * quantize;
@@ -10496,7 +10501,8 @@ var User = class _User {
         dominantColor = { r: qr, g: qg, b: qb };
       }
     }
-    return dominantColor;
+    const toHex = (c) => c.toString(16).padStart(2, "0");
+    return `#${toHex(dominantColor.r)}${toHex(dominantColor.g)}${toHex(dominantColor.b)}`;
   }
   processOption(name, opt) {
     const html = this.generateOptionTemplate(name, opt);
@@ -10518,6 +10524,12 @@ var User = class _User {
                     ${optionTitle}
                 </a>
             </li>`,
+    userOption: ({ optionClass, optionPreText, optionTitle, func: func2 }, name) => `<li class="${optionClass}">
+                <a href="#" onclick="${func2}">
+                    <div class="rightIcon">${optionPreText}</div>
+                    ${optionTitle}
+                </a>
+            </li>`,
     plainText: ({ optionTitle }) => optionTitle
   };
   generateOptionTemplate(name, opt) {
@@ -10528,17 +10540,18 @@ var User = class _User {
     try {
       await this.getUserData(login);
       const [front, back] = await Promise.all([
-        this.getUserSkin(login, "front"),
-        this.getUserSkin(login, "back")
+        this._getUserSkin(login, "front"),
+        this._getUserSkin(login, "back")
       ]);
       this.userSkin = { front, back };
-      this.getPlayTimeWidget(this.userData.serversOnline);
+      this.getPlayTimeWidget(this.userData[login].serversOnline);
       await this.parseBadges(login);
     } catch (err) {
       console.error("Error in parseUserLook:", err);
     }
   }
-  getUserSkin(login, side) {
+  /** @private */
+  _getUserSkin(login, side) {
     return this.apiRequest({ sysRequest: "skinPreview", login, side }, "TEXT");
   }
   async userAction(action) {
@@ -10553,6 +10566,12 @@ var User = class _User {
       console.error("Error in userAction:", err);
     }
   }
+  /**
+   * Загружает и рендерит бейджи пользователя, избегая дублирования.
+   *
+   * @param {Object} user – объект пользователя, должен содержать уникальный идентификатор user.id
+   * @returns {Promise<void>}
+   */
   async parseBadges(user) {
     try {
       const badgesContainer = document.getElementById("userBadges");
@@ -10560,27 +10579,49 @@ var User = class _User {
         console.warn("\u041A\u043E\u043D\u0442\u0435\u0439\u043D\u0435\u0440 \u0431\u0435\u0439\u0434\u0436\u0435\u0439 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D");
         return;
       }
-      if (badgesContainer.children.length) {
-        console.log("Badges already loaded.");
-        return;
-      }
+      const existingIds = new Set(
+        Array.from(badgesContainer.children).map((el) => el.dataset.badgeId).filter((id) => id)
+      );
       const tpl = this.foxEngine.templateCache["badge"];
       if (!tpl) {
         console.error('\u0428\u0430\u0431\u043B\u043E\u043D "badge" \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D \u0432 \u043A\u0435\u0448\u0435');
         return;
       }
       const badges = await this.getBadgesArray(user);
-      for (const obj of badges) {
-        const html = await this.foxEngine.replaceTextInTemplate(tpl, {
-          BadgeDesc: obj.description,
-          AcquiredDateFormatted: this.foxEngine.utils.getFormattedDate(obj.acquiredDate),
-          BadgeName: obj.badgeName,
-          BadgeImg: obj.badgeImg
-        });
-        badgesContainer.insertAdjacentHTML("beforeend", html);
-        $('[data-toggle="tooltip"]').tooltip({ placement: "bottom", trigger: "hover" });
+      if (badges.length === 0 && existingIds.size === 0) {
+        badgesContainer.remove();
+        return;
       }
-      if (!badges.length) badgesContainer.remove();
+      const fragment = document.createDocumentFragment();
+      let addedCount = 0;
+      for (const badge of badges) {
+        if (existingIds.has(String(badge.id))) {
+          continue;
+        }
+        existingIds.add(String(badge.id));
+        const html = await this.foxEngine.replaceTextInTemplate(tpl, {
+          BadgeId: badge.id,
+          BadgeDesc: badge.description,
+          AcquiredDateFormatted: this.foxEngine.utils.getFormattedDate(badge.acquiredDate),
+          BadgeName: badge.badgeName,
+          BadgeImg: badge.badgeImg
+        });
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html.trim();
+        const badgeElement = tempDiv.firstElementChild;
+        if (badgeElement) {
+          badgeElement.dataset.badgeId = badge.id;
+          fragment.appendChild(badgeElement);
+          addedCount++;
+        }
+      }
+      if (addedCount > 0) {
+        badgesContainer.appendChild(fragment);
+        $(badgesContainer).find('[data-toggle="tooltip"]').tooltip({ placement: "bottom", trigger: "hover" });
+      }
+      if (existingIds.size === 0) {
+        badgesContainer.remove();
+      }
     } catch (err) {
       console.error("Error in parseBadges:", err);
     }
@@ -10638,22 +10679,54 @@ var User = class _User {
       }
     }
   }
-  async showUserProfile(user) {
+  async showUserProfile(user, options = {}) {
+    await this.getUserData(user);
     try {
+      const config = {
+        quantize: this.userData[user]?.quantize || options.quantize || 24,
+        alphaThreshold: this.userData[user]?.alphaThreshold || options.alphaThreshold || 128,
+        gradientAngle: this.userData[user]?.gradientAngle || options.gradientAngle || 45,
+        formInitDelay: this.userData[user]?.formInitDelay || options.formInitDelay || 500,
+        ...options
+      };
       const profile = await this.getUserProfile(user);
-      await this.getUserData(user);
+      config.gradientAngle = this._extractAngle(this.userData[user].last_date);
+      const userPic = new Image();
+      userPic.crossOrigin = "anonymous";
+      userPic.src = this.userData[user].profilePhoto;
+      const dominantColor = await this._getDominantColor(userPic, 24, 128);
+      let content = await this.foxEngine.entryReplacer.replaceText(profile);
+      const doc = new DOMParser().parseFromString(content, "text/html");
+      const profileDiv = doc.querySelector("#profileContents");
+      profileDiv.style.background = `linear-gradient(${config.gradientAngle}deg, ${dominantColor}cc, ${this.userData[user].colorScheme})`;
       this.foxEngine.page.setPage("");
-      const content = await this.foxEngine.entryReplacer.replaceText(profile);
-      this.foxEngine.page.loadData(content, this.foxEngine.replaceData.contentBlock);
+      this.foxEngine.page.loadData(doc.body.innerHTML, this.foxEngine.replaceData.contentBlock);
       location.hash = `user/${user}`;
-      this.foxEngine.foxesInputHandler.formInit(1e3);
-      setTimeout(() => {
-        this.getPlayTimeWidget(this.userData.serversOnline);
-        this.parseBadges(user);
-      }, 600);
+      doc.onload = () => {
+        this.getPlayTimeWidget(this.userData[user].serversOnline);
+        this.foxEngine.foxesInputHandler.formInit(config.formInitDelay);
+      };
     } catch (err) {
       console.error("Error in showUserProfile:", err);
     }
+  }
+  /** @private */
+  _getDominantColor(userPic, quantize, alphaThreshold) {
+    return new Promise((resolve, reject) => {
+      userPic.onload = () => {
+        const color = this._calculateDominantColor(userPic, quantize, alphaThreshold);
+        resolve(color);
+      };
+      userPic.onerror = (err) => reject(new Error("\u041E\u0448\u0438\u0431\u043A\u0430 \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F: " + err));
+    });
+  }
+  /** @private */
+  _extractAngle(num) {
+    const last3 = num % 1e3;
+    if (last3 <= 360) return last3;
+    const last2 = num % 100;
+    if (last2 <= 360) return last2;
+    return 360;
   }
   async showProfilePopup(user, dialogOptions) {
     try {
@@ -10674,8 +10747,15 @@ var User = class _User {
         console.error('\u0428\u0430\u0431\u043B\u043E\u043D "lastUser" \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D \u0432 \u043A\u0435\u0448\u0435');
         return;
       }
+      const userPic = new Image();
+      userPic.crossOrigin = "anonymous";
+      userPic.src = last.profilePhoto;
+      const dColor = await this._getDominantColor(userPic, 24, 128);
+      const gradientAngle = this._extractAngle(last.last_date);
       const html = await this.foxEngine.replaceTextInTemplate(tpl, {
         colorScheme: last.colorScheme,
+        angle: gradientAngle,
+        dominantColor: dColor + "cc",
         profilePhoto: last.profilePhoto,
         login: last.login,
         realname: last.realname,
@@ -10707,7 +10787,9 @@ var User = class _User {
   }
   async getUserData(login) {
     try {
-      this.userData = await this.apiRequest({ user_doaction: "getUserData", login });
+      const data2 = await this.apiRequest({ user_doaction: "getUserData", login });
+      this.userData[login] = data2;
+      console.log(`Loading data for %c${login}%c...`, "color: #ff0000;", "color: #000000;");
     } catch (err) {
       console.error("Error in getUserData:", err);
       throw err;
@@ -10741,22 +10823,38 @@ var EditUser = class extends User {
     $cont.removeClass("active").eq(idx).addClass("active");
   }
   async uploadFile(button, type) {
-    try {
-      const files = window[`${type}Files`] || {};
-      const fd = new FormData();
-      Object.entries(files).forEach(([k, f]) => fd.append(k, f));
-      fd.append("sysRequest", "uploadFile");
-      fd.append("type", type);
-      fd.append("login", this.login);
-      fd.append("csrf_token", this.foxEngine.replaceData.hash);
-      const resp = await fetch("/", { method: "POST", body: fd, credentials: "same-origin" });
-      const json = await resp.json();
-      button.notify(json.message, json.type);
-      if (json.type === "success") await this.drawSkins(this.login);
-    } catch (err) {
-      console.error("EditUser.uploadFile error:", err);
-      button.notify("\u041E\u0448\u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0435 \u0444\u0430\u0439\u043B\u0430", "error");
+    var data2 = new FormData();
+    if (type === "skin") {
+      $.each(skinsFiles, function(key, value) {
+        data2.append(key, value);
+      });
     }
+    if (type === "cloak") {
+      $.each(cloakFiles, function(key, value) {
+        data2.append(key, value);
+      });
+    }
+    data2.append("sysRequest", "uploadFile");
+    data2.append("type", type);
+    data2.append("login", this.login);
+    data2.append("csrf_token", this.foxEngine.replaceData.hash);
+    $.ajax({
+      url: "/",
+      type: "POST",
+      data: data2,
+      cache: false,
+      dataType: "json",
+      processData: false,
+      contentType: false,
+      success: (respond, textStatus, jqXHR) => {
+        button.notify(respond.message, respond.type);
+        this.drawSkins(this.login);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR);
+        button.notify(textStatus);
+      }
+    });
   }
   async deleteFile(button, type) {
     try {
@@ -11041,15 +11139,15 @@ var Servers = class {
         });
     }
     var k2 = q[a2], l2 = k2.thumbs, m2 = {}, n2 = k2.viewport[0].getElementsByTagName("a"), o2 = k2.viewport[0].getElementsByTagName("img");
-    s.onStart = function(a3) {
+    s2.onStart = function(a3) {
       k2.freeze || (m2.x1 = a3.clientX || a3.touches && a3.touches[0].clientX, m2.y1 = a3.clientY || a3.touches && a3.touches[0].clientY, m2.t1 = /* @__PURE__ */ new Date(), m2.isPressed = true, m2.isThumbs = f(this, k2.params.thumbs), m2.thumbsStartX = k2.thumbsIndent, k2.layer.css("transition-duration", "0s"), k2.thumbsLayer.css("transition-duration", "0s"));
-    }, s.onMove = function(e3) {
+    }, s2.onMove = function(e3) {
       if (m2.isPressed && !k2.freeze) {
         if (m2.shiftX = (e3.clientX || e3.touches && e3.touches[0].clientX) - m2.x1, m2.shiftY = (e3.clientY || e3.touches && e3.touches[0].clientY) - m2.y1, m2.shiftXAbs = Math.abs(m2.shiftX), m2.shiftYAbs = Math.abs(m2.shiftY), m2.isMultitouch = m2.isMultitouch || !!e3.touches && e3.touches.length > 1, m2.isMultitouch)
           return void c2();
         m2.isSlide || m2.isScroll || (m2.shiftYAbs >= 5 && m2.shiftYAbs > m2.shiftXAbs && (m2.isScroll = true), m2.shiftXAbs >= 5 && m2.shiftXAbs > m2.shiftYAbs && (k2.root.addClass(k2.params._dragging), m2.isSlide = true, m2.startShift = b2(a2))), m2.isSlide && (m2.isThumbs ? k2.thumbsDragging && g2() : k2.params.transition && d2(), e3.preventDefault && e3.preventDefault());
       }
-    }, s.onEnd = function(b3) {
+    }, s2.onEnd = function(b3) {
       if (!m2.isSlide && !m2.isScroll && m2.isPressed) {
         if (f(b3.target, k2.params.prev) && t.prev(a2), f(b3.target, k2.params.next) && t.next(a2), f(b3.target, k2.params.thumbImg) || f(b3.target, k2.params.thumb)) {
           var d3 = parseInt(b3.target.getAttribute("data-rel"));
@@ -11061,41 +11159,41 @@ var Servers = class {
     }, k2.events.push({
       element: k2.viewport[0],
       event: r[0],
-      handler: s.onStart
+      handler: s2.onStart
     }, {
       element: k2.viewport[0],
       event: r[1],
-      handler: s.onMove,
+      handler: s2.onMove,
       capture: true
     }, {
       element: k2.viewport[0],
       event: r[2],
-      handler: s.onEnd
+      handler: s2.onEnd
     }, {
       element: k2.viewport[0],
       event: r[3],
-      handler: s.onEnd
+      handler: s2.onEnd
     }, {
       element: l2[0],
       event: r[0],
-      handler: s.onStart
+      handler: s2.onStart
     }, {
       element: l2[0],
       event: r[1],
-      handler: s.onMove,
+      handler: s2.onMove,
       capture: true
     }, {
       element: l2[0],
       event: r[2],
-      handler: s.onEnd
+      handler: s2.onEnd
     }, {
       element: l2[0],
       event: r[3],
-      handler: s.onEnd
+      handler: s2.onEnd
     }), j2(k2.thumb, "click"), j2(k2.thumbImg, "dragstart"), j2(n2, "dragstart"), j2(o2, "dragstart");
   }
   function i(a2) {
-    if (!s.resize) {
+    if (!s2.resize) {
       var b2 = q[a2];
       b2.events.push({
         element: window,
@@ -11106,7 +11204,7 @@ var Servers = class {
   }
   function j(a2) {
     var b2 = q[a2];
-    s.keydown = function(b3) {
+    s2.keydown = function(b3) {
       var c2 = b3.which || b3.keyCode, d2 = b3.target.nodeName.toLowerCase(), e2 = !!b3.target.attributes.contenteditable;
       if ("input" != d2 && "textarea" != d2 && "select" != d2 && !e2)
         switch (c2) {
@@ -11122,12 +11220,12 @@ var Servers = class {
     }, b2.events.push({
       element: window,
       event: "keydown",
-      handler: s.keydown
+      handler: s2.keydown
     });
   }
   function k(a2) {
     var b2 = q[a2], c2 = ["webkitTransitionEnd", "MSTransitionEnd", "oTransitionEnd", "transitionend"];
-    s.transitionEnd = function(b3) {
+    s2.transitionEnd = function(b3) {
       var c3 = b3.propertyName;
       (c3.lastIndexOf("transform") == c3.length - "transform".length || "left" == c3) && l(a2);
     };
@@ -11135,7 +11233,7 @@ var Servers = class {
       b2.events.push({
         element: b2.layer[0],
         event: c2[d2],
-        handler: s.transitionEnd
+        handler: s2.transitionEnd
       });
   }
   function l(a2) {
@@ -11163,7 +11261,7 @@ var Servers = class {
       MozTransform: "-moz-transform",
       msTransform: "-ms-transform",
       OTransform: "-o-transform"
-    }, q = [], r = g(), s = [], t = {
+    }, q = [], r = g(), s2 = [], t = {
       init: function(e2) {
         var f2 = "photor__";
         return o = a.extend({
@@ -11558,14 +11656,14 @@ var ModalApp = class {
       return;
     }
     this.closeCallback = closeCallback;
+    let modalTpl = this.foxEngine.templateCache["modalApp"];
+    const data2 = await this.foxEngine.replaceTextInTemplate(modalTpl, {
+      title,
+      content: await this.foxEngine.entryReplacer.replaceText(html)
+    });
     $(".modal_app").css("width", width);
     $(".modal_app").empty();
-    $(".modal_app").append(`
-            <div class="modal_app_close" onclick="foxEngine.modalApp.closeModalApp(true);"></div>
-            <div class="modal_app_title">${title}</div>
-            <div class="modal_app_content"></div>
-        `);
-    $(".modal_app_content").html(await this.foxEngine.entryReplacer.replaceText(html));
+    $(".modal_app").append(data2);
     $(".container").addClass("modal_open_body");
     $(".modal_wrapper").css("display", "flex");
     $(".modal_app").addClass("show_animation");
@@ -12017,7 +12115,11 @@ var EntryReplacer = class {
                             </div>
                         </section>`;
       default:
-        return `<div class="form-floating mb-3 input_block" style="${style}">
+        let styleAttr = "";
+        if (style !== void 0) {
+          styleAttr = s`tyle="${style}"`;
+        }
+        return `<div class="form-floating mb-3 input_block" ${styleAttr}>
                             <input type="${type || "text"}" name="${name || ""}" class="form-control input" id="${name || ""}" value="${value || ""}" onKeyUp="${onKeyUp || ""}" placeholder="${placeholder || ""}" />
                             <label for="${name || ""}">${placeholder || ""}</label>
                         </div>`;
