@@ -37,6 +37,10 @@
             {
                 "code": "1F606",
                 "name": "blush"
+            },
+            {
+                "code": "U+1f44b",
+                "name": "wavehand"
             }
         ]
     },
@@ -157,6 +161,22 @@
             {
                 "code": "1F520",
                 "name": "warning"
+            },
+            {
+                "code": "1F521",
+                "name": "shield"
+            },
+            {
+                "code": "1F522",
+                "name": "paintBrush"
+            },
+            {
+                "code": "1F523",
+                "name": "gear"
+            },
+            {
+                "code": "1F524",
+                "name": "link"
             }
         ]
     },

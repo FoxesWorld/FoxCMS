@@ -131,6 +131,10 @@
 	/* display: inline-grid; */
 }
 
+.adminPanel .input_block input {
+	    float: right;
+}
+
 .menu-toggle-btn {
     width: 30%;
     margin: 5px;
@@ -152,7 +156,6 @@
 }
 
 #serverOptionsForm {
-	width: 70%;
 	margin: 10px;
 }
 

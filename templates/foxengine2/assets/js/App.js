@@ -10,7 +10,12 @@ const templates = {
 	"emptyWidget": "/templates/" + replaceData['template'] + "/foxEngine/playTimeWidget/emptyWidget.tpl",
 	"widgetSegment": "/templates/" + replaceData['template'] + "/foxEngine/playTimeWidget/widgetSegment.tpl",
 	"widgetRow": "/templates/" + replaceData['template'] + "/foxEngine/playTimeWidget/widgetRow.tpl",
-	"modalApp": "/templates/" + replaceData['template'] + "/foxEngine/modalApp.tpl"
+	"modalApp": "/templates/" + replaceData['template'] + "/foxEngine/modalApp.tpl",
+	"serverEntry": "/templates/" + replaceData['template'] + "/foxEngine/monitor/serverEntry.tpl",
+	"adminPanel": "/templates/" + replaceData['template'] + "/foxEngine/admin/panel.tpl",
+	"totalOnline": "/templates/" + replaceData['template'] + "/foxEngine/monitor/totalOnline.tpl",
+	"serverPage": "/templates/" + replaceData['template'] + "/foxEngine/serverPage/serverPage.tpl",
+	"serverMods": "/templates/" + replaceData['template'] + "/foxEngine/serverPage/serverMods.tpl"
   }
 };
 
@@ -23,6 +28,7 @@ const serversColorMap = {
 
 const foxEngine = new FoxEngine(replaceData, userFields, templates, serversColorMap);
 window.foxEngine = foxEngine;
+
 
 const App = new Vue({
     delimiters: ["<%", "%>"],
@@ -67,7 +73,7 @@ setInterval(() => {
 (function () {
     function handleHashChange() {
         const hash = location.hash.substring(1);
-        console.log("Current hash: ", hash);
+        foxEngine.log("Current hash: " +  hash);
 
         if (hash) {
             const linkTypes = [
@@ -83,7 +89,7 @@ setInterval(() => {
                     const replaceValue = hash.split(linkType.keyWord + '/')[1];
                     const moduleFunc = `foxEngine.${linkType.module}${linkType.action}`;
 
-                    console.log(`Executing action: ${linkType.action} from module: ${linkType.module} with value: ${replaceValue}`);
+                    foxEngine.log(`Executing action: ${linkType.action} from module: ${linkType.module} with value: ${replaceValue}`);
 
                     if (typeof foxEngine !== 'undefined' && typeof foxEngine[linkType.module.slice(0, -1)][linkType.action] === 'function') {
                         foxEngine[linkType.module.slice(0, -1)][linkType.action](replaceValue, replaceData.contentBlock);
@@ -92,14 +98,14 @@ setInterval(() => {
                             foxEngine.onUrlChange(replaceValue);
                         }
                     } else {
-                        console.error(`Method not found: ${moduleFunc}`);
+                        foxEngine.error(`Method not found: ${moduleFunc}`, "WARN");
                     }
                     return;
                 }
             }
-            console.log("No matching linkType found for hash: ", hash);
+            foxEngine.log("No matching linkType found for hash: " +  hash, "WARN");
         } else {
-            console.log("Hash is empty, calling unhash()");
+            foxEngine.log("Hash is empty, calling unhash()");
             unhash();
         }
     }
@@ -131,13 +137,13 @@ setInterval(() => {
     });
 });
 
-//setTimeout(() => {
+/*
 	document.addEventListener("DOMContentLoaded", () => {
 		document.querySelector('.option_select').addEventListener('click', function() {
 			this.classList.toggle('open');
 		});
-	});
-//}, 1000);
-}());
+	});*/
+
+}()); 
 
 export { App, foxEngine };

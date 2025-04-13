@@ -1,5 +1,5 @@
 <?php 
-    /* [10.04.2025] */
+    /* [12.04.2025] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -44,7 +44,7 @@ $config = array(
 
 	"frontendSettings" => array(
 		"contentBlock" => "#content",
-		"secureKey" => "ghYyufghVH",
+		"secureKey" => "ghYyufghVHGYHg",
 		"assets" => "/templates/foxengine2/assets/",
 		"template" => "foxengine2"
 ),

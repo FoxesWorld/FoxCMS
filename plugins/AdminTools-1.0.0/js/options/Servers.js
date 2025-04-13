@@ -13,6 +13,20 @@ import { EditServer } from './serverOptions/EditServer.js';
 export class Servers {
     constructor(adminPanel) {
 		this.adminPanel = adminPanel;
+		
+		this.formFields = [
+            { fieldName: 'host', fieldType: 'text' },
+            { fieldName: 'port', fieldType: 'number' },
+            { fieldName: 'ignoreDirs', fieldType: 'tagify' },
+            { fieldName: 'enabled', fieldType: 'checkbox' },
+            { fieldName: 'checkLib', fieldType: 'checkbox' },
+            { fieldName: 'serverGroups', fieldType: 'tagify' },
+            { fieldName: 'serverDescription', fieldType: 'textarea' },
+            { fieldName: 'serverVersion', fieldType: 'dropdown', optionsArray: this.versions },
+            { fieldName: 'jreVersion', fieldType: 'dropdown', optionsArray: this.javaVersions },
+            { fieldName: 'serverImage', fieldType: 'dropdown', optionsArray: this.serverPictures },
+        ];
+		
 		this.editServer = new EditServer(this);
     }
 
@@ -74,8 +88,27 @@ export class Servers {
 			});
 
 			$('.deleteServerButt').click((event) => {
+				console.log($(event.currentTarget).attr('data-id'));
 				const serverName = $(event.currentTarget).attr('data-serverName');
-				this.editServer.deleteServer(serverName);
+				const serverId =   $(event.currentTarget).attr('data-serverId');
+				
+
+				foxEngine.confirmDialog?.(
+					`Вы уверены, что хотите удалить сервер <b>${serverName}</b>?`,
+					async () => {
+						this.editServer.deleteServer(serverId);
+					},
+					{
+						title: "Подтверждение удаления",
+						confirmText: "Удалить",
+						cancelText: "Отмена"
+					}
+				) || (confirm(`Удалить сервер ${serverName}?`) && this.editServer.deleteServer(serverId));
+			});
+
+			
+			$("#addServerButton").click((event) => {
+				this.editServer.openAddServerDialog();
 			});
 	}
 

@@ -1,6 +1,25 @@
  <useroption> { "optionGroup": 5, "type": "pageContent" } </useroption>
  <pageContent>
      <div class="pageRoot">
+	 
+	 <style>
+	 #passStrengthBarContainer {
+    margin-top: 10px;
+    width: 100%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#passStrengthBar {
+    width: 0%;
+    height: 100%;
+    background-color: #B20A0A;
+    transition: width 0.5s ease, background-color 0.5s ease;
+}
+
+	 </style>
          <div class="page-content">
              <div class="formContent">
                  <h1>Регистрация</h1>
@@ -12,15 +31,21 @@
                   <label class="label">Имя</label>
                </div> 
 			   --> 
-			   <b class="note">При указании почты использкйте настояшую! В противном случае аккаунт будет невозможно восстановить!</b>
+			   <b class="note">При указании почты используйте настояшую! В противном случае аккаунт будет невозможно восстановить!</b>
 			   [input type="email" name="email" placeholder="Почта"]
 			   [input type="text" name="password1" style="display: inline-flex; width: 90%;" onKeyUp="CheckPassStrength($(this).val())" placeholder="Пароль"]
 			   <button style="width: auto;height: 55px;position: absolute;margin: 0 5;" type="button" class="btn btn-secondary btn-icon tip" onclick="generatePassword($(this), $('#password1'), $('#password2'))" data-title="Генерировать">
 					<i class="fa-regular fa-shuffle"></i>
 				</button>
 			   [input type="password" name="password2" placeholder="Повтор пароля"]
-			   <span style="background: #ffffff;padding: 5px;border-radius: 10px; color: black;">Надежность пароля: <b class="shadowText" id="passStrength"></b></span>
-                     <!--			   
+				<span style="background: #ffffff;padding: 5px;border-radius: 10px; color: black;">
+					Надежность пароля: <b class="shadowText" id="passStrength"></b>
+				</span>
+				<div id="passStrengthBarContainer">
+					<div id="passStrengthBar"></div>
+				</div>
+
+			   <!--			   
 			   <div class="input_block">
                   <input name="regCode" class="input" type="text" autocomplete="off" />
                   <label class="label">Код регистрации</label>
@@ -39,39 +64,56 @@
          </div>
      </div>
      <script>
-         async function CheckPassStrength(pass) {
-         	let color, text;
-			
+		async function CheckPassStrength(pass) {
+			let color = '#B20A0A';
+			let text = 'Очень слабый';
+			let width = '10%';
+
 			let passStatus = await foxEngine.sendPostAndGetAnswer({userAction: 'checkPass', password: pass}, "JSON");
-						switch(passStatus.PassStrength){
-							case 1:
-								color = '#B20A0A';
-								text = 'Очень слабый';
-								break;
 
-							case 2:
-								color = '#E67300';
-								text = 'Слабый';
-								break;
+			switch(passStatus.PassStrength){
+				case 1:
+					color = '#B20A0A';
+					text = 'Очень слабый';
+					width = '10%';
+					break;
 
-							case 3:
-								color = '#E6D200';
-								text = 'Простой';
-								break;
+				case 2:
+					color = '#E67300';
+					text = 'Слабый';
+					width = '30%';
+					break;
 
-							case 4:
-								color = '#59B300';
-								text = 'Надежный';
-								break;
+				case 3:
+					color = '#E6D200';
+					text = 'Простой';
+					width = '50%';
+					break;
 
-							case 5:
-								color = '#00C853';
-								text = 'Очень надежный!';
-								break;
-						}
+				case 4:
+					color = '#59B300';
+					text = 'Надежный';
+					width = '75%';
+					break;
 
-         				$("#passStrength").html(`<small style="color: ${color}">${text}</small>`);
-         }
+				case 5:
+					color = '#00C853';
+					text = 'Очень надежный!';
+					width = '100%';
+					break;
+			}
+
+			// Обновляем текст
+			$("#passStrength").html(`<small style="color: ${color}">${text}</small>`);
+
+			// Обновляем прогрессбар
+			let bar = $("#passStrengthBar");
+			bar.css({
+				"width": width,
+				"background-color": color
+			});
+		}
+
 		 
 		    function generatePassword(button, pass1, pass2) {
 				let password = $(pass1);

@@ -1,0 +1,439 @@
+<useroption>
+   { 
+   "optionTitle": "Профиль",
+   "description": "Профиль пользователя",
+   "func": "foxEngine.user.showUserProfile(foxEngine.replaceData.login); return false;",
+   "optionBlock": "#usrMenu",
+   "optionClass": "dropdown-item",
+   "optionPreText": "<i style='color: #736d5f' class='fa fa-user'></i>",
+   "optionGroup": [1,3,4,5],
+   "langPack": "userProfile",
+   "type": "userOption"
+   } 
+</useroption>
+<pageContent>
+   <style>
+      button {
+      width: fit-content;
+      }
+   </style> 
+   <div class="tabs">
+      [hasPriviligies] 
+	  <link rel="stylesheet" type="text/css" href="%assets%/css/skin.css">
+      <div id="edit" style="display: none;">
+         <div class="d-inline-flex m-2">
+		 <button class="login editProfile" style="float: right;" onclick="foxEngine.editUser.toggleEditView()">
+			<img src="/templates/foxengine2/assets/icons/svg/back.svg" />
+		 </button>
+            <h3 class="m-1">%lang|profileOf% [login]</h3>   
+         </div>
+<div class="tabs-box">
+   <ul class="tab_caption">
+      <li class="profileSettings active" value="profile">:gear:%lang|profileSettings%</li>
+      <li class="personalisation">:paintBrush:%lang|personalisation%</li>
+      <li class="security">:shield: %lang|security%</li>
+      <li class="connections">:link:%lang|connections%</li>
+   </ul>
+   <form method="POST" action="/" id="viewUserProfile">
+   <div class="tab_content active">
+      <section class="form-horizontal">
+         <!--  <div class="form-row">
+            <div class="control"> -->
+         [input type="text" name="realname" placeholder="%lang|fullName%" value="[realname]"]
+         <!-- </div>
+            </div> -->
+         [input type="text" name="userStatus" placeholder="%lang|status%" value="[userStatus]"]
+         [input type="text" name="land" placeholder="%lang|land%" value="[land]"]
+         [input type="text" name="email" placeholder="%lang|email%" value="[email]"]
+         <!--
+            <div class="form-row">
+            			
+            			<div class="form-floating mb-3 input_block">
+            			<div class="control">
+            				<textarea name="about" id="about" class="form-control input" ></textarea>
+            				<label for="about">Кто Вы? Чем занимаетесь?</label>
+            			</div>
+            			</div>
+            </div> -->
+         [group=1]
+         <div class="form-floating mb-3 input_block">
+            <div class="option_select">
+               <select class="option_select_text" id="viewEdit" name="gender">
+                  <option value="f" selected>Женский</option>
+                  <option value="m">Мужской</option>
+               </select>
+               <span class="option_select_bar"></span>
+               <label class="option_select_label">Пол</label>	
+            </div>
+         </div>
+         [/group]
+         [group=4,3]
+         <div class="currentPass"> 
+            [input type="password" name="password" placeholder="%lang|currentPass%"]
+         </div>
+         [/group]
+         [group=1]
+         [input type="number" name="user_group" placeholder="%lang|userGroup%" value="[user_group]"] 
+         [/group]
+      </section>
+   </div>
+   <div class="tab_content" id="personalisation">
+      <h4>%lang|loadPhoto%</h4>
+      [input type="upload" id="profilePhoto" name="image" metadata="profilePhoto"]
+      <div class="fields_item">
+         <h3 class="settingsTitle">%lang|colorScheme%</h3>
+         <div class="container">
+            <div id="demo">
+               <input type="text" value="[colorScheme]" />
+            </div>
+            <script>
+               $(function() {
+                 $('#demo').colorpicker({
+               	popover: false,
+               	inline: true,
+               	container: '#demo'
+                 }).on('colorpickerChange', function(event) {
+               	$('#colourVal').val(event.color.toString());
+                 });
+               });
+                
+            </script>
+            <!--
+               <div class="row row-cols-2 row-cols-md-4 g-4" id="profileColors">
+               
+               </div>
+               -->
+         </div>
+      </div>
+      <!-- TO REPLACE --> 
+      <script>
+         (async function () {
+         setTimeout(async () => {
+         	foxEngine.editUser.initialize('[login]');
+         	}, 1000);
+         })();
+         
+         $('.tabs .tab_caption').on('click', 'li:not(.active)', function() {
+         	const index = $(this).index();
+         	foxEngine.editUser.openTab(index);
+         });
+         
+         var skinsFiles;
+         var cloakFiles;
+         
+         $('#skin_file').change(function () {
+         	skinsFiles = this.files;
+         	console.log(skinsFiles);
+         	$("#file_name_skin").text(skinsFiles[0].name);
+         });
+         
+         $('#cloak_file').change(function () {
+         	cloakFiles = this.files;
+         	$("#file_name_cloak").text(cloakFiles[0].name);
+         });
+         
+         $("#load_skin").click(function () {
+         	foxEngine.editUser.uploadFile($(this), 'skin');
+         });
+         
+         $("#load_cloak").click(function () {
+         	foxEngine.editUser.uploadFile($(this), 'cloak');
+         });
+      </script>
+      <div class="basic_function_block">
+         <div class="basic_function_block_title">
+            <h3>Смена скина и плаща</h3>
+         </div>
+         <div class="description">
+            Доступные размеры для скинов: <b>64 x 32</b>, <b>64 x 64</b>, <b>128 x 64</b>, <b>256 x 128</b>, <b>512 x 256</b>, <b>1024 x 512</b>.
+            <br>
+            Доступные размеры для плащей: <b>22 x 17</b>, <b>64 x 32</b>, <b>128 x 64</b>, <b>256 x 128</b>, <b>512 x 256</b>, <b>1024 x 512</b>.
+         </div>
+         <div class="body">
+            <div class="changes_blocks">
+               <div class="change_block">
+                  <img id="skin_image_front" />
+                  <label>
+                     <div class="file_select" title="Нажмите, чтобы выбрать файл">
+                        <span class="file_name" id="file_name_skin">Файл не выбран</span>
+                        <img src="%assets%icons/cabinet_file.png">
+                        <span class="file_select_field">
+                        Выбрать файл
+                        </span>
+                        <input type="file" name="skin_file" id="skin_file">
+                     </div>
+                  </label>
+                  <a href="#" class="green_button" onclick="foxEngine.editUser.uploadFile($(this), 'skin'); return false;">
+                  Загрузить скин
+                  </a>
+                  <a href="#" class="green_button red-button" style="margin-left: 20px !important; width: 104px;" onclick="foxEngine.editUser.deleteFile($(this), 'skin'); return false;">Удалить</a>
+               </div>
+               <div class="change_block">
+                  <img id="skin_image_back" />
+                  <div class="cloak_functions_block">
+                     <label>
+                        <div class="file_select" title="Нажмите, чтобы выбрать файл">
+                           <span class="file_name" id="file_name_cloak">Файл не выбран</span>
+                           <img src="%assets%icons/cabinet_file.png">
+                           <span class="file_select_field">Выбрать файл</span>
+                           <input type="file" name="cloak_file" id="cloak_file">
+                        </div>
+                     </label>
+                     <a href="#" class="green_button" onclick="foxEngine.editUser.uploadFile($(this), 'cloak'); return false;">
+                     Загрузить плащ
+                     </a>
+                     <a href="#" class="green_button red-button" style="margin-left: 14px !important; width: 104px;" onclick="foxEngine.editUser.deleteFile($(this), 'cloak'); return false;">Удалить</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="tab_content">
+      <section class="changePass"> 
+         [input type="password" name="newPass" placeholder="Новый пароль"]
+         [input type="password" name="repeatPass" placeholder="Повтор пароля"]
+      </section>
+   </div>
+
+
+   <div class="tab_content">
+      <section class="connections"> 
+	
+	[group=1]
+	<div class="mb-3">
+			Привязка внешних учётных записей нужна для работы интеграций,
+			а также помогает восстановить доступ к этому аккаунту FoxesCraft в случае утери пароля.
+		</div>
+
+		<div class="connected-account__list">
+			
+			
+			
+										<div class="connected-account connected-account--placeholder" style="--provider-color:#0077FF;">
+						<div class="connected-account__icon">
+							<i class="fa-brands fa-vk"></i>
+						</div>
+						<div class="connected-account__info">
+							<b>ВКонтакте</b><br>
+							<a href="https://redserver.su/settings/oauth/vkontakte">Подключить аккаунт</a>
+						</div>
+					</div>
+													<div class="connected-account connected-account--placeholder" style="--provider-color:#5865F2;">
+						<div class="connected-account__icon">
+							<i class="fa-brands fa-discord"></i>
+						</div>
+						<div class="connected-account__info">
+							<b>Discord</b><br>
+							<a href="https://redserver.su/settings/oauth/discord">Подключить аккаунт</a>
+						</div>
+					</div>
+													<div class="connected-account connected-account--placeholder" style="--provider-color:#282C34;">
+						<div class="connected-account__icon">
+							<i class="fa-brands fa-steam"></i>
+						</div>
+						<div class="connected-account__info">
+							<b>Steam</b><br>
+							<a href="https://redserver.su/settings/oauth/steam">Подключить аккаунт</a>
+						</div>
+					</div>
+			</div>
+	[/group]
+	
+	[not-group=1]
+	<div class="importantText">
+		<b>В разработке!</b><br/>
+		В будущем появится возможность подключать аккаунты других социальных сетей и сервисов, таких как Стим и Дискорд.
+	</div>
+[/not-group]
+      </section>
+   </div>
+   
+   <!-- Tab Section ends here-->
+</div>
+			
+            <input name="user_doaction" type="hidden" value="EditUser" />
+            <input name="login" type="hidden" value="[login]" />
+			<input type="hidden" id="colourVal" name="colorScheme" value="[colorScheme]" />
+            <input name="refreshPage" type="hidden" value="false" />
+            <input name="onSubmit" type="hidden" value="foxEngine.user.showUserProfile('[login]');" /> 
+            [not-group=1]
+            <input name="user_group" class="input" type="hidden" value="[user_group]" />
+            [/not-group]
+            <input name="foxesHash" class="input" type="hidden" value="[hash]" />
+            <button type="submit" class="m-2 login">
+               %lang|submit%
+               <div class="fa fa-cog fa-spin"></div>
+            </button>
+         </form>
+         <div class="d-none" id="photoModal">
+				<h3 style="margin: 0 auto;color: antiquewhite;padding: 15;">
+				</h3>
+				<div class="importantText">
+					Привет, [realname]! :wavehand: <br /> Загрузка фото профиля возможна во вкладке <b class="fakeLink" onclick="foxEngine.editUser.openTab(1); foxEngine.modalApp.closeModalApp();">"Персонализация"</b>
+					<br />
+					<small>Это временная мера, в будущем загрузка фото перейдёт сюда :smirk:</small>
+					<!--
+					<form method="POST" action="/" id="loadPhoto">
+						[input type="upload" id="profilePhoto" name="image" metadata="profilePhoto"]
+						<input name="refreshPage" type="hidden" value="false" />
+						<input name="onSubmit" type="hidden" value="foxEngine.modalApp.closeModalApp();" /> 
+						<input name="user_doaction" type="hidden" value="loadPhoto" />
+						<input name="foxesHash" class="input" type="hidden" value="[hash]" />
+						<button type="submit" class="m-2 login">
+						   %lang|submit%
+						   <div class="fa fa-cog fa-spin"></div>
+						</button>
+					</form> -->
+				</div>
+         </div>
+      </div>
+	  </div>
+      [/hasPriviligies] 
+      <div id="view" style="display: block;">
+         <div id="profileContents"  class="foxesPageHead_special" id="profileHeader">
+            <div class="profileActions"> 
+				<!--[not-login=[login]] 
+				<button class="logout ban" style="float: right;" onclick="">
+				Забанить</button> [/not-login] 
+				[/group] 
+				-->
+				
+				<ul class="foxesButton_split" id="elEditProfile">
+				[hasPriviligies]
+					<li>
+						<b class="fakeLink foxesButton foxesButton_small foxesButton_overlaid" onclick="foxEngine.editUser.toggleEditView()">
+							<i class="fa fa-pencil"></i>&nbsp;<span class="foxesResponsive_hidePhone foxesResponsive_inline">%lang|edit%</span>
+						</b>					
+					</li>
+
+					<li>
+						<b class="fakeLink foxesButton foxesButton_small foxesButton_overlaid" onclick="$($(this)).notify('В разработке!', 'warn');">
+							<i class="fa-light fa-image"></i>&nbsp;<span class="foxesResponsive_hidePhone foxesResponsive_inline">&nbsp;&nbsp;Обложка <i class="fa fa-caret-down"></i></span>
+						</b>					
+					</li>
+					
+				[/hasPriviligies]
+					
+				</ul>
+			</div>
+			<ul class="foxesColumns foxesColumns_collapsePhone">
+				<li class="foxesColumn foxesColumn_fixed foxesColumn_narrow foxesPos_center" id="profilePhoto">
+					<span class="foxesUserPhoto foxesUserPhoto_xlarge">
+						<div class="avatar-wrapper">
+							<div class="avatar-image-inner">
+								<img src="[profilePhoto]" class="avatar-image" loading="lazy" style="opacity: 1; position: relative;" />
+							</div>
+							[hasPriviligies]
+							<button type="button" onclick="loadPhoto()" data-marker="edit-avatar-btn" class="avatar-edit-button">
+								<div class="avatar-edit-button-content">
+									<svg viewBox="0 0 18 18" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+										<path d="M6.75 4.99985C6.75 5.96635 5.9665 6.74985 5 6.74985C4.0335 6.74985 3.25 5.96635 3.25 4.99985C3.25 4.03335 4.0335 3.24985 5 3.24985C5.9665 3.24985 6.75 4.03335 6.75 4.99985Z" fill="currentColor"></path>
+										<path
+											fill-rule="evenodd"
+											clip-rule="evenodd"
+											d="M4 0.249847C1.92893 0.249847 0.25 1.92878 0.25 3.99985V11.9998C0.25 14.0709 1.92893 15.7498 4 15.7498H8.47979C8.17149 15.063 8 14.3015 8 13.4998C8 10.4623 10.4624 7.99985 13.5 7.99985C14.3016 7.99985 15.0632 8.17134 15.75 8.47964V3.99985C15.75 1.92878 14.0711 0.249847 12 0.249847H4ZM1.75 3.99985C1.75 2.75721 2.75736 1.74985 4 1.74985H12C13.2426 1.74985 14.25 2.75721 14.25 3.99985V8.0311L11.9584 6.59884C11.391 6.24421 10.6573 6.30828 10.1599 6.7559L6.46256 10.0835C6.17937 10.3384 5.77595 10.4102 5.4222 10.2687L4.31158 9.82448C3.81 9.62385 3.23928 9.70842 2.81745 10.0459L1.75 10.8998V3.99985Z"
+											fill="currentColor"
+										></path>
+										<path
+											fill-rule="evenodd"
+											clip-rule="evenodd"
+											d="M9.5 13.4998C9.5 11.2907 11.2909 9.49985 13.5 9.49985C15.7091 9.49985 17.5 11.2907 17.5 13.4998C17.5 15.709 15.7091 17.4998 13.5 17.4998C11.2909 17.4998 9.5 15.709 9.5 13.4998ZM13.5 10.9998C13.9142 10.9998 14.25 11.3356 14.25 11.7498V12.7498H15.25C15.6642 12.7498 16 13.0856 16 13.4998C16 13.9141 15.6642 14.2498 15.25 14.2498H14.25V15.2498C14.25 15.6641 13.9142 15.9998 13.5 15.9998C13.0858 15.9998 12.75 15.6641 12.75 15.2498V14.2498H11.75C11.3358 14.2498 11 13.9141 11 13.4998C11 13.0856 11.3358 12.7498 11.75 12.7498H12.75V11.7498C12.75 11.3356 13.0858 10.9998 13.5 10.9998Z"
+											fill="currentColor"
+										></path>
+									</svg>
+								</div>
+								<script>
+									async function loadPhoto(){
+										foxEngine.modalApp.showModalApp(700, "Загрузка фото [login]:", $("#photoModal").html(), () => {});
+									}
+								</script>
+								[/hasPriviligies]
+							</button>
+						</div>
+					</span>
+				</li>
+
+				<li class="foxesColumn foxesColumn_fluid">
+					<div class="foxesPos_left foxesPad cProfileHeader_name foxesType_normal">
+						 <h1 class="foxesPageHead_barText groupStatus-[user_group]">[login]</h1>
+						<span>
+							<span class="foxesPageHead_barText"><b><span style="color:#80d672">[groupName]</span></b></span>
+						</span>
+					</div>				
+				</li>
+			</ul>
+			
+			<div id="profileStats" class="foxesClearfix sm:foxesPadding foxesResponsive_pull">
+				<ul class="foxReset foxesFlex foxesFlex-ai:center foxesFlex-fw:no-wrap">
+				
+					<li>
+					<span class="userStatus groupStatus-[user_group]">[userStatus]</span>
+					</li>
+					<li>
+						<h4 class="foxes_minorHeading">Регистрация</h4>
+						<time>[reg_date]</time>
+					</li>
+					
+					<li>
+						<h4 class="foxes_minorHeading">Посещение</h4>
+						<span>
+							<time>[last_date]</time>
+						</span>
+					</li>
+					
+					<li class="d-lg-block d-none">
+						<ul class="profileBadges container-1gYwHN" id="userBadges">
+						</ul>
+					</li>
+				</ul>
+			</div>
+
+			<div class="userinfo">
+				<div class="pageItem">
+					<div class="itemTitle"><i class="fa-thin fa-address-card"></i> %lang|fullName%</div>
+					<div class="itemDetail">
+						<span style="color: #f1864e;">[realname]</span>
+					</div>
+				</div>
+
+				<div class="pageItem">
+					<div class="itemTitle"><i class="fa-thin fa-location-dot"></i> %lang|land%</div>
+					<div class="itemDetail">
+						<span style="color: #f1864e;">[land]</span>
+					</div>
+				</div>
+
+				[hasPriviligies]
+				<div class="pageItem">
+					<div class="itemTitle"><i class="fa-thin fa-envelope"></i> %lang|email%</div>
+					<div class="itemDetail">
+						<span style="color: #f1864e;">[email]</span>
+					</div>
+				</div>
+
+				<div class="pageItem">
+					<div class="itemTitle"><img src="%assets%/icons/units.png" alt="Units Icon" style="height: 24px;width: 24px;" uk-img /> %lang|units%</div>
+					<div class="itemDetail" id="[login]units">0</div>
+				</div>
+
+				<div class="pageItem">
+					<div class="itemTitle"><img src="%assets%/icons/crystals.png" alt="Crystals Icon" style="height: 24px;width: 24px;" uk-img /> %lang|crystals%</div>
+					<div class="itemDetail" id="[login]crystals">0</div>
+				</div>
+				<script>
+					let balance = [balance];
+					for (const item of balance) {
+						for (const [key, value] of Object.entries(item)) {
+							$("#[login]"+key).html(value);
+						}
+					}
+				</script>
+				[/hasPriviligies]
+				
+				
+			</div>
+		<div class="playtime-widget-container"></div>
+      </div>
+   </div>
+</pageContent>

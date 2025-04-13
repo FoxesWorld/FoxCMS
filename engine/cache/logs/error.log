@@ -1,0 +1,16 @@
+2025/04/12 22:41:44 [error] 1043973#1043973: *47151 directory index of "/var/www/FoxCMS/.git/" is forbidden, client: 209.38.85.189, server: foxescraft.ru, request: "GET /.git/ HTTP/1.1", host: "109.173.96.129"
+2025/04/12 23:03:33 [crit] 1043983#1043983: *47324 SSL_read() failed (SSL: error:0A0001BB:SSL routines::bad record type) while waiting for request, client: 8.220.202.246, server: 0.0.0.0:443
+2025/04/13 03:47:14 [crit] 1067279#1067279: *50327 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 162.243.161.162, server: 0.0.0.0:443
+2025/04/13 03:55:57 [crit] 1067278#1067278: *50347 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 143.198.131.74, server: 0.0.0.0:443
+2025/04/13 04:05:15 [crit] 1067283#1067283: *50363 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 192.34.59.192, server: 0.0.0.0:443
+2025/04/13 09:06:16 [crit] 1073009#1073009: *54296 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 152.32.143.6, server: 0.0.0.0:443
+2025/04/13 09:51:36 [error] 1073005#1073005: *56730 FastCGI sent in stderr: "PHP message: PHP Notice:  Undefined variable: pdo in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 65PHP message: PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php:65
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#2 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#3 /var/www/FoxCMS/engine/init.php(89): ModulesLoader->modulesInc()
+#4 /var/www/FoxCMS/engine/init.php(42): init->postInit()
+#5 /var/www/FoxCMS/index.php(8): init->__construct()
+#6 {main}
+  thrown in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 65" while reading response header from upstream, client: 109.252.8.60, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"

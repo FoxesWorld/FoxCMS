@@ -13,6 +13,70 @@ class AdminOptions extends AdminPanel {
                     	$editServer = new EditServer($db);
 						$editServer->updateServer(RequestHandler::$REQUEST);
                     break;
+					
+				case "addServer":
+					try {
+						// Список полей, которые нужно добавить в БД
+						$allowedFields = [
+							"serverName", "host", "port", "ignoreDirs", "enabled", "checkLib",
+							"serverGroups", "serverDescription", "serverVersion", "jreVersion", "serverImage"
+						];
+
+						// Оставляем только нужные поля
+						$serverData = array_intersect_key($REQUEST, array_flip($allowedFields));
+
+						// Проверка обязательных полей
+						if (empty($serverData['serverName'])) {
+							throw new Exception("Имя сервера обязательно для заполнения");
+						}
+
+						// Приведение типов: для 'enabled' и 'checkLib' - строки 'true' или 'false'
+						$serverData['enabled'] = ($serverData['enabled'] === 'true') ? 'true' : 'false';
+						$serverData['checkLib'] = ($serverData['checkLib'] === 'true') ? 'true' : 'false';
+
+						// Если какие-то поля отсутствуют, заполняем их значениями по умолчанию
+						foreach ($allowedFields as $field) {
+							if (!isset($serverData[$field])) {
+								// Например, если поле не передано, ставим NULL или значение по умолчанию для текстовых данных
+								$serverData[$field] = null; 
+							}
+						}
+
+						// Подготовка SQL
+						$sql = "INSERT INTO servers (
+									serverName, host, port, ignoreDirs, enabled, checkLib,
+									serverGroups, serverDescription, serverVersion, jreVersion, serverImage
+								) VALUES (
+									:serverName, :host, :port, :ignoreDirs, :enabled, :checkLib,
+									:serverGroups, :serverDescription, :serverVersion, :jreVersion, :serverImage
+								)
+								ON DUPLICATE KEY UPDATE
+									host = VALUES(host),
+									port = VALUES(port),
+									ignoreDirs = VALUES(ignoreDirs),
+									enabled = VALUES(enabled),
+									checkLib = VALUES(checkLib),
+									serverGroups = VALUES(serverGroups),
+									serverDescription = VALUES(serverDescription),
+									serverVersion = VALUES(serverVersion),
+									jreVersion = VALUES(jreVersion),
+									serverImage = VALUES(serverImage)";
+
+						$stmt = $db->prepare($sql);
+						$stmt->execute($serverData);
+
+						die(json_encode([
+							"type" => "success",
+							"message" => "Сервер успешно добавлен или обновлён"
+						]));
+					} catch (Exception $e) {
+						die(json_encode([
+							"type" => "error",
+							"message" => "Ошибка при добавлении сервера: " . $e->getMessage()
+						]));
+					}
+					break;
+
 
                 case "editUserBadges":
                     $this->updateUserField($db, 'badges', $REQUEST);
@@ -28,7 +92,6 @@ class AdminOptions extends AdminPanel {
 					$i = 1;
 
 					try {
-
 						foreach ($permArray as $permission) {
 							$groupName = $permission['groupName'];
 							$permName = $permission['permName'];
@@ -166,8 +229,8 @@ class AdminOptions extends AdminPanel {
 
     // Удаление сервера
     private function deleteServer($db, $REQUEST) {
-        $serverName = @$REQUEST['serverName'];
-        $query = "DELETE FROM `servers` WHERE serverName = '".$serverName."'";
+        $serverName = @$REQUEST['serverId'];
+        $query = "DELETE FROM `servers` WHERE id = '".$serverName."'";
         $data = $db->run($query);
         if($data) {
             die('{"message": "Server '.$serverName.' removed!", "type": "success"}');

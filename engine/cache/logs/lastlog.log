@@ -1,0 +1,21 @@
+[12.04.2025] (15:33:32) Updater 109.252.8.60 with version '2.5.6-Elunium' requests an update information
+[12.04.2025] (15:33:32) CPU ID BFEBFBFF000406F1 already exists in the database.
+[12.04.2025] (15:33:55) Calista successfully authorized from 109.252.8.60
+[12.04.2025] (15:34:50) 109.252.8.60 requests 'Prodigium 1.20.1-Forge' files
+[12.04.2025] (15:36:45) **JoinServer constructor called**
+[12.04.2025] (15:36:45) [INFO] Data accessToken 88ed75c65205681764c590fc8af9a077 is valid!
+[12.04.2025] (15:36:45) [INFO] Data selectedProfile ac4bfbd258c56a10a4ea9b27b5056a3c is valid!
+[12.04.2025] (15:36:45) [INFO] Data serverId -44fa21394af3bfa24d5c40f1287a324d06229032 is valid!
+[12.04.2025] (15:36:45) [INFO] Database connection established
+[12.04.2025] (15:36:45) [INFO] Validating session for userMd5: <b>ac4bfbd258c56a10a4ea9b27b5056a3c</b>
+[12.04.2025] (15:36:45) [INFO] Session validated successfully
+[12.04.2025] (15:36:45) [INFO] Updating session for userMd5: <b>ac4bfbd258c56a10a4ea9b27b5056a3c</b>
+[12.04.2025] (15:36:45) [INFO] Начата обработка для пользователя: Calista
+[12.04.2025] (15:36:45) [INFO] Найден пользователь: Calista (UUID: ac4bfbd258c56a10a4ea9b27b5056a3c)
+[12.04.2025] (15:36:45) [INFO] Проверка пользователя: Calista
+[12.04.2025] (15:36:45) [DEBUG] user -> **Calista**  realUser -> **Calista**
+[12.04.2025] (15:36:45) [INFO] Установлен текстурный файл (SKIN): 
+[12.04.2025] (15:36:45) [INFO] Установлен текстурный файл (CAPE): 
+[12.04.2025] (18:23:44) Calista successfully authorized from 109.252.8.60
+[13.04.2025] (10:21:15) Updater 109.252.8.60 with version '2.5.6-Elunium' requests an update information
+[13.04.2025] (10:21:15) CPU ID BFEBFBFF000406F1 already exists in the database.

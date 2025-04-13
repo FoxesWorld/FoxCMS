@@ -340,7 +340,6 @@ body {
 #content {
 	height: fit-content;
 	margin: 10px;
-	padding: 0 0 45px;
 }
 
 @media (max-width: 991px) {

@@ -27,7 +27,6 @@ class AdminPanel {
 		
 	}
 	
-	
 	setAdmOption(option) {
         $(".admOpt-" + option).addClass("active");
         if (option != this.selectoption.thisAdmoption) {
@@ -83,6 +82,8 @@ class AdminPanel {
 			"serverRow": "/templates/" + replaceData['template'] + "/foxEngine/admin/servers/serverRow.tpl",
 			"serversTable": "/templates/" + replaceData['template'] + "/foxEngine/admin/servers/serversTable.tpl",
 			"noServers": "/templates/" + replaceData['template'] + "/foxEngine/admin/servers/noServers.tpl",
+			"serverEndForm": "/templates/" + replaceData['template'] + "/foxEngine/admin/servers/editServerEnd.tpl",
+			"addServerEndForm": "/templates/" + replaceData['template'] + "/foxEngine/admin/servers/addServerEnd.tpl",
 			"permRow": "/templates/" + replaceData['template'] + "/foxEngine/admin/permissions/permRow.tpl",
 			"permTable": "/templates/" + replaceData['template'] + "/foxEngine/admin/permissions/permTable.tpl"
 		}

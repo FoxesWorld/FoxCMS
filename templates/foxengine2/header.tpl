@@ -27,14 +27,35 @@
                     </li>
                     {/if}
 
-                    {if $user_group == 1}
-                    {/if}
+
                 </ul>
             </div>
         </div>
 
         <!-- Userfields -->
         <div class="navbar-right">
+
+		{if $user_group == 1}
+		<ul class="inline">
+			<li>		
+			<a class="regular-btn regular-btn-icon dropdown-toggle" title="Сообщения" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+				<i class="fa-solid fa-envelope"></i>
+				<span data-element="notificationsCounter" class="unread-counter d-none">0</span>
+			</a>
+			</li>
+			
+			<li class="nav-sep"></li>
+
+			<li>
+			<a href="https://redserver.su/notifications" class="regular-btn regular-btn-icon dropdown-toggle" title="Уведомления" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+				<i class="fa-solid fa-bell"></i>
+				<span data-element="notificationsCounter" class="unread-counter d-none">0</span>
+			</a>
+			</li>
+		</ul>
+		{/if}
+			
+        </div>
             <ul class="userBlock">
                 <!-- LOGGED USER -->
                 {if $user_group != 5}
@@ -63,6 +84,5 @@
 					</script>
                 {/if}
             </ul>
-        </div>
     </div>
 </header>

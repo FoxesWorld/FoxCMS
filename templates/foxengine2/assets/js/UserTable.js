@@ -127,18 +127,28 @@ class UserTable {
     }
 
     async createUserRow(user, rank) {
-        // Если выбран конкретный сервер и пользователь не играет на нём – пропускаем его
+		let base64Image = await this.fetchPlayerHeadImage(user.login);
+		if (!base64Image.startsWith('data:image')) {
+			base64Image = `data:image/png;base64,${base64Image}`;
+		}
+		const userPic = new Image();
+		new Promise((resolve, reject) => {
+			userPic.onload = () => resolve(userPic);
+			userPic.onerror = (err) => reject(new Error("Ошибка загрузки изображения: " + err));
+			userPic.src = base64Image;
+		});
+		//const dominantColor = await foxEngine.user._getDominantColor(userPic, 24, 128);
+		//Looks horrible 0_0
         const servers = this.parseServersOnline(user.serversOnline);
         if (this.selectedServer !== 'all' && !servers.some(server => server.serverName === this.selectedServer)) {
             return null;
         }
 
         const row = document.createElement('tr');
-        row.style.background = `linear-gradient(45deg, #c5c5e19c, ${user.colorScheme})`;
+        row.style.background = `linear-gradient(45deg, #ffffffcc, ${user.colorScheme})`;
 
         row.appendChild(this.createRankCell(rank));
         row.appendChild(await this.createPlayerCell(user));
-        // Заменяем простое текстовое отображение общей игры на ячейку с полосой
         row.appendChild(this.createPlaytimeCell(user));
         row.appendChild(this.createLastSessionCell(user));
         row.appendChild(this.createLastLoginCell(user));

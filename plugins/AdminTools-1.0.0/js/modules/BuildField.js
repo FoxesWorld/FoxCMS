@@ -1,21 +1,22 @@
 /**
  * @fileoverview BuildField class for FoxesCraft
  * 
- * This file contains the BuildField class, which is responsible for creating input fields dynamically based on configuration data.
- * It provides methods for creating various types of input fields such as text inputs, number inputs, dropdowns, checkboxes, textareas, and tag inputs.
+ * Этот класс создаёт динамические поля ввода на основе переданных данных конфигурации.
+ * Поддерживаются поля: текст, число, выпадающий список, чекбокс, textarea, tagify и date-picker.
  * 
- * Authors: AidenFox
- * Date: [07.01.25]
- * Version: 2.0.0
+ * Авторы: AidenFox
+ * Дата: [13.04.25]
+ * Версия: 2.2.0
  */
 export class BuildField {
     constructor(classInstance, options = {}) {
         this.classInstance = classInstance;
         this.inputFields = classInstance.formFields || [];
         this.initAwait = options.initAwait || 600;
-
+        
+        // Базовые обработчики для создания полей ввода
         this.defaultHandlers = {
-			label: this.createLabel.bind(this),
+            label: this.createLabel.bind(this),
             text: this.createTextInput.bind(this),
             number: this.createNumberInput.bind(this),
             dropdown: this.createDropdown.bind(this),
@@ -24,10 +25,57 @@ export class BuildField {
             tagify: this.createTagifyInput.bind(this),
             date: this.createDatePickerInput.bind(this),
         };
-
+        // Позволяет переопределять или добавлять обработчики
         this.handlers = { ...this.defaultHandlers, ...(options.customHandlers || {}) };
+
+        // Для обеспечения единоразовой инициализации каждого поля
+        // используется встроенная проверка через data-атрибуты в DOM элементах.
     }
 
+    /**
+     * Унифицированный метод для создания блока с плавающей меткой.
+     * Использует постоянный id для полей, где это необходимо.
+     * @param {string} fieldName - имя поля.
+     * @param {string} value - значение.
+     * @param {string} type - тип инпута.
+     * @param {string} [id=fieldName] - идентификатор элемента.
+     * @returns {string} HTML-код блока.
+     */
+    _createFloatingInput(fieldName, value, type = 'text', id = fieldName) {
+        return `
+            <div class="form-floating mb-3">
+                <input type="${type}" class="form-control" name="${fieldName}" id="${id}" placeholder="%lang|${fieldName}%" value="${value}">
+                <label for="${id}">${fieldName}</label>
+            </div>`;
+    }
+
+    /**
+     * Унифицированный метод для отложенного выполнения.
+     * @param {function} callback - функция, которую следует выполнить.
+     * @param {number} [delay=this.initAwait] - задержка в мс.
+     */
+    _runAfterDelay(callback, delay = this.initAwait) {
+        setTimeout(callback, delay);
+    }
+
+    /**
+     * Выполнить инициализацию элемента только один раз.
+     * @param {string} key - уникальный ключ для данного инициализатора (например, id элемента).
+     * @param {HTMLElement} el - DOM-элемент, который инициализируется.
+     * @param {function} initFn - функция инициализации.
+     */
+    _initializeOnce(key, el, initFn) {
+        if (el && !el.dataset.initializedFor) {
+            initFn();
+            el.dataset.initializedFor = key;
+        }
+    }
+
+    /**
+     * Создание HTML-структуры формы для каждой строки данных.
+     * @param {Array} data - массив объектов с данными.
+     * @returns {Promise<string>} HTML строк таблицы.
+     */
     async buildFormFields(data) {
         const rows = await Promise.all(data.map(async (rowData) => {
             let rowHtml = '<tr>';
@@ -41,16 +89,30 @@ export class BuildField {
         }));
         return rows.join('');
     }
-	
-	async buildTable(fields, data, rowTemplate) {
-    const rows = await Promise.all(data.map(async (rowData, index) => {
-        const rowHtml = await this.renderRow(fields, { ...rowData, index }, rowTemplate);
-        return `<tr>${rowHtml}</tr>`;
-    }));
-    return rows.join("");
-}
+    
+    /**
+     * Построение таблицы с формами на основании шаблона.
+     * @param {Array} fields - массив определений полей.
+     * @param {Array} data - данные для таблицы.
+     * @param {string} rowTemplate - шаблон строки.
+     * @returns {Promise<string>} HTML таблицы.
+     */
+    async buildTable(fields, data, rowTemplate) {
+        const rows = await Promise.all(data.map(async (rowData, index) => {
+            const rowHtml = await this.renderRow(fields, { ...rowData, index }, rowTemplate);
+            return `<tr>${rowHtml}</tr>`;
+        }));
+        return rows.join("");
+    }
 
-
+    /**
+     * Создание блока ввода посредством вызова соответствующего обработчика.
+     * @param {string} fieldName 
+     * @param {string} value 
+     * @param {string} fieldType 
+     * @param {Array} [optionsArray] 
+     * @returns {string} HTML-код блока ввода.
+     */
     async createInputBlock(fieldName, value, fieldType, optionsArray) {
         const handler = this.handlers[fieldType];
         if (handler) {
@@ -60,104 +122,164 @@ export class BuildField {
             return '';
         }
     }
-	
-	createLabel(fieldName, value) {
-		return `<b>${value}`;
-	}
+    
+    /**
+     * Создание простой метки.
+     * @param {string} fieldName 
+     * @param {string} value 
+     * @returns {string}
+     */
+    createLabel(fieldName, value) {
+        return `<b>${value}</b>`;
+    }
 
     createTextInput(fieldName, value) {
-        return `
-            <div class="input_block">
-                <label class="label" for="${fieldName}">${fieldName}:</label>
-                <input type="text" name="${fieldName}" class="input" value="${value}" />
-            </div>`;
+        return this._createFloatingInput(fieldName, value, 'text');
     }
 
     createNumberInput(fieldName, value) {
-        return `
-            <div class="input_block">
-                <label class="label" for="${fieldName}">${fieldName}:</label>
-                <input type="number" name="${fieldName}" class="input" value="${value}" />
-            </div>`;
+        return this._createFloatingInput(fieldName, value, 'number');
     }
 
+    /**
+     * Создание выпадающего списка.
+     * @param {string} fieldName 
+     * @param {string} value 
+     * @param {Array} optionsArray 
+     * @returns {string}
+     */
     createDropdown(fieldName, value, optionsArray = []) {
-        const options = optionsArray
-            .map(option => `<option value="${option}" ${option === value ? 'selected' : ''}>${option}</option>`)
-            .join('');
+        const options = optionsArray.map(option =>
+            `<option value="${option}" ${option === value ? 'selected' : ''}>${option}</option>`
+        ).join('');
         return `
-            <div class="input_block">
-                <label class="label" for="${fieldName}">${fieldName}:</label>
-                <select name="${fieldName}" class="input">${options}</select>
+            <div class="form-floating mb-3">
+                <select id="${fieldName}" name="${fieldName}" class="form-select">
+                    ${options}
+                </select>
+                <label for="${fieldName}">${fieldName}</label>
             </div>`;
     }
 
+    /**
+     * Создание чекбокса с отложенной инициализацией Switchery.
+     * Используется постоянный id, равный fieldName.
+     * @param {string} key 
+     * @param {string} value 
+     * @returns {string}
+     */
     createCheckboxInput(key, value) {
         const isChecked = value === "true" ? 'checked' : '';
-        const inputBlock = `
-            <div class="input_block">
-                <input type="checkbox" id="${key}" name="${key}" class="input ${key}-checkbox" ${isChecked} />
-                <label class="label" for="${key}">${key}:</label>
-            </div>`;
-
-        setTimeout(() => {
-            new Switchery(document.querySelector("." + key + "-checkbox"));
-        }, this.initAwait);
-
-        return inputBlock;
-    }
-
-    createTextareaInput(fieldName, value) {
-        const textareaId = `${fieldName}_textarea`;
-        return `
-            <div class="input_block">
-                <label class="label d-none" for="${textareaId}">${fieldName}:</label>
-                <textarea id="${textareaId}" name="${fieldName}" class="d-none">${value}</textarea>
-            </div>`;
-    }
-
-    createTagifyInput(fieldName, value) {
-        const uniqueId = `${fieldName}_${Math.random().toString(36).substr(2, 9)}`;
-        const inputBlock = `
-            <div class="input_block">
-                <label class="label" for="${uniqueId}">${fieldName}:</label>
-                <input type="text" id="${uniqueId}" name="${fieldName}" class="input" value="${value}">
-            </div>`;
-        setTimeout(() => {
-            const input = document.getElementById(uniqueId);
-            new Tagify(input, {
-                originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(','),
-                delimiters: ',',
-            });
-        }, this.initAwait);
-        return inputBlock;
-    }
-
-    createDatePickerInput(fieldName, value) {
-        const uniqueId = `${fieldName}_${Math.random().toString(36).substr(2, 9)}`;
-        const unixInputId = `${uniqueId}_unix`;
+        const id = key; // используем key как постоянный id
         const html = `
-            <div class="input_block">
-                <label class="label" for="${uniqueId}">${fieldName}:</label>
-                <input type="hidden" name="${fieldName}" id="${unixInputId}" value="${value}" />
-                <input type="text" class="input" id="${uniqueId}" readonly />
+            <div class="form-floating mb-3">
+                <input type="checkbox" id="${id}" class="form-control ${id}-checkbox" name="${key}" ${isChecked} />
+                <label for="${id}">${key}</label>
             </div>`;
-        setTimeout(() => {
-            const dateValue = new Date(parseInt(value, 10)) || new Date();
-            flatpickr(`#${uniqueId}`, {
-                enableTime: true,
-                dateFormat: 'd.m.Y H:i',
-                defaultDate: dateValue,
-                onChange: (selectedDates) => {
-                    if (selectedDates.length > 0) {
-                        document.getElementById(unixInputId).value = selectedDates[0].getTime();
-                    }
-                }
+        this._runAfterDelay(() => {
+            const el = document.getElementById(id);
+            this._initializeOnce(`${id}_switchery`, el, () => {
+                new Switchery(el);
             });
-        }, this.initAwait);
+        });
         return html;
     }
 
+    /**
+     * Создание текстовой области с использованием CodeMirror.
+     * Для textarea используется id в виде fieldName + '_textarea'
+     * @param {string} fieldName 
+     * @param {string} value 
+     * @returns {string}
+     */
+    createTextareaInput(fieldName, value) {
+        const textareaId = `${fieldName}_textarea`;
+        this._runAfterDelay(() => {
+            const textarea = document.getElementById(textareaId);
+            this._initializeOnce(`${textareaId}_cm`, textarea, () => {
+                const editor = CodeMirror.fromTextArea(textarea, {
+                    mode: "htmlmixed",
+                    lineNumbers: false,
+                    theme: "default",
+                    viewportMargin: Infinity,
+                    lineWrapping: true
+                });
+                editor.setSize("100%", "auto");
+                window.addEventListener('resize', () => editor.setSize("100%", "auto"));
+                editor.refresh();
+                editor.getWrapperElement().classList.add("codeHtml", "mb-3");
+            });
+        });
+        return `
+            <div class="mb-3">
+                <label for="${textareaId}" class="form-label">${fieldName}</label>
+                <textarea id="${textareaId}" name="${fieldName}" class="form-control d-none">${value}</textarea>
+            </div>`;
+    }
+
+    /**
+     * Создание поля ввода с Tagify.
+     * Для каждого поля tagify используется постоянный id: fieldName + '_tagify'
+     * @param {string} fieldName 
+     * @param {string} value 
+     * @returns {string}
+     */
+    createTagifyInput(fieldName, value) {
+        const id = `${fieldName}_tagify`;
+        this._runAfterDelay(() => {
+            const input = document.getElementById(id);
+            this._initializeOnce(`${id}_tagify`, input, () => {
+                new Tagify(input, {
+                    originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(','),
+                    delimiters: ','
+                });
+            });
+        });
+        return this._createFloatingInput(fieldName, value, 'text', id);
+    }
+
+    /**
+     * Создание поля выбора даты с использованием flatpickr.
+     * Для каждого date-picker используется постоянный id: fieldName + '_date'
+     * @param {string} fieldName 
+     * @param {string} value 
+     * @returns {string}
+     */
+    createDatePickerInput(fieldName, value) {
+        const id = `${fieldName}_date`;
+        const unixInputId = `${id}_unix`;
+        const html = `
+            <div class="input_block">
+                <label class="label" for="${id}">${fieldName}:</label>
+                <input type="hidden" name="${fieldName}" id="${unixInputId}" value="${value}" />
+                <input type="text" class="input" id="${id}" readonly />
+            </div>`;
+        this._runAfterDelay(() => {
+            const input = document.getElementById(id);
+            this._initializeOnce(`${id}_flatpickr`, input, () => {
+                const dateValue = new Date(parseInt(value, 10)) || new Date();
+                flatpickr(input, {
+                    enableTime: true,
+                    dateFormat: 'd.m.Y H:i',
+                    defaultDate: dateValue,
+                    onChange: (selectedDates) => {
+                        if (selectedDates.length > 0) {
+                            document.getElementById(unixInputId).value = selectedDates[0].getTime();
+                        }
+                    }
+                });
+            });
+        });
+        return html;
+    }
+
+    /**
+     * Генерация строки таблицы с полями, заменяя плейсхолдеры в шаблоне.
+     * @param {Array} fields - массив определений полей.
+     * @param {Object} rowData - данные строки.
+     * @param {string} template - шаблон строки.
+     * @returns {Promise<string>} HTML строки.
+     */
     async renderRow(fields, rowData, template) {
         const replacements = {};
         for (const field of fields) {
@@ -168,6 +290,12 @@ export class BuildField {
         return foxEngine.replaceTextInTemplate(template, replacements);
     }
 
+    /**
+     * Валидация данных формы на основе правил валидации каждого поля.
+     * @param {Array} fields - массив определений полей.
+     * @param {Object} data - данные формы.
+     * @returns {Array} массив сообщений об ошибках.
+     */
     validateForm(fields, data) {
         const errors = [];
         fields.forEach(field => {

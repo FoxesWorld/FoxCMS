@@ -52,7 +52,6 @@
     </div>
 </div>
 
-
 <script>
 const logsContainer = document.getElementById('logs');
 const toggleLoggingButton = document.getElementById('toggleLogging');
@@ -135,7 +134,7 @@ function animateLogs() {
 
 (async function() {
     const admOptions = ["settings", "users",  "servers", "permissions"]; //"pages", "modules", "groupAssoc", "templateEditor"
-    const blockTpl = await foxEngine.loadTemplate(foxEngine.elementsDir + 'admin/panel.tpl', false);
+    const blockTpl = foxEngine.templateCache["adminPanel"];
     admOptions.forEach(async (option, index) => {
         let panelBlock = await foxEngine.replaceTextInTemplate(blockTpl, {
             option: option
@@ -143,7 +142,7 @@ function animateLogs() {
         $("#admOptions").append(await foxEngine.entryReplacer.replaceText(panelBlock));
         
         if ((index + 1) % 2 === 0 || index === admOptions.length - 1) {
-            //$("#admOptions").append('<div class="w-100"></div>');
+           //$("#admOptions").append('<div class="w-100"></div>');
         }
     });
 	await selectUsers();
@@ -169,10 +168,8 @@ async function selectUsers(){
 	  }
 	  totalUsers++;
 	});
-	//usersInfo.push({loginCount: countRecentLogins});
 	$("#totalUsers").html(totalUsers);
-	$("#loginCount").html(countRecentLogins);
-	//usersInfo.push({totalUsers: totalUsers});
+	$("#loginCount").html(countRecentLogins);;
 	return usersInfo;
 }
 
