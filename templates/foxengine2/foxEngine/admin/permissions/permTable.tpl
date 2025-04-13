@@ -1,3 +1,8 @@
+<div class="alert alert-warning" role="alert">
+ Deprecated! 
+</div>
+
+
 <div class="card-body px-0" id="perms">
                <div class="table-responsive">
 			   <form id="permissionsForm" method="POST" action="/" autocomplete="false">

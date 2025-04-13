@@ -224,8 +224,8 @@ export class BuildField {
      * @param {string} value 
      * @returns {string}
      */
-    createTagifyInput(fieldName, value) {
-        const id = `${fieldName}_tagify`;
+    createTagifyInput(fieldName, value, uniqueSuffix = Math.random().toString(36).substring(2, 8)) {
+        const id = `${fieldName}_tagify_${uniqueSuffix}`;
         this._runAfterDelay(() => {
             const input = document.getElementById(id);
             this._initializeOnce(`${id}_tagify`, input, () => {
@@ -238,40 +238,44 @@ export class BuildField {
         return this._createFloatingInput(fieldName, value, 'text', id);
     }
 
-    /**
-     * Создание поля выбора даты с использованием flatpickr.
-     * Для каждого date-picker используется постоянный id: fieldName + '_date'
-     * @param {string} fieldName 
-     * @param {string} value 
-     * @returns {string}
-     */
-    createDatePickerInput(fieldName, value) {
-        const id = `${fieldName}_date`;
-        const unixInputId = `${id}_unix`;
-        const html = `
-            <div class="input_block">
-                <label class="label" for="${id}">${fieldName}:</label>
-                <input type="hidden" name="${fieldName}" id="${unixInputId}" value="${value}" />
-                <input type="text" class="input" id="${id}" readonly />
-            </div>`;
-        this._runAfterDelay(() => {
-            const input = document.getElementById(id);
-            this._initializeOnce(`${id}_flatpickr`, input, () => {
-                const dateValue = new Date(parseInt(value, 10)) || new Date();
-                flatpickr(input, {
-                    enableTime: true,
-                    dateFormat: 'd.m.Y H:i',
-                    defaultDate: dateValue,
-                    onChange: (selectedDates) => {
-                        if (selectedDates.length > 0) {
-                            document.getElementById(unixInputId).value = selectedDates[0].getTime();
-                        }
-                    }
-                });
-            });
-        });
-        return html;
-    }
+/**
+ * Создание поля выбора даты с использованием flatpickr.
+ * Для каждого date-picker используется уникальный id.
+ * @param {string} fieldName 
+ * @param {string} value 
+ * @param {number|string} [uniqueSuffix] - Уникальный суффикс для id
+ * @returns {string}
+ */
+createDatePickerInput(fieldName, value, uniqueSuffix = Math.random().toString(36).substring(2, 8)) {
+	const id = `${fieldName}_date_${uniqueSuffix}`;
+	const unixInputId = `${id}_unix`;
+	const html = `
+		<div class="form-floating mb-3">
+			<input type="hidden" name="${fieldName}" id="${unixInputId}" value="${value}" />
+			<input type="text" class="form-control" id="${id}" readonly />
+			<label for="${id}">${fieldName}:</label>
+		</div>`;
+
+	this._runAfterDelay(() => {
+		const input = document.getElementById(id);
+		this._initializeOnce(`${id}_flatpickr`, input, () => {
+			const dateValue = new Date(parseInt(value, 10)) || new Date();
+			flatpickr(input, {
+				enableTime: true,
+				dateFormat: 'd.m.Y H:i',
+				defaultDate: dateValue,
+				onChange: (selectedDates) => {
+					if (selectedDates.length > 0) {
+						document.getElementById(unixInputId).value = selectedDates[0].getTime();
+					}
+				}
+			});
+		});
+	});
+
+	return html;
+}
+
 
     /**
      * Генерация строки таблицы с полями, заменяя плейсхолдеры в шаблоне.

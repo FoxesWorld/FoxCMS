@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2025-04-13 10:18:01
+/* Smarty version 4.0.4, created on 2025-04-13 17:34:36
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_67fb652967dbd8_56679478',
+  'unifunc' => 'content_67fbcb7c173dc4_22414194',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1744276522,
+      1 => 1744553476,
       2 => 'file',
     ),
   ),
@@ -26,7 +26,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_67fb652967dbd8_56679478 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67fbcb7c173dc4_22414194 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -79,6 +79,24 @@ function content_67fb652967dbd8_56679478 (Smarty_Internal_Template $_smarty_tpl)
 			top: 0;
 		}
 		
+		<?php if ($_smarty_tpl->tpl_vars['siteStatus']->value == "MAINTENANCE MODE") {?>
+		#header::after {
+			content: "";
+			display: inline-block;
+			width: 100%;
+			height: 10px;
+			margin: 25px 0px -8px;
+			background: repeating-linear-gradient(
+				45deg,
+				#000,
+				#000 10px,
+				#ffcc00 10px,
+				#ffcc00 20px
+			);
+			border-radius: 0 0 5px 5px;
+		}
+		<?php }?>
+		
 	</style>	  
 	  <?php echo '<script'; ?>
  type="module" src="<?php echo $_smarty_tpl->tpl_vars['tplDir']->value;?>
@@ -115,16 +133,16 @@ function content_67fb652967dbd8_56679478 (Smarty_Internal_Template $_smarty_tpl)
 	
 		
 	async function myAction() {
-		const template = await foxEngine.loadTemplate(foxEngine.elementsDir + 'discordFeelingBad.tpl', true);
+		const template = await foxEngine.loadTemplate(foxEngine.elementsDir + 'maintenanceMode.tpl', true);
 		let data = await foxEngine.entryReplacer.replaceText(template, "");
-		foxEngine.modalApp.showModalApp('auto', "О нет, конец эпохи!", data, () => {
+		foxEngine.modalApp.showModalApp('auto', "", data, () => {
 			foxEngine.cookieManager.setCookie('modalShown', 'true', 7);
 		});
 	}
 
-    //document.addEventListener('DOMContentLoaded', function() {
-	//	foxEngine.cookieManager.checkCookie('modalShown', 'true', 7, myAction, false);
-    //});
+    document.addEventListener('DOMContentLoaded', function() {
+		foxEngine.cookieManager.checkCookie('modalShown', 'true', 7, myAction, false);
+    });
 	
     /**
      * Инициализация анимации Lottie

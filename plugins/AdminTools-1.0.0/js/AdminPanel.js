@@ -47,30 +47,36 @@ class AdminPanel {
 		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 	
-	async loadAdminTemplates() {
-		const templates = this.templateConfig.templates;
-		if (!templates) {
-			this.foxEngine.log("Нет путей до шаблонов в конфигурации", "WARN");
-			return;
-		}
-		
-		if (!this.templateCache) {
-			this.templateCache = {};
-		}
-		
-		const self = this;
-		const templatePromises = Object.entries(templates).map(async ([key, path]) => {
-			try {
-				const html = await this.foxEngine.loadTemplate(path, true);
-				self.templateCache[key] = html;
-				this.foxEngine.log(`Шаблон админпанели ${key} успешно загружен`);
-			} catch (error) {
-				this.foxEngine.log(`Ошибка загрузки шаблона для "${key}" с путём "${path}":`, "ERROR");
-			}
-		});
-		
-		await Promise.all(templatePromises);
-	}
+async loadAdminTemplates() {
+    const templates = this.templateConfig.templates;
+    if (!templates) {
+        this.foxEngine.log("Нет путей до шаблонов в конфигурации", "WARN");
+        return;
+    }
+
+    if (!this.templateCache) {
+        this.templateCache = {};
+    }
+
+    const self = this;
+    const templatePromises = Object.entries(templates).map(async ([key, path]) => {
+        try {
+            // Загружаем шаблон и обрабатываем его с помощью entryReplacer
+            const rawHtml = await this.foxEngine.loadTemplate(path, true);
+            //const html = await this.foxEngine.entryReplacer.replaceText(rawHtml);
+
+            // Сохраняем обработанный шаблон в кеш
+            self.templateCache[key] = rawHtml;
+
+            this.foxEngine.log(`Шаблон админпанели ${key} успешно загружен`);
+        } catch (error) {
+            this.foxEngine.log(`Ошибка загрузки шаблона для "${key}" с путём "${path}":`, "ERROR");
+        }
+    });
+
+    await Promise.all(templatePromises);
+}
+
 
 }
 

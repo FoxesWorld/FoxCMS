@@ -35,6 +35,24 @@
 			top: 0;
 		}
 		
+		{if $siteStatus == "MAINTENANCE MODE"}
+		#header::after {
+			content: "";
+			display: inline-block;
+			width: 100%;
+			height: 10px;
+			margin: 25px 0px -8px;
+			background: repeating-linear-gradient(
+				45deg,
+				#000,
+				#000 10px,
+				#ffcc00 10px,
+				#ffcc00 20px
+			);
+			border-radius: 0 0 5px 5px;
+		}
+		{/if}
+		
 	</style>	  
 	  <script type="module" src="{$tplDir}/assets/js/App.js"></script>
 	  <script src="{$tplDir}/assets/js/CustomNavBar.js"></script>
@@ -64,16 +82,16 @@
 	
 		
 	async function myAction() {
-		const template = await foxEngine.loadTemplate(foxEngine.elementsDir + 'discordFeelingBad.tpl', true);
+		const template = await foxEngine.loadTemplate(foxEngine.elementsDir + 'maintenanceMode.tpl', true);
 		let data = await foxEngine.entryReplacer.replaceText(template, "");
-		foxEngine.modalApp.showModalApp('auto', "О нет, конец эпохи!", data, () => {
+		foxEngine.modalApp.showModalApp('auto', "", data, () => {
 			foxEngine.cookieManager.setCookie('modalShown', 'true', 7);
 		});
 	}
 
-    //document.addEventListener('DOMContentLoaded', function() {
-	//	foxEngine.cookieManager.checkCookie('modalShown', 'true', 7, myAction, false);
-    //});
+    document.addEventListener('DOMContentLoaded', function() {
+		foxEngine.cookieManager.checkCookie('modalShown', 'true', 7, myAction, false);
+    });
 	
     /**
      * Инициализация анимации Lottie

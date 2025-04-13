@@ -1423,13 +1423,12 @@ ul>li {
 --------------------------------------------------------------*/
 footer {
 	-webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    border-top: 3px solid #ac6343;
-    box-sizing: border-box;
-    color: #ccc;
-    display: block;
-    padding: 15px;
-
+	backdrop-filter: blur(5px);
+	border-top: 5px solid #ac6343;
+	box-sizing: border-box;
+	color: #ccc;
+	display: block;
+	padding: 15px;
 }
 
 footer a {
