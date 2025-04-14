@@ -166,21 +166,11 @@ class UserTable {
     async createPlayerCell(user) {
         const playerCell = document.createElement('td');
         const headImage = await this.fetchPlayerHeadImage(user.login);
-        playerCell.innerHTML = `
-            <div class="d-flex align-items-center">
-                <div class="flex-shrink-0">
-                    <ul class="player-head">
-                        <li>
-                            <a href="#user/${user.login}">
-                                <img class="head-image" src="data:image/png;base64,${headImage}" alt="${user.login}">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#user/${user.login}">${user.login}</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>`;
+		const playerHtml = await foxEngine.replaceTextInTemplate(foxEngine.templateCache["playerCell"], {
+                login: user.login,
+                headImage: headImage
+            });
+		playerCell.innerHTML = playerHtml;
         return playerCell;
     }
 

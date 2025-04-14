@@ -45,7 +45,7 @@
 </div>
 
 <button class="user-button">
-    <div class="avatar">
+    <div class="avatar" onclick="foxEngine.user.showUserProfile(foxEngine.replaceData.login); return false;">
         <img src="{$profilePhoto}" alt="User's Avatar" />
     </div>
     <a class="user-info">
@@ -57,7 +57,7 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const userBar = new CustomNavbar({
-        togglerSelector: ".user-button",
+        togglerSelector: ".user-info",
         collapseSelector: "#userPane",
         burgerButtonSelector: ".chevron",
         navItemSelector: "#usrMenu",

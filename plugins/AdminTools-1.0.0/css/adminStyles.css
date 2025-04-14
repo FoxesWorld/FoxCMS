@@ -159,6 +159,12 @@
 	margin: 10px;
 }
 
+#serverImagePreview {
+	margin-top: 20px;
+    text-align: center;
+    max-width: 512px;
+}
+
 #serversList .serverVersion {
     padding: 10px;
     display: block;
@@ -166,7 +172,7 @@
 }
 
 #serversList button {
-	margin: 10px;
+	margin: 5px 0;
 }
 
 .codeHtml {

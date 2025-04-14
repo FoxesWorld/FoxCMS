@@ -8,6 +8,7 @@ class AdminOptions extends AdminPanel {
     function __construct($REQUEST, $db) {
         global $config;
         if(init::$usrArray['user_group'] == 1) {
+			require("GenericUpdater.php");
             switch($REQUEST["admPanel"]){
                 case "editServer":
                     	$editServer = new EditServer($db);
@@ -16,59 +17,25 @@ class AdminOptions extends AdminPanel {
 					
 				case "addServer":
 					try {
-						// Список полей, которые нужно добавить в БД
-						$allowedFields = [
+						$updater = new GenericUpdater($db, 'servers', [
 							"serverName", "host", "port", "ignoreDirs", "enabled", "checkLib",
 							"serverGroups", "serverDescription", "serverVersion", "jreVersion", "serverImage"
-						];
+						], false);
 
-						// Оставляем только нужные поля
-						$serverData = array_intersect_key($REQUEST, array_flip($allowedFields));
-
-						// Проверка обязательных полей
-						if (empty($serverData['serverName'])) {
+						if (empty($REQUEST['serverName'])) {
 							throw new Exception("Имя сервера обязательно для заполнения");
 						}
 
-						// Приведение типов: для 'enabled' и 'checkLib' - строки 'true' или 'false'
-						$serverData['enabled'] = ($serverData['enabled'] === 'true') ? 'true' : 'false';
-						$serverData['checkLib'] = ($serverData['checkLib'] === 'true') ? 'true' : 'false';
-
-						// Если какие-то поля отсутствуют, заполняем их значениями по умолчанию
-						foreach ($allowedFields as $field) {
-							if (!isset($serverData[$field])) {
-								// Например, если поле не передано, ставим NULL или значение по умолчанию для текстовых данных
-								$serverData[$field] = null; 
+						// Приведение булевых значений
+						foreach (['enabled', 'checkLib'] as $boolField) {
+							if (isset($REQUEST[$boolField])) {
+								$REQUEST['addServer'][$boolField] = ($REQUEST[$boolField] === 'true') ? 'true' : 'false';
 							}
 						}
 
-						// Подготовка SQL
-						$sql = "INSERT INTO servers (
-									serverName, host, port, ignoreDirs, enabled, checkLib,
-									serverGroups, serverDescription, serverVersion, jreVersion, serverImage
-								) VALUES (
-									:serverName, :host, :port, :ignoreDirs, :enabled, :checkLib,
-									:serverGroups, :serverDescription, :serverVersion, :jreVersion, :serverImage
-								)
-								ON DUPLICATE KEY UPDATE
-									host = VALUES(host),
-									port = VALUES(port),
-									ignoreDirs = VALUES(ignoreDirs),
-									enabled = VALUES(enabled),
-									checkLib = VALUES(checkLib),
-									serverGroups = VALUES(serverGroups),
-									serverDescription = VALUES(serverDescription),
-									serverVersion = VALUES(serverVersion),
-									jreVersion = VALUES(jreVersion),
-									serverImage = VALUES(serverImage)";
+						$result = $updater->updateData($REQUEST, 'serverName');
 
-						$stmt = $db->prepare($sql);
-						$stmt->execute($serverData);
-
-						die(json_encode([
-							"type" => "success",
-							"message" => "Сервер успешно добавлен или обновлён"
-						]));
+						die(json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 					} catch (Exception $e) {
 						die(json_encode([
 							"type" => "error",
@@ -76,6 +43,26 @@ class AdminOptions extends AdminPanel {
 						]));
 					}
 					break;
+
+					
+					case "infoBoxUpdate":
+						$updater = new GenericUpdater($db, 'infobox', [
+							'group_name', 'start_timestamp', 'end_timestamp', 'title', 'text', 'image', 'button_text', 'button_url'
+						]);
+						$result = $updater->updateData($REQUEST["infoBoxUpdate"], "group_name");
+						die(json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+					break;
+
+				
+				// Обработка запроса allBadgesUpdate в классе AdminOptions:
+				case "allBadgesUpdate":
+					$updater = new GenericUpdater($db, 'badgesList', [
+						'badgeName', 'description', 'img'
+					]);
+					$result = $updater->updateData($REQUEST['allBadgesUpdate'], 'badgeName');
+					die(json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+				break;
+
 
 
                 case "editUserBadges":
@@ -87,7 +74,7 @@ class AdminOptions extends AdminPanel {
                     break;
 					
 				case "editPermissions":
-					$permArray = json_decode(@$REQUEST['permissions'], true); // Декодируем JSON в ассоциативный массив
+					$permArray = json_decode(@$REQUEST['permissions'], true);
 					if(is_array($permArray)) {
 					$i = 1;
 
@@ -97,7 +84,6 @@ class AdminOptions extends AdminPanel {
 							$permName = $permission['permName'];
 							$permValue = $permission['permValue'];
 
-							// Пример SQL-запроса для обновления или вставки
 							$sql = "
 								UPDATE groupPermissions SET groupName = :groupName, permName = :permName, 
 								permValue = :permValue
@@ -199,7 +185,7 @@ class AdminOptions extends AdminPanel {
             die('{"message": "Insufficient rights!"}');
         }
     }
-
+	
     // Обновление данных пользователя
     private function updateUserField($db, $field, $REQUEST) {
         $login = $REQUEST['userLogin'];
@@ -259,15 +245,26 @@ class AdminOptions extends AdminPanel {
 	}
 
     // Получить все бейджи
-    private function getAllBadges($db) {
-        $query = 'SELECT `badgeName` FROM `badgesList`';
-        $badgesArr = array();
-        $data = $db->getRows($query);
-        foreach($data as $key){
-            $badgesArr[] = $key['badgeName'];
-        }
-        die(json_encode($badgesArr));
+private function getAllBadges($db) {
+    // Корректный SQL-запрос (без обратных кавычек вокруг *)
+    $query = 'SELECT * FROM `badgesList`';
+    
+    // Получаем все строки
+    $data = $db->getRows($query);
+
+    // Убедимся, что результат — это массив
+    if (!is_array($data)) {
+        http_response_code(500);
+        die(json_encode([
+            "status" => "error",
+            "message" => "Ошибка при получении данных из базы"
+        ]));
     }
+
+    // Возвращаем как JSON
+    header('Content-Type: application/json');
+    die(json_encode($data));
+}
 
     // Получить баланс пользователя
     private function loadUserBalance($db, $REQUEST) {

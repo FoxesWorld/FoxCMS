@@ -34,7 +34,7 @@
       <li class="security">:shield: %lang|security%</li>
       <li class="connections">:link:%lang|connections%</li>
    </ul>
-   <form method="POST" action="/" id="viewUserProfile">
+   <form method="POST" action="/" id="viewUserProfile" autocomplete="off">
    <div class="tab_content active">
       <section class="form-horizontal">
          <!--  <div class="form-row">
@@ -250,21 +250,23 @@
    </div>
    
    <!-- Tab Section ends here-->
+
+   <input name="user_doaction" type="hidden" value="EditUser" />
+   <input name="login" type="hidden" value="[login]" />
+   <input type="hidden" id="colourVal" name="colorScheme" value="[colorScheme]" />
+   <input name="refreshPage" type="hidden" value="false" />
+   <input name="onSubmit" type="hidden" value="foxEngine.user.showUserProfile('[login]');" /> 
+   [not-group=1]
+        <input name="user_group" class="input" type="hidden" value="[user_group]" />
+   [/not-group]
+   <input name="foxesHash" class="input" type="hidden" value="[hash]" />
+   <button type="submit" class="m-2 login">
+		%lang|submit%
+		<div class="fa fa-cog fa-spin"></div>
+    </button>
 </div>
 			
-            <input name="user_doaction" type="hidden" value="EditUser" />
-            <input name="login" type="hidden" value="[login]" />
-			<input type="hidden" id="colourVal" name="colorScheme" value="[colorScheme]" />
-            <input name="refreshPage" type="hidden" value="false" />
-            <input name="onSubmit" type="hidden" value="foxEngine.user.showUserProfile('[login]');" /> 
-            [not-group=1]
-            <input name="user_group" class="input" type="hidden" value="[user_group]" />
-            [/not-group]
-            <input name="foxesHash" class="input" type="hidden" value="[hash]" />
-            <button type="submit" class="m-2 login">
-               %lang|submit%
-               <div class="fa fa-cog fa-spin"></div>
-            </button>
+
          </form>
          <div class="d-none" id="photoModal">
 				<h3 style="margin: 0 auto;color: antiquewhite;padding: 15;">
@@ -306,12 +308,13 @@
 							<i class="fa fa-pencil"></i>&nbsp;<span class="foxesResponsive_hidePhone foxesResponsive_inline">%lang|edit%</span>
 						</b>					
 					</li>
-
+					[group=3,1]
 					<li>
 						<b class="fakeLink foxesButton foxesButton_small foxesButton_overlaid" onclick="$($(this)).notify('В разработке!', 'warn');">
 							<i class="fa-light fa-image"></i>&nbsp;<span class="foxesResponsive_hidePhone foxesResponsive_inline">&nbsp;&nbsp;Обложка <i class="fa fa-caret-down"></i></span>
 						</b>					
 					</li>
+					[/group]
 					
 				[/hasPriviligies]
 					

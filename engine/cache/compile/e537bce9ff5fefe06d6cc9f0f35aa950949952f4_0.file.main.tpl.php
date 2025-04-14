@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2025-04-13 17:34:36
+/* Smarty version 4.0.4, created on 2025-04-14 22:35:50
   from '/var/www/FoxCMS/templates/foxengine2/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_67fbcb7c173dc4_22414194',
+  'unifunc' => 'content_67fd63964b03e2_72851455',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e537bce9ff5fefe06d6cc9f0f35aa950949952f4' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/main.tpl',
-      1 => 1744553476,
+      1 => 1744631350,
       2 => 'file',
     ),
   ),
@@ -26,7 +26,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../notify.tpl' => 1,
   ),
 ),false)) {
-function content_67fbcb7c173dc4_22414194 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67fd63964b03e2_72851455 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="ru">
    <head>
 	  <meta charset="utf-8" />
@@ -93,6 +93,18 @@ function content_67fbcb7c173dc4_22414194 (Smarty_Internal_Template $_smarty_tpl)
 				#ffcc00 10px,
 				#ffcc00 20px
 			);
+			border-radius: 0 0 5px 5px;
+		}
+		
+		footer::before {
+			content: "";
+			display: inline-block;
+			width: 100%;
+			position: absolute;
+			height: 10px;
+			margin: -25px 0px;
+			left: 0;
+			background: repeating-linear-gradient(45deg, #000, #000 10px, #ffcc00 10px, #ffcc00 20px);
 			border-radius: 0 0 5px 5px;
 		}
 		<?php }?>
@@ -193,8 +205,10 @@ function content_67fbcb7c173dc4_22414194 (Smarty_Internal_Template $_smarty_tpl)
                 <?php $_smarty_tpl->_subTemplateRender('file:slider.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
             </div>
+			<div id="infoBox"></div>
             <div class="<?php if (!$_smarty_tpl->tpl_vars['isMobile']->value) {?>col-8<?php } else { ?>container<?php }?>">
-                <main id="content" class="mainBlock">
+			
+                <main id="content" class="mainBlock">	
                     <?php echo '<%'; ?>
 contentData<?php echo '%>'; ?>
 

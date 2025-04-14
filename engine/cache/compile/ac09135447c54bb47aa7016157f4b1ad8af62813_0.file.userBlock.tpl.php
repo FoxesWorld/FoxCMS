@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2025-04-13 17:34:36
+/* Smarty version 4.0.4, created on 2025-04-14 22:35:50
   from '/var/www/FoxCMS/templates/foxengine2/userBlock.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_67fbcb7c1861b8_48048410',
+  'unifunc' => 'content_67fd63964bfe29_13629127',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ac09135447c54bb47aa7016157f4b1ad8af62813' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/userBlock.tpl',
-      1 => 1744297311,
+      1 => 1744562264,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:balanceBox.tpl' => 1,
   ),
 ),false)) {
-function content_67fbcb7c1861b8_48048410 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67fd63964bfe29_13629127 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- UserPane -->
 <div id="userPane" class="side-nav">
     <div class="menu-content">
@@ -75,7 +75,7 @@ function content_67fbcb7c1861b8_48048410 (Smarty_Internal_Template $_smarty_tpl)
 </div>
 
 <button class="user-button">
-    <div class="avatar">
+    <div class="avatar" onclick="foxEngine.user.showUserProfile(foxEngine.replaceData.login); return false;">
         <img src="<?php echo $_smarty_tpl->tpl_vars['profilePhoto']->value;?>
 " alt="User's Avatar" />
     </div>
@@ -90,7 +90,7 @@ function content_67fbcb7c1861b8_48048410 (Smarty_Internal_Template $_smarty_tpl)
 >
 document.addEventListener("DOMContentLoaded", () => {
     const userBar = new CustomNavbar({
-        togglerSelector: ".user-button",
+        togglerSelector: ".user-info",
         collapseSelector: "#userPane",
         burgerButtonSelector: ".chevron",
         navItemSelector: "#usrMenu",

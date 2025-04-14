@@ -15,7 +15,9 @@ const templates = {
 	"adminPanel": "/templates/" + replaceData['template'] + "/foxEngine/admin/panel.tpl",
 	"totalOnline": "/templates/" + replaceData['template'] + "/foxEngine/monitor/totalOnline.tpl",
 	"serverPage": "/templates/" + replaceData['template'] + "/foxEngine/serverPage/serverPage.tpl",
-	"serverMods": "/templates/" + replaceData['template'] + "/foxEngine/serverPage/serverMods.tpl"
+	"serverMods": "/templates/" + replaceData['template'] + "/foxEngine/serverPage/serverMods.tpl",
+	"playerCell": "/templates/" + replaceData['template'] + "/foxEngine/userTop/playTime/playerCell.tpl",
+	"infoBox": "/templates/" + replaceData['template'] + "/foxEngine/infoBox.tpl"
   }
 };
 
@@ -39,7 +41,7 @@ const App = new Vue({
 
     mounted() {
         document.addEventListener("DOMContentLoaded", () => {
-			foxEngine.user.parseUsrOptionsMenu();
+			foxEngine.user.initUserOptions();
 			foxEngine.logo.logoAnimation();
 			foxEngine.servers.parseOnline();
 			setBackgroundBySeason();
@@ -48,6 +50,7 @@ const App = new Vue({
     },
 
     created() {
+		/*
         $("#dialog").dialog({
             autoOpen: false,
             show: 'fade',
@@ -60,6 +63,7 @@ const App = new Vue({
                 $("#dialogContent").html("");
             }
         });
+		*/
     }
 
 });
@@ -75,39 +79,43 @@ setInterval(() => {
         const hash = location.hash.substring(1);
         foxEngine.log("Current hash: " +  hash);
 
-        if (hash) {
-            const linkTypes = [
-                { keyWord: "user", action: "showUserProfile", module: "user." },
-                { keyWord: "server", action: "loadServerPage", module: "servers." },
-                { keyWord: "page", action: "loadPage", module: "page." }
-            ];
+if (hash) {
+    const linkTypes = [
+        { keyWords: ["user"], action: "showUserProfile", module: "user." },
+        { keyWords: ["server"], action: "loadServerPage", module: "servers." },
+        { keyWords: ["page", "badge"], action: "loadPage", module: "page." }
+    ];
 
-            for (const linkType of linkTypes) {
-                //console.log("Checking linkType: ", linkType.keyWord);
+    for (const linkType of linkTypes) {
+        for (const keyWord of linkType.keyWords) {
+            if (hash.startsWith(keyWord + '/')) {
+                const replaceValue = hash.split(keyWord + '/')[1];
+                const moduleFunc = `foxEngine.${linkType.module}${linkType.action}`;
 
-                if (hash.startsWith(linkType.keyWord + '/')) {
-                    const replaceValue = hash.split(linkType.keyWord + '/')[1];
-                    const moduleFunc = `foxEngine.${linkType.module}${linkType.action}`;
+                foxEngine.log(`Executing action: ${linkType.action} from module: ${linkType.module} with value: ${replaceValue}`);
 
-                    foxEngine.log(`Executing action: ${linkType.action} from module: ${linkType.module} with value: ${replaceValue}`);
+                if (typeof foxEngine !== 'undefined' &&
+                    typeof foxEngine[linkType.module.slice(0, -1)][linkType.action] === 'function') {
 
-                    if (typeof foxEngine !== 'undefined' && typeof foxEngine[linkType.module.slice(0, -1)][linkType.action] === 'function') {
-                        foxEngine[linkType.module.slice(0, -1)][linkType.action](replaceValue, replaceData.contentBlock);
+                    foxEngine[linkType.module.slice(0, -1)][linkType.action](replaceValue, replaceData.contentBlock);
 
-                        if (typeof foxEngine.onUrlChange === 'function') {
-                            foxEngine.onUrlChange(replaceValue);
-                        }
-                    } else {
-                        foxEngine.error(`Method not found: ${moduleFunc}`, "WARN");
+                    if (typeof foxEngine.onUrlChange === 'function') {
+                        foxEngine.onUrlChange(replaceValue);
                     }
-                    return;
+                } else {
+                    foxEngine.error(`Method not found: ${moduleFunc}`, "WARN");
                 }
+                return;
             }
-            foxEngine.log("No matching linkType found for hash: " +  hash, "WARN");
-        } else {
-            foxEngine.log("Hash is empty, calling unhash()");
-            unhash();
         }
+    }
+
+    foxEngine.log("No matching linkType found for hash: " + hash, "WARN");
+} else {
+    foxEngine.log("Hash is empty, calling unhash()");
+    unhash();
+}
+
     }
 
     function unhash() {

@@ -51,8 +51,12 @@
                 "code": "1F98A",
                 "name": "fox"
             },
+            {
+                "code": "1F98B",
+                "name": "sadFox"
+            },
 			{
-				"code": "1F98B",
+				"code": "1F98C",
 				"name": "finley"
 			}
         ]

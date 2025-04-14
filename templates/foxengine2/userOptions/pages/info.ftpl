@@ -34,36 +34,5 @@
             с единомышленниками. Присоединяйтесь к нам, и вместе мы создадим увлекательные истории, где каждый
             игрок станет героем своего собственного сказочного путешествия.</p>
     </section>
-</div>
-
-<style>
-.story {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-		
-	.story section {
-            max-width: 800px;
-            margin: 0px auto;
-            padding: 20px;
-            background-color: #292929;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-    .story h2 {
-            color: #ff6600;
-			font-family: 'FSElliotPro-Heavy';
-        }
-
-    .story p {
-            line-height: 1.6;
-        }
-
-</style>
-
-	
+</div>	
 </pageContent>

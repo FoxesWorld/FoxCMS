@@ -51,6 +51,18 @@
 			);
 			border-radius: 0 0 5px 5px;
 		}
+		
+		footer::before {
+			content: "";
+			display: inline-block;
+			width: 100%;
+			position: absolute;
+			height: 10px;
+			margin: -25px 0px;
+			left: 0;
+			background: repeating-linear-gradient(45deg, #000, #000 10px, #ffcc00 10px, #ffcc00 20px);
+			border-radius: 0 0 5px 5px;
+		}
 		{/if}
 		
 	</style>	  
@@ -138,8 +150,10 @@
             <div class="col-12">
                 {include file='slider.tpl'}
             </div>
+			<div id="infoBox"></div>
             <div class="{if !$isMobile}col-8{else}container{/if}">
-                <main id="content" class="mainBlock">
+			
+                <main id="content" class="mainBlock">	
                     <%contentData%>
                 </main>
             </div>

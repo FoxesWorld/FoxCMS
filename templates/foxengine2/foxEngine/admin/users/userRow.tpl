@@ -1,7 +1,7 @@
 <tr>
     <td scope="row">{index}</td>
 	<td><img class="profilePic" src="{avatar}" /></td>
-    <td class="{login}"><a href="#" class="user-link" data-login="{login}">{login}</a></td>
+    <td class="{login}"><a class="user-link" onclick="foxEngine.user.showUserProfile('{login}'); return false;" data-login="{login}">{login}</a></td>
     <!--<td>{email}</td>
      <td>{convertUnixTime(lastdate)}</td> -->
     <td>

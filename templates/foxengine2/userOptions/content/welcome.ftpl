@@ -10,8 +10,37 @@
 </useroption>
 
 <pageContent>
+
+
+<!--
+<div id="info-box" class="info-box position-relative d-flex align-items-start border border-warning rounded shadow-sm bg-dark text-light overflow-hidden">
+<div class="info-icon min-h-40 w-40 d-md-block d-none">
+  <img style="max-width: 200px;" src="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/5759bc25-1068-420f-b236-3569aa5cfe70/width=200/5759bc25-1068-420f-b236-3569aa5cfe70.jpeg" alt="Banner image" class="rounded" />
+</div>
+
+
+  <div class="info-body flex-grow-1 p-3 pe-4">
+    <h4 class="title">Невероятно!!</h4>
+    <p class="mb-2 small">
+      Сегодня, <strong>Лисий Мир</strong> выходит на новый уровень — ждите новые решения!
+    </p>
+<div class="flex gap-2">
+	<a class="mantine-UnstyledButton-root mantine-Button-root mantine-11u412d" type="button" data-button="true" href="#page/newAge">
+		<div class="mantine-3xbgk5 mantine-Button-inner">	
+			<span class="mantine-qo1k2 mantine-Button-label">Читать подробнее</span>
+		</div>
+	</a>
+</div>
+  </div>
+
+  <button type="button"
+          class="btn-close btn-close-white position-absolute top-0 end-0 m-2"
+          aria-label="Close"
+          onclick="document.getElementById('info-box').style.display = 'none';">
+  </button>
+</div> -->
+
 <div class="contentInner">
-	<!-- <img src="%assets%/img/revelio.png" style="border-radius: 10px;" /> -->
 	Привет, %realname%! Добро пожаловать в мир приключений!
 	Готовы отправиться в захватывающее путешествие?
 	Нажмите кнопку ниже и погрузитесь в увлекательные приключения, полные загадок, открытий и неожиданных поворотов сюжета!

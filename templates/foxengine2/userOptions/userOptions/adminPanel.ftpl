@@ -21,15 +21,27 @@
                 <div class="grid-margin" id="adminContent"></div>
             </div>
 			
-			<div class="row" id="engineInfo" style="margin: 15px; border: 1px solid black;padding: 15px;">
+			
+	<div class="tabs-box">
+	   <ul class="tab_caption">
+		  <li class="profileSettings active" value="profile">Статистика</li>
+		  <li class="personalisation">Логи</li>
+		  <li class="security">Переменные среды</li>
+	   </ul>
+   
+     <div class="tab_content active">
+		<div class="row" id="engineInfo" style="margin: 15px; border: 1px solid black;padding: 15px;">
 			<ul>
 				<li>Всего пользователей: <b id="totalUsers"></b></li>
 				<li>Авторизаций за последний день: <b id="loginCount"></b></li>
 				<li></li>
 				<li></li>
 			</ul>
-			</div>
-			<div class="logWrapper">
+		</div>
+	 </div>
+
+     <div class="tab_content">
+		<div class="logWrapper">
 				<ul class="inline">
 					<li>
 						<input type="number" id="linesNum" class="form-control" value="20" placeholder="Строки">
@@ -47,8 +59,20 @@
 				<div id="loading" class="loading-spinner" style="display:none;"></div>
 				<button id="toggleLogging" class="btn btn-primary">Остановить обновление</button>
 			</div>
+	 </div>
 
-        </div>
+     <div class="tab_content">
+		 <div>			
+			<div class="alert alert-warning" role="alert">
+			 Внимание!!! <br />
+			 <small>Это временное решение, да - неудобно, зато действенно!</small>
+			</div>
+			<div class="buttonGroup">	
+				<button type="button" class="btn btn-success" onclick="adminPanel.editInfoBox.openEditWindow()">БлокИнфо</button>
+				<button type="button" class="btn btn-success" onclick="adminPanel.editAllBadges.openEditWindow()">Все бейджи</button>
+			</div>
+		 </div>
+	 </div>
     </div>
 </div>
 
@@ -173,6 +197,22 @@ async function selectUsers(){
 	return usersInfo;
 }
 
+    const tabButtons = document.querySelectorAll(".tab_caption li");
+    const tabContents = document.querySelectorAll(".tab_content");
+
+    tabButtons.forEach((btn, index) => {
+        btn.addEventListener("click", () => {
+            // Убираем активные классы у всех кнопок и контента
+            tabButtons.forEach(el => el.classList.remove("active"));
+            tabContents.forEach(el => el.classList.remove("active"));
+
+            // Добавляем активный класс текущему табу и контенту
+            btn.classList.add("active");
+            if (tabContents[index]) {
+                tabContents[index].classList.add("active");
+            }
+        });
+    });
 
 </script>
  </pageContent>

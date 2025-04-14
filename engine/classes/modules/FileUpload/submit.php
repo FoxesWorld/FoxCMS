@@ -59,7 +59,7 @@ if (!defined('profile')) {
 		
 		function handle_transfer_ids_post($ids) {
 			global $lang;
-			$this->delete_existing_files();
+			
 			foreach ($ids as $id) {
 				$transfer = FilePond\get_transfer(TRANSFER_DIR, $id);
 				if (!$transfer) continue;
@@ -71,11 +71,12 @@ if (!defined('profile')) {
 					   foreach($files as $file) {
 						   $nameOverride;
 						   $extension = explode('.', $file["name"])[1];
+						   $this->delete_existing_file_if_diff($extension);
 						   switch($imageType){
 							   case "profilePhoto":
 								$nameOverride = $imageType;
 								$fullPath = UPLOADS_DIR.USR_SUBFOLDER.$this->usrArray['login']."/".$nameOverride.'.'.$extension;
-								$query = "UPDATE `users` SET profilePhoto='".$fullPath."' WHERE login = '".$this->usrArray['login']."'";
+								$query = "UPDATE users SET profilePhoto='".$fullPath."' WHERE login = '".$this->usrArray['login']."'";
 								$this->db->query($query);
 							   break;
 						   }
@@ -98,13 +99,39 @@ if (!defined('profile')) {
 		}
 		
 		private function delete_existing_files() {
-			$query = "SELECT profilePhoto FROM `users` WHERE login = '".$this->usrArray['login']."'";
+			$query = "SELECT profilePhoto FROM users WHERE login = '" . $this->db->escape($this->usrArray['login']) . "'";
 			$result = $this->db->getValue($query);
 			if ($result) {
-				$existingFile = ROOT_DIR.$result;
-				if ($existingFile && file_exists($existingFile)) {
-					unlink($existingFile);
+				$existingFile = ROOT_DIR . $result;
+				if (
+					$existingFile &&
+					file_exists($existingFile) &&
+					is_readable($existingFile) &&
+					is_writable($existingFile) &&
+					strpos($existingFile, '/templates/') === false
+				) {
+					if (!unlink($existingFile)) {
+						$this->logger->warning("Не удалось удалить файл: $existingFile");
+					}
 				}
 			}
 		}
+		
+	private function delete_existing_file_if_diff($newExtension) {
+        $query = "SELECT profilePhoto FROM users WHERE login = '" . $this->usrArray['login'] . "'";
+        $result = $this->db->getValue($query);
+        if ($result) {
+            $existingFile = ROOT_DIR . $result;
+            // Проверяем, что файл существует и что его путь не содержит запрещённую поддиректорию
+            if ($existingFile && file_exists($existingFile) && strpos($existingFile, '/templates/') === false) {
+                $oldExtension = strtolower(pathinfo($existingFile, PATHINFO_EXTENSION));
+                if (strtolower($newExtension) !== $oldExtension) {
+                    if (!unlink($existingFile)) {
+                        throw new Exception("Не удалось удалить файл: $existingFile");
+                    }
+                }
+            }
+        }
+    }
+
 	}

@@ -87,6 +87,15 @@
 							$userTop->getTopPlayers();
 						break;
 						
+						case "infoBox":
+						$login = @RequestHandler::$REQUEST['user'] ?? "quest";
+						$loadUserInfo = new LoadUserInfo($login, $this->db);
+						$grAss = new groupAssociacion($loadUserInfo->userInfoArray()['user_group'], $this->db);
+						$tag = $grAss->userGroupTag();
+						$info = new InfoBox($this->db, $this->logger, $tag);
+						$info->getInfoBox();
+						break;
+						
 						case "mailTest":
 						init::classUtil('FoxMail', "1.0.0");
 						$entries = [
