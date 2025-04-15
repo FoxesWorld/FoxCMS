@@ -6,9 +6,10 @@
      <td>{convertUnixTime(lastdate)}</td> -->
     <td>
 		<div class="buttonGroup">
-			<button class="btn bg-green btn-sm btn-raised position-left legitRipple showProfile" data-login="{login}" data-action="profile"><i class="fa-thin fa-id-card"></i></button>
-			<button class="btn bg-indigo-800 btn-sm btn-raised position-left legitRipple loadUserBadges" data-action="badges" data-login="{login}"><i class="fa-thin fa-badge"></i></button>
+			<!--<button class="btn bg-green btn-sm btn-raised position-left legitRipple showProfile" data-login="{login}" data-action="profile"><i class="fa-thin fa-id-card"></i></button> -->
+			<button class="btn bg-indigo-800 btn-sm btn-raised position-left legitRipple editUserBadges" data-action="badges" data-login="{login}"><i class="fa-thin fa-badge"></i></button>
 			<button class="btn bg-orange-600 btn-sm btn-raised position-left legitRipple editBalance" data-action="balance" data-login="{login}"><i class="fa-thin fa-money-bill"></i></button>
+			<button class="btn bg-grey-600 btn-sm btn-raised position-left legitRipple editServersOnline" data-action="balance" data-login="{login}"><i class="fa-solid fa-server"></i></button>
 		</div>
     </td>
 </tr>

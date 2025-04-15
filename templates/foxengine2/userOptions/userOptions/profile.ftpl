@@ -389,6 +389,23 @@
 						<ul class="profileBadges container-1gYwHN" id="userBadges">
 						</ul>
 					</li>
+					
+					[group=1]
+					<li class="buttonGroup">
+						<button class="btn bg-indigo-800 btn-sm btn-raised position-left legitRipple" onclick="window.adminPanel.users.editBadges.openEditWindow('[login]');">
+							<i class="fa-thin fa-badge"></i>
+						</button>
+					
+
+					
+						<button class="btn bg-orange-600 btn-sm btn-raised position-left legitRipple" onclick="window.adminPanel.users.editBalance.openEditWindow('[login]')">
+							<i class="fa-thin fa-money-bill"></i>
+						</button>
+						
+						<button class="btn bg-grey-600 btn-sm btn-raised position-left legitRipple" onclick="window.adminPanel.users.editUserOnline.openEditWindow('[login]')">
+						<i class="fa-solid fa-server"></i></button>
+					</li>
+					[/group]
 				</ul>
 			</div>
 

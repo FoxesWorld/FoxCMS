@@ -7,7 +7,7 @@
                 </a>
             </li>
             <li>
-                <a class="text-decoration-none text-break fw-semibold" href="#user/${user.login}">
+                <a class="text-decoration-none text-break fw-semibold" href="#user/{login}">
                     {login}
                 </a>
             </li>

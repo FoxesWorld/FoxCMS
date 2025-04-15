@@ -156,21 +156,40 @@ function animateLogs() {
 })();
 
 
-(async function() {
-    const admOptions = ["settings", "users",  "servers", "permissions"]; //"pages", "modules", "groupAssoc", "templateEditor"
+(async function () {
+    const admOptions = [
+        { name: "settings" },
+        { name: "users", loadAfter: true },
+        { name: "servers", requiresAuth: true },
+        { name: "permissions", classStyle: "deprecated-block" }
+        // { name: "modules", category: "advanced" },
+        // { name: "templateEditor", experimental: true }
+    ];
+
     const blockTpl = foxEngine.templateCache["adminPanel"];
-    admOptions.forEach(async (option, index) => {
+
+    for (let index = 0; index < admOptions.length; index++) {
+        const optionObj = admOptions[index];
+        const optionName = optionObj.name;
+
         let panelBlock = await foxEngine.replaceTextInTemplate(blockTpl, {
-            option: option
+            option: optionName,
+            ...optionObj // можно использовать доп. параметры внутри шаблона
         });
+
         $("#admOptions").append(await foxEngine.entryReplacer.replaceText(panelBlock));
-        
+
         if ((index + 1) % 2 === 0 || index === admOptions.length - 1) {
-           //$("#admOptions").append('<div class="w-100"></div>');
+            //$("#admOptions").append('<div class="w-100"></div>');
         }
-    });
-	await selectUsers();
+
+        // Выполняем дополнительные действия на основе параметров
+        if (optionObj.loadAfter && optionName === "users") {
+            await selectUsers();
+        }
+    }
 })();
+
 
 async function selectUsers(){
 	let usersInfo = [];

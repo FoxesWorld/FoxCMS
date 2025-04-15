@@ -63,7 +63,9 @@ class AdminOptions extends AdminPanel {
 					die(json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 				break;
 
-
+				case "editUserOnline":
+					$this->updateUserField($db, 'serversOnline', $REQUEST);
+				break;
 
                 case "editUserBadges":
                     $this->updateUserField($db, 'badges', $REQUEST);
@@ -109,7 +111,7 @@ class AdminOptions extends AdminPanel {
                     break;
 					
 				case "selectUsers":
-					$this->selectUsers($db);
+					die(json_encode($this->selectUsers($db)));
 				break;
 
                 case "showPermissions":
@@ -136,6 +138,13 @@ class AdminOptions extends AdminPanel {
                     	$versions = filesInDir::filesInDirArray(ROOT_DIR . UPLOADS_DIR . $config['launcherSettings']['gameFiles'].'versions');
 						die(json_encode($versions));
                     break;
+				
+				case "getUserPlayTime":
+					$userRow = $this->selectUsers($db, "WHERE `login` = '".$REQUEST['login']."'")[0];
+					$serversOnline = $userRow['serversOnline'];
+					die($serversOnline);
+				break;
+
 
                 case "getJavaVersions":
                     $this->getJavaVersions($config);
@@ -223,10 +232,10 @@ class AdminOptions extends AdminPanel {
         }
     }
 	
-	private function selectUsers($db){
-		$query = 'SELECT * FROM `users`';
+	private function selectUsers($db, $where = ""){
+		$query = 'SELECT * FROM `users` '.$where;
         $users = $db->getRows($query);
-        die(json_encode($users));
+        return $users;
 	}
 	
 	private function resetOnline($db){

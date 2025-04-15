@@ -19,6 +19,34 @@
 	display: inline-block;
 }
 
+.deprecated-block {
+    position: relative;
+    padding: 20px;
+    margin: 20px 0;
+    background: #fff6f6;
+    border-left: 6px solid #ff4d4f;
+    color: #a94442;
+    font-style: italic;
+    opacity: 0.8;
+    filter: grayscale(20%);
+    transition: opacity 0.3s ease-in-out;
+}
+
+.deprecated-block::before {
+    content: "⚠️ Устаревший блок";
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    background: #ff4d4f;
+    color: white;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
 .adminPanel {
 	min-height: 100%;
 	display: flex;

@@ -54,27 +54,32 @@ class GameServerManager {
     }
 
     /**
-     * Получает данные пользователя по логину.
+     * Получает список серверов пользователя из БД.
      *
      * @param string $login Логин пользователя.
-     * @return array|null Ассоциативный массив с данными пользователя или null, если не найден.
+     * @return array|null Список объектов с данными сессий или null, если пользователь не найден.
      */
     private function getUserData(string $login): ?array {
         $sql = "SELECT * FROM users WHERE login = :login";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([':login' => $login]);
-        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+        $row = $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+        if (!$row) {
+            return null;
+        }
+        return $this->parseServersOnline($row['serversOnline'] ?? null);
     }
 
     /**
-     * Обновляет данные о времени игры для пользователя в базе.
+     * Обновляет список серверов пользователя в БД.
+     * Записывает только JSON-массив (список серверов).
      *
      * @param string $login Логин пользователя.
-     * @param array  $userData Ассоциативный массив с данными о сессиях.
+     * @param array  $servers Список объектов с данными сессий.
      * @throws RuntimeException Если не удаётся закодировать данные в JSON.
      */
-    private function updateUserData(string $login, array $userData): void {
-        $jsonData = json_encode($userData, JSON_UNESCAPED_UNICODE);
+    private function updateUserData(string $login, array $servers): void {
+        $jsonData = json_encode($servers, JSON_UNESCAPED_UNICODE);
         if ($jsonData === false) {
             throw new RuntimeException('Failed to encode JSON: ' . json_last_error_msg());
         }
@@ -84,6 +89,55 @@ class GameServerManager {
             ':serversOnline' => $jsonData,
             ':login'         => $login
         ]);
+    }
+
+    /**
+     * Декодирует JSON-строку с информацией о сессиях или возвращает пустой список.
+     *
+     * @param string|null $serversOnline JSON-данные из БД.
+     * @return array Список объектов с данными сессий.
+     * @throws RuntimeException Если не удаётся декодировать JSON.
+     */
+    private function parseServersOnline(?string $serversOnline): array {
+        if (empty($serversOnline)) {
+            return [];
+        }
+        $data = json_decode($serversOnline, true);
+        if (json_last_error() !== JSON_ERROR_NONE || !is_array($data)) {
+            throw new RuntimeException('Failed to decode JSON or invalid format: ' . json_last_error_msg());
+        }
+        // Конвертация старого формата (ассоциативный массив) в список объектов
+        if ($data && array_keys($data) !== range(0, count($data) - 1)) {
+            $converted = [];
+            foreach ($data as $name => $srv) {
+                $srv['serverName'] = $name;
+                $converted[] = $srv;
+            }
+            return $converted;
+        }
+        // Убедимся, что у каждого объекта есть поле serverName
+        foreach ($data as &$srv) {
+            if (!isset($srv['serverName'])) {
+                $srv['serverName'] = '';
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * Ищет индекс сервера в списке по имени.
+     *
+     * @param array $servers Список серверов.
+     * @param string $serverName Имя сервера.
+     * @return int|null Индекс сервера или null, если не найден.
+     */
+    private function findServerIndex(array $servers, string $serverName): ?int {
+        foreach ($servers as $index => $server) {
+            if (isset($server['serverName']) && $server['serverName'] === $serverName) {
+                return $index;
+            }
+        }
+        return null;
     }
 
     /**
@@ -110,60 +164,7 @@ class GameServerManager {
     }
 
     /**
-     * Декодирует JSON-строку с информацией о сессиях или возвращает стандартную структуру.
-     *
-     * @param string|null $serversOnline JSON-данные из БД.
-     * @return array Ассоциативный массив с данными о сессиях.
-     * @throws RuntimeException Если не удаётся декодировать JSON.
-     */
-    private function parseServersOnline(?string $serversOnline): array {
-        if (empty($serversOnline)) {
-            return [
-                'isPlaying' => false,
-                'playingOn' => '',
-                'servers'   => []
-            ];
-        }
-        $data = json_decode($serversOnline, true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new RuntimeException('Failed to decode JSON: ' . json_last_error_msg());
-        }
-        // Если основные ключи отсутствуют, задаём их по умолчанию
-        if (!isset($data['isPlaying'], $data['playingOn'], $data['servers'])) {
-            $data = [
-                'isPlaying' => false,
-                'playingOn' => '',
-                'servers'   => []
-            ];
-        }
-        return $data;
-    }
-
-    /**
-     * Завершает игровую сессию для конкретного сервера, вычисляя длительность сессии.
-     * Все расчёты проводятся в секундах.
-     *
-     * @param array    &$serverData Ссылка на данные сессии для конкретного сервера.
-     * @param int      $currentTime Текущее время (timestamp).
-     * @param int|null $playTime Если задан, используется для расчёта длительности.
-     */
-    private function finishSession(array &$serverData, int $currentTime, ?int $playTime = null): void {
-        if ($playTime === null && !empty($serverData['startTimestamp'])) {
-            $playTime = $currentTime - $serverData['startTimestamp'];
-        } elseif ($playTime === null) {
-            $playTime = 0;
-        }
-        $serverData['lastSession'] = $playTime;
-        $serverData['totalTime']   += $playTime;
-        $serverData['lastPlayed']   = $currentTime;
-        // Сброс времени начала сессии
-        $serverData['startTimestamp'] = 0;
-        $serverData['lastUpdated']    = $currentTime;
-    }
-
-    /**
      * Запускает игровую сессию для пользователя на указанном сервере.
-     * Фиксируется время начала сессии и устанавливается глобальный статус игры.
      *
      * @param string $login Логин пользователя.
      * @param string $serverName Имя игрового сервера.
@@ -176,34 +177,32 @@ class GameServerManager {
 
         try {
             return $this->runInTransaction(function() use ($login, $serverName) {
-                $userRow = $this->getUserData($login);
-                if (!$userRow) {
+                $servers = $this->getUserData($login);
+                if ($servers === null) {
                     throw new RuntimeException('User not found.');
                 }
-                $userData = $this->parseServersOnline($userRow['serversOnline'] ?? null);
 
-                // Инициализируем данные для данного сервера, если они отсутствуют
-                if (!isset($userData['servers'][$serverName])) {
-                    $userData['servers'][$serverName] = [
+                $index = $this->findServerIndex($servers, $serverName);
+                if ($index === null) {
+                    $servers[] = [
+                        'serverName'      => $serverName,
                         'totalTime'      => 0,
                         'startTimestamp' => 0,
                         'lastUpdated'    => 0,
                         'lastSession'    => 0,
                         'lastPlayed'     => 0
                     ];
+                    $index = count($servers) - 1;
                 }
+
                 $currentTime = time();
-                // Фиксируем время входа и устанавливаем статус онлайн
-                $userData['servers'][$serverName]['startTimestamp'] = $currentTime;
-                $userData['servers'][$serverName]['lastUpdated']    = $currentTime;
-                $userData['servers'][$serverName]['lastSession']    = 0;
+                $servers[$index]['startTimestamp'] = $currentTime;
+                $servers[$index]['lastUpdated']    = $currentTime;
+                $servers[$index]['lastSession']    = 0;
 
-                $userData['isPlaying'] = true;
-                $userData['playingOn'] = $serverName;
+                $this->updateUserData($login, $servers);
 
-                $this->updateUserData($login, $userData);
-
-                return $this->respondWithSuccess('Game started successfully.', $userData);
+                return $this->respondWithSuccess('Game started successfully.', $servers);
             });
         } catch (Exception $ex) {
             return $this->respondWithError('Error starting game: ' . $ex->getMessage());
@@ -224,11 +223,11 @@ class GameServerManager {
      * @return string JSON-ответ с результатом операции.
      */
     public function updateGameTime(
-        string $login, 
-        string $serverName, 
-        string $host, 
-        int $port, 
-        int $playTime, 
+        string $login,
+        string $serverName,
+        string $host,
+        int $port,
+        int $playTime,
         int $additionalTimeSeconds = 0
     ): string {
         if (empty($login) || empty($serverName)) {
@@ -237,48 +236,42 @@ class GameServerManager {
 
         try {
             return $this->runInTransaction(function() use ($login, $serverName, $host, $port, $playTime, $additionalTimeSeconds) {
-                $userRow = $this->getUserData($login);
-                if (!$userRow) {
+                $servers = $this->getUserData($login);
+                if ($servers === null) {
                     throw new RuntimeException('User not found.');
                 }
 
-                $userData = $this->parseServersOnline($userRow['serversOnline'] ?? null);
-                if (!isset($userData['servers'][$serverName])) {
+                $index = $this->findServerIndex($servers, $serverName);
+                if ($index === null) {
                     throw new RuntimeException('Server not found for user.');
                 }
 
-                $serverData = &$userData['servers'][$serverName];
                 $currentTime = time();
                 $isOnline = $this->isPlayerOnline($host, $port, $login);
+                $srv = &$servers[$index];
 
                 if ($isOnline) {
-                    // Игрок онлайн: обновляем время сессии
-                    $userData['isPlaying'] = true;
-                    $userData['playingOn'] = $serverName;
-                    $sessionTime = ($playTime > 0) 
-                        ? $playTime 
-                        : max(0, $currentTime - $serverData['lastUpdated']);
-                    $serverData['totalTime']  += $sessionTime;
-                    $serverData['lastSession'] = $sessionTime;
-                    $serverData['lastUpdated'] = $currentTime;
+                    $sessionTime = ($playTime > 0)
+                        ? $playTime
+                        : max(0, $currentTime - $srv['lastUpdated']);
+                    $srv['totalTime']  += $sessionTime;
+                    $srv['lastSession'] = $sessionTime;
+                    $srv['lastUpdated'] = $currentTime;
                     if ($additionalTimeSeconds > 0) {
-                        $serverData['totalTime']  += $additionalTimeSeconds;
-                        $serverData['lastSession'] += $additionalTimeSeconds;
+                        $srv['totalTime']  += $additionalTimeSeconds;
+                        $srv['lastSession'] += $additionalTimeSeconds;
                     }
                 } else {
-                    // Игрок оффлайн: завершаем сессию, если она активна
-                    if (!empty($serverData['startTimestamp'])) {
-                        $this->finishSession($serverData, $currentTime, ($playTime > 0 ? $playTime : null));
+                    if (!empty($srv['startTimestamp'])) {
+                        $this->finishSession($srv, $currentTime, ($playTime > 0 ? $playTime : null));
                     }
-                    $userData['isPlaying'] = false;
-                    $userData['playingOn'] = '';
                 }
 
-                $this->updateUserData($login, $userData);
+                $this->updateUserData($login, $servers);
 
                 return $isOnline
-                    ? $this->respondWithSuccess('Game time updated successfully.', $userData)
-                    : $this->respondWithSuccess('Player is offline. Session finished.', $userData);
+                    ? $this->respondWithSuccess('Game time updated successfully.', $servers)
+                    : $this->respondWithSuccess('Player is offline. Session finished.', $servers);
             });
         } catch (Exception $ex) {
             return $this->respondWithError('Error updating game time: ' . $ex->getMessage());
@@ -300,25 +293,21 @@ class GameServerManager {
 
         try {
             return $this->runInTransaction(function() use ($login, $serverName, $playTime) {
-                $userRow = $this->getUserData($login);
-                if (!$userRow) {
+                $servers = $this->getUserData($login);
+                if ($servers === null) {
                     throw new RuntimeException('User not found.');
                 }
-                $userData = $this->parseServersOnline($userRow['serversOnline'] ?? null);
-                if (!isset($userData['servers'][$serverName])) {
+                $index = $this->findServerIndex($servers, $serverName);
+                if ($index === null) {
                     throw new RuntimeException('Server not found for user.');
                 }
-                $serverData = &$userData['servers'][$serverName];
                 $currentTime = time();
-                $this->finishSession($serverData, $currentTime, $playTime);
+                $srv = &$servers[$index];
+                $this->finishSession($srv, $currentTime, $playTime);
 
-                // Сброс глобального статуса игры
-                $userData['isPlaying'] = false;
-                $userData['playingOn'] = '';
+                $this->updateUserData($login, $servers);
 
-                $this->updateUserData($login, $userData);
-
-                return $this->respondWithSuccess('Game finished successfully.', $userData);
+                return $this->respondWithSuccess('Game finished successfully.', $servers);
             });
         } catch (Exception $ex) {
             return $this->respondWithError('Error finishing game: ' . $ex->getMessage());
@@ -335,17 +324,33 @@ class GameServerManager {
     }
 
     /**
+     * Закрывает сессию, обновляя totalTime и lastPlayed.
+     *
+     * @param array $srv Ссылка на данные сервера.
+     * @param int $currentTime Текущее время.
+     * @param int|null $playTime Время сессии (если передано).
+     */
+    private function finishSession(array &$srv, int $currentTime, ?int $playTime = null): void {
+        $duration = $playTime ?? max(0, $currentTime - $srv['lastUpdated']);
+        $srv['totalTime'] += $duration;
+        $srv['lastSession'] = $duration;
+        $srv['lastPlayed'] = $currentTime;
+        $srv['startTimestamp'] = 0;
+        $srv['lastUpdated'] = 0;
+    }
+
+    /**
      * Возвращает JSON-ответ для успешного выполнения операции.
      *
      * @param string $message Сообщение об успехе.
-     * @param array  $data Дополнительные данные.
+     * @param array  $servers Список серверов.
      * @return string JSON-ответ.
      */
-    private function respondWithSuccess(string $message, array $data = []): string {
+    private function respondWithSuccess(string $message, array $servers = []): string {
         return json_encode([
             'status'  => 'success',
             'message' => $message,
-            'data'    => $data
+            'data'    => $servers
         ], JSON_UNESCAPED_UNICODE);
     }
 
@@ -360,54 +365,5 @@ class GameServerManager {
             'status'  => 'error',
             'message' => $message
         ], JSON_UNESCAPED_UNICODE);
-    }
-    
-    /**
-     * Метод для проверки статуса игрока.
-     * Отправляет запрос с параметрами:
-     *   "sysRequest": "checkStatus",
-     *   "login": <логин>,
-     *   "serverIp": <IP сервера>,
-     *   "serverPort": <Порт сервера>
-     * Если игрок онлайн, возвращает данные с полем startTimestamp из БД (если найдена активная сессия),
-     * иначе возвращает текущий timestamp.
-     */
-    public function checkStatus(): void {
-        $login = @RequestHandler::$REQUEST["login"];
-        $host = @RequestHandler::$REQUEST["serverIp"];
-        $port = @RequestHandler::$REQUEST["serverPort"];
-
-        if (!$login) {
-            die(json_encode(["message" => "Invalid request: missing login"]));
-        }
-
-        // Проверяем статус через запрос к серверу
-        $status = $this->isPlayerOnline($host, $port, $login);
-
-        // Если онлайн, пытаемся извлечь startTimestamp из данных пользователя
-        $startTimestamp = time(); // значение по умолчанию
-        if ($status) {
-            $userRow = $this->getUserData($login);
-            if ($userRow) {
-                $userData = $this->parseServersOnline($userRow['serversOnline'] ?? null);
-                if (!empty($userData['isPlaying']) && !empty($userData['playingOn'])) {
-                    $serverName = $userData['playingOn'];
-                    if (isset($userData['servers'][$serverName]) && !empty($userData['servers'][$serverName]['startTimestamp'])) {
-                        $startTimestamp = $userData['servers'][$serverName]['startTimestamp'];
-                    }
-                }
-            }
-            $response = [
-                "message" => "Player status retrieved",
-                "isPlaying" => true,
-                "startTimestamp" => $startTimestamp
-            ];
-        } else {
-            $response = [
-                "message" => "Player is offline",
-                "isPlaying" => false
-            ];
-        }
-        die(json_encode($response, JSON_UNESCAPED_UNICODE));
     }
 }

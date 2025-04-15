@@ -13,10 +13,7 @@ class UserTable {
                 "sysRequest": "parseServers",
                 "login": foxEngine.replaceData.login
             }, "JSON");
-
-            response.forEach(server => {
-                this.availableServers.add(server.serverName);
-            });
+            response.forEach(server => this.availableServers.add(server.serverName));
         } catch (error) {
             console.error("Ошибка при парсинге серверов:", error);
         }
@@ -65,82 +62,118 @@ class UserTable {
     createOptionElement(value, text) {
         const option = document.createElement('option');
         option.value = value;
-        option.textContent = this.availableServers.has(value) || value === 'all' ? text : `${text} (Закрыт)`;
+        option.textContent = this.availableServers.has(value) || value === 'all'
+            ? text
+            : `${text} (Закрыт)`;
         return option;
     }
 
-    /**
-     * Парсит JSON-строку с данными серверов и возвращает массив объектов.
-     * Ожидаемый формат JSON:
-     * {
-     *   "isPlaying": boolean,
-     *   "playingOn": string,
-     *   "servers": {
-     *       "serverName1": {
-     *           "totalTime": number,
-     *           "startTimestamp": number,
-     *           "lastUpdated": number,
-     *           "lastSession": number,
-     *           "lastPlayed": number
-     *       },
-     *       ...
-     *   }
-     * }
-     */
-    parseServersOnline(serversOnline) {
-        try {
-            const data = JSON.parse(serversOnline);
-            return Object.entries(data.servers).map(([serverName, serverData]) => ({
-                serverName,
-                totalTime: serverData.totalTime || 0,
-                lastUpdated: serverData.lastUpdated,
-                lastSession: serverData.lastSession || 0,
-                lastPlayed: serverData.lastPlayed,
-            }));
-        } catch (error) {
-            console.error("Ошибка при парсинге серверов онлайн:", error);
-            return [];
+/**
+ * Парсит JSON-строку с данными серверов и возвращает массив объектов,
+ * у всех полей приводит строки к числам, а миллисекунды — к секундам.
+ */
+parseServersOnline(serversOnline) {
+    try {
+        const raw = JSON.parse(serversOnline || '[]');
+
+        const normalize = s => {
+            const totalTime = Number(s.totalTime) || 0; 
+            return {
+                serverName: s.serverName || '',
+                totalTime
+            };
+        };
+
+        if (Array.isArray(raw)) {
+            return raw
+                .filter(s => s.serverName && !isNaN(Number(s.totalTime))).map(normalize);
         }
+
+        if (raw.servers && typeof raw.servers === 'object') {
+            return Object.entries(raw.servers).map(([name, srv]) => normalize({ serverName: name, ...srv }));
+        }
+
+        return [];
+    } catch (err) {
+        console.error("Ошибка при парсинге serversOnline:", err);
+        return [];
     }
+}
+
+
+/**
+ * Всегда возвращает ровно totalTime (в секундах) из БД,
+ * не учитывая текущую активную сессию.
+ */
+calculateTotalPlaytime(serversOnline, selectedServer) {
+    const servers = this.parseServersOnline(serversOnline);
+
+    if (selectedServer === 'all') {
+        return servers.reduce((sum, s) => sum + s.totalTime, 0);
+    }
+    const srv = servers.find(s => s.serverName === selectedServer);
+    return srv ? srv.totalTime : 0;
+}
+
+
+/**
+ * Форматирует общее время (в секундах) в строку,
+ * всегда показыя часы и секунды (даже если минут = 0).
+ * Для 3630 секунд вернет "1 час 30 секунд".
+ */
+formatPlaytimeText(totalSeconds) {
+    const s   = Math.round(totalSeconds);
+    const h   = Math.floor(s / 3600);
+    const sec = s % 60;
+    const parts = [];
+
+    if (h > 0)   parts.push(`${h} ${this.declineWord(h, ['час', 'часа', 'часов'])}`);
+    if (sec > 0) parts.push(`${sec} ${this.declineWord(sec, ['секунда', 'секунды', 'секунд'])}`);
+
+    return parts.join(' ') || `0 ${this.declineWord(0, ['секунда', 'секунды', 'секунд'])}`;
+}
+
 
     sortUsersByPlaytime(users, selectedServer) {
         return users.sort((a, b) =>
-            this.calculateTotalPlaytime(b.serversOnline, selectedServer) -
+            this.calculateTotalPlaytime(b.serversOnline, selectedServer) - 
             this.calculateTotalPlaytime(a.serversOnline, selectedServer)
         );
     }
 
     calculateTotalPlaytime(serversOnline, selectedServer) {
         const servers = this.parseServersOnline(serversOnline);
+        const now = Math.floor(Date.now() / 1000);
+
+        const getServerPlaytime = (s) => {
+            const base = s.totalTime || 0;
+            const isActive = s.startTimestamp && (!s.lastUpdated || s.lastUpdated < now);
+
+            if (isActive) {
+                const sessionTime = now - s.startTimestamp;
+                return base + sessionTime;
+            }
+
+            return base;
+        };
+
         if (selectedServer === 'all') {
-            return servers.reduce((total, server) => total + (server.totalTime || 0), 0);
-        } else {
-            const server = servers.find(s => s.serverName === selectedServer);
-            return server ? server.totalTime : 0;
+            return servers.reduce((sum, s) => sum + getServerPlaytime(s), 0);
         }
+
+        const server = servers.find(s => s.serverName === selectedServer);
+        return server ? getServerPlaytime(server) : 0;
     }
 
     async renderUsers(users) {
         this.container.innerHTML = '';
-        const rows = await Promise.all(users.map((user, index) => this.createUserRow(user, index + 1)));
+        const rows = await Promise.all(users.map((user, idx) => this.createUserRow(user, idx + 1)));
         rows.forEach(row => row && this.container.appendChild(row));
     }
 
     async createUserRow(user, rank) {
-		let base64Image = await this.fetchPlayerHeadImage(user.login);
-		if (!base64Image.startsWith('data:image')) {
-			base64Image = `data:image/png;base64,${base64Image}`;
-		}
-		const userPic = new Image();
-		new Promise((resolve, reject) => {
-			userPic.onload = () => resolve(userPic);
-			userPic.onerror = (err) => reject(new Error("Ошибка загрузки изображения: " + err));
-			userPic.src = base64Image;
-		});
-		//const dominantColor = await foxEngine.user._getDominantColor(userPic, 24, 128);
-		//Looks horrible 0_0
         const servers = this.parseServersOnline(user.serversOnline);
-        if (this.selectedServer !== 'all' && !servers.some(server => server.serverName === this.selectedServer)) {
+        if (this.selectedServer !== 'all' && !servers.some(s => s.serverName === this.selectedServer)) {
             return null;
         }
 
@@ -166,11 +199,11 @@ class UserTable {
     async createPlayerCell(user) {
         const playerCell = document.createElement('td');
         const headImage = await this.fetchPlayerHeadImage(user.login);
-		const playerHtml = await foxEngine.replaceTextInTemplate(foxEngine.templateCache["playerCell"], {
-                login: user.login,
-                headImage: headImage
-            });
-		playerCell.innerHTML = playerHtml;
+        const playerHtml = await foxEngine.replaceTextInTemplate(foxEngine.templateCache["playerCell"], {
+            login: user.login,
+            headImage: headImage
+        });
+        playerCell.innerHTML = playerHtml;
         return playerCell;
     }
 
@@ -187,179 +220,115 @@ class UserTable {
         }
     }
 
-    /**
-     * Создаёт ячейку, в которой выводится общее время игры в виде отформатированного текста 
-     * и полосы с сегментами по серверам, пропорциональными вкладу каждого сервера.
-     */
     createPlaytimeCell(user) {
         const playtimeCell = document.createElement('td');
-		//$(playtimeCell).addClass("indent");
         const totalSeconds = this.calculateTotalPlaytime(user.serversOnline, this.selectedServer);
-        // Текстовое представление общего времени
+
         const timeText = document.createElement('div');
         timeText.textContent = this.formatPlaytimeText(totalSeconds);
         playtimeCell.appendChild(timeText);
-        // Полоса с сегментами
+
         const bar = this.createPlaytimeBar(user);
         playtimeCell.appendChild(bar);
+
         return playtimeCell;
     }
 
-    /**
-     * Создаёт элемент полосы, в которой каждому серверу отведена своя доля по времени игры.
-     */
     createPlaytimeBar(user) {
         const servers = this.parseServersOnline(user.serversOnline);
         let relevantServers = servers;
-        // Если выбран конкретный сервер – отфильтровываем данные
+
         if (this.selectedServer !== 'all') {
             relevantServers = servers.filter(s => s.serverName === this.selectedServer);
         }
+
         const totalTime = relevantServers.reduce((sum, s) => sum + s.totalTime, 0);
-        
         if (totalTime === 0) {
             const emptyBar = document.createElement('div');
             emptyBar.textContent = 'Нет данных';
             return emptyBar;
         }
-        
-        // Создаём контейнер полосы
+
         const barContainer = document.createElement('div');
-        // Стилизация – можно вынести в CSS
-		$(barContainer).addClass("playtime-bar-wrapper");
+        $(barContainer).addClass("playtime-bar-wrapper");
         barContainer.style.width = '100%';
-        
-        // Для каждого сервера создаём сегмент с шириной пропорциональной времени
+
         relevantServers.forEach(s => {
             const pct = ((s.totalTime / totalTime) * 100).toFixed(2);
             const segment = document.createElement('div');
             segment.style.width = `${pct}%`;
-            // Используем цвет из карты (foxEngine.serversColorMap) или задаём запасной вариант
             const color = (foxEngine.serversColorMap && foxEngine.serversColorMap[s.serverName]) || '#AAA';
             segment.style.backgroundColor = color;
             segment.title = `${s.serverName}: ${this.formatPlaytimeText(s.totalTime)}`;
             barContainer.appendChild(segment);
         });
-        
+
         return barContainer;
     }
 
-    /**
-     * Форматирует время, показывая часы, минуты и секунды.
-     * Например, 80 секунд будет отображено как "1 минута 20 секунд".
-     */
-    formatPlaytimeText(totalSeconds) {
-        const hours = Math.floor(totalSeconds / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
-        let parts = [];
-        if (hours > 0) {
-            parts.push(`${hours} ${this.declineWord(hours, ['час', 'часа', 'часов'])}`);
-        }
-        if (minutes > 0) {
-            parts.push(`${minutes} ${this.declineWord(minutes, ['минута', 'минуты', 'минут'])}`);
-        }
-        if (seconds > 0) {
-            parts.push(`${seconds} ${this.declineWord(seconds, ['секунда', 'секунды', 'секунд'])}`);
-        }
-        return parts.join(' ') || `0 ${this.declineWord(0, ['секунда', 'секунды', 'секунд'])}`;
-    }
-
     createLastSessionCell(user) {
-        const lastSessionCell = document.createElement('td');
-        let serversOnline;
-        try {
-            serversOnline = JSON.parse(user.serversOnline);
-        } catch (error) {
-            console.error("Ошибка при парсинге JSON в createLastSessionCell:", error);
-            lastSessionCell.textContent = 'Нет данных';
-            return lastSessionCell;
-        }
-
+        const cell = document.createElement('td');
         const servers = this.parseServersOnline(user.serversOnline);
+        let parsed;
 
-        if (serversOnline.isPlaying && serversOnline.playingOn) {
-            lastSessionCell.innerHTML = `<span class="badge badge-success">Играет на ${serversOnline.playingOn}</span>`;
-        } else if (this.selectedServer === 'all') {
-            if (servers.length > 0) {
-                const mostRecentServer = servers.reduce((prev, curr) => (prev.lastPlayed > curr.lastPlayed ? prev : curr));
-                const lastSessionLength = mostRecentServer.lastSession;
-                lastSessionCell.textContent = lastSessionLength
-                    ? this.formatTime(parseInt(lastSessionLength, 10))
-                    : 'Нет данных';
-            } else {
-                lastSessionCell.textContent = 'Нет данных';
-            }
-        } else {
-            const selectedServer = servers.find(server => server.serverName === this.selectedServer);
-            const lastSessionLength = selectedServer ? selectedServer.lastSession : 0;
-            lastSessionCell.textContent = lastSessionLength
-                ? this.formatTime(parseInt(lastSessionLength, 10))
-                : 'Нет данных';
+        try {
+            parsed = JSON.parse(user.serversOnline || '{}');
+        } catch (e) {
+            console.error("Ошибка при парсинге JSON:", e);
+            cell.textContent = 'Нет данных';
+            return cell;
         }
 
-        return lastSessionCell;
+        if (parsed.isPlaying && parsed.playingOn) {
+            cell.innerHTML = `<span class="badge badge-success">Играет на ${parsed.playingOn}</span>`;
+            return cell;
+        }
+
+        const relevant = this.selectedServer === 'all'
+            ? servers.reduce((a, b) => (a.lastPlayed > b.lastPlayed ? a : b), { lastSession: 0 })
+            : servers.find(s => s.serverName === this.selectedServer);
+
+        const sessionTime = relevant?.lastSession || 0;
+        cell.textContent = sessionTime ? this.formatTime(sessionTime) : 'Нет данных';
+        return cell;
     }
 
     createLastLoginCell(user) {
-        const lastLoginCell = document.createElement('td');
+        const cell = document.createElement('td');
         const servers = this.parseServersOnline(user.serversOnline);
-        if (servers.length > 0) {
-            const mostRecentServer = servers.reduce((prev, curr) => (prev.lastPlayed > curr.lastPlayed ? prev : curr));
-            if (mostRecentServer && mostRecentServer.lastPlayed) {
-                const lastLoginDate = new Date(mostRecentServer.lastPlayed * 1000);
-                lastLoginCell.textContent = this.formatLastLoginDate(lastLoginDate);
-            } else {
-                lastLoginCell.textContent = 'Нет данных';
-            }
+
+        const relevant = this.selectedServer === 'all'
+            ? servers.reduce((a, b) => (a.lastPlayed > b.lastPlayed ? a : b), { lastPlayed: 0 })
+            : servers.find(s => s.serverName === this.selectedServer);
+
+        const lastPlayed = relevant?.lastPlayed || 0;
+        if (lastPlayed > 0) {
+            const lastDate = new Date(lastPlayed * 1000);
+            cell.textContent = lastDate.toLocaleString();
         } else {
-            lastLoginCell.textContent = 'Нет данных';
+            cell.textContent = 'Нет данных';
         }
-        return lastLoginCell;
+
+        return cell;
     }
 
-    formatTime(totalSeconds) {
-        const hours = Math.floor(totalSeconds / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
-        let parts = [];
-        if (hours > 0) {
-            parts.push(`${hours} ${this.declineWord(hours, ['час', 'часа', 'часов'])}`);
-        }
-        if (minutes > 0) {
-            parts.push(`${minutes} ${this.declineWord(minutes, ['минута', 'минуты', 'минут'])}`);
-        }
-        if (seconds > 0) {
-            parts.push(`${seconds} ${this.declineWord(seconds, ['секунда', 'секунды', 'секунд'])}`);
-        }
-        return parts.join(' ') || `0 ${this.declineWord(0, ['секунда', 'секунды', 'секунд'])}`;
+    sortAndRenderUsersByServer(server) {
+        this.users = this.sortUsersByPlaytime(this.users, server);
+        this.renderUsers(this.users);
     }
 
-    formatLastLoginDate(date) {
-        const now = new Date();
-        const diffTime = now - date;
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-        const timeString = date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-
-        if (diffDays === 0) {
-            return `Сегодня в ${timeString}`;
-        } else if (diffDays === 1) {
-            return `Вчера в ${timeString}`;
-        } else {
-            return date.toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' });
-        }
+    formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins} мин ${secs} сек`;
     }
 
-    declineWord(number, declensions) {
-        const cases = [2, 0, 1, 1, 1, 2];
-        return declensions[
-            (number % 100 > 4 && number % 100 < 20) ? 2 :
-            cases[(number % 10 < 5) ? number % 10 : 5]
-        ];
-    }
-
-    sortAndRenderUsersByServer(selectedServer) {
-        const sortedUsers = this.sortUsersByPlaytime(this.users, selectedServer);
-        this.renderUsers(sortedUsers);
+    declineWord(number, forms) {
+        const n = Math.abs(number) % 100;
+        const n1 = n % 10;
+        if (n > 10 && n < 20) return forms[2];
+        if (n1 > 1 && n1 < 5) return forms[1];
+        if (n1 === 1) return forms[0];
+        return forms[2];
     }
 }
