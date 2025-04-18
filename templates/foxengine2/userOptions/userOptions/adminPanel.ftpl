@@ -70,6 +70,7 @@
 			<div class="buttonGroup">	
 				<button type="button" class="btn btn-success" onclick="adminPanel.editInfoBox.openEditWindow()">БлокИнфо</button>
 				<button type="button" class="btn btn-success" onclick="adminPanel.editAllBadges.openEditWindow()">Все бейджи</button>
+				<button type="button" class="btn btn-success" onclick="adminPanel.groupAssoc.openEditWindow()">Группы</button>
 			</div>
 		 </div>
 	 </div>
@@ -159,9 +160,8 @@ function animateLogs() {
 (async function () {
     const admOptions = [
         { name: "settings" },
-        { name: "users", loadAfter: true },
-        { name: "servers", requiresAuth: true },
-        { name: "permissions", classStyle: "deprecated-block" }
+        { name: "users", loadAfter: true, classStyle: "updated-block" },
+        { name: "servers", requiresAuth: true, classStyle: "warning-block" }
         // { name: "modules", category: "advanced" },
         // { name: "templateEditor", experimental: true }
     ];

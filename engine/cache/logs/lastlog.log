@@ -76,3 +76,206 @@
 [15.04.2025] (10:26:29) [DEBUG] user -> **Calista**  realUser -> **Calista**
 [15.04.2025] (10:26:29) [INFO] Установлен текстурный файл (SKIN): 
 [15.04.2025] (10:26:29) [INFO] Установлен текстурный файл (CAPE): 
+[15.04.2025] (11:40:36) Calista successfully authorized from 109.252.8.60
+[15.04.2025] (11:54:57) Checking a password 'undefined'
+[15.04.2025] (11:55:59) Checking a password 'B'
+[15.04.2025] (11:55:59) Checking a password 'B'
+[15.04.2025] (11:56:01) Checking a password 'undefined'
+[15.04.2025] (11:56:01) Checking a password 'b'
+[15.04.2025] (11:56:01) Checking a password 'bu'
+[15.04.2025] (11:56:02) Checking a password 'bul'
+[15.04.2025] (11:56:02) Checking a password 'bula'
+[15.04.2025] (11:56:02) Checking a password 'bulat'
+[15.04.2025] (11:56:02) Checking a password 'bulat2'
+[15.04.2025] (11:56:03) Checking a password 'bulat20'
+[15.04.2025] (11:56:03) Checking a password 'bulat200'
+[15.04.2025] (11:56:03) Checking a password 'bulat2004'
+[15.04.2025] (11:56:17) Checking a password 'bulat2004.'
+[15.04.2025] (11:56:17) Checking a password 'bulat2004.0'
+[15.04.2025] (11:56:18) Checking a password 'bulat2004.04'
+[15.04.2025] (11:56:53) Trying to register user 'Fox_Box'
+[15.04.2025] (11:56:53) User has completed registration 'Fox_Box'
+[15.04.2025] (11:58:34) Updater 178.207.22.145 with version '1.0.0' requests an update information
+[15.04.2025] (12:00:06) Updater 109.252.8.60 with version '2.5.6-Elunium' requests an update information
+[15.04.2025] (12:00:06) CPU ID BFEBFBFF000406F1 already exists in the database.
+[15.04.2025] (12:00:29) Calista successfully authorized from 109.252.8.60
+[15.04.2025] (12:00:41) Calista successfully authorized from 109.252.8.60
+[15.04.2025] (12:03:25) Updater 178.207.22.145 with version '2.5.6-Elunium' requests an update information
+[15.04.2025] (12:03:25) CPU ID BFEBFBFF000406F1 already exists in the database.
+[15.04.2025] (12:10:09) Fox_Box successfully authorized from 178.207.22.145
+[15.04.2025] (12:10:37) Calista successfully authorized from 109.252.8.60
+[15.04.2025] (12:10:52) Calista successfully authorized from 109.252.8.60
+[15.04.2025] (12:12:12) Fox_Box successfully authorized from 178.207.22.145
+[15.04.2025] (12:13:01) 178.207.22.145 requests 'Prodigium 1.20.1-Forge' files
+[15.04.2025] (12:13:08) 109.252.8.60 requests 'Prodigium 1.20.1-Forge' files
+[15.04.2025] (12:50:42) Calista successfully authorized from 109.252.8.60
+[15.04.2025] (12:54:49) AidenFox successfully authorized from 109.252.8.60
+[15.04.2025] (12:55:02) 109.252.8.60 requests 'Prodigium 1.20.1-Forge' files
+[15.04.2025] (13:31:22) Updater 178.207.22.145 with version '2.5.6-Elunium' requests an update information
+[15.04.2025] (13:31:22) CPU ID BFEBFBFF000406F1 already exists in the database.
+[15.04.2025] (13:32:35) Fox_Box successfully authorized from 178.207.22.145
+[15.04.2025] (13:32:37) 178.207.22.145 requests 'Prodigium 1.20.1-Forge' files
+[15.04.2025] (13:47:16) Updater 178.207.22.145 with version '2.5.6-Elunium' requests an update information
+[15.04.2025] (13:47:16) CPU ID BFEBFBFF000406F1 already exists in the database.
+[15.04.2025] (13:49:02) Fox_Box successfully authorized from 178.207.22.145
+[15.04.2025] (13:49:05) 178.207.22.145 requests 'Prodigium 1.20.1-Forge' files
+[15.04.2025] (13:53:59) Updater 178.207.22.145 with version '2.5.6-Elunium' requests an update information
+[15.04.2025] (13:53:59) CPU ID BFEBFBFF000406F1 already exists in the database.
+[15.04.2025] (13:54:47) Fox_Box successfully authorized from 178.207.22.145
+[15.04.2025] (13:54:53) 178.207.22.145 requests 'Prodigium 1.20.1-Forge' files
+[15.04.2025] (13:55:32) 178.207.22.145 requests 'Prodigium 1.20.1-Forge' files
+[15.04.2025] (14:15:39) Updater 178.207.22.145 with version '2.5.6-Elunium' requests an update information
+[15.04.2025] (14:15:39) CPU ID BFEBFBFF000406F1 already exists in the database.
+[15.04.2025] (14:22:31) Fox_Box successfully authorized from 178.207.22.145
+[15.04.2025] (14:23:09) Fox_Box successfully authorized from 178.207.22.145
+[15.04.2025] (14:23:15) 178.207.22.145 requests 'Prodigium 1.20.1-Forge' files
+[15.04.2025] (15:07:37) AidenFox successfully authorized from 109.252.8.60
+[15.04.2025] (15:14:45) Fox_Box successfully authorized from 178.207.22.145
+[15.04.2025] (16:14:02) Updater 178.207.22.145 with version '2.5.6-Elunium' requests an update information
+[15.04.2025] (16:14:02) CPU ID BFEBFBFF000406F1 already exists in the database.
+[15.04.2025] (16:14:58) Fox_Box successfully authorized from 178.207.22.145
+[15.04.2025] (16:15:14) 178.207.22.145 requests 'Prodigium 1.20.1-Forge' files
+[15.04.2025] (19:38:22) Updater 188.254.110.80 with version '2.5.6-Elunium' requests an update information
+[15.04.2025] (19:38:22) CPU ID BFEBFBFF00090675 already exists in the database.
+[15.04.2025] (19:38:49) Cube successfully authorized from 188.254.110.80
+[15.04.2025] (19:38:52) 188.254.110.80 requests 'Prodigium 1.20.1-Forge' files
+[15.04.2025] (19:40:44) **JoinServer constructor called**
+[15.04.2025] (19:40:44) [INFO] Data accessToken 1e5f0f287bc49d58a5b7827430e8bd35 is valid!
+[15.04.2025] (19:40:44) [INFO] Data selectedProfile a296104f0c61a9cf39f4824d05315e12 is valid!
+[15.04.2025] (19:40:44) [INFO] Data serverId 66728947c1c6aa7ca287730ff9f22a0efe1fe53d is valid!
+[15.04.2025] (19:40:44) [INFO] Database connection established
+[15.04.2025] (19:40:44) [INFO] Validating session for userMd5: <b>a296104f0c61a9cf39f4824d05315e12</b>
+[15.04.2025] (19:40:44) [INFO] Session validated successfully
+[15.04.2025] (19:40:44) [INFO] Updating session for userMd5: <b>a296104f0c61a9cf39f4824d05315e12</b>
+[15.04.2025] (19:40:44) [INFO] Начата обработка для пользователя: Cube
+[15.04.2025] (19:40:44) [INFO] Найден пользователь: Cube (UUID: a296104f0c61a9cf39f4824d05315e12)
+[15.04.2025] (19:40:44) [INFO] Проверка пользователя: Cube
+[15.04.2025] (19:40:44) [DEBUG] user -> **Cube**  realUser -> **Cube**
+[15.04.2025] (19:40:44) [INFO] Установлен текстурный файл (SKIN): 
+[15.04.2025] (20:23:49) Updater 178.207.22.140 with version '2.5.6-Elunium' requests an update information
+[15.04.2025] (20:23:49) CPU ID BFEBFBFF000406F1 already exists in the database.
+[15.04.2025] (20:24:41) Fox_Box successfully authorized from 178.207.22.140
+[15.04.2025] (20:24:47) 178.207.22.140 requests 'Prodigium 1.20.1-Forge' files
+[15.04.2025] (20:36:27) **JoinServer constructor called**
+[15.04.2025] (20:36:27) [INFO] Data accessToken 6d845100be3ceafa49fc32cd61a7797f is valid!
+[15.04.2025] (20:36:27) [INFO] Data selectedProfile ba40c023b4d59bee47854cdbda8d6d61 is valid!
+[15.04.2025] (20:36:27) [INFO] Data serverId -2ec8a3f486a5e991883bd7c10bedee15656bd0dc is valid!
+[15.04.2025] (20:36:27) [INFO] Database connection established
+[15.04.2025] (20:36:27) [INFO] Validating session for userMd5: <b>ba40c023b4d59bee47854cdbda8d6d61</b>
+[15.04.2025] (20:36:27) [INFO] Session validated successfully
+[15.04.2025] (20:36:27) [INFO] Updating session for userMd5: <b>ba40c023b4d59bee47854cdbda8d6d61</b>
+[15.04.2025] (20:36:27) [INFO] Начата обработка для пользователя: Fox_Box
+[15.04.2025] (20:36:27) [INFO] Найден пользователь: Fox_Box (UUID: ba40c023b4d59bee47854cdbda8d6d61)
+[15.04.2025] (20:36:27) [INFO] Проверка пользователя: Fox_Box
+[15.04.2025] (20:36:27) [DEBUG] user -> **Fox_Box**  realUser -> **Fox_Box**
+[15.04.2025] (20:36:27) [INFO] Установлен текстурный файл (SKIN): 
+[16.04.2025] (08:46:14) Calista successfully authorized from 109.252.8.60
+[16.04.2025] (10:44:25) Updater 188.254.110.80 with version '2.5.6-Elunium' requests an update information
+[16.04.2025] (10:44:25) CPU ID BFEBFBFF00090675 already exists in the database.
+[16.04.2025] (10:44:49) Cube successfully authorized from 188.254.110.80
+[16.04.2025] (10:44:54) 188.254.110.80 requests 'Prodigium 1.20.1-Forge' files
+[16.04.2025] (10:46:38) **JoinServer constructor called**
+[16.04.2025] (10:46:38) [INFO] Data accessToken 4501d8af5bbf1b9cd0c0957dc42a9036 is valid!
+[16.04.2025] (10:46:38) [INFO] Data selectedProfile a296104f0c61a9cf39f4824d05315e12 is valid!
+[16.04.2025] (10:46:38) [INFO] Data serverId -1cd8912a958227970d1084e4079fa5c92107b81a is valid!
+[16.04.2025] (10:46:38) [INFO] Database connection established
+[16.04.2025] (10:46:38) [INFO] Validating session for userMd5: <b>a296104f0c61a9cf39f4824d05315e12</b>
+[16.04.2025] (10:46:38) [INFO] Session validated successfully
+[16.04.2025] (10:46:38) [INFO] Updating session for userMd5: <b>a296104f0c61a9cf39f4824d05315e12</b>
+[16.04.2025] (10:46:38) [INFO] Начата обработка для пользователя: Cube
+[16.04.2025] (10:46:38) [INFO] Найден пользователь: Cube (UUID: a296104f0c61a9cf39f4824d05315e12)
+[16.04.2025] (10:46:38) [INFO] Проверка пользователя: Cube
+[16.04.2025] (10:46:38) [DEBUG] user -> **Cube**  realUser -> **Cube**
+[16.04.2025] (10:46:38) [INFO] Установлен текстурный файл (SKIN): 
+[16.04.2025] (10:49:14) Updater 109.252.8.60 with version '2.5.6-Elunium' requests an update information
+[16.04.2025] (10:49:14) CPU ID BFEBFBFF000406F1 already exists in the database.
+[16.04.2025] (10:49:38) AidenFox successfully authorized from 109.252.8.60
+[16.04.2025] (10:49:40) 109.252.8.60 requests 'Prodigium 1.20.1-Forge' files
+[16.04.2025] (10:51:17) **JoinServer constructor called**
+[16.04.2025] (10:51:17) [INFO] Data accessToken 738bb6192e81f750c8b3f2f06360d7cd is valid!
+[16.04.2025] (10:51:17) [INFO] Data selectedProfile 436246fdf1d0f84b5b2ca7e0646aecc9 is valid!
+[16.04.2025] (10:51:17) [INFO] Data serverId -51d07e6662565ef2e97cd8935608b75485a2cdde is valid!
+[16.04.2025] (10:51:17) [INFO] Database connection established
+[16.04.2025] (10:51:17) [INFO] Validating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[16.04.2025] (10:51:17) [INFO] Session validated successfully
+[16.04.2025] (10:51:17) [INFO] Updating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[16.04.2025] (10:51:17) [INFO] Начата обработка для пользователя: AidenFox
+[16.04.2025] (10:51:17) [INFO] Найден пользователь: AidenFox (UUID: 436246fdf1d0f84b5b2ca7e0646aecc9)
+[16.04.2025] (10:51:17) [INFO] Проверка пользователя: AidenFox
+[16.04.2025] (10:51:17) [DEBUG] user -> **AidenFox**  realUser -> **AidenFox**
+[16.04.2025] (10:51:17) [INFO] Установлен текстурный файл (SKIN): 
+[16.04.2025] (10:51:17) [INFO] Установлен текстурный файл (CAPE): 
+[16.04.2025] (11:18:39) AidenFox successfully authorized from 109.252.8.60
+[16.04.2025] (12:30:33) **JoinServer constructor called**
+[16.04.2025] (12:30:33) [INFO] Data accessToken 4501d8af5bbf1b9cd0c0957dc42a9036 is valid!
+[16.04.2025] (12:30:33) [INFO] Data selectedProfile a296104f0c61a9cf39f4824d05315e12 is valid!
+[16.04.2025] (12:30:33) [INFO] Data serverId 3865c5f8866b3383d3cd24e14edeae2ee3c134d8 is valid!
+[16.04.2025] (12:30:33) [INFO] Database connection established
+[16.04.2025] (12:30:33) [INFO] Validating session for userMd5: <b>a296104f0c61a9cf39f4824d05315e12</b>
+[16.04.2025] (12:30:33) [INFO] Session validated successfully
+[16.04.2025] (12:30:33) [INFO] Updating session for userMd5: <b>a296104f0c61a9cf39f4824d05315e12</b>
+[16.04.2025] (12:30:33) [INFO] Начата обработка для пользователя: Cube
+[16.04.2025] (12:30:33) [INFO] Найден пользователь: Cube (UUID: a296104f0c61a9cf39f4824d05315e12)
+[16.04.2025] (12:30:33) [INFO] Проверка пользователя: Cube
+[16.04.2025] (12:30:33) [DEBUG] user -> **Cube**  realUser -> **Cube**
+[16.04.2025] (12:30:33) [INFO] Установлен текстурный файл (SKIN): 
+[16.04.2025] (12:31:30) Cube successfully authorized from 188.254.110.80
+[16.04.2025] (12:33:26) Updater 188.254.110.80 with version '2.5.6-Elunium' requests an update information
+[16.04.2025] (12:33:26) CPU ID BFEBFBFF00090675 already exists in the database.
+[16.04.2025] (12:33:51) Cube successfully authorized from 188.254.110.80
+[16.04.2025] (12:34:02) 188.254.110.80 requests 'FrostPunkZ 1.20.1-Forge' files
+[16.04.2025] (14:10:22) Updater 188.254.110.80 with version '2.5.6-Elunium' requests an update information
+[16.04.2025] (14:10:22) CPU ID BFEBFBFF00090675 already exists in the database.
+[16.04.2025] (14:10:47) Cube successfully authorized from 188.254.110.80
+[16.04.2025] (14:11:00) 188.254.110.80 requests 'FrostPunkZ 1.20.1-Forge' files
+[16.04.2025] (17:29:34) Updater 188.254.110.80 with version '2.5.6-Elunium' requests an update information
+[16.04.2025] (17:29:34) CPU ID BFEBFBFF00090675 already exists in the database.
+[16.04.2025] (17:29:57) Cube successfully authorized from 188.254.110.80
+[16.04.2025] (17:30:47) Updater 188.254.110.80 with version '2.5.6-Elunium' requests an update information
+[16.04.2025] (17:30:47) CPU ID BFEBFBFF00090675 already exists in the database.
+[16.04.2025] (17:31:10) Cube successfully authorized from 188.254.110.80
+[16.04.2025] (17:32:12) 188.254.110.80 requests 'FrostPunkZ 1.20.1-Forge' files
+[16.04.2025] (18:23:59) Updater 188.254.110.80 with version '2.5.6-Elunium' requests an update information
+[16.04.2025] (18:23:59) CPU ID BFEBFBFF00090675 already exists in the database.
+[16.04.2025] (18:24:22) Cube successfully authorized from 188.254.110.80
+[16.04.2025] (18:24:43) 188.254.110.80 requests 'FrostPunkZ 1.20.1-Forge' files
+[17.04.2025] (15:07:18) Calista successfully authorized from 31.173.82.71
+[17.04.2025] (18:54:38) Updater 188.254.110.80 with version '2.5.6-Elunium' requests an update information
+[17.04.2025] (18:54:38) CPU ID BFEBFBFF00090675 already exists in the database.
+[17.04.2025] (18:55:15) Cube successfully authorized from 188.254.110.80
+[17.04.2025] (18:56:05) 188.254.110.80 requests 'FrostPunkZ 1.20.1-Forge' files
+[17.04.2025] (22:10:43) Updater 31.173.82.71 with version '2.4.5-Elunium' requests an update information
+[17.04.2025] (22:10:43) CPU ID BFEBFBFF000906E9 already exists in the database.
+[17.04.2025] (22:11:02) Updater 31.173.82.71 with version '2.5.6-Elunium' requests an update information
+[17.04.2025] (22:11:02) CPU ID BFEBFBFF000906E9 already exists in the database.
+[17.04.2025] (22:12:07) AidenFox successfully authorized from 31.173.82.71
+[17.04.2025] (22:12:24) 31.173.82.71 requests 'Celeste 1.12.2-Forge' files
+[17.04.2025] (22:16:32) AidenFox successfully authorized from 31.173.82.71
+[17.04.2025] (22:18:48) Updater 91.236.2.253 with version '2.5.6-Elunium' requests an update information
+[17.04.2025] (22:18:48) CPU ID BFEBFBFF000A0653 already exists in the database.
+[17.04.2025] (22:18:48) AidenFox successfully authorized from 31.173.82.71
+[17.04.2025] (22:18:57) 31.173.82.71 requests 'Celeste 1.20.1-Forge' files
+[17.04.2025] (22:19:51) vinjoooo successfully authorized from 91.236.2.253
+[17.04.2025] (22:23:19) **JoinServer constructor called**
+[17.04.2025] (22:23:19) [INFO] Data accessToken afaffa4ef8a52d8bd4d699a4be467bd8 is valid!
+[17.04.2025] (22:23:19) [INFO] Data selectedProfile 436246fdf1d0f84b5b2ca7e0646aecc9 is valid!
+[17.04.2025] (22:23:19) [INFO] Data serverId 3d769260273a9be9c608957e952cf6e28fb9466a is valid!
+[17.04.2025] (22:23:19) [INFO] Database connection established
+[17.04.2025] (22:23:19) [INFO] Validating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[17.04.2025] (22:23:19) [INFO] Session validated successfully
+[17.04.2025] (22:23:19) [INFO] Updating session for userMd5: <b>436246fdf1d0f84b5b2ca7e0646aecc9</b>
+[17.04.2025] (22:23:20) [INFO] Начата обработка для пользователя: AidenFox
+[17.04.2025] (22:23:20) [INFO] Найден пользователь: AidenFox (UUID: 436246fdf1d0f84b5b2ca7e0646aecc9)
+[17.04.2025] (22:23:20) [INFO] Проверка пользователя: AidenFox
+[17.04.2025] (22:23:20) [DEBUG] user -> **AidenFox**  realUser -> **AidenFox**
+[17.04.2025] (22:23:20) [INFO] Установлен текстурный файл (SKIN): 
+[17.04.2025] (22:23:20) [INFO] Установлен текстурный файл (CAPE): 
+[18.04.2025] (09:59:40) AidenFox successfully authorized from 31.173.82.71
+[18.04.2025] (10:00:35) Calista successfully authorized from 31.173.82.71
+[18.04.2025] (10:22:53) Updater 31.173.82.71 with version '2.5.6-Elunium' requests an update information
+[18.04.2025] (10:22:53) CPU ID BFEBFBFF000906E9 already exists in the database.
+[18.04.2025] (10:23:26) AidenFox successfully authorized from 31.173.82.71
+[18.04.2025] (10:25:15) AidenFox successfully authorized from 31.173.82.71
+[18.04.2025] (10:26:13) Updater 31.173.82.71 with version '2.5.6-Elunium' requests an update information
+[18.04.2025] (10:26:13) CPU ID BFEBFBFF000906E9 already exists in the database.
+[18.04.2025] (10:26:39) AidenFox successfully authorized from 31.173.82.71

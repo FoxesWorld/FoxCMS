@@ -20,7 +20,6 @@ export class EditServer {
         try {
             await this.loadAllOptions();
             const serverData = await this.getServerData(serverName);
-            this.createDialogIfNeeded();
             this.updateFieldOptions();
 
             const formHtml = await this.generateFormHtml(serverName, serverData);
@@ -59,12 +58,6 @@ export class EditServer {
         return await foxEngine.sendPostAndGetAnswer(query, 'JSON');
     }
 
-    createDialogIfNeeded() {
-        //if ($('#dialog').length === 0) {
-        //    $('body').append('<div id="dialog" title="Server Options"></div>');
-        //}
-    }
-
     async loadAllOptions() {
         const [versions, javaVersions, serverPictures] = await Promise.all([
             this.parseAvailableVersions(),
@@ -89,21 +82,20 @@ export class EditServer {
         return await foxEngine.sendPostAndGetAnswer({ admPanel: 'getServerPictures' }, 'JSON');
     }
 
-    updateFieldOptions() {
-        for (const field of this.formFields) {
-            switch (field.fieldName) {
-                case 'serverVersion':
-                    field.optionsArray = this.versions;
-                    break;
-                case 'jreVersion':
-                    field.optionsArray = this.javaVersions;
-                    break;
-                case 'serverImage':
-                    field.optionsArray = this.serverPictures;
-                    break;
-            }
-        }
-    }
+	updateFieldOptions() {
+		const fieldOptionsMap = {
+			serverVersion: this.versions,
+			jreVersion: this.javaVersions,
+			serverImage: this.serverPictures
+			// можно легко добавить новые поля: role: this.roles и т.д.
+		};
+
+		this.formFields.forEach(field => {
+			if (field.fieldName in fieldOptionsMap) {
+				field.optionsArray = fieldOptionsMap[field.fieldName];
+			}
+		});
+	}
 
     async generateFormHtml(serverName, serverData) {
         const serverEndFormTpl = this.serversInstance.adminPanel.templateCache["serverEndForm"];
@@ -161,8 +153,6 @@ export class EditServer {
     async openAddServerDialog() {
         try {
             await this.loadAllOptions();
-            this.createDialogIfNeeded();
-            //$('#dialog').attr('title', 'Добавить сервер');
             this.updateFieldOptions();
 
             const emptyData = {

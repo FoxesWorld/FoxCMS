@@ -1,5 +1,5 @@
 <?php 
-    /* [14.04.2025] */
+    /* [18.04.2025] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -24,7 +24,7 @@ $config = array(
 		"smtp_port" => "465",
 		"smtp_secure" => "ssl",
 		"contactPhone" => "null",
-		"ServiceVersion" => "2.14.5"
+		"ServiceVersion" => "2.15.5"
 ),
 
 	"launcherSettings" => array(
@@ -71,7 +71,7 @@ $config = array(
 		"userOptions" => "userOptions",
 		"OptionReplaceValues" => "{siteKey}->cfgVal(securitySetings|reCaptchaWebsite),{discordLink}->cfgVal(other|discordLink),{vkLink}->cfgVal(other|vkLink),{TPL}->cfgVal(siteSettings|siteTpl),{lang}->cfgVal(siteSettings|lang)",
 		"userFieldsArray" => "user_id,email,login,password,user_group,realname,hash,reg_date,last_date,logged_ip,profilePhoto,userStatus,land,colorScheme,groupName,badges,balance,token,serversOnline",
-		"canEditGroup" => "1,4,3"
+		"canEditGroup" => "1,4,3,6"
 ));
 
 ?>

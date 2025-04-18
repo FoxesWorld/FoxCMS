@@ -30,9 +30,10 @@ var JsonArrConfig;
 var init_JsonArrConfig = __esm({
   "modules/JsonArrConfig.js"() {
     JsonArrConfig = class {
-      constructor(jsonAttributes, submitHandler, buildField) {
+      constructor(instance, submitHandler, buildField) {
         this.postData;
-        this.jsonAttributes = jsonAttributes;
+        ;
+        this.jsonAttributes = this.getFieldNames(instance.formFields);
         this.submitHandler = submitHandler;
         if (buildField) {
           this.buildField = buildField;
@@ -44,6 +45,9 @@ var init_JsonArrConfig = __esm({
         const minHeight = 100;
         const calculatedHeight = Math.max(minHeight, value.length / 2);
         return calculatedHeight;
+      }
+      getFieldNames(formFields) {
+        return formFields.map((field) => field.fieldName);
       }
       async openFormWindow(configArray, serverName, postData) {
         this.postData = postData;
@@ -555,7 +559,8 @@ var init_EditBalance = __esm({
         ];
         this.buildField = new BuildField(this);
         this.jsonArrConfig = new JsonArrConfig(
-          this.formFields.map((f) => f.fieldName),
+          this,
+          //.formFields.map(f => f.fieldName),
           this.submitHandler.bind(this),
           this.buildField
         );
@@ -650,7 +655,7 @@ var init_EditBadges = __esm({
         ];
         this.buildField = new BuildField(this);
         this.jsonArrConfig = new JsonArrConfig(
-          ["badgeName", "acquiredDate", "description"],
+          this,
           this.submitHandler.bind(this),
           this.buildField
         );
@@ -712,6 +717,61 @@ var init_EditBadges = __esm({
   }
 });
 
+// options/userOptions/EditUserOnline.js
+var EditUserOnline;
+var init_EditUserOnline = __esm({
+  "options/userOptions/EditUserOnline.js"() {
+    init_JsonArrConfig();
+    init_BuildField();
+    EditUserOnline = class {
+      constructor() {
+        this.formFields = [
+          { fieldName: "serverName", fieldType: "text" },
+          { fieldName: "totalTime", fieldType: "number" },
+          { fieldName: "startTimestamp", fieldType: "date" },
+          { fieldName: "lastUpdated", fieldType: "date" },
+          { fieldName: "lastSession", fieldType: "number" },
+          { fieldName: "lastPlayed", fieldType: "number" }
+        ];
+        this.buildField = new BuildField(this);
+        this.jsonArrConfig = new JsonArrConfig(
+          this,
+          this.submitHandler.bind(this),
+          this.buildField
+        );
+      }
+      async openEditWindow(login) {
+        if (login) {
+          try {
+            const badgesArray = await foxEngine.sendPostAndGetAnswer({
+              "admPanel": "getUserPlayTime",
+              "login": login
+            }, "JSON");
+            console.log(badgesArray);
+            this.jsonArrConfig.openFormWindow(
+              badgesArray,
+              login,
+              { admPanel: "editUserOnline", userLogin: login }
+            );
+          } catch (error) {
+            console.error("An error occurred:", error.message);
+          }
+        } else {
+          console.error("Login is undefined");
+        }
+      }
+      async submitHandler(button, user) {
+        const answer = await this.jsonArrConfig.updateJsonConfig("serversOnline");
+        button.notify(answer.message, answer.type);
+        setTimeout(async () => {
+          foxEngine.modalApp.closeModalApp();
+          foxEngine.user.showUserProfile(user);
+        }, 500);
+      }
+    };
+  }
+});
+
 // options/Users.js
 var Users;
 var init_Users = __esm({
@@ -720,6 +780,7 @@ var init_Users = __esm({
     init_BuildField();
     init_EditBalance();
     init_EditBadges();
+    init_EditUserOnline();
     Users = class {
       constructor(adminPanel2) {
         this.adminPanel = adminPanel2;
@@ -728,20 +789,7 @@ var init_Users = __esm({
         this.contentAdded = false;
         this.editBadges = new EditBadges();
         this.editBalance = new EditBalance();
-        this.dialogOptions = {
-          autoOpen: false,
-          position: {
-            my: "center",
-            at: "center",
-            of: window
-          },
-          modal: true,
-          height: "auto",
-          width: 600,
-          resizable: false,
-          open: function(event, ui) {
-          }
-        };
+        this.editUserOnline = new EditUserOnline();
       }
       async parseUsers(input = "*") {
         try {
@@ -781,15 +829,7 @@ var init_Users = __esm({
               });
               $("#usersList").append(userHtml);
             }
-            $("#usersList").on("click", ".showProfile", async (event) => {
-              const login = $(event.currentTarget).data("login");
-              if (login) {
-                foxEngine.user.showProfilePopup(login);
-              } else {
-                console.error("Login is undefined");
-              }
-            });
-            $("#usersList").on("click", ".loadUserBadges", async (event) => {
+            $("#usersList").on("click", ".editUserBadges", async (event) => {
               const login = $(event.currentTarget).data("login");
               if (login) {
                 await adminPanel.users.editBadges.openEditWindow(login);
@@ -801,6 +841,14 @@ var init_Users = __esm({
               const login = $(event.currentTarget).data("login");
               if (login) {
                 await adminPanel.users.editBalance.openEditWindow(login);
+              } else {
+                console.error("Login is undefined");
+              }
+            });
+            $("#usersList").on("click", ".editServersOnline", async (event) => {
+              const login = $(event.currentTarget).data("login");
+              if (login) {
+                await adminPanel.users.editUserOnline.openEditWindow(login);
               } else {
                 console.error("Login is undefined");
               }
@@ -1033,7 +1081,12 @@ var init_EditServerMods = __esm({
     EditServerMods = class {
       constructor() {
         this.serverAttributes = ["modName", "modPicture", "modDesc"];
-        this.jsonArrConfig = new JsonArrConfig(this.serverAttributes, this.submitHandler.bind(this));
+        this.formFields = [
+          { fieldName: "modName", fieldType: "text" },
+          { fieldName: "modPicture", fieldType: "text" },
+          { fieldName: "modDesc", fieldType: "text" }
+        ];
+        this.jsonArrConfig = new JsonArrConfig(this, this.submitHandler.bind(this));
       }
       async submitHandler(button, serverName) {
         let answer = await this.jsonArrConfig.updateJsonConfig("modsInfo");
@@ -1069,7 +1122,7 @@ var init_EditServer = __esm({
         this.serverPictures = [];
         this.javaVersions = [];
         this.buildField = new BuildField(this);
-        this.jsonArrConfig = new JsonArrConfig();
+        this.jsonArrConfig = new JsonArrConfig(this, {}, this.buildField);
         this.editServerMods = new EditServerMods();
       }
       async loadServerOptions(serverName) {
@@ -1364,20 +1417,12 @@ var init_EditInfoBox = __esm({
         ];
         this.buildField = new BuildField(this);
         this.jsonArrConfig = new JsonArrConfig(
-          this.formFields.map((f) => f.fieldName),
+          this,
+          //.formFields.map(f => f.fieldName),
           this.submitHandler.bind(this),
           this.buildField
         );
       }
-      /*
-      	async loadInfoBoxConfig(button, data, user) {
-      		if (data) {
-      			this.jsonArrConfig.openModsInfoWindow(data, user);
-      		} else {
-      			button.notify(`${user} has no infobox configuration!`, "warn");
-      		}
-      	}
-      	*/
       async openEditWindow() {
         try {
           console.log("\u0417\u0430\u043F\u0440\u043E\u0441 \u043D\u0430 \u0441\u0435\u0440\u0432\u0435\u0440...");
@@ -1426,7 +1471,8 @@ var init_EditAllBadges = __esm({
         ];
         this.buildField = new BuildField(this);
         this.jsonArrConfig = new JsonArrConfig(
-          this.formFields.map((f) => f.fieldName),
+          this,
+          //.formFields.map(f => f.fieldName),
           this.submitHandler.bind(this),
           this.buildField
         );

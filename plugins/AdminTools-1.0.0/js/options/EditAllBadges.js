@@ -8,14 +8,16 @@ export class EditAllBadges {
 		this.formFields = [
 			{ fieldName: 'badgeName', fieldType: 'text' },
 			{ fieldName: 'description', fieldType: 'text' },
-			{ fieldName: 'img', fieldType: 'text' }
+			{ fieldName: 'img', fieldType: 'text' },
+			{ fieldName: 'img', fieldType: 'image'}
 		];
 		
 		this.buildField = new BuildField(this);
 		this.jsonArrConfig = new JsonArrConfig(
 			this,//.formFields.map(f => f.fieldName),
 			this.submitHandler.bind(this),
-			this.buildField
+			this.buildField,
+			{addRow: true, delRow: true}
 		);
 	}
 	
@@ -30,7 +32,7 @@ export class EditAllBadges {
 			console.log("Ответ от сервера:", allBadgesArray);
 
 			if (allBadgesArray && Array.isArray(allBadgesArray) && allBadgesArray.length > 0) {
-				this.jsonArrConfig.openFormWindow(
+				this.jsonArrConfig.openForm(
 					allBadgesArray,
 					"AllBadges",
 					{ admPanel: "allBadgesUpdate" }

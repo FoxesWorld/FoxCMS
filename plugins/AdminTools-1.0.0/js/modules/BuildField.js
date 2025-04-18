@@ -24,6 +24,7 @@ export class BuildField {
             textarea: this.createTextareaInput.bind(this),
             tagify: this.createTagifyInput.bind(this),
             date: this.createDatePickerInput.bind(this),
+			image: this.createImage.bind(this)
         };
         // Позволяет переопределять или добавлять обработчики
         this.handlers = { ...this.defaultHandlers, ...(options.customHandlers || {}) };
@@ -237,7 +238,6 @@ createTextareaInput(fieldName, value) {
     const textareaId = `${fieldName}_textarea`;
     const safeValue = typeof value === "string" ? value : "";
 
-    // Возвращаем HTML сразу с видимым textarea
     return `
         <div class="mb-3">
             <label for="${textareaId}" class="form-label">${fieldName}</label>
@@ -249,6 +249,16 @@ createTextareaInput(fieldName, value) {
                 style="resize: vertical;">${safeValue}</textarea>
         </div>`;
 }
+
+	createImage(fieldName, value) {
+		const imageId = `${fieldName}_image`;
+		const safeValue = typeof value === "string" ? value : "";
+
+		return `
+			<div class="mb-3">
+				<img src="${value}" class="previewImage" alt="${imageId}"/>
+			</div>`;
+	}
 
 
 

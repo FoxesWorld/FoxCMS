@@ -10,6 +10,7 @@ export class EditInfoBox {
 			{ fieldName: 'title', fieldType: 'text' },
 			{ fieldName: 'text', fieldType: 'textarea' },
 			{ fieldName: 'image', fieldType: 'text' },
+			{ fieldName: 'image', fieldType: 'image' },
 			{ fieldName: 'button_text', fieldType: 'text' },
 			{ fieldName: 'button_url', fieldType: 'text' }
 		];
@@ -18,7 +19,8 @@ export class EditInfoBox {
 		this.jsonArrConfig = new JsonArrConfig(
 			this,//.formFields.map(f => f.fieldName),
 			this.submitHandler.bind(this),
-			this.buildField
+			this.buildField,
+			{addRow: true, delRow: true}
 		);
 	}
 
@@ -33,7 +35,7 @@ export class EditInfoBox {
 			console.log("Ответ от сервера:", infoBoxArray);
 
 			if (infoBoxArray && Array.isArray(infoBoxArray) && infoBoxArray.length > 0) {
-				this.jsonArrConfig.openFormWindow(
+				this.jsonArrConfig.openForm(
 					infoBoxArray,
 					"InfoBox",
 					{ admPanel: "infoBoxUpdate" }

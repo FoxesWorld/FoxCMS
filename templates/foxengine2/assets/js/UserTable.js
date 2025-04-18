@@ -121,16 +121,18 @@ calculateTotalPlaytime(serversOnline, selectedServer) {
  * всегда показыя часы и секунды (даже если минут = 0).
  * Для 3630 секунд вернет "1 час 30 секунд".
  */
-formatPlaytimeText(totalSeconds) {
-    const s   = Math.round(totalSeconds);
-    const h   = Math.floor(s / 3600);
+formatPlaytimeText(seconds) {
+ const s = Math.round(seconds);
+    const h = Math.floor(s / 3600);
+    const m = Math.floor((s % 3600) / 60);
     const sec = s % 60;
+
     const parts = [];
+    if (h > 0) parts.push(`${h} ${this.declineWord(h, 'час', 'часа', 'часов')}`);
+    if (m > 0) parts.push(`${m} ${this.declineWord(m, 'минута', 'минуты', 'минут')}`);
+    if (sec > 0) parts.push(`${sec} ${this.declineWord(sec, 'секунда', 'секунды', 'секунд')}`);
 
-    if (h > 0)   parts.push(`${h} ${this.declineWord(h, ['час', 'часа', 'часов'])}`);
-    if (sec > 0) parts.push(`${sec} ${this.declineWord(sec, ['секунда', 'секунды', 'секунд'])}`);
-
-    return parts.join(' ') || `0 ${this.declineWord(0, ['секунда', 'секунды', 'секунд'])}`;
+    return parts.join(' ') || `0 ${this.declineWord(0, 'секунда', 'секунды', 'секунд')}`;
 }
 
 
@@ -323,12 +325,13 @@ formatPlaytimeText(totalSeconds) {
         return `${mins} мин ${secs} сек`;
     }
 
-    declineWord(number, forms) {
-        const n = Math.abs(number) % 100;
-        const n1 = n % 10;
-        if (n > 10 && n < 20) return forms[2];
-        if (n1 > 1 && n1 < 5) return forms[1];
-        if (n1 === 1) return forms[0];
-        return forms[2];
-    }
+	declineWord(number, ...forms) {
+		const n = Math.abs(number) % 100;
+		const n1 = n % 10;
+		if (n > 10 && n < 20) return forms[2];
+		if (n1 > 1 && n1 < 5) return forms[1];
+		if (n1 === 1) return forms[0];
+		return forms[2];
+	}
+
 }

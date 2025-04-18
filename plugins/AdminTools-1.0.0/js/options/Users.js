@@ -7,12 +7,15 @@ import { EditUserOnline }  from './userOptions/EditUserOnline.js';
 export class Users {
     constructor(adminPanel) {
 		this.adminPanel = adminPanel;
+		
+		
         this.userArr = [];
 		this.allBadges = [];
+		this.allServers = [];
 		this.contentAdded = false;
 		this.editBadges = new EditBadges();
 		this.editBalance = new EditBalance();
-		this.editUserOnline = new EditUserOnline();
+		this.editUserOnline = new EditUserOnline(adminPanel);
     }
 
 async parseUsers(input = '*') {

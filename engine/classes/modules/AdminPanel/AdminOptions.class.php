@@ -8,7 +8,6 @@ class AdminOptions extends AdminPanel {
     function __construct($REQUEST, $db) {
         global $config;
         if(init::$usrArray['user_group'] == 1) {
-			require("GenericUpdater.php");
             switch($REQUEST["admPanel"]){
                 case "editServer":
                     	$editServer = new EditServer($db);
@@ -60,6 +59,14 @@ class AdminOptions extends AdminPanel {
 						'badgeName', 'description', 'img'
 					]);
 					$result = $updater->updateData($REQUEST['allBadgesUpdate'], 'badgeName');
+					die(json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+				break;
+
+				case "groupAssocUpdate":
+					$updater = new GenericUpdater($db, 'groupAssociation', [
+						'groupName', 'groupNum', 'groupType'
+					]);
+					$result = $updater->updateData($REQUEST['groupAssoc'], 'groupName');
 					die(json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 				break;
 

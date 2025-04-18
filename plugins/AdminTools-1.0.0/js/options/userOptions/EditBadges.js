@@ -14,7 +14,8 @@ export class EditBadges {
 		this.jsonArrConfig = new JsonArrConfig(
 			this, 
 			this.submitHandler.bind(this), 
-			this.buildField
+			this.buildField,
+			{addRow: true, delRow: true}
 		);
 	}
 
@@ -55,8 +56,7 @@ export class EditBadges {
 		if (login) {
 			try {
 				const badgesArray = await foxEngine.user.badgeManager.getBadgesArray(login);
-				console.log(badgesArray);
-				this.jsonArrConfig.openFormWindow(
+				this.jsonArrConfig.openForm(
 					badgesArray, 
 					login, 
 					{ admPanel: "editUserBadges", userLogin: login }

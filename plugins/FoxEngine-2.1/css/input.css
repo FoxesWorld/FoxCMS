@@ -81,7 +81,6 @@ a {
 .buttonGroup {
 	display: inline-flex;
 	align-self: center;
-	height: 40px;
 }
 
 .buttonGroup > button {

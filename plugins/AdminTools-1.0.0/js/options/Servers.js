@@ -5,16 +5,17 @@
  * Он предоставляет методы для загрузки, отображения и редактирования серверов, а также создания соответствующих форм и элементов ввода.
  * 
  * Authors: FoxesWorld
- * Date: [10.05.24]
- * Version: [1.8.8]
+ * Date: [16.04.25]
+ * Version: [1.9.8]
  */
-import { EditServer } from './serverOptions/EditServer.js'; 
+import { EditServer } from './serverOptions/EditServer.js';
+import { AddServer } from './serverOptions/AddServer.js';
 
 export class Servers {
     constructor(adminPanel) {
-		this.adminPanel = adminPanel;
-		
-		this.formFields = [
+        this.adminPanel = adminPanel;
+
+        this.formFields = [
             { fieldName: 'host', fieldType: 'text' },
             { fieldName: 'port', fieldType: 'number' },
             { fieldName: 'ignoreDirs', fieldType: 'tagify' },
@@ -24,28 +25,29 @@ export class Servers {
             { fieldName: 'serverDescription', fieldType: 'textarea' },
             { fieldName: 'serverVersion', fieldType: 'dropdown', optionsArray: this.versions },
             { fieldName: 'jreVersion', fieldType: 'dropdown', optionsArray: this.javaVersions },
-            { fieldName: 'serverImage', fieldType: 'dropdown', optionsArray: this.serverPictures },
+            { fieldName: 'serverImage', fieldType: 'dropdown', optionsArray: this.serverPictures }
         ];
-		
-		this.editServer = new EditServer(this);
+
+        this.editServer = new EditServer(this);
+        this.addServer = new AddServer(this);
+    }
+
+    async parseAllServers() {
+        const serverData = await this.getServerData("");
+        return serverData.map(server => server.serverName);
     }
 
     async getServerData(server) {
-        const query = {
-            admPanel: "parseServers"
-        };
-
+        const query = { admPanel: "parseServers" };
         if (server && server.trim() !== "") {
             query.server = `serverName = '${server}'`;
         }
-
         return await foxEngine.sendPostAndGetAnswer(query, "JSON");
     }
 
     async parseServers() {
         try {
             const servers = await this.getServerData("");
-
             if (servers.length > 0) {
                 await this.displayServers(servers);
             } else {
@@ -57,68 +59,85 @@ export class Servers {
         }
     }
 
-	async displayServers(servers) {
-		const serversList = $("#serversList");
-		serversList.html("");
-		const serverRowTpl = this.adminPanel.templateCache["serverRow"];
+    async displayServers(servers) {
+        const $serversList = $("#serversList");
+        $serversList.empty();
 
-		for (let index = 0; index < servers.length; index++) {
-			const server = servers[index];
-			let icon;
-			if (server.enabled == "true") {
-				icon = `<i style="color: green" class="fa-thin fa-check"></i>`;
-			} else {
-				icon = `<i style="color: red" class="fa-regular fa-xmark-large fa-fw"></i>`;
-			}
-			const serverHtml = await foxEngine.replaceTextInTemplate(serverRowTpl, {
-				index: server.id, //index + 1
-				serverName: server.serverName,
-				serverVersion: server.serverVersion,
-				serverVstyle: server.serverVersion.split('-')[0].replaceAll('.', ''),
-				serverDescription: server.serverDescription,
-				enabled: icon,
-				serverGroups: server.serverGroups
-			});
+        const serverRowTpl = this.adminPanel.templateCache["serverRow"];
 
-			serversList.append(serverHtml);
-		}
-			$('.editServerButt').click((event) => {
-				const serverName = $(event.currentTarget).attr('data-serverName');
-				this.editServer.loadServerOptions(serverName);
-			});
+        for (const server of servers) {
+            const isEnabled = String(server.enabled).toLowerCase() === "true";
+            const icon = isEnabled
+                ? `<i style="color: green" class="fa-thin fa-check"></i>`
+                : `<i style="color: red" class="fa-regular fa-xmark-large fa-fw"></i>`;
 
-			$('.deleteServerButt').click((event) => {
-				console.log($(event.currentTarget).attr('data-id'));
-				const serverName = $(event.currentTarget).attr('data-serverName');
-				const serverId =   $(event.currentTarget).attr('data-serverId');
-				
+            const serverVstyle = server.serverVersion
+                ? server.serverVersion.split('-')[0].replaceAll('.', '')
+                : '';
 
-				foxEngine.confirmDialog?.(
-					`Вы уверены, что хотите удалить сервер <b>${serverName}</b>?`,
-					async () => {
-						this.editServer.deleteServer(serverId);
-					},
-					{
-						title: "Подтверждение удаления",
-						confirmText: "Удалить",
-						cancelText: "Отмена"
-					}
-				) || (confirm(`Удалить сервер ${serverName}?`) && this.editServer.deleteServer(serverId));
-			});
+            const serverHtml = await foxEngine.replaceTextInTemplate(serverRowTpl, {
+                index: server.id,
+                serverName: server.serverName,
+                serverVersion: server.serverVersion,
+                serverVstyle,
+                serverDescription: server.serverDescription,
+                enabled: icon,
+                serverGroups: server.serverGroups
+            });
 
-			
-			$("#addServerButton").click((event) => {
-				this.editServer.openAddServerDialog();
-			});
-	}
+            $serversList.append(serverHtml);
+        }
+
+        this.bindServerEvents();
+    }
+
+    bindServerEvents() {
+        $("#serversList")
+            .off('click', '.editServerButt')
+            .on('click', '.editServerButt', (event) => {
+                const serverName = $(event.currentTarget).data('servername');
+                this.editServer.loadServerOptions(serverName);
+            });
+
+        $("#serversList")
+            .off('click', '.deleteServerButt')
+            .on('click', '.deleteServerButt', (event) => {
+                const $target = $(event.currentTarget);
+                const serverName = $target.data('servername');
+                const serverId = $target.data('serverid');
+
+                const confirmationMessage = `Вы уверены, что хотите удалить сервер <b>${serverName}</b>?`;
+                if (foxEngine.confirmDialog) {
+                    foxEngine.confirmDialog(
+                        confirmationMessage,
+                        async () => {
+                            this.editServer.deleteServer(serverId);
+                        },
+                        {
+                            title: "Подтверждение удаления",
+                            confirmText: "Удалить",
+                            cancelText: "Отмена"
+                        }
+                    );
+                } else if (confirm(`Удалить сервер ${serverName}?`)) {
+                    this.editServer.deleteServer(serverId);
+                }
+            });
+
+        $("#addServerButton")
+            .off('click')
+            .on('click', () => {
+                this.addServer.openAddServerDialog();
+            });
+    }
 
     async addContent() {
-        const adminContent = $("#adminContent");
-        adminContent.html(" ");
+        const $adminContent = $("#adminContent");
+        $adminContent.empty();
 
-        if (!adminContent.find("> table").length) {
+        if (!$adminContent.children('table').length) {
             const tableHeader = this.adminPanel.templateCache["serversTable"];
-            adminContent.html(tableHeader);
+            $adminContent.html(tableHeader);
         }
     }
 }

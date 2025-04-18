@@ -3,9 +3,12 @@
 
 export class EditUserOnline {
 	
-	constructor() {
+	constructor(adminPanel) {
+		this.adminPanel = adminPanel;
+		this.allServers = [];
+		
 		this.formFields = [
-			{ fieldName: 'serverName', fieldType: 'text' },
+			{ fieldName: 'serverName', fieldType: 'dropdown', optionsArray: adminPanel.servers.allServers },
 			{ fieldName: 'totalTime', fieldType: 'number' },
 			{ fieldName: 'startTimestamp', fieldType: 'date' },
 			{ fieldName: 'lastUpdated', fieldType: 'date' },
@@ -17,22 +20,29 @@ export class EditUserOnline {
 		this.jsonArrConfig = new JsonArrConfig(
 			this, 
 			this.submitHandler.bind(this), 
-			this.buildField
+			this.buildField,
+			{addRow: true, delRow: true}
 		);
 	}
 	
 
 	async openEditWindow(login) {
-
+		if (!this.allServers.length) {
+			this.allServers = await this.adminPanel.servers.parseAllServers();
+		}
+		this.formFields.forEach(field => {
+			if (field.fieldName === 'serverName') {
+				field.optionsArray = this.allServers;
+			}
+		});
 		if (login) {
 			try {
-				const badgesArray = await foxEngine.sendPostAndGetAnswer({
+				const userServers = await foxEngine.sendPostAndGetAnswer({
 				"admPanel": "getUserPlayTime",
 				"login": login
 					}, "JSON");
-				console.log(badgesArray);
-				this.jsonArrConfig.openFormWindow(
-					badgesArray, 
+				this.jsonArrConfig.openForm(
+					userServers, 
 					login, 
 					{ admPanel: "editUserOnline", userLogin: login }
 				);

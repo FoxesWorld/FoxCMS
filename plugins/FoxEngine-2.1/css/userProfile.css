@@ -676,30 +676,61 @@ ul.foxesMenu, .foxesMenu > ul {
 		margin: 10px;
 	}
 	
-	span.groupStatus-1 {
-		color: #cfc09f;
-		position: relative;
-		text-transform: uppercase;
-		letter-spacing: 3px;
-		line-height: 1;
-		font-weight: 300;
-		text-shadow: -1px 0 1px #c6bb9f, 0 1px 1px #c6bb9f, 5px 5px 10px rgba(0, 0, 0, 0.4), -5px -5px 10px rgba(0, 0, 0, 0.4);
-	}
-	
-	h1.groupStatus-1 {
-		font-family: 'FSElliotPro-Heavy';
-		color: #8b0000d4;
-	}
-	
-	h1.groupStatus-4 {
-		color: #7fff00c4;
-		font-size: 15px;
-		font-family: 'Minecraft';
-	}
-	
-	h1.groupStatus-5 {
-		text-transform: capitalize;
-	}
+/* Админ (1) */
+span.groupStatus-1 {
+	color: #cfc09f;
+	position: relative;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	line-height: 1;
+	font-weight: 300;
+	text-shadow:
+		-1px 0 1px #c6bb9f,
+		0 1px 1px #c6bb9f,
+		5px 5px 10px rgba(0, 0, 0, 0.4),
+		-5px -5px 10px rgba(0, 0, 0, 0.4);
+}
+
+h1.groupStatus-1 {
+	font-family: 'FSElliotPro-Heavy';
+	color: #8b0000d4;
+}
+
+/* Лиса (4) */
+h1.groupStatus-4 {
+	color: #7fff00c4;
+	font-size: 15px;
+	font-family: 'Minecraft';
+}
+
+/* Гостевичек (5) */
+h1.groupStatus-5 {
+	text-transform: capitalize;
+	font-style: italic;
+	color: #888;
+	font-size: 14px;
+	font-family: 'Segoe UI', sans-serif;
+	opacity: 0.85;
+}
+
+/* Тестер (3) */
+h1.groupStatus-3 {
+	font-family: 'Courier New', Courier, monospace;
+	color: #00bfff;
+	font-size: 16px;
+	letter-spacing: 1px;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Партнёр (6) */
+h1.groupStatus-6 {
+	font-weight: bold;
+	font-family: "PF Din Text Comp Pro";
+	color: #ff69b4;
+	text-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
+	letter-spacing: 2px;
+}
+
 	
 	.connected-account__list {
     --provider-color: $text-color;
