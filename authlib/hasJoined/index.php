@@ -71,7 +71,7 @@ class HasJoined
 			$this->realUser = $row['user'];
 		} else {
 			$this->logger->WriteLine("[WARN] Пользователь: {$inputUser} не равен: {$row['user']}");
-			exit($this->errorResponse("Bad login", "Пользователь не соответствует сессии!"));
+			//exit($this->errorResponse("Bad login", "Пользователь не соответствует сессии!"));
 		}
 		
         $this->UUID = $row['userMd5'];
