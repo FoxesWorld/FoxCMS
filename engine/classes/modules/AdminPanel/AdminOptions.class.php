@@ -8,7 +8,6 @@ class AdminOptions extends AdminPanel {
     function __construct($REQUEST, $db) {
         global $config;
         if(init::$usrArray['user_group'] == 1) {
-			require("GenericUpdater.php");
             switch($REQUEST["admPanel"]){
                 case "editServer":
                     	$editServer = new EditServer($db);
@@ -60,6 +59,14 @@ class AdminOptions extends AdminPanel {
 						'badgeName', 'description', 'img'
 					]);
 					$result = $updater->updateData($REQUEST['allBadgesUpdate'], 'badgeName');
+					die(json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+				break;
+
+				case "groupAssocUpdate":
+					$updater = new GenericUpdater($db, 'groupAssociation', [
+						'groupName', 'groupColor', 'groupNum', 'groupType'
+					]);
+					$result = $updater->updateData($REQUEST['groupAssocUpdate'], 'groupName');
 					die(json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 				break;
 
@@ -170,10 +177,6 @@ class AdminOptions extends AdminPanel {
                     $this->usersList($db, $REQUEST);
                     break;
 
-                case "groupAssoc":
-                    $this->groupAssoc($db);
-                    break;
-
                 case "cfgParse":
                     $this->cfgParse();
                     break;
@@ -189,6 +192,10 @@ class AdminOptions extends AdminPanel {
                 case "log":
                     $this->handleLog($REQUEST);
                     break;
+					
+				case "deleteLogFile":
+					$this->handleLog($REQUEST, true);
+				break;
             }
         } else {
             die('{"message": "Insufficient rights!"}');
@@ -326,11 +333,6 @@ private function getAllBadges($db) {
         die(json_encode(new UsersList($db, $REQUEST)));
     }
 
-    // Группировка ассоциаций
-    private function groupAssoc($db) {
-        die(json_encode(new GroupAssocAdmin($db)));
-    }
-
     // Разбор конфигурации
     private function cfgParse() {
         init::classUtil('ConfigUtils', "1.0.0");
@@ -345,9 +347,19 @@ private function getAllBadges($db) {
     }
 
     // Обработка логов
-    private function handleLog($REQUEST) {
+    private function handleLog(array $REQUEST, bool $delete = false) {
         $file = @$REQUEST['file'];
         $logfile = ENGINE_DIR. 'cache/logs/'.$file.'.log';
+		
+		if ($delete) {
+			if (!file_exists($logfile)) {
+				die('{"message": "File '.$logfile.' not found!!"}');
+			} else {
+				if(unlink($logfile)){
+					die('{"message": "Logfile deleted!", "type": "success"}');
+				}
+			}
+		}
         if (file_exists($logfile)) {
             $lines = $this->getLastLines($logfile, @intval(@$REQUEST['lines']));
             if ($lines !== false) {

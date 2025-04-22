@@ -74,19 +74,23 @@ class UserTable {
  */
 parseServersOnline(serversOnline) {
     try {
+        // Парсим строку serversOnline в JSON объект
         const raw = JSON.parse(serversOnline || '[]');
 
         const normalize = s => {
-            const totalTime = Number(s.totalTime) || 0; 
+            const totalTime = Number(s.totalTime) || 0;
+            const lastPlayed = Number(s.lastPlayed) || 0;
             return {
                 serverName: s.serverName || '',
-                totalTime
+                totalTime,
+                lastPlayed
             };
         };
 
         if (Array.isArray(raw)) {
             return raw
-                .filter(s => s.serverName && !isNaN(Number(s.totalTime))).map(normalize);
+                .filter(s => s.serverName && !isNaN(Number(s.totalTime)) && !isNaN(Number(s.lastPlayed)))
+                .map(normalize);
         }
 
         if (raw.servers && typeof raw.servers === 'object') {
@@ -99,7 +103,6 @@ parseServersOnline(serversOnline) {
         return [];
     }
 }
-
 
 /**
  * Всегда возвращает ровно totalTime (в секундах) из БД,
@@ -121,16 +124,18 @@ calculateTotalPlaytime(serversOnline, selectedServer) {
  * всегда показыя часы и секунды (даже если минут = 0).
  * Для 3630 секунд вернет "1 час 30 секунд".
  */
-formatPlaytimeText(totalSeconds) {
-    const s   = Math.round(totalSeconds);
-    const h   = Math.floor(s / 3600);
+formatPlaytimeText(seconds) {
+ const s = Math.round(seconds);
+    const h = Math.floor(s / 3600);
+    const m = Math.floor((s % 3600) / 60);
     const sec = s % 60;
+
     const parts = [];
+    if (h > 0) parts.push(`${h} ${this.declineWord(h, 'час', 'часа', 'часов')}`);
+    if (m > 0) parts.push(`${m} ${this.declineWord(m, 'минута', 'минуты', 'минут')}`);
+    if (sec > 0) parts.push(`${sec} ${this.declineWord(sec, 'секунда', 'секунды', 'секунд')}`);
 
-    if (h > 0)   parts.push(`${h} ${this.declineWord(h, ['час', 'часа', 'часов'])}`);
-    if (sec > 0) parts.push(`${sec} ${this.declineWord(sec, ['секунда', 'секунды', 'секунд'])}`);
-
-    return parts.join(' ') || `0 ${this.declineWord(0, ['секунда', 'секунды', 'секунд'])}`;
+    return parts.join(' ') || `0 ${this.declineWord(0, 'секунда', 'секунды', 'секунд')}`;
 }
 
 
@@ -172,6 +177,7 @@ formatPlaytimeText(totalSeconds) {
     }
 
     async createUserRow(user, rank) {
+		console.log(user);
         const servers = this.parseServersOnline(user.serversOnline);
         if (this.selectedServer !== 'all' && !servers.some(s => s.serverName === this.selectedServer)) {
             return null;
@@ -293,24 +299,41 @@ formatPlaytimeText(totalSeconds) {
         return cell;
     }
 
-    createLastLoginCell(user) {
-        const cell = document.createElement('td');
-        const servers = this.parseServersOnline(user.serversOnline);
+	createLastLoginCell(user) {
+		const cell = document.createElement('td');
+		const servers = this.parseServersOnline(user.serversOnline);
+		
+		const defaultSrv = { lastPlayed: 0 };
+		const relevant = this.selectedServer === 'all'
+			? servers.reduce((a, b) => ((a.lastPlayed || 0) > (b.lastPlayed || 0) ? a : b), defaultSrv)
+			: servers.find(s => s.serverName === this.selectedServer) || defaultSrv;
 
-        const relevant = this.selectedServer === 'all'
-            ? servers.reduce((a, b) => (a.lastPlayed > b.lastPlayed ? a : b), { lastPlayed: 0 })
-            : servers.find(s => s.serverName === this.selectedServer);
+		let lastPlayed = Number(relevant.lastPlayed) || 0;
+		if (lastPlayed > 0 && lastPlayed < 1e12) lastPlayed *= 1000;
 
-        const lastPlayed = relevant?.lastPlayed || 0;
-        if (lastPlayed > 0) {
-            const lastDate = new Date(lastPlayed * 1000);
-            cell.textContent = lastDate.toLocaleString();
-        } else {
-            cell.textContent = 'Нет данных';
-        }
+		if (!lastPlayed) {
+			cell.textContent = 'Нет данных';
+			return cell;
+		}
 
-        return cell;
-    }
+		const lastDate = new Date(lastPlayed);
+		const now = new Date();
+		const msInDay = 24 * 60 * 60 * 1000;
+		const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+		const diffDays = Math.floor((startOfToday - new Date(lastDate.getFullYear(), lastDate.getMonth(), lastDate.getDate())) / msInDay);
+
+		const labels = ['Сегодня', 'Вчера', 'Позавчера'];
+		const label = labels[diffDays] || null;
+
+		if (label) {
+			const timePart = lastDate.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+			cell.textContent = `${label} в ${timePart}`;
+		} else {
+			cell.textContent = foxEngine.utils.getFormattedDate(lastPlayed);
+		}
+
+		return cell;
+	}
 
     sortAndRenderUsersByServer(server) {
         this.users = this.sortUsersByPlaytime(this.users, server);
@@ -323,12 +346,13 @@ formatPlaytimeText(totalSeconds) {
         return `${mins} мин ${secs} сек`;
     }
 
-    declineWord(number, forms) {
-        const n = Math.abs(number) % 100;
-        const n1 = n % 10;
-        if (n > 10 && n < 20) return forms[2];
-        if (n1 > 1 && n1 < 5) return forms[1];
-        if (n1 === 1) return forms[0];
-        return forms[2];
-    }
+	declineWord(number, ...forms) {
+		const n = Math.abs(number) % 100;
+		const n1 = n % 10;
+		if (n > 10 && n < 20) return forms[2];
+		if (n1 > 1 && n1 < 5) return forms[1];
+		if (n1 === 1) return forms[0];
+		return forms[2];
+	}
+
 }

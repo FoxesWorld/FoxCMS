@@ -26,7 +26,7 @@ export class EditServerMods {
 	
 	openModsInfo(responses, serverName){
 		$('#viewModsInfoBtn').click(() => {
-			this.jsonArrConfig.openFormWindow(responses.modsInfo, responses.serverName, {admPanel: "editServer",serverName: serverName});
+			this.jsonArrConfig.openForm(responses.modsInfo, responses.serverName, {admPanel: "editServer",serverName: serverName});
 		});
 	}
 }

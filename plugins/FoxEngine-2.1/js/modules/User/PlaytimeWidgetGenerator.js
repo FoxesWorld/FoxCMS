@@ -125,19 +125,19 @@ parseServersData(serversRaw) {
 	 * @param {number} seconds
 	 * @returns {string}
 	 */
-formatTime(seconds) {
-    const s = Math.round(seconds);
-    const h = Math.floor(s / 3600);
-    const m = Math.floor((s % 3600) / 60);
-    const sec = s % 60;
+	formatTime(seconds) {
+		const s = Math.round(seconds);
+		const h = Math.floor(s / 3600);
+		const m = Math.floor((s % 3600) / 60);
+		const sec = s % 60;
 
-    const parts = [];
-    if (h > 0) parts.push(`${h} ${this.decline(h, 'час', 'часа', 'часов')}`);
-    if (m > 0) parts.push(`${m} ${this.decline(m, 'минута', 'минуты', 'минут')}`);
-    if (sec > 0) parts.push(`${sec} ${this.decline(sec, 'секунда', 'секунды', 'секунд')}`);
+		const parts = [];
+		if (h > 0) parts.push(`${h} ${this.decline(h, 'час', 'часа', 'часов')}`);
+		if (m > 0) parts.push(`${m} ${this.decline(m, 'минута', 'минуты', 'минут')}`);
+		if (sec > 0) parts.push(`${sec} ${this.decline(sec, 'секунда', 'секунды', 'секунд')}`);
 
-    return parts.join(' ') || `0 ${this.decline(0, 'секунда', 'секунды', 'секунд')}`;
-}
+		return parts.join(' ') || `0 ${this.decline(0, 'секунда', 'секунды', 'секунд')}`;
+	}
 
 
 

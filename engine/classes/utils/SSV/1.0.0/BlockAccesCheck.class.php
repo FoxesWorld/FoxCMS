@@ -1,76 +1,82 @@
 <?php
 
 class BlockAccessCheck extends SSV {
-    
-    private $content;
-    private $requestedUserArray;
-    private $keyTags = ["hasPriviligies", "group=", "not-group=", "not-login="];
+    private string $content;
+    private array $requestedUserArray;
 
-    public function __construct($content, $requestedUserArray) {
+    private const TAGS = [
+        'hasPriviligies',
+        'group=',
+        'not-group=',
+        'not-login='
+    ];
+
+    public function __construct(string $content, array $requestedUserArray) {
         $this->content = $content;
         $this->requestedUserArray = $requestedUserArray;
     }
 
-    protected function checkBlocks() {
-        foreach ($this->keyTags as $tag) {
-            $methodName = 'check' . ucfirst(str_replace(['-', '='], '', $tag));
-            if (method_exists($this, $methodName)) {
-                $this->$methodName();
+    public function checkBlocks(): string {
+        foreach (self::TAGS as $tag) {
+            $method = 'check' . ucfirst(str_replace(['-', '='], '', $tag));
+            if (method_exists($this, $method)) {
+                $this->$method();
             }
         }
         return $this->content;
     }
 
-	private function checkHasPriviligies() {
-		$hasPriviligiesTag = "[hasPriviligies]";
+    private function checkHasPriviligies(): void {
+        $tag = 'hasPriviligies';
 
-		if (stripos($this->content, $hasPriviligiesTag) !== false && init::$usrArray['isLogged']) {
-			if ($this->hasSufficientPriviligies()) {
-				$this->removeTags("hasPriviligies");
-			}	
-		}
-		$this->content = preg_replace("/\\$hasPriviligiesTag(.*?)\\[\\/hasPriviligies\\]/si", '', $this->content);
-	}
-
-	private function hasSufficientPriviligies(): bool {
-		return init::$usrArray['login'] === $this->requestedUserArray['login'] || init::$usrArray['groupTag'] === "admin";
-	}
-
-
-    private function checkGroup() {
-        $this->content = $this->processBlock('[group=', 'group');
-        $this->content = $this->processBlock('[not-group=', 'not-group');
-    }
-
-    private function checkNotLogin() {
-        if (stripos($this->content, "[not-login=") !== false) {
-            $this->content = preg_replace_callback('#\\[not-login=(.+?)\\](.*?)\\[/not-login\\]#is', function ($matches) {
-                $groups = $matches[1];
-                $block = $matches[2];
-                $groups = explode(',', $groups);
-                return (in_array(init::$usrArray['login'], $groups)) ? "" : $block;
-            }, $this->content);
+        if (stripos($this->content, "[$tag]") !== false) {
+            if ($this->hasSufficientPriviligies()) {
+                $this->removeTags($tag);
+            } else {
+                $this->removeTaggedBlock($tag);
+            }
         }
     }
 
-    private function removeTags($tag) {
-        $this->content = str_replace("[" . $tag . "]", ' ', $this->content);
-        $this->content = str_replace("[/" . $tag . "]", ' ', $this->content);
+    private function hasSufficientPriviligies(): bool {
+        return (
+            init::$usrArray['login'] === $this->requestedUserArray['login'] ||
+            init::$usrArray['groupTag'] === 'admin'
+        );
     }
 
-    private function processBlock($tag, $type) {
-        $regex = '/\[' . $type . '=(.*?)\]((?>(?R)|.)*?)\[\/' . $type . '\]/is';
-        return preg_replace_callback($regex, function ($matches) use ($type) {
-            $groups = $matches[1];
-            $block = $matches[2];
-            $action = ($type === 'group');
+    private function checkGroup(): void {
+        $this->content = $this->processBlock('group', true);
+        $this->content = $this->processBlock('not-group', false);
+    }
 
-            $groups = explode(',', $groups);
-            if ($action) {
-                return (in_array(init::$usrArray['user_group'], $groups)) ? $block : '';
-            } else {
-                return (in_array(init::$usrArray['user_group'], $groups)) ? '' : $block;
-            }
+    private function checkNotLogin(): void {
+        $pattern = '/\[not-login=(.+?)\](.*?)\[\/not-login\]/is';
+
+        $this->content = preg_replace_callback($pattern, function ($matches) {
+            $logins = array_map('trim', explode(',', $matches[1]));
+            return in_array(init::$usrArray['login'], $logins) ? '' : $matches[2];
+        }, $this->content);
+    }
+
+    private function removeTags(string $tag): void {
+        $this->content = str_replace(["[$tag]", "[/$tag]"], '', $this->content);
+    }
+
+    private function removeTaggedBlock(string $tag): void {
+        $pattern = "/\[$tag](.*?)\[\/$tag\]/si";
+        $this->content = preg_replace($pattern, '', $this->content);
+    }
+
+    private function processBlock(string $type, bool $shouldInclude): string {
+        $pattern = '/\[' . preg_quote($type) . '=(.*?)\]((?>(?R)|.)*?)\[\/' . preg_quote($type) . '\]/is';
+
+        return preg_replace_callback($pattern, function ($matches) use ($shouldInclude) {
+            $groups = array_map('trim', explode(',', $matches[1]));
+            $userGroup = init::$usrArray['user_group'];
+
+            $shouldShow = in_array($userGroup, $groups);
+            return ($shouldInclude === $shouldShow) ? $matches[2] : '';
         }, $this->content);
     }
 }

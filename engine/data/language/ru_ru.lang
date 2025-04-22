@@ -203,5 +203,5 @@
 		"configChanged" => "Конфигурация изменена",
 		
 		"userNotFound" => 'Пользователь <strong>{replace}</strong> не найден!',
-		"optionInvalid" => 'Опция - <strong>{replace}</strong> не найдена или у вас просто нет прав её находить  :form:'
+		"optionInvalid" => 'Опция - <strong>{replace}</strong> не найдена или <b style="color: {groupColor}">{groupName}</b> просто не может её находить  :form:'
 	);

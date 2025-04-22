@@ -7,37 +7,56 @@ class GetOption extends UserOptions
 {
     private string $optionRequestKey = "getOption";
     private string $pageTplFile = "staticPage.tpl";
+	protected $db;
+	private static $groupDataArr;
 
     public function __construct(string $userLogin, $db, $logger)
     {
         global $config;
 
         init::classUtil('SSV', "1.0.0");
-
+		$this->db = $db;
         if (!empty(RequestHandler::$REQUEST[$this->optionRequestKey])) {
             $login = functions::filterString($userLogin);
 
             init::classUtil('LoadUserInfo', "1.0.0");
             $loadUserInfo = new LoadUserInfo($login, $db);
             $userData = $loadUserInfo->userInfoArray();
+			$groupAssociacion = new GroupAssociacion($userData['user_group'], $db);
+			$userData["groupName"] = $groupAssociacion->userGroupName();
+			$userData["groupColor"] = $groupAssociacion->userGroupColor();
+			
+			$groupService = new GroupNames($this->db);
+			self::$groupDataArr = $groupService->jsonSerialize();
 
             $requestedOption = functions::filterString($_POST[$this->optionRequestKey] ?? '');
             $templatePath = TEMPLATE_DIR . $this->pageTplFile;
 
-            $pageTemplate = self::getPageContent($requestedOption, $templatePath);
+            $pageTemplate = self::getPageContent($requestedOption, $templatePath, $userData);
 
             // SERVER SIDE VERIFICATION
             new SSV($pageTemplate, $login, $userData, $db, $logger);
         }
     }
 
-    public static function getPageContent(string $optionName, string $filePath): string
+    public static function getPageContent(string $optionName, string $filePath, $userData): string
     {
         global $lang;
 
         if (!in_array($optionName, self::$userOptions['optionNames'] ?? [])) {
-            $error = str_replace('{replace}', $optionName, $lang['optionInvalid'] ?? 'Invalid option: {replace}');
-            die(json_encode(['error' => $error]));
+			
+			$replaceValues = [
+				'{replace}' => $optionName,
+				'{groupName}' => $userData["groupName"],
+				'{groupColor}' => $userData["groupColor"]
+			];
+
+			$errorMessage = $lang['optionInvalid'] ?? 'Invalid option: {replace}';
+			foreach ($replaceValues as $search => $replace) {
+				$errorMessage = str_replace($search, $replace, $errorMessage);
+			}
+			die(json_encode(['error' => $errorMessage]));
+
         }
 
         $optionJson = UserOptions::getOptionData($optionName);

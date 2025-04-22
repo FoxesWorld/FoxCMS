@@ -64,6 +64,10 @@
 							die($SelectUsers->selectUsersBy(@RequestHandler::$REQUEST['selectKey'], "'".@RequestHandler::$REQUEST['selectValue']."'"));
 						break;
 						
+						case "getGroups":
+							die(json_encode(new GroupNames($this->db)));
+						break;
+						
 						case "parseServers":
 						//if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
 							init::classUtil('ServerParser', "1.0.0");

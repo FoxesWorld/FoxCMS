@@ -40,7 +40,7 @@ export class BadgeManager {
         this.cachedBadges = badges;
 
         if (!badges.length && !this.loadedBadgeKeys.size) {
-            container.remove();
+            document.getElementById('badgesWrapper').remove();
             return;
         }
 

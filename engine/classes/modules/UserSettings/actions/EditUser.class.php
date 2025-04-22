@@ -7,7 +7,8 @@ if (!defined('profile')) {
 class EditUser extends User
 {
     /* CFG */
-    private array $dbQueryConstruct = ["realname", "user_group", "email", "userStatus", "land", "colorScheme"];
+    private array $userEditableFields = ["realname", "user_group", "email", "userStatus", "land", "colorScheme"];
+	private array $adminEditValues = [ "user_group", "reg_date" ];
 
     /* EditStatus */
     private string $status = "success";
@@ -142,51 +143,108 @@ $this->checkNewPassword(
         $this->applyProfileChanges();
     }
 
+/*
+    private function applyProfileChanges(): void
+    {
+        // 1) Определяем, какие поля разрешены к правке
+        $allowed = $this->userEditableFields;
+        if (init::$usrArray['groupTag'] === 'admin') {
+            $allowed = array_merge($allowed, $this->adminEditValues);
+        }
+        // пароль вручную добавим в список, если он есть
+        if ($this->newPasswordClause) {
+            $allowed[] = 'password';
+        }
+
+        // 2) Формируем массив данных для обновления
+        $row = ['login' => $this->inputLogin];
+        foreach ($allowed as $field) {
+            if (array_key_exists($field, $this->requestArray)) {
+                $row[$field] = $this->requestArray[$field];
+            }
+        }
+
+        if (count($row) <= 1) {
+            throw new Exception($this->lang['profileEdit']['noChanges']);
+        }
+
+        // 3) Запускаем GenericUpdater
+        $updater = new GenericUpdater(
+            $this->db,
+            'users',
+            $allowed,
+			false
+        );
+
+        $result = $updater->updateData(
+            // Можно передавать сам массив, GenericUpdater обернёт в [ $row ]
+            $row,
+            'login'
+        );
+
+        if ($result['type'] !== 'success') {
+            throw new Exception($result['message']);
+        }
+    }*/
+
+
 private function applyProfileChanges(): void
 {
     $fieldsToUpdate = [];
 
-    // Если новый пароль был передан — добавляем его в SQL-запрос
+    // Собираем список разрешённых полей
+    $editableFields = $this->userEditableFields;
+
+    // Если админ — расширяем список полей
+    $isAdmin = (init::$usrArray['groupTag'] ?? '') === 'admin';
+    if ($isAdmin) {
+        $editableFields = array_merge($editableFields, $this->adminEditValues);
+    }
+
+    // Добавляем пароль, если был передан
     if ($this->newPasswordClause !== null) {
         $fieldsToUpdate[] = $this->newPasswordClause;
     }
 
-    // Добавляем остальные поля, если они заданы
-    foreach ($this->dbQueryConstruct as $field) {
-        if (isset($this->requestArray[$field])) {
+    // Обрабатываем остальные поля
+    foreach ($this->requestArray as $field => $value) {
+        if (in_array($field, $editableFields, true)) {
             $fieldsToUpdate[] = "`$field` = :$field";
         }
     }
 
-    // Если нечего обновлять — выбрасываем исключение
+    // Если нечего обновлять — исключение
     if (empty($fieldsToUpdate)) {
-        throw new Exception("Нет данных для обновления");
+        throw new Exception($this->lang['profileEdit']['noChanges'] ?? 'Нет данных для обновления');
     }
 
+    // Сборка SQL-запроса
     $setClause = implode(", ", $fieldsToUpdate);
     $query = "UPDATE `users` SET $setClause WHERE login = :login";
-
     $stmt = $this->db->prepare($query);
+
     if (!$stmt) {
         throw new Exception("Ошибка подготовки запроса к базе данных");
     }
 
-    // Привязываем пароль, если он был установлен (т.е. если новый пароль был передан)
+    // Привязка значений
     if ($this->newPasswordClause !== null) {
         $stmt->bindValue(":password", $this->requestArray['password']);
     }
 
-    // Привязываем остальные параметры
-    foreach ($this->dbQueryConstruct as $field) {
-        if (isset($this->requestArray[$field])) {
-            $stmt->bindValue(":$field", $this->requestArray[$field]);
+    foreach ($this->requestArray as $field => $value) {
+        if (in_array($field, $editableFields, true)) {
+            $stmt->bindValue(":$field", $value);
         }
     }
+
     $stmt->bindValue(":login", $this->inputLogin);
+
     if (!$stmt->execute()) {
         throw new Exception("Ошибка при выполнении обновления пользователя");
     }
-}	
+}
+
 
 private function checkNewPassword(?string $newPass, ?string $repeatPass): void
 {
@@ -218,28 +276,6 @@ private function checkNewPassword(?string $newPass, ?string $repeatPass): void
     $this->newPasswordClause = "`password` = :password";
     $this->requestArray['password'] = $hashedPass;
 }
-
-
-
-/*
-
-    private function canSetColor(string $color): bool
-    {
-        if ($color === $this->baseColor) {
-            return true;
-        }
-        $allowedColors = $this->allColors();
-        if (in_array($color, $allowedColors, true)) {
-            return true;
-        }
-        return in_array(init::$usrArray['colorScheme'], $allowedColors, true);
-    }
-
-    private function allColors(): array
-    {
-        return init::$dynamicConfig['allowedColors'] ?? [];
-    }
-	*/
 
     private function getUserField(string $userField)
     {

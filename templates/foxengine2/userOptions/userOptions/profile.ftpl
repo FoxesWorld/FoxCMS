@@ -5,7 +5,7 @@
    "func": "foxEngine.user.showUserProfile(foxEngine.replaceData.login); return false;",
    "optionBlock": "#usrMenu",
    "optionClass": "dropdown-item",
-   "optionPreText": "<i style='color: #736d5f' class='fa fa-user'></i>",
+   "optionPreText": "<i style='color: #a38b51' class='fa fa-user'></i>",
    "optionGroup": [1,3,4,5],
    "langPack": "userProfile",
    "type": "userOption"
@@ -56,6 +56,7 @@
             			</div>
             </div> -->
          [group=1]
+		 <!--
          <div class="form-floating mb-3 input_block">
             <div class="option_select">
                <select class="option_select_text" id="viewEdit" name="gender">
@@ -65,7 +66,7 @@
                <span class="option_select_bar"></span>
                <label class="option_select_label">Пол</label>	
             </div>
-         </div>
+         </div>-->
          [/group]
          [group=4,3]
          <div class="currentPass"> 
@@ -73,7 +74,57 @@
          </div>
          [/group]
          [group=1]
-         [input type="number" name="user_group" placeholder="%lang|userGroup%" value="[user_group]"] 
+		 <div class="adminOptions">
+		 <h3>Опции Администратора</h3>
+		 <div id="userGroup"></div>
+		 </div>
+		<script>
+			async function buildGroupSelect(selectedNum = 1) {
+				try {
+					const groups = await foxEngine.sendPostAndGetAnswer(
+						{ sysRequest: "getGroups" },
+						"JSON"
+					);
+
+					if (!Array.isArray(groups)) {
+						console.error("Некорректный формат данных:", groups);
+						return '';
+					}
+
+					let optionsHTML = '';
+
+					for (const group of groups) {
+						const value = Number(group.groupNum);
+						const name = group.groupName;
+						const selected = value === selectedNum ? ' selected' : '';
+						optionsHTML += `<option value="${value}"${selected}>${name}</option>\n`;
+					}
+
+					return `
+					<div class="form-floating mb-3">
+						<div class="form-floating mb-3 input_block">
+							<div class="option_select">
+								<select class="option_select_text" name="user_group">
+									${optionsHTML}
+								</select>
+								<span class="option_select_bar"></span>
+								<label class="option_select_label">Группа</label>	
+							</div>
+						</div>
+					</div>
+					`;
+				} catch (err) {
+					console.error("Ошибка при получении списка групп:", err);
+					return '';
+				}
+			}
+
+			async function renderGroupSelect(selectedNum = 1) {
+				const html = await buildGroupSelect(selectedNum);
+				document.getElementById('userGroup').innerHTML = html;
+			}
+			renderGroupSelect([user_group]); 
+			</script>
          [/group]
       </section>
    </div>
@@ -320,7 +371,7 @@
 					
 				</ul>
 			</div>
-			<ul class="foxesColumns foxesColumns_collapsePhone">
+			<ul class="foxesColumns foxesColumns_collapsePhone" data-hideoncoveredit>
 				<li class="foxesColumn foxesColumn_fixed foxesColumn_narrow foxesPos_center" id="profilePhoto">
 					<span class="foxesUserPhoto foxesUserPhoto_xlarge">
 						<div class="avatar-wrapper">
@@ -361,7 +412,7 @@
 					<div class="foxesPos_left foxesPad cProfileHeader_name foxesType_normal">
 						 <h1 class="foxesPageHead_barText groupStatus-[user_group]">[login]</h1>
 						<span>
-							<span class="foxesPageHead_barText"><b><span style="color:#80d672">[groupName]</span></b></span>
+							<span class="foxesPageHead_barText groupStatus-[user_group]"><b><span style="color:[groupColor]">[groupName]</span></b></span>
 						</span>
 					</div>				
 				</li>
@@ -385,13 +436,13 @@
 						</span>
 					</li>
 					
-					<li class="d-lg-block d-none">
+					<li class="d-lg-block d-none" id="badgesWrapper">
 						<ul class="profileBadges container-1gYwHN" id="userBadges">
 						</ul>
 					</li>
 					
 					[group=1]
-					<li class="buttonGroup">
+					<li class="foxesResponsive_showDesktop foxesResponsive_inline">
 						<button class="btn bg-indigo-800 btn-sm btn-raised position-left legitRipple" onclick="window.adminPanel.users.editBadges.openEditWindow('[login]');">
 							<i class="fa-thin fa-badge"></i>
 						</button>
@@ -405,6 +456,7 @@
 						<button class="btn bg-grey-600 btn-sm btn-raised position-left legitRipple" onclick="window.adminPanel.users.editUserOnline.openEditWindow('[login]')">
 						<i class="fa-solid fa-server"></i></button>
 					</li>
+					
 					[/group]
 				</ul>
 			</div>

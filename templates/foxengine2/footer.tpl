@@ -34,9 +34,10 @@
 				document.addEventListener('DOMContentLoaded', function () {
 					const block = document.getElementById('socialLinksBlock');
 					const links = {
-					  'telegram': { title: 'Telegram', slug: 'https://t.me/foxesworld' },
+					  'telegram': { title: 'Telegram', slug: 'https://t.me/+VyduZeS0IwhkMWFi' },
 					  'vk': { title: 'ВКонтакте', slug: 'https://vk.com/foxesworlds1' },
-					  'discord': { title: 'Discord', slug: 'https://discord.gg/MkWUjBzt3Y' },
+					  'discord': { title: 'Discord', slug: 'https://discord.gg/t59KW4ESWV' },
+					  'youtube': { title: 'YouTube', slug: 'https://www.youtube.com/channel/UCzAKXn6Kbizv7dspREdqztQ' },
 					  'github': { title: 'GitHub', slug: 'https://github.com/FoxesWorld' }
 					};
 

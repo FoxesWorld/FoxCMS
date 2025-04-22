@@ -1,5 +1,6 @@
 <?php
 
+//DEPRECATED
 class SafeSQLHandler {
     private $db;
 

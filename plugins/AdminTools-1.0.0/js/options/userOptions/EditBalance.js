@@ -15,10 +15,11 @@ export class EditBalance {
         this.jsonArrConfig = new JsonArrConfig(
             this,//.formFields.map(f => f.fieldName),
             this.submitHandler.bind(this),
-            this.buildField
+            this.buildField,
+			{addRow: false, delRow: false}
         );
         // Режим редактирования строк отключен, так как баланс редактируется как объект
-        this.jsonArrConfig.setEditRows(false);
+        //this.jsonArrConfig.setEditRows(false);
     }
 
     /**
@@ -69,10 +70,10 @@ export class EditBalance {
                 crystals: userBalance.find(item => item.crystals)?.crystals || 0
             };
 
-            console.log('Form data being passed to openFormWindow:', balanceData);  // Логируем данные
+            console.log('Form data being passed to openForm:', balanceData);  // Логируем данные
 
             // Открываем окно формы редактирования с переданными данными и параметрами для сервера
-            this.jsonArrConfig.openFormWindow(
+            this.jsonArrConfig.openForm(
                 [balanceData], // Оборачиваем объект в массив, чтобы форма могла корректно вставить значения
                 login,
                 { admPanel: "editUserBalance", userLogin: login }

@@ -24,7 +24,7 @@
 					}
 
 				}
-				self::$groupAssociacion = new groupAssociacion(self::$usrArray['user_group'], $db);
+				self::$groupAssociacion = new GroupAssociacion(self::$usrArray['user_group'], $db);
 				self::$usrArray['groupName'] = self::$groupAssociacion->userGroupName();
 				self::$usrArray['groupTag'] = self::$groupAssociacion->userGroupTag();
 				self::$usrArray['user_group'] = self::$groupAssociacion->userGroupNum();
@@ -75,7 +75,7 @@
 		
 
 
-		class groupAssociacion extends initHelper {
+		class GroupAssociacion extends initHelper {
 			
 			private $userGroup;
 			protected $db;
@@ -93,16 +93,31 @@
 				return $answer;
 			}
 
-			public function userGroupName(){
-				return $this->dbRequest()["groupName"] ?? randTexts::getRandText('noGroup');
+			public function userGroupName() {
+				$result = $this->dbRequest()["groupName"] ?? randTexts::getRandText('noGroup');
+
+				if (is_string($result) && strpos($result, ',') !== false) {
+					$parts = array_filter(array_map('trim', explode(',', $result)));
+					if (!empty($parts)) {
+						return $parts[array_rand($parts)];
+					}
+				}
+
+				return $result;
 			}
-			
+
 			public function userGroupTag(){
 				return $this->dbRequest()["groupType"] ?? "cursed";
+			}
+
+			public function userGroupColor(){
+				return $this->dbRequest()["groupColor"] ?? "#ffffff";
 			}
 			
 			protected function userGroupNum() {
 				return $this->dbRequest()["groupNum"] ?? 3;
 			}
+			
+			
 		}
 ?>

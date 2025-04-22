@@ -24,6 +24,8 @@ export class BuildField {
             textarea: this.createTextareaInput.bind(this),
             tagify: this.createTagifyInput.bind(this),
             date: this.createDatePickerInput.bind(this),
+			image: this.createImage.bind(this),
+			color: this._colorpicker.bind(this)
         };
         // Позволяет переопределять или добавлять обработчики
         this.handlers = { ...this.defaultHandlers, ...(options.customHandlers || {}) };
@@ -104,6 +106,34 @@ export class BuildField {
         }));
         return rows.join("");
     }
+	
+	
+    async _colorpicker(fieldName, value = '#ffffff', uniqueSuffix = Math.random().toString(36).substring(2, 8)) {
+        const id = `${fieldName}_color_${uniqueSuffix}`;
+        const inputId = `${id}_input`;
+        setTimeout(() => {
+            const picker = document.querySelector(`#${id} .input-group`);
+            if (picker && !picker.dataset.initialized) {
+                $(`#${id} .input-group`).colorpicker({
+                    inline: true,
+                    container: `#${id}`
+                }).on('colorpickerChange', (e) => {
+                    document.getElementById(inputId).value = e.color.toString();
+                });
+                picker.dataset.initialized = true;
+            }
+        }, BuildField.initAwaitStatic);
+
+        return `
+            <div id="${id}" class="mb-3">
+                <label for="${inputId}" class="form-label">${fieldName}</label>
+                <div class="input-group">
+                    <input type="text" id="${inputId}" name="${fieldName}" class="form-control" value="${value}">
+                    <span class="input-group-text"><i class="bi bi-square-fill" style="color: ${value}"></i></span>
+                </div>
+            </div>`;
+    }
+
 
     /**
      * Создание блока ввода посредством вызова соответствующего обработчика.
@@ -237,7 +267,6 @@ createTextareaInput(fieldName, value) {
     const textareaId = `${fieldName}_textarea`;
     const safeValue = typeof value === "string" ? value : "";
 
-    // Возвращаем HTML сразу с видимым textarea
     return `
         <div class="mb-3">
             <label for="${textareaId}" class="form-label">${fieldName}</label>
@@ -249,6 +278,16 @@ createTextareaInput(fieldName, value) {
                 style="resize: vertical;">${safeValue}</textarea>
         </div>`;
 }
+
+	createImage(fieldName, value) {
+		const imageId = `${fieldName}_image`;
+		const safeValue = typeof value === "string" ? value : "";
+
+		return `
+			<div class="mb-3">
+				<img src="${value}" class="previewImage" alt="${imageId}"/>
+			</div>`;
+	}
 
 
 

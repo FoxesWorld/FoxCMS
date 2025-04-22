@@ -1,11 +1,11 @@
 <!-- UserPane -->
 <div id="userPane" class="side-nav">
     <div class="menu-content">
-        <ul style="width: 100%">
+        <ul>
             <li class="userData">
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
-                            <div class="d-flex" style="margin: 15">
+                            <div class="d-flex" style="margin: 20px 10px;">
                                 <div class="flex-shrink-0">
                                     <div class="avatar">
                                         <img class="h-auto rounded-circle profilePic uk-animation-fade" src="{$profilePhoto}" alt="Profile Photo" uk-img />
@@ -29,12 +29,14 @@
                 }
             </script>
 			{include file='balanceBox.tpl'}
-            <ul id="usrMenu">
+			<ul id="usrMenu">
+				<!-- User options go here -->
 				
-                <!-- User options go here -->
+                <ul class="navbar-collapse navbar-nav pages me-auto mb-2 mb-lg-0 dropup">
+				</ul>
 				
-				
-            </ul>
+			</ul>
+
             <li class="dropdown-item">
                 <a href="#" class="pageLink-logout" onclick="foxEngine.user.logout($(this)); return false;">
                     <i style="color: red" class="fa fa-sign-out me-2"></i> Выйти

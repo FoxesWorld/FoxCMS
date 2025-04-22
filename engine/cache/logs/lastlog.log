@@ -1,78 +1,77 @@
-[14.04.2025] (23:19:02) Updater 109.252.8.60 with version '2.5.6-Elunium' requests an update information
-[14.04.2025] (23:19:02) CPU ID BFEBFBFF000406F1 already exists in the database.
-[14.04.2025] (23:19:28) Calista successfully authorized from 109.252.8.60
-[14.04.2025] (23:19:46) 109.252.8.60 requests 'Prodigium 1.20.1-Forge' files
-[14.04.2025] (23:21:26) **JoinServer constructor called**
-[14.04.2025] (23:21:26) [INFO] Data accessToken d2e5be2be670dfeb006839226b4738f7 is valid!
-[14.04.2025] (23:21:26) [INFO] Data selectedProfile ac4bfbd258c56a10a4ea9b27b5056a3c is valid!
-[14.04.2025] (23:21:26) [INFO] Data serverId 6a1ddc08a85d9984f6a694d54871ce0592b05434 is valid!
-[14.04.2025] (23:21:26) [INFO] Database connection established
-[14.04.2025] (23:21:26) [INFO] Validating session for userMd5: <b>ac4bfbd258c56a10a4ea9b27b5056a3c</b>
-[14.04.2025] (23:21:26) [INFO] Session validated successfully
-[14.04.2025] (23:21:26) [INFO] Updating session for userMd5: <b>ac4bfbd258c56a10a4ea9b27b5056a3c</b>
-[14.04.2025] (23:21:27) [INFO] Начата обработка для пользователя: Calista
-[14.04.2025] (23:21:27) [INFO] Найден пользователь: Calista (UUID: ac4bfbd258c56a10a4ea9b27b5056a3c)
-[14.04.2025] (23:21:27) [INFO] Проверка пользователя: Calista
-[14.04.2025] (23:21:27) [DEBUG] user -> **Calista**  realUser -> **Calista**
-[14.04.2025] (23:21:27) [INFO] Установлен текстурный файл (SKIN): 
-[14.04.2025] (23:21:27) [INFO] Установлен текстурный файл (CAPE): 
-[14.04.2025] (23:27:36) Calista successfully authorized from 109.252.8.60
-[15.04.2025] (06:35:05) AidenFox successfully authorized from 109.252.8.60
-[15.04.2025] (07:03:32) Calista successfully authorized from 109.252.8.60
-[15.04.2025] (07:29:43) Updater 109.252.8.60 with version '2.5.6-Elunium' requests an update information
-[15.04.2025] (07:29:43) CPU ID BFEBFBFF000406F1 already exists in the database.
-[15.04.2025] (07:30:09) Calista successfully authorized from 109.252.8.60
-[15.04.2025] (07:30:13) 109.252.8.60 requests 'Prodigium 1.20.1-Forge' files
-[15.04.2025] (07:32:14) **JoinServer constructor called**
-[15.04.2025] (07:32:14) [INFO] Data accessToken b2dd1e7efd0c99a5a342c892a6a892b6 is valid!
-[15.04.2025] (07:32:14) [INFO] Data selectedProfile ac4bfbd258c56a10a4ea9b27b5056a3c is valid!
-[15.04.2025] (07:32:14) [INFO] Data serverId -395a75b07941d60741a7c37cbc9a8102c2d8fddd is valid!
-[15.04.2025] (07:32:14) [INFO] Database connection established
-[15.04.2025] (07:32:14) [INFO] Validating session for userMd5: <b>ac4bfbd258c56a10a4ea9b27b5056a3c</b>
-[15.04.2025] (07:32:14) [INFO] Session validated successfully
-[15.04.2025] (07:32:14) [INFO] Updating session for userMd5: <b>ac4bfbd258c56a10a4ea9b27b5056a3c</b>
-[15.04.2025] (07:32:14) [INFO] Начата обработка для пользователя: Calista
-[15.04.2025] (07:32:14) [INFO] Найден пользователь: Calista (UUID: ac4bfbd258c56a10a4ea9b27b5056a3c)
-[15.04.2025] (07:32:14) [INFO] Проверка пользователя: Calista
-[15.04.2025] (07:32:14) [DEBUG] user -> **Calista**  realUser -> **Calista**
-[15.04.2025] (07:32:14) [INFO] Установлен текстурный файл (SKIN): 
-[15.04.2025] (07:32:14) [INFO] Установлен текстурный файл (CAPE): 
-[15.04.2025] (09:27:32) AidenFox successfully authorized from 109.252.8.60
-[15.04.2025] (09:35:04) Calista successfully authorized from 109.252.8.60
-[15.04.2025] (09:39:45) AidenFox successfully authorized from 109.252.8.60
-[15.04.2025] (09:41:49) **JoinServer constructor called**
-[15.04.2025] (09:41:49) [INFO] Data accessToken b2dd1e7efd0c99a5a342c892a6a892b6 is valid!
-[15.04.2025] (09:41:49) [INFO] Data selectedProfile ac4bfbd258c56a10a4ea9b27b5056a3c is valid!
-[15.04.2025] (09:41:49) [INFO] Data serverId -37cd13fb97d96c6614208ede0f0ad86de2bebc33 is valid!
-[15.04.2025] (09:41:49) [INFO] Database connection established
-[15.04.2025] (09:41:49) [INFO] Validating session for userMd5: <b>ac4bfbd258c56a10a4ea9b27b5056a3c</b>
-[15.04.2025] (09:41:49) [INFO] Session validated successfully
-[15.04.2025] (09:41:49) [INFO] Updating session for userMd5: <b>ac4bfbd258c56a10a4ea9b27b5056a3c</b>
-[15.04.2025] (09:41:49) [INFO] Начата обработка для пользователя: Calista
-[15.04.2025] (09:41:49) [INFO] Найден пользователь: Calista (UUID: ac4bfbd258c56a10a4ea9b27b5056a3c)
-[15.04.2025] (09:41:49) [INFO] Проверка пользователя: Calista
-[15.04.2025] (09:41:49) [DEBUG] user -> **Calista**  realUser -> **Calista**
-[15.04.2025] (09:41:49) [INFO] Установлен текстурный файл (SKIN): 
-[15.04.2025] (09:41:49) [INFO] Установлен текстурный файл (CAPE): 
-[15.04.2025] (09:43:55) Calista successfully authorized from 109.252.8.60
-[15.04.2025] (09:44:44) AidenFox successfully authorized from 109.252.8.60
-[15.04.2025] (09:48:15) Calista successfully authorized from 109.252.8.60
-[15.04.2025] (09:54:35) Calista successfully authorized from 109.252.8.60
-[15.04.2025] (10:18:18) Updater 109.252.8.60 with version '2.5.6-Elunium' requests an update information
-[15.04.2025] (10:18:18) CPU ID BFEBFBFF000406F1 already exists in the database.
-[15.04.2025] (10:18:44) Calista successfully authorized from 109.252.8.60
-[15.04.2025] (10:18:46) 109.252.8.60 requests 'Prodigium 1.20.1-Forge' files
-[15.04.2025] (10:26:28) **JoinServer constructor called**
-[15.04.2025] (10:26:28) [INFO] Data accessToken 99786ff10a611b3104ddc0c833c6f7c6 is valid!
-[15.04.2025] (10:26:28) [INFO] Data selectedProfile ac4bfbd258c56a10a4ea9b27b5056a3c is valid!
-[15.04.2025] (10:26:28) [INFO] Data serverId -3afe344cdf3bea0457063268f13e4585e015bdac is valid!
-[15.04.2025] (10:26:28) [INFO] Database connection established
-[15.04.2025] (10:26:28) [INFO] Validating session for userMd5: <b>ac4bfbd258c56a10a4ea9b27b5056a3c</b>
-[15.04.2025] (10:26:28) [INFO] Session validated successfully
-[15.04.2025] (10:26:28) [INFO] Updating session for userMd5: <b>ac4bfbd258c56a10a4ea9b27b5056a3c</b>
-[15.04.2025] (10:26:29) [INFO] Начата обработка для пользователя: Calista
-[15.04.2025] (10:26:29) [INFO] Найден пользователь: Calista (UUID: ac4bfbd258c56a10a4ea9b27b5056a3c)
-[15.04.2025] (10:26:29) [INFO] Проверка пользователя: Calista
-[15.04.2025] (10:26:29) [DEBUG] user -> **Calista**  realUser -> **Calista**
-[15.04.2025] (10:26:29) [INFO] Установлен текстурный файл (SKIN): 
-[15.04.2025] (10:26:29) [INFO] Установлен текстурный файл (CAPE): 
+[21.04.2025] (21:48:26) Updater 109.252.8.60 with version '2.5.6-Elunium' requests an update information
+[21.04.2025] (21:48:26) CPU ID BFEBFBFF000406F1 already exists in the database.
+[21.04.2025] (21:48:54) AidenFox successfully authorized from 109.252.8.60
+[21.04.2025] (22:25:00) AidenFox successfully authorized from 104.28.230.248
+[21.04.2025] (22:34:12) AidenFox successfully authorized from 104.28.198.248
+[21.04.2025] (22:36:10) AidenFox successfully authorized from 104.28.198.248
+[21.04.2025] (22:36:27) AidenFox successfully authorized from 104.28.198.248
+[21.04.2025] (22:36:35) AidenFox successfully authorized from 104.28.198.248
+[21.04.2025] (22:36:46) AidenFox successfully authorized from 104.28.198.248
+[21.04.2025] (22:36:50) AidenFox successfully authorized from 104.28.198.248
+[21.04.2025] (22:36:54) 104.28.198.248 requests 'Celeste 1.20.1-Forge' files
+[21.04.2025] (23:26:45) Updater 217.73.117.65 with version '2.5.6-Elunium' requests an update information
+[21.04.2025] (23:26:45) CPU ID 178BFBFF00600F20 already exists in the database.
+[21.04.2025] (23:27:25) Bimpy successfully authorized from 217.73.117.65
+[21.04.2025] (23:27:47) 217.73.117.65 requests 'Celeste 1.20.1-Forge' files
+[21.04.2025] (23:30:20) **JoinServer constructor called**
+[21.04.2025] (23:30:20) [INFO] Data accessToken bb1b4d8647162276166c31e15e2c1fbb is valid!
+[21.04.2025] (23:30:20) [INFO] Data selectedProfile 53350713bde16f8bed7ad273f84587ee is valid!
+[21.04.2025] (23:30:20) [INFO] Data serverId 3db2f829fb0b6515d46631b4b0d5125de6dbf402 is valid!
+[21.04.2025] (23:30:20) [INFO] Database connection established
+[21.04.2025] (23:30:20) [INFO] Validating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[21.04.2025] (23:30:20) [INFO] Session validated successfully
+[21.04.2025] (23:30:20) [INFO] Updating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[21.04.2025] (23:30:20) [INFO] Начата обработка для пользователя: bimpy
+[21.04.2025] (23:30:20) [INFO] Найден пользователь: bimpy (UUID: 53350713bde16f8bed7ad273f84587ee)
+[21.04.2025] (23:30:20) [INFO] Проверка пользователя: bimpy
+[21.04.2025] (23:30:20) [DEBUG] user -> **bimpy**  realUser -> **bimpy**
+[21.04.2025] (23:30:20) [INFO] Установлен текстурный файл (SKIN): 
+[21.04.2025] (23:42:29) **JoinServer constructor called**
+[21.04.2025] (23:42:29) [INFO] Data accessToken bb1b4d8647162276166c31e15e2c1fbb is valid!
+[21.04.2025] (23:42:29) [INFO] Data selectedProfile 53350713bde16f8bed7ad273f84587ee is valid!
+[21.04.2025] (23:42:29) [INFO] Data serverId -40b005dd5439b19d76c00b7f039d8f485b5958ad is valid!
+[21.04.2025] (23:42:29) [INFO] Database connection established
+[21.04.2025] (23:42:29) [INFO] Validating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[21.04.2025] (23:42:29) [INFO] Session validated successfully
+[21.04.2025] (23:42:29) [INFO] Updating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[21.04.2025] (23:42:29) [INFO] Начата обработка для пользователя: bimpy
+[21.04.2025] (23:42:29) [INFO] Найден пользователь: bimpy (UUID: 53350713bde16f8bed7ad273f84587ee)
+[21.04.2025] (23:42:29) [INFO] Проверка пользователя: bimpy
+[21.04.2025] (23:42:29) [DEBUG] user -> **bimpy**  realUser -> **bimpy**
+[21.04.2025] (23:42:29) [INFO] Установлен текстурный файл (SKIN): 
+[21.04.2025] (23:43:46) **JoinServer constructor called**
+[21.04.2025] (23:43:46) [INFO] Data accessToken bb1b4d8647162276166c31e15e2c1fbb is valid!
+[21.04.2025] (23:43:46) [INFO] Data selectedProfile 53350713bde16f8bed7ad273f84587ee is valid!
+[21.04.2025] (23:43:46) [INFO] Data serverId 7f5b077697951d5c68f6af7a9dc63ce7e29aade5 is valid!
+[21.04.2025] (23:43:46) [INFO] Database connection established
+[21.04.2025] (23:43:46) [INFO] Validating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[21.04.2025] (23:43:46) [INFO] Session validated successfully
+[21.04.2025] (23:43:46) [INFO] Updating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[21.04.2025] (23:43:46) [INFO] Начата обработка для пользователя: bimpy
+[21.04.2025] (23:43:46) [INFO] Найден пользователь: bimpy (UUID: 53350713bde16f8bed7ad273f84587ee)
+[21.04.2025] (23:43:46) [INFO] Проверка пользователя: bimpy
+[21.04.2025] (23:43:46) [DEBUG] user -> **bimpy**  realUser -> **bimpy**
+[21.04.2025] (23:43:46) [INFO] Установлен текстурный файл (SKIN): 
+[21.04.2025] (23:48:39) **JoinServer constructor called**
+[21.04.2025] (23:48:39) [INFO] Data accessToken bb1b4d8647162276166c31e15e2c1fbb is valid!
+[21.04.2025] (23:48:39) [INFO] Data selectedProfile 53350713bde16f8bed7ad273f84587ee is valid!
+[21.04.2025] (23:48:39) [INFO] Data serverId 3c0436cb909e922e2a2fb35d1c076c66c4da06c2 is valid!
+[21.04.2025] (23:48:39) [INFO] Database connection established
+[21.04.2025] (23:48:39) [INFO] Validating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[21.04.2025] (23:48:39) [INFO] Session validated successfully
+[21.04.2025] (23:48:39) [INFO] Updating session for userMd5: <b>53350713bde16f8bed7ad273f84587ee</b>
+[21.04.2025] (23:48:39) [INFO] Начата обработка для пользователя: bimpy
+[21.04.2025] (23:48:39) [INFO] Найден пользователь: bimpy (UUID: 53350713bde16f8bed7ad273f84587ee)
+[21.04.2025] (23:48:39) [INFO] Проверка пользователя: bimpy
+[21.04.2025] (23:48:39) [DEBUG] user -> **bimpy**  realUser -> **bimpy**
+[21.04.2025] (23:48:39) [INFO] Установлен текстурный файл (SKIN): 
+[22.04.2025] (06:50:39) Checking a password 'undefined'
+[22.04.2025] (08:10:53) AidenFox successfully authorized from 109.252.8.60
+[22.04.2025] (08:16:22) AidenFox successfully authorized from 109.252.8.60
+[22.04.2025] (08:20:54) AidenFox successfully authorized from 109.252.8.60
+[22.04.2025] (08:30:42) AidenFox successfully authorized from 109.252.8.60
+[22.04.2025] (08:33:49) AidenFox successfully authorized from 109.252.8.60
+[22.04.2025] (08:37:34) AidenFox successfully authorized from 109.252.8.60
+[22.04.2025] (08:38:08) Calista successfully authorized from 109.252.8.60
+[22.04.2025] (08:42:32) Calista successfully authorized from 109.252.8.60
+[22.04.2025] (09:38:23) Calista successfully authorized from 109.252.8.60

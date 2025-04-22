@@ -26,8 +26,6 @@
                         </a>
                     </li>
                     {/if}
-
-
                 </ul>
             </div>
         </div>
@@ -41,8 +39,8 @@
                 {if $user_group != 5}
                 {include file='userBlock.tpl'}
 				
-						{if $user_group == 1}
-		
+			{if $user_group == 1}
+			<!--
 			<li class="nav-sep"></li>
 			<li>		
 			<a class="regular-btn regular-btn-icon" title="Сообщения" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
@@ -54,12 +52,11 @@
 			
 
 			<li>
-			<a href="https://redserver.su/notifications" class="regular-btn regular-btn-icon" title="Уведомления" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+			<a href="" class="regular-btn regular-btn-icon" title="Уведомления" data-bs-toggle="dropdown" data-bs-auto-close="outside">
 				<i class="fa-solid fa-bell"></i>
 				<span data-element="notificationsCounter" class="unread-counter d-none">0</span>
 			</a>
-			</li>
-
+			</li> -->
 		{/if}
                 {else}
                 <!-- Custom burger menu button for mobile version -->
@@ -75,7 +72,7 @@
 							togglerSelector: ".navbar-toggler",
 							collapseSelector: "#navbarSupportedContent",
 							burgerButtonSelector: ".mantine-cahhlp",
-							toggleAnimationDelay: 100,
+							toggleAnimationDelay: 140,
 							closeAnimationDelay: 400,
 							  onOpen: () => {
 								console.log('NavBar opened!');

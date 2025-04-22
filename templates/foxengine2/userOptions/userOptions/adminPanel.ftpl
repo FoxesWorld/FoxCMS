@@ -53,6 +53,10 @@
 							<option value="access">accesslog</option>
 						</select>
 					</li>
+					
+					<li>
+						<button id="deleteLogFileButt" class="btn bg-orange-800 btn-sm btn-raised position-left legitRipple"><i class="fa-thin fa-trash"></i></button>
+					</li>
 				</ul>
 				
 				<div class="logger" id="logs"></div>
@@ -70,6 +74,7 @@
 			<div class="buttonGroup">	
 				<button type="button" class="btn btn-success" onclick="adminPanel.editInfoBox.openEditWindow()">БлокИнфо</button>
 				<button type="button" class="btn btn-success" onclick="adminPanel.editAllBadges.openEditWindow()">Все бейджи</button>
+				<button type="button" class="btn btn-success" onclick="adminPanel.groupAssoc.openEditWindow()">Группы</button>
 			</div>
 		 </div>
 	 </div>
@@ -77,161 +82,147 @@
 </div>
 
 <script>
-const logsContainer = document.getElementById('logs');
-const toggleLoggingButton = document.getElementById('toggleLogging');
-let intervalId;
-let isLoggingActive = true;
-let usersInfo = [];
-
-toggleLoggingButton.addEventListener('click', () => {
-    if (isLoggingActive) {
-        clearInterval(intervalId);
-        toggleLoggingButton.textContent = 'Запустить обновление';
-    } else {
-        intervalId = setInterval(fetchLogs, 2000);
-        toggleLoggingButton.textContent = 'Остановить обновление';
-    }
-    isLoggingActive = !isLoggingActive;
-});
-
-function initializeLogging() {
-    if (document.getElementById('logs') && document.getElementById('linesNum')) {
-        fetchLogs();
-        logsContainer.classList.add('fade-in');
-        intervalId = setInterval(fetchLogs, 2000);
-    } else {
-        setTimeout(initializeLogging, 100); 
-    }
-}
-
-async function fetchLogs() {
-    const fileName = document.getElementById('logName').value;
+(() => {
+    const logsContainer = document.getElementById('logs');
+    const linesInput = document.getElementById('linesNum');
+    const logNameInput = document.getElementById('logName');
     const loadingElement = document.getElementById('loading');
-    const logsElement = document.getElementById('logs');
-    
-    loadingElement.style.display = 'block';
+    const toggleBtn = document.getElementById('toggleLogging');
+    const deleteBtn = document.getElementById('deleteLogFileButt');
+    let intervalId;
+    let isLogging = true;
 
-    try {
-        const response = await foxEngine.sendPostAndGetAnswer({ admPanel: "log", file: fileName, lines: document.getElementById('linesNum').value }, "TEXT");
-        logsElement.innerHTML = formatLogs(response);
-        // animateLogs(); // если вам нужно, чтобы это работало
-    } catch (error) {
-        logsElement.innerHTML = '<div class="error">Error fetching logs: ' + error.message + '</div>';
-    } finally {
-        loadingElement.style.display = 'none';
-    }
+const patterns = [
+  { regex: /\*\*(.*?)\*\*/g, replacement: '<strong>$1</strong>' },
+  { regex: /\[(\d{2}\.\d{2}\.\d{4})\]/g, replacement: '<span class="timestamp">[$1]</span>' },
+  { regex: /\((\d{2}:\d{2}:\d{2})\)/g, replacement: '<span class="time">($1)</span>' },
+  { regex: /(user\d+)/g, replacement: '<span class="username">$1</span>' },
+  { regex: /from (\d{1,3}(?:\.\d{1,3}){3})/g, replacement: 'from <span class="ip-address">$1</span>' },
+  { regex: /\/\*([\s\S]*?)\*\//g, replacement: '<span class="special-format">/*$1*/</span>' },
+  { regex: /<b>(.*?)<\/b>/g, replacement: '<b>$1</b>' },
+  { regex: /\[INFO\]/g,  replacement: '<span class="logLevel">[<span class="info">INFO</span>]</span>' },
+  { regex: /\[WARN\]/g,  replacement: '<span class="logLevel">[<span class="warn">WARN</span>]</span>' },
+  { regex: /\[ERROR\]/g, replacement: '<span class="logLevel">[<span class="error">ERROR</span>]</span>' },
+  { regex: /\[DEBUG\]/g, replacement: '<span class="logLevel">[<span class="debug">DEBUG</span>]</span>' }
+];
+
+function formatLogLine(line) {
+  return patterns.reduce(
+    (formatted, { regex, replacement }) => formatted.replace(regex, replacement),
+    line
+  ) + '<br>';
 }
 
-function formatLogs(logs) {
-    const lines = logs.split('\n');
-    let formattedLogs = '';
-
-    lines.forEach(line => {
-        formattedLogs += line
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\[(\d{2}\.\d{2}\.\d{4})\]/g, '<span class="timestamp">[$1]</span>')
-            .replace(/\((\d{2}:\d{2}:\d{2})\)/g, '<span class="time">($1)</span>')
-            .replace(/(user\d+)/g, '<span class="username">$&</span>')
-            .replace(/from (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/g, 'from <span class="ip-address">$1</span>')
-            .replace(/\/\*([\s\S]*?)\*\//g, '<span class="special-format">/*$1*/</span>')
-			.replace(/<b>(.*?)<\/b>/g, '<b>$1</b>')
-			.replace(/\[INFO\]/g, '<span class="logLevel">[<span class="info">INFO</span>]</span>') // Уровень логов: INFO
-            .replace(/\[WARN\]/g, '<span class="logLevel">[<span class="warn">WARN</span>]</span>') // Уровень логов: WARN
-            .replace(/\[ERROR\]/g, '<span class="logLevel">[<span class="error">ERROR</span>]</span>') // Уровень логов: ERROR
-			.replace(/\[DEBUG\]/g, '<span class="logLevel">[<span class="debug">DEBUG</span>]</span>') // Уровень логов: DEBUG
-			+ '<br>';
-    });
-
-    return formattedLogs;
-}
-
-function animateLogs() {
-    setTimeout(() => {
-        logsContainer.scrollTop = logsContainer.scrollHeight;
-    }, 1000);
-}
-
-(function() {
-    initializeLogging();
-})();
+const formatLogs = logs => 
+  logs
+    .split('\n')
+    .map(formatLogLine)
+    .join('');
 
 
-(async function () {
-    const admOptions = [
-        { name: "settings" },
-        { name: "users", loadAfter: true },
-        { name: "servers", requiresAuth: true },
-        { name: "permissions", classStyle: "deprecated-block" }
-        // { name: "modules", category: "advanced" },
-        // { name: "templateEditor", experimental: true }
-    ];
-
-    const blockTpl = foxEngine.templateCache["adminPanel"];
-
-    for (let index = 0; index < admOptions.length; index++) {
-        const optionObj = admOptions[index];
-        const optionName = optionObj.name;
-
-        let panelBlock = await foxEngine.replaceTextInTemplate(blockTpl, {
-            option: optionName,
-            ...optionObj // можно использовать доп. параметры внутри шаблона
-        });
-
-        $("#admOptions").append(await foxEngine.entryReplacer.replaceText(panelBlock));
-
-        if ((index + 1) % 2 === 0 || index === admOptions.length - 1) {
-            //$("#admOptions").append('<div class="w-100"></div>');
+    const fetchLogs = async () => {
+        const file = logNameInput.value.trim();
+        if (!file) return;
+        loadingElement.style.display = 'block';
+        try {
+            const text = await foxEngine.sendPostAndGetAnswer(
+                { admPanel: 'log', file, lines: linesInput.value },
+                'TEXT'
+            );
+            logsContainer.innerHTML = formatLogs(text);
+            setTimeout(() => {
+                logsContainer.scrollTop = logsContainer.scrollHeight;
+            }, 1000);
+        } catch (e) {
+            logsContainer.innerHTML = '<div class="error">Error: ' +e.message +'</div>';
+        } finally {
+            loadingElement.style.display = 'none';
         }
+    };
 
-        // Выполняем дополнительные действия на основе параметров
-        if (optionObj.loadAfter && optionName === "users") {
-            await selectUsers();
+    const clearLogFile = async () => {
+        const file = logNameInput.value.trim();
+        if (!file) {
+            alert('Укажите имя лог-файла.');
+            return;
         }
-    }
-})();
-
-
-async function selectUsers(){
-	let usersInfo = [];
-	let countRecentLogins = 0;
-	let totalUsers = 0;
-	const currentTime = Date.now();
-		let users = await foxEngine.sendPostAndGetAnswer({
-		"admPanel": "selectUsers",
-		"login": foxEngine.replaceData.login
-			}, "JSON");
-			
-	const time24HoursAgo = currentTime - 24 * 60 * 60 * 1000;
-
-	users.forEach(user => {
-	  const lastLogin = parseInt(user.last_date) * 1000;
-
-	  if (lastLogin > time24HoursAgo) {
-		countRecentLogins++;
-	  }
-	  totalUsers++;
-	});
-	$("#totalUsers").html(totalUsers);
-	$("#loginCount").html(countRecentLogins);;
-	return usersInfo;
-}
-
-    const tabButtons = document.querySelectorAll(".tab_caption li");
-    const tabContents = document.querySelectorAll(".tab_content");
-
-    tabButtons.forEach((btn, index) => {
-        btn.addEventListener("click", () => {
-            // Убираем активные классы у всех кнопок и контента
-            tabButtons.forEach(el => el.classList.remove("active"));
-            tabContents.forEach(el => el.classList.remove("active"));
-
-            // Добавляем активный класс текущему табу и контенту
-            btn.classList.add("active");
-            if (tabContents[index]) {
-                tabContents[index].classList.add("active");
+        if (!confirm(`Удалить "${file}.log"? Это действие нельзя отменить.`)) return;
+        try {
+            const res = await foxEngine.sendPostAndGetAnswer(
+                { admPanel: 'deleteLogFile', file },
+                'JSON'
+            );
+            if (res.deleted) {
+                alert(`"${file}.log" очищен.`);
+            } else if (res.message) {
+                $('#deleteLogFileButt').notify(res.message, res.type);
             }
-        });
+        } catch (e) {
+            console.error(e);
+            alert('Ошибка при удалении лог‑файла.');
+        }
+    };
+
+    deleteBtn.addEventListener('click', clearLogFile);
+
+    toggleBtn.addEventListener('click', () => {
+        if (isLogging) {
+            clearInterval(intervalId);
+            toggleBtn.textContent = 'Запустить обновление';
+        } else {
+            intervalId = setInterval(fetchLogs, 2000);
+            toggleBtn.textContent = 'Остановить обновление';
+        }
+        isLogging = !isLogging;
     });
 
+    const initialize = () => {
+        if (logsContainer && linesInput && logNameInput) {
+            fetchLogs();
+            logsContainer.classList.add('fade-in');
+            intervalId = setInterval(fetchLogs, 2000);
+        } else {
+            setTimeout(initialize, 100);
+        }
+    };
+
+    initialize();
+
+    (async () => {
+        const admOptions = [
+            { name: "settings" },
+            { name: "users", loadAfter: true, classStyle: "updated-block" },
+            { name: "servers", requiresAuth: true, classStyle: "warning-block" }
+        ];
+        const blockTpl = foxEngine.templateCache["adminPanel"];
+        for (let i = 0; i < admOptions.length; i++) {
+            const opt = admOptions[i];
+            const panel = await foxEngine.replaceTextInTemplate(blockTpl, { option: opt.name, ...opt });
+            $("#admOptions").append(await foxEngine.entryReplacer.replaceText(panel));
+            if (opt.loadAfter && opt.name === "users") selectUsers();
+        }
+    })();
+
+    const selectUsers = async () => {
+        const now = Date.now();
+        const users = await foxEngine.sendPostAndGetAnswer(
+            { admPanel: "selectUsers", login: foxEngine.replaceData.login },
+            "JSON"
+        );
+        const since = now - 24 * 60 * 60 * 1000;
+        const recent = users.filter(u => parseInt(u.last_date, 10) * 1000 > since).length;
+        $("#totalUsers").html(users.length);
+        $("#loginCount").html(recent);
+    };
+
+    document.querySelectorAll(".tab_caption li").forEach((btn, idx) => {
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".tab_caption li, .tab_content").forEach(el => el.classList.remove("active"));
+            btn.classList.add("active");
+            document.querySelectorAll(".tab_content")[idx]?.classList.add("active");
+        });
+    });
+})();
 </script>
+
  </pageContent>

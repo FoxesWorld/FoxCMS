@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2025-04-15 11:16:47
+/* Smarty version 4.0.4, created on 2025-04-22 09:44:32
   from '/var/www/FoxCMS/templates/foxengine2/footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_67fe15ef618601_41512291',
+  'unifunc' => 'content_68073ad0120db8_77230124',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '21164cd38f4b1e20c2b131e7201342b1d7510eaf' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/footer.tpl',
-      1 => 1744140375,
+      1 => 1745214455,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67fe15ef618601_41512291 (Smarty_Internal_Template $_smarty_tpl) {
+function content_68073ad0120db8_77230124 (Smarty_Internal_Template $_smarty_tpl) {
 ?>   <div id="button-up" style="display: block;">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </div>
@@ -66,9 +66,10 @@ function content_67fe15ef618601_41512291 (Smarty_Internal_Template $_smarty_tpl)
 				document.addEventListener('DOMContentLoaded', function () {
 					const block = document.getElementById('socialLinksBlock');
 					const links = {
-					  'telegram': { title: 'Telegram', slug: 'https://t.me/foxesworld' },
+					  'telegram': { title: 'Telegram', slug: 'https://t.me/+VyduZeS0IwhkMWFi' },
 					  'vk': { title: 'ВКонтакте', slug: 'https://vk.com/foxesworlds1' },
-					  'discord': { title: 'Discord', slug: 'https://discord.gg/MkWUjBzt3Y' },
+					  'discord': { title: 'Discord', slug: 'https://discord.gg/t59KW4ESWV' },
+					  'youtube': { title: 'YouTube', slug: 'https://www.youtube.com/channel/UCzAKXn6Kbizv7dspREdqztQ' },
 					  'github': { title: 'GitHub', slug: 'https://github.com/FoxesWorld' }
 					};
 

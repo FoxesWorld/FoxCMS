@@ -1,10 +1,10 @@
 
 	import { Settings } from "./options/Settings.js";
 	import { Users } from "./options/Users.js";
-	import { Permissions } from "./options/Permissions.js";
 	import { Servers } from "./options/Servers.js";
 	import { EditInfoBox } from "./options/EditInfoBox.js";
 	import { EditAllBadges } from "./options/EditAllBadges.js";
+	import { GroupAssoc } from "./options/GroupAssoc.js";
 
 class AdminPanel {
 
@@ -12,13 +12,15 @@ class AdminPanel {
 		this.foxEngine = foxEngine;
 		this.templateConfig = templateConfig;
 		this.loadAdminTemplates();
+		
 		this.selectoption = {thisAdmoption: "",thatAdmoption: ""}
 		this.settings = new Settings();
-		this.users = new Users(this);
-		this.permissions = new Permissions(this);
+		
 		this.servers = new Servers(this);
+		this.users = new Users(this);
 		this.editInfoBox = new EditInfoBox(this);
-		this.editAllBadges = new EditAllBadges(this);		
+		this.editAllBadges = new EditAllBadges(this);
+		this.groupAssoc = new GroupAssoc(this);
 	}
 	
 	setAdmOption(option) {
@@ -80,9 +82,7 @@ async loadAdminTemplates() {
 			"serversTable": "/templates/" + replaceData['template'] + "/foxEngine/admin/servers/serversTable.tpl",
 			"noServers": "/templates/" + replaceData['template'] + "/foxEngine/admin/servers/noServers.tpl",
 			"serverEndForm": "/templates/" + replaceData['template'] + "/foxEngine/admin/servers/editServerEnd.tpl",
-			"addServerEndForm": "/templates/" + replaceData['template'] + "/foxEngine/admin/servers/addServerEnd.tpl",
-			"permRow": "/templates/" + replaceData['template'] + "/foxEngine/admin/permissions/permRow.tpl",
-			"permTable": "/templates/" + replaceData['template'] + "/foxEngine/admin/permissions/permTable.tpl"
+			"addServerEndForm": "/templates/" + replaceData['template'] + "/foxEngine/admin/servers/addServerEnd.tpl"
 		}
 	};
 	document.addEventListener("DOMContentLoaded", () => {

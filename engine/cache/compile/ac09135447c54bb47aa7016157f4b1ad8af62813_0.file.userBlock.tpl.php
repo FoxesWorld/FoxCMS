@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2025-04-15 11:16:47
+/* Smarty version 4.0.4, created on 2025-04-22 09:44:32
   from '/var/www/FoxCMS/templates/foxengine2/userBlock.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_67fe15ef602df5_10961189',
+  'unifunc' => 'content_68073ad010b866_52828812',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ac09135447c54bb47aa7016157f4b1ad8af62813' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/userBlock.tpl',
-      1 => 1744562264,
+      1 => 1745059748,
       2 => 'file',
     ),
   ),
@@ -21,15 +21,15 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:balanceBox.tpl' => 1,
   ),
 ),false)) {
-function content_67fe15ef602df5_10961189 (Smarty_Internal_Template $_smarty_tpl) {
+function content_68073ad010b866_52828812 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- UserPane -->
 <div id="userPane" class="side-nav">
     <div class="menu-content">
-        <ul style="width: 100%">
+        <ul>
             <li class="userData">
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
-                            <div class="d-flex" style="margin: 15">
+                            <div class="d-flex" style="margin: 20px 10px;">
                                 <div class="flex-shrink-0">
                                     <div class="avatar">
                                         <img class="h-auto rounded-circle profilePic uk-animation-fade" src="<?php echo $_smarty_tpl->tpl_vars['profilePhoto']->value;?>
@@ -59,12 +59,14 @@ function content_67fe15ef602df5_10961189 (Smarty_Internal_Template $_smarty_tpl)
 >
 			<?php $_smarty_tpl->_subTemplateRender('file:balanceBox.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
-            <ul id="usrMenu">
+			<ul id="usrMenu">
+				<!-- User options go here -->
 				
-                <!-- User options go here -->
+                <ul class="navbar-collapse navbar-nav pages me-auto mb-2 mb-lg-0 dropup">
+				</ul>
 				
-				
-            </ul>
+			</ul>
+
             <li class="dropdown-item">
                 <a href="#" class="pageLink-logout" onclick="foxEngine.user.logout($(this)); return false;">
                     <i style="color: red" class="fa fa-sign-out me-2"></i> Выйти

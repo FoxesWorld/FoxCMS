@@ -37,7 +37,7 @@ export class Page {
                 }
 
                 this.removeUserOptionElement();
-                // this.scrollToBlock(block);
+                this.scrollToBlock(block, 120);
             } else {
                 await this.foxEngine.utils.showErrorPage(response, block);
                 this.setPage("");
@@ -152,13 +152,31 @@ export class Page {
         if (userOption) userOption.remove();
     }
 
-    scrollToBlock(block) {
-        const contentBlock = document.querySelector(block);
-        if (contentBlock) {
-            window.scrollTo({
-                top: contentBlock.offsetTop,
-                behavior: 'smooth'
-            });
-        }
-    }
+	scrollToBlock(block, offset = 10) {
+		let $el;
+
+		if (typeof block === 'string') {
+			$el = $(block);
+		} else {
+			$el = $(block);
+		}
+
+		if (!$el.length) {
+			console.warn("scrollToBlock: Элемент не найден");
+			return;
+		}
+
+		const targetY = $el.offset().top - offset;
+
+		console.log("scrollToBlock →", {
+			offsetTop: $el.offset().top,
+			offset,
+			targetY
+		});
+
+		$("html, body").stop().animate({
+			scrollTop: targetY
+		}, 400); // 400 мс — стандартная скорость анимации
+	}
+
 }

@@ -26,47 +26,68 @@ export class FoxesInputHandler {
         }, awaitms);
     }
 
-	collectFormData(form) {
-		const inputFields = form.querySelectorAll("input, select, textarea");
-		const inputObj = {};
+collectFormData(form) {
+    const inputObj = {};
+    const elements = Array.from(form.elements).filter(el => el.name);
 
-		inputFields.forEach(input => {
-			let value;
-			const name = input.name;
+    // Группируем элементы по имени
+    const groups = elements.reduce((acc, el) => {
+        acc[el.name] = acc[el.name] || [];
+        acc[el.name].push(el);
+        return acc;
+    }, {});
 
-			// Пропускаем поля без имени
-			if (!name) return;
+    for (const [name, inputs] of Object.entries(groups)) {
+        let value;
 
-			// Находим все поля с тем же именем в пределах формы
-			const inputsInForm = $(form).find(`[name="${CSS.escape(name)}"]`);
-			const inputLength = inputsInForm.length;
+        const first = inputs[0];
+        const type  = first.type;
+        const tag   = first.tagName.toLowerCase();
 
-			switch (input.type) {
-				case "checkbox":
-					value = input.checked;
-					break;
+        // 1) checkbox
+        if (type === 'checkbox') {
+            if (inputs.length === 1) {
+                value = first.checked;
+            } else {
+                value = inputs
+                    .filter(i => i.checked)
+                    .map(i => this.normalizeValue(i.value));
+            }
 
-				case "textarea":
-				case "text":
-					value = $(input).val();
-					value = this.normalizeValue(value);
-					break;
+        // 2) radio
+        } else if (type === 'radio') {
+            const checked = inputs.find(i => i.checked);
+            value = checked ? this.normalizeValue(checked.value) : undefined;
 
-				default:
-					if (inputLength <= 1) {
-						value = $(input).val();
-						value = this.normalizeValue(value);
-					} else {
-						value = inputsInForm.toArray().map(el => this.normalizeValue(el.value));
-					}
-					break;
-			}
+        // 3) select[multiple]
+        } else if (tag === 'select' && first.multiple) {
+            value = Array.from(first.selectedOptions)
+                .map(opt => this.normalizeValue(opt.value));
 
-			inputObj[name] = value;
-		});
+        // 4) все остальные (text, textarea, select-single, number и т.д.)
+        } else {
+            if (inputs.length === 1) {
+                value = this.normalizeValue(first.value);
+            } else {
+                value = inputs.map(i => this.normalizeValue(i.value));
+            }
+        }
 
-		return inputObj;
-	}
+        // 5) фильтр пустых значений: "", undefined, [] или [ "", undefined, ... ]
+        const isEmpty =
+            value === "" ||
+            value === undefined ||
+            (Array.isArray(value) && value.every(v => v === "" || v === undefined));
+
+        if (!isEmpty) {
+            inputObj[name] = value;
+        }
+    }
+
+    return inputObj;
+}
+
+
 
 	// Преобразует строку "true"/"false" в булев тип, если применимо
 	normalizeValue(value) {
