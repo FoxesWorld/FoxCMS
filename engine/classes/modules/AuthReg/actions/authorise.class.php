@@ -45,14 +45,14 @@ class Authorise extends AuthManager {
             if ($authQuery->type === "success") {
                 $this->setUserdata($this->inputLogin);
                 $this->setTokenIfNeeded($this->rememberMe, $this->inputLogin);
-                $this->logger->WriteLine("{$this->inputLogin} successfully authorized from " . REMOTE_IP);
+                $this->logger->logInfo("{$this->inputLogin} successfully authorized from " . REMOTE_IP);
                 $antiBrute->clearIp(REMOTE_IP);
                 return true;
             } else {
                 die($authQuery);
             }
         } else {
-            $this->logger->WriteLine("{$this->inputLogin} failed authorization with password {$this->inputPassword}");
+            $this->logger->logError("{$this->inputLogin} failed authorization with password {$this->inputPassword}");
             $antiBrute->failedAuth(REMOTE_IP);
             return false;
         }
@@ -78,29 +78,29 @@ class Authorise extends AuthManager {
         InitHelper::userArrFill($this->db);
     }
     
-    /**
-     * Если пользователь выбрал "Запомнить меня", генерируется токен,
-     * который устанавливается в cookie на 30 дней и сохраняется в базе.
-     * Если флажок не выбран, то cookie удаляется, а значение токена в базе очищается.
-     *
-     * @param bool   $checkbox Флаг "Запомнить меня"
-     * @param string $login    Логин пользователя
-     */
+	/**
+	 * Если пользователь выбрал "Запомнить меня", генерируется токен,
+	 * который устанавливается в cookie на 30 дней и сохраняется в базе.
+	 * Если флажок не выбран, то cookie удаляется, а значение токена в базе очищается.
+	 *
+	 * @param bool   $checkbox Флаг "Запомнить меня"
+	 * @param string $login    Логин пользователя
+	 */
 	private function setTokenIfNeeded($checkbox, $login) {
-		// Продолжительность действия токена (например, 365 дней)
 		$tokenLifetime = 365 * 24 * 60 * 60;
-
-		// Устанавливаем cookie-домен
 		$cookieDomain = $_SERVER['HTTP_HOST'];
-		
-		// HTTPS проверка
 		$isSecure = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on';
 
+		$updater = new GenericUpdater(
+			$this->db,
+			'users',
+			['login', 'token'],
+			false
+		);
+
 		if ($checkbox) {
-			// Генерация нового токена
 			$token = authorize::generateLoginHash($login);
 
-			// Установка cookie со всеми флагами безопасности
 			$cookieSet = setcookie(
 				AuthManager::$userToken,
 				$token,
@@ -110,19 +110,17 @@ class Authorise extends AuthManager {
 					'domain'   => $cookieDomain,
 					'secure'   => $isSecure,
 					'httponly' => true,
-					'samesite' => 'Lax', // Или 'Strict', если не нужна кросс-сайтовая авторизация
+					'samesite' => 'Lax',
 				]
 			);
 
-			if (!$cookieSet) {
-				$this->logger->WriteLine("Ошибка установки cookie для пользователя {$login}");
+			if (!$cookieSet && $this->logger) {
+				$this->logger->logError("Ошибка установки cookie для пользователя {$login}");
 			}
 
-			// Обновляем токен в базе
-			init::$sqlQueryHandler->updateData('users', ['token' => $token], 'login', $login);
+			$updater->updateData(['login' => $login, 'token' => $token], 'login');
 
 		} else {
-			// Удаление cookie
 			setcookie(
 				AuthManager::$userToken,
 				'',
@@ -136,8 +134,8 @@ class Authorise extends AuthManager {
 				]
 			);
 
-			// Очистка токена в БД
-			init::$sqlQueryHandler->updateData('users', ['token' => ''], 'login', $login);
+			$updater->updateData(['login' => $login, 'token' => ''], 'login');
 		}
 	}
+
 }

@@ -26,8 +26,7 @@ class GetOption extends UserOptions
 			$userData["groupName"] = $groupAssociacion->userGroupName();
 			$userData["groupColor"] = $groupAssociacion->userGroupColor();
 			
-			$groupService = new GroupNames($this->db);
-			self::$groupDataArr = $groupService->jsonSerialize();
+			self::$groupDataArr = $groupAssociacion->getGroupArray();
 
             $requestedOption = functions::filterString($_POST[$this->optionRequestKey] ?? '');
             $templatePath = TEMPLATE_DIR . $this->pageTplFile;

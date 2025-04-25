@@ -87,7 +87,7 @@ class Register extends AuthManager
         if ($this->error === false) {
 			init::classUtil('FoxMail', "1.0.0");
             functions::checkSA($this->regData, $this->SAtoCheck);
-            $this->logger->WriteLine("Trying to register user '" . $this->regData['login'] . "'");
+            $this->logger->logInfo("Trying to register user '" . $this->regData['login'] . "'");
             $password = password_hash($this->regData['password1'], PASSWORD_DEFAULT);
             $photo = '/templates/' . $config['siteSettings']['siteTpl'] . '/assets/img/no-photo.jpg';
             $realname = $this->regData['realname'] ?? randTexts::getRandText('noName');
@@ -100,7 +100,7 @@ class Register extends AuthManager
                 //$GiveBadge->giveBadge("earlyUser");
                 $loadUserInfo = new loadUserInfo($this->regData['login'], $this->db);
                 $userData = $loadUserInfo->userInfoArray();
-                $this->logger->WriteLine("User has completed registration '" . $this->regData['login'] . "'");
+                $this->logger->logInfo("User has completed registration '" . $this->regData['login'] . "'");
                 $sessionManager = new sessionManager($userData);
 				mkdir(init::$usrArray['usrFolder'], 0755, true);
 				$entries = ['username' => $this->regData['login']];

@@ -17,7 +17,7 @@ if (!defined('FOXXEY')) {
 				switch($key){
 
 					case "g-recaptcha-response":
-						if(@$captchaCheck && @$config['securitySetings']['reCaptchaCheck']) {
+						if($captchaCheck && @$config['securitySetings']['reCaptchaCheck']) {
 							$reCaptcha = new ReCaptcha($config['securitySetings']['reCaptchaSecret']);
 							$resp = $reCaptcha->verifyResponse(REMOTE_IP, $value);
 							if (!$resp->success) {

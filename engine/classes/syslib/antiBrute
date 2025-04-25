@@ -84,7 +84,7 @@ class antiBrute {
 		$banTime = CURRENT_TIME + $config['securitySetings']['bantime'];
 		if (class_exists('Logger')) {
 			$Logger = new Logger('AuthLog');
-			$Logger->WriteLine('Banning '.$this->ip.' for too many authorization errors');
+			$Logger->logInfo('Banning '.$this->ip.' for too many authorization errors');
 		}
 		$query = "UPDATE `antiBrute` SET `time` = ".$banTime." WHERE ip = '".$this->ip."'";
 		$this->db->run($query);

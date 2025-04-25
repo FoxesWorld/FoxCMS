@@ -31,8 +31,21 @@
 		}
 		
 		private function updateUserOnline($db, $usrArray){
-			if($usrArray['isLogged']) {
-				init::$sqlQueryHandler->updateData('users', array('last_date' => CURRENT_TIME), 'login', $usrArray['login']);
+			if ($usrArray['isLogged']) {
+				$updater = new GenericUpdater(
+					$db,
+					'users',
+					['login', 'last_date'],
+					false
+				);
+
+				$updater->updateData(
+					[
+						'login' => $usrArray['login'],
+						'last_date' => CURRENT_TIME
+					],
+					'login' // primary key
+				);
 			}
 		}
 		

@@ -10,11 +10,11 @@
 				if(@functions::userExists($userData['login'], $db)) {
 					init::requireNestedClasses(basename(__FILE__), __DIR__);
 					$UFR = new UserFieldsReplacement($content);
-					$groupAssociacion = new GroupAssociacion($userData['user_group'], $db);
-					$userData["groupName"] = $groupAssociacion->userGroupName();
-					$groupService = new GroupNames($db);
-					$groups = $groupService->jsonSerialize();
-					$userData["groupColor"] = self::getColorByType($groups, $groupAssociacion->userGroupTag());
+					//$groupAssociacion = new GroupAssociacion($userData['user_group'], $db);
+					//$userData["groupName"] = $groupAssociacion->userGroupName();
+					//$groupService = new GroupNames($db);
+					//$groups = $groupService->jsonSerialize();
+					//$userData["groupColor"] = self::getColorByType($groups, $groupAssociacion->userGroupTag());
 					if($userData !== false) {
 						$this->content = $UFR->replaceUserTags($userData);
 						$BAC = new BlockAccessCheck($this->content, $userData);

@@ -40,6 +40,10 @@ class SafeSQLHandler {
             return '{"message": "No valid fields to update", "type": "error"}';
         }
     }
+	
+	public function getDb(){
+		return $this->db;
+	}
 }
 
 ?>

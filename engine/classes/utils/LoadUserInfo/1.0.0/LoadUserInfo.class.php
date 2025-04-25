@@ -14,19 +14,17 @@ class LoadUserInfo {
         $this->userInfoArray['isLogged'] = !empty($this->userInfoArray);
     }
 
-    private function fetchUserInfo(string $login, \db $db): array {
-        try {
-            $query = "SELECT * FROM `users` WHERE login = :login";
-            $stmt = $db->prepare($query);
-            $stmt->bindParam(':login', $login, \PDO::PARAM_STR);
-            $stmt->execute();
+	private function fetchUserInfo(string $login, \db $db): array {
+		try {
+			$selector = new GenericSelector($db, 'users');
+			$result = $selector->select(['login' => $login]);
+			return $result[0] ?? [];
+		} catch (\Throwable $e) {
+			error_log("User fetch error: " . $e->getMessage());
+			return [];
+		}
+	}
 
-            return $stmt->fetch(\PDO::FETCH_ASSOC) ?: [];
-        } catch (\PDOException $e) {
-            error_log("Database error: " . $e->getMessage());
-            return [];
-        }
-    }
 
     public function userInfoArray(): array {
         return $this->userInfoArray;

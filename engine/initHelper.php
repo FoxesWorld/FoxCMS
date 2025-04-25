@@ -3,7 +3,7 @@
 
 			protected $db;
 			protected $logger;
-			protected static $groupAssociacion;
+			public static $groupAssociacion;
 
 			function __construct($db, $logger) {
 				$this->db = $db;
@@ -28,6 +28,7 @@
 				self::$usrArray['groupName'] = self::$groupAssociacion->userGroupName();
 				self::$usrArray['groupTag'] = self::$groupAssociacion->userGroupTag();
 				self::$usrArray['user_group'] = self::$groupAssociacion->userGroupNum();
+				self::$usrArray['groupName'] = self::$groupAssociacion->userGroupName();
 			}
 			
 			protected static function userSkinInit() {
@@ -77,47 +78,81 @@
 
 		class GroupAssociacion extends initHelper {
 			
+			private array $groupArray = [];
 			private $userGroup;
 			protected $db;
-			private $dbTabble = "groupAssociation";
+			private $dbTable = "groupAssociation";
 
 			function __construct($userGroup, $db){
 				$this->userGroup = $userGroup;
 				$this->db = $db;
+				$this->dbRequest();
 			}
 			
 			private function dbRequest(){
-				$query = "SELECT * FROM `".$this->dbTabble."` WHERE groupNum = ".$this->userGroup."";
-				$answer = $this->db->getRow($query);
+				$query = "SELECT * FROM `".$this->dbTable."` WHERE groupNum = ".$this->userGroup."";
+				$this->groupArray = $this->db->getRow($query);
 				
-				return $answer;
+				return $this->groupArray;
 			}
 
-			public function userGroupName() {
-				$result = $this->dbRequest()["groupName"] ?? randTexts::getRandText('noGroup');
+		public function userGroupName(): string {
+			$result = $this->groupArray["groupName"] ?? randTexts::getRandText('noGroup');
 
-				if (is_string($result) && strpos($result, ',') !== false) {
+			if (is_string($result)) {
+				if (strpos($result, ',') !== false) {
 					$parts = array_filter(array_map('trim', explode(',', $result)));
-					if (!empty($parts)) {
-						return $parts[array_rand($parts)];
-					}
+					return !empty($parts) ? $parts[array_rand($parts)] : randTexts::getRandText('noGroup');
 				}
-
-				return $result;
+				if (strlen(trim($result)) > 0) {
+					return trim($result);
+				}
 			}
+
+			return randTexts::getRandText('noGroup');
+		}
+
+		
+		public function getColorByType(array $groupArray, string $type, string $default = '#ffffff'): string {
+			foreach ($groupArray as $group) {
+				if ($group['groupType'] === $type) {
+					return $group['groupColor'];
+				}
+			}
+			return $default;
+		}
+
+			/**
+			 * Загрузить все группы.
+			 *
+			 * @return array
+			 */
+			public function loadAllGroups(): array {
+
+				$selector = new GenericSelector(
+					$this->db,
+					$this->dbTable,
+					['id', 'groupNum', 'groupName', 'groupType', 'groupColor']
+				);
+
+				return $selector->select(); // Без условий — получить всё
+			}
+		
+			public function getGroupArray(){
+				return $this->groupArray;
+			}
+
 
 			public function userGroupTag(){
-				return $this->dbRequest()["groupType"] ?? "cursed";
+				return $this->groupArray["groupType"] ?? "cursed";
 			}
 
 			public function userGroupColor(){
-				return $this->dbRequest()["groupColor"] ?? "#ffffff";
+				return $this->groupArray["groupColor"] ?? "#ffffff";
 			}
 			
 			protected function userGroupNum() {
-				return $this->dbRequest()["groupNum"] ?? 3;
-			}
-			
-			
+				return $this->groupArray["groupNum"] ?? 3;
+			}	
 		}
 ?>

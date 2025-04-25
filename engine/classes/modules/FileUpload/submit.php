@@ -98,40 +98,69 @@ if (!defined('profile')) {
 			}
 		}
 		
-		private function delete_existing_files() {
-			$query = "SELECT profilePhoto FROM users WHERE login = '" . $this->db->escape($this->usrArray['login']) . "'";
-			$result = $this->db->getValue($query);
-			if ($result) {
-				$existingFile = ROOT_DIR . $result;
-				if (
-					$existingFile &&
-					file_exists($existingFile) &&
-					is_readable($existingFile) &&
-					is_writable($existingFile) &&
-					strpos($existingFile, '/templates/') === false
-				) {
-					if (!unlink($existingFile)) {
-						$this->logger->warning("Не удалось удалить файл: $existingFile");
-					}
-				}
-			}
-		}
-		
-	private function delete_existing_file_if_diff($newExtension) {
-        $query = "SELECT profilePhoto FROM users WHERE login = '" . $this->usrArray['login'] . "'";
-        $result = $this->db->getValue($query);
-        if ($result) {
-            $existingFile = ROOT_DIR . $result;
-            // Проверяем, что файл существует и что его путь не содержит запрещённую поддиректорию
-            if ($existingFile && file_exists($existingFile) && strpos($existingFile, '/templates/') === false) {
-                $oldExtension = strtolower(pathinfo($existingFile, PATHINFO_EXTENSION));
+  /**
+     * Удаляет существующий файл фотографии пользователя.
+     *
+     * @return void
+     */
+    private function delete_existing_files(): void {
+        $photoPath = $this->getProfilePhotoPath();
+        if ($photoPath) {
+            $absolutePath = ROOT_DIR . $photoPath;
+            if (
+                file_exists($absolutePath) &&
+                is_readable($absolutePath) &&
+                is_writable($absolutePath) &&
+                strpos($absolutePath, '/templates/') === false
+            ) {
+                if (!unlink($absolutePath)) {
+                    $this->logger->warning("Не удалось удалить файл: $absolutePath");
+                }
+            }
+        }
+    }
+
+    /**
+     * Удаляет существующий файл, если расширение файла отличается от нового.
+     *
+     * @param string $newExtension
+     * @return void
+     * @throws Exception
+     */
+    private function delete_existing_file_if_diff(string $newExtension): void {
+        $photoPath = $this->getProfilePhotoPath();
+        if ($photoPath) {
+            $absolutePath = ROOT_DIR . $photoPath;
+            if (
+                file_exists($absolutePath) &&
+                is_readable($absolutePath) &&
+                strpos($absolutePath, '/templates/') === false
+            ) {
+                $oldExtension = strtolower(pathinfo($absolutePath, PATHINFO_EXTENSION));
                 if (strtolower($newExtension) !== $oldExtension) {
-                    if (!unlink($existingFile)) {
-                        throw new Exception("Не удалось удалить файл: $existingFile");
+                    if (!unlink($absolutePath)) {
+                        throw new Exception("Не удалось удалить файл: $absolutePath");
                     }
                 }
             }
         }
+    }
+
+    /**
+     * Получает путь к фото профиля пользователя через GenericSelector.
+     *
+     * @return string|null
+     */
+    private function getProfilePhotoPath(): ?string {
+		$selector = new GenericSelector($this->db, 'users', ['login', 'profilePhoto']);
+        $result = $selector->select(
+            ['login' => $this->usrArray['login']],
+            ['profilePhoto'],
+            null,
+            'ASC',
+            1
+        );
+        return $result[0]['profilePhoto'] ?? null;
     }
 
 	}

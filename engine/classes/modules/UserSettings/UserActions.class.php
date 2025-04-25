@@ -22,6 +22,7 @@ if(!defined('profile')) {
 				if(isset($userAction)) {
 						$this->requireFile($userAction);
 						$this->fRequest = functions::collectData($request, true);
+
 						switch($userAction){
 
 							case 'EditUser':
@@ -80,10 +81,13 @@ if(!defined('profile')) {
 								init::classUtil('LoadUserInfo', "1.0.0");
 								$loadUserInfo = new loadUserInfo(functions::filterString($request['userDisplay']), $this->db);
 								$userData = $loadUserInfo->userInfoArray();
+								$groupAssociacion = new GroupAssociacion($userData['user_group'], $db);
+								$userData["groupName"] = $groupAssociacion->userGroupName();
+								$userData["groupColor"] = $groupAssociacion->userGroupColor();
 								
 								if(@$userData['login']){
 									$SSV = new SSV(
-										GetOption::getPageContent('profile', TEMPLATE_DIR.$this->pageTplFile),
+										GetOption::getPageContent('profile', TEMPLATE_DIR.$this->pageTplFile, $userData),
 										$request['userDisplay'],
 										$userData,
 										$this->db, 

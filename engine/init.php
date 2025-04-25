@@ -11,7 +11,8 @@ require ('data/config.php');
 			Module setings - JSON file for each module!!!
 		*/
 		
-		private $initHelper, $ModulesLoader, $initLevels;
+		private $ModulesLoader, $initLevels;
+		public static $initHelper;
 		protected $debug, $logger, $db, $tpl;
 		protected static $deviceType, $usrFiles, $permissions, $dynamicConfig, $sqlQueryHandler, $usrArray = array(
 			'isLogged' => false,
@@ -60,11 +61,11 @@ require ('data/config.php');
 			$this->logger = new Logger('lastlog');
 			require('classes/modules/Module.class.php');
 			$this->ModulesLoader = new ModulesLoader($this->db, $this->logger);
-			$this->initHelper = new initHelper($this->db, $this->logger); //UsrArray Override (if IsLogged)
+			self::$initHelper = new initHelper($this->db, $this->logger); //UsrArray Override (if IsLogged)
 			self::$usrArray['usrFolder'] = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER .init::$usrArray['login'] . '/';
 			$RequestHandler = new RequestHandler($this->db);
 			init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "preInit");
-			$this->initHelper::userSkinInit();
+			self::$initHelper::userSkinInit();
 			$SystemRequests = new SystemRequests($this->db, $this->logger);
 			self::$deviceType = new \Detection\MobileDetect;
 			$SystemRequests->requestListener();

@@ -18,7 +18,7 @@ class GameScanner extends Init {
         ["so", "zip", "jar", "toml", "txt", "cfg", "recipe", "dat", "properties", "git", "sha1", "json"]
     ];
 
-    public function __construct(string $client, string $version, int $platform) {
+    public function __construct(string $client, string $version, int $platform = 0) {
         global $config;
         $this->platform = $platform;
         $this->clientDir = ROOT_DIR . UPLOADS_DIR . $config['launcherSettings']['gameFiles'];

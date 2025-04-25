@@ -88,7 +88,7 @@ class AuthManager extends Module {
             
             case 'checkPass':
                 init::classUtil('PasswordStrength', "1.0.0");
-                $this->logger->WriteLine("Checking a password '".$request['password']."'");
+                $this->logger->logInfo("Checking a password '".$request['password']."'");
                 die(json_encode(new PasswordStrength($request['password'])));
             break;
             
@@ -142,6 +142,7 @@ class AuthManager extends Module {
             $query = "SELECT login from `users` WHERE token = '".$token."'";
             $username = $db->getValue($query);
             if ($username && !init::$usrArray['isLogged']) {
+				//$this->logger->WriteLine("Authentificating ".$username." from ".REMOTE_IP);
                 $auth = new authorise("", $db, $logger, $username);
             }
         }
@@ -159,7 +160,6 @@ public static function logout(string $message = ""): void {
             session_unset();
             session_destroy();
 
-            // Удаление файла сессии (по желанию)
             if (ini_get("session.use_cookies")) {
                 $params = session_get_cookie_params();
                 setcookie(
@@ -177,7 +177,6 @@ public static function logout(string $message = ""): void {
             }
         }
 
-        // Удаление токена-куки (тот, что используется для авторизации)
         $domain   = $_SERVER["HTTP_HOST"];
         $isSecure = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on';
 
@@ -194,14 +193,18 @@ public static function logout(string $message = ""): void {
             ]
         );
 
-        // Если используется токен в БД — очистить
+        // Очистка токена в базе через GenericUpdater
         if (!empty(init::$usrArray["login"])) {
-            init::$sqlQueryHandler->updateData('users', ['token' => ''], 'login', init::$usrArray["login"]);
+            $updater = new GenericUpdater(
+                init::$sqlQueryHandler->getDb(), // предположительно доступ к PDO
+                'users',
+                ['login', 'token'],
+                false
+            );
+            $updater->updateData(['login' => init::$usrArray["login"], 'token' => ''], 'login');
         }
 
-        // Ответ клиенту
         functions::jsonAnswer($message ?: "Logged out successfully", false);
-
     } else {
         functions::jsonAnswer("Can't log out — not logged in", true);
     }
@@ -256,17 +259,17 @@ class AuthLib {
         }
     }
     
-    private function checkUserSession() : bool {
-        $stmt = $this->db->prepare("SELECT * FROM usersession WHERE user = :login");
-        $stmt->bindValue(':login', $this->login);
-        $stmt->execute();
-        return ($stmt->rowCount() == 1);
-    }
+	private function checkUserSession(): bool {
+		$selector = new GenericSelector($this->db, 'usersession');
+		$result = $selector->select(['user' => $this->login], ['user']);
+		return count($result) === 1;
+	}
 
-    private function getRealUser($login) {
-        $stmt = $this->db->prepare("SELECT user, accessToken FROM usersession WHERE user= :login");
-        $stmt->bindValue(':login', $login);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+
+	private function getRealUser($login): string {
+		$selector = new GenericSelector($this->db, 'usersession', ['*']);
+		$result = $selector->select(['user' => $login], ['user', 'accessToken'], null, 1);
+		return $result[0] ?? null;
+	}
+
 }

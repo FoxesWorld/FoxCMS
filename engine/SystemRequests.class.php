@@ -65,7 +65,8 @@
 						break;
 						
 						case "getGroups":
-							die(json_encode(new GroupNames($this->db)));
+							//die(json_encode(new GroupNames($this->db)));
+							die(json_encode(initHelper::$groupAssociacion->loadAllGroups()));
 						break;
 						
 						case "parseServers":
@@ -220,15 +221,15 @@
 							break;
 						
 						case "loadFiles":
-							if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
+							//if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
 								$client = @RequestHandler::$REQUEST['client'];
 								$version = @RequestHandler::$REQUEST['version'];
-								$this->logger->WriteLine(REMOTE_IP." requests '".$client." ".$version."' files");
-								$gameScanner = new GameScanner($client, $version, @RequestHandler::$REQUEST['platform']);
+								$this->logger->logInfo(REMOTE_IP." requests '".$client." ".$version."' files");
+								$gameScanner = new GameScanner($client, $version, @RequestHandler::$REQUEST['platform'] ?? 0);
 								die($gameScanner->checkfiles());
-							} else {
-								die('{"message": "Invalid Agent!"}');
-							}
+							//} else {
+							//	die('{"message": "Invalid Agent!"}');
+							//}
 						break;
 						
 						case  "scanUploads":
@@ -243,7 +244,7 @@
 						case "downloadUpdater":
 						$version = @RequestHandler::$REQUEST['version'];
 						$systemInformation = @RequestHandler::$REQUEST['systemInformation'];
-						$this->logger->WriteLine("Updater ".REMOTE_IP." with version '".$version."' requests an update information");
+						$this->logger->logInfo("Updater ".REMOTE_IP." with version '".$version."' requests an update information");
 						if($systemInformation){
 							$this->fillHWID($systemInformation);
 							}
@@ -357,27 +358,37 @@
 						case "getUserData":
 							$token = @RequestHandler::$REQUEST["accessToken"];
 							$uuid  = @RequestHandler::$REQUEST["uuid"];
-							$query = "SELECT * FROM `usersession` WHERE `accessToken` = :token";
-
-						    $stmt = $this->db->prepare($query);
-							$stmt->bindParam(':token', $token, \PDO::PARAM_STR);
-							$stmt->execute();
 							
-							$result = $stmt->fetch(\PDO::FETCH_ASSOC);
-							if($result) {
-							$login = $result["user"];
-							$loadUserInfo = new LoadUserInfo($login, $this->db);
-							$userData = $loadUserInfo->userInfoArray();
-							$groupAssoc = new groupAssociacion($userData['user_group'], $this->db);
-							$userData['groupName'] = $groupAssoc->userGroupTag();
-							die(json_encode($userData));
+							// Инициализируем GenericSelector для работы с таблицей usersession
+							$selector = new GenericSelector($this->db, 'usersession');
+
+							// Создаем критерий для поиска записи с соответствующим токеном
+							$criteria = ['accessToken' => $token];
+
+							// Выполняем запрос для поиска записи с данным токеном
+							$userSession = $selector->select($criteria);
+
+							if (!empty($userSession)) {
+								// Если сессия найдена, получаем логин пользователя
+								$login = $userSession[0]['user'];
+
+								// Загружаем информацию о пользователе
+								$loadUserInfo = new LoadUserInfo($login, $this->db);
+								$userData = $loadUserInfo->userInfoArray();
+
+								// Получаем данные группы пользователя
+								$groupAssoc = new groupAssociacion($userData['user_group'], $this->db);
+								$userData['groupName'] = $groupAssoc->userGroupTag();
+
+								// Отправляем данные пользователя в формате JSON
+								die(json_encode($userData));
+
 							} else {
-								//die('{"message": "incorrect session"}');
-								
+								// Если сессия не найдена, возвращаем ошибку
 								die('{"realname": "ErrorWin", "groupName": "#Ошибка 0xc32", "colorScheme": "#c1a634", "userStatus": "Неверный токен!", "land": "FoxesLand", "profilePhoto": "/templates/foxengine2/assets/img/no-photo.jpg", "groupName": "tester", "user_group": "4"}');
 							}
-							//
-						break;
+							break;
+
 
 						default:
 							die('{"message": "Unknown sysRequest option - '.RequestHandler::$REQUEST[$this->requestHeader].'!"}');
@@ -405,7 +416,7 @@
 		private function handleUploadFile($fileType, $login) : void {
 			if(init::$usrArray['isLogged']) {
 				if($login === init::$usrArray['login'] || init::$usrArray['user_group'] == 1) {
-					$this->logger->WriteLine("Logged user '".init::$usrArray['login']."' uploading ".$fileType." for ".$login);
+					$this->logger->logInfo("Logged user '".init::$usrArray['login']."' uploading ".$fileType." for ".$login);
 					if(@RequestHandler::$REQUEST['csrf_token'] === init::$usrArray['hash'] || init::$usrArray['user_group'] == 1) {
 						$folder = ROOT_DIR . UPLOADS_DIR . USR_SUBFOLDER .$login. '/';
 						if(!file_exists($folder)){
@@ -546,7 +557,7 @@ private function fillHWID($hwid) {
 	
 	$this->db->run($query);
 	} else {
-		 $this->logger->WriteLine("CPU ID ".@$hwidArray['cpuId']." already exists in the database.");
+		 $this->logger->logInfo("CPU ID ".@$hwidArray['cpuId']." already exists in the database.");
 	}
 
 }

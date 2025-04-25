@@ -2,5 +2,5 @@
 	"classInclude": true,
 	"mainClass": "preLoad.php",
 	"priority": "secondary",
-	"userGroup": [1,4,3]
+	"userGroup": [1,4,3,6]
 }

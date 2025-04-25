@@ -6,6 +6,7 @@ class BlockAccessCheck extends SSV {
 
     private const TAGS = [
         'hasPriviligies',
+        'hasStatus',
         'group=',
         'not-group=',
         'not-login='
@@ -20,22 +21,33 @@ class BlockAccessCheck extends SSV {
         foreach (self::TAGS as $tag) {
             $method = 'check' . ucfirst(str_replace(['-', '='], '', $tag));
             if (method_exists($this, $method)) {
-                $this->$method();
+                // Повторяем, чтобы обработать вложенные и множественные блоки
+                do {
+                    $prev = $this->content;
+                    $this->$method();
+                } while ($this->content !== $prev);
             }
         }
         return $this->content;
     }
 
     private function checkHasPriviligies(): void {
-        $tag = 'hasPriviligies';
+        $this->processSimpleBlock('hasPriviligies', $this->hasSufficientPriviligies());
+    }
 
-        if (stripos($this->content, "[$tag]") !== false) {
-            if ($this->hasSufficientPriviligies()) {
-                $this->removeTags($tag);
-            } else {
-                $this->removeTaggedBlock($tag);
+    private function checkHasStatus(): void {
+        $pattern = '/\[hasStatus\](.*?)\[\/hasStatus\]/is';
+        $this->content = preg_replace_callback($pattern, function($m) {
+            // проверяем статус в запрошенных данных и в сессии
+            $status = $this->requestedUserArray['userStatus'] ?? null;
+            $sessionStatus = init::$usrArray['userStatus'] ?? null;
+            // если ни в запрошенных, ни в сессии нет статуса — удаляем блок
+            if (empty($status) && empty($sessionStatus)) {
+                $this->removeTaggedBlock('hasStatus');//return '';
             }
-        }
+            // иначе оставляем содержимое, убрав теги
+            return $m[1];
+        }, $this->content);
     }
 
     private function hasSufficientPriviligies(): bool {
@@ -52,10 +64,21 @@ class BlockAccessCheck extends SSV {
 
     private function checkNotLogin(): void {
         $pattern = '/\[not-login=(.+?)\](.*?)\[\/not-login\]/is';
+        $this->content = preg_replace_callback($pattern, function($m) {
+            $list = array_map('trim', explode(',', $m[1]));
+            return in_array(init::$usrArray['login'], $list) ? '' : $m[2];
+        }, $this->content);
+    }
 
-        $this->content = preg_replace_callback($pattern, function ($matches) {
-            $logins = array_map('trim', explode(',', $matches[1]));
-            return in_array(init::$usrArray['login'], $logins) ? '' : $matches[2];
+    /**
+     * Общий метод для простых блоков без параметров
+     */
+    private function processSimpleBlock(string $tag, bool $condition): void {
+        $open = "[$tag]";
+        $close = "[/$tag]";
+        $pattern = '/\[' . preg_quote($tag) . '\](.*?)\[\/' . preg_quote($tag) . '\]/is';
+        $this->content = preg_replace_callback($pattern, function($m) use ($condition) {
+            return $condition ? $m[1] : '';
         }, $this->content);
     }
 
@@ -69,14 +92,11 @@ class BlockAccessCheck extends SSV {
     }
 
     private function processBlock(string $type, bool $shouldInclude): string {
-        $pattern = '/\[' . preg_quote($type) . '=(.*?)\]((?>(?R)|.)*?)\[\/' . preg_quote($type) . '\]/is';
-
-        return preg_replace_callback($pattern, function ($matches) use ($shouldInclude) {
-            $groups = array_map('trim', explode(',', $matches[1]));
-            $userGroup = init::$usrArray['user_group'];
-
-            $shouldShow = in_array($userGroup, $groups);
-            return ($shouldInclude === $shouldShow) ? $matches[2] : '';
+        $pattern = '/\[' . preg_quote($type) . '=(.*?)\](.*?)\[\/' . preg_quote($type) . '\]/is';
+        return preg_replace_callback($pattern, function($m) use ($shouldInclude) {
+            $vals = array_map('trim', explode(',', $m[1]));
+            $ug = init::$usrArray['user_group'] ?? null;
+            return ($shouldInclude === in_array($ug, $vals)) ? $m[2] : '';
         }, $this->content);
     }
 }

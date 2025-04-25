@@ -53,22 +53,23 @@ class GameServerManager {
         }
     }
 
-    /**
-     * Получает список серверов пользователя из БД.
-     *
-     * @param string $login Логин пользователя.
-     * @return array|null Список объектов с данными сессий или null, если пользователь не найден.
-     */
-    private function getUserData(string $login): ?array {
-        $sql = "SELECT * FROM users WHERE login = :login";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([':login' => $login]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
-        if (!$row) {
-            return null;
-        }
-        return $this->parseServersOnline($row['serversOnline'] ?? null);
+/**
+ * Получает список серверов пользователя из БД.
+ *
+ * @param string $login Логин пользователя.
+ * @return array|null Список объектов с данными сессий или null, если пользователь не найден.
+ */
+private function getUserData(string $login): ?array {
+    $selector = new GenericSelector($this->db, 'users', ['login', 'serversOnline']);
+    $rows = $selector->select(['login' => $login]);
+
+    if (!$rows || !isset($rows[0]['serversOnline'])) {
+        return null;
     }
+
+    return $this->parseServersOnline($rows[0]['serversOnline']);
+}
+
 
     /**
      * Обновляет список серверов пользователя в БД.
@@ -77,7 +78,7 @@ class GameServerManager {
      * @param string $login Логин пользователя.
      * @param array  $servers Список объектов с данными сессий.
      * @throws RuntimeException Если не удаётся закодировать данные в JSON.
-     */
+    
     private function updateUserData(string $login, array $servers): void {
         $jsonData = json_encode($servers, JSON_UNESCAPED_UNICODE);
         if ($jsonData === false) {
@@ -89,7 +90,38 @@ class GameServerManager {
             ':serversOnline' => $jsonData,
             ':login'         => $login
         ]);
-    }
+    } */
+	
+	/**
+	 * Обновляет список серверов пользователя в БД с использованием GenericUpdater.
+	 *
+	 * @param string $login   Логин пользователя.
+	 * @param array  $servers Список объектов сессий.
+	 * @throws RuntimeException Если JSON кодирование не удалось.
+	 */
+	private function updateUserData(string $login, array $servers): void {
+		$jsonData = json_encode($servers, JSON_UNESCAPED_UNICODE);
+		if ($jsonData === false) {
+			throw new RuntimeException('Failed to encode JSON: ' . json_last_error_msg());
+		}
+
+		$updater = new GenericUpdater(
+			$this->db,
+			'users',
+			['login', 'serversOnline'],
+			false // отключаем удаление, так как обновляем одну строку
+		);
+
+		$result = $updater->updateData([
+			'login' => $login,
+			'serversOnline' => $jsonData
+		], 'login');
+
+		if ($result['type'] === 'error') {
+			throw new RuntimeException('Update failed: ' . $result['message']);
+		}
+	}
+
 
     /**
      * Декодирует JSON-строку с информацией о сессиях или возвращает пустой список.
