@@ -1179,3 +1179,352 @@ Stack trace:
 #3 /var/www/FoxCMS/index.php(8): init->__construct()
 #4 {main}
   thrown in /var/www/FoxCMS/engine/classes/utils/ServerParser/1.0.0/ServerParser.class.php on line 22" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/25 19:04:54 [error] 1997624#1997624: *347928 FastCGI sent in stderr: "PHP message: PHP Notice:  Undefined offset: -1 in /var/www/FoxCMS/engine/classes/modules/StartUpSound/StartUpSound.class.php on line 243PHP message: PHP Notice:  Trying to access array offset on value of type null in /var/www/FoxCMS/engine/classes/modules/StartUpSound/StartUpSound.class.php on line 254PHP message: PHP Notice:  Trying to access array offset on value of type null in /var/www/FoxCMS/engine/classes/modules/StartUpSound/StartUpSound.class.php on line 255" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2025/04/26 05:37:43 [error] 2065212#2065212: *349121 directory index of "/var/www/FoxCMS/.git/" is forbidden, client: 38.22.104.67, server: foxescraft.ru, request: "GET /.git/ HTTP/1.1", host: "foxescraft.ru"
+2025/04/26 07:17:22 [crit] 2065211#2065211: *349547 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 178.62.43.13, server: 0.0.0.0:443
+2025/04/26 07:18:42 [error] 2065213#2065213: *349491 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:18:42 [error] 2065211#2065211: *349608 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:18:42 [error] 2065211#2065211: *349611 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:18:42 [error] 2065211#2065211: *349608 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:18:42 [error] 2065213#2065213: *349491 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:18:46 [error] 2065211#2065211: *349611 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:18:47 [error] 2065211#2065211: *349611 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:18:51 [error] 2065211#2065211: *349611 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:18:52 [error] 2065211#2065211: *349611 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:18:57 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:18:57 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:01 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:02 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:06 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:07 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:11 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:12 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:16 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:17 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:21 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:22 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:27 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:27 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:32 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:32 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:37 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:37 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:41 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:42 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:19:46 [error] 2065215#2065215: *349622 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected '(', expecting variable (T_VARIABLE) in /var/www/FoxCMS/engine/init.php on line 152" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:20:01 [error] 2065215#2065215: *349646 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot redeclare init::getLogger() in /var/www/FoxCMS/engine/init.php on line 152" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:20:23 [error] 2065215#2065215: *349646 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:20:32 [error] 2065215#2065215: *349646 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Access level to GenericSelector::$db must be protected (as in class init) or weaker in /var/www/FoxCMS/engine/GenericSelector.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:33:34 [error] 2065216#2065216: *350182 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to GenericSelector::select() must be of the type array, string given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 244 and defined in /var/www/FoxCMS/engine/GenericSelector.class.php:46
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(244): GenericSelector->select()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(121): AdminOptions->selectUsers()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/index.php(8): init->__construct()" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:33:35 [error] 2065216#2065216: *350182 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to ServerParser::parseServers() must be of the type string, null given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 229 and defined in /var/www/FoxCMS/engine/classes/utils/ServerParser/1.0.0/ServerParser.class.php:22
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(229): ServerParser->parseServers()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(129): AdminOptions->parseServers()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCM" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:33:39 [error] 2065216#2065216: *350182 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to ServerParser::parseServers() must be of the type string, null given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 229 and defined in /var/www/FoxCMS/engine/classes/utils/ServerParser/1.0.0/ServerParser.class.php:22
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(229): ServerParser->parseServers()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(129): AdminOptions->parseServers()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCM" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:33:42 [error] 2065216#2065216: *350182 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to ServerParser::parseServers() must be of the type string, null given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 229 and defined in /var/www/FoxCMS/engine/classes/utils/ServerParser/1.0.0/ServerParser.class.php:22
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(229): ServerParser->parseServers()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(129): AdminOptions->parseServers()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCM" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:34:01 [error] 2065216#2065216: *350184 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to ServerParser::parseServers() must be of the type string, null given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 229 and defined in /var/www/FoxCMS/engine/classes/utils/ServerParser/1.0.0/ServerParser.class.php:22
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(229): ServerParser->parseServers()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(129): AdminOptions->parseServers()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCM" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:35:35 [error] 2065216#2065216: *350184 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to ServerParser::parseServers() must be of the type string, null given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 229 and defined in /var/www/FoxCMS/engine/classes/utils/ServerParser/1.0.0/ServerParser.class.php:22
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(229): ServerParser->parseServers()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(129): AdminOptions->parseServers()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCM" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:38:04 [error] 2065216#2065216: *350184 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'AdminOptions' not found in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php:20
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#1 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#2 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#3 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#4 /var/www/FoxCMS/index.php(8): init->__construct()
+#5 {main}
+  thrown in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php on line 20" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:34 [error] 2065218#2065218: *350466 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:35 [error] 2065216#2065216: *350184 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:35 [error] 2065216#2065216: *350184 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:35 [error] 2065216#2065216: *350184 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:36 [error] 2065216#2065216: *350184 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:36 [error] 2065218#2065218: *350466 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:36 [error] 2065216#2065216: *350184 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:36 [error] 2065218#2065218: *350466 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:37 [error] 2065218#2065218: *350466 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:37 [error] 2065218#2065218: *350466 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:38 [error] 2065218#2065218: *350466 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:38 [error] 2065218#2065218: *350466 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:38 [error] 2065216#2065216: *350184 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:39 [error] 2065216#2065216: *350184 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:43 [error] 2065218#2065218: *350466 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:43 [error] 2065218#2065218: *350466 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:39:43 [error] 2065218#2065218: *350494 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to UsersList::__construct() must be an instance of PDO, instance of db given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 337 and defined in /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php:12
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:40:01 [error] 2065218#2065218: *350494 FastCGI sent in stderr: "PHP message: PHP Notice:  Array to string conversion in /var/www/FoxCMS/engine/GenericSelector.class.php on line 86PHP message: PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'field list' in /var/www/FoxCMS/engine/GenericSelector.class.php:86
+Stack trace:
+#0 /var/www/FoxCMS/engine/GenericSelector.class.php(86): PDOStatement->execute()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php(26): GenericSelector->select()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/actions/UsersList.class.php(15): UsersList->parseUsers()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(337): UsersList->__construct()
+#4 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(177): AdminOptions->usersList()
+#5 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#6 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#7 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:40:37 [error] 2065218#2065218: *350507 FastCGI sent in stderr: "PHP message: PHP Notice:  Array to string conversion in /var/www/FoxCMS/engine/GenericSelector.class.php on line 86" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:40:37 [error] 2065218#2065218: *350507 FastCGI sent in stderr: "PHP message: PHP Notice:  Array to string conversion in /var/www/FoxCMS/engine/GenericSelector.class.php on line 86" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:40:51 [error] 2065218#2065218: *350507 FastCGI sent in stderr: "PHP message: PHP Notice:  Array to string conversion in /var/www/FoxCMS/engine/GenericSelector.class.php on line 86" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:42:29 [error] 2065217#2065217: *350684 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to GenericSelector::select() must be of the type array, string given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 244 and defined in /var/www/FoxCMS/engine/GenericSelector.class.php:47
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(244): GenericSelector->select()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(121): AdminOptions->selectUsers()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(90): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/index.php(8): init->__construct()" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:57:43 [error] 2065214#2065214: *350932 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Access to undeclared static property: init::$sqlQueryHandler in /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php:206
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php(100): AuthManager::logout()
+#1 /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php(48): AuthManager->authActionsInit()
+#2 /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php(16): AuthManager->__construct()
+#3 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#4 /var/www/FoxCMS/engine/init.php(66): ModulesLoader->modulesInc()
+#5 /var/www/FoxCMS/engine/init.php(41): init->preInit()
+#6 /var/www/FoxCMS/index.php(8): init->__construct()
+#7 {main}
+  thrown in /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php on line 206" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:58:08 [error] 2065214#2065214: *350832 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Access to undeclared static property: init::$sqlQueryHandler in /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php:206
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php(100): AuthManager::logout()
+#1 /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php(48): AuthManager->authActionsInit()
+#2 /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php(16): AuthManager->__construct()
+#3 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#4 /var/www/FoxCMS/engine/init.php(66): ModulesLoader->modulesInc()
+#5 /var/www/FoxCMS/engine/init.php(41): init->preInit()
+#6 /var/www/FoxCMS/index.php(8): init->__construct()
+#7 {main}
+  thrown in /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php on line 206" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:59:49 [error] 2065214#2065214: *350832 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot redeclare non static Module::$db as static AuthManager::$db in /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:59:54 [error] 2065214#2065214: *350832 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot redeclare non static Module::$db as static AuthManager::$db in /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 07:59:59 [error] 2065214#2065214: *350832 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot redeclare non static Module::$db as static AuthManager::$db in /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 08:00:04 [error] 2065214#2065214: *350832 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot redeclare non static Module::$db as static AuthManager::$db in /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 08:00:08 [error] 2065219#2065219: *351143 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot redeclare non static Module::$db as static AuthManager::$db in /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php on line 0" while reading response header from upstream, client: 185.54.49.166, server: foxescraft.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxesworld.ru"
+2025/04/26 08:00:09 [error] 2065214#2065214: *350832 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot redeclare non static Module::$db as static AuthManager::$db in /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 08:00:14 [error] 2065214#2065214: *350832 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot redeclare non static Module::$db as static AuthManager::$db in /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 08:00:19 [error] 2065214#2065214: *350832 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot redeclare non static Module::$db as static AuthManager::$db in /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 08:00:20 [error] 2065214#2065214: *350832 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot redeclare non static Module::$db as static AuthManager::$db in /var/www/FoxCMS/engine/classes/modules/AuthReg/AuthReg.class.php on line 0" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 08:02:48 [error] 2065214#2065214: *350832 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to GenericSelector::select() must be of the type array, string given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 244 and defined in /var/www/FoxCMS/engine/GenericSelector.class.php:47
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(244): GenericSelector->select()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(121): AdminOptions->selectUsers()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(89): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/index.php(8): init->__construct()" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/26 08:03:11 [error] 2065219#2065219: *351158 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to GenericSelector::select() must be of the type array, string given, called in /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php on line 244 and defined in /var/www/FoxCMS/engine/GenericSelector.class.php:47
+Stack trace:
+#0 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(244): GenericSelector->select()
+#1 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminOptions.class.php(121): AdminOptions->selectUsers()
+#2 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(20): AdminOptions->__construct()
+#3 /var/www/FoxCMS/engine/classes/modules/AdminPanel/AdminPanel.class.php(10): AdminPanel->__construct()
+#4 /var/www/FoxCMS/engine/ModulesLoader.class.php(95): require_once('/var/www/FoxCMS...')
+#5 /var/www/FoxCMS/engine/init.php(89): ModulesLoader->modulesInc()
+#6 /var/www/FoxCMS/engine/init.php(43): init->postInit()
+#7 /var/www/FoxCMS/index.php(8): init->__construct()" while reading response header from upstream, client: 31.173.84.139, server: foxescraft.ru, request: "POST / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"

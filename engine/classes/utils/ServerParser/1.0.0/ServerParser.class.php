@@ -19,7 +19,7 @@
 			return $result && isset($result[0]['user_group']) ? $result[0]['user_group'] : null;
 		}
 		
-		public function parseServers(string $where = ''): string {
+		public function parseServers($where = ''): string {
 			$selector = new GenericSelector($this->db, 'servers');
 			$servers = $selector->select();
 			$result = [];

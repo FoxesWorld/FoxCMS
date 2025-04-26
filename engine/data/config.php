@@ -1,5 +1,5 @@
 <?php 
-    /* [24.04.2025] */
+    /* [26.04.2025] */
 $config = array(
 	"database" => array(
 		"dbHost" => "localhost",
@@ -24,7 +24,7 @@ $config = array(
 		"smtp_port" => "465",
 		"smtp_secure" => "ssl",
 		"contactPhone" => "null",
-		"ServiceVersion" => "2.16.7"
+		"ServiceVersion" => "2.18.0"
 ),
 
 	"launcherSettings" => array(

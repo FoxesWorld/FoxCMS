@@ -1,5 +1,6 @@
 <?php
-class GenericUpdater {
+class GenericUpdater extends init {
+	
     protected $db;
     protected $table;
     protected $allowedFields;
@@ -11,7 +12,7 @@ class GenericUpdater {
      * @param array  $allowedFields  Разрешённые поля для обновления
      * @param bool   $deleteMissing  Удалять ли отсутствующие строки (по умолчанию true)
      */
-    public function __construct($db, $table, array $allowedFields, $deleteMissing = true) {
+    public function __construct($db, $table, array $allowedFields, $deleteMissing = false) {
         $this->db = $db;
         $this->table = $table;
         $this->allowedFields = $allowedFields;
@@ -105,5 +106,33 @@ class GenericUpdater {
             ];
         }
     }
+	
+	public function updateRowByKey(array $data, string $primaryKey, $primaryValue): array {
+    $filtered = array_intersect_key($data, array_flip($this->allowedFields));
+
+    if (empty($filtered)) {
+        return ['type' => 'error', 'message' => 'Нет допустимых полей для обновления'];
+    }
+
+    $setClause = implode(', ', array_map(fn($f) => "`$f` = :$f", array_keys($filtered)));
+    $sql = "UPDATE `{$this->table}` SET $setClause WHERE `$primaryKey` = :__primary";
+
+    $stmt = $this->db->prepare($sql);
+    $filtered['__primary'] = $primaryValue;
+
+    try {
+        $stmt->execute($filtered);
+        return [
+            'type' => 'success',
+            'message' => $stmt->rowCount() . ' строк(а) обновлено'
+        ];
+    } catch (PDOException $e) {
+        return [
+            'type' => 'error',
+            'message' => 'Ошибка при обновлении: ' . $e->getMessage()
+        ];
+    }
+}
+
 }
 ?>

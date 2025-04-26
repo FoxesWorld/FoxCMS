@@ -240,14 +240,13 @@ class AdminOptions extends AdminPanel {
     }
 	
 	private function selectUsers($db, $where = ""){
-		$query = 'SELECT * FROM `users` '.$where;
-        $users = $db->getRows($query);
-        return $users;
+		$selector = new GenericSelector($db, 'users');
+        $rows = $selector->select($where);
+        return $rows;
 	}
 	
 	private function resetOnline($db){
-		$query = 'SELECT * FROM `users`';
-		$users = $db->getRows($query);
+		$users = $this->selectUsers($db);
     
 		foreach ($users as $user) {
 			$newValue = '[]';
@@ -260,33 +259,38 @@ class AdminOptions extends AdminPanel {
 		die('{"message": "Cleared '.count($users).'", "type": "success"}');
 	}
 
-    // Получить все бейджи
-private function getAllBadges($db) {
-    // Корректный SQL-запрос (без обратных кавычек вокруг *)
-    $query = 'SELECT * FROM `badgesList`';
-    
-    // Получаем все строки
-    $data = $db->getRows($query);
+	private function getAllBadges($db) {
+		$selector = new GenericSelector($db, 'badgesList');
+		$data = $selector->select();
 
-    // Убедимся, что результат — это массив
-    if (!is_array($data)) {
-        http_response_code(500);
-        die(json_encode([
-            "status" => "error",
-            "message" => "Ошибка при получении данных из базы"
-        ]));
-    }
+		// Убедимся, что результат — это массив
+		if (!is_array($data)) {
+			http_response_code(500);
+			die(json_encode([
+				"status" => "error",
+				"message" => "Ошибка при получении данных из базы"
+			]));
+		}
 
-    // Возвращаем как JSON
-    header('Content-Type: application/json');
-    die(json_encode($data));
-}
+		// Возвращаем как JSON
+		header('Content-Type: application/json');
+		die(json_encode($data));
+	}
 
     // Получить баланс пользователя
-    private function loadUserBalance($db, $REQUEST) {
-        $balance = $db->getValue("SELECT balance FROM users WHERE login = '".@$REQUEST['userLogin']."'");
-        die($balance);
-    }
+	private function loadUserBalance($db, $REQUEST) {
+		$login = $REQUEST['userLogin'] ?? null;
+		if (!$login) {
+			die('0');
+		}
+
+		$selector = new GenericSelector($db, 'users', ['login', 'balance']);
+		$rows = $selector->select(['login' => $login], [], 1);
+
+		$balance = $rows[0]['balance'] ?? '0';
+		die($balance);
+	}
+
 
     // Получение файлов в директории
     private function getFilesInDir($config, $dirKey, $REQUEST) {

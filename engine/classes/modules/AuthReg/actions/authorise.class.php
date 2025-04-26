@@ -42,7 +42,7 @@ class Authorise extends AuthManager {
         if ($this->inputPassword && $this->realPassword && authorize::passVerify($this->inputPassword, $this->realPassword)) {
             $authQuery = $this->authQueries($this->inputLogin);
             
-            if ($authQuery->type === "success") {
+            if ($authQuery['type'] === "success") {
                 $this->setUserdata($this->inputLogin);
                 $this->setTokenIfNeeded($this->rememberMe, $this->inputLogin);
                 $this->logger->logInfo("{$this->inputLogin} successfully authorized from " . REMOTE_IP);
@@ -58,16 +58,19 @@ class Authorise extends AuthManager {
         }
     }
     
-    private function authQueries($login) {
-        // Здесь генерируем хеш фиксированной длины (например, 16 символов) для внутреннего использования
-        $updateData = [
-            'last_date' => CURRENT_TIME,
-            'hash'      => authorize::generateLoginHash($login, 16),
-            'logged_ip' => REMOTE_IP
-        ];
-        $response = init::$sqlQueryHandler->updateData('users', $updateData, 'login', $login);
-        return json_decode($response);
-    }
+private function authQueries(string $login) {
+    $updateData = [
+        'last_date' => CURRENT_TIME,
+        'hash'      => authorize::generateLoginHash($login, 16),
+        'logged_ip' => REMOTE_IP
+    ];
+
+    $updater = new GenericUpdater($this->db, 'users', ['last_date', 'hash', 'logged_ip']);
+    $result = $updater->updateRowByKey($updateData, 'login', $login);
+
+    return $result;
+}
+
     
     private function setUserdata($login) {
         $loadUserInfo = new LoadUserInfo($login, $this->db);

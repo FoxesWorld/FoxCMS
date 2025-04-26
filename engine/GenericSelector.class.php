@@ -1,8 +1,8 @@
 <?php
 
-class GenericSelector
+class GenericSelector extends init
 {
-    private $db;
+    protected $db;
     private string $table;
     private ?array $allowedFields;
 
@@ -36,12 +36,13 @@ class GenericSelector
     /**
      * Выполняет SELECT-запрос с фильтрацией и безопасной сортировкой.
      *
-     * @param array $criteria
-     * @param array $selectFields
-     * @param string|null $orderBy
+     * @param array $criteria Массив критериев выборки, поддерживаются операторы: =, !=, <, >, <=, >=, LIKE
+     * @param array $selectFields Поля для выборки
+     * @param string|null $orderBy Поле для сортировки
      * @param string $orderDirection ASC|DESC
      * @param int|null $limit
      * @return array
+     * @throws Exception
      */
     public function select(array $criteria = [], array $selectFields = [], ?string $orderBy = null, string $orderDirection = 'ASC', ?int $limit = null): array
     {
@@ -56,22 +57,9 @@ class GenericSelector
         }
 
         $columns = implode(', ', array_map(fn($f) => "`$f`", $selectFields));
+        [$whereClause, $params] = $this->buildWhereClause($criteria);
 
-        $conds = $this->allowedFields !== null
-            ? array_intersect_key($criteria, array_flip($this->allowedFields))
-            : $criteria;
-
-        $sql = "SELECT {$columns} FROM `{$this->table}`";
-        $params = [];
-
-        if (!empty($conds)) {
-            $where = [];
-            foreach ($conds as $field => $value) {
-                $where[] = "`$field` = :$field";
-                $params[$field] = $value;
-            }
-            $sql .= ' WHERE ' . implode(' AND ', $where);
-        }
+        $sql = "SELECT {$columns} FROM `{$this->table}`{$whereClause}";
 
         if ($orderBy !== null && ($this->allowedFields === null || in_array($orderBy, $this->allowedFields, true))) {
             $direction = strtoupper($orderDirection) === 'DESC' ? 'DESC' : 'ASC';
@@ -86,5 +74,47 @@ class GenericSelector
         $stmt->execute($params);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Собирает WHERE-условие и массив параметров.
+     *
+     * @param array $where
+     * @return array [$sqlWhere, $params]
+     */
+    private function buildWhereClause(array $where): array
+    {
+        $conditions = [];
+        $params = [];
+
+        foreach ($where as $field => $value) {
+            if ($this->allowedFields !== null && !in_array($field, $this->allowedFields, true)) {
+                continue;
+            }
+
+            if (is_array($value)) {
+                foreach ($value as $operator => $val) {
+                    $paramKey = $field . '_' . strtolower($operator);
+                    $operator = strtoupper(trim($operator));
+
+                    if (!in_array($operator, ['=', '!=', '<', '>', '<=', '>=', 'LIKE'], true)) {
+                        throw new Exception("Недопустимый оператор: $operator");
+                    }
+
+                    $conditions[] = "`$field` $operator :$paramKey";
+                    $params[$paramKey] = $val;
+                }
+            } else {
+                $conditions[] = "`$field` = :$field";
+                $params[$field] = $value;
+            }
+        }
+
+        $whereClause = '';
+        if (!empty($conditions)) {
+            $whereClause = ' WHERE ' . implode(' AND ', $conditions);
+        }
+
+        return [$whereClause, $params];
     }
 }

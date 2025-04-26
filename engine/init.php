@@ -14,7 +14,7 @@ require ('data/config.php');
 		private $ModulesLoader, $initLevels;
 		public static $initHelper;
 		protected $debug, $logger, $db, $tpl;
-		protected static $deviceType, $usrFiles, $permissions, $dynamicConfig, $sqlQueryHandler, $usrArray = array(
+		protected static $deviceType, $usrFiles, $permissions, $dynamicConfig, $usrArray = array(
 			'isLogged' => false,
 			'user_id' => 0,
 			'email' => "admin@foxesworld.ru",
@@ -57,7 +57,6 @@ require ('data/config.php');
 			self::libFilesInclude(SYSLIB_DIR, $this->debug); //Require classes/Syslib
 			self::requireNestedClasses(basename(__FILE__), __DIR__); //Requiring nested classes from self directory
 			$this->db = new db($config['database']['dbUser'], $config['database']['dbPass'], $config['database']['dbName'], $config['database']['dbHost']);
-			self::$sqlQueryHandler = new SafeSQLHandler($this->db);
 			$this->logger = new Logger('lastlog');
 			require('classes/modules/Module.class.php');
 			$this->ModulesLoader = new ModulesLoader($this->db, $this->logger);

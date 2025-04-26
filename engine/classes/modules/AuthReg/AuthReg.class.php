@@ -16,7 +16,8 @@ if (!defined('FOXXEY')) {
 $authWrapper = new AuthManager($this->db, $this->logger);
 
 class AuthManager extends Module {
-    
+	
+    protected static $dbStatic;
     private $dbShape = "";
     private $moduleName;
     private $requestListener = "userAction";
@@ -38,6 +39,7 @@ class AuthManager extends Module {
     
     function __construct($db, $logger) {
         $this->db = $db;
+		self::$dbStatic = $db;
         $this->logger = $logger;
         $this->moduleName = basename(__FILE__, '.class.php');
         init::classUtil('LoadUserInfo', "1.0.0");
@@ -135,18 +137,25 @@ class AuthManager extends Module {
         $sessionManager = new SessionManager($userData);
     }
     
-    protected static function checkUserToken($db, $logger) : void {
-        $username = "";
-        if (isset($_COOKIE[self::$userToken])) {
-            $token = functions::filterString($_COOKIE[self::$userToken]);
-            $query = "SELECT login from `users` WHERE token = '".$token."'";
-            $username = $db->getValue($query);
-            if ($username && !init::$usrArray['isLogged']) {
-				//$this->logger->WriteLine("Authentificating ".$username." from ".REMOTE_IP);
-                $auth = new authorise("", $db, $logger, $username);
-            }
+protected static function checkUserToken($db, $logger): void {
+    $username = "";
+
+    if (isset($_COOKIE[self::$userToken])) {
+        $token = functions::filterString($_COOKIE[self::$userToken]);
+
+        $selector = new GenericSelector($db, 'users', ['login', 'token']);
+        $rows = $selector->select(['token' => $token]);
+
+        if ($rows && isset($rows[0]['login'])) {
+            $username = $rows[0]['login'];
+        }
+
+        if ($username && !init::$usrArray['isLogged']) {
+            $auth = new authorise("", $db, $logger, $username);
         }
     }
+}
+
     
 public static function logout(string $message = ""): void {
     // Проверка: был ли пользователь авторизован
@@ -196,7 +205,7 @@ public static function logout(string $message = ""): void {
         // Очистка токена в базе через GenericUpdater
         if (!empty(init::$usrArray["login"])) {
             $updater = new GenericUpdater(
-                init::$sqlQueryHandler->getDb(), // предположительно доступ к PDO
+                self::$dbStatic, // предположительно доступ к PDO
                 'users',
                 ['login', 'token'],
                 false

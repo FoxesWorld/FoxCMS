@@ -32,11 +32,9 @@ class LostPassword extends User {
     }
 
     private function getUserData($mail) {
-        $query = "SELECT * FROM `users` WHERE `email` = :email";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':email', $mail);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+		$selector = new GenericSelector($this->db, 'users');
+        $rows = $selector->select(['email' => $mail]);
+        return $rows;
     }
 
     private function checkMail($mail): bool {
