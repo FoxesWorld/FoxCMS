@@ -5,7 +5,7 @@
 	"keywords": "Начать игру, Давай играть!, Играть с Лисами, Лисий мир играть давать, Быстро играть, Играть копать",
 	"optionBlock": "#userBlock",
 	"optionPreText": "<img src='/templates/foxengine2/assets/icons/menu/icon_start.png' />",
-	"optionGroup": [1,4,5],
+	"optionGroup": [1,4,5,6],
 	"optionClass": "login uk-animation-fade scale-down",
 	"type": "page"
    }

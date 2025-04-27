@@ -4,7 +4,7 @@
     "keywords": "Вумпус в беде, Доступ к Дискорду, Обход блокировки Дискордика, ЧАВО с Дискордом?, Обновления жизни Вумпуса",
     "optionBlock": ".pages",
     "optionPreText": "<i class=\"page-title-icon fa-brands fa-discord\"></i>",
-    "optionGroup": [1,4,5],
+    "optionGroup": [1,4,5,6],
     "optionClass": "nav-item uk-animation-fade",
     "type": "page" 
 } </useroption>

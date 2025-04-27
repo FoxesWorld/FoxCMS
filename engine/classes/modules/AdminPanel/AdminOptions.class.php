@@ -147,7 +147,7 @@ class AdminOptions extends AdminPanel {
                     break;
 				
 				case "getUserPlayTime":
-					$userRow = $this->selectUsers($db, "WHERE `login` = '".$REQUEST['login']."'")[0];
+					$userRow = $this->selectUsers($db, ['login' => $REQUEST['login']])[0];
 					$serversOnline = $userRow['serversOnline'];
 					die($serversOnline);
 				break;
@@ -203,12 +203,24 @@ class AdminOptions extends AdminPanel {
     }
 	
     // Обновление данных пользователя
-    private function updateUserField($db, $field, $REQUEST) {
-        $login = $REQUEST['userLogin'];
-        $value = $REQUEST[$field];
-        $data = init::$sqlQueryHandler->updateData('users', array($field => $value), 'login', $login);
-        die($data);
-    }
+	private function updateUserField($db, $field, $REQUEST) {
+		$login = $REQUEST['userLogin'];
+		$value = $REQUEST[$field];
+		$updater = new GenericUpdater(
+			$db,
+			'users',                 // Таблица
+			[$field],                // Разрешённые поля
+			false                    // Удаление отсутствующих строк не требуется
+		);
+		$result = $updater->updateRowByKey(
+			[$field => $value],
+			'login',
+			$login
+		);
+
+		die(json_encode($result));
+	}
+
 
     // Показать доступные модули
     private function showModules() {
@@ -239,7 +251,7 @@ class AdminOptions extends AdminPanel {
         }
     }
 	
-	private function selectUsers($db, $where = ""){
+	private function selectUsers($db, array $where = []){
 		$selector = new GenericSelector($db, 'users');
         $rows = $selector->select($where);
         return $rows;

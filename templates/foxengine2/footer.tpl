@@ -6,7 +6,7 @@
    
 	<div class="footer-copyright d-lg-block d-none">
 		{$siteTitle} {$siteStatus} <b>{$year}</b>
-		<span>Powered by {$webserviceName} v.{$ServiceVersion}<img class="img-fluid" uk-img /></span>
+		<span>Powered by {$webserviceName} <b style="margin: 0 5px;">v.{$ServiceVersion}<img class="img-fluid" uk-img /></b></span>
 	</div>
 
 	  

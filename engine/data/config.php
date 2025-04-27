@@ -24,7 +24,7 @@ $config = array(
 		"smtp_port" => "465",
 		"smtp_secure" => "ssl",
 		"contactPhone" => "null",
-		"ServiceVersion" => "2.18.0"
+		"ServiceVersion" => "2.18.3"
 ),
 
 	"launcherSettings" => array(

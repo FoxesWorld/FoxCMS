@@ -4,6 +4,7 @@ import { BuildField } from '../../modules/BuildField.js';
 export class EditBadges {
 	constructor() {
 		this.allBadges = [];
+		this.currentUser = "";
 		this.formFields = [
 			{ fieldName: 'badgeName', fieldType: 'dropdown', optionsArray: this.allBadges },
 			{ fieldName: 'acquiredDate', fieldType: 'date' },
@@ -43,6 +44,7 @@ export class EditBadges {
 	}
 
 	async openEditWindow(login) {
+		this.currentUser = login;
 		if (!this.allBadges.length) {
 			await this.getAllBadges();
 		}
@@ -69,13 +71,14 @@ export class EditBadges {
 		}
 	}
 
-	async submitHandler(button, user) {
+	async submitHandler(button) {
 		const answer = await this.jsonArrConfig.updateJsonConfig("badges");
 		button.notify(answer.message, answer.type);
 
 		setTimeout(async () => {
 			foxEngine.modalApp.closeModalApp()
-			foxEngine.user.showUserProfile(user);
+			//foxEngine.user.showUserProfile();
+			foxEngine.user.showUserProfile(this.currentUser);
 
 			//setTimeout(() => {
 				//foxEngine.user.parseBadges(user);

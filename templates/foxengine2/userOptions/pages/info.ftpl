@@ -5,7 +5,7 @@
 	"keywords": "О сайте, Я расскажу тебе историю, Подробнее о Мире Лис, Что за сайт Лисий Мир?",
 	"optionBlock": ".pages",
 	"optionPreText": "<i class=\"page-title-icon fa-regular fa-sparkle\"></i>",
-	"optionGroup": [1,4,5],
+	"optionGroup": [1,4,5,6],
 	"optionClass": "nav-item uk-animation-fade",
 	"type": "page"
 }

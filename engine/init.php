@@ -56,6 +56,7 @@ require ('data/config.php');
 			define('RT_DIR', CURRENT_TEMPLATE.'randTexts/');
 			self::libFilesInclude(SYSLIB_DIR, $this->debug); //Require classes/Syslib
 			self::requireNestedClasses(basename(__FILE__), __DIR__); //Requiring nested classes from self directory
+			self::requireNestedClasses(basename(__FILE__), __DIR__."/classes/GenericPDO");
 			$this->db = new db($config['database']['dbUser'], $config['database']['dbPass'], $config['database']['dbName'], $config['database']['dbHost']);
 			$this->logger = new Logger('lastlog');
 			require('classes/modules/Module.class.php');

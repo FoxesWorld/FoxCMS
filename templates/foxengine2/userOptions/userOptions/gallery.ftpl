@@ -4,7 +4,7 @@
 	"description": "Галлерея FoxesCraft",
 	"optionBlock": "#usrMenu",
 	"optionPreText": "<i style='color: #ccd722' class='fa fa-book'></i>",
-	"optionGroup": [1,4],
+	"optionGroup": [1,4,6],
 	"optionClass": "dropdown-item",
 	"type": "page"
 }

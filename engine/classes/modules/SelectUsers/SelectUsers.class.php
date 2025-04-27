@@ -3,7 +3,8 @@
 		
 		private $fieldsToSelect = array(
 			"realname",
-			"profilePhoto", 
+			"profilePhoto",
+			"serversOnline",
 			"last_date ",
 			"userStatus",
 			"land",
