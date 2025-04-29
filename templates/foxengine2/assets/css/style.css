@@ -1482,7 +1482,7 @@ footer .footer-copyright span {
 footer .footer-copyright span img {
 	height: 50px;
 	margin: -20px -10px;
-	content: url('../icons/foxengine.png');
+	content: url('../icons/svg/foxengine.svg');
 }
 
 .text-wrapper {

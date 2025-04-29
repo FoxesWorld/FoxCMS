@@ -36,3 +36,58 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+
+
+.foxengine-powered {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    font-size: 0.9rem;
+    color: #7a7a7a;
+    background: linear-gradient(90deg, rgba(255, 136, 0, 0.1), rgba(255, 204, 0, 0.1));
+    padding: 6px 12px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    gap: 6px;
+}
+
+.foxengine-powered:hover {
+    background: linear-gradient(90deg, rgba(255, 136, 0, 0.2), rgba(255, 204, 0, 0.2));
+    scale: 1.25;
+    color: #555;
+}
+
+.foxengine-name {
+    font-weight: bold;
+    color: #ff6600;
+    margin: 0 6px;
+    text-shadow: 0 0 3px rgba(255, 136, 0, 0.5);
+}
+
+.foxengine-version {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.8rem;
+    background: #fff3e0;
+    color: #ff9500;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-left: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.foxengine-version img.foxengine-icon {
+    width: 34px;
+    height: 34px;
+    margin-left: 5px;
+    vertical-align: middle;
+    filter: brightness(0.8) saturate(1.2);
+    transition: transform 0.3s ease;
+}
+
+.foxengine-powered:hover .foxengine-version img.foxengine-icon {
+    transform: scale(1.6);
+}

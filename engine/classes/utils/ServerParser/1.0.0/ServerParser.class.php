@@ -10,31 +10,41 @@
 			$this->db = $db;
 			$this->parseAll = $parseAll;
 			$this->userGroup = $this->getUserGroup($login);
+			//echo $this->userGroup;
 		}
 		
-		private function getUserGroup(string $login): ?string {
-			$selector = new GenericSelector($this->db, 'users', ['user_group', 'login']);
-			$result = $selector->select(['login' => $login]);
+		private function getUserGroup($login) {
+			$query = "SELECT user_group FROM `users` WHERE login = '".$login."'";
+			return $this->db->getValue($query);
+		}
+		
+		public function parseServers($where = "") {
+			$queryWhere = "";
 
-			return $result && isset($result[0]['user_group']) ? $result[0]['user_group'] : null;
-		}
-		
-		public function parseServers($where = ''): string {
-			$selector = new GenericSelector($this->db, 'servers');
-			$servers = $selector->select();
-			$result = [];
-			foreach ($servers as $server) {
-				if (isset($server['serverGroups']) && strpos((string) $server['serverGroups'], (string) $this->userGroup) !== false) {
-					if ($server['enabled'] === 'true' || $this->parseAll) {
-						$result[] = $server;
+			if (!empty($where)) {
+				$queryWhere = " WHERE " . $where;
+			}
+
+			$serversArray = array();
+			$query = "SELECT * FROM servers";
+			$servers = $this->db->getRows($query . $queryWhere);
+
+			foreach ($servers as $key) {
+				if(strpos($key['serverGroups'], (String) $this->userGroup) !== false) {
+					if($key['enabled'] == "true") {
+						$serversArray[] = $key;
+					} else {
+						if($this->parseAll) {
+							$serversArray[] = $key;
+						}
 					}
 				}
 			}
-
-			return !empty($result)
-				? json_encode($result, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
-				: json_encode(['error' => 'ServerNotFound']);
+			if(count($serversArray) > 0) {
+				return json_encode($serversArray);
+			} else {
+				return '{"error": "ServerNotFound"}';
+			}
 		}
-
 	}
 	

@@ -632,3 +632,44 @@
 1745672465 [INFO] Cube successfully authorized from 85.172.111.185
 1745688401 [INFO] Calista successfully authorized from 109.252.8.60
 1745732968 [INFO] Calista successfully authorized from 109.252.8.60
+1745737961 [INFO] Updater 109.252.8.60 with version '2.5.6-Elunium' requests an update information
+1745737961 [INFO] CPU ID BFEBFBFF000406F1 already exists in the database.
+1745737990 [INFO] Calista successfully authorized from 109.252.8.60
+1745737994 [INFO] 109.252.8.60 requests "Celeste 1.20.1-Forge" files (platform 1)
+1745738091 [INFO] Calista successfully authorized from 109.252.8.60
+1745738092 [INFO] 109.252.8.60 requests "Celeste 1.20.1-Forge" files (platform 1)
+1745738259 [INFO] Calista successfully authorized from 109.252.8.60
+1745738264 [INFO] 109.252.8.60 requests "Celeste 1.20.1-Forge" files (platform 1)
+1745739403 [INFO] **JoinServer constructor called**
+1745739403 [INFO] Data accessToken 7b487b68dd58d315a5f9ecfd4d9db209 is valid!
+1745739403 [INFO] Data selectedProfile ac4bfbd258c56a10a4ea9b27b5056a3c is valid!
+1745739403 [INFO] Data serverId -3ffbc197cb5a8f0a9c6bc794e0e4a02f8e845ebe is valid!
+1745739403 [INFO] Database connection established
+1745739403 [INFO] Validating session for userMd5: <b>ac4bfbd258c56a10a4ea9b27b5056a3c</b>
+1745739403 [INFO] Session validated successfully
+1745739403 [INFO] Updating session for userMd5: <b>ac4bfbd258c56a10a4ea9b27b5056a3c</b>
+1745739403 [INFO] Начата обработка для пользователя: Calista
+1745739403 [INFO] Найден пользователь: Calista (UUID: ac4bfbd258c56a10a4ea9b27b5056a3c)
+1745739403 [INFO] Проверка пользователя: Calista
+1745739403 [DEBUG] user -> **Calista**  realUser -> **Calista**
+1745739403 [INFO] Установлен файл (SKIN): https://foxescraft.ru/uploads/users/Calista/ac4bfbd258c56a10a4ea9b27b5056a3c-skin.png
+1745739403 [INFO] Установлен файл (CAPE): https://foxescraft.ru/uploads/users/Calista/ac4bfbd258c56a10a4ea9b27b5056a3c-cape.png
+1745740989 [INFO] Calista successfully authorized from 109.252.8.60
+1745808605 [INFO] Updater 212.119.227.145 with version '2.5.6-Elunium' requests an update information
+1745808605 [INFO] CPU ID 178BFBFF000206A1 already exists in the database.
+1745808642 [INFO] Updater 195.239.51.88 with version '2.5.6-Elunium' requests an update information
+1745808642 [INFO] CPU ID 178BFBFF000206A1 already exists in the database.
+1745809164 [INFO] Updater 79.104.209.18 with version '2.5.6-Elunium' requests an update information
+1745809164 [INFO] CPU ID 178BFBFF000206A1 already exists in the database.
+1745809168 [INFO] Updater 194.154.78.215 with version '2.5.6-Elunium' requests an update information
+1745809168 [INFO] CPU ID 178BFBFF000206A1 already exists in the database.
+1745809178 [INFO] Updater 195.68.142.27 with version '2.5.6-Elunium' requests an update information
+1745809178 [INFO] CPU ID 178BFBFF000206A1 already exists in the database.
+1745809199 [INFO] Updater 194.154.78.232 with version '2.5.6-Elunium' requests an update information
+1745809199 [INFO] CPU ID 178BFBFF000206A1 already exists in the database.
+1745817190 [INFO] Calista successfully authorized from 109.252.8.60
+1745818418 [INFO] Calista successfully authorized from 109.252.8.60
+1745860555 [INFO] Cube successfully authorized from 94.25.174.2
+1745860615 [INFO] Updater 94.25.174.2 with version '1.0.0' requests an update information
+1745906651 [INFO] Checking a password 'undefined'
+1745913328 [INFO] Calista successfully authorized from 109.252.8.60

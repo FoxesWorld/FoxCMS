@@ -59,7 +59,7 @@ export class EditUserOnline {
 		button.notify(answer.message, answer.type);
 
 		setTimeout(async () => {
-			foxEngine.modalApp.closeModalApp()
+			foxEngine.modalApp.closeModalApp();
 			foxEngine.user.showUserProfile(user);
 
 			//setTimeout(() => {

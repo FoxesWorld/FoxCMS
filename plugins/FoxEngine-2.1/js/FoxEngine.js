@@ -19,7 +19,7 @@ import '../../popper.min.js';
 import './modules/Howler/howler.core.js';
 import './modules/Notify.js';
 
-export class FoxEngine {
+export default class FoxEngine {
 
     constructor(replaceData, userFields, templatesConfig, serversColorMap) {
         this.replaceData = replaceData;

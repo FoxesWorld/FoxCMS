@@ -1,18 +1,35 @@
 <?php
-class GenericUpdater extends init {
-	
+
+/**
+ * Класс GenericUpdater
+ *
+ * Позволяет безопасно выполнять массовое обновление, добавление и удаление записей в таблице БД,
+ * с автоматическим контролем допустимых полей и возможностью удаления отсутствующих записей.
+ */
+class GenericUpdater extends init
+{
+    /** @var PDO */
     protected $db;
+
+    /** @var string */
     protected $table;
+
+    /** @var array */
     protected $allowedFields;
+
+    /** @var bool */
     protected $deleteMissing;
 
     /**
-     * @param PDO    $db             Объект базы данных
+     * Конструктор
+     *
+     * @param PDO    $db             Подключение к базе данных
      * @param string $table          Имя таблицы
-     * @param array  $allowedFields  Разрешённые поля для обновления
-     * @param bool   $deleteMissing  Удалять ли отсутствующие строки (по умолчанию true)
+     * @param array  $allowedFields  Список разрешённых полей для операций
+     * @param bool   $deleteMissing  Удалять строки, отсутствующие в переданных данных
      */
-    public function __construct($db, $table, array $allowedFields, $deleteMissing = false) {
+    public function __construct($db, $table, array $allowedFields, $deleteMissing = false)
+    {
         $this->db = $db;
         $this->table = $table;
         $this->allowedFields = $allowedFields;
@@ -20,15 +37,15 @@ class GenericUpdater extends init {
     }
 
     /**
-     * Обновление, добавление и удаление строк на основе данных.
+     * Массовое обновление данных.
      *
-     * @param string|array $jsonData   JSON или массив данных
-     * @param string       $primaryKey Уникальное поле, по которому проверяется наличие
-     *                                 ключа в таблице. При его отсутствии — строка может быть удалена.
+     * @param string|array $jsonData   JSON строка или массив данных для обновления
+     * @param string       $primaryKey Поле уникального ключа (по умолчанию 'id')
      *
-     * @return array Результат операции
+     * @return array Массив с типом результата и сообщением
      */
-    public function updateData($jsonData, $primaryKey = 'id') {
+    public function updateData($jsonData, $primaryKey = 'id')
+    {
         if (is_string($jsonData)) {
             $data = json_decode($jsonData, true);
             if (!is_array($data)) {
@@ -38,12 +55,14 @@ class GenericUpdater extends init {
             $data = $jsonData;
         }
 
+        // Приведение к массиву записей
         if (array_keys($data) !== range(0, count($data) - 1)) {
             $data = [$data];
         }
 
         $filteredData = [];
         $newPrimaryKeys = [];
+
         foreach ($data as $row) {
             $filtered = array_intersect_key($row, array_flip($this->allowedFields));
             if (isset($row[$primaryKey])) {
@@ -57,6 +76,7 @@ class GenericUpdater extends init {
             return ['type' => 'error', 'message' => 'Нет данных для обновления'];
         }
 
+        // Формирование полей для запроса
         $fields = array_keys($filteredData[0]);
         $fieldList = implode(", ", array_map(fn($f) => "`{$f}`", $fields));
         $placeholders = implode(", ", array_map(fn($f) => ":{$f}", $fields));
@@ -68,6 +88,7 @@ class GenericUpdater extends init {
         }
         $updateClause = implode(", ", $updateFields);
 
+        // Подготовка SQL
         $sql = "INSERT INTO `{$this->table}` ({$fieldList})
                 VALUES ({$placeholders})
                 ON DUPLICATE KEY UPDATE {$updateClause}";
@@ -81,6 +102,7 @@ class GenericUpdater extends init {
 
             $deletedCount = 0;
 
+            // Удаление записей, если требуется
             if ($this->deleteMissing && !empty($newPrimaryKeys)) {
                 $existingSql = "SELECT `{$primaryKey}` FROM `{$this->table}`";
                 $existingKeys = $this->db->query($existingSql)->fetchAll(PDO::FETCH_COLUMN);
@@ -106,33 +128,43 @@ class GenericUpdater extends init {
             ];
         }
     }
-	
-	public function updateRowByKey(array $data, string $primaryKey, $primaryValue): array {
-    $filtered = array_intersect_key($data, array_flip($this->allowedFields));
 
-    if (empty($filtered)) {
-        return ['type' => 'error', 'message' => 'Нет допустимых полей для обновления'];
-    }
+    /**
+     * Обновление одной строки по значению ключа.
+     *
+     * @param array  $data        Данные для обновления
+     * @param string $primaryKey  Имя первичного ключа
+     * @param mixed  $primaryValue Значение первичного ключа
+     *
+     * @return array Результат выполнения операции
+     */
+    public function updateRowByKey(array $data, string $primaryKey, $primaryValue)
+    {
+        $filtered = array_intersect_key($data, array_flip($this->allowedFields));
 
-    $setClause = implode(', ', array_map(fn($f) => "`$f` = :$f", array_keys($filtered)));
-    $sql = "UPDATE `{$this->table}` SET $setClause WHERE `$primaryKey` = :__primary";
+        if (empty($filtered)) {
+            return ['type' => 'error', 'message' => 'Нет допустимых полей для обновления'];
+        }
 
-    $stmt = $this->db->prepare($sql);
-    $filtered['__primary'] = $primaryValue;
+        $setClause = implode(', ', array_map(fn($f) => "`$f` = :$f", array_keys($filtered)));
+        $sql = "UPDATE `{$this->table}` SET {$setClause} WHERE `{$primaryKey}` = :__primary";
 
-    try {
-        $stmt->execute($filtered);
-        return [
-            'type' => 'success',
-            'message' => $stmt->rowCount() . ' строк(а) обновлено'
-        ];
-    } catch (PDOException $e) {
-        return [
-            'type' => 'error',
-            'message' => 'Ошибка при обновлении: ' . $e->getMessage()
-        ];
+        $stmt = $this->db->prepare($sql);
+        $filtered['__primary'] = $primaryValue;
+
+        try {
+            $stmt->execute($filtered);
+            return [
+                'type' => 'success',
+                'message' => $stmt->rowCount() . ' строк(а) обновлено'
+            ];
+        } catch (PDOException $e) {
+            return [
+                'type' => 'error',
+                'message' => 'Ошибка при обновлении: ' . $e->getMessage()
+            ];
+        }
     }
 }
 
-}
 ?>

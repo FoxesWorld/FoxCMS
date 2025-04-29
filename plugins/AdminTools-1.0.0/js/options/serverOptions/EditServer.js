@@ -17,9 +17,11 @@ export class EditServer {
     }
 
     async loadServerOptions(serverName) {
+		
         try {
             await this.loadAllOptions();
             const serverData = await this.getServerData(serverName);
+			console.log(serverData);
             this.updateFieldOptions();
 
             const formHtml = await this.generateFormHtml(serverName, serverData);
@@ -129,7 +131,7 @@ export class EditServer {
 
 			$form.off('submit').on('submit', (event) => {
 				event.preventDefault();
-				//$dialog.dialog('close');
+				foxEngine.modalApp.closeModalApp();
 
 				setTimeout(() => {
 					this.serversInstance.parseServers();

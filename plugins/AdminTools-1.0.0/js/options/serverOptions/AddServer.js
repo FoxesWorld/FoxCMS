@@ -4,7 +4,11 @@ import { JsonArrConfig } from '../../modules/JsonArrConfig.js';
 export class AddServer {
 	constructor(serversInstance) {
 		this.serversInstance = serversInstance;
-		this.formFields = serversInstance.formFields;
+		this.formFields = [
+			{ fieldName: 'serverName', fieldType: 'text' },
+			...serversInstance.formFields 
+		];
+
 
 		this.versions = [];
 		this.javaVersions = [];
@@ -14,26 +18,98 @@ export class AddServer {
 		this.jsonArrConfig = new JsonArrConfig(
 			this,
 			this.submitHandler.bind(this),
-			this.buildField
+			this.buildField,
+			{addRow: false, delTow: false}
 		);
 	}
 
-	async submitHandler(button) {
-		try {
-			const answer = await this.jsonArrConfig.updateJsonConfig('editServer'); // сервер обрабатывает добавление и редактирование одинаково
-			button.notify(answer.message, answer.type);
+async submitHandler(button) {
+    try {
+        const $form = $('#serverOptionsForm');
 
-			if (answer.success) {
-				setTimeout(() => {
-					$('#dialog').dialog('close');
-					this.serversInstance.parseServers();
-					foxEngine.servers.parseOnline();
-				}, 500);
-			}
-		} catch (error) {
-			console.error('Ошибка при добавлении сервера:', error.message);
-		}
-	}
+        if (!$form.length) {
+            throw new Error('Форма #serverOptionsForm не найдена');
+        }
+
+        // Считываем ВСЕ данные формы
+        const formDataArray = $form.serializeArray();
+
+        // Превращаем в объект вида {fieldName: value}
+        const formData = {};
+        formDataArray.forEach(item => {
+            formData[item.name] = item.value;
+        });
+
+        console.log('Данные формы:', formData);
+
+        // Проверяем наличие serverName
+        const serverName = formData.serverName?.trim();
+
+        if (!serverName) {
+            button.notify('Пожалуйста, введите имя сервера.', 'error');
+            return;
+        }
+
+        // Отправляем запрос
+        const answer = await this.jsonArrConfig.updateJsonConfig('addServer', { serverName });
+
+        button.notify(answer.message, answer.type);
+
+        if (answer.success) {
+            setTimeout(() => {
+                $('#dialog').dialog('close');
+                this.serversInstance.parseServers();
+                foxEngine.servers.parseOnline();
+            }, 500);
+        }
+    } catch (error) {
+        console.error('Ошибка при добавлении сервера:', error.message);
+    }
+}
+async submitHandler(button) {
+    try {
+        const $form = $('#jsonConfigForm');
+
+        if (!$form.length) {
+            throw new Error('Форма #jsonConfigForm не найдена');
+        }
+
+        // Считываем ВСЕ данные формы
+        const formDataArray = $form.serializeArray();
+
+        // Превращаем в объект вида {fieldName: value}
+        const formData = {};
+        formDataArray.forEach(item => {
+            formData[item.name] = item.value;
+        });
+
+        console.log('Данные формы:', formData);
+
+        // Проверяем наличие serverName
+        const serverName = formData.serverName?.trim();
+
+        if (!serverName) {
+            button.notify('Пожалуйста, введите имя сервера.', 'error');
+            return;
+        }
+
+        // Отправляем запрос
+        const answer = await this.jsonArrConfig.updateJsonConfig('addServer', { serverName });
+
+        button.notify(answer.message, answer.type);
+
+        if (answer.success) {
+            setTimeout(() => {
+                $('#dialog').dialog('close');
+                this.serversInstance.parseServers();
+                foxEngine.servers.parseOnline();
+            }, 500);
+        }
+    } catch (error) {
+        console.error('Ошибка при добавлении сервера:', error.message);
+    }
+}
+
 
 	async openAddServerDialog() {
 		try {
@@ -56,7 +132,7 @@ export class AddServer {
 			};
 
 			this.jsonArrConfig.openForm([emptyData], 'new', {
-				admPanel: 'editServer'
+				admPanel: 'addServer'
 			});
 
 			this.setupImagePreview([emptyData]);

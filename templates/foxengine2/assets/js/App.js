@@ -1,4 +1,5 @@
-import { FoxEngine } from '/plugins/FoxEngine-2.1/js/FoxEngine.js';
+import FoxEngine from '/plugins/FoxEngine-2.1/js/FoxEngine.js';
+//import { Vue } from '/plugins/Vue-2.6.14/js/vue.min.js';
 
 const templates = {
   "templates": {
@@ -50,20 +51,6 @@ const App = new Vue({
     },
 
     created() {
-		/*
-        $("#dialog").dialog({
-            autoOpen: false,
-            show: 'fade',
-            hide: 'fade',
-            modal: true,
-            width: "55%",
-            height: 350,
-            appendTo: "#dialogContent",
-            close() {
-                $("#dialogContent").html("");
-            }
-        });
-		*/
     }
 
 });

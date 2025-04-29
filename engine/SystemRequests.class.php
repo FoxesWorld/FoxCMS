@@ -221,15 +221,39 @@
 							break;
 						
 						case "loadFiles":
-							//if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
-								$client = @RequestHandler::$REQUEST['client'];
-								$version = @RequestHandler::$REQUEST['version'];
-								$this->logger->logInfo(REMOTE_IP." requests '".$client." ".$version."' files");
-								$gameScanner = new GameScanner($client, $version, @RequestHandler::$REQUEST['platform'] ?? 0);
-								die($gameScanner->checkfiles());
-							//} else {
-							//	die('{"message": "Invalid Agent!"}');
-							//}
+							if($_SERVER['HTTP_USER_AGENT'] === "FoxesWorldLauncher"){
+								$client   = RequestHandler::$REQUEST['client'] ?? null;
+								$version  = RequestHandler::$REQUEST['version'] ?? null;
+								$platform = isset(RequestHandler::$REQUEST['platform']) ? (int)RequestHandler::$REQUEST['platform'] : 0;
+
+								// Валидация обязательных параметров
+								if (empty($client) || empty($version)) {
+									$this->logger->logError('Invalid request: missing client or version.');
+									header('HTTP/1.1 400 Bad Request');
+									die(json_encode(['error' => 'Missing client or version'], JSON_UNESCAPED_SLASHES));
+								}
+
+								// Логгирование запроса
+								$this->logger->logInfo(sprintf(
+									'%s requests "%s %s" files (platform %d)',
+									REMOTE_IP,
+									addslashes($client),
+									addslashes($version),
+									$platform
+								));
+
+								// Инициализация сканера
+								$gameScanner = new GameScanner($client, $version, $platform);
+
+								// Сканирование файлов
+								$gameScanner->scan();
+
+								// Ответ в JSON-формате
+								header('Content-Type: application/json; charset=utf-8');
+								die($gameScanner->toJson());
+							} else {
+								die('{"message": "Invalid Agent!"}');
+							}
 						break;
 						
 						case  "scanUploads":

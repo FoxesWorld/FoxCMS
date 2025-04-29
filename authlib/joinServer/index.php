@@ -34,18 +34,18 @@ class JoinServer {
     public function __construct($json) {
         global $config, $LOGGER;
         $this->logger = $LOGGER;
-        $this->logger->WriteLine("**JoinServer constructor called**");
+        $this->logger->logInfo("**JoinServer constructor called**");
         
         try {
             $this->validateJson($json);
             $this->db = new db($config['db_user'], $config['db_pass'], $config['db_database']);
-            $this->logger->WriteLine("[INFO] Database connection established");
+            $this->logger->logInfo("Database connection established");
             
             if($this->validateSession()) {
-                $this->logger->WriteLine("[INFO] Session validated successfully");
+                $this->logger->logInfo("Session validated successfully");
                 $this->updateSession();
             } else {
-                $this->logger->WriteLine("[ERROR] Session validation failed");
+                $this->logger->logError("Session validation failed");
             }
         } catch (Exception $e) {
             $this->handleError($e);
@@ -80,14 +80,14 @@ class JoinServer {
                     }
                     $this->sessionData[$key] = $json[$key];
                 }
-				$this->logger->WriteLine("[INFO] Data $key $json[$key] is valid!");
+				$this->logger->logInfo("Data $key $json[$key] is valid!");
             }
         }
 		
     }
 
     private function validateSession() : bool {
-        $this->logger->WriteLine("[INFO] Validating session for userMd5: <b>" . $this->sessionData['selectedProfile'].'</b>');
+        $this->logger->logInfo("Validating session for userMd5: <b>" . $this->sessionData['selectedProfile'].'</b>');
         
         $stmt = $this->db->prepare("
             SELECT userMd5, user 
@@ -111,13 +111,13 @@ class JoinServer {
             }
             return true;
         } else {
-            $this->logger->WriteLine("**[ERROR] No session found for userMd5: " . $this->sessionData['selectedProfile'].'**');
+            $this->logger->logError("**No session found for userMd5: " . $this->sessionData['selectedProfile'].'**');
             return false;
         }
     }
 
     private function updateSession() : void {
-        $this->logger->WriteLine("[INFO] Updating session for userMd5: <b>" . $this->sessionData['selectedProfile'].'</b>');
+        $this->logger->logInfo("Updating session for userMd5: <b>" . $this->sessionData['selectedProfile'].'</b>');
         
         $stmt = $this->db->prepare("
             UPDATE usersession
@@ -151,14 +151,14 @@ class JoinServer {
             ]
         ];
 
-        $this->logger->WriteLine("[ERROR] Error occurred: " . json_encode($errorDetails));
+        $this->logger->logError("Error occurred: " . json_encode($errorDetails));
         error_log(json_encode($errorDetails));
         exit(json_encode($errorDetails));
     }
     
     private function throwException($title, $desc) : void {
         $error = '{"error": "'.$title.'", "errorMessage": "'.$desc.'"}';
-        $this->logger->WriteLine($error);
+        $this->logger->logError($error);
         die($error);
     }
 }

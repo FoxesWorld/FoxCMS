@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.0.4, created on 2025-04-27 09:31:15
+/* Smarty version 4.0.4, created on 2025-04-29 12:13:26
   from '/var/www/FoxCMS/templates/foxengine2/footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_680dcf338f55b9_79442986',
+  'unifunc' => 'content_68109836998ae2_79100384',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '21164cd38f4b1e20c2b131e7201342b1d7510eaf' => 
     array (
       0 => '/var/www/FoxCMS/templates/foxengine2/footer.tpl',
-      1 => 1745689064,
+      1 => 1745736150,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_680dcf338f55b9_79442986 (Smarty_Internal_Template $_smarty_tpl) {
+function content_68109836998ae2_79100384 (Smarty_Internal_Template $_smarty_tpl) {
 ?>   <div id="button-up" style="display: block;">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </div>
@@ -30,11 +30,19 @@ function content_680dcf338f55b9_79442986 (Smarty_Internal_Template $_smarty_tpl)
 	<div class="footer-copyright d-lg-block d-none">
 		<?php echo $_smarty_tpl->tpl_vars['siteTitle']->value;?>
  <?php echo $_smarty_tpl->tpl_vars['siteStatus']->value;?>
- <b><?php echo $_smarty_tpl->tpl_vars['year']->value;?>
+ <b>2016 - <?php echo $_smarty_tpl->tpl_vars['year']->value;?>
 </b>
-		<span>Powered by <?php echo $_smarty_tpl->tpl_vars['webserviceName']->value;?>
- <b style="margin: 0 5px;">v.<?php echo $_smarty_tpl->tpl_vars['ServiceVersion']->value;?>
-<img class="img-fluid" uk-img /></b></span>
+		
+		<span class="foxengine-powered">
+    Powered by <span class="foxengine-name"><?php echo $_smarty_tpl->tpl_vars['webserviceName']->value;?>
+</span>
+    <b class="foxengine-version">
+        v.<?php echo $_smarty_tpl->tpl_vars['ServiceVersion']->value;?>
+
+        <img class="foxengine-icon" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'></svg>' alt="FoxEngine Icon">
+    </b>
+</span>
+
 	</div>
 
 	  

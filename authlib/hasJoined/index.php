@@ -29,7 +29,7 @@ class HasJoined
         global $config, $LOGGER;
         $this->logger = $LOGGER;
 
-        $this->logger->WriteLine("[INFO] Начата обработка для пользователя: {$user}");
+        $this->logger->logInfo("Начата обработка для пользователя: {$user}");
         
         $this->db = new db($config['db_user'], $config['db_pass'], $config['db_database']);
         $this->user = $this->validateInput($user, "username");
@@ -48,7 +48,7 @@ class HasJoined
     private function validateInput($string, $fieldName)
     {
         if (!preg_match("/^[a-zA-Z0-9_-]+$/", $string)) { //Whatt the HELL???
-            $this->logger->WriteLine("[ERROR] Некорректные символы в {$fieldName}: {$string}");
+            $this->logger->logError("Некорректные символы в {$fieldName}: {$string}");
            // exit($this->errorResponse('Bad login', "Некорректные символы в {$fieldName}: {$string}"));
         }
         return $string;
@@ -63,25 +63,25 @@ class HasJoined
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if (!$row) {
-            $this->logger->WriteLine("[WARN] Сессия не найдена для пользователя: {$inputUser}");
+            $this->logger->logWarn("Сессия не найдена для пользователя: {$inputUser}");
             exit($this->errorResponse("Bad login", "Пользователь не найден или неверный serverId"));
         }
 		
 		if($inputUser == $row['user']) {
 			$this->realUser = $row['user'];
 		} else {
-			$this->logger->WriteLine("[WARN] Пользователь: {$inputUser} не равен: {$row['user']}");
+			$this->logger->logWarn("Пользователь: {$inputUser} не равен: {$row['user']}");
 			//exit($this->errorResponse("Bad login", "Пользователь не соответствует сессии!"));
 		}
 		
         $this->UUID = $row['userMd5'];
-        $this->logger->WriteLine("[INFO] Найден пользователь: {$this->realUser} (UUID: {$this->UUID})");
+        $this->logger->logInfo("Найден пользователь: {$this->realUser} (UUID: {$this->UUID})");
     }
 
     private function userCheck()
     {
-        $this->logger->WriteLine("[INFO] Проверка пользователя: {$this->user}");
-		$this->logger->WriteLine("[DEBUG] user -> **".$this->user."**  realUser -> **".$this->realUser."**");
+        $this->logger->logInfo("Проверка пользователя: {$this->user}");
+		$this->logger->debug("user -> **".$this->user."**  realUser -> **".$this->realUser."**");
         $this->setUserTextures();
 
         $profileData = json_encode(self::getProfileData($this->UUID, $this->realUser, $this->textures), JSON_UNESCAPED_SLASHES);
@@ -127,19 +127,19 @@ class HasJoined
 
     private function errorResponse($title, $message)
     {
-        $this->logger->WriteLine("[ERROR] {$title}: {$message}");
+        $this->logger->logError("{$title}: {$message}");
         return json_encode(['error' => $title, 'errorMessage' => $message]);
     }
 
     private function setTextures($type, $url)
     {
         $this->textures[$type] = ['url' => $url];
-        $this->logger->WriteLine("[INFO] Установлен текстурный файл ({$type}): "); //{$url}
+        $this->logger->logInfo("Установлен файл ({$type}): {$url}");
     }
 
     private function logError($exception, $context)
     {
-        $this->logger->WriteLine("[ERROR] {$context}: " . $exception->getMessage());
+        $this->logger->logError("{$context}: " . $exception->getMessage());
         error_log($exception->getMessage());
         exit($this->errorResponse($context, $exception->getMessage()));
     }

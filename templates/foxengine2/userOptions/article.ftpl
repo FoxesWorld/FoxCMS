@@ -13,7 +13,7 @@
 <pageContent>
 
 <div class="importantText">
-					<b>Попробуй написать какой-нибудь текст и он останется с тобой навсегда :sparkles:</b>
+					<b>Попробуй написать какой-нибудь текст :sparkles:</b>
 					<p>В РАЗРАБОТКЕ!</p>
 				</div>
 	
@@ -32,7 +32,7 @@ class FroalaEditorWithCookies {
 
     initEditor() {
         // Инициализация редактора Froala
-        this.editor = $('#' + this.editorId).froalaEditor({
+        this.editor = new FroalaEditor('#' + this.editorId, {
             uploadArea: "short_story",
             uploadUser: "[login]",
 			dle_root: "/",
@@ -53,9 +53,7 @@ class FroalaEditorWithCookies {
             emojiButtons: ['smile', 'laugh', 'wink', 'cry', 'angry'],
             // Подключаем набор смайлов
             emoticonsSet: this.smileysSet,
-            placeholderText: 'Напишите что-нибудь...',
-        }).on('froalaEditor.contentChanged', (e) => {
-            this.saveToCookies();
+            placeholderText: '',
         });
 
         // Восстановление содержимого из куки

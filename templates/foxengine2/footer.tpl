@@ -5,8 +5,16 @@
    <div class="container footer--flex">
    
 	<div class="footer-copyright d-lg-block d-none">
-		{$siteTitle} {$siteStatus} <b>{$year}</b>
-		<span>Powered by {$webserviceName} <b style="margin: 0 5px;">v.{$ServiceVersion}<img class="img-fluid" uk-img /></b></span>
+		{$siteTitle} {$siteStatus} <b>2016 - {$year}</b>
+		
+		<span class="foxengine-powered">
+    Powered by <span class="foxengine-name">{$webserviceName}</span>
+    <b class="foxengine-version">
+        v.{$ServiceVersion}
+        <img class="foxengine-icon" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'></svg>' alt="FoxEngine Icon">
+    </b>
+</span>
+
 	</div>
 
 	  

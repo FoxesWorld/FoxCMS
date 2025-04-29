@@ -9,39 +9,48 @@ class AdminOptions extends AdminPanel {
         global $config;
         if(init::$usrArray['user_group'] == 1) {
             switch($REQUEST["admPanel"]){
-                case "editServer":
-                    	$editServer = new EditServer($db);
-						$editServer->updateServer(RequestHandler::$REQUEST);
-                    break;
+				case "editServer":
+                  	$editServer = new EditServer($db);
+					$editServer->updateServer(RequestHandler::$REQUEST);
+                break;
 					
 				case "addServer":
 					try {
+
+						$serverData = $REQUEST['addServer'];
+
+						// Обязательное поле serverName
+						if (empty($REQUEST['serverName'])) {
+							throw new Exception("Имя сервера обязательно для заполнения.");
+						}
+
+						// Приведение булевых значений к строкам 'true'/'false'
+						foreach (['enabled', 'checkLib'] as $boolField) {
+							if (isset($serverData[$boolField])) {
+								$serverData[$boolField] = ($serverData[$boolField] === 'true' || $serverData[$boolField] === true) ? 'true' : 'false';
+							}
+						}
+
+						// Инициализация апдейтера
 						$updater = new GenericUpdater($db, 'servers', [
 							"serverName", "host", "port", "ignoreDirs", "enabled", "checkLib",
 							"serverGroups", "serverDescription", "serverVersion", "jreVersion", "serverImage"
 						], false);
 
-						if (empty($REQUEST['serverName'])) {
-							throw new Exception("Имя сервера обязательно для заполнения");
-						}
+						// Обновление или добавление строки
+						$result = $updater->updateData($serverData, 'serverName');
 
-						// Приведение булевых значений
-						foreach (['enabled', 'checkLib'] as $boolField) {
-							if (isset($REQUEST[$boolField])) {
-								$REQUEST['addServer'][$boolField] = ($REQUEST[$boolField] === 'true') ? 'true' : 'false';
-							}
-						}
-
-						$result = $updater->updateData($REQUEST, 'serverName');
-
+						// Ответ
 						die(json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 					} catch (Exception $e) {
 						die(json_encode([
 							"type" => "error",
 							"message" => "Ошибка при добавлении сервера: " . $e->getMessage()
-						]));
+						], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 					}
 					break;
+
+
 
 					
 					case "infoBoxUpdate":
