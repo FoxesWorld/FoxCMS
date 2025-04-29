@@ -79,9 +79,9 @@ require ('data/config.php');
 			global $config;
 			if($this->initLevels["init"] === true) {
 				init::$modulesArray = $this->ModulesLoader->modulesInc(MODULES_DIR, "primary");
-				$PermissionsLoader = new PermissionsLoader($this->db);
-				self::$permissions = $PermissionsLoader->loadPermissions();
-				self::$dynamicConfig = $PermissionsLoader->permArray;
+				//$PermissionsLoader = new PermissionsLoader($this->db);
+				//self::$permissions = $PermissionsLoader->loadPermissions();
+				//self::$dynamicConfig = $PermissionsLoader->permArray;
 			}
 		}
 		

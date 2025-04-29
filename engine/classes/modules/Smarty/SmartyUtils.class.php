@@ -39,9 +39,9 @@ protected function assignJs() {
         $jsData[] = '"' . $key . '": ' . $data;
     }
 
-    foreach ($userPermissions as $permission) {
-        $jsData[] = $permission;
-    }
+    //foreach ($userPermissions as $permission) {
+    //    $jsData[] = $permission;
+    //}
 
     $builtInJS .= "const replaceData = {\n" . implode(",\n", $jsData) . "\n};\n";
     $builtInJS .= "const userFields = [" . implode(",\n", $replaceFields) . "];\n";

@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.0.4, created on 2025-04-29 12:13:26
+/* Smarty version 4.0.4, created on 2025-04-29 19:59:49
   from '/var/www/FoxCMS/templates/foxengine2/slider.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.0.4',
-  'unifunc' => 'content_68109836990e58_99977912',
+  'unifunc' => 'content_681105852c2532_86656279',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_68109836990e58_99977912 (Smarty_Internal_Template $_smarty_tpl) {
+function content_681105852c2532_86656279 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 	 <div class="owl-carousel owl-theme">

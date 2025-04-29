@@ -1,10 +1,10 @@
-
 	import { Settings } from "./options/Settings.js";
 	import { Users } from "./options/Users.js";
 	import { Servers } from "./options/Servers.js";
 	import { EditInfoBox } from "./options/EditInfoBox.js";
 	import { EditAllBadges } from "./options/EditAllBadges.js";
 	import { GroupAssoc } from "./options/GroupAssoc.js";
+	import HardwareVendorCharts from "./HardwareVendorCharts.js";
 
 class AdminPanel {
 
@@ -21,6 +21,12 @@ class AdminPanel {
 		this.editInfoBox = new EditInfoBox(this);
 		this.editAllBadges = new EditAllBadges(this);
 		this.groupAssoc = new GroupAssoc(this);
+		
+		this.hardwareCharts = new HardwareVendorCharts({
+		  pieCanvasId: 'cpuPieChart',
+		  donutCanvasId: 'cpuDonutChart',
+		  totalUsersId: 'totalUsers'
+		}, this);
 	}
 	
 	setAdmOption(option) {
@@ -43,34 +49,28 @@ class AdminPanel {
 		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 	
-async loadAdminTemplates() {
+  async loadAdminTemplates() {
     const templates = this.templateConfig.templates;
     if (!templates) {
-        this.foxEngine.log("Нет путей до шаблонов в конфигурации", "WARN");
-        return;
+      this.foxEngine.log("Нет путей до шаблонов в конфигурации", "WARN");
+      return;
     }
 
-    if (!this.templateCache) {
-        this.templateCache = {};
-    }
-
-    const self = this;
-    const templatePromises = Object.entries(templates).map(async ([key, path]) => {
-        try {
-            const rawHtml = await this.foxEngine.loadTemplate(path, true);
-            //const html = await this.foxEngine.entryReplacer.replaceText(rawHtml);
-            self.templateCache[key] = rawHtml;
-
-            this.foxEngine.log(`Шаблон админпанели ${key} успешно загружен`);
-        } catch (error) {
-            this.foxEngine.log(`Ошибка загрузки шаблона для "${key}" с путём "${path}":`, "ERROR");
-        }
-    });
-
-    await Promise.all(templatePromises);
-}
-
-
+    this.templateCache = {};
+    await Promise.all(Object.entries(templates).map(async ([key, path]) => {
+      try {
+        const rawHtml = await this.foxEngine.loadTemplate(path, true);
+        this.templateCache[key] = rawHtml;
+        this.foxEngine.log(`Шаблон админпанели ${key} успешно загружен`);
+      } catch (error) {
+        this.foxEngine.log(`Ошибка загрузки шаблона ${key}: ${error}`, "ERROR");
+      }
+    }));
+  }
+	
+	async getHardware(){
+		return await foxEngine.sendPostAndGetAnswer({admPanel: "getHardware"}, "JSON");
+	}
 }
 
 
@@ -85,7 +85,11 @@ async loadAdminTemplates() {
 			"addServerEndForm": "/templates/" + replaceData['template'] + "/foxEngine/admin/servers/addServerEnd.tpl"
 		}
 	};
-	document.addEventListener("DOMContentLoaded", () => {
+	document.addEventListener("DOMContentLoaded", async () => {
 		const adminPanel = new AdminPanel(window.foxEngine, adminTemplates);
 		window.adminPanel = adminPanel;
+		 setTimeout(() => {
+			adminPanel.hardwareCharts.init().catch(err => console.error('Charts init failed:', err));
+		  }, 2000);
 	});
+	

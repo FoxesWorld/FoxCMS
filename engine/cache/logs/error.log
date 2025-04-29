@@ -1,3 +1,39 @@
 2025/04/29 03:01:58 [crit] 2256758#2256758: *378657 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 107.189.19.172, server: 0.0.0.0:443
 2025/04/29 03:02:58 [crit] 2256758#2256758: *378663 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 107.189.19.172, server: 0.0.0.0:443
 2025/04/29 05:35:56 [crit] 2281269#2281269: *378809 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 138.197.136.217, server: 0.0.0.0:443
+2025/04/29 14:25:54 [crit] 2281275#2281275: *384922 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 107.189.19.172, server: 0.0.0.0:443
+2025/04/29 14:27:06 [crit] 2281276#2281276: *384927 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share) while SSL handshaking, client: 107.189.19.172, server: 0.0.0.0:443
+2025/04/29 16:32:56 [error] 2281275#2281275: *387557 client intended to send too large body: 3730760 bytes, client: 109.252.8.60, server: foxescraft.ru, request: "POST / HTTP/1.1", host: "foxescraft.ru", referrer: "https://foxescraft.ru/"
+2025/04/29 18:40:50 [error] 2281269#2281269: *392042 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'PermissionsLoader' not found in /var/www/FoxCMS/engine/init.php:82
+Stack trace:
+#0 /var/www/FoxCMS/engine/init.php(42): init->init()
+#1 /var/www/FoxCMS/index.php(8): init->__construct()
+#2 {main}
+  thrown in /var/www/FoxCMS/engine/init.php on line 82" while reading response header from upstream, client: 109.252.8.60, server: foxescraft.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2025/04/29 18:41:18 [error] 2281269#2281269: *392042 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'PermissionsLoader' not found in /var/www/FoxCMS/engine/init.php:82
+Stack trace:
+#0 /var/www/FoxCMS/engine/init.php(42): init->init()
+#1 /var/www/FoxCMS/index.php(8): init->__construct()
+#2 {main}
+  thrown in /var/www/FoxCMS/engine/init.php on line 82" while reading response header from upstream, client: 109.252.8.60, server: foxescraft.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2025/04/29 18:41:19 [error] 2281269#2281269: *392042 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'PermissionsLoader' not found in /var/www/FoxCMS/engine/init.php:82
+Stack trace:
+#0 /var/www/FoxCMS/engine/init.php(42): init->init()
+#1 /var/www/FoxCMS/index.php(8): init->__construct()
+#2 {main}
+  thrown in /var/www/FoxCMS/engine/init.php on line 82" while reading response header from upstream, client: 109.252.8.60, server: foxescraft.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2025/04/29 18:41:19 [error] 2281269#2281269: *392042 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'PermissionsLoader' not found in /var/www/FoxCMS/engine/init.php:82
+Stack trace:
+#0 /var/www/FoxCMS/engine/init.php(42): init->init()
+#1 /var/www/FoxCMS/index.php(8): init->__construct()
+#2 {main}
+  thrown in /var/www/FoxCMS/engine/init.php on line 82" while reading response header from upstream, client: 109.252.8.60, server: foxescraft.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2025/04/29 18:41:27 [error] 2281269#2281269: *392042 FastCGI sent in stderr: "PHP message: PHP Warning:  Invalid argument supplied for foreach() in /var/www/FoxCMS/engine/classes/modules/Smarty/SmartyUtils.class.php on line 42" while reading response header from upstream, client: 109.252.8.60, server: foxescraft.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2025/04/29 18:41:28 [error] 2281269#2281269: *392042 FastCGI sent in stderr: "PHP message: PHP Warning:  Invalid argument supplied for foreach() in /var/www/FoxCMS/engine/classes/modules/Smarty/SmartyUtils.class.php on line 42" while reading response header from upstream, client: 109.252.8.60, server: foxescraft.ru, request: "GET /plugins/popper.js.map HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2025/04/29 18:41:28 [error] 2281269#2281269: *392223 FastCGI sent in stderr: "PHP message: PHP Warning:  Invalid argument supplied for foreach() in /var/www/FoxCMS/engine/classes/modules/Smarty/SmartyUtils.class.php on line 42" while reading response header from upstream, client: 109.252.8.60, server: foxescraft.ru, request: "GET /plugins/Chart/js/chart.umd.js.map HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2025/04/29 18:41:28 [error] 2281269#2281269: *392223 FastCGI sent in stderr: "PHP message: PHP Warning:  Invalid argument supplied for foreach() in /var/www/FoxCMS/engine/classes/modules/Smarty/SmartyUtils.class.php on line 42" while reading response header from upstream, client: 109.252.8.60, server: foxescraft.ru, request: "GET /plugins/Froala/languages/en_gb.js.map HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2025/04/29 18:41:28 [error] 2281269#2281269: *392042 FastCGI sent in stderr: "PHP message: PHP Warning:  Invalid argument supplied for foreach() in /var/www/FoxCMS/engine/classes/modules/Smarty/SmartyUtils.class.php on line 42" while reading response header from upstream, client: 109.252.8.60, server: foxescraft.ru, request: "GET /plugins/Froala/languages/ru.js.map HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2025/04/29 18:41:28 [error] 2281270#2281270: *392232 FastCGI sent in stderr: "PHP message: PHP Warning:  Invalid argument supplied for foreach() in /var/www/FoxCMS/engine/classes/modules/Smarty/SmartyUtils.class.php on line 42" while reading response header from upstream, client: 109.252.8.60, server: foxescraft.ru, request: "GET /plugins/Froala/languages/uk.js.map HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2025/04/29 18:41:28 [error] 2281269#2281269: *392223 FastCGI sent in stderr: "PHP message: PHP Warning:  Invalid argument supplied for foreach() in /var/www/FoxCMS/engine/classes/modules/Smarty/SmartyUtils.class.php on line 42" while reading response header from upstream, client: 109.252.8.60, server: foxescraft.ru, request: "GET /plugins/Pixi-4.7.1/js/pixi.min.js.map HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2025/04/29 18:41:28 [error] 2281270#2281270: *392235 FastCGI sent in stderr: "PHP message: PHP Warning:  Invalid argument supplied for foreach() in /var/www/FoxCMS/engine/classes/modules/Smarty/SmartyUtils.class.php on line 42" while reading response header from upstream, client: 109.252.8.60, server: foxescraft.ru, request: "GET /plugins/popper.js.map HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"
+2025/04/29 18:42:39 [error] 2281270#2281270: *392235 FastCGI sent in stderr: "PHP message: Uncaught exception in class="Error" message="Access to undeclared static property: init::$permissions" line="21"" while reading response header from upstream, client: 109.252.8.60, server: foxescraft.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "foxescraft.ru"

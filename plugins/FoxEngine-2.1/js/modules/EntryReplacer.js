@@ -85,23 +85,22 @@ export class EntryReplacer {
                         </div>`;
             case 'hidden':
                 return `<input type="hidden" name="${name || ''}" id="${name || ''}" value="${value || ''}" onKeyUp="${onKeyUp || ''}" placeholder="${placeholder || ''}" />`;
-            case 'upload':
+
+						
+			  case 'upload':
                 return `<table>
                             <td>
-                                <input type="file" id="${id}" name="${name}" accept=".jpeg" data-file-metadata-imagetype="${metadata}" />
+                                <input type="file" id="${id}" name="${name}" accept="image/jpeg,image/png,image/gif,image/webp" data-file-metadata-imagetype="${metadata}" />
                             </td>
                         </table>
                         <script>
                             FilePond.registerPlugin(
-                                FilePondPluginImageCrop,
-                                FilePondPluginMediaPreview,
                                 FilePondPluginImagePreview,
                                 FilePondPluginFileMetadata,
-                                FilePondPluginFileRename
+                                FilePondPluginFileValidateType
                             );
                             FilePond.setOptions({
                                 maxFileSize: '15MB',
-                                imageCropAspectRatio: '3:5',
                                 server: {
                                     process: {
                                         url: '/',
@@ -112,6 +111,7 @@ export class EntryReplacer {
                                         }
                                     }
                                 }
+
                             });
 
                             const inputElement = document.querySelector('#${id}');
@@ -122,6 +122,10 @@ export class EntryReplacer {
 
                             window.pond = pond;
                         </script>`;
+
+							
+					
+
             case 'gallery':
                 return `<section class="gallery" dir="${attributeMap['dir']}" mask="${attributeMap['mask']}">
                             <div class="foxesGallery photor">
@@ -161,4 +165,37 @@ export class EntryReplacer {
 
         return modifiedHtml;
     }
+	
+initFilePond(inputId, secureKey) {
+    FilePond.registerPlugin(
+        FilePondPluginImagePreview,
+        FilePondPluginFileMetadata,
+        FilePondPluginFileValidateType
+    );
+
+    FilePond.setOptions({
+        maxFileSize: '15MB',
+        server: {
+            process: {
+                url: '/',
+                method: 'POST',
+                ondata: (formData) => {
+                    formData.append('key', secureKey);
+                    return formData;
+                }
+            }
+        }
+    });
+
+    const inputElement = document.querySelector('#' + inputId);
+    const pond = FilePond.create(inputElement, {
+        allowMultiple: false,
+        allowReorder: false,
+        labelFileTypeNotAllowed: 'Тип файла не разрешён',
+        fileValidateTypeLabelExpectedTypes: 'Ожидаются: {allTypes}'
+    });
+
+    window.pond = pond;
+}
+
 }

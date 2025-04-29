@@ -1,0 +1,6 @@
+# Не показывать содержимое директории
+IndexIgnore *
+
+# Отключить исполнение скриптов
+AddHandler cgi-script .php .pl .jsp .asp .sh .cgi
+Options -ExecCGI -Indexes

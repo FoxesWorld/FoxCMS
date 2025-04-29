@@ -9,6 +9,7 @@ class AdminOptions extends AdminPanel {
         global $config;
         if(init::$usrArray['user_group'] == 1) {
             switch($REQUEST["admPanel"]){
+				
 				case "editServer":
                   	$editServer = new EditServer($db);
 					$editServer->updateServer(RequestHandler::$REQUEST);
@@ -49,9 +50,6 @@ class AdminOptions extends AdminPanel {
 						], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 					}
 					break;
-
-
-
 					
 					case "infoBoxUpdate":
 						$updater = new GenericUpdater($db, 'infobox', [
@@ -81,6 +79,12 @@ class AdminOptions extends AdminPanel {
 
 				case "editUserOnline":
 					$this->updateUserField($db, 'serversOnline', $REQUEST);
+				break;
+				
+				case "getHardware":
+					$selector = new GenericSelector($db, 'userHardware');
+					$data = $selector->select();
+					die(json_encode($data));
 				break;
 
                 case "editUserBadges":

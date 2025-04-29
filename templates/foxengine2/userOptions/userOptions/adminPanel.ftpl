@@ -79,7 +79,30 @@
 		 </div>
 	 </div>
     </div>
+	
+<div class="hardware-stats">
+  <h2 class="hardware-title">Статистика железа</h2>
+  <div class="row">
+    <div class="chart-wrapper">
+      <div class="chart-title">Процессоры</div>
+      <canvas id="cpuPieChart"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <div class="chart-title">Видеокарты</div>
+      <canvas id="gpuPieChart"></canvas>
+    </div>
+  </div>
+  <!--
+  <div class="total-users">
+    Всего пользователей: <span id="totalUsers">0</span>
+  </div> -->
 </div>
+
+
+</div>
+</div>
+
+
 
 <script>
 (() => {

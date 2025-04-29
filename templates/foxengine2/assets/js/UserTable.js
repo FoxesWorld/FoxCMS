@@ -189,7 +189,7 @@ formatPlaytimeText(seconds) {
         row.appendChild(this.createRankCell(rank));
         row.appendChild(await this.createPlayerCell(user));
         row.appendChild(this.createPlaytimeCell(user));
-        row.appendChild(this.createLastSessionCell(user));
+        //row.appendChild(this.createLastSessionCell(user));
         row.appendChild(this.createLastLoginCell(user));
 
         return row;
